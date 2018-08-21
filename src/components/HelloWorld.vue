@@ -8,7 +8,9 @@
     </p>
     <h3>Installed CLI Plugins</h3>
     <ul>
-      <li><a href="https://github.com/vuejs/vue-cli/tree/dev/packages/%40vue/cli-plugin-babel" target="_blank" rel="noopener">babel</a></li>
+      <div v-for="score in highscores" :key="score.id">
+        <strong>{{`🏆: ${score.name}: ${score.score}`}}</strong>
+      </div>
       <li><a href="https://github.com/vuejs/vue-cli/tree/dev/packages/%40vue/cli-plugin-pwa" target="_blank" rel="noopener">pwa</a></li>
       <li><a href="https://github.com/vuejs/vue-cli/tree/dev/packages/%40vue/cli-plugin-eslint" target="_blank" rel="noopener">eslint</a></li>
     </ul>
@@ -36,6 +38,28 @@ export default {
   name: 'HelloWorld',
   props: {
     msg: String
+  },
+  data () {
+    return {
+      highscores: []
+    }
+  },
+  created () {
+    console.log(this)
+    this.$root.db.collection('highscores').get()
+      .then((snapshot) => {
+        snapshot.forEach((doc) => {
+          console.log(`🏆: ${doc.data().name}: ${doc.data().score}`)
+          this.highscores.push({
+            id: doc.id,
+            name: doc.data().name,
+            score: doc.data().score
+          })
+        })
+      })
+      .catch((err) => {
+        console.log('Error getting documents', err)
+      })
   }
 }
 </script>

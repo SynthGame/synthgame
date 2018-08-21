@@ -37,5 +37,6 @@ db.collection('highscores').get()
 new Vue({
   router,
   store,
+  data () {return {db}},
   render: h => h(App)
 }).$mount('#app')
