@@ -1,5 +1,7 @@
 # synthgame
 
+Super awesome
+
 ## Project setup
 ```
 yarn install
