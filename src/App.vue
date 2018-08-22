@@ -9,7 +9,7 @@
 </template>
 
 <script>
-import Tone from 'tone';
+import * as synth from '@/synth.js'
 
 export default {
   name: 'App',
@@ -18,41 +18,33 @@ export default {
 
     }
   },
-  components: {
-    Tone
-  },
   methods: {
-    clock(step) {
-        if (this.text[step] !== undefined && this.text[step] !== ' ') {
-          this.textBig = this.underlineWord(step,this.text);
-          // this.text = this.upperCase(step,this.text);
-          this.letterFunction(this.textBig[step]);
-        }
-    },
+  },
   created () {
+    // create loop wich sequences 4 notes
+    const loop = synth.createLoop({
+      noteArray: ["C4", "E4", "G4", "A4"],
+      subdivision: "4n"
+    }, (thing, note) => {
+      synth.playNote(note)
+    })
 
-    // Init.
+    // set BPM
+    synth.setBpm(110)
+    // start tone general 
+    synth.start()
+    // start loop
+    loop.start()
 
-    let self = this;
-
-        // Start sequence
-
-        var loop = new Tone.Sequence(function(time ,col) {self.clock(col)}, [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15], "16n");
-
-        Tone.Transport.bpm.value = 110;
-        Tone.Transport.start();
-        loop.start();
-
-        // Pc keyboard listener (might be needed for mobile)
-        document.addEventListener('keypress', (event) => {
-          if (Tone.context.state !== 'running') {
-              Tone.context.resume();
-          }
-          const key = event.key;
-        });
-
+    // Pc keyboard listener (might be needed for mobile)
+    document.addEventListener('keypress', (event) => {
+      if (Tone.context.state !== 'running') {
+          Tone.context.resume();
       }
-    }
+      const key = event.key;
+    });
+
+  }
 }
 </script>
 
