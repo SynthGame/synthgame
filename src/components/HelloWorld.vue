@@ -6,7 +6,7 @@
       check out the
       <a href="https://cli.vuejs.org" target="_blank" rel="noopener">vue-cli documentation</a>.
     </p>
-    <h3>Installed CLI Plugins</h3>
+    <input v-model="cutOffFreq" type="range" min="0" max="20000">
     <ul>
       <div v-for="score in highscores" :key="score.id">
         <strong>{{`🏆: ${score.name}: ${score.score}`}}</strong>
@@ -34,6 +34,7 @@
 </template>
 
 <script>
+import { synth, ToneInstance, connectToMaster } from '@/synth'
 export default {
   name: 'HelloWorld',
   props: {
@@ -41,11 +42,13 @@ export default {
   },
   data () {
     return {
-      highscores: []
+      highscores: [],
+      cutOffFreq: 0,
+      filter: {}
     }
   },
   created () {
-    console.log(this)
+    // db stuff
     this.$root.db.collection('highscores').get()
       .then((snapshot) => {
         snapshot.forEach((doc) => {
@@ -60,6 +63,18 @@ export default {
       .catch((err) => {
         console.log('Error getting documents', err)
       })
+    
+    this.filter = new ToneInstance
+      .Filter(this.cutOffFreq, "lowpass")
+
+    synth.disconnect()
+    synth.connect(this.filter)
+    connectToMaster(this.filter)
+  },
+  watch: {
+    cutOffFreq (val) {
+      this.filter.frequency.value = val
+    }
   }
 }
 </script>
