@@ -10,6 +10,7 @@
 
 <script>
 import * as synth from '@/synth.js'
+import c from '@/constants'
 
 export default {
   name: 'App',
@@ -23,14 +24,14 @@ export default {
   created () {
     // create loop wich sequences 4 notes
     const loop = synth.createLoop({
-      noteArray: ["C4", "E4", "G4", "A4"],
-      subdivision: "4n"
+      noteArray: ['C4', 'E4', 'G4', 'A4'],
+      subdivision: '4n'
     }, (thing, note) => {
       synth.playNote(note)
     })
 
     // set BPM
-    synth.setBpm(110)
+    synth.setBpm(c['BPM'])
     // start tone general 
     synth.start()
     // start loop
