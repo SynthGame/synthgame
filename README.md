@@ -1,6 +1,6 @@
 # synthgame
 
-Super awesome
+Super awesome project
 
 ## Project setup
 ```
