@@ -25,7 +25,7 @@ export default {
     // create loop wich sequences 4 notes
     const loop = synth.createLoop({
       noteArray: ['C4', 'E4', 'G4', 'A4'],
-      subdivision: '4n'
+      subdivision: '1n'
     }, (thing, note) => {
       synth.playNote(note)
     })
@@ -36,6 +36,8 @@ export default {
     synth.start()
     // start loop
     loop.start()
+
+    setTimeout(() => synth.setSynthToneLength('1n'), 4000)
 
     // Pc keyboard listener (might be needed for mobile)
     document.addEventListener('keypress', (event) => {
