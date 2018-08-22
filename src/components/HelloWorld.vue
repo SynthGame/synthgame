@@ -75,12 +75,13 @@ export default {
     cutOffFreq (val) {
       // if(this.filter.dispose) this.filter.dispose() 
       console.log(this.filter)
-      this.filter = new ToneInstance
-        .Filter(val, "lowpass")
+      this.filter.frequency.value = val
+      // this.filter = new ToneInstance
+      //   .Filter(val, "lowpass")
 
-      synth.disconnect()
-      synth.connect(this.filter)
-      connectToMaster(this.filter)
+      // synth.disconnect()
+      // synth.connect(this.filter)
+      // connectToMaster(this.filter)
     }
   }
 }
