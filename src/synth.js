@@ -16,7 +16,20 @@ export const createLoop = ({
   return new Tone.Sequence(callback, noteArray, subdivision)
 }
 
-export const synth = new Tone.Synth().toMaster()
+export const synth = new Tone.MonoSynth({
+  envelope: {
+    attack: 0.01,
+    decay: 0.01,
+    sustain: 1,
+    release: 0.01
+  }
+})
+
+export const connectToMaster = (channel) => {
+  log(`Connecting channel: ${channel} to master`)
+  // disconnect outputs?
+  return channel.toMaster();
+}
 
 export const playNote = (note) => {
   log(`Playing note: ${note}`)

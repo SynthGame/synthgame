@@ -24,12 +24,15 @@ export default {
   created () {
     // create loop wich sequences 4 notes
     const loop = synth.createLoop({
-      noteArray: ['C4', 'E4', 'G4', 'A4'],
+      noteArray: ['c4'], // ['C4', 'E4', 'G4', 'A4'],
       subdivision: '1n'
     }, (thing, note) => {
       synth.playNote(note)
     })
 
+    // connect the synth to the master output, kinda weird I know
+    synth.connectToMaster(synth.synth)
+    // synth.masterOutput.toMaster()
     // set BPM
     synth.setBpm(c['BPM'])
     // start tone general 
