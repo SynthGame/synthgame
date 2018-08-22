@@ -35,7 +35,7 @@ export default {
     // synth.masterOutput.toMaster()
     // set BPM
     synth.setBpm(c['BPM'])
-    // start tone general 
+    // start tone general
     synth.start()
     // start loop
     loop.start()
@@ -55,6 +55,18 @@ export default {
 </script>
 
 <style lang="scss">
+path {
+    display: none;
+}
+
+circle:first-of-type {
+    r: 30;
+}
+
+circle:nth-of-type(2) {
+    cursor: pointer;
+}
+
 #app {
   font-family: 'Avenir', Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;

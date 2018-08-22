@@ -5,10 +5,12 @@ import router from './router'
 import store from './store'
 import './registerServiceWorker'
 import 'firebase/firestore' // import the db to use with firebase
+import VueCircleSlider from 'vue-circle-slider'
 
 Vue.config.productionTip = false
 
 require('tone')
+Vue.use(VueCircleSlider)
 
 // Initialize Firebase
 const config = {
