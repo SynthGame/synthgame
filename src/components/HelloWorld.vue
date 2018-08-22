@@ -73,6 +73,7 @@ export default {
   },
   watch: {
     cutOffFreq (val) {
+      // this might be abstracted away
       this.filter.frequency.value = val
     }
   }
