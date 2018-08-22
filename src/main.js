@@ -8,6 +8,8 @@ import 'firebase/firestore' // import the db to use with firebase
 
 Vue.config.productionTip = false
 
+require('tone')
+
 // Initialize Firebase
 const config = {
   apiKey: 'AIzaSyAWPa6eGYyind5Gu74KqGLiRT2NBkS0Pmc',
@@ -35,6 +37,9 @@ db.collection('highscores').get()
   })
 
 new Vue({
+  el: '#app', // needed?
+  components: { App }, // needed?
+  template: '<App/>', // needed?
   router,
   store,
   data () {return {db}},

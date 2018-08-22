@@ -8,6 +8,54 @@
   </div>
 </template>
 
+<script>
+import Tone from 'tone';
+
+export default {
+  name: 'App',
+  data() {
+    return {
+
+    }
+  },
+  components: {
+    Tone
+  },
+  methods: {
+    clock(step) {
+        if (this.text[step] !== undefined && this.text[step] !== ' ') {
+          this.textBig = this.underlineWord(step,this.text);
+          // this.text = this.upperCase(step,this.text);
+          this.letterFunction(this.textBig[step]);
+        }
+    },
+  created () {
+
+    // Init.
+
+    let self = this;
+
+        // Start sequence
+
+        var loop = new Tone.Sequence(function(time ,col) {self.clock(col)}, [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15], "16n");
+
+        Tone.Transport.bpm.value = 110;
+        Tone.Transport.start();
+        loop.start();
+
+        // Pc keyboard listener (might be needed for mobile)
+        document.addEventListener('keypress', (event) => {
+          if (Tone.context.state !== 'running') {
+              Tone.context.resume();
+          }
+          const key = event.key;
+        });
+
+      }
+    }
+}
+</script>
+
 <style lang="scss">
 #app {
   font-family: 'Avenir', Helvetica, Arial, sans-serif;
