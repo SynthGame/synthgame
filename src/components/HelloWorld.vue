@@ -7,6 +7,12 @@
       <a href="https://cli.vuejs.org" target="_blank" rel="noopener">vue-cli documentation</a>.
     </p>
     <h3>Installed CLI Plugins</h3>
+   <div style="display: flex; justify-content: center">
+    <display :data="sliderValue"/></div>
+   <div style="display: flex; justify-content: center">
+
+    <input type="range" min="0" max="150" v-model="sliderValue" style="display: block"/>
+   </div>
     <ul>
       <div v-for="score in highscores" :key="score.id">
         <strong>{{`🏆: ${score.name}: ${score.score}`}}</strong>
@@ -34,14 +40,18 @@
 </template>
 
 <script>
+import display from '@/components/display.vue'
+
 export default {
   name: 'HelloWorld',
   props: {
     msg: String
   },
+  components: {display: display},
   data () {
     return {
-      highscores: []
+      highscores: [],
+      sliderValue: 0
     }
   },
   created () {
@@ -79,5 +89,10 @@ li {
 }
 a {
   color: #42b983;
+}
+displayPosition {
+display: block;
+margin-left: 40%;
+margin-right: auto
 }
 </style>
