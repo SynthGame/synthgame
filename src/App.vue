@@ -66,6 +66,10 @@ circle:nth-of-type(2) {
     cursor: pointer;
 }
 
+body {
+  background-color: black;
+}
+
 #app {
   font-family: 'Avenir', Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
