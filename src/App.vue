@@ -40,8 +40,6 @@ export default {
     // start loop
     loop.start()
 
-    setTimeout(() => audio.synth.setToneLength('1n'), 4000)
-
     // Pc keyboard listener (might be needed for mobile)
     document.addEventListener('keypress', (event) => {
       if (audio.Tone.context.state !== 'running') {

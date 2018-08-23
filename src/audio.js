@@ -30,7 +30,7 @@ export default {
   synth: {
     state: {
       synth: undefined,
-      synthToneLength: '4n'
+      synthToneLength: '1n'
     },
     init (options) {
       log(`Initializing synth with options: ${options}`)

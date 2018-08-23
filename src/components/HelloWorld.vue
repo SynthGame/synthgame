@@ -24,8 +24,16 @@ export default {
   },
   data () {
     return {
-      highscores: [],
-      cutOffFreq: 1000,
+      highscores: [], // remove this
+      cutOffFreq: 350,
+      typeArray: [
+        'lowpass',
+        'highpass',
+        'bandpass'
+      ],
+      type: 0,
+      Q: 1,
+      gain: 0,
       filter: {}
     }
   },
@@ -60,6 +68,18 @@ export default {
     cutOffFreq (val) {
       // this might be abstracted away
       this.filter.frequency.value = val
+    },
+    Q (val) {
+      // this might be abstracted away
+      this.filter.Q.value = val
+    },
+    gain (val) {
+      // this might be abstracted away
+      this.filter.gain.value = val
+    },
+    type (val) {
+      // this might be abstracted away
+      this.filter.type = this.typeArray[val]
     }
   }
 }
