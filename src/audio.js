@@ -51,7 +51,7 @@ export default {
     setToneLength (length) {
       log(`setting synth tone length to: ${length}`)
       this.state.synthToneLength = length
-      return state.synthToneLength
+      return this.state.synthToneLength
     }
   }
 }
