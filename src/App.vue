@@ -56,15 +56,20 @@ export default {
 
 <style lang="scss">
 path {
-    display: none;
+    // display: none;
 }
 
 circle:first-of-type {
-    r: 30;
+    r: 40;
 }
 
 circle:nth-of-type(2) {
     cursor: pointer;
+    r: 10;
+}
+
+body {
+  background: black;
 }
 
 #app {
