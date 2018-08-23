@@ -1,0 +1,6 @@
+{
+  "projects": {
+    "default": "synthgame-staging",
+    "production": "synthgame-c2436"
+  }
+}
