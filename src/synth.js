@@ -1,4 +1,4 @@
-import Tone from 'tone';
+import Tone from 'tone'
 
 // define logging mechanism
 const log = console.info
@@ -8,7 +8,7 @@ export let state = {
   synthToneLength: '4n'
 }
 
-// returns configured sequence 
+// returns configured sequence
 export const createLoop = ({
   noteArray,
   subdivision
@@ -28,7 +28,7 @@ export const synth = new Tone.MonoSynth({
 export const connectToMaster = (channel) => {
   log(`Connecting channel: ${channel} to master`)
   // disconnect outputs?
-  return channel.toMaster();
+  return channel.toMaster()
 }
 
 export const playNote = (note) => {
@@ -38,17 +38,19 @@ export const playNote = (note) => {
 
 export const setBpm = (bpm) => {
   log(`setting BPM length to: ${bpm}`)
-  return Tone.Transport.bpm.value = bpm;
+  Tone.Transport.bpm.value = bpm
+  return Tone.Transport.bpm.value
 }
 
 export const setSynthToneLength = (length) => {
   log(`setting tone length to: ${length}`)
-  return state.synthToneLength = length
+  state.synthToneLength = length
+  return state.synthToneLength
 }
 
 export const start = () => {
   log(`starting Tone.js Transport`)
-  return Tone.Transport.start();
+  return Tone.Transport.start()
 }
 
 export const ToneInstance = Tone

@@ -44,6 +44,6 @@ new Vue({
   template: '<App/>', // needed?
   router,
   store,
-  data () {return {db}},
+  data () { return {db} },
   render: h => h(App)
 }).$mount('#app')

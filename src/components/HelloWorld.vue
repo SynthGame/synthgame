@@ -30,7 +30,7 @@ export default {
     }
   },
   components: {
-    'rotary' : VueCircleSlider
+    'rotary': VueCircleSlider
   },
   created () {
     // db stuff
@@ -50,7 +50,7 @@ export default {
       })
 
     this.filter = new ToneInstance
-      .Filter(this.cutOffFreq, "lowpass")
+      .Filter(this.cutOffFreq, 'lowpass')
 
     synth.disconnect()
     synth.connect(this.filter)

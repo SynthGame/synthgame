@@ -14,7 +14,7 @@ import c from '@/constants'
 
 export default {
   name: 'App',
-  data() {
+  data () {
     return {
 
     }
@@ -45,11 +45,10 @@ export default {
     // Pc keyboard listener (might be needed for mobile)
     document.addEventListener('keypress', (event) => {
       if (synth.ToneInstance.context.state !== 'running') {
-          synth.ToneInstance.context.resume();
+        synth.ToneInstance.context.resume()
       }
-      const key = event.key;
-    });
-
+      // const key = event.key
+    })
   }
 }
 </script>
