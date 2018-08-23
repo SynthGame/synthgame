@@ -9,7 +9,7 @@
 </template>
 
 <script>
-import * as synth from '@/synth.js'
+import audio from '@/audio'
 import c from '@/constants'
 
 export default {
@@ -22,30 +22,30 @@ export default {
   methods: {
   },
   created () {
+    // initialize the synth
+    audio.synth.init()
     // create loop wich sequences 4 notes
-    const loop = synth.createLoop({
+    const loop = audio.setMainLoop({
       noteArray: ['c4'], // ['C4', 'E4', 'G4', 'A4'],
       subdivision: '1n'
     }, (thing, note) => {
-      synth.playNote(note)
+      audio.synth.playNote(note)
     })
-
     // connect the synth to the master output, kinda weird I know
-    synth.connectToMaster(synth.synth)
-    // synth.masterOutput.toMaster()
+    audio.connectChanelToMaster(audio.synth.state.synth)
     // set BPM
-    synth.setBpm(c['BPM'])
+    audio.setBpm(c['BPM'])
     // start tone general
-    synth.start()
+    audio.start()
     // start loop
     loop.start()
 
-    setTimeout(() => synth.setSynthToneLength('1n'), 4000)
+    setTimeout(() => audio.synth.setToneLength('1n'), 4000)
 
     // Pc keyboard listener (might be needed for mobile)
     document.addEventListener('keypress', (event) => {
-      if (synth.ToneInstance.context.state !== 'running') {
-        synth.ToneInstance.context.resume()
+      if (audio.Tone.context.state !== 'running') {
+        audio.Tone.context.resume()
       }
       // const key = event.key
     })

@@ -14,7 +14,7 @@
 </template>
 
 <script>
-import { synth, ToneInstance, connectToMaster } from '@/synth'
+import audio from '@/audio'
 import VueCircleSlider from 'vue-circle-slider'
 
 export default {
@@ -49,12 +49,12 @@ export default {
         console.log('Error getting documents', err)
       })
 
-    this.filter = new ToneInstance
+    this.filter = new audio.state.Tone
       .Filter(this.cutOffFreq, 'lowpass')
 
-    synth.disconnect()
-    synth.connect(this.filter)
-    connectToMaster(this.filter)
+    audio.synth.state.synth.disconnect()
+    audio.synth.state.synth.connect(this.filter)
+    audio.connectChanelToMaster(this.filter)
   },
   watch: {
     cutOffFreq (val) {
