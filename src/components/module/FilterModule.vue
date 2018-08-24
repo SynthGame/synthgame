@@ -1,22 +1,22 @@
 <template>
   <div class="hello">
     <div style="margin: auto">
-    <display  style="height:300px;width:700px" module="filter" :lowpass="cutOffFreq" :highpass="cutOffFreq1" :gain="cutOffFreq2"/></div>
-    lowpass: <circle-slider style="display: inline"
+    <display  style="height:300px;width:700px; margin-bottom: 1rem" module="filter" :lowpass="cutOffFreq" :highpass="cutOffFreq1" :gain="cutOffFreq2"/></div>
+    lowpass: <rotary style="display: inline"
             v-model="cutOffFreq"
             :min="50"
             :max="10000"
-          ></circle-slider>
-    highpass: <circle-slider style="display: inline"
+          ></rotary>
+    highpass: <rotary style="display: inline"
             v-model="cutOffFreq1"
             :min="50"
             :max="10000"
-          ></circle-slider>
-    gain: <circle-slider style="display: inline"
+          ></rotary>
+    gain: <rotary style="display: inline"
             v-model="cutOffFreq2"
             :min="50"
             :max="10000"
-          ></circle-slider>
+          ></rotary>
     <ul>
       <div v-for="score in highscores" :key="score.id">
         <strong>{{`🏆: ${score.name}: ${score.score}`}}</strong>
