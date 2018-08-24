@@ -1,5 +1,5 @@
 <template>
-  <svg fill="black" style="margin: auto; width:600px; height:300px">
+  <svg fill="black" :height="displayHeight" :width="displayWidth" style="margin: auto;">
     <rect width="600" height="300"/>
        <path stroke="red" stroke-width="3"
             :d="path"/>
@@ -15,7 +15,8 @@ export default {
   },
   data () {
     return {
-
+      displayHeight: 300,
+      displayWidth: 600
     }
   },
   methods: {
@@ -31,16 +32,25 @@ export default {
       // the data as length is a ratio of this.data
       // and the number of possible values times the available space
       // (gotta simplify it, for sure)
-      let data = (this.data / (10000 - 50)) * 250
+      let data = ((this.data / (10000 - 50)) * 250) - 20
+
+      // start coding curves:
+      // H: highpass
+      // L: lowpass
+
+      const Hcurve1 = ' c 20,0 20,15 20,20 '
+      const Hcurve2 = ' c 0,20 15,20 20,20 '
 
       // lengths added and stringified into a path
-      let line = 'M 0,5 H' + (lowpassOffset + mainLine + data) + ' V 300'
+      let line = 'M 0,5 H' + (lowpassOffset + mainLine + data) + Hcurve1 + ' V ' + (this.displayHeight - 21) + Hcurve2 + 'h 100'
+
       return line
     }
+
   },
   watch: {
     data () {
-      if (this.data % 100 == 0) {
+      if (this.data % 100 === 0) {
         console.log('data changed! ', this.data)
       }
     }
