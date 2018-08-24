@@ -31,7 +31,7 @@ export default {
       // the data as length is a ratio of this.data
       // and the number of possible values times the available space
       // (gotta simplify it, for sure)
-      let data = (this.data / (10000-50)) * 250
+      let data = (this.data / (10000 - 50)) * 250
 
       // lengths added and stringified into a path
       let line = 'M 0,5 H' + (lowpassOffset + mainLine + data) + ' V 300'
@@ -40,7 +40,9 @@ export default {
   },
   watch: {
     data () {
-      console.log('data changed! ', this.data)
+      if (this.data % 100 == 0) {
+        console.log('data changed! ', this.data)
+      }
     }
   }
 }
