@@ -2,11 +2,11 @@
   <div class="hello">
     <div style="margin: auto">
     <display :data="cutOffFreq"/></div>
-    <circle-slider
+    <rotary
             v-model="cutOffFreq"
             :min="50"
             :max="10000"
-          ></circle-slider>
+          ></rotary>
     <ul>
       <div v-for="score in highscores" :key="score.id">
         <strong>{{`🏆: ${score.name}: ${score.score}`}}</strong>
@@ -17,7 +17,7 @@
 
 <script>
 import audio from '@/audio'
-import VueCircleSlider from 'vue-circle-slider'
+import VueCircleSlider from '@/components/knob.vue'
 import display from '@/components/display.vue'
 
 export default {

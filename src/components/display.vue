@@ -1,9 +1,9 @@
 <template>
   <svg fill="black" :height="displayHeight" :width="displayWidth" style="margin: auto;">
     <rect width="600" height="300"/>
-       <path stroke="red" stroke-width="3"
+       <path stroke="#3C32FF" stroke-width="3"
             :d="path"/>
-	    <text x="50%" y="25" fill="red">{{data}}</text>
+	    <text x="50%" y="25" fill="white">{{data}}</text>
    </svg>
 </template>
 <script>
