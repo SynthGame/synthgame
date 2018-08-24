@@ -1,5 +1,7 @@
 <template>
   <div class="hello">
+    <div style="margin: auto">
+    <display :data="cutOffFreq"/></div>
     <circle-slider
             v-model="cutOffFreq"
             :min="50"
@@ -16,6 +18,7 @@
 <script>
 import audio from '@/audio'
 import VueCircleSlider from 'vue-circle-slider'
+import display from '@/components/display.vue'
 
 export default {
   name: 'HelloWorld',
@@ -34,11 +37,13 @@ export default {
       type: 0,
       Q: 1,
       gain: 0,
-      filter: {}
+      filter: {},
+      sliderValue: 0
     }
   },
   components: {
-    'rotary': VueCircleSlider
+    'rotary': VueCircleSlider,
+    'display': display
   },
   created () {
     // db stuff
