@@ -1,9 +1,19 @@
 <template>
   <div class="hello">
     <div style="margin: auto">
-    <display :data="cutOffFreq"/></div>
-    <circle-slider
+    <display  style="height:300px;width:700px" module="filter" :lowpass="cutOffFreq" :highpass="cutOffFreq1" :gain="cutOffFreq2"/></div>
+    lowpass: <circle-slider style="display: inline"
             v-model="cutOffFreq"
+            :min="50"
+            :max="10000"
+          ></circle-slider>
+    highpass: <circle-slider style="display: inline"
+            v-model="cutOffFreq1"
+            :min="50"
+            :max="10000"
+          ></circle-slider>
+    gain: <circle-slider style="display: inline"
+            v-model="cutOffFreq2"
             :min="50"
             :max="10000"
           ></circle-slider>
@@ -29,6 +39,8 @@ export default {
     return {
       highscores: [], // remove this
       cutOffFreq: 350,
+      cutOffFreq1: 350,
+      cutOffFreq2: 350,
       typeArray: [
         'lowpass',
         'highpass',
