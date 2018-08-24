@@ -52,17 +52,12 @@ export default {
 </script>
 
 <style lang="scss">
-path {
-    // display: none;
-}
 
-circle:first-of-type {
-    r: 40;
-}
-
-circle:nth-of-type(2) {
-    cursor: pointer;
-    r: 10;
+.knob {
+  &__bg {
+    margin-bottom: -150px;
+    overflow: visible;
+  }
 }
 
 body {
