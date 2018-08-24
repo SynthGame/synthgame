@@ -1,13 +1,12 @@
 <template>
   <div class="hello">
-  <div class="knob">
+    <div style="margin: auto">
+    <display :data="cutOffFreq"/></div>
     <circle-slider
             v-model="cutOffFreq"
             :min="50"
-            :max="3000"
-          >
-    </circle-slider>
-  </div>
+            :max="10000"
+          ></circle-slider>
     <ul>
       <div v-for="score in highscores" :key="score.id">
         <strong>{{`🏆: ${score.name}: ${score.score}`}}</strong>
@@ -18,10 +17,11 @@
 
 <script>
 import audio from '@/audio'
-import VueCircleSlider from './knob.vue'
+import VueCircleSlider from 'vue-circle-slider'
+import display from '@/components/display.vue'
 
 export default {
-  name: 'HelloWorld',
+  name: 'EnvelopeModule',
   props: {
     msg: String
   },
@@ -37,11 +37,13 @@ export default {
       type: 0,
       Q: 1,
       gain: 0,
-      filter: {}
+      filter: {},
+      sliderValue: 0
     }
   },
   components: {
-    'circle-slider': VueCircleSlider
+    'rotary': VueCircleSlider,
+    display
   },
   created () {
     // db stuff
@@ -95,7 +97,6 @@ h3 {
   margin: 40px 0 0;
 }
 ul {
-  margin-top: 5em;
   list-style-type: none;
   padding: 0;
 }
