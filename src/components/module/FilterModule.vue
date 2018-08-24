@@ -4,8 +4,8 @@
     <display :data="cutOffFreq"/></div>
     <rotary
             v-model="cutOffFreq"
-            :min="50"
-            :max="10000"
+            :min="40"
+            :max="1000"
           ></rotary>
     <ul>
       <div v-for="score in highscores" :key="score.id">
