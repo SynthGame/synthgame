@@ -1,17 +1,12 @@
 <template>
   <div class="hello">
     <div style="margin: auto">
-    <display :data="cutOffFreq"/></div>
+    <display :data="attack"/></div>
     <circle-slider
-            v-model="cutOffFreq"
-            :min="50"
-            :max="10000"
-          ></circle-slider>
-    <ul>
-      <div v-for="score in highscores" :key="score.id">
-        <strong>{{`🏆: ${score.name}: ${score.score}`}}</strong>
-      </div>
-    </ul>
+      v-model="attack"
+      :min="50"
+      :max="10000"
+    ></circle-slider>
   </div>
 </template>
 
@@ -27,18 +22,11 @@ export default {
   },
   data () {
     return {
-      highscores: [], // remove this
-      cutOffFreq: 350,
-      typeArray: [
-        'lowpass',
-        'highpass',
-        'bandpass'
-      ],
-      type: 0,
-      Q: 1,
-      gain: 0,
-      filter: {},
-      sliderValue: 0
+      attack: 1,
+      delay: 1,
+      sustain: 1,
+      release: 0,
+      envelope: {},
     }
   },
   components: {
@@ -46,45 +34,34 @@ export default {
     display
   },
   created () {
-    // db stuff
-    this.$root.db.collection('highscores').get()
-      .then((snapshot) => {
-        snapshot.forEach((doc) => {
-          console.log(`🏆: ${doc.data().name}: ${doc.data().score}`)
-          this.highscores.push({
-            id: doc.id,
-            name: doc.data().name,
-            score: doc.data().score
-          })
-        })
-      })
-      .catch((err) => {
-        console.log('Error getting documents', err)
-      })
+    this.envelope = new audio.state.Tone
+      .Envelope(
+        this.attack,
+        this.delay,
+        this.sustain,
+        this.release
+      )
 
-    this.filter = new audio.state.Tone
-      .Filter(this.cutOffFreq, 'lowpass')
-
-    audio.synth.state.synth.disconnect()
-    audio.synth.state.synth.connect(this.filter)
-    audio.connectChanelToMaster(this.filter)
+    // audio.synth.state.synth.disconnect()
+    // audio.synth.state.synth.connect(this.filter)
+    // audio.connectChanelToMaster(this.filter)
   },
   watch: {
-    cutOffFreq (val) {
+    attack (val) {
       // this might be abstracted away
-      this.filter.frequency.value = val
+      this.envelope.attack.value = val
     },
-    Q (val) {
+    decay (val) {
       // this might be abstracted away
-      this.filter.Q.value = val
+      this.envelope.decay.value = val
     },
-    gain (val) {
+    sustain (val) {
       // this might be abstracted away
-      this.filter.gain.value = val
+      this.envelope.sustain.value = val
     },
-    type (val) {
+    release (val) {
       // this might be abstracted away
-      this.filter.type = this.typeArray[val]
+      this.envelope.release.value = val
     }
   }
 }

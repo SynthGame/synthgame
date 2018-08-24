@@ -1,17 +1,12 @@
 <template>
   <div class="hello">
     <div style="margin: auto">
-    <display :data="cutOffFreq"/></div>
+    <display :data="frequency"/></div>
     <circle-slider
-            v-model="cutOffFreq"
-            :min="50"
-            :max="10000"
-          ></circle-slider>
-    <ul>
-      <div v-for="score in highscores" :key="score.id">
-        <strong>{{`🏆: ${score.name}: ${score.score}`}}</strong>
-      </div>
-    </ul>
+      v-model="frequency"
+      :min="50"
+      :max="10000"
+    ></circle-slider>
   </div>
 </template>
 
@@ -27,18 +22,16 @@ export default {
   },
   data () {
     return {
-      highscores: [], // remove this
-      cutOffFreq: 350,
+      frequency: 350,
       typeArray: [
-        'lowpass',
-        'highpass',
-        'bandpass'
+        'sine',
+        'square',
+        'sawtooth',
+        'triangle'
       ],
       type: 0,
-      Q: 1,
-      gain: 0,
-      filter: {},
-      sliderValue: 0
+      amplitude: 1,
+      lfo: {}
     }
   },
   components: {
@@ -46,45 +39,29 @@ export default {
     display
   },
   created () {
-    // db stuff
-    this.$root.db.collection('highscores').get()
-      .then((snapshot) => {
-        snapshot.forEach((doc) => {
-          console.log(`🏆: ${doc.data().name}: ${doc.data().score}`)
-          this.highscores.push({
-            id: doc.id,
-            name: doc.data().name,
-            score: doc.data().score
-          })
-        })
-      })
-      .catch((err) => {
-        console.log('Error getting documents', err)
+    this.lfo = new audio.state.Tone
+      .LFO({
+        type: this.typeArray[this.type],
+        frequency: this.frequency,
+        amplitude: this.amplitude
       })
 
-    this.filter = new audio.state.Tone
-      .Filter(this.cutOffFreq, 'lowpass')
-
-    audio.synth.state.synth.disconnect()
-    audio.synth.state.synth.connect(this.filter)
-    audio.connectChanelToMaster(this.filter)
+    // audio.synth.state.synth.disconnect()
+    // audio.synth.state.synth.connect(this.filter)
+    // audio.connectChanelToMaster(this.filter)
   },
   watch: {
-    cutOffFreq (val) {
+    frequency (val) {
       // this might be abstracted away
-      this.filter.frequency.value = val
+      this.lfo.frequency.value = val
     },
-    Q (val) {
+    amplitude (val) {
       // this might be abstracted away
-      this.filter.Q.value = val
-    },
-    gain (val) {
-      // this might be abstracted away
-      this.filter.gain.value = val
+      this.lfo.amplitude.value = val
     },
     type (val) {
       // this might be abstracted away
-      this.filter.type = this.typeArray[val]
+      this.lfo.type = this.typeArray[val]
     }
   }
 }

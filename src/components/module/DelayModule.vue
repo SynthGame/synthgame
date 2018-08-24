@@ -1,17 +1,12 @@
 <template>
   <div class="hello">
     <div style="margin: auto">
-    <display :data="cutOffFreq"/></div>
+    <display :data="delayTime"/></div>
     <circle-slider
-            v-model="cutOffFreq"
-            :min="50"
-            :max="10000"
-          ></circle-slider>
-    <ul>
-      <div v-for="score in highscores" :key="score.id">
-        <strong>{{`🏆: ${score.name}: ${score.score}`}}</strong>
-      </div>
-    </ul>
+      v-model="delayTime"
+      :min="50"
+      :max="10000"
+    ></circle-slider>
   </div>
 </template>
 
@@ -27,10 +22,11 @@ export default {
   },
   data () {
     return {
-      delay: {},
-      delayTime: '8n',
+      delayTime: '1',
+      mappedDelayTime: '8n',
       wet: 0,
-      feedback: 1
+      feedback: 1,
+      delay: {}
     }
   },
   components: {
@@ -41,26 +37,22 @@ export default {
     this.delay = new audio.state.Tone
       .FeedbackDelay(this.delayTime, this.feedback)
 
-    audio.synth.state.synth.disconnect()
-    audio.synth.state.synth.connect(this.filter)
-    audio.connectChanelToMaster(this.filter)
+    // audio.synth.state.synth.disconnect()
+    // audio.synth.state.synth.connect(this.filter)
+    // audio.connectChanelToMaster(this.filter)
   },
   watch: {
-    cutOffFreq (val) {
+    mappedDelayTime (val) {
       // this might be abstracted away
-      this.filter.frequency.value = val
+      this.delay.mappedDelayTime.value = val
     },
-    Q (val) {
+    wet (val) {
       // this might be abstracted away
-      this.filter.Q.value = val
+      this.delay.wet.value = val
     },
-    gain (val) {
+    feedback (val) {
       // this might be abstracted away
-      this.filter.gain.value = val
-    },
-    type (val) {
-      // this might be abstracted away
-      this.filter.type = this.typeArray[val]
+      this.delay.feedback.value = val
     }
   }
 }

@@ -3,15 +3,10 @@
     <div style="margin: auto">
     <display :data="cutOffFreq"/></div>
     <circle-slider
-            v-model="cutOffFreq"
-            :min="50"
-            :max="10000"
-          ></circle-slider>
-    <ul>
-      <div v-for="score in highscores" :key="score.id">
-        <strong>{{`🏆: ${score.name}: ${score.score}`}}</strong>
-      </div>
-    </ul>
+      v-model="cutOffFreq"
+      :min="50"
+      :max="10000"
+    ></circle-slider>
   </div>
 </template>
 
@@ -27,7 +22,6 @@ export default {
   },
   data () {
     return {
-      highscores: [], // remove this
       cutOffFreq: 350,
       typeArray: [
         'lowpass',
