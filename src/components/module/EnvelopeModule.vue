@@ -21,7 +21,7 @@ import VueCircleSlider from 'vue-circle-slider'
 import display from '@/components/display.vue'
 
 export default {
-  name: 'HelloWorld',
+  name: 'EnvelopeModule',
   props: {
     msg: String
   },
@@ -43,7 +43,7 @@ export default {
   },
   components: {
     'rotary': VueCircleSlider,
-    'display': display
+    display
   },
   created () {
     // db stuff
