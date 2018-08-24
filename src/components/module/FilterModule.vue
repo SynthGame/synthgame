@@ -47,7 +47,7 @@ export default {
   },
   created () {
     this.filter = new audio.state.Tone
-      .Filter(this.cutOffFreq, this.typeArray[val])
+      .Filter(this.cutOffFreq, this.typeArray[this.type])
 
     audio.synth.state.synth.disconnect()
     audio.synth.state.synth.connect(this.filter)
