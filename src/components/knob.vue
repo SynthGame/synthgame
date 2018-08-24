@@ -1,0 +1,336 @@
+<template>
+  <div>
+    <svg width="25%" height="auto" style="overflow:visible" viewBox="0 0 550 550" ref="_svg"
+      @touchmove="handleTouchMove"
+      @click="handleClick"
+      @mousedown="handleMouseDown"
+      @mouseup="handleMouseUp"
+    >
+      <g>
+        <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+            <g id="knob_1-01" transform="translate(3.000000, 3.000000)">
+                <polyline id="Shape" stroke="#3C32FF" stroke-width="5.796" points="332.4 467.7 307 517.5 310.6 519.3 356.7 542.9"></polyline>
+                <polyline id="Shape" stroke="#3C32FF" stroke-width="5.796" points="191.3 467.7 216.8 517.5 213.1 519.3 167 542.9"></polyline>
+                <path d="M209.3,518.9 C195.5,516.2 181.9,512.3 168.7,507.4 C138.6,496.1 110.5,479 86.2,457.1 C37.5,413.6 5.3,349.4 1,280.8 C-1.1,246.6 3.3,211.4 14.9,178.2 C26.6,145 44.8,113.7 69,87.2 C93.2,60.7 123,39 156.3,24.1 C189.5,9.1 226.1,1.2 262.7,0.5 C299.3,-9.43689571e-16 336.3,7.5 369.8,22.4 C403.4,37.2 433.1,59.7 457,86.6 C480.7,113.7 498.7,145.2 509.9,178.5 C521.1,211.8 526,246.7 524.3,280.9 L521.7,306.4 C520.2,314.8 518.3,323.1 516.6,331.4 C514.4,339.6 511.5,347.6 508.9,355.6 C505.8,363.5 502.2,371.1 498.9,378.8 C484,408.9 463.1,435.4 438.4,456.7 C402.5,487.9 359.4,508.7 314,518.1 M309.6,516.3 C324.1,513.2 339.6,505.3 353.1,499.2 C381.4,486.6 406.3,467.3 426.3,444.4 C446,421.3 460.8,394.5 469.8,366.6 C478.9,338.6 482.6,309.4 480.9,280.8 L478.5,259.5 C477.1,252.5 475.5,245.6 474,238.7 C472.1,231.9 469.5,225.3 467.4,218.6 C464.8,212.1 461.6,205.8 458.8,199.5 C446,174.7 428.4,153 407.7,135.7 C366.2,100.9 314.9,82.4 262.6,81.2 C210.2,80 157.4,99 116.8,135 C76,170.7 48.7,223.4 44.2,280.8 C42.1,309.4 45.4,338.9 54.8,366.9 C64.3,394.8 79.3,421.3 99.5,443.9 C119.7,466.4 144.2,487.5 172.1,500.3 C185.4,506.4 200.8,513.8 215.3,516.5" id="Shape" stroke="#3C32FF" stroke-width="5.796"></path>
+                <g :style="{transition: '.1s all'}" :transform="'rotate(' + (((this.value / (this.max - (this.min*0.9))) * 300) + 28) + ' 264 285) translate(0, 206)'" >
+                  <defs>
+                    <radialGradient id="grad1" cx="50%" cy="75%" r="50%" fx="50%" fy="75%">
+                      <stop offset="0%" style="stop-color:rgba(0,0,0,1);
+                      stop-opacity:1" />
+                      <stop offset="50%" style="stop-color:rgba(0,0,0,1);stop-opacity:1" />
+                      <stop offset="60%" style="stop-color:rgba(0,0,0,0);stop-opacity:0" />
+                    </radialGradient>
+                  </defs>
+                  <polygon transform="translate(4, 175) scale(8,4)" fill="url(#grad1)" points="29.5,-36 4,60 60,60"></polygon>
+                </g>
+                <circle id="Oval" fill="#171A3D" fill-rule="nonzero" cx="262.6" cy="288.4" r="153.2"></circle>
+                <circle id="Oval" stroke="#FFFFFF" stroke-width="5.796" fill="#3C32FF" fill-rule="nonzero" cx="262.6" cy="288.4" r="113.4"></circle>
+                <g :transform="'rotate(' + (((this.value / (this.max - (this.min*0.9))) * 359.8) - 2) + ' 264 285) translate(2, 205)'" >
+                  <path d="M262.6,288.4 L262.6,81.2" id="Shape" stroke="white" stroke-width="5.796"></path>
+                </g>
+            </g>
+        </g>
+        <g>
+          <defs>
+            <filter id="dropshadow" x="-100%" y="-100%" width="300%" height="300%">
+              <feDropShadow dx="0" dy="0" stdDeviation="35" flood-color="#3C32FF" flood-opacity="1" />
+            </filter>
+          </defs>
+          <circle style="filter:url(#dropshadow);cursor:move" fill="#3C32FF" r="30" :cx="(cpPathX - 10)" :cy="(cpPathY + 10)" stroke="white" stroke-width="6"></circle>
+        </g>
+      </g>
+    </svg>
+  </div>
+</template>
+<script>
+import TouchPosition from '../modules/touch_position.js'
+import CircleSliderState from '../modules/circle_slider_state.js'
+export default {
+  name: 'CircleSlider',
+  created () {
+    this.stepsCount = 1 + (this.max - this.min) / this.stepSize
+    this.steps = Array.from({
+      length: this.stepsCount
+    }, (_, i) => this.min + i * this.stepSize)
+
+    this.circleSliderState = new CircleSliderState(this.steps, this.startAngleOffset, this.value)
+    this.angle = this.circleSliderState.angleValue
+    this.currentStepValue = this.circleSliderState.currentStep
+
+    let maxCurveWidth = Math.max(this.cpMainCircleStrokeWidth, this.cpPathStrokeWidth)
+    this.radius = (550 / 2) - Math.max(maxCurveWidth, this.cpKnobRadius * 2) / 2
+    this.updateFromPropValue(this.value)
+  },
+  mounted () {
+    this.touchPosition = new TouchPosition(this.$refs._svg, this.radius, this.radius / 2)
+  },
+  props: {
+    startAngleOffset: {
+      type: Number,
+      required: false,
+      default: function () {
+        // return Math.PI / 20
+        return 0
+      }
+    },
+    value: {
+      type: Number,
+      required: false,
+      default: 0
+    },
+    side: {
+      type: Number,
+      required: false,
+      default: 550
+    },
+    stepSize: {
+      type: Number,
+      required: false,
+      default: 1
+    },
+    min: {
+      type: Number,
+      required: false,
+      default: 0
+    },
+    max: {
+      type: Number,
+      required: false,
+      default: 100
+    },
+    circleColor: {
+      type: String,
+      required: false,
+      default: '#334860'
+    },
+    progressColor: {
+      type: String,
+      required: false,
+      default: '#00be7e'
+    },
+    knobColor: {
+      type: String,
+      required: false,
+      default: '#00be7e'
+    },
+    knobRadius: {
+      type: Number,
+      required: false,
+      default: null
+    },
+    knobRadiusRel: {
+      type: Number,
+      required: false,
+      default: 7
+    },
+    circleWidth: {
+      type: Number,
+      required: false,
+      default: null
+    },
+    circleWidthRel: {
+      type: Number,
+      required: false,
+      default: 20
+    },
+    progressWidth: {
+      type: Number,
+      required: false,
+      default: null
+    },
+    progressWidthRel: {
+      type: Number,
+      required: false,
+      default: 10
+    }
+    // limitMin: {
+    //   type: Number,
+    //   required: false,
+    //   default: null
+    // },
+    // limitMax: {
+    //   type: Number,
+    //   required: false,
+    //   default: null
+    // }
+  },
+  data () {
+    return {
+      steps: null,
+      stepsCount: null,
+      radius: 0,
+      angle: 0,
+      currentStepValue: 0,
+      mousePressed: false,
+      circleSliderState: null,
+      mousemoveTicks: 0
+    }
+  },
+  computed: {
+    // cpStartAngleOffset () {
+    //   if (!this.minStepLimit) {
+    //     return 0
+    //   }
+    // },
+    cpCenter () {
+      return 550 / 2
+    },
+    cpAngle () {
+      return this.angle + Math.PI / 2
+    },
+    cpMainCircleStrokeWidth () {
+      return this.circleWidth || (550 / 2) / this.circleWidthRel
+    },
+    cpPathDirection () {
+      return (this.cpAngle < 3 / 2 * Math.PI) ? 0 : 1
+    },
+    cpPathX () {
+      return this.cpCenter + this.radius * Math.cos(this.cpAngle)
+    },
+    cpPathY () {
+      return this.cpCenter + this.radius * Math.sin(this.cpAngle)
+    },
+    cpPathStrokeWidth () {
+      return this.progressWidth || (550 / 2) / this.progressWidthRel
+    },
+    cpKnobRadius () {
+      return this.knobRadius || (550 / 2) / this.knobRadiusRel
+    },
+    cpPathD () {
+      let parts = []
+      parts.push('M' + this.cpCenter)
+      parts.push(this.cpCenter + this.radius)
+      parts.push('A')
+      parts.push(this.radius)
+      parts.push(this.radius)
+      parts.push(0)
+      parts.push(this.cpPathDirection)
+      parts.push(1)
+      parts.push(this.cpPathX)
+      parts.push(this.cpPathY)
+      return parts.join(' ')
+    }
+  },
+  methods: {
+    /*
+     */
+    fitToStep (val) {
+      return Math.round(val / this.stepSize) * this.stepSize
+    },
+
+    /*
+     */
+    handleClick (e) {
+      this.touchPosition.setNewPosition(e)
+      if (this.touchPosition.isTouchWithinSliderRange) {
+        const newAngle = this.touchPosition.sliderAngle
+        this.animateSlider(this.angle, newAngle)
+      }
+    },
+
+    /*
+     */
+    handleMouseDown (e) {
+      e.preventDefault()
+      this.mousePressed = true
+      window.addEventListener('mousemove', this.handleWindowMouseMove)
+      window.addEventListener('mouseup', this.handleMouseUp)
+    },
+
+    /*
+     */
+    handleMouseUp (e) {
+      e.preventDefault()
+      this.mousePressed = false
+      window.removeEventListener('mousemove', this.handleWindowMouseMove)
+      window.removeEventListener('mouseup', this.handleMouseUp)
+      this.mousemoveTicks = 0
+    },
+
+    /*
+     */
+    handleWindowMouseMove (e) {
+      e.preventDefault()
+      if (this.mousemoveTicks < 5) {
+        this.mousemoveTicks++
+        return
+      }
+
+      this.touchPosition.setNewPosition(e)
+      this.updateSlider()
+    },
+
+    /*
+     */
+    handleTouchMove (e) {
+      this.$emit('touchmove')
+      // Do nothing if two or more fingers used
+      if (e.targetTouches.length > 1 || e.changedTouches.length > 1 || e.touches.length > 1) {
+        return true
+      }
+
+      const lastTouch = e.targetTouches.item(e.targetTouches.length - 1)
+      this.touchPosition.setNewPosition(lastTouch)
+
+      if (this.touchPosition.isTouchWithinSliderRange) {
+        e.preventDefault()
+        this.updateSlider()
+      }
+    },
+
+    /*
+     */
+    updateAngle (angle) {
+      this.circleSliderState.updateCurrentStepFromAngle(angle)
+      this.angle = this.circleSliderState.angleValue
+      this.currentStepValue = this.circleSliderState.currentStep
+
+      this.$emit('input', this.currentStepValue)
+    },
+
+    /*
+     */
+    updateFromPropValue (value) {
+      let stepValue = this.fitToStep(value)
+      this.circleSliderState.updateCurrentStepFromValue(stepValue)
+
+      this.angle = this.circleSliderState.angleValue
+      this.currentStepValue = stepValue
+      this.$emit('input', this.currentStepValue)
+    },
+
+    /*
+     */
+    updateSlider () {
+      const angle = this.touchPosition.sliderAngle
+      if (Math.abs(angle - this.angle) < Math.PI) {
+        this.updateAngle(angle)
+      }
+    },
+
+    /*
+     */
+    animateSlider (startAngle, endAngle) {
+      // const direction = startAngle < endAngle ? 1 : -1
+      // const curveAngleMovementUnit = direction * this.circleSliderState.angleUnit * 2
+      //
+      // const animate = () => {
+      //   if (Math.abs(endAngle - startAngle) < Math.abs(2 * curveAngleMovementUnit)) {
+      //     this.updateAngle(endAngle)
+      //   } else {
+      //     const newAngle = startAngle + curveAngleMovementUnit
+      //     this.updateAngle(newAngle)
+      //     this.animateSlider(newAngle, endAngle)
+      //   }
+      // }
+      //
+      // window.requestAnimationFrame(animate)
+    }
+  },
+  watch: {
+    value (val) {
+      this.updateFromPropValue(val)
+    }
+  }
+}
+</script>

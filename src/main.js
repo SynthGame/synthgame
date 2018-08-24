@@ -5,7 +5,7 @@ import router from './router'
 import store from './store'
 import './registerServiceWorker'
 import 'firebase/firestore' // import the db to use with firebase
-import VueCircleSlider from 'vue-circle-slider'
+import VueCircleSlider from './components/knob.vue'
 
 Vue.config.productionTip = false
 

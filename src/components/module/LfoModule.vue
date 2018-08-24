@@ -5,8 +5,10 @@
     <circle-slider
             v-model="cutOffFreq"
             :min="50"
-            :max="10000"
-          ></circle-slider>
+            :max="3000"
+          >
+    </circle-slider>
+  </div>
     <ul>
       <div v-for="score in highscores" :key="score.id">
         <strong>{{`🏆: ${score.name}: ${score.score}`}}</strong>
@@ -17,7 +19,7 @@
 
 <script>
 import audio from '@/audio'
-import VueCircleSlider from 'vue-circle-slider'
+import VueCircleSlider from './knob.vue'
 import display from '@/components/display.vue'
 
 export default {
@@ -42,7 +44,7 @@ export default {
     }
   },
   components: {
-    'rotary': VueCircleSlider,
+    'circle-slider': VueCircleSlider,
     display
   },
   created () {
@@ -97,6 +99,7 @@ h3 {
   margin: 40px 0 0;
 }
 ul {
+  margin-top: 5em;
   list-style-type: none;
   padding: 0;
 }
