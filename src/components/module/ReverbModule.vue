@@ -21,13 +21,12 @@ import VueCircleSlider from 'vue-circle-slider'
 import display from '@/components/display.vue'
 
 export default {
-  name: 'FilterModule',
+  name: 'ReverbModule',
   props: {
     msg: String
   },
   data () {
     return {
-      highscores: [], // remove this
       cutOffFreq: 350,
       typeArray: [
         'lowpass',
@@ -46,8 +45,24 @@ export default {
     display
   },
   created () {
+    // db stuff
+    this.$root.db.collection('highscores').get()
+      .then((snapshot) => {
+        snapshot.forEach((doc) => {
+          console.log(`🏆: ${doc.data().name}: ${doc.data().score}`)
+          this.highscores.push({
+            id: doc.id,
+            name: doc.data().name,
+            score: doc.data().score
+          })
+        })
+      })
+      .catch((err) => {
+        console.log('Error getting documents', err)
+      })
+
     this.filter = new audio.state.Tone
-      .Filter(this.cutOffFreq, this.typeArray[val])
+      .Filter(this.cutOffFreq, 'lowpass')
 
     audio.synth.state.synth.disconnect()
     audio.synth.state.synth.connect(this.filter)

@@ -21,24 +21,16 @@ import VueCircleSlider from 'vue-circle-slider'
 import display from '@/components/display.vue'
 
 export default {
-  name: 'FilterModule',
+  name: 'DelayModule',
   props: {
     msg: String
   },
   data () {
     return {
-      highscores: [], // remove this
-      cutOffFreq: 350,
-      typeArray: [
-        'lowpass',
-        'highpass',
-        'bandpass'
-      ],
-      type: 0,
-      Q: 1,
-      gain: 0,
-      filter: {},
-      sliderValue: 0
+      delay: {},
+      delayTime: '8n',
+      wet: 0,
+      feedback: 1
     }
   },
   components: {
@@ -46,8 +38,8 @@ export default {
     display
   },
   created () {
-    this.filter = new audio.state.Tone
-      .Filter(this.cutOffFreq, this.typeArray[val])
+    this.delay = new audio.state.Tone
+      .FeedbackDelay(this.delayTime, this.feedback)
 
     audio.synth.state.synth.disconnect()
     audio.synth.state.synth.connect(this.filter)
