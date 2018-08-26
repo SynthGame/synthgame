@@ -1,12 +1,22 @@
 <template>
   <div class="hello">
-    <div style="margin: auto">
-    <display :data="cutOffFreq"/></div>
+    <div style="margin: auto; width: 100%">
+      <display :data="cutOffFreq"/>
+    </div>
     <rotary
             v-model="cutOffFreq"
-            :min="40"
-            :max="1000"
-          ></rotary>
+            :min="0"
+            :max="10000"
+            knobColor="#ff8574"
+          >
+    </rotary>
+    <rotary
+                  v-model="type"
+                  :min="0"
+                  :max="3"
+                  knobColor="#ff8574"
+                >
+    </rotary>
     <ul>
       <div v-for="score in highscores" :key="score.id">
         <strong>{{`🏆: ${score.name}: ${score.score}`}}</strong>
@@ -35,7 +45,7 @@ export default {
         'bandpass'
       ],
       type: 0,
-      Q: 1,
+      setQ: 1,
       gain: 0,
       filter: {},
       sliderValue: 0
@@ -58,7 +68,7 @@ export default {
       // this might be abstracted away
       this.filter.frequency.value = val
     },
-    Q (val) {
+    setQ (val) {
       // this might be abstracted away
       this.filter.Q.value = val
     },
@@ -68,7 +78,7 @@ export default {
     },
     type (val) {
       // this might be abstracted away
-      this.filter.type = this.typeArray[val]
+      this.filter.type = this.typeArray[Math.round(val)]
     }
   }
 }

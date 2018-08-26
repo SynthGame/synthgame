@@ -2,12 +2,12 @@
   <div class="hello">
     <div style="margin: auto">
     <display :data="cutOffFreq"/></div>
-    <circle-slider
+    <rotary
             v-model="cutOffFreq"
             :min="50"
             :max="3000"
           >
-    </circle-slider>
+    </rotary>
   </div>
     <ul>
       <div v-for="score in highscores" :key="score.id">

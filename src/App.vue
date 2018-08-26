@@ -1,9 +1,9 @@
 <template>
   <div id="app">
-    <div id="nav">
+    <!-- <div id="nav">
       <router-link to="/">Home</router-link> |
       <router-link to="/about">About</router-link>
-    </div>
+    </div> -->
     <router-view/>
   </div>
 </template>
@@ -64,8 +64,12 @@ body {
   background: black;
 }
 
-body {
-  background-color: black;
+.hello {
+  display: flex;
+  width: 30%;
+  margin: auto;
+  justify-content: space-around;
+  flex-wrap: wrap;
 }
 
 #app {
