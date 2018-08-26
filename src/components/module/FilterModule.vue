@@ -14,7 +14,7 @@
             :max="10000"
             knobColor="#ff8574"
           ></rotary>
-    gain: <rotary
+    bandpass: <rotary
             v-model="gain"
             :min="50"
             :max="10000"
