@@ -1,22 +1,25 @@
 <template>
   <div class="hello">
-    <div style="margin: auto; width: 100%">
-      <display :data="cutOffFreq"/>
-    </div>
-    <rotary
+    <div style="margin: auto">
+    <display  style="height:300px;width:700px; margin-bottom: 1rem" module="filter" :lowpass="cutOffFreq" :highpass="cutOffFreq1" :gain="gain"/></div>
+    lowpass: <rotary
             v-model="cutOffFreq"
             :min="0"
             :max="10000"
             knobColor="#ff8574"
-          >
-    </rotary>
-    <rotary
-                  v-model="type"
-                  :min="0"
-                  :max="3"
-                  knobColor="#ff8574"
-                >
-    </rotary>
+          ></rotary>
+    highpass: <rotary
+            v-model="cutOffFreq1"
+            :min="50"
+            :max="10000"
+            knobColor="#ff8574"
+          ></rotary>
+    gain: <rotary
+            v-model="gain"
+            :min="50"
+            :max="10000"
+            knobColor="#ff8574"
+          ></rotary>
     <ul>
       <div v-for="score in highscores" :key="score.id">
         <strong>{{`🏆: ${score.name}: ${score.score}`}}</strong>
@@ -39,6 +42,8 @@ export default {
     return {
       highscores: [], // remove this
       cutOffFreq: 350,
+      cutOffFreq1: 350,
+      cutOffFreq2: 350,
       typeArray: [
         'lowpass',
         'highpass',
