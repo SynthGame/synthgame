@@ -12,7 +12,7 @@
 
 <script>
 import audio from '@/audio'
-import VueCircleSlider from './knob.vue'
+import CircleSlider from './knob.vue'
 import display from '@/components/display.vue'
 
 export default {
@@ -35,7 +35,7 @@ export default {
     }
   },
   components: {
-    'circle-slider': VueCircleSlider,
+    CircleSlider,
     display
   },
   created () {

@@ -42,8 +42,8 @@ export default {
 
     // Pc keyboard listener (might be needed for mobile)
     document.addEventListener('keypress', (event) => {
-      if (audio.Tone.context.state !== 'running') {
-        audio.Tone.context.resume()
+      if (audio.state.Tone.context.state !== 'running') {
+        audio.state.Tone.context.resume()
       }
       // const key = event.key
     })
