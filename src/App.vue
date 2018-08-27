@@ -1,9 +1,9 @@
 <template>
   <div id="app">
-    <div id="nav">
+    <!-- <div id="nav">
       <router-link to="/">Home</router-link> |
       <router-link to="/about">About</router-link>
-    </div>
+    </div> -->
     <router-view/>
   </div>
 </template>
@@ -52,20 +52,24 @@ export default {
 </script>
 
 <style lang="scss">
-path {
-    display: none;
-}
 
-circle:first-of-type {
-    r: 30;
-}
-
-circle:nth-of-type(2) {
-    cursor: pointer;
+.knob {
+  &__bg {
+    margin-bottom: -150px;
+    overflow: visible;
+  }
 }
 
 body {
-  background-color: black;
+  background: black;
+}
+
+.hello {
+  display: flex;
+  width: 30%;
+  margin: auto;
+  justify-content: space-around;
+  flex-wrap: wrap;
 }
 
 #app {

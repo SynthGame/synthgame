@@ -12,7 +12,7 @@
 
 <script>
 import audio from '@/audio'
-import VueCircleSlider from 'vue-circle-slider'
+import VueCircleSlider from '@/components/knob.vue'
 import display from '@/components/display.vue'
 
 export default {
@@ -23,13 +23,15 @@ export default {
   data () {
     return {
       cutOffFreq: 350,
+      cutOffFreq1: 350,
+      cutOffFreq2: 350,
       typeArray: [
         'lowpass',
         'highpass',
         'bandpass'
       ],
       type: 0,
-      Q: 1,
+      setQ: 1,
       gain: 0,
       filter: {},
       sliderValue: 0
@@ -52,7 +54,7 @@ export default {
       // this might be abstracted away
       this.filter.frequency.value = val
     },
-    Q (val) {
+    setQ (val) {
       // this might be abstracted away
       this.filter.Q.value = val
     },
@@ -62,7 +64,7 @@ export default {
     },
     type (val) {
       // this might be abstracted away
-      this.filter.type = this.typeArray[val]
+      this.filter.type = this.typeArray[Math.round(val)]
     }
   }
 }
