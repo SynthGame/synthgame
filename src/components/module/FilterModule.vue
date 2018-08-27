@@ -97,12 +97,7 @@ export default {
     'rotary': VueCircleSlider,
   },
   created () {
-    this.filter = new audio.state.Tone
-      .Filter(this.cutOffFreq, this.typeArray[this.type])
-
-    audio.synth.state.synth.disconnect()
-    audio.synth.state.synth.connect(this.filter)
-    audio.connectChanelToMaster(this.filter)
+    this.filter = audio.filter.state.device
   },
   mounted () {
     console.log('display: mounted!')
@@ -249,6 +244,10 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped lang="scss">
+
+svg.display {
+    fill: #6e01d1;
+}
 
 h3 {
   margin: 40px 0 0;

@@ -1,17 +1,32 @@
 <template>
-  <div class="home">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+  <div class="level">
+    <OscillatorModule />
+    <EnvelopeModule />
+    <FilterModule />
+    <LfoModule />
+    <DelayModule />
+    <ReverbModule />
   </div>
 </template>
 
 <script>
 // @ is an alias to /src
-import HelloWorld from '@/components/module/FilterModule.vue'
+import OscillatorModule from '@/components/module/OscillatorModule.vue'
+import EnvelopeModule from '@/components/module/EnvelopeModule.vue'
+import FilterModule from '@/components/module/FilterModule.vue'
+import LfoModule from '@/components/module/LfoModule.vue'
+import DelayModule from '@/components/module/DelayModule.vue'
+import ReverbModule from '@/components/module/ReverbModule.vue'
 
 export default {
   name: 'home',
   components: {
-    HelloWorld
+    OscillatorModule,
+    EnvelopeModule,
+    FilterModule,
+    LfoModule,
+    DelayModule,
+    ReverbModule,
   }
 }
 </script>

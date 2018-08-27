@@ -9,7 +9,6 @@
       <tspan x="45%" y="50%">H: {{highpass}}</tspan>
       <tspan x="45%" y="60%">G: {{gain}}</tspan>
     </text>
-
   </svg>
   <!-- envelope display -->
     <svg v-else-if="module=='envelope'"

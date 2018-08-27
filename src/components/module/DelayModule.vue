@@ -1,23 +1,34 @@
 <template>
-  <div class="hello">
-    <div style="margin: auto">
-    <display :data="cutOffFreq"/></div>
-    <rotary
-            v-model="cutOffFreq"
-            :min="50"
-            :max="10000"
-          ></rotary>
-    <ul>
-      <div v-for="score in highscores" :key="score.id">
-        <strong>{{`🏆: ${score.name}: ${score.score}`}}</strong>
-      </div>
-    </ul>
+  <div class="module">
+    <display class="display" module="delay"/>
+    <circle-slider
+      v-model="delayTime"
+      :step-size="1"
+      :min="1"
+      :max="6"
+      knobColor="#43bede"
+      name="Time"
+    ></circle-slider>
+    <circle-slider
+      v-model="feedback"
+      :min="50"
+      :max="10000"
+      knobColor="#43bede"
+      name="Feedback"
+    ></circle-slider>
+    <circle-slider
+      v-model="wet"
+      :min="50"
+      :max="10000"
+      knobColor="#43bede"
+      name="Dry/wet"
+    ></circle-slider>
   </div>
 </template>
 
 <script>
 import audio from '@/audio'
-import VueCircleSlider from '@/components/knob.vue'
+import CircleSlider from '@/components/knob.vue'
 import display from '@/components/display.vue'
 
 export default {
@@ -27,40 +38,37 @@ export default {
   },
   data () {
     return {
-      delay: {},
-      delayTime: '8n',
+      delayTime: 1,
       wet: 0,
-      feedback: 1
+      feedback: 1,
+      delay: {}
     }
   },
   components: {
-    'rotary': VueCircleSlider,
+    CircleSlider,
     display
   },
   created () {
-    this.delay = new audio.state.Tone
-      .FeedbackDelay(this.delayTime, this.feedback)
-
-    audio.synth.state.synth.disconnect()
-    audio.synth.state.synth.connect(this.filter)
-    audio.connectChanelToMaster(this.filter)
+    this.delay = audio.delay.state.device
+  },
+  computed: {
+    mappedDelayTime () {
+      const nth = 2 ** this.delayTime // 2 to the power of delaytime
+      return `${nth}n`
+    }
   },
   watch: {
-    cutOffFreq (val) {
+    mappedDelayTime (val) {
       // this might be abstracted away
-      this.filter.frequency.value = val
+      this.delay.delayTime = val
     },
-    Q (val) {
+    wet (val) {
       // this might be abstracted away
-      this.filter.Q.value = val
+      this.delay.wet.value = val
     },
-    gain (val) {
+    feedback (val) {
       // this might be abstracted away
-      this.filter.gain.value = val
-    },
-    type (val) {
-      // this might be abstracted away
-      this.filter.type = this.typeArray[val]
+      this.delay.feedback.value = val
     }
   }
 }
@@ -68,6 +76,10 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped lang="scss">
+
+svg.display {
+    fill: #43bede;
+}
 
 h3 {
   margin: 40px 0 0;

@@ -1,23 +1,35 @@
 <template>
-  <div class="hello">
-    <div style="margin: auto">
-    <display :data="cutOffFreq"/></div>
-    <rotary
-            v-model="cutOffFreq"
-            :min="50"
-            :max="10000"
-          ></rotary>
-    <ul>
-      <div v-for="score in highscores" :key="score.id">
-        <strong>{{`🏆: ${score.name}: ${score.score}`}}</strong>
-      </div>
-    </ul>
+  <div class="module">
+    <display class="display" module="reverb"/>
+    <circle-slider
+      v-model="decay"
+      :step-size="0.1"
+      :min="2"
+      :max="8"
+      knobColor="#3c32ff"
+      name="Time"
+    ></circle-slider>
+    <circle-slider
+      v-model="preDelay"
+      :step-size="0.1"
+      :min="2"
+      :max="8"
+      knobColor="#3c32ff"
+      name="Predelay"
+    ></circle-slider>
+    <circle-slider
+      v-model="wet"
+      :min="0"
+      :max="100"
+      knobColor="#3c32ff"
+      name="Dry/wet"
+    ></circle-slider>
   </div>
 </template>
 
 <script>
 import audio from '@/audio'
-import VueCircleSlider from '@/components/knob.vue'
+import CircleSlider from '@/components/knob.vue'
 import display from '@/components/display.vue'
 
 export default {
@@ -27,63 +39,32 @@ export default {
   },
   data () {
     return {
-      cutOffFreq: 350,
-      typeArray: [
-        'lowpass',
-        'highpass',
-        'bandpass'
-      ],
-      type: 0,
-      Q: 1,
-      gain: 0,
-      filter: {},
+      decay: 2.4, // setting this smaler than 2 will produce an error with scheduling
+      preDelay: 1,
+      wet: 0,
+      reverb: {},
       sliderValue: 0
     }
   },
   components: {
-    'rotary': VueCircleSlider,
+    CircleSlider,
     display
   },
   created () {
-    // db stuff
-    this.$root.db.collection('highscores').get()
-      .then((snapshot) => {
-        snapshot.forEach((doc) => {
-          console.log(`🏆: ${doc.data().name}: ${doc.data().score}`)
-          this.highscores.push({
-            id: doc.id,
-            name: doc.data().name,
-            score: doc.data().score
-          })
-        })
-      })
-      .catch((err) => {
-        console.log('Error getting documents', err)
-      })
-
-    this.filter = new audio.state.Tone
-      .Filter(this.cutOffFreq, 'lowpass')
-
-    audio.synth.state.synth.disconnect()
-    audio.synth.state.synth.connect(this.filter)
-    audio.connectChanelToMaster(this.filter)
+    this.reverb = audio.reverb.state.device
   },
   watch: {
-    cutOffFreq (val) {
-      // this might be abstracted away
-      this.filter.frequency.value = val
+    decay (val) {
+      // const mappedDecay = `${2 ** val}n`
+      console.log(val)
+      audio.reverb.setParameter('decay', val)
     },
-    Q (val) {
-      // this might be abstracted away
-      this.filter.Q.value = val
+    preDelay (val) {
+      // const mappedPreDelay = `${2 ** val}n`
+      audio.reverb.setParameter('preDelay', val)
     },
-    gain (val) {
-      // this might be abstracted away
-      this.filter.gain.value = val
-    },
-    type (val) {
-      // this might be abstracted away
-      this.filter.type = this.typeArray[val]
+    wet (val) {
+      this.reverb.wet.value = val
     }
   }
 }
@@ -91,6 +72,10 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped lang="scss">
+
+svg.display {
+    fill: #3c32ff;
+}
 
 h3 {
   margin: 40px 0 0;

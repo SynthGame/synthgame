@@ -1,23 +1,40 @@
 <template>
-  <div class="hello">
-    <div style="margin: auto">
-    <display :data="cutOffFreq"/></div>
-    <rotary
-            v-model="cutOffFreq"
-            :min="50"
-            :max="10000"
-          ></rotary>
-    <ul>
-      <div v-for="score in highscores" :key="score.id">
-        <strong>{{`🏆: ${score.name}: ${score.score}`}}</strong>
-      </div>
-    </ul>
+  <div class="module">
+    <display class="display" module="oscillator"/>
+    <circle-slider
+      v-model="frequency"
+      :min="50"
+      :max="10000"
+      knobColor="#ff8574"
+      name="Frequency"
+    ></circle-slider>
+    <circle-slider
+      v-model="detune"
+      :min="50"
+      :max="10000"
+      knobColor="#ff8574"
+      name="Detune"
+    ></circle-slider>
+    <circle-slider
+      v-model="phase"
+      :min="50"
+      :max="10000"
+      knobColor="#ff8574"
+      name="Phase"
+    ></circle-slider>
+    <circle-slider
+      v-model="type"
+      :min="50"
+      :max="10000"
+      knobColor="#ff8574"
+      name="Type"
+    ></circle-slider>
   </div>
 </template>
 
 <script>
 import audio from '@/audio'
-import VueCircleSlider from '@/components/knob.vue'
+import CircleSlider from '@/components/knob.vue'
 import display from '@/components/display.vue'
 
 export default {
@@ -27,64 +44,42 @@ export default {
   },
   data () {
     return {
-      highscores: [], // remove this
-      cutOffFreq: 350,
+      frequency: 350,
       typeArray: [
-        'lowpass',
-        'highpass',
-        'bandpass'
+        'sine',
+        'square',
+        'sawtooth',
+        'triangle'
       ],
       type: 0,
-      Q: 1,
-      gain: 0,
-      filter: {},
-      sliderValue: 0
+      detune: 1,
+      phase: 0,
+      oscillator: {}
     }
   },
   components: {
-    'rotary': VueCircleSlider,
+    CircleSlider,
     display
   },
   created () {
-    // db stuff
-    this.$root.db.collection('highscores').get()
-      .then((snapshot) => {
-        snapshot.forEach((doc) => {
-          console.log(`🏆: ${doc.data().name}: ${doc.data().score}`)
-          this.highscores.push({
-            id: doc.id,
-            name: doc.data().name,
-            score: doc.data().score
-          })
-        })
-      })
-      .catch((err) => {
-        console.log('Error getting documents', err)
-      })
-
-    this.filter = new audio.state.Tone
-      .Filter(this.cutOffFreq, 'lowpass')
-
-    audio.synth.state.synth.disconnect()
-    audio.synth.state.synth.connect(this.filter)
-    audio.connectChanelToMaster(this.filter)
+    this.oscillator = audio.oscillator.state.device
   },
   watch: {
-    cutOffFreq (val) {
+    frequency (val) {
       // this might be abstracted away
-      this.filter.frequency.value = val
+      this.oscillator.frequency.value = val
     },
-    Q (val) {
+    detune (val) {
       // this might be abstracted away
-      this.filter.Q.value = val
+      this.oscillator.detune.value = val
     },
-    gain (val) {
+    phase (val) {
       // this might be abstracted away
-      this.filter.gain.value = val
+      this.oscillator.phase.value = val
     },
     type (val) {
       // this might be abstracted away
-      this.filter.type = this.typeArray[val]
+      this.oscillator.type = this.typeArray[val]
     }
   }
 }
@@ -92,6 +87,10 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped lang="scss">
+
+svg.display {
+    fill: #ff8574;
+}
 
 h3 {
   margin: 40px 0 0;

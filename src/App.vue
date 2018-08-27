@@ -23,16 +23,14 @@ export default {
   },
   created () {
     // initialize the synth
-    audio.synth.init()
+    audio.init()
     // create loop wich sequences 4 notes
     const loop = audio.setMainLoop({
       noteArray: ['c4'], // ['C4', 'E4', 'G4', 'A4'],
       subdivision: '1n'
-    }, (thing, note) => {
-      audio.synth.playNote(note)
+    }, (time, note) => {
+      audio.envelope.playNote(note)
     })
-    // connect the synth to the master output, kinda weird I know
-    audio.connectChanelToMaster(audio.synth.state.synth)
     // set BPM
     audio.setBpm(c['BPM'])
     // start tone general
@@ -42,8 +40,8 @@ export default {
 
     // Pc keyboard listener (might be needed for mobile)
     document.addEventListener('keypress', (event) => {
-      if (audio.Tone.context.state !== 'running') {
-        audio.Tone.context.resume()
+      if (audio.state.Tone.context.state !== 'running') {
+        audio.state.Tone.context.resume()
       }
       // const key = event.key
     })
@@ -53,23 +51,35 @@ export default {
 
 <style lang="scss">
 
-.knob {
-  &__bg {
-    margin-bottom: -150px;
-    overflow: visible;
-  }
+.module {
+  height: calc(50% - 1em - 2px);
+  width: calc(33.3% - 2em - 2px);
+  display: flex;
+  justify-content: space-around;
+  flex-wrap: wrap;
+  border: 1px solid #2c3e50;
+  border-radius: .2em;
+  margin: 1em 1em 0 1em;
+}
+
+.level {
+  display: flex;
+  justify-content: space-around;
+  flex-wrap: wrap;
+  width:100%;
+  height:100vh;
+}
+
+.display {
+  margin: 10%;
+  background: #141414;
+  height:30%;
+  width:80%;
 }
 
 body {
   background: black;
-}
-
-.hello {
-  display: flex;
-  width: 30%;
-  margin: auto;
-  justify-content: space-around;
-  flex-wrap: wrap;
+  margin: 0;
 }
 
 #app {
