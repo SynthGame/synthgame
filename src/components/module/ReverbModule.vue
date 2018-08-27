@@ -3,22 +3,24 @@
     <display class="display" module="reverb"/>
     <circle-slider
       v-model="decay"
-      :min="50"
-      :max="10000"
+      :step-size="0.1"
+      :min="2"
+      :max="8"
       knobColor="#3c32ff"
       name="Time"
     ></circle-slider>
     <circle-slider
       v-model="preDelay"
-      :min="50"
-      :max="10000"
+      :step-size="0.1"
+      :min="2"
+      :max="8"
       knobColor="#3c32ff"
       name="Predelay"
     ></circle-slider>
     <circle-slider
       v-model="wet"
-      :min="50"
-      :max="10000"
+      :min="0"
+      :max="100"
       knobColor="#3c32ff"
       name="Dry/wet"
     ></circle-slider>
@@ -37,10 +39,8 @@ export default {
   },
   data () {
     return {
-      decay: 1,
-      mappedDecay: '4n',
+      decay: 2.4, // setting this smaler than 2 will produce an error with scheduling
       preDelay: 1,
-      mappedPreDelay: '4n',
       wet: 0,
       reverb: {},
       sliderValue: 0
@@ -52,17 +52,19 @@ export default {
   },
   created () {
     this.reverb = audio.reverb.state.device
-    console.log(this.reverb)
   },
   watch: {
-    mappedDecay (val) {
+    decay (val) {
+      // const mappedDecay = `${2 ** val}n`
+      console.log(val)
       audio.reverb.setParameter('decay', val)
     },
-    mappedPreDelay (val) {
+    preDelay (val) {
+      // const mappedPreDelay = `${2 ** val}n`
       audio.reverb.setParameter('preDelay', val)
     },
     wet (val) {
-      audio.reverb.setParameter('wet', val, true) // third arg is setValueProp
+      this.reverb.wet.value = val
     }
   }
 }

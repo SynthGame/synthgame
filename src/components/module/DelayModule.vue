@@ -4,8 +4,8 @@
     <circle-slider
       v-model="delayTime"
       :step-size="1"
-      :min="50"
-      :max="10000"
+      :min="1"
+      :max="6"
       knobColor="#43bede"
       name="Time"
     ></circle-slider>
@@ -39,7 +39,6 @@ export default {
   data () {
     return {
       delayTime: 1,
-      mappedDelayTime: '8n',
       wet: 0,
       feedback: 1,
       delay: {}
@@ -51,15 +50,17 @@ export default {
   },
   created () {
     this.delay = audio.delay.state.device
-
-    // audio.synth.state.synth.disconnect()
-    // audio.synth.state.synth.connect(this.filter)
-    // audio.connectChanelToMaster(this.filter)
+  },
+  computed: {
+    mappedDelayTime () {
+      const nth = 2 ** this.delayTime // 2 to the power of delaytime
+      return `${nth}n`
+    }
   },
   watch: {
     mappedDelayTime (val) {
       // this might be abstracted away
-      this.delay.delayTime.value = val
+      this.delay.delayTime = val
     },
     wet (val) {
       // this might be abstracted away
