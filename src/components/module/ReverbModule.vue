@@ -20,7 +20,7 @@
     <circle-slider
       v-model="wet"
       :min="0"
-      :max="100"
+      :max="1"
       knobColor="#3c32ff"
       name="Dry/wet"
     ></circle-slider>
@@ -41,7 +41,7 @@ export default {
     return {
       decay: 2.4, // setting this smaler than 2 will produce an error with scheduling
       preDelay: 1,
-      wet: 0,
+      wet: 0.2,
       reverb: {},
       sliderValue: 0
     }

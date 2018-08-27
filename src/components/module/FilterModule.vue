@@ -1,8 +1,7 @@
 <template>
   <div class="module">
-
-    <div class="display" style="margin: auto;" ref="filterDisplay">
-      <svg :width="displayWidth" :height="displayHeight">
+    <div class="display" ref="filterDisplay">
+      <svg width="100%" height="100%">
         <rect fill="rgb(14, 80, 186)" :width="displayWidth" :height="displayHeight" />
 
         <path stroke="black"
@@ -20,41 +19,40 @@
 
     </div>
 
-
-
-    <select v-model="type">
-      <option :value="0">lowpass</option>
-      <option :value="1">highpass</option>
-      <option selected="selected" :value="2">bandpass</option>
-    </select>
-
+    <rotary
+            v-model="type"
+            :min="0"
+            :max="2"
+            knobColor="#ff8574"
+            name="Type"
+          ></rotary>
     <rotary
             v-model="cutOffFreq"
             :min="0"
-            :max="10000"
+            :max="20000"
             knobColor="#ff8574"
-            name="Cutoff Freq"
-    ></rotary>
-    <rotary
+            name="frequency"
+          ></rotary>
+
+   <rotary
             v-model="setQ"
             :min="0"
             :max="100"
             knobColor="#ff8574"
-            name= "Q"
-    ></rotary>
+            name="Q"
+          ></rotary>
     <rotary
             v-model="gain"
             :min="0"
             :max="100"
             knobColor="#ff8574"
             name="Gain"
-    ></rotary>
-
-    <ul>
+          ></rotary>
+    <!-- <ul>
       <div v-for="score in highscores" :key="score.id">
         <strong>{{`🏆: ${score.name}: ${score.score}`}}</strong>
       </div>
-    </ul>
+    </ul> -->
   </div>
 
 </template>
@@ -79,12 +77,12 @@ export default {
         'bandpass'
       ],
       type: 0,
-      setQ: 50,
-      gain: 0,
+      setQ: 0.1,
+      gain: 0.1,
       filter: {},
       sliderValue: 0,
       displayHeight: 300,
-      displayWidth: 600
+      displayWidth: 600,
     }
   },
   components: {
@@ -218,7 +216,9 @@ export default {
   watch: {
     cutOffFreq (val) {
       // this might be abstracted away
-      this.filter.frequency.value = val
+      // this.filter.frequency.value = val
+      this.filter.frequency.value = Math.round(Math.pow(val, (val/20000)) + 20)
+      // console.log('this.filter.frequency.value', this.filter.frequency.value);
     },
     setQ (val) {
       // this might be abstracted away
@@ -258,18 +258,4 @@ a {
   color: #42b983;
 }
 
-.display {
-  // width: 100%;
-  // height: 100%;
-  margin:0;
-  background-color: transparent
-  // margin: 2rem auto;
-
-}
-
-.controls {
-  max-width: 40%;
-  margin: auto
-
-}
 </style>
