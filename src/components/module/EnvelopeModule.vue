@@ -37,7 +37,7 @@ export default {
   data () {
     return {
       attack: 1,
-      delay: 1,
+      decay: 1,
       sustain: 1,
       release: 0,
       envelope: {},
@@ -48,13 +48,7 @@ export default {
     display
   },
   created () {
-    this.envelope = new audio.state.Tone
-      .Envelope(
-        this.attack,
-        this.delay,
-        this.sustain,
-        this.release
-      )
+    this.envelope = audio.envelope.state.device
 
     // audio.synth.state.synth.disconnect()
     // audio.synth.state.synth.connect(this.filter)
