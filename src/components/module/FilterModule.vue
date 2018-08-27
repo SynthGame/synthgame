@@ -60,12 +60,7 @@ export default {
     display
   },
   created () {
-    this.filter = new audio.state.Tone
-      .Filter(this.cutOffFreq, this.typeArray[this.type])
-
-    audio.synth.state.synth.disconnect()
-    audio.synth.state.synth.connect(this.filter)
-    audio.connectChanelToMaster(this.filter)
+    this.filter = audio.filter.state.device
   },
   watch: {
     cutOffFreq (val) {

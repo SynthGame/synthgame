@@ -8,7 +8,7 @@
       knobColor="#3c32ff"
     ></circle-slider>
     <circle-slider
-      v-model="predelay"
+      v-model="preDelay"
       :min="50"
       :max="10000"
       knobColor="#3c32ff"
@@ -46,15 +46,7 @@ export default {
     display
   },
   created () {
-    this.reverb = new audio.state.Tone
-      .Reverb({
-        decay: this.decay,
-        preDelay: this.preDelay
-      })
-
-    // audio.synth.state.synth.disconnect()
-    // audio.synth.state.synth.connect(this.filter)
-    // audio.connectChanelToMaster(this.filter)
+    this.reverb = audio.reverb.state.device
   },
   watch: {
     decay (val) {

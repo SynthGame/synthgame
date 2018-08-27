@@ -51,12 +51,7 @@ export default {
     display
   },
   created () {
-    this.lfo = new audio.state.Tone
-      .LFO({
-        type: this.typeArray[this.type],
-        frequency: this.frequency,
-        amplitude: this.amplitude
-      })
+    this.lfo = audio.lfo.state.device
 
     // audio.synth.state.synth.disconnect()
     // audio.synth.state.synth.connect(this.filter)

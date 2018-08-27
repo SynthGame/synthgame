@@ -2,7 +2,8 @@
   <div class="module">
     <display class="display" module="filter" :lowpass="cutOffFreq" :highpass="cutOffFreq1" :gain="gain"/>
     <circle-slider
-      v-model="mappedDelayTime"
+      v-model="delayTime"
+      :step-size="1"
       :min="50"
       :max="10000"
       knobColor="#43bede"
@@ -34,7 +35,7 @@ export default {
   },
   data () {
     return {
-      delayTime: '1',
+      delayTime: 1,
       mappedDelayTime: '8n',
       wet: 0,
       feedback: 1,
@@ -46,8 +47,7 @@ export default {
     display
   },
   created () {
-    this.delay = new audio.state.Tone
-      .FeedbackDelay(this.delayTime, this.feedback)
+    this.delay = audio.delay.state.device
 
     // audio.synth.state.synth.disconnect()
     // audio.synth.state.synth.connect(this.filter)
@@ -56,7 +56,7 @@ export default {
   watch: {
     mappedDelayTime (val) {
       // this might be abstracted away
-      this.delay.mappedDelayTime.value = val
+      this.delay.delayTime.value = val
     },
     wet (val) {
       // this might be abstracted away

@@ -60,12 +60,7 @@ export default {
     display
   },
   created () {
-    this.oscillator = new audio.state.Tone
-      .Oscillator(this.frequency, this.typeArray[this.type])
-
-    // audio.synth.state.synth.disconnect()
-    // audio.synth.state.synth.connect(this.filter)
-    // audio.connectChanelToMaster(this.filter)
+    this.lfo = audio.lfo.state.device
   },
   watch: {
     frequency (val) {
