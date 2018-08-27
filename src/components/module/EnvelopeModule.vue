@@ -1,31 +1,50 @@
 <template>
   <div class="module">
-    <display class="display" module="envelope"/>
+    <div class="display" style="margin: auto;" ref="filterDisplay">
+      <svg :width="displayWidth" :height="displayHeight">
+        <rect fill="#e4e259" :width="displayWidth" :height="displayHeight" />
+
+        <path stroke="black"
+              stroke-width="3"
+              :d="envelopePath"
+              fill="black"
+              style="fill-rule: nozero"
+              />
+
+        <text x="45%" y="40%" fill="blue">
+          <tspan x="45%" y="50%">A: {{attack}}</tspan>
+          <tspan x="45%" y="60%">D: {{decay}}</tspan>
+          <tspan x="45%" y="70%">S: {{sustain}}</tspan>
+          <tspan x="45%" y="80%">R: {{release}}</tspan>
+        </text>
+      </svg>
+
+    </div>
     <circle-slider
       v-model="attack"
-      :min="50"
-      :max="10000"
+      :min="1"
+      :max="100"
       knobColor="#e4e259"
       name="Attack"
     ></circle-slider>
     <circle-slider
       v-model="decay"
-      :min="50"
-      :max="10000"
+      :min="1"
+      :max="100"
       knobColor="#e4e259"
       name="Decay"
     ></circle-slider>
     <circle-slider
       v-model="sustain"
-      :min="50"
-      :max="10000"
+      :min="1"
+      :max="100"
       knobColor="#e4e259"
       name="Sustain"
     ></circle-slider>
     <circle-slider
       v-model="release"
-      :min="50"
-      :max="10000"
+      :min="1"
+      :max="100"
       knobColor="#e4e259"
       name="Release"
     ></circle-slider>
@@ -35,7 +54,6 @@
 <script>
 import audio from '@/audio'
 import CircleSlider from '@/components/knob.vue'
-import display from '@/components/display.vue'
 
 export default {
   name: 'EnvelopeModule',
@@ -44,16 +62,17 @@ export default {
   },
   data () {
     return {
-      attack: 1,
-      decay: 1,
-      sustain: 1,
-      release: 0,
+      attack: 50,
+      decay: 50,
+      sustain: 50,
+      release: 50,
       envelope: {},
+      displayHeight: 300,
+      displayWidth: 600
     }
   },
   components: {
     CircleSlider,
-    display
   },
   created () {
     this.envelope = audio.envelope.state.device
@@ -62,23 +81,60 @@ export default {
     // audio.synth.state.synth.connect(this.filter)
     // audio.connectChanelToMaster(this.filter)
   },
-  watch: {
-    attack (val) {
-      // this might be abstracted away
-      this.envelope.attack.value = val
-    },
-    decay (val) {
-      // this might be abstracted away
-      this.envelope.decay.value = val
-    },
-    sustain (val) {
-      // this might be abstracted away
-      this.envelope.sustain.value = val
-    },
-    release (val) {
-      // this might be abstracted away
-      this.envelope.release.value = val
+  mounted () {
+    console.log('envelope: mounted!')
+
+    // update dimentions:
+    this.displayHeight = this.$refs.filterDisplay.clientHeight
+    this.displayWidth = this.$refs.filterDisplay.clientWidth
+  },
+  computed: {
+    envelopePath() {
+    // helpers:
+      let fourthOfWidth = this.displayWidth/4
+
+      const attackXPosition = (this.attack/100)*fourthOfWidth;
+      const attackYPosition = this.displayHeight*0.75;
+      const decayXPosition = (this.decay/100)*fourthOfWidth;
+
+      // the vertical decay position shall include a fix stopping it
+      // from going all the way down (5% height) to perserve release indication:
+      const decayYPosition = (1-(this.sustain/100))*(attackYPosition)-(1-(this.sustain/100))*(attackYPosition)*0.05;
+      // no sustain, as it basically a horizontal line
+      // release is known and shall be market with absolute position
+
+      let line;
+      line = 'M 0, '+ this.displayHeight +
+             ' l ' + attackXPosition + ', ' + (-attackYPosition) + ' ' +
+             ' l ' + decayXPosition + ', ' + decayYPosition+ ' ' +
+             // a horizontal line representing sustain level including a fix regarding adding the release:
+             ' h ' + (this.displayWidth - attackXPosition-decayXPosition-((1-(this.release/100))*fourthOfWidth)) +
+             // release end position:
+             ' L ' + this.displayWidth + ', ' + this.displayHeight + ' ' +
+             ' Z'
+      return line
     }
+  },
+  watch: {
+
+    // watchers gave away warnings:
+
+    // attack (val) {
+    //   // this might be abstracted away
+    //   this.envelope.attack.value = val
+    // },
+    // decay (val) {
+    //   // this might be abstracted away
+    //   this.envelope.decay.value = val
+    // },
+    // sustain (val) {
+    //   // this might be abstracted away
+    //   this.envelope.sustain.value = val
+    // },
+    // release (val) {
+    //   // this might be abstracted away
+    //   this.envelope.release.value = val
+    // }
   }
 }
 </script>
