@@ -1,6 +1,6 @@
 <template>
   <div class="module">
-    <display class="display" module="filter"/>
+    <display class="display" module="oscillator"/>
     <circle-slider
       v-model="frequency"
       :min="50"

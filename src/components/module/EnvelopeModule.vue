@@ -1,6 +1,6 @@
 <template>
   <div class="module">
-    <display class="display" module="filter" :lowpass="cutOffFreq" :highpass="cutOffFreq1" :gain="gain"/>
+    <display class="display" module="envelope"/>
     <circle-slider
       v-model="attack"
       :min="50"
