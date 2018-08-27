@@ -1,9 +1,23 @@
 <template>
-  <div class="hello">
-    <div style="margin: auto">
-    <display :data="attack"/></div>
+  <div class="module">
+    <display :data="attack"/>
     <circle-slider
       v-model="attack"
+      :min="50"
+      :max="10000"
+    ></circle-slider>
+    <circle-slider
+      v-model="decay"
+      :min="50"
+      :max="10000"
+    ></circle-slider>
+    <circle-slider
+      v-model="sustain"
+      :min="50"
+      :max="10000"
+    ></circle-slider>
+    <circle-slider
+      v-model="release"
       :min="50"
       :max="10000"
     ></circle-slider>

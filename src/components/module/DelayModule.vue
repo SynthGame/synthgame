@@ -1,9 +1,18 @@
 <template>
-  <div class="hello">
-    <div style="margin: auto">
-    <display :data="delayTime"/></div>
+  <div class="module">
+    <display :data="delayTime"/>
     <circle-slider
-      v-model="delayTime"
+      v-model="mappedDelayTime"
+      :min="50"
+      :max="10000"
+    ></circle-slider>
+    <circle-slider
+      v-model="wet"
+      :min="50"
+      :max="10000"
+    ></circle-slider>
+    <circle-slider
+      v-model="feedback"
       :min="50"
       :max="10000"
     ></circle-slider>

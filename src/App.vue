@@ -61,6 +61,14 @@ export default {
   flex-wrap: wrap;
 }
 
+.level {
+  display: flex;
+  justify-content: space-around;
+  flex-wrap: wrap;
+  width:100%;
+  height:100vh;
+}
+
 .knob {
   &__bg {
     margin-bottom: -150px;

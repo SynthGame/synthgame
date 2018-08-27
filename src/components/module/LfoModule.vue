@@ -1,9 +1,18 @@
 <template>
-  <div class="hello">
-    <div style="margin: auto">
-    <display :data="frequency"/></div>
+  <div class="module">
+    <display :data="frequency"/>
     <circle-slider
       v-model="frequency"
+      :min="50"
+      :max="10000"
+    ></circle-slider>
+    <circle-slider
+      v-model="amplitude"
+      :min="50"
+      :max="10000"
+    ></circle-slider>
+    <circle-slider
+      v-model="type"
       :min="50"
       :max="10000"
     ></circle-slider>
@@ -12,7 +21,7 @@
 
 <script>
 import audio from '@/audio'
-import CircleSlider from './knob.vue'
+import CircleSlider from '@/components/knob.vue'
 import display from '@/components/display.vue'
 
 export default {

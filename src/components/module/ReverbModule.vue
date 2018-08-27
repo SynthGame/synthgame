@@ -1,9 +1,18 @@
 <template>
-  <div class="hello">
-    <div style="margin: auto">
-    <display :data="decay"/></div>
+  <div class="module">
+    <display :data="decay"/>
     <circle-slider
       v-model="decay"
+      :min="50"
+      :max="10000"
+    ></circle-slider>
+    <circle-slider
+      v-model="predelay"
+      :min="50"
+      :max="10000"
+    ></circle-slider>
+    <circle-slider
+      v-model="wet"
       :min="50"
       :max="10000"
     ></circle-slider>

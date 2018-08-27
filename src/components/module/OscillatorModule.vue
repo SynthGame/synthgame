@@ -1,9 +1,23 @@
 <template>
-  <div class="hello">
-    <div style="margin: auto">
-    <display :data="frequency"/></div>
+  <div class="module">
+    <display :data="frequency"/>
     <circle-slider
       v-model="frequency"
+      :min="50"
+      :max="10000"
+    ></circle-slider>
+    <circle-slider
+      v-model="detune"
+      :min="50"
+      :max="10000"
+    ></circle-slider>
+    <circle-slider
+      v-model="phase"
+      :min="50"
+      :max="10000"
+    ></circle-slider>
+    <circle-slider
+      v-model="type"
       :min="50"
       :max="10000"
     ></circle-slider>
