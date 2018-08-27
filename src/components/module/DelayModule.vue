@@ -18,8 +18,8 @@
     ></circle-slider>
     <circle-slider
       v-model="wet"
-      :min="50"
-      :max="10000"
+      :min="0"
+      :max="1"
       knobColor="#43bede"
       name="Dry/wet"
     ></circle-slider>
@@ -39,7 +39,7 @@ export default {
   data () {
     return {
       delayTime: 1,
-      wet: 0,
+      wet: 0.2,
       feedback: 1,
       delay: {}
     }
