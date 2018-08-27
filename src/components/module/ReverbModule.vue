@@ -1,20 +1,23 @@
 <template>
   <div class="module">
-    <display :data="decay"/>
+    <display class="display" module="filter" :lowpass="cutOffFreq" :highpass="cutOffFreq1" :gain="gain"/>
     <circle-slider
       v-model="decay"
       :min="50"
       :max="10000"
+      knobColor="#3c32ff"
     ></circle-slider>
     <circle-slider
       v-model="predelay"
       :min="50"
       :max="10000"
+      knobColor="#3c32ff"
     ></circle-slider>
     <circle-slider
       v-model="wet"
       :min="50"
       :max="10000"
+      knobColor="#3c32ff"
     ></circle-slider>
   </div>
 </template>
@@ -72,6 +75,10 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped lang="scss">
+
+svg.display {
+    fill: #3c32ff;
+}
 
 h3 {
   margin: 40px 0 0;
