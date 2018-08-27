@@ -31,8 +31,10 @@ export default {
   },
   data () {
     return {
-      decay: 350,
+      decay: 1,
+      mappedDecay: '4n',
       preDelay: 1,
+      mappedPreDelay: '4n',
       wet: 0,
       reverb: {},
       sliderValue: 0
@@ -44,19 +46,17 @@ export default {
   },
   created () {
     this.reverb = audio.reverb.state.device
+    console.log(this.reverb)
   },
   watch: {
-    decay (val) {
-      // this might be abstracted away
-      this.reverb.frequency.value = val
+    mappedDecay (val) {
+      audio.reverb.setParameter('decay', val)
     },
-    preDelay (val) {
-      // this might be abstracted away
-      this.reverb.preDelay.value = val
+    mappedPreDelay (val) {
+      audio.reverb.setParameter('preDelay', val)
     },
     wet (val) {
-      // this might be abstracted away
-      this.reverb.wet.value = val
+      audio.reverb.setParameter('wet', val, true) // third arg is setValueProp
     }
   }
 }

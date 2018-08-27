@@ -152,6 +152,13 @@ export default {
         preDelay: 0.01,
         ...options
       })
+    },
+    setParameter(parameter, value, setValueProp = false) {
+      log(`Generating new reverb based on new value: : ${parameter} = ${value}`)
+      if (setValueProp) this.state.device[parameter].value = value // set value by prop (for signals)
+      else this.state.device[parameter] = value // set value directly (for properties)
+      this.state.device.generate() // generate new reverb
+      return this.state.device[parameter].value
     }
   },
 }
