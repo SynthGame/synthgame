@@ -1,21 +1,27 @@
 <template>
   <div class="module">
-    <display :data="delayTime"/>
+    <display class="display" module="filter" :lowpass="cutOffFreq" :highpass="cutOffFreq1" :gain="gain"/>
     <circle-slider
       v-model="delayTime"
       :step-size="1"
       :min="50"
       :max="10000"
-    ></circle-slider>
-    <circle-slider
-      v-model="wet"
-      :min="50"
-      :max="10000"
+      knobColor="#43bede"
+      name="Time"
     ></circle-slider>
     <circle-slider
       v-model="feedback"
       :min="50"
       :max="10000"
+      knobColor="#43bede"
+      name="Feedback"
+    ></circle-slider>
+    <circle-slider
+      v-model="wet"
+      :min="50"
+      :max="10000"
+      knobColor="#43bede"
+      name="Dry/wet"
     ></circle-slider>
   </div>
 </template>
@@ -69,6 +75,10 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped lang="scss">
+
+svg.display {
+    fill: #43bede;
+}
 
 h3 {
   margin: 40px 0 0;

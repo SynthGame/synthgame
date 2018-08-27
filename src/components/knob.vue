@@ -1,6 +1,6 @@
 <template>
-  <div style="width:40%">
-    <svg width="80%" height="auto" style="overflow:visible" viewBox="0 0 550 550" ref="_svg"
+  <div class="knob">
+    <svg width="80%" style="overflow:visible" viewBox="0 0 550 550" ref="_svg"
       @touchmove="handleTouchMove"
       @click="handleClick"
       @mousedown="handleMouseDown"
@@ -40,6 +40,7 @@
         </g>
       </g>
     </svg>
+    <p>{{name}}</p>
   </div>
 </template>
 <script>
@@ -113,6 +114,11 @@ export default {
       required: false,
       default: '#00be7e'
     },
+    name: {
+      type: String,
+      required: false,
+      default: 'Extra Tats'
+    },
     knobRadius: {
       type: Number,
       required: false,
@@ -163,7 +169,7 @@ export default {
       currentStepValue: 0,
       mousePressed: false,
       circleSliderState: null,
-      mousemoveTicks: 0
+      mousemoveTicks: 0,
     }
   },
   computed: {
@@ -334,3 +340,14 @@ export default {
   }
 }
 </script>
+<style scoped lang="scss">
+
+.knob {
+  width:25%;
+  min-width: 5em;
+  &__bg {
+    margin-bottom: -150px;
+    overflow: visible;
+  }
+}
+</style>

@@ -1,25 +1,33 @@
 <template>
   <div class="module">
-    <display :data="attack"/>
+    <display class="display" module="filter" :lowpass="cutOffFreq" :highpass="cutOffFreq1" :gain="gain"/>
     <circle-slider
       v-model="attack"
       :min="50"
       :max="10000"
+      knobColor="#e4e259"
+      name="Attack"
     ></circle-slider>
     <circle-slider
       v-model="decay"
       :min="50"
       :max="10000"
+      knobColor="#e4e259"
+      name="Decay"
     ></circle-slider>
     <circle-slider
       v-model="sustain"
       :min="50"
       :max="10000"
+      knobColor="#e4e259"
+      name="Sustain"
     ></circle-slider>
     <circle-slider
       v-model="release"
       :min="50"
       :max="10000"
+      knobColor="#e4e259"
+      name="Release"
     ></circle-slider>
   </div>
 </template>
@@ -77,6 +85,10 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped lang="scss">
+
+svg.display {
+    fill: #e4e259;
+}
 
 h3 {
   margin: 40px 0 0;

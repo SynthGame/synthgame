@@ -52,7 +52,7 @@ export default {
 <style lang="scss">
 
 .module {
-  height: 100vh;
+  height: 50%;
   width: 33.3%;
   display: flex;
   justify-content: space-around;
@@ -67,11 +67,11 @@ export default {
   height:100vh;
 }
 
-.knob {
-  &__bg {
-    margin-bottom: -150px;
-    overflow: visible;
-  }
+.display {
+  margin: 10%;
+  background: #141414;
+  height:30%;
+  width:80%;
 }
 
 body {
