@@ -6,18 +6,21 @@
       :min="50"
       :max="10000"
       knobColor="#5bd484"
+      name="Rate"
     ></circle-slider>
     <circle-slider
       v-model="amplitude"
       :min="50"
       :max="10000"
       knobColor="#5bd484"
+      name="Amount"
     ></circle-slider>
     <circle-slider
       v-model="type"
       :min="50"
       :max="10000"
       knobColor="#5bd484"
+      name="Shape"
     ></circle-slider>
   </div>
 </template>

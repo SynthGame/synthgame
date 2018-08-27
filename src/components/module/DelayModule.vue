@@ -7,18 +7,21 @@
       :min="50"
       :max="10000"
       knobColor="#43bede"
-    ></circle-slider>
-    <circle-slider
-      v-model="wet"
-      :min="50"
-      :max="10000"
-      knobColor="#43bede"
+      name="Time"
     ></circle-slider>
     <circle-slider
       v-model="feedback"
       :min="50"
       :max="10000"
       knobColor="#43bede"
+      name="Feedback"
+    ></circle-slider>
+    <circle-slider
+      v-model="wet"
+      :min="50"
+      :max="10000"
+      knobColor="#43bede"
+      name="Dry/wet"
     ></circle-slider>
   </div>
 </template>

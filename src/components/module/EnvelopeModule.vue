@@ -6,24 +6,28 @@
       :min="50"
       :max="10000"
       knobColor="#e4e259"
+      name="Attack"
     ></circle-slider>
     <circle-slider
       v-model="decay"
       :min="50"
       :max="10000"
       knobColor="#e4e259"
+      name="Decay"
     ></circle-slider>
     <circle-slider
       v-model="sustain"
       :min="50"
       :max="10000"
       knobColor="#e4e259"
+      name="Sustain"
     ></circle-slider>
     <circle-slider
       v-model="release"
       :min="50"
       :max="10000"
       knobColor="#e4e259"
+      name="Release"
     ></circle-slider>
   </div>
 </template>

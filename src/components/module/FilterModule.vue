@@ -6,24 +6,28 @@
       :min="0"
       :max="10000"
       knobColor="#6e01d1"
+      name="Frequency"
     ></circle-slider>
     <circle-slider
       v-model="setQ"
       :min="50"
       :max="10000"
       knobColor="#6e01d1"
+      name="Q"
     ></circle-slider>
     <circle-slider
       v-model="gain"
       :min="50"
       :max="10000"
       knobColor="#6e01d1"
+      name="Gain"
     ></circle-slider>
     <circle-slider
       v-model="type"
       :min="50"
       :max="10000"
       knobColor="#6e01d1"
+      name="Type"
     ></circle-slider>
   </div>
 </template>

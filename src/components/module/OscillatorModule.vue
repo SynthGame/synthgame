@@ -1,31 +1,33 @@
 <template>
   <div class="module">
     <display class="display" module="filter"/>
-    <div class="firstTwoKnobs">
-      <circle-slider
-        v-model="frequency"
-        :min="50"
-        :max="10000"
-        knobColor="#ff8574"
-      ></circle-slider>
-      <circle-slider
-        v-model="detune"
-        :min="50"
-        :max="10000"
-        knobColor="#ff8574"
-      ></circle-slider>
-    </div>
+    <circle-slider
+      v-model="frequency"
+      :min="50"
+      :max="10000"
+      knobColor="#ff8574"
+      name="Frequency"
+    ></circle-slider>
+    <circle-slider
+      v-model="detune"
+      :min="50"
+      :max="10000"
+      knobColor="#ff8574"
+      name="Detune"
+    ></circle-slider>
     <circle-slider
       v-model="phase"
       :min="50"
       :max="10000"
       knobColor="#ff8574"
+      name="Phase"
     ></circle-slider>
     <circle-slider
       v-model="type"
       :min="50"
       :max="10000"
       knobColor="#ff8574"
+      name="Type"
     ></circle-slider>
   </div>
 </template>
@@ -86,13 +88,6 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped lang="scss">
-
-.firstTwoKnobs {
-  width: 100%;
- justify-content: space-around;
- display: flex;
-
-}
 
 svg.display {
     fill: #ff8574;

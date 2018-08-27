@@ -6,18 +6,21 @@
       :min="50"
       :max="10000"
       knobColor="#3c32ff"
+      name="Time"
     ></circle-slider>
     <circle-slider
       v-model="preDelay"
       :min="50"
       :max="10000"
       knobColor="#3c32ff"
+      name="Predelay"
     ></circle-slider>
     <circle-slider
       v-model="wet"
       :min="50"
       :max="10000"
       knobColor="#3c32ff"
+      name="Dry/wet"
     ></circle-slider>
   </div>
 </template>

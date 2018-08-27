@@ -40,6 +40,7 @@
         </g>
       </g>
     </svg>
+    <p>{{name}}</p>
   </div>
 </template>
 <script>
@@ -113,6 +114,11 @@ export default {
       required: false,
       default: '#00be7e'
     },
+    name: {
+      type: String,
+      required: false,
+      default: 'Extra Tats'
+    },
     knobRadius: {
       type: Number,
       required: false,
@@ -163,7 +169,7 @@ export default {
       currentStepValue: 0,
       mousePressed: false,
       circleSliderState: null,
-      mousemoveTicks: 0
+      mousemoveTicks: 0,
     }
   },
   computed: {
