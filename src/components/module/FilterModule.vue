@@ -37,7 +37,7 @@
    <rotary
             v-model="setQ"
             :min="0"
-            :max="100"
+            :max="10"
             knobColor="#ff8574"
             name="Q"
           ></rotary>

@@ -3,15 +3,15 @@
     <display class="display" module="oscillator"/>
     <circle-slider
       v-model="frequency"
-      :min="50"
-      :max="10000"
+      :min="0"
+      :max="7"
       knobColor="#ff8574"
       name="Frequency"
     ></circle-slider>
     <circle-slider
       v-model="detune"
-      :min="50"
-      :max="10000"
+      :min="-120"
+      :max="120"
       knobColor="#ff8574"
       name="Detune"
     ></circle-slider>
@@ -44,12 +44,15 @@ export default {
   },
   data () {
     return {
-      frequency: 350,
+      frequency: 2,
       typeArray: [
         'sine',
         'square',
         'sawtooth',
         'triangle'
+      ],
+      freqArray: [
+        33,65,131,262,523,1047,2093,4186
       ],
       type: 0,
       detune: 1,
@@ -67,7 +70,7 @@ export default {
   watch: {
     frequency (val) {
       // this might be abstracted away
-      this.oscillator.frequency.value = val
+      this.oscillator.frequency.value = this.freqArray[val]
     },
     detune (val) {
       // this might be abstracted away
