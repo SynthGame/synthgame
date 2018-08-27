@@ -1,11 +1,7 @@
 <template>
-  <div class="filter">
-    <div style="margin: auto">
-    <!-- <display  style="height:300px;width:800px; margin-bottom: 1rem" module="filter" :lowpass="cutOffFreq" :highpass="cutOffFreq1" :gain="gain"/> -->
+  <div class="module">
 
-
-    <div class="display" ref="filterDisplay">
-
+    <div class="display" style="margin: auto;" ref="filterDisplay">
       <svg :width="displayWidth" :height="displayHeight">
         <rect fill="rgb(14, 80, 186)" :width="displayWidth" :height="displayHeight" />
 
@@ -24,51 +20,49 @@
 
     </div>
 
-    <div class="controls">
 
-    Type: <select v-model="type">
+
+    <select v-model="type">
       <option :value="0">lowpass</option>
       <option :value="1">highpass</option>
       <option selected="selected" :value="2">bandpass</option>
     </select>
 
-    <br/>Freq: <rotary
+    <rotary
             v-model="cutOffFreq"
             :min="0"
             :max="10000"
             knobColor="#ff8574"
-          ></rotary>
-
-   <br/> Q: <rotary
+            name="Cutoff Freq"
+    ></rotary>
+    <rotary
             v-model="setQ"
             :min="0"
             :max="100"
             knobColor="#ff8574"
-          ></rotary>
-    <br/> gain: <rotary
+            name= "Q"
+    ></rotary>
+    <rotary
             v-model="gain"
             :min="0"
             :max="100"
             knobColor="#ff8574"
-          ></rotary>
-    </div>
+            name="Gain"
+    ></rotary>
+
     <ul>
       <div v-for="score in highscores" :key="score.id">
         <strong>{{`🏆: ${score.name}: ${score.score}`}}</strong>
       </div>
     </ul>
-    </div>
   </div>
+
 </template>
 
 <script>
 import audio from '@/audio'
 import VueCircleSlider from '@/components/knob.vue'
 
-
-// TODO:
-// [v] exaggerate Q
-// []
 
 export default {
   name: 'FilterModule',
@@ -100,7 +94,7 @@ export default {
     this.filter = audio.filter.state.device
   },
   mounted () {
-    console.log('display: mounted!')
+    console.log('filter: mounted!')
 
     // update dimentions:
     this.displayHeight = this.$refs.filterDisplay.clientHeight
@@ -173,13 +167,13 @@ export default {
       }
       else if (this.type == 1) {
         line = "M 0," + this.displayHeight+
-                " h " + freqDistance +
+               " h " + freqDistance +
                " h " + ((this.setQ/100)*(halfWidth)/2) +
-                " q " + (qDistance/2) + ", " + (-(halfHeight+gainAddedDistance)) + " " +
+               " q " + (qDistance/2) + ", " + (-(halfHeight+gainAddedDistance)) + " " +
                         qDistance +", " + (-(halfHeight+gainAddedDistance)) +
-                " h " + this.displayWidth +
-                " v " + this.displayHeight  +
-                " Z"
+               " h " + this.displayWidth +
+               " v " + this.displayHeight  +
+               " Z"
 
         // line = "M"+(-halfWidth)+", "+ this.displayHeight+
         //        " h " + (halfWidth + freqDistance-qDistance)+
@@ -265,13 +259,12 @@ a {
 }
 
 .display {
-  width: 80%;
-  height: 500px;
-  margin: 2rem auto;
-  svg {
-    width: 100%;
-    height: 100%;
-  }
+  // width: 100%;
+  // height: 100%;
+  margin:0;
+  background-color: transparent
+  // margin: 2rem auto;
+
 }
 
 .controls {
