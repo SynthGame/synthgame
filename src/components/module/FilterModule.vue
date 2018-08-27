@@ -1,12 +1,29 @@
 <template>
-  <div class="hello">
-    <div style="margin: auto">
-    <display :data="cutOffFreq"/></div>
-    <circle-slider
-      v-model="cutOffFreq"
-      :min="50"
-      :max="10000"
-    ></circle-slider>
+  <div class="module">
+    <display  style="margin-left:10%;background: #141414;height:15em;width:80%" module="filter" :lowpass="cutOffFreq" :highpass="cutOffFreq1" :gain="gain"/>
+          <circle-slider
+            v-model="cutOffFreq"
+            :min="0"
+            :max="10000"
+            knobColor="#6e01d1"
+          ></circle-slider>
+          <circle-slider
+            v-model="cutOffFreq1"
+            :min="50"
+            :max="10000"
+            knobColor="#6e01d1"
+          ></circle-slider>
+    bandpass: <circle-slider
+            v-model="gain"
+            :min="50"
+            :max="10000"
+            knobColor="#6e01d1"
+          ></circle-slider>
+    <ul>
+      <div v-for="score in highscores" :key="score.id">
+        <strong>{{`🏆: ${score.name}: ${score.score}`}}</strong>
+      </div>
+    </ul>
   </div>
 </template>
 

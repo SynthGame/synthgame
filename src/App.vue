@@ -53,6 +53,14 @@ export default {
 
 <style lang="scss">
 
+.module {
+  height: 100vh;
+  width: 33.3%;
+  display: flex;
+  justify-content: space-around;
+  flex-wrap: wrap;
+}
+
 .knob {
   &__bg {
     margin-bottom: -150px;
@@ -62,14 +70,6 @@ export default {
 
 body {
   background: black;
-}
-
-.hello {
-  display: flex;
-  width: 30%;
-  margin: auto;
-  justify-content: space-around;
-  flex-wrap: wrap;
 }
 
 #app {

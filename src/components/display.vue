@@ -1,15 +1,14 @@
 <template>
-  <svg v-if="module=='filter'" fill="rgb(14, 80, 186)"
-  style="margin: auto;">
-  <rect :width="displayWidth" :height="displayHeight"/>
+  <svg v-if="module=='filter'" fill="#6e01d1"
+  style="margin: auto; width: 90%">
+    <rect :width="displayWidth" :height="displayHeight"/>
     <path stroke="black" stroke-width="3" :d="filterPath" fill="black" style="fill-rule: nozero"/>
 
-	  <text x="45%" y="40%" fill="blue">
+	  <text x="45%" y="40%" fill="white">
       <tspan>L: {{lowpass}}</tspan>
       <tspan x="45%" y="50%">H: {{highpass}}</tspan>
       <tspan x="45%" y="60%">G: {{gain}}</tspan>
     </text>
-
   </svg>
 </template>
 
