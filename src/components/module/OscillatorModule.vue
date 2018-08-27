@@ -54,11 +54,12 @@ export default {
     display
   },
   created () {
-    this.lfo = audio.lfo.state.device
+    this.oscillator = audio.oscillator.state.device
   },
   watch: {
     frequency (val) {
       // this might be abstracted away
+      console.log(val)
       this.oscillator.frequency.value = val
     },
     detune (val) {
