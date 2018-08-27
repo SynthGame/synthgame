@@ -1,24 +1,23 @@
 <template>
-  <div class="hello">
-    <div style="margin: auto">
-    <display  style="height:300px;width:700px; margin-bottom: 1rem" module="filter" :lowpass="cutOffFreq" :highpass="cutOffFreq1" :gain="gain"/></div>
-    lowpass: <rotary
+  <div class="module">
+    <display  style="margin-left:10%;background: #141414;height:15em;width:80%" module="filter" :lowpass="cutOffFreq" :highpass="cutOffFreq1" :gain="gain"/>
+          <rotary
             v-model="cutOffFreq"
             :min="0"
             :max="10000"
-            knobColor="#ff8574"
+            knobColor="#6e01d1"
           ></rotary>
-    highpass: <rotary
+          <rotary
             v-model="cutOffFreq1"
             :min="50"
             :max="10000"
-            knobColor="#ff8574"
+            knobColor="#6e01d1"
           ></rotary>
-    gain: <rotary
+          <rotary
             v-model="gain"
             :min="50"
             :max="10000"
-            knobColor="#ff8574"
+            knobColor="#6e01d1"
           ></rotary>
     <ul>
       <div v-for="score in highscores" :key="score.id">

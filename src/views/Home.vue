@@ -1,17 +1,19 @@
 <template>
-  <div class="home">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+  <div class="level">
+    <FilterModule />
+    <FilterModule />
+    <FilterModule />
   </div>
 </template>
 
 <script>
 // @ is an alias to /src
-import HelloWorld from '@/components/module/FilterModule.vue'
+import FilterModule from '@/components/module/FilterModule.vue'
 
 export default {
   name: 'home',
   components: {
-    HelloWorld
+    FilterModule
   }
 }
 </script>
