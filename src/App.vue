@@ -52,11 +52,14 @@ export default {
 <style lang="scss">
 
 .module {
-  height: 50%;
-  width: 33.3%;
+  height: calc(50% - 1em - 2px);
+  width: calc(33.3% - 2em - 2px);
   display: flex;
   justify-content: space-around;
   flex-wrap: wrap;
+  border: 1px solid #2c3e50;
+  border-radius: .2em;
+  margin: 1em 1em 0 1em;
 }
 
 .level {
@@ -76,6 +79,7 @@ export default {
 
 body {
   background: black;
+  margin: 0;
 }
 
 #app {
