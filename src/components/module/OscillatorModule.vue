@@ -59,7 +59,6 @@ export default {
   watch: {
     frequency (val) {
       // this might be abstracted away
-      console.log(val)
       this.oscillator.frequency.value = val
     },
     detune (val) {
