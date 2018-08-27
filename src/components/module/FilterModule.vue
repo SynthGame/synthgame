@@ -54,16 +54,13 @@
       </div>
     </ul> -->
   </div>
+
 </template>
 
 <script>
 import audio from '@/audio'
 import VueCircleSlider from '@/components/knob.vue'
 
-
-// TODO:
-// [v] exaggerate Q
-// []
 
 export default {
   name: 'FilterModule',
@@ -95,7 +92,7 @@ export default {
     this.filter = audio.filter.state.device
   },
   mounted () {
-    console.log('display: mounted!')
+    console.log('filter: mounted!')
 
     // update dimentions:
     this.displayHeight = this.$refs.filterDisplay.clientHeight
@@ -168,13 +165,13 @@ export default {
       }
       else if (this.type == 1) {
         line = "M 0," + this.displayHeight+
-                " h " + freqDistance +
+               " h " + freqDistance +
                " h " + ((this.setQ/100)*(halfWidth)/2) +
-                " q " + (qDistance/2) + ", " + (-(halfHeight+gainAddedDistance)) + " " +
+               " q " + (qDistance/2) + ", " + (-(halfHeight+gainAddedDistance)) + " " +
                         qDistance +", " + (-(halfHeight+gainAddedDistance)) +
-                " h " + this.displayWidth +
-                " v " + this.displayHeight  +
-                " Z"
+               " h " + this.displayWidth +
+               " v " + this.displayHeight  +
+               " Z"
 
         // line = "M"+(-halfWidth)+", "+ this.displayHeight+
         //        " h " + (halfWidth + freqDistance-qDistance)+
