@@ -12,31 +12,31 @@
             v-model="type"
             :min="0"
             :max="2"
-            knobColor="#ff8574"
+            knobColor="rgb(14, 80, 186)"
             name="Type"
           ></rotary>
     <rotary
             v-model="cutOffFreq"
             :min="0"
             :max="20000"
-            knobColor="#ff8574"
-            name="frequency"
+            knobColor="rgb(14, 80, 186)"
+            name="Frequency"
           ></rotary>
 
    <rotary
             v-model="setQ"
             :min="0"
-            :max="50"
-            knobColor="#ff8574"
+            :max="100 "
+            knobColor="rgb(14, 80, 186)"
             name="Q"
           ></rotary>
-    <!-- <rotary
+    <rotary
             v-model="gain"
             :min="0"
             :max="100"
-            knobColor="#ff8574"
+            knobColor="rgb(14, 80, 186)"
             name="Gain"
-          ></rotary> -->
+          ></rotary>
     <!-- <ul>
       <div v-for="score in highscores" :key="score.id">
         <strong>{{`🏆: ${score.name}: ${score.score}`}}</strong>
@@ -50,7 +50,6 @@
 import audio from '@/audio'
 import VueCircleSlider from '@/components/knob.vue'
 import display from '@/components/display'
-
 
 export default {
   name: 'FilterModule',
@@ -72,7 +71,7 @@ export default {
       filter: {},
       sliderValue: 0,
       displayHeight: 300,
-      displayWidth: 600,
+      displayWidth: 600
     }
   },
   components: {
@@ -85,9 +84,6 @@ export default {
   mounted () {
     console.log('filter: mounted!')
 
-    // update dimentions:
-    this.displayHeight = this.$refs.filterDisplay.clientHeight
-    this.displayWidth = this.$refs.filterDisplay.clientWidth
   },
   methods: {
 
@@ -99,8 +95,8 @@ export default {
     cutOffFreq (val) {
       // this might be abstracted away
       // this.filter.frequency.value = val
-      this.filter.frequency.value = Math.round(Math.pow(val, (val/20000)) - 120)
-      console.log('this.filter.frequency.value', this.filter.frequency.value);
+      this.filter.frequency.value = Math.round(Math.pow(val, (val / 20000)) - 120)
+      console.log('this.filter.frequency.value', this.filter.frequency.value)
     },
     setQ (val) {
       // this might be abstracted away
