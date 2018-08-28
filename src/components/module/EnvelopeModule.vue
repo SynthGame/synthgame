@@ -10,29 +10,29 @@
                        ]"/>
     <circle-slider
       v-model="attack"
-      :min="1"
-      :max="100"
+      :min="0"
+      :max="50"
       knobColor="#e4e259"
       name="Attack"
     ></circle-slider>
     <circle-slider
       v-model="decay"
-      :min="1"
-      :max="100"
+      :min="0"
+      :max="5"
       knobColor="#e4e259"
       name="Decay"
     ></circle-slider>
     <circle-slider
       v-model="sustain"
-      :min="1"
-      :max="100"
+      :min="0"
+      :max="1"
       knobColor="#e4e259"
       name="Sustain"
     ></circle-slider>
     <circle-slider
       v-model="release"
-      :min="1"
-      :max="100"
+      :min="0"
+      :max="5"
       knobColor="#e4e259"
       name="Release"
     ></circle-slider>
@@ -51,10 +51,10 @@ export default {
   },
   data () {
     return {
-      attack: 50,
-      decay: 50,
-      sustain: 50,
-      release: 50,
+      attack: 0.11,
+      decay: 0.21,
+      sustain: 0.09,
+      release: 1.2,
       envelope: {},
       displayHeight: 300,
       displayWidth: 600
@@ -81,22 +81,22 @@ export default {
 
     // watchers gave away warnings:
 
-    // attack (val) {
-    //   // this might be abstracted away
-    //   this.envelope.attack.value = val
-    // },
-    // decay (val) {
-    //   // this might be abstracted away
-    //   this.envelope.decay.value = val
-    // },
-    // sustain (val) {
-    //   // this might be abstracted away
-    //   this.envelope.sustain.value = val
-    // },
-    // release (val) {
-    //   // this might be abstracted away
-    //   this.envelope.release.value = val
-    // }
+    attack (val) {
+      // this might be abstracted away
+      this.envelope.attack = val
+    },
+    decay (val) {
+      // this might be abstracted away
+      this.envelope.decay = val
+    },
+    sustain (val) {
+      // this might be abstracted away
+      this.envelope.sustain = val
+    },
+    release (val) {
+      // this might be abstracted away
+      this.envelope.release = val
+    }
   }
 }
 </script>
