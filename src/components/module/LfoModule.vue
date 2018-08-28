@@ -60,8 +60,8 @@ export default {
   },
   computed: {
     ...vuexSyncGen('lfo', 'frequency', val => {
-      self.lfo.frequency.value = Math.round(Math.pow(val, (val/100)) - 120);
-      console.log('self.lfo.frequency.value', self.lfo.frequency.value);
+      self.lfo.frequency.value = Math.pow(val, (val/100)) - 1
+      console.log('this.lfo.frequency.value', this.lfo.frequency.value)
     }),
     ...vuexSyncGen('lfo', 'amount', val => {
       self.lfo.max = val

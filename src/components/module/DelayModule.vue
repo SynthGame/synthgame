@@ -3,9 +3,8 @@
     <display class="display" module="delay"/>
     <circle-slider
       v-model="delayTime"
-      :step-size="1"
-      :min="1"
-      :max="6"
+      :min="0.1"
+      :max="100"
       knobColor="#43bede"
       name="Time"
     ></circle-slider>
@@ -54,7 +53,7 @@ export default {
     ...vuexSyncGen('delay', 'delayTime', val => {
       // const nth = 2 ** self.delayTime // 2 to the power of delaytime
       // return `${nth}n`
-      self.delay.delayTime.value = val
+      self.delay.delayTime.value = val/10
     }),
     ...vuexSyncGen('delay', 'wet', val => {
       self.delay.wet.value = val /100

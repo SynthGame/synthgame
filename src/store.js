@@ -7,26 +7,26 @@ export default new Vuex.Store({
   state: {
     audioParameters: {
       delay: {
-        delayTime: 1,
-        wet: 1,
-        feedback: 100
+        delayTime: 20,
+        wet: 0.2,
+        feedback: 10,
       },
       envelope: {
-        attack: 0.11,
-        decay: 0.21,
-        sustain: 0.09,
-        release: 1.2
+        attack: 11,
+        decay: 21,
+        sustain: 9,
+        release: 12,
       },
       filter: {
-        cutOffFreq: 5000,
+        cutOffFreq: 8000,
         type: 0,
-        setQ: 25,
-        gain: 0.1,
+        setQ: 50,
+        gain: 1,
       },
       lfo: {
-        frequency: 10,
+        frequency: 0,
         type: 0,
-        amount: 4000,
+        amount: 0,
       },
       oscillator: {
         frequency: 2,
@@ -35,8 +35,7 @@ export default new Vuex.Store({
         phase: 0,
       },
       reverb: {
-        decay: 2.4, // setting this smaler than 2 will produce an error with scheduling
-        preDelay: 1,
+        roomSize: 0.5,
         wet: 0.2,
       }
     }

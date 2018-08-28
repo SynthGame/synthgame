@@ -1,6 +1,5 @@
 <template>
   <div class="module">
-
      <display fill="#e4e259"
               module="envelope"
               :knobs="[{name: 'attack', min: 1, max: 100, value: this.attack},
@@ -10,29 +9,29 @@
                        ]"/>
     <circle-slider
       v-model="attack"
-      :min="0"
-      :max="50"
+      :min="1"
+      :max="100"
       knobColor="#e4e259"
       name="Attack"
     ></circle-slider>
     <circle-slider
       v-model="decay"
-      :min="0"
-      :max="5"
+      :min="1"
+      :max="100"
       knobColor="#e4e259"
       name="Decay"
     ></circle-slider>
     <circle-slider
       v-model="sustain"
-      :min="0"
-      :max="1"
+      :min="1"
+      :max="100"
       knobColor="#e4e259"
       name="Sustain"
     ></circle-slider>
     <circle-slider
       v-model="release"
-      :min="0"
-      :max="5"
+      :min="1"
+      :max="100"
       knobColor="#e4e259"
       name="Release"
     ></circle-slider>
@@ -70,16 +69,16 @@ export default {
   },
   computed: {
     ...vuexSyncGen('envelope', 'attack', val => {
-      self.envelope.attack = val
+      self.envelope.attack = val / 100
     }),
     ...vuexSyncGen('envelope', 'decay', val => {
-      self.envelope.decay = val
+      self.envelope.decay = val / 100
     }),
     ...vuexSyncGen('envelope', 'sustain', val => {
-      self.envelope.sustain = val
+      self.envelope.sustain = val / 100
     }),
     ...vuexSyncGen('envelope', 'release', val => {
-      self.envelope.release = val
+      self.envelope.release = val / 100
     })
   }
 }

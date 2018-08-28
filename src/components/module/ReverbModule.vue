@@ -2,25 +2,24 @@
   <div class="module">
     <display class="display" module="reverb"/>
     <circle-slider
-      v-model="decay"
-      :step-size="0.1"
-      :min="2"
-      :max="8"
+      v-model="roomSize"
+      :min="0"
+      :max="100"
       knobColor="#3c32ff"
-      name="Time"
+      name="Room Size"
     ></circle-slider>
-    <circle-slider
+    <!-- <circle-slider
       v-model="preDelay"
       :step-size="0.1"
       :min="2"
       :max="8"
       knobColor="#3c32ff"
       name="Predelay"
-    ></circle-slider>
+    ></circle-slider> -->
     <circle-slider
       v-model="wet"
       :min="0"
-      :max="1"
+      :max="100"
       knobColor="#3c32ff"
       name="Dry/wet"
     ></circle-slider>
@@ -56,17 +55,11 @@ export default {
     this.reverb = audio.reverb.state.device
   },
   computed: {
-    ...vuexSyncGen('reverb', 'decay', val => { // setting this smaler than 2 will produce an error with scheduling
-      // const mappedDecay = `${2 ** val}n`
-      console.log(val)
-      audio.reverb.setParameter('decay', val)
-    }),
-    ...vuexSyncGen('reverb', 'preDelay', val => {
-      // const mappedPreDelay = `${2 ** val}n`
-      audio.reverb.setParameter('preDelay', val)
-    }),
     ...vuexSyncGen('reverb', 'wet', val => {
-      self.reverb.wet.value = val
+      self.reverb.wet.value = val/100
+    }),
+    ...vuexSyncGen('reverb', 'roomSize', val => {
+      self.reverb.roomSize.value = val/100;
     }),
   }
 }

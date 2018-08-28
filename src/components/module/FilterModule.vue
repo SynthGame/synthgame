@@ -26,9 +26,9 @@
    <rotary
             v-model="setQ"
             :min="0"
-            :max="50"
+            :max="100"
             knobColor="#ff8574"
-            name="Q"
+            name="Resonance"
           ></rotary>
     <!-- <rotary
             v-model="gain"
@@ -94,14 +94,13 @@ export default {
   computed: {
     ...vuexSyncGen('filter', 'cutOffFreq', val => {
       // self.filter.frequency.value = val
-      self.filter.frequency.value = Math.round(Math.pow(val, (val/20000)) - 120)
-      console.log('self.filter.frequency.value', self.filter.frequency.value);
+      self.filter.frequency.value = Math.pow(val, (val/20000)) + 20
     }),
     ...vuexSyncGen('filter', 'type', val => {
       self.filter.type = self.typeArray[Math.round(val)]
     }),
     ...vuexSyncGen('filter', 'setQ', val => {
-      self.filter.Q.value = val
+      self.filter.Q.value = val/8
     }),
     ...vuexSyncGen('filter', 'gain', val => {
       self.filter.gain.value = val
