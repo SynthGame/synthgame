@@ -62,7 +62,7 @@ export default {
   },
   components: {
     CircleSlider,
-    display,
+    display
   },
   created () {
     this.envelope = audio.envelope.state.device
