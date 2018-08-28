@@ -23,28 +23,28 @@
     <circle-slider
       v-model="attack"
       :min="0"
-      :max="50"
+      :max="100"
       knobColor="#e4e259"
       name="Attack"
     ></circle-slider>
     <circle-slider
       v-model="decay"
       :min="0"
-      :max="5"
+      :max="100"
       knobColor="#e4e259"
       name="Decay"
     ></circle-slider>
     <circle-slider
       v-model="sustain"
-      :min="0"
-      :max="1"
+      :min="0.01"
+      :max="100"
       knobColor="#e4e259"
       name="Sustain"
     ></circle-slider>
     <circle-slider
       v-model="release"
       :min="0"
-      :max="5"
+      :max="100"
       knobColor="#e4e259"
       name="Release"
     ></circle-slider>
@@ -121,19 +121,19 @@ export default {
 
     attack (val) {
       // this might be abstracted away
-      this.envelope.attack = val
+      this.envelope.attack = val / 2
     },
     decay (val) {
       // this might be abstracted away
-      this.envelope.decay = val
+      this.envelope.decay = val / 20
     },
     sustain (val) {
       // this might be abstracted away
-      this.envelope.sustain = val
+      this.envelope.sustain = val / 100
     },
     release (val) {
       // this might be abstracted away
-      this.envelope.release = val
+      this.envelope.release = val / 20
     }
   }
 }

@@ -37,7 +37,7 @@ export default {
   },
   data () {
     return {
-      frequency: 10,
+      frequency: 0,
       typeArray: [
         'sine',
         'square',
@@ -45,7 +45,7 @@ export default {
         'triangle'
       ],
       type: 0,
-      amount: 4000,
+      amount: 0,
       lfo: {}
     }
   },
@@ -63,7 +63,8 @@ export default {
   watch: {
     frequency (val) {
       // this might be abstracted away
-      this.lfo.frequency.value = Math.round(Math.pow(val, (val/100)) - 120);
+      // this.lfo.frequency.value = Math.round(Math.pow(val, (val/100)) - 120);
+      this.lfo.frequency.value = Math.pow(val, (val/100)) - 1;
       console.log('this.lfo.frequency.value', this.lfo.frequency.value);
     },
     amount (val) {

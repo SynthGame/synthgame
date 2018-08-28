@@ -2,25 +2,24 @@
   <div class="module">
     <display class="display" module="reverb"/>
     <circle-slider
-      v-model="decay"
-      :step-size="0.1"
-      :min="2"
-      :max="8"
+      v-model="roomSize"
+      :min="0"
+      :max="100"
       knobColor="#3c32ff"
-      name="Time"
+      name="Room Size"
     ></circle-slider>
-    <circle-slider
+    <!-- <circle-slider
       v-model="preDelay"
       :step-size="0.1"
       :min="2"
       :max="8"
       knobColor="#3c32ff"
       name="Predelay"
-    ></circle-slider>
+    ></circle-slider> -->
     <circle-slider
       v-model="wet"
       :min="0"
-      :max="1"
+      :max="100"
       knobColor="#3c32ff"
       name="Dry/wet"
     ></circle-slider>
@@ -43,7 +42,8 @@ export default {
       preDelay: 1,
       wet: 0.2,
       reverb: {},
-      sliderValue: 0
+      sliderValue: 0,
+      roomSize : 0.5
     }
   },
   components: {
@@ -56,15 +56,20 @@ export default {
   watch: {
     decay (val) {
       // const mappedDecay = `${2 ** val}n`
-      console.log(val)
+      // console.log(val)
       audio.reverb.setParameter('decay', val)
+    },
+    roomSize (val) {
+      this.reverb.roomSize.value = val/100;
+      console.log('this.reverb.roomSize.value', this.reverb.roomSize.value);
     },
     preDelay (val) {
       // const mappedPreDelay = `${2 ** val}n`
-      audio.reverb.setParameter('preDelay', val)
+      audio.reverb.setParameter('preDelay', val);
+      // console.log('audio.reverb.preDelay',audio.reverb.preDelay);
     },
     wet (val) {
-      this.reverb.wet.value = val
+      this.reverb.wet.value = val/100
     }
   }
 }

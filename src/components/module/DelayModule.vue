@@ -3,9 +3,8 @@
     <display class="display" module="delay"/>
     <circle-slider
       v-model="delayTime"
-      :step-size="1"
-      :min="1"
-      :max="6"
+      :min="0.1"
+      :max="100"
       knobColor="#43bede"
       name="Time"
     ></circle-slider>
@@ -38,9 +37,9 @@ export default {
   },
   data () {
     return {
-      delayTime: 1,
-      wet: 1,
-      feedback: 100,
+      delayTime: 20,
+      wet: 0.2,
+      feedback: 10,
       delay: {}
     }
   },
@@ -52,17 +51,15 @@ export default {
     this.delay = audio.delay.state.device
   },
   computed: {
-    mappedDelayTime () {
-      const nth = 2 ** this.delayTime // 2 to the power of delaytime
-      return `${nth}n`
-    }
+    // mappedDelayTime () {
+    //   const nth = 2 ** this.delayTime // 2 to the power of delaytime
+    //   return `${nth}n`
+    // }
   },
   watch: {
-    mappedDelayTime (val) {
+    delayTime (val) {
       // this might be abstracted away
-      this.delay.delayTime.value = val;
-      // this.delay.stop();
-      // this.delay.start();
+      this.delay.delayTime.value = val/10;
       console.log('this.delay.delayTime', this.delay.delayTime);
     },
     wet (val) {

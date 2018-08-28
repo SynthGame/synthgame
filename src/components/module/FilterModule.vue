@@ -37,9 +37,9 @@
    <rotary
             v-model="setQ"
             :min="0"
-            :max="50"
+            :max="100"
             knobColor="#ff8574"
-            name="Q"
+            name="Resonance"
           ></rotary>
     <!-- <rotary
             v-model="gain"
@@ -70,15 +70,15 @@ export default {
   data () {
     return {
       highscores: [], // remove this
-      cutOffFreq: 5000,
+      cutOffFreq: 8000,
       typeArray: [
         'lowpass',
         'highpass',
         'bandpass'
       ],
       type: 0,
-      setQ: 25,
-      gain: 0.1,
+      setQ: 50,
+      gain: 1,
       filter: {},
       sliderValue: 0,
       displayHeight: 300,
@@ -217,12 +217,12 @@ export default {
     cutOffFreq (val) {
       // this might be abstracted away
       // this.filter.frequency.value = val
-      this.filter.frequency.value = Math.round(Math.pow(val, (val/20000)) - 120)
-      console.log('this.filter.frequency.value', this.filter.frequency.value);
+      this.filter.frequency.value = Math.pow(val, (val/20000)) + 20;
+      // console.log('this.filter.frequency.value', this.filter.frequency.value);
     },
     setQ (val) {
       // this might be abstracted away
-      this.filter.Q.value = val
+      this.filter.Q.value = val/8
     },
     gain (val) {
       // this might be abstracted away
