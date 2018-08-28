@@ -10,7 +10,7 @@
     ></circle-slider>
     <circle-slider
       v-model="detune"
-      :min="-120"
+      :min="0"
       :max="120"
       knobColor="#ff8574"
       name="Detune"
@@ -81,7 +81,7 @@ export default {
       self.oscillator.phase = val // phase in degrees
     }),
     ...vuexSyncGen('oscillator', 'detune', val => {
-      self.oscillator.detune.value = val
+      self.oscillator.detune.value = (val * 2) - 120
     })
   }
 }

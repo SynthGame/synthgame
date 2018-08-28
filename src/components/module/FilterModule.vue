@@ -1,6 +1,6 @@
 <template>
   <div class="module">
-    <display fill="rgb(14, 80, 186)"
+    <display fill="#6e01d1"
         module="filter"
         :knobs="[{name: 'type', min: 0, max: 2, value: this.type},
                   {name: 'frequency', min: 0, max: 20000, value: this.cutOffFreq},
@@ -12,14 +12,14 @@
             v-model="type"
             :min="0"
             :max="2"
-            knobColor="#ff8574"
+            knobColor="#6e01d1"
             name="Type"
           ></rotary>
     <rotary
             v-model="cutOffFreq"
             :min="0"
             :max="20000"
-            knobColor="#ff8574"
+            knobColor="#6e01d1"
             name="frequency"
           ></rotary>
 
@@ -27,7 +27,7 @@
             v-model="setQ"
             :min="0"
             :max="100"
-            knobColor="#ff8574"
+            knobColor="#6e01d1"
             name="Resonance"
           ></rotary>
     <!-- <rotary
