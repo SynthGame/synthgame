@@ -11,28 +11,28 @@
     <circle-slider
       v-model="attack"
       :min="0"
-      :max="50"
+      :max="100"
       knobColor="#e4e259"
       name="Attack"
     ></circle-slider>
     <circle-slider
       v-model="decay"
       :min="0"
-      :max="5"
+      :max="100"
       knobColor="#e4e259"
       name="Decay"
     ></circle-slider>
     <circle-slider
       v-model="sustain"
       :min="0"
-      :max="1"
+      :max="100"
       knobColor="#e4e259"
       name="Sustain"
     ></circle-slider>
     <circle-slider
       v-model="release"
       :min="0"
-      :max="5"
+      :max="100"
       knobColor="#e4e259"
       name="Release"
     ></circle-slider>
@@ -51,10 +51,10 @@ export default {
   },
   data () {
     return {
-      attack: 0.11,
-      decay: 0.21,
-      sustain: 0.09,
-      release: 1.2,
+      attack: 50,
+      decay: 50,
+      sustain: 50,
+      release:50,
       envelope: {},
       displayHeight: 300,
       displayWidth: 600
@@ -62,7 +62,7 @@ export default {
   },
   components: {
     CircleSlider,
-    display,
+    display
   },
   created () {
     this.envelope = audio.envelope.state.device
