@@ -1,6 +1,5 @@
 <template>
   <div class="module">
-
      <display fill="#e4e259"
               module="envelope"
               :knobs="[{name: 'attack', min: 1, max: 100, value: this.attack},
@@ -10,28 +9,28 @@
                        ]"/>
     <circle-slider
       v-model="attack"
-      :min="0"
+      :min="1"
       :max="100"
       knobColor="#e4e259"
       name="Attack"
     ></circle-slider>
     <circle-slider
       v-model="decay"
-      :min="0"
+      :min="1"
       :max="100"
       knobColor="#e4e259"
       name="Decay"
     ></circle-slider>
     <circle-slider
       v-model="sustain"
-      :min="0.01"
+      :min="1"
       :max="100"
       knobColor="#e4e259"
       name="Sustain"
     ></circle-slider>
     <circle-slider
       v-model="release"
-      :min="0"
+      :min="1"
       :max="100"
       knobColor="#e4e259"
       name="Release"
@@ -51,10 +50,10 @@ export default {
   },
   data () {
     return {
-      attack: 0.11,
-      decay: 0.21,
-      sustain: 0.09,
-      release: 1.2,
+      attack: 11,
+      decay: 21,
+      sustain: 9,
+      release: 12,
       envelope: {},
       displayHeight: 300,
       displayWidth: 600
@@ -83,11 +82,11 @@ export default {
 
     attack (val) {
       // this might be abstracted away
-      this.envelope.attack = val / 2
+      this.envelope.attack = val / 100
     },
     decay (val) {
       // this might be abstracted away
-      this.envelope.decay = val / 20
+      this.envelope.decay = val / 100
     },
     sustain (val) {
       // this might be abstracted away
@@ -95,7 +94,7 @@ export default {
     },
     release (val) {
       // this might be abstracted away
-      this.envelope.release = val / 20
+      this.envelope.release = val / 100
     }
   }
 }
