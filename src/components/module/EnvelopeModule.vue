@@ -40,9 +40,13 @@
 </template>
 
 <script>
+import { vuexSyncGen } from '@/utils'
+
 import audio from '@/audio'
 import CircleSlider from '@/components/knob.vue'
 import display from '@/components/display'
+
+var self = undefined
 
 export default {
   name: 'EnvelopeModule',
@@ -51,10 +55,6 @@ export default {
   },
   data () {
     return {
-      attack: 0.11,
-      decay: 0.21,
-      sustain: 0.09,
-      release: 1.2,
       envelope: {},
       displayHeight: 300,
       displayWidth: 600
@@ -65,38 +65,22 @@ export default {
     display
   },
   created () {
+    self = this
     this.envelope = audio.envelope.state.device
-
-    // audio.synth.state.synth.disconnect()
-    // audio.synth.state.synth.connect(this.filter)
-    // audio.connectChanelToMaster(this.filter)
-  },
-  mounted () {
-    console.log('envelope: mounted!')
   },
   computed: {
-
-  },
-  watch: {
-
-    // watchers gave away warnings:
-
-    attack (val) {
-      // this might be abstracted away
-      this.envelope.attack = val
-    },
-    decay (val) {
-      // this might be abstracted away
-      this.envelope.decay = val
-    },
-    sustain (val) {
-      // this might be abstracted away
-      this.envelope.sustain = val
-    },
-    release (val) {
-      // this might be abstracted away
-      this.envelope.release = val
-    }
+    ...vuexSyncGen('envelope', 'attack', val => {
+      self.envelope.attack = val
+    }),
+    ...vuexSyncGen('envelope', 'decay', val => {
+      self.envelope.decay = val
+    }),
+    ...vuexSyncGen('envelope', 'sustain', val => {
+      self.envelope.sustain = val
+    }),
+    ...vuexSyncGen('envelope', 'release', val => {
+      self.envelope.release = val
+    })
   }
 }
 </script>

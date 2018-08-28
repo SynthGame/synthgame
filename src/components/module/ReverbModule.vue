@@ -28,9 +28,13 @@
 </template>
 
 <script>
+import { vuexSyncGen } from '@/utils'
+
 import audio from '@/audio'
 import CircleSlider from '@/components/knob.vue'
 import display from '@/components/display.vue'
+
+var self = undefined
 
 export default {
   name: 'ReverbModule',
@@ -39,9 +43,6 @@ export default {
   },
   data () {
     return {
-      decay: 2.4, // setting this smaler than 2 will produce an error with scheduling
-      preDelay: 1,
-      wet: 0.2,
       reverb: {},
       sliderValue: 0
     }
@@ -51,21 +52,22 @@ export default {
     display
   },
   created () {
+    self = this
     this.reverb = audio.reverb.state.device
   },
-  watch: {
-    decay (val) {
+  computed: {
+    ...vuexSyncGen('reverb', 'decay', val => { // setting this smaler than 2 will produce an error with scheduling
       // const mappedDecay = `${2 ** val}n`
       console.log(val)
       audio.reverb.setParameter('decay', val)
-    },
-    preDelay (val) {
+    }),
+    ...vuexSyncGen('reverb', 'preDelay', val => {
       // const mappedPreDelay = `${2 ** val}n`
       audio.reverb.setParameter('preDelay', val)
-    },
-    wet (val) {
-      this.reverb.wet.value = val
-    }
+    }),
+    ...vuexSyncGen('reverb', 'wet', val => {
+      self.reverb.wet.value = val
+    }),
   }
 }
 </script>

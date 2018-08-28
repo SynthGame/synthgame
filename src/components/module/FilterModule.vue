@@ -47,10 +47,13 @@
 </template>
 
 <script>
+import { vuexSyncGen } from '@/utils'
+
 import audio from '@/audio'
 import VueCircleSlider from '@/components/knob.vue'
 import display from '@/components/display'
 
+var self = undefined
 
 export default {
   name: 'FilterModule',
@@ -59,16 +62,11 @@ export default {
   },
   data () {
     return {
-      highscores: [], // remove this
-      cutOffFreq: 5000,
       typeArray: [
         'lowpass',
         'highpass',
         'bandpass'
       ],
-      type: 0,
-      setQ: 25,
-      gain: 0.1,
       filter: {},
       sliderValue: 0,
       displayHeight: 300,
@@ -80,6 +78,7 @@ export default {
     display
   },
   created () {
+    self = this
     this.filter = audio.filter.state.device
   },
   mounted () {
@@ -93,27 +92,20 @@ export default {
 
   },
   computed: {
-
-  },
-  watch: {
-    cutOffFreq (val) {
-      // this might be abstracted away
-      // this.filter.frequency.value = val
-      this.filter.frequency.value = Math.round(Math.pow(val, (val/20000)) - 120)
-      console.log('this.filter.frequency.value', this.filter.frequency.value);
-    },
-    setQ (val) {
-      // this might be abstracted away
-      this.filter.Q.value = val
-    },
-    gain (val) {
-      // this might be abstracted away
-      this.filter.gain.value = val
-    },
-    type (val) {
-      // this might be abstracted away
-      this.filter.type = this.typeArray[Math.round(val)]
-    }
+    ...vuexSyncGen('filter', 'cutOffFreq', val => {
+      // self.filter.frequency.value = val
+      self.filter.frequency.value = Math.round(Math.pow(val, (val/20000)) - 120)
+      console.log('self.filter.frequency.value', self.filter.frequency.value);
+    }),
+    ...vuexSyncGen('filter', 'type', val => {
+      self.filter.type = self.typeArray[Math.round(val)]
+    }),
+    ...vuexSyncGen('filter', 'setQ', val => {
+      self.filter.Q.value = val
+    }),
+    ...vuexSyncGen('filter', 'gain', val => {
+      self.filter.gain.value = val
+    })
   }
 }
 </script>

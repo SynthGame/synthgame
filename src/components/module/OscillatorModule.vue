@@ -33,9 +33,13 @@
 </template>
 
 <script>
+import { vuexSyncGen } from '@/utils'
+
 import audio from '@/audio'
 import CircleSlider from '@/components/knob.vue'
 import display from '@/components/display.vue'
+
+var self = undefined
 
 export default {
   name: 'OscillatorModule',
@@ -44,7 +48,6 @@ export default {
   },
   data () {
     return {
-      frequency: 2,
       typeArray: [
         'sine',
         'square',
@@ -54,9 +57,6 @@ export default {
       freqArray: [
         33,65,131,262,523,1047,2093,4186
       ],
-      typeOsc: 1,
-      detune: 1,
-      phase: 0,
       oscillator: {}
     }
   },
@@ -65,23 +65,24 @@ export default {
     display
   },
   created () {
+    self = this
     this.oscillator = audio.oscillator.state.device
   },
-  watch: {
-    frequency (val) {
-      this.oscillator.frequency.value = this.freqArray[val]
-    },
-    detune (val) {
-      this.oscillator.detune.value = val
-    },
-    phase (val) {
-      this.oscillator.phase.value = val
-    },
-    typeOsc (val) {
-      this.oscillator.type = this.typeArray[Math.round(val)];
-      this.oscillator.stop();
-      this.oscillator.start();
-    }
+  computed: {
+    ...vuexSyncGen('oscillator', 'frequency', val => {
+      self.oscillator.frequency.value = self.freqArray[val]
+    }),
+    ...vuexSyncGen('oscillator', 'typeOsc', val => {
+      self.oscillator.type = self.typeArray[Math.round(val)];
+      self.oscillator.stop();
+      self.oscillator.start();
+    }),
+    ...vuexSyncGen('oscillator', 'phase', val => {
+      self.oscillator.phase = val // phase in degrees
+    }),
+    ...vuexSyncGen('oscillator', 'detune', val => {
+      self.oscillator.detune.value = val
+    })
   }
 }
 </script>

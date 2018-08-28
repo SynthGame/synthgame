@@ -26,9 +26,13 @@
 </template>
 
 <script>
+import { vuexSyncGen } from '@/utils'
+
 import audio from '@/audio'
 import CircleSlider from '@/components/knob.vue'
 import display from '@/components/display.vue'
+
+var self = undefined
 
 export default {
   name: 'LfoModule',
@@ -37,15 +41,12 @@ export default {
   },
   data () {
     return {
-      frequency: 10,
       typeArray: [
         'sine',
         'square',
         'sawtooth',
         'triangle'
       ],
-      type: 0,
-      amount: 4000,
       lfo: {}
     }
   },
@@ -54,28 +55,22 @@ export default {
     display
   },
   created () {
+    self = this
     this.lfo = audio.lfo.state.device
-
-    // audio.synth.state.synth.disconnect()
-    // audio.synth.state.synth.connect(this.filter)
-    // audio.connectChanelToMaster(this.filter)
   },
-  watch: {
-    frequency (val) {
-      // this might be abstracted away
-      this.lfo.frequency.value = Math.round(Math.pow(val, (val/100)) - 120);
-      console.log('this.lfo.frequency.value', this.lfo.frequency.value);
-    },
-    amount (val) {
-      // this might be abstracted away
-      this.lfo.max = val
-    },
-    type (val) {
-      // this might be abstracted away
-      this.lfo.type = this.typeArray[val];
-      this.lfo.stop();
-      this.lfo.start();
-    }
+  computed: {
+    ...vuexSyncGen('lfo', 'frequency', val => {
+      self.lfo.frequency.value = Math.round(Math.pow(val, (val/100)) - 120);
+      console.log('self.lfo.frequency.value', self.lfo.frequency.value);
+    }),
+    ...vuexSyncGen('lfo', 'amount', val => {
+      self.lfo.max = val
+    }),
+    ...vuexSyncGen('lfo', 'type', val => {
+      self.lfo.type = self.typeArray[val];
+      self.lfo.stop();
+      self.lfo.start();
+    })
   }
 }
 </script>
