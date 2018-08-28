@@ -26,7 +26,7 @@ export default {
     audio.init()
     // create loop wich sequences 4 notes
     const loop = audio.setMainLoop({
-      noteArray: ['c4'], // ['C4', 'E4', 'G4', 'A4'],
+      noteArray: ['C4', 'E4', 'G4', 'A4'], // ['c4']
       subdivision: '1n'
     }, (time, note) => {
       audio.envelope.playNote(note)

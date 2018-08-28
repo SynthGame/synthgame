@@ -11,15 +11,15 @@
     ></circle-slider>
     <circle-slider
       v-model="feedback"
-      :min="50"
-      :max="10000"
+      :min="0"
+      :max="100"
       knobColor="#43bede"
       name="Feedback"
     ></circle-slider>
     <circle-slider
       v-model="wet"
       :min="0"
-      :max="1"
+      :max="100"
       knobColor="#43bede"
       name="Dry/wet"
     ></circle-slider>
@@ -39,8 +39,8 @@ export default {
   data () {
     return {
       delayTime: 1,
-      wet: 0.2,
-      feedback: 1,
+      wet: 1,
+      feedback: 100,
       delay: {}
     }
   },
@@ -60,15 +60,18 @@ export default {
   watch: {
     mappedDelayTime (val) {
       // this might be abstracted away
-      this.delay.delayTime = val
+      this.delay.delayTime.value = val;
+      // this.delay.stop();
+      // this.delay.start();
+      console.log('this.delay.delayTime', this.delay.delayTime);
     },
     wet (val) {
       // this might be abstracted away
-      this.delay.wet.value = val
+      this.delay.wet.value = val /100
     },
     feedback (val) {
       // this might be abstracted away
-      this.delay.feedback.value = val
+      this.delay.feedback.value = val /100
     }
   }
 }

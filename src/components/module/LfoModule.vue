@@ -3,22 +3,22 @@
   <display class="display" module="lfo"/>
     <circle-slider
       v-model="frequency"
-      :min="50"
-      :max="10000"
+      :min="1"
+      :max="100"
       knobColor="#5bd484"
       name="Rate"
     ></circle-slider>
     <circle-slider
-      v-model="amplitude"
-      :min="50"
-      :max="10000"
+      v-model="amount"
+      :min="0"
+      :max="4000"
       knobColor="#5bd484"
       name="Amount"
     ></circle-slider>
     <circle-slider
       v-model="type"
-      :min="50"
-      :max="10000"
+      :min="0"
+      :max="3"
       knobColor="#5bd484"
       name="Shape"
     ></circle-slider>
@@ -37,7 +37,7 @@ export default {
   },
   data () {
     return {
-      frequency: 350,
+      frequency: 10,
       typeArray: [
         'sine',
         'square',
@@ -45,7 +45,7 @@ export default {
         'triangle'
       ],
       type: 0,
-      amplitude: 1,
+      amount: 4000,
       lfo: {}
     }
   },
@@ -63,15 +63,18 @@ export default {
   watch: {
     frequency (val) {
       // this might be abstracted away
-      this.lfo.frequency.value = val
+      this.lfo.frequency.value = Math.round(Math.pow(val, (val/100)) - 120);
+      console.log('this.lfo.frequency.value', this.lfo.frequency.value);
     },
-    amplitude (val) {
+    amount (val) {
       // this might be abstracted away
-      this.lfo.amplitude.value = val
+      this.lfo.max = val
     },
     type (val) {
       // this might be abstracted away
-      this.lfo.type = this.typeArray[val]
+      this.lfo.type = this.typeArray[val];
+      this.lfo.stop();
+      this.lfo.start();
     }
   }
 }

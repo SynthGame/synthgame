@@ -37,17 +37,17 @@
    <rotary
             v-model="setQ"
             :min="0"
-            :max="10"
+            :max="50"
             knobColor="#ff8574"
             name="Q"
           ></rotary>
-    <rotary
+    <!-- <rotary
             v-model="gain"
             :min="0"
             :max="100"
             knobColor="#ff8574"
             name="Gain"
-          ></rotary>
+          ></rotary> -->
     <!-- <ul>
       <div v-for="score in highscores" :key="score.id">
         <strong>{{`🏆: ${score.name}: ${score.score}`}}</strong>
@@ -77,7 +77,7 @@ export default {
         'bandpass'
       ],
       type: 0,
-      setQ: 0.1,
+      setQ: 25,
       gain: 0.1,
       filter: {},
       sliderValue: 0,
@@ -217,8 +217,8 @@ export default {
     cutOffFreq (val) {
       // this might be abstracted away
       // this.filter.frequency.value = val
-      this.filter.frequency.value = Math.round(Math.pow(val, (val/20000)) + 20)
-      // console.log('this.filter.frequency.value', this.filter.frequency.value);
+      this.filter.frequency.value = Math.round(Math.pow(val, (val/20000)) - 120)
+      console.log('this.filter.frequency.value', this.filter.frequency.value);
     },
     setQ (val) {
       // this might be abstracted away

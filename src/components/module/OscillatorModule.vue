@@ -6,7 +6,7 @@
       :min="0"
       :max="7"
       knobColor="#ff8574"
-      name="Frequency"
+      name="Octave"
     ></circle-slider>
     <circle-slider
       v-model="detune"
@@ -23,11 +23,11 @@
       name="Phase"
     ></circle-slider>
     <circle-slider
-      v-model="type"
-      :min="50"
-      :max="10000"
+      v-model="typeOsc"
+      :min="0"
+      :max="3"
       knobColor="#ff8574"
-      name="Type"
+      name="Waveform"
     ></circle-slider>
   </div>
 </template>
@@ -54,7 +54,7 @@ export default {
       freqArray: [
         33,65,131,262,523,1047,2093,4186
       ],
-      type: 0,
+      typeOsc: 1,
       detune: 1,
       phase: 0,
       oscillator: {}
@@ -80,9 +80,11 @@ export default {
       // this might be abstracted away
       this.oscillator.phase.value = val
     },
-    type (val) {
+    typeOsc (val) {
       // this might be abstracted away
-      this.oscillator.type = this.typeArray[val]
+      this.oscillator.type = this.typeArray[Math.round(val)];
+      this.oscillator.stop();
+      this.oscillator.start();
     }
   }
 }

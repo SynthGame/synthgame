@@ -26,7 +26,7 @@ export default {
     const reverb = this.reverb.state.device
 
     log(`Connecting LFO to filter frequency`)
-    lfo.connect(filter.frequency)
+    lfo.connect(oscillator.detune).start()
     log(`Generating reverb`)
     reverb.generate()
     log(`Chaining oscillator => envelope => filter => delay => reverb to Master`)
@@ -61,7 +61,7 @@ export default {
       log(`Initializing oscillator with options: ${options}`)
       this.state.device = new Tone.Oscillator({
         type: 'sine',
-        frequency: 440,
+        frequency: 131,
         detune: 0,
         phase: 0,
         ...options
@@ -76,10 +76,10 @@ export default {
     init (options) {
       log(`Initializing envelope with options: ${options}`)
       this.state.device = new Tone.AmplitudeEnvelope({
-        attack: 0.01,
-        decay: 0.1,
-        sustain: 0.5,
-        release: 1,
+        attack: 0.11,
+        decay: 0.21,
+        sustain: 0.09,
+        release: 1.2,
         attackCurve: 'linear',
         releaseCurve: 'exponential',
         ...options
@@ -101,15 +101,18 @@ export default {
     },
     init (options) {
       log(`Initializing LFO with options: ${options}`)
-      this.state.device = new Tone.LFO({
-        type: 'sine',
-        min: 0,
-        max: 350,
-        phase: 0,
-        frequency: '4n',
-        amplitude: 1,
-        ...options
-      })
+      this.state.device = new Tone.LFO(
+      //   {
+      //   type: 'sine',
+      //   min: 0.1,
+      //   max: 10,
+      //   phase: 0,
+      //   frequency: 1,
+      //   amplitude: 1,
+      //   ...options
+      // }
+      "4n", 400, 4000
+    )
     }
   },
   filter: {
@@ -134,11 +137,14 @@ export default {
     },
     init (options) {
       log(`Initializing delay with options: ${options}`)
-      this.state.device = new Tone.FeedbackDelay({
-        delayTime: 0.25,
-        maxDelay: 1,
-        ...options
-      })
+      this.state.device = new Tone.FeedbackDelay(
+      //   {
+      //   delayTime: 0.25,
+      //   maxDelay: 1,
+      //   ...options
+      // }
+      "8n", 0.5
+    )
     }
   },
   reverb: {
