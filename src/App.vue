@@ -52,14 +52,14 @@ export default {
 <style lang="scss">
 
 .module {
-  height: calc(50% - 1em - 2px);
-  width: calc(33.3% - 2em - 2px);
+  height: calc(50% );
+  width: calc(27.3% - .1em);
+  padding: 0 3%;
   display: flex;
-  justify-content: space-around;
+  justify-content: space-between;
   flex-wrap: wrap;
-  border: 1px solid #2c3e50;
-  border-radius: .2em;
-  margin: 1em 1em 0 1em;
+  border: 1px solid #fff;
+  margin: 0;
 }
 
 .level {

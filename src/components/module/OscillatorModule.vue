@@ -18,7 +18,7 @@
     ></circle-slider>
     <circle-slider
       v-model="detune"
-      :min="-120"
+      :min="0"
       :max="120"
       knobColor="#ff8574"
       name="Detune"
@@ -41,9 +41,13 @@
 </template>
 
 <script>
+import { vuexSyncGen } from '@/utils'
+
 import audio from '@/audio'
 import CircleSlider from '@/components/knob.vue'
 import display from '@/components/display.vue'
+
+var self = undefined
 
 export default {
   name: 'OscillatorModule',
@@ -52,7 +56,6 @@ export default {
   },
   data () {
     return {
-      frequency: 2,
       typeArray: [
         'sine',
         'square',
@@ -73,28 +76,24 @@ export default {
     display
   },
   created () {
+    self = this
     this.oscillator = audio.oscillator.state.device
   },
-  watch: {
-    // watchers giving off warnings
-    frequency (val) {
-      // this might be abstracted away
-      this.oscillator.frequency.value = this.freqArray[val]
-    },
-    detune (val) {
-      // this might be abstracted away
-      this.oscillator.detune.value = val
-    },
-    phase (val) {
-      // this might be abstracted away
-      // this.oscillator.phase.value = val
-    },
-    typeOsc (val) {
-      // this might be abstracted away
-      this.oscillator.type = this.typeArray[Math.round(val)]
-      this.oscillator.stop()
-      this.oscillator.start()
-    }
+  computed: {
+    ...vuexSyncGen('oscillator', 'frequency', val => {
+      self.oscillator.frequency.value = self.freqArray[val]
+    }),
+    ...vuexSyncGen('oscillator', 'typeOsc', val => {
+      self.oscillator.type = self.typeArray[Math.round(val)];
+      self.oscillator.stop();
+      self.oscillator.start();
+    }),
+    ...vuexSyncGen('oscillator', 'phase', val => {
+      self.oscillator.phase = val // phase in degrees
+    }),
+    ...vuexSyncGen('oscillator', 'detune', val => {
+      self.oscillator.detune.value = (val * 2) - 120
+    })
   }
 }
 </script>

@@ -1,6 +1,6 @@
 <template>
   <div class="module">
-    <display fill="rgb(14, 80, 186)"
+    <display fill="#6e01d1"
         module="filter"
         :knobs="[{name: 'type', min: 0, max: 2, value: this.type},
                   {name: 'frequency', min: 0, max: 20000, value: this.cutOffFreq},
@@ -26,9 +26,9 @@
    <rotary
             v-model="setQ"
             :min="0"
-            :max="100 "
-            knobColor="rgb(14, 80, 186)"
-            name="Q"
+            :max="100"
+            knobColor="#6e01d1"
+            name="Resonance"
           ></rotary>
     <rotary
             v-model="gain"
@@ -47,9 +47,13 @@
 </template>
 
 <script>
+import { vuexSyncGen } from '@/utils'
+
 import audio from '@/audio'
 import VueCircleSlider from '@/components/knob.vue'
 import display from '@/components/display'
+
+var self = undefined
 
 export default {
   name: 'FilterModule',
@@ -58,16 +62,11 @@ export default {
   },
   data () {
     return {
-      highscores: [], // remove this
-      cutOffFreq: 5000,
       typeArray: [
         'lowpass',
         'highpass',
         'bandpass'
       ],
-      type: 0,
-      setQ: 25,
-      gain: 0.1,
       filter: {},
       sliderValue: 0,
       displayHeight: 300,
@@ -79,6 +78,7 @@ export default {
     display
   },
   created () {
+    self = this
     this.filter = audio.filter.state.device
   },
   mounted () {
@@ -89,27 +89,19 @@ export default {
 
   },
   computed: {
-
-  },
-  watch: {
-    cutOffFreq (val) {
-      // this might be abstracted away
-      // this.filter.frequency.value = val
-      this.filter.frequency.value = Math.round(Math.pow(val, (val / 20000)) - 120)
-      console.log('this.filter.frequency.value', this.filter.frequency.value)
-    },
-    setQ (val) {
-      // this might be abstracted away
-      this.filter.Q.value = val
-    },
-    gain (val) {
-      // this might be abstracted away
-      this.filter.gain.value = val
-    },
-    type (val) {
-      // this might be abstracted away
-      this.filter.type = this.typeArray[Math.round(val)]
-    }
+    ...vuexSyncGen('filter', 'cutOffFreq', val => {
+      // self.filter.frequency.value = val
+      self.filter.frequency.value = Math.pow(val, (val/20000)) + 20
+    }),
+    ...vuexSyncGen('filter', 'type', val => {
+      self.filter.type = self.typeArray[Math.round(val)]
+    }),
+    ...vuexSyncGen('filter', 'setQ', val => {
+      self.filter.Q.value = val/8
+    }),
+    ...vuexSyncGen('filter', 'gain', val => {
+      self.filter.gain.value = val
+    })
   }
 }
 </script>

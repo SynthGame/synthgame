@@ -1,6 +1,5 @@
 <template>
   <div class="module">
-
      <display fill="#e4e259"
               module="envelope"
               :knobs="[{name: 'attack', min: 1, max: 100, value: this.attack},
@@ -10,28 +9,28 @@
                        ]"/>
     <circle-slider
       v-model="attack"
-      :min="0"
+      :min="1"
       :max="100"
       knobColor="#e4e259"
       name="Attack"
     ></circle-slider>
     <circle-slider
       v-model="decay"
-      :min="0"
+      :min="1"
       :max="100"
       knobColor="#e4e259"
       name="Decay"
     ></circle-slider>
     <circle-slider
       v-model="sustain"
-      :min="0"
+      :min="1"
       :max="100"
       knobColor="#e4e259"
       name="Sustain"
     ></circle-slider>
     <circle-slider
       v-model="release"
-      :min="0"
+      :min="1"
       :max="100"
       knobColor="#e4e259"
       name="Release"
@@ -40,9 +39,13 @@
 </template>
 
 <script>
+import { vuexSyncGen } from '@/utils'
+
 import audio from '@/audio'
 import CircleSlider from '@/components/knob.vue'
 import display from '@/components/display'
+
+var self = undefined
 
 export default {
   name: 'EnvelopeModule',
@@ -65,38 +68,22 @@ export default {
     display
   },
   created () {
+    self = this
     this.envelope = audio.envelope.state.device
-
-    // audio.synth.state.synth.disconnect()
-    // audio.synth.state.synth.connect(this.filter)
-    // audio.connectChanelToMaster(this.filter)
-  },
-  mounted () {
-    console.log('envelope: mounted!')
   },
   computed: {
-
-  },
-  watch: {
-
-    // watchers gave away warnings:
-
-    attack (val) {
-      // this might be abstracted away
-      this.envelope.attack = val
-    },
-    decay (val) {
-      // this might be abstracted away
-      this.envelope.decay = val
-    },
-    sustain (val) {
-      // this might be abstracted away
-      this.envelope.sustain = val
-    },
-    release (val) {
-      // this might be abstracted away
-      this.envelope.release = val
-    }
+    ...vuexSyncGen('envelope', 'attack', val => {
+      self.envelope.attack = val / 100
+    }),
+    ...vuexSyncGen('envelope', 'decay', val => {
+      self.envelope.decay = val / 100
+    }),
+    ...vuexSyncGen('envelope', 'sustain', val => {
+      self.envelope.sustain = val / 100
+    }),
+    ...vuexSyncGen('envelope', 'release', val => {
+      self.envelope.release = val / 100
+    })
   }
 }
 </script>

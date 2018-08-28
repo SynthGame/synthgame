@@ -3,9 +3,8 @@
     <display class="display" module="delay"/>
     <circle-slider
       v-model="delayTime"
-      :step-size="1"
-      :min="1"
-      :max="6"
+      :min="0.1"
+      :max="100"
       knobColor="#43bede"
       name="Time"
     ></circle-slider>
@@ -27,20 +26,18 @@
 </template>
 
 <script>
+import { vuexSyncGen } from '@/utils'
+
 import audio from '@/audio'
 import CircleSlider from '@/components/knob.vue'
 import display from '@/components/display.vue'
 
+var self = undefined
+
 export default {
   name: 'DelayModule',
-  props: {
-    msg: String
-  },
   data () {
     return {
-      delayTime: 1,
-      wet: 1,
-      feedback: 100,
       delay: {}
     }
   },
@@ -49,30 +46,21 @@ export default {
     display
   },
   created () {
+    self = this
     this.delay = audio.delay.state.device
   },
   computed: {
-    mappedDelayTime () {
-      const nth = 2 ** this.delayTime // 2 to the power of delaytime
-      return `${nth}n`
-    }
-  },
-  watch: {
-    mappedDelayTime (val) {
-      // this might be abstracted away
-      this.delay.delayTime.value = val;
-      // this.delay.stop();
-      // this.delay.start();
-      console.log('this.delay.delayTime', this.delay.delayTime);
-    },
-    wet (val) {
-      // this might be abstracted away
-      this.delay.wet.value = val /100
-    },
-    feedback (val) {
-      // this might be abstracted away
-      this.delay.feedback.value = val /100
-    }
+    ...vuexSyncGen('delay', 'delayTime', val => {
+      // const nth = 2 ** self.delayTime // 2 to the power of delaytime
+      // return `${nth}n`
+      self.delay.delayTime.value = val/10
+    }),
+    ...vuexSyncGen('delay', 'wet', val => {
+      self.delay.wet.value = val /100
+    }),
+    ...vuexSyncGen('delay', 'feedback', val => {
+      self.delay.feedback.value = val /100
+    })
   }
 }
 </script>

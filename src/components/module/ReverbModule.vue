@@ -2,25 +2,24 @@
   <div class="module">
     <display class="display" module="reverb"/>
     <circle-slider
-      v-model="decay"
-      :step-size="0.1"
-      :min="2"
-      :max="8"
+      v-model="roomSize"
+      :min="0"
+      :max="100"
       knobColor="#3c32ff"
-      name="Time"
+      name="Room Size"
     ></circle-slider>
-    <circle-slider
+    <!-- <circle-slider
       v-model="preDelay"
       :step-size="0.1"
       :min="2"
       :max="8"
       knobColor="#3c32ff"
       name="Predelay"
-    ></circle-slider>
+    ></circle-slider> -->
     <circle-slider
       v-model="wet"
       :min="0"
-      :max="1"
+      :max="100"
       knobColor="#3c32ff"
       name="Dry/wet"
     ></circle-slider>
@@ -28,9 +27,13 @@
 </template>
 
 <script>
+import { vuexSyncGen } from '@/utils'
+
 import audio from '@/audio'
 import CircleSlider from '@/components/knob.vue'
 import display from '@/components/display.vue'
+
+var self = undefined
 
 export default {
   name: 'ReverbModule',
@@ -39,9 +42,6 @@ export default {
   },
   data () {
     return {
-      decay: 2.4, // setting this smaler than 2 will produce an error with scheduling
-      preDelay: 1,
-      wet: 0.2,
       reverb: {},
       sliderValue: 0
     }
@@ -51,21 +51,16 @@ export default {
     display
   },
   created () {
+    self = this
     this.reverb = audio.reverb.state.device
   },
-  watch: {
-    decay (val) {
-      // const mappedDecay = `${2 ** val}n`
-      console.log(val)
-      audio.reverb.setParameter('decay', val)
-    },
-    preDelay (val) {
-      // const mappedPreDelay = `${2 ** val}n`
-      audio.reverb.setParameter('preDelay', val)
-    },
-    wet (val) {
-      this.reverb.wet.value = val
-    }
+  computed: {
+    ...vuexSyncGen('reverb', 'wet', val => {
+      self.reverb.wet.value = val/100
+    }),
+    ...vuexSyncGen('reverb', 'roomSize', val => {
+      self.reverb.roomSize.value = val/100;
+    }),
   }
 }
 </script>

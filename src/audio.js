@@ -26,11 +26,11 @@ export default {
     const reverb = this.reverb.state.device
 
     log(`Connecting LFO to filter frequency`)
-    lfo.connect(oscillator.detune).start()
+    lfo.connect(filter.frequency).start()
     log(`Generating reverb`)
-    reverb.generate()
+    // reverb.generate()
     log(`Chaining oscillator => envelope => filter => delay => reverb to Master`)
-    oscillator.chain(envelope, filter, delay, reverb, Tone.Master)
+    oscillator.chain(envelope, filter, reverb, delay, Tone.Master)
     log(`Starting oscillator`)
     oscillator.start()
   },
@@ -111,7 +111,7 @@ export default {
       //   amplitude: 1,
       //   ...options
       // }
-      "4n", 400, 4000
+      "4n", 0, 8000
     )
     }
   },
@@ -121,14 +121,16 @@ export default {
     },
     init (options) {
       log(`Initializing filter with options: ${options}`)
-      this.state.device = new Tone.Filter({
+      this.state.device = new Tone.Filter(
+        {
         type: 'lowpass',
-        frequency: 350,
+        frequency: 8000,
         rolloff: -12,
         Q: 1,
-        gain: 0,
+        gain: 1,
         ...options
-      })
+      }
+    )
     }
   },
   delay: {
@@ -153,11 +155,14 @@ export default {
     },
     init (options) {
       log(`Initializing reverb with options: ${options}`)
-      this.state.device = new Tone.Reverb({
-        decay: 1.5,
-        preDelay: 0.01,
-        ...options
-      })
+      this.state.device = new Tone.JCReverb(
+      //   {
+      //   decay: 1.5,
+      //   preDelay: 0.01,
+      //   ...options
+      // }
+      0.9
+    )
     },
     setParameter(parameter, value) {
       log(`Generating new reverb based on new value: : ${parameter} = ${value}`)

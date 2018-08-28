@@ -1,8 +1,8 @@
 <template>
   <div class="level">
     <OscillatorModule />
-    <EnvelopeModule />
     <FilterModule />
+    <EnvelopeModule />
     <LfoModule />
     <DelayModule />
     <ReverbModule />
