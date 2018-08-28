@@ -1,6 +1,14 @@
 <template>
   <div class="module">
-    <display class="display" module="oscillator"/>
+    <display class="display"
+             module="oscillator"
+             fill="#ff8574"
+             :knobs="[{name: 'Octave', min: 0, max: 7, value: this.frequency},
+                      {name: 'Detune', min: -120, max: 120, value: this.detune},
+                      {name: 'Phase', min: 50, max: 10000, value: this.phase},
+                      {name: 'Waveform', min: 0, max:3, value: this.typeOsc},
+                    ]"
+             />
     <circle-slider
       v-model="frequency"
       :min="0"
@@ -52,10 +60,10 @@ export default {
         'triangle'
       ],
       freqArray: [
-        33,65,131,262,523,1047,2093,4186
+        33, 65, 131, 262, 523, 1047, 2093, 4186
       ],
       typeOsc: 1,
-      detune: 1,
+      detune: 0,
       phase: 0,
       oscillator: {}
     }
@@ -68,6 +76,7 @@ export default {
     this.oscillator = audio.oscillator.state.device
   },
   watch: {
+    // watchers giving off warnings
     frequency (val) {
       // this might be abstracted away
       this.oscillator.frequency.value = this.freqArray[val]
@@ -78,13 +87,13 @@ export default {
     },
     phase (val) {
       // this might be abstracted away
-      this.oscillator.phase.value = val
+      // this.oscillator.phase.value = val
     },
     typeOsc (val) {
       // this might be abstracted away
-      this.oscillator.type = this.typeArray[Math.round(val)];
-      this.oscillator.stop();
-      this.oscillator.start();
+      this.oscillator.type = this.typeArray[Math.round(val)]
+      this.oscillator.stop()
+      this.oscillator.start()
     }
   }
 }
