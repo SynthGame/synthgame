@@ -69,19 +69,15 @@ export default {
   },
   watch: {
     frequency (val) {
-      // this might be abstracted away
       this.oscillator.frequency.value = this.freqArray[val]
     },
     detune (val) {
-      // this might be abstracted away
       this.oscillator.detune.value = val
     },
     phase (val) {
-      // this might be abstracted away
       this.oscillator.phase.value = val
     },
     typeOsc (val) {
-      // this might be abstracted away
       this.oscillator.type = this.typeArray[Math.round(val)];
       this.oscillator.stop();
       this.oscillator.start();
