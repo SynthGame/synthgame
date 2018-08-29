@@ -72,7 +72,8 @@ export default {
       type: String
     },
     knobs: {
-      type: Array
+      type: Array,
+      default: []
     }
   },
   data () {
