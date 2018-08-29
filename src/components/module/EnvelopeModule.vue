@@ -54,10 +54,6 @@ export default {
   },
   data () {
     return {
-      attack: 50,
-      decay: 50,
-      sustain: 50,
-      release:50,
       envelope: {},
       displayHeight: 300,
       displayWidth: 600
