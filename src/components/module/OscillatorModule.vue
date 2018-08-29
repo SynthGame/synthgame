@@ -65,9 +65,6 @@ export default {
       freqArray: [
         33, 65, 131, 262, 523, 1047, 2093, 4186
       ],
-      typeOsc: 1,
-      detune: 0,
-      phase: 0,
       oscillator: {}
     }
   },
