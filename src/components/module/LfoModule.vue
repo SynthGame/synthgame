@@ -32,7 +32,7 @@ import audio from '@/audio'
 import CircleSlider from '@/components/knob.vue'
 import display from '@/components/display.vue'
 
-var self = undefined
+var self
 
 export default {
   name: 'LfoModule',
@@ -60,16 +60,16 @@ export default {
   },
   computed: {
     ...vuexSyncGen('lfo', 'frequency', val => {
-      self.lfo.frequency.value = Math.pow(val, (val/100)) - 1
+      self.lfo.frequency.value = Math.pow(val, (val / 100)) - 1
       console.log('self.lfo.frequency.value', self.lfo.frequency.value)
     }),
     ...vuexSyncGen('lfo', 'amount', val => {
       self.lfo.max = val
     }),
     ...vuexSyncGen('lfo', 'type', val => {
-      self.lfo.type = self.typeArray[val];
-      self.lfo.stop();
-      self.lfo.start();
+      self.lfo.type = self.typeArray[val]
+      self.lfo.stop()
+      self.lfo.start()
     })
   }
 }

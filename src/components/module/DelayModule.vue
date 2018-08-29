@@ -32,7 +32,7 @@ import audio from '@/audio'
 import CircleSlider from '@/components/knob.vue'
 import display from '@/components/display.vue'
 
-var self = undefined
+var self
 
 export default {
   name: 'DelayModule',
@@ -53,13 +53,13 @@ export default {
     ...vuexSyncGen('delay', 'delayTime', val => {
       // const nth = 2 ** self.delayTime // 2 to the power of delaytime
       // return `${nth}n`
-      self.delay.delayTime.value = val/10
+      self.delay.delayTime.value = val / 10
     }),
     ...vuexSyncGen('delay', 'wet', val => {
-      self.delay.wet.value = val /100
+      self.delay.wet.value = val / 100
     }),
     ...vuexSyncGen('delay', 'feedback', val => {
-      self.delay.feedback.value = val /100
+      self.delay.feedback.value = val / 100
     })
   }
 }

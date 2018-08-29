@@ -45,7 +45,7 @@ import audio from '@/audio'
 import CircleSlider from '@/components/knob.vue'
 import display from '@/components/display'
 
-var self = undefined
+var self
 
 export default {
   name: 'EnvelopeModule',

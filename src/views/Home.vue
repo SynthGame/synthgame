@@ -26,7 +26,7 @@ export default {
     FilterModule,
     LfoModule,
     DelayModule,
-    ReverbModule,
+    ReverbModule
   }
 }
 </script>

@@ -33,7 +33,7 @@ import audio from '@/audio'
 import CircleSlider from '@/components/knob.vue'
 import display from '@/components/display.vue'
 
-var self = undefined
+var self
 
 export default {
   name: 'ReverbModule',
@@ -56,11 +56,11 @@ export default {
   },
   computed: {
     ...vuexSyncGen('reverb', 'wet', val => {
-      self.reverb.wet.value = val/100
+      self.reverb.wet.value = val / 100
     }),
     ...vuexSyncGen('reverb', 'roomSize', val => {
-      self.reverb.roomSize.value = val/100;
-    }),
+      self.reverb.roomSize.value = val / 100
+    })
   }
 }
 </script>

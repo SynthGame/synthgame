@@ -4,7 +4,7 @@
   style="margin: auto; width: 100%">
   <rect :width="displayWidth" :height="displayHeight" fill="rgb(14, 80, 186)"/>
     <path stroke="black" stroke-width="3" :d="filterPath" fill="black" style="fill-rule: nozero"/>
-	  <text x="45%" y="40%" fill="blue">
+    <text x="45%" y="40%" fill="blue">
       <tspan>L: {{lowpass}}</tspan>
       <tspan x="45%" y="50%">H: {{highpass}}</tspan>
       <tspan x="45%" y="60%">G: {{gain}}</tspan>
@@ -73,7 +73,7 @@ export default {
     },
     knobs: {
       type: Array,
-      default() {return []}
+      default () { return [] }
     }
   },
   data () {
@@ -143,7 +143,6 @@ export default {
       }
 
       if (this.module === 'filter') {
-
         // helpers:
         const type = this.knobs[0]
         const cutOffFreq = this.knobs[1]
@@ -188,48 +187,47 @@ export default {
       }
 
       if (this.module === 'oscillator') {
-
         // helpers:
         const octave = this.knobs[0]
         const detune = this.knobs[1]
         const phase = this.knobs[2]
         const type = this.knobs[3]
 
-        const lineLength = 1.5*this.displayWidth
-        const yAxisMiddle = this.displayHeight/2
-        const h = yAxisMiddle/2
+        const lineLength = 1.5 * this.displayWidth
+        const yAxisMiddle = this.displayHeight / 2
+        const h = yAxisMiddle / 2
 
-        const iteration = 1.2 * h - h*(0.6*(octave.value/(octave.max-octave.min))) +(h*0.2*(phase.value/(phase.max)))
+        const iteration = 1.2 * h - h * (0.6 * (octave.value / (octave.max - octave.min))) + (h * 0.2 * (phase.value / (phase.max)))
 
-        let wave;
+        let wave
         // square:
-        if (type.value == 0) {
+        if (type.value === 0) {
           wave = ' v ' + h +
                  ' h ' + iteration +
                  ' v ' + (-yAxisMiddle) +
                  ' h ' + iteration +
                  ' v ' + h
         // sine:
-        } else if (type.value == 1) {
-          wave = ' q ' + '0, ' + h + ' ' + iteration/2 + ', ' + h +
-                 ' q ' + iteration/2 + ', 0 ' + iteration/2 + ', '+ (-h) +
-                 ' q 0, ' + (-h) + ' ' + iteration/2 + ' ' + (-h) +
-                 ' q ' + iteration/2 + ', 0 ' + ' ' + iteration/2 + ' ' + h
+        } else if (type.value === 1) {
+          wave = ' q ' + '0, ' + h + ' ' + iteration / 2 + ', ' + h +
+                 ' q ' + iteration / 2 + ', 0 ' + iteration / 2 + ', ' + (-h) +
+                 ' q 0, ' + (-h) + ' ' + iteration / 2 + ' ' + (-h) +
+                 ' q ' + iteration / 2 + ', 0 ' + ' ' + iteration / 2 + ' ' + h
         // sawtooth:
-        } else if (type.value == 2) {
+        } else if (type.value === 2) {
           wave = ' v ' + h +
-                 ' l ' + 2*iteration + ', ' + (-yAxisMiddle) +
+                 ' l ' + 2 * iteration + ', ' + (-yAxisMiddle) +
                  ' v ' + h
         // triangle
-        } else if (type.value == 3) {
-          wave = ' l ' + iteration/2 +  ', ' + h +
+        } else if (type.value === 3) {
+          wave = ' l ' + iteration / 2 + ', ' + h +
                  ' l ' + iteration + ', ' + (-yAxisMiddle) +
-                 ' l ' + iteration/2 + ', ' + h
+                 ' l ' + iteration / 2 + ', ' + h
         }
-        line = 'M ' + iteration * (detune.value/(detune.max)) + ', 0 ' +
-              ' m ' + lineLength + ', ' + yAxisMiddle  +
-              ' h ' + (-lineLength-iteration) +
-              wave + wave + wave + wave + wave + wave + wave + wave+ wave+ wave+ wave +
+        line = 'M ' + iteration * (detune.value / (detune.max)) + ', 0 ' +
+              ' m ' + lineLength + ', ' + yAxisMiddle +
+              ' h ' + (-lineLength - iteration) +
+              wave + wave + wave + wave + wave + wave + wave + wave + wave + wave + wave +
               ' Z '
       }
 

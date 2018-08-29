@@ -111,8 +111,8 @@ export default {
       //   amplitude: 1,
       //   ...options
       // }
-      "4n", 0, 8000
-    )
+        '4n', 0, 8000
+      )
     }
   },
   filter: {
@@ -123,14 +123,14 @@ export default {
       log(`Initializing filter with options: ${options}`)
       this.state.device = new Tone.Filter(
         {
-        type: 'lowpass',
-        frequency: 8000,
-        rolloff: -12,
-        Q: 1,
-        gain: 1,
-        ...options
-      }
-    )
+          type: 'lowpass',
+          frequency: 8000,
+          rolloff: -12,
+          Q: 1,
+          gain: 1,
+          ...options
+        }
+      )
     }
   },
   delay: {
@@ -145,8 +145,8 @@ export default {
       //   maxDelay: 1,
       //   ...options
       // }
-      "8n", 0.5
-    )
+        '8n', 0.5
+      )
     }
   },
   reverb: {
@@ -161,13 +161,13 @@ export default {
       //   preDelay: 0.01,
       //   ...options
       // }
-      0.9
-    )
+        0.9
+      )
     },
-    setParameter(parameter, value) {
+    setParameter (parameter, value) {
       log(`Generating new reverb based on new value: : ${parameter} = ${value}`)
       this.state.device[parameter] = value // set value directly (for properties)
       return this.state.device.generate() // generate new reverb returns promise
     }
-  },
+  }
 }

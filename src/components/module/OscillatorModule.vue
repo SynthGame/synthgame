@@ -47,7 +47,7 @@ import audio from '@/audio'
 import CircleSlider from '@/components/knob.vue'
 import display from '@/components/display.vue'
 
-var self = undefined
+var self
 
 export default {
   name: 'OscillatorModule',
@@ -81,9 +81,9 @@ export default {
       self.oscillator.frequency.value = self.freqArray[val]
     }),
     ...vuexSyncGen('oscillator', 'typeOsc', val => {
-      self.oscillator.type = self.typeArray[Math.round(val)];
-      self.oscillator.stop();
-      self.oscillator.start();
+      self.oscillator.type = self.typeArray[Math.round(val)]
+      self.oscillator.stop()
+      self.oscillator.start()
     }),
     ...vuexSyncGen('oscillator', 'phase', val => {
       self.oscillator.phase = val // phase in degrees

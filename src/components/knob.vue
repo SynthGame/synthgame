@@ -171,7 +171,7 @@ export default {
       currentStepValue: 0,
       mousePressed: false,
       circleSliderState: null,
-      mousemoveTicks: 0,
+      mousemoveTicks: 0
     }
   },
   computed: {

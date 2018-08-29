@@ -53,7 +53,7 @@ import audio from '@/audio'
 import VueCircleSlider from '@/components/knob.vue'
 import display from '@/components/display'
 
-var self = undefined
+var self
 
 export default {
   name: 'FilterModule',
@@ -83,7 +83,6 @@ export default {
   },
   mounted () {
     console.log('filter: mounted!')
-
   },
   methods: {
 
@@ -91,13 +90,13 @@ export default {
   computed: {
     ...vuexSyncGen('filter', 'cutOffFreq', val => {
       // self.filter.frequency.value = val
-      self.filter.frequency.value = Math.pow(val, (val/20000)) + 20
+      self.filter.frequency.value = Math.pow(val, (val / 20000)) + 20
     }),
     ...vuexSyncGen('filter', 'type', val => {
       self.filter.type = self.typeArray[Math.round(val)]
     }),
     ...vuexSyncGen('filter', 'setQ', val => {
-      self.filter.Q.value = val/8
+      self.filter.Q.value = val / 8
     }),
     ...vuexSyncGen('filter', 'gain', val => {
       self.filter.gain.value = val
