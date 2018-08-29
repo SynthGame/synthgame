@@ -13,15 +13,15 @@ export default new Vuex.Store({
       },
       envelope: {
         attack: 11,
-        decay: 21,
-        sustain: 9,
-        release: 12
+        decay: 60,
+        sustain: 52,
+        release: 34
       },
       filter: {
         cutOffFreq: 12000,
         type: 0,
         setQ: 50,
-        gain: 1
+        gain: 50
       },
       lfo: {
         frequency: 0,
@@ -30,7 +30,7 @@ export default new Vuex.Store({
       },
       oscillator: {
         frequency: 2,
-        typeOsc: 1,
+        typeOsc: 2,
         detune: 60,
         phase: 0
       },

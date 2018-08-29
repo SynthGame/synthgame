@@ -1,27 +1,33 @@
 <template>
   <div class="module">
-  <display class="display" module="lfo"/>
-    <circle-slider
-      v-model="frequency"
-      :min="1"
-      :max="100"
-      knobColor="#5bd484"
-      name="Rate"
-    ></circle-slider>
-    <circle-slider
-      v-model="amount"
-      :min="0"
-      :max="4000"
-      knobColor="#5bd484"
-      name="Amount"
-    ></circle-slider>
-    <circle-slider
-      v-model="type"
-      :min="0"
-      :max="3"
-      knobColor="#5bd484"
-      name="Shape"
-    ></circle-slider>
+    <div class="title">
+      <h2>Tats</h2>
+      <h3>Lfo</h3>
+    </div>
+    <display class="display" module="lfo"/>
+    <div class="knobs">
+      <circle-slider
+        v-model="frequency"
+        :min="1"
+        :max="100"
+        knobColor="#5bd484"
+        name="Rate"
+      ></circle-slider>
+      <circle-slider
+        v-model="amount"
+        :min="0"
+        :max="4000"
+        knobColor="#5bd484"
+        name="Amount"
+      ></circle-slider>
+      <circle-slider
+        v-model="type"
+        :min="0"
+        :max="3"
+        knobColor="#5bd484"
+        name="Shape"
+      ></circle-slider>
+    </div>
   </div>
 </template>
 
@@ -83,8 +89,9 @@ svg.display {
 }
 
 h3 {
-  margin: 40px 0 0;
+  color: #5bd484;
 }
+
 ul {
   margin-top: 5em;
   list-style-type: none;

@@ -1,27 +1,33 @@
 <template>
   <div class="module">
+    <div class="title">
+      <h2>Tats</h2>
+      <h3>Delay</h3>
+    </div>
     <display class="display" module="delay"/>
-    <circle-slider
-      v-model="delayTime"
-      :min="0.1"
-      :max="100"
-      knobColor="#43bede"
-      name="Time"
-    ></circle-slider>
-    <circle-slider
-      v-model="feedback"
-      :min="0"
-      :max="100"
-      knobColor="#43bede"
-      name="Feedback"
-    ></circle-slider>
-    <circle-slider
-      v-model="wet"
-      :min="0"
-      :max="100"
-      knobColor="#43bede"
-      name="Dry/wet"
-    ></circle-slider>
+    <div class="knobs">
+      <circle-slider
+        v-model="delayTime"
+        :min="0.1"
+        :max="100"
+        knobColor="#43bede"
+        name="Time"
+      ></circle-slider>
+      <circle-slider
+        v-model="feedback"
+        :min="0"
+        :max="100"
+        knobColor="#43bede"
+        name="Feedback"
+      ></circle-slider>
+      <circle-slider
+        v-model="wet"
+        :min="0"
+        :max="100"
+        knobColor="#43bede"
+        name="Dry/wet"
+      ></circle-slider>
+    </div>
   </div>
 </template>
 
@@ -73,8 +79,9 @@ svg.display {
 }
 
 h3 {
-  margin: 40px 0 0;
+  color: #43bede;
 }
+
 ul {
   list-style-type: none;
   padding: 0;

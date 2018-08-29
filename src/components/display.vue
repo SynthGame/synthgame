@@ -29,7 +29,7 @@
               style="fill-rule: nozero"
               />
 
-        <text x="45%" y="40%" fill="blue">
+        <text x="45%" y="40%" fill="transparent">
           <tspan x="45%" y="50%">{{knobs[0].name}}: {{knobs[0].value}}</tspan>
           <tspan x="45%" y="60%">{{knobs[1].name}}: {{knobs[1].value}}</tspan>
           <tspan x="45%" y="70%">{{knobs[2].name}}: {{knobs[2].value}}</tspan>
