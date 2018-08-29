@@ -18,7 +18,7 @@
     <rotary
             v-model="cutOffFreq"
             :min="0"
-            :max="20000"
+            :max="100"
             knobColor="#6e01d1"
             name="Frequency"
           ></rotary>
@@ -90,7 +90,7 @@ export default {
   computed: {
     ...vuexSyncGen('filter', 'cutOffFreq', val => {
       // self.filter.frequency.value = val
-      self.filter.frequency.value = Math.pow(val, (val / 20000)) + 20
+      self.filter.frequency.value = Math.pow((val * 200), (val / 200)) + 20
     }),
     ...vuexSyncGen('filter', 'type', val => {
       if(val >= self.typeArray.length) self.filter.type = self.typeArray[self.typeArray.length - 1]

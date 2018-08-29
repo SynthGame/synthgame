@@ -11,7 +11,7 @@
     <circle-slider
       v-model="amount"
       :min="0"
-      :max="4000"
+      :max="100"
       knobColor="#5bd484"
       name="Amount"
     ></circle-slider>
@@ -64,7 +64,7 @@ export default {
       console.log('self.lfo.frequency.value', self.lfo.frequency.value)
     }),
     ...vuexSyncGen('lfo', 'amount', val => {
-      self.lfo.max = val
+      self.lfo.max = (val * 40)
     }),
     ...vuexSyncGen('lfo', 'type', val => {
       if(val >= self.typeArray.length) self.lfo.type = self.typeArray[self.typeArray.length - 1]
