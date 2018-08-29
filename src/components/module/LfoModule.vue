@@ -67,7 +67,8 @@ export default {
       self.lfo.max = val
     }),
     ...vuexSyncGen('lfo', 'type', val => {
-      self.lfo.type = self.typeArray[val]
+      if(val >= self.typeArray.length) self.lfo.type = self.typeArray[self.typeArray.length - 1]
+      else self.lfo.type = self.typeArray[val]
       self.lfo.stop()
       self.lfo.start()
     })

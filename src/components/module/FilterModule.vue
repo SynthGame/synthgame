@@ -93,7 +93,8 @@ export default {
       self.filter.frequency.value = Math.pow(val, (val / 20000)) + 20
     }),
     ...vuexSyncGen('filter', 'type', val => {
-      self.filter.type = self.typeArray[Math.round(val)]
+      if(val >= self.typeArray.length) self.filter.type = self.typeArray[self.typeArray.length - 1]
+      else self.filter.type = self.typeArray[Math.round(val)]
     }),
     ...vuexSyncGen('filter', 'setQ', val => {
       self.filter.Q.value = val / 8
