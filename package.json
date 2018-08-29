@@ -11,6 +11,7 @@
   },
   "dependencies": {
     "firebase": "^5.4.0",
+    "lodash": "^4.17.10",
     "register-service-worker": "^1.0.0",
     "tone": "^13.3.1",
     "vue": "^2.5.17",
