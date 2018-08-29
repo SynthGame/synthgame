@@ -73,7 +73,7 @@ export default {
     },
     knobs: {
       type: Array,
-      default: []
+      default() {return []}
     }
   },
   data () {
