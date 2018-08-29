@@ -71,10 +71,9 @@ export default {
 }
 
 .display {
-  margin: 10%;
-  background: #141414;
-  height:30%;
-  width:80%;
+  margin: 10% 2%;
+  height: 40%;
+  width: 95%;
 }
 
 body {

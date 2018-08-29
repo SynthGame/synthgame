@@ -20,7 +20,7 @@ export default new Vuex.Store({
         release: 12
       },
       filter: {
-        cutOffFreq: 8000,
+        cutOffFreq: 12000,
         type: 0,
         setQ: 50,
         gain: 1
