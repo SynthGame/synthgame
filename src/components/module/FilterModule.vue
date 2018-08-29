@@ -12,14 +12,14 @@
             v-model="type"
             :min="0"
             :max="2"
-            knobColor="rgb(14, 80, 186)"
+            knobColor="#6e01d1"
             name="Type"
           ></rotary>
     <rotary
             v-model="cutOffFreq"
             :min="0"
             :max="20000"
-            knobColor="rgb(14, 80, 186)"
+            knobColor="#6e01d1"
             name="Frequency"
           ></rotary>
 
@@ -30,13 +30,13 @@
             knobColor="#6e01d1"
             name="Resonance"
           ></rotary>
-    <rotary
+    <!-- <rotary
             v-model="gain"
             :min="0"
             :max="100"
             knobColor="rgb(14, 80, 186)"
             name="Gain"
-          ></rotary>
+          ></rotary> -->
     <!-- <ul>
       <div v-for="score in highscores" :key="score.id">
         <strong>{{`🏆: ${score.name}: ${score.score}`}}</strong>

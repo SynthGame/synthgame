@@ -23,13 +23,13 @@
       knobColor="#ff8574"
       name="Detune"
     ></circle-slider>
-    <circle-slider
+    <!-- <circle-slider
       v-model="phase"
       :min="50"
       :max="10000"
       knobColor="#ff8574"
       name="Phase"
-    ></circle-slider>
+    ></circle-slider> -->
     <circle-slider
       v-model="typeOsc"
       :min="0"

@@ -9,28 +9,28 @@
                        ]"/>
     <circle-slider
       v-model="attack"
-      :min="1"
+      :min="0"
       :max="100"
       knobColor="#e4e259"
       name="Attack"
     ></circle-slider>
     <circle-slider
       v-model="decay"
-      :min="1"
+      :min="0"
       :max="100"
       knobColor="#e4e259"
       name="Decay"
     ></circle-slider>
     <circle-slider
       v-model="sustain"
-      :min="1"
+      :min="0"
       :max="100"
       knobColor="#e4e259"
       name="Sustain"
     ></circle-slider>
     <circle-slider
       v-model="release"
-      :min="1"
+      :min="0"
       :max="100"
       knobColor="#e4e259"
       name="Release"
@@ -69,16 +69,16 @@ export default {
   },
   computed: {
     ...vuexSyncGen('envelope', 'attack', val => {
-      self.envelope.attack = val / 100
+      self.envelope.attack = val + 0.01
     }),
     ...vuexSyncGen('envelope', 'decay', val => {
-      self.envelope.decay = val / 100
+      self.envelope.decay = Math.pow(val, (val / 100)) - 0.99
     }),
     ...vuexSyncGen('envelope', 'sustain', val => {
       self.envelope.sustain = val / 100
     }),
     ...vuexSyncGen('envelope', 'release', val => {
-      self.envelope.release = val / 100
+      self.envelope.release = val
     })
   }
 }

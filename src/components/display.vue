@@ -17,8 +17,9 @@
 
     <!-- </svg> -->
 
-    <div class="display" style="margin: auto;" ref="displayWrapper">
-      <svg :width="displayWidth" :height="displayHeight">
+    <div class="display" ref="displayWrapper">
+      <!-- <svg :width="displayWidth" :height="displayHeight"> -->
+      <svg width="100%" height="100%">
         <rect :fill="fill" :width="displayWidth" :height="displayHeight" />
 
         <path stroke="black"
@@ -197,18 +198,18 @@ export default {
         const yAxisMiddle = this.displayHeight / 2
         const h = yAxisMiddle / 2
 
-        const iteration = 1.2 * h - h * (0.6 * (octave.value / (octave.max - octave.min))) + (h * 0.2 * (phase.value / (phase.max)))
+        const iteration = 1.2 * h - h * (0.6 * (octave.value / (octave.max - octave.min))) + (h * 0.2 * (1 - (detune.value / (detune.max))))
 
         let wave
         // square:
-        if (type.value === 0) {
+        if (type.value === 1) {
           wave = ' v ' + h +
                  ' h ' + iteration +
                  ' v ' + (-yAxisMiddle) +
                  ' h ' + iteration +
                  ' v ' + h
         // sine:
-        } else if (type.value === 1) {
+      } else if (type.value === 0) {
           wave = ' q ' + '0, ' + h + ' ' + iteration / 2 + ', ' + h +
                  ' q ' + iteration / 2 + ', 0 ' + iteration / 2 + ', ' + (-h) +
                  ' q 0, ' + (-h) + ' ' + iteration / 2 + ' ' + (-h) +
@@ -224,7 +225,7 @@ export default {
                  ' l ' + iteration + ', ' + (-yAxisMiddle) +
                  ' l ' + iteration / 2 + ', ' + h
         }
-        line = 'M ' + iteration * (detune.value / (detune.max)) + ', 0 ' +
+        line = 'M ' + iteration * (phase.value / (phase.max)) + ', 0 ' +
               ' m ' + lineLength + ', ' + yAxisMiddle +
               ' h ' + (-lineLength - iteration) +
               wave + wave + wave + wave + wave + wave + wave + wave + wave + wave + wave +
