@@ -53,8 +53,8 @@ export default {
 
 .module {
   height: calc(50% );
-  width: calc(27.3% - .1em);
-  padding: 0 3%;
+  width: calc(29.3% - .1em);
+  padding: 0 2%;
   display: flex;
   justify-content: space-between;
   flex-wrap: wrap;
