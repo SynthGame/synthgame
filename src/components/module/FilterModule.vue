@@ -95,7 +95,7 @@ export default {
   computed: {
     ...vuexSyncGen('filter', 'cutOffFreq', val => {
       // self.filter.frequency.value = val
-      self.filter.frequency.value = Math.pow((val * 200), (val / 200)) + 20
+      self.filter.frequency.value = Math.pow((val * 200), (val / 100)) + 20
     }),
     ...vuexSyncGen('filter', 'type', val => {
       if(val >= self.typeArray.length) self.filter.type = self.typeArray[self.typeArray.length - 1]
