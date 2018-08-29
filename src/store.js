@@ -1,5 +1,7 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
+import mapValues from 'lodash/mapValues'
+import random from 'lodash/random'
 
 Vue.use(Vuex)
 
@@ -44,9 +46,24 @@ export default new Vuex.Store({
   mutations: {
     setAudioParameter (state, {device, parameter, value}) {
       state.audioParameters[device][parameter] = value
+    },
+    setAudioParameterToPreset (state, {preset}) {
+      // overwrite parameters from audiostate, this will not fill in nested objects
+      state.audioParameters = {
+        ...state.audioParameters,
+        ...preset
+      }
     }
   },
   actions: {
-
+    randomizeAudioParameters ({state, commit}) {
+      const randomizeValues = obj => mapValues(obj, val => {
+        if(typeof val === 'object') return randomizeValues(val) // recuuursion whooo
+        return random(0, 100)
+      })
+      return commit('setAudioParameterToPreset', {
+        preset: randomizeValues(state.audioParameters)
+      })
+    }
   }
 })
