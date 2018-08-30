@@ -326,7 +326,7 @@ export default {
         const spaceBetween = timeRatio*this.displayWidth/3 + 15
 
         line = 'M 0, 0 ' +
-               'm 0, ' + (this.displayHeight+this.displayHeight*wetRatio) +
+               'm 0, ' + (this.displayHeight+this.displayHeight*(1-wetRatio)) +
                this.drawDelayBar(spaceBetween, barWidth, 0) +
 
                // DRY-nasty, sure
