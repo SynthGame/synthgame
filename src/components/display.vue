@@ -19,7 +19,6 @@
               <g v-if="this.module === 'lfo'"
                 stroke="black"
                 class="swing"
-                :transform="'rotate(' + lfoRotation + ' 0 -80)'"
                                 >
                 <path
                   :stroke-width="1"
@@ -50,7 +49,7 @@
         <!-- //       fill="black"
         //       style="fill-rule: nozero" -->
 
-        <text x="45%" y="40%" fill="WHITE">
+        <text x="45%" y="40%" fill="transparent">
           <tspan x="45%" y="50%">{{knobs[0].name}}: {{knobs[0].value}}</tspan>
           <tspan x="45%" y="60%">{{knobs[1].name}}: {{knobs[1].value}}</tspan>
           <tspan x="45%" y="70%">{{knobs[2].name}}: {{knobs[2].value}}</tspan>
@@ -264,14 +263,14 @@ export default {
         const shape = this.knobs[2]
         // let position = null
         // Bart's little experiment
-        setInterval(function(){
-          console.log('this.lfoRotation',this.lfoRotation);
-          if (this.lfoRotation === 40) {
-              this.lfoRotation = -40
-            } else{
-             this.lfoRotation = 40;
-           }
-         }, rate * 10 + 1000);
+        // setInterval(function(){
+        //   console.log('this.lfoRotation',this.lfoRotation);
+        //   if (this.lfoRotation === 40) {
+        //       this.lfoRotation = -40
+        //     } else{
+        //      this.lfoRotation = 40;
+        //    }
+        //  }, rate * 10 + 1000);
 
         //making a circle with a path..
         const circle = ' q ' + '0, ' + (-r) + ' ' + r + ', ' + (-r) +
@@ -353,13 +352,13 @@ export default {
 
  .swing {
    /* transform: translateX(100px); */
-   /*animation: swing  ease-in-out 1s infinite alternate*/
+   animation: swing  ease-in-out 1s infinite alternate
  }
 
 /* https://developer.mozilla.org/en-US/docs/Web/API/CSSStyleSheet/insertRule */
  @keyframes swing {
-    0% { transform: rotate(40deg); }
-    100% { transform: rotate(-40deg); }
+    0% { transform: rotate(-40deg); }
+    to { transform: rotate(40deg);}
 }
 
  </style>
