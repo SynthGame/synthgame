@@ -12,6 +12,10 @@
               {name: 'Detune', min: -120, max: 120, value: this.detune},
               {name: 'Phase', min: 50, max: 10000, value: this.phase},
               {name: 'Waveform', min: 0, max:3, value: this.selectedType},
+              {name: 'OctaveGoal', min: freqArray[0], max: freqArray[freqArray.length -1], value: this.selectedFreqGoal},
+              {name: 'DetuneGoal', min: -120, max: 120, value: this.detuneGoal},
+              {name: 'PhaseGoal', min: 50, max: 10000, value: this.phaseGoal},
+              {name: 'WaveformGoal', min: 0, max:3, value: this.selectedTypeGoal},
             ]"/>
     <div class="knobs">
       <module-knob
