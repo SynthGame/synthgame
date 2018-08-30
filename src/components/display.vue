@@ -181,7 +181,7 @@ export default {
         const freqDistance = (cutOffFreq.value / cutOffFreq.max) * (halfWidth)
 
         // svg path:
-        if (type.value === 0) {
+        if (type.value === 'lowpass') {
           line = 'M 0,' + this.displayHeight +
                 ' v ' + (-(halfHeight + gainAddedDistance - yOffset)) +
                 ' h ' + (freqDistance) +
@@ -190,7 +190,7 @@ export default {
                       +qDistance + ', ' + (halfHeight + gainAddedDistance) +
 
                 ' Z'
-        } else if (type.value === 1) {
+        } else if (type.value === 'highpass') {
           line = 'M 0,' + this.displayHeight +
                 ' h ' + freqDistance +
                 ' h ' + ((q.value / q.max) * (halfWidth) / 2) +
@@ -199,7 +199,7 @@ export default {
                 ' h ' + this.displayWidth +
                 ' v ' + this.displayHeight +
                 ' Z'
-        } else if (type.value === 2) {
+        } else if (type.value === 'bandpass') {
           line = 'M 0, ' + this.displayHeight +
                 ' h ' + (freqDistance + (halfWidth / 2) - qDistance) +
                 ' q ' + (qDistance / 2) + ', ' + (-(halfHeight + gainAddedDistance)) + ' ' +

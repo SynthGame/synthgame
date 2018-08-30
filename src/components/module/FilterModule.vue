@@ -7,7 +7,7 @@
     <display fill="#6e01d1"
         module="filter"
         :knobs="[{name: 'type', min: 0, max: 2, value: this.selectedType},
-                  {name: 'frequency', min: 0, max: 20000, value: this.cutOffFreq},
+                  {name: 'frequency', min: 0, max: 100, value: this.cutOffFreq},
                   {name: 'q', min: 0, max: 100, value: this.setQ},
                   {name: 'gain', min: 0, max: 100, value: this.gain}
                   ]"/>
@@ -45,11 +45,6 @@
               name="Gain"
             ></rotary> -->
     </div>
-    <!-- <ul>
-      <div v-for="score in highscores" :key="score.id">
-        <strong>{{`🏆: ${score.name}: ${score.score}`}}</strong>
-      </div>
-    </ul> -->
   </div>
 
 </template>
