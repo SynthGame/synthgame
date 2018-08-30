@@ -22,7 +22,7 @@
           <circle-slider
             v-model="amount"
             :min="0"
-            :max="4000"
+            :max="100"
             knobColor="#5bd484"
             name="Amount"
             module="lfo"
@@ -30,7 +30,7 @@
           <circle-slider
             v-model="type"
             :min="0"
-            :max="3"
+            :max="100"
             knobColor="#5bd484"
             name="Shape"
             module="lfo"
@@ -40,7 +40,7 @@
 </template>
 
 <script>
-import { vuexSyncGen } from '@/utils'
+import { vuexSyncGen, mapValueToRange } from '@/utils'
 
 import audio from '@/audio'
 import CircleSlider from '@/components/knob.vue'
@@ -75,14 +75,12 @@ export default {
   computed: {
     ...vuexSyncGen('lfo', 'frequency', val => {
       self.lfo.frequency.value = Math.pow(val, (val / 100)) - 1
-      console.log('self.lfo.frequency.value', self.lfo.frequency.value)
     }),
     ...vuexSyncGen('lfo', 'amount', val => {
       self.lfo.max = (val * 40)
     }),
     ...vuexSyncGen('lfo', 'type', val => {
-      if(val >= self.typeArray.length) self.lfo.type = self.typeArray[self.typeArray.length - 1]
-      else self.lfo.type = self.typeArray[val]
+      self.lfo.type = self.typeArray[mapValueToRange(val, 100, (self.typeArray.length - 1))]
       self.lfo.stop()
       self.lfo.start()
     })

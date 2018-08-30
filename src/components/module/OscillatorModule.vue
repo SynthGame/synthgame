@@ -17,7 +17,7 @@
       <circle-slider
         v-model="typeOsc"
         :min="0"
-        :max="3"
+        :max="100"
         knobColor="#ff8574"
         name="Waveform"
         module="oscillator"
@@ -25,7 +25,7 @@
       <circle-slider
         v-model="frequency"
         :min="0"
-        :max="7"
+        :max="100"
         knobColor="#ff8574"
         name="Octave"
       ></circle-slider>
@@ -49,7 +49,7 @@
 
 <script>
 import { mapState } from 'vuex'
-import { vuexSyncGen } from '@/utils'
+import { vuexSyncGen, mapValueToRange } from '@/utils'
 
 import audio from '@/audio'
 import CircleSlider from '@/components/knob.vue'
@@ -86,12 +86,10 @@ export default {
   },
   computed: {
     ...vuexSyncGen('oscillator', 'frequency', val => {
-      if (val >= self.freqArray.length) self.oscillator.frequency.value = self.freqArray[self.freqArray.length - 1]
-      else self.oscillator.frequency.value = self.freqArray[val]
+      self.oscillator.frequency.value = self.freqArray[mapValueToRange(val, 100, (self.freqArray.length - 1))]
     }),
     ...vuexSyncGen('oscillator', 'typeOsc', val => {
-      if (val >= self.typeArray.length) self.oscillator.type = self.typeArray[self.typeArray.length - 1]
-      else self.oscillator.type = self.typeArray[Math.round(val)]
+      self.oscillator.type = self.typeArray[mapValueToRange(val, 100, (self.typeArray.length - 1))]
       self.oscillator.stop()
       self.oscillator.start()
     }),
