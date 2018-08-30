@@ -78,7 +78,6 @@
 // [v] have the other knobs connected to the filter audio output
 // [v] relativize and clean up the path drawing function (inc. the curve "global" variable)
 
-
 // lfo:
 // [] create swing
 // [] have it move for sine
@@ -104,8 +103,8 @@ export default {
       displayHeight: 300,
       displayWidth: 600,
       curveAmnt: 90,
-      strokeWidth : '0.1',
-      lfoRotation: 20,
+      strokeWidth: '0.1',
+      lfoRotation: 20
     }
   },
   mounted () {
@@ -232,7 +231,7 @@ export default {
                  ' h ' + iteration +
                  ' v ' + h
         // sine:
-      } else if (type.value === 'sine') {
+        } else if (type.value === 'sine') {
           wave = ' q ' + '0, ' + h + ' ' + iteration / 2 + ', ' + h +
                  ' q ' + iteration / 2 + ', 0 ' + iteration / 2 + ', ' + (-h) +
                  ' q 0, ' + (-h) + ' ' + iteration / 2 + ' ' + (-h) +
@@ -257,7 +256,7 @@ export default {
 
       if (this.module === 'lfo') {
         // helpers:
-        const r = this.displayHeight/4
+        const r = this.displayHeight / 4
         const rate = this.knobs[0]
         const amount = this.knobs[1]
         const shape = this.knobs[2]
@@ -272,20 +271,19 @@ export default {
         //    }
         //  }, rate * 10 + 1000);
 
-        //making a circle with a path..
+        // making a circle with a path..
         const circle = ' q ' + '0, ' + (-r) + ' ' + r + ', ' + (-r) +
                        ' q ' + r + ', 0 ' + r + ', ' + r +
-                       ' q ' + '0, '+ r + ' ' + (-r) + ', ' + r +
+                       ' q ' + '0, ' + r + ' ' + (-r) + ', ' + r +
                        ' q ' + (-r) + ', 0 ' + (-r) + ', ' + (-r)
 
         // the idea from https://codepen.io/jakob-e/pen/bgBegJ
-        const archCrcl= 'M'+((this.displayWidth/2)-r)+', '+ ((this.displayHeight/2))+
+        const archCrcl = 'M' + ((this.displayWidth / 2) - r) + ', ' + ((this.displayHeight / 2)) +
         // 'm '+(-r)+', 0'+
-        'a '+r+', '+r+ ' 0 1,0 '+(2*r)+',0'+
-        'a '+r+', '+r+ ' 0 1,0 '+(-2*r)+',0'
+        'a ' + r + ', ' + r + ' 0 1,0 ' + (2 * r) + ',0' +
+        'a ' + r + ', ' + r + ' 0 1,0 ' + (-2 * r) + ',0'
 
         // not good enough, since how would it be animated?
-
 
         // might actually go with <circle>
 
@@ -298,7 +296,6 @@ export default {
         // [] lfo prop watched/computed
         // [] transition
         // [] stylesheetapi
-
       }
 
       if (this.module === 'delay') {
@@ -307,9 +304,6 @@ export default {
         const feedback = this.knobs[1]
         const wet = this.knobs[2]
 
-
-
-
         line = 'M 0, 0' +
                'm 0, ' + this.displayHeight
         return line
@@ -317,17 +311,15 @@ export default {
       if (this.module === 'reverb') {
         // helpers:
 
-
-
         line = ''
         return line
       }
 
       return line
     },
-    centerLFOSwing() {
-      return 'transform: translateX('+(this.displayWidth/2) + 'px)'
-    },
+    centerLFOSwing () {
+      return 'transform: translateX(' + (this.displayWidth / 2) + 'px)'
+    }
     // moveLFOSwingUp() {
     //   return 'translateY(-' + (this.displayHeight/2) + 'px)'
     // }
