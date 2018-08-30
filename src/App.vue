@@ -23,12 +23,6 @@ export default {
   },
   created () {
     // initialize the synth
-
-    document.bart = () => {
-      this.$store.dispatch('randomizeAudioParameters')
-        .then(() => console.log('success'))
-    }
-
     audio.init()
     // create loop wich sequences 4 notes
     const loop = audio.setMainLoop({
@@ -43,6 +37,16 @@ export default {
     audio.start()
     // start loop
     loop.start()
+
+    window.randomizeGoal = () => {
+      this.$store.dispatch('randomizGoalParameters')
+        .then(() => console.log('success'))
+    }
+
+    window.randomizeParams = () => {
+      this.$store.dispatch('randomizeAudioParameters')
+        .then(() => console.log('success'))
+    }
 
     // Pc keyboard listener (might be needed for mobile)
     document.addEventListener('keypress', (event) => {
