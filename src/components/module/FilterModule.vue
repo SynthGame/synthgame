@@ -4,52 +4,40 @@
       <h2>Tats</h2>
       <h3>Filter</h3>
     </div>
-    <display fill="#6e01d1"
-        module="filter"
-        :knobs="[{name: 'type', min: 0, max: 2, value: this.type},
-                  {name: 'frequency', min: 0, max: 20000, value: this.cutOffFreq},
-                  {name: 'q', min: 0, max: 100, value: this.setQ},
-                  {name: 'gain', min: 0, max: 100, value: this.gain}
-                  ]"/>
+    <module-display
+      fill="#6e01d1"
+      module="filter"
+      :knobs="[{name: 'type', min: 0, max: 2, value: this.selectedType},
+                {name: 'frequency', min: 0, max: 100, value: this.cutOffFreq},
+                {name: 'q', min: 0, max: 100, value: this.setQ},
+                {name: 'gain', min: 0, max: 100, value: this.gain}
+                ]"/>
     <div class="knobs">
-      <rotary
-              v-model="type"
-              :min="0"
-              :max="100"
-              knobColor="#6e01d1"
-              name="Type"
-              module="filter"
-            ></rotary>
-      <rotary
-              v-model="cutOffFreq"
-              :min="0"
-              :max="100"
-              knobColor="#6e01d1"
-              name="Frequency"
-              module="filter"
-            ></rotary>
-
-     <rotary
-              v-model="setQ"
-              :min="0"
-              :max="100"
-              knobColor="#6e01d1"
-              name="Resonance"
-              module="filter"
-            ></rotary>
-      <!-- <rotary
-              v-model="gain"
-              :min="0"
-              :max="100"
-              knobColor="rgb(14, 80, 186)"
-              name="Gain"
-            ></rotary> -->
+      <module-knob
+        v-model="type"
+        :min="0"
+        :max="100"
+        knobColor="#6e01d1"
+        name="Type"
+        module="filter"
+      ></module-knob>
+      <module-knob
+        v-model="cutOffFreq"
+        :min="0"
+        :max="100"
+        knobColor="#6e01d1"
+        name="Frequency"
+        module="filter"
+      ></module-knob>
+      <module-knob
+        v-model="setQ"
+        :min="0"
+        :max="100"
+        knobColor="#6e01d1"
+        name="Resonance"
+        module="filter"
+      ></module-knob>
     </div>
-    <!-- <ul>
-      <div v-for="score in highscores" :key="score.id">
-        <strong>{{`🏆: ${score.name}: ${score.score}`}}</strong>
-      </div>
-    </ul> -->
   </div>
 
 </template>
@@ -58,8 +46,8 @@
 import { vuexSyncGen, mapValueToRange } from '@/utils'
 
 import audio from '@/audio'
-import VueCircleSlider from '@/components/knob.vue'
-import display from '@/components/display'
+import ModuleKnob from '@/components/ModuleKnob.vue'
+import ModuleDisplay from '@/components/ModuleDisplay.vue'
 
 var self
 
@@ -75,6 +63,7 @@ export default {
         'highpass',
         'bandpass'
       ],
+      selectedType: '',
       filter: {},
       sliderValue: 0,
       displayHeight: 300,
@@ -82,15 +71,12 @@ export default {
     }
   },
   components: {
-    'rotary': VueCircleSlider,
-    display
+    ModuleKnob,
+    ModuleDisplay
   },
   created () {
     self = this
     this.filter = audio.filter.state.device
-  },
-  mounted () {
-    console.log('filter: mounted!')
   },
   methods: {
 
@@ -102,6 +88,9 @@ export default {
     }),
     ...vuexSyncGen('filter', 'type', val => {
       self.filter.type = self.typeArray[mapValueToRange(val, 100, (self.typeArray.length - 1))]
+      self.selectedType = self.typeArray[mapValueToRange(val, 100, (self.typeArray.length - 1))]
+      if (self.filter.type === self.selectedType) return
+      self.filter.type = self.selectedType
     }),
     ...vuexSyncGen('filter', 'setQ', val => {
       self.filter.Q.value = val / 8

@@ -6,22 +6,22 @@
     </div>
     <!-- <display class="display" module="reverb"/> -->
     <div class="knobs">
-      <circle-slider
+      <module-knob
         v-model="roomSize"
         :min="0"
         :max="100"
         knobColor="#3c32ff"
         name="Room Size"
         module="reverb"
-      ></circle-slider>
-      <circle-slider
+      ></module-knob>
+      <module-knob
         v-model="wet"
         :min="0"
         :max="100"
         knobColor="#3c32ff"
         name="Dry/wet"
         module="reverb"
-      ></circle-slider>
+      ></module-knob>
     </div>
   </div>
 </template>
@@ -30,8 +30,8 @@
 import { vuexSyncGen } from '@/utils'
 
 import audio from '@/audio'
-import CircleSlider from '@/components/knob.vue'
-import display from '@/components/display.vue'
+import ModuleKnob from '@/components/ModuleKnob.vue'
+import ModuleDisplay from '@/components/ModuleDisplay.vue'
 
 var self
 
@@ -47,8 +47,8 @@ export default {
     }
   },
   components: {
-    CircleSlider,
-    display
+    ModuleKnob,
+    ModuleDisplay
   },
   created () {
     self = this

@@ -187,7 +187,7 @@ export default {
     },
     module: {
       type: String,
-      default: "oscillator"
+      default: 'oscillator'
     },
     value: {
       type: Number,

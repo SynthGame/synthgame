@@ -113,8 +113,8 @@ export default new Vuex.Store({
     audioParametersMatchGoalWithMargin: (state) => {
       return mapValues(state.audioParameters, (val, moduleName) => {
         return mapValues(val, (val, parameterName) => {
-          return inRange(val, 
-            (state.gameState.goal[moduleName][parameterName] - state.gameState.margin), 
+          return inRange(val,
+            (state.gameState.goal[moduleName][parameterName] - state.gameState.margin),
             (state.gameState.goal[moduleName][parameterName] + state.gameState.margin)
           )
         })
@@ -124,7 +124,7 @@ export default new Vuex.Store({
   actions: {
     randomizeAudioParameters ({state, commit}) {
       const randomizeValues = obj => mapValues(obj, val => {
-        if(typeof val === 'object') return randomizeValues(val) // recuuursion whooo
+        if (typeof val === 'object') return randomizeValues(val) // recuuursion whooo
         return random(0, 100)
       })
       return commit('setAudioParameterToPreset', {
@@ -133,7 +133,7 @@ export default new Vuex.Store({
     },
     randomizGoalParameters ({state, commit}) {
       const randomizeValues = obj => mapValues(obj, val => {
-        if(typeof val === 'object') return randomizeValues(val) // recuuursion whooo
+        if (typeof val === 'object') return randomizeValues(val) // recuuursion whooo
         return random(0, 100)
       })
       return commit('setGoalToPreset', {
