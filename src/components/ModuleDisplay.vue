@@ -31,18 +31,6 @@
                 </g>
               </g>
 
-              <!-- <g v-if="module === 'delay'">
-                <rect :x="" :y="" :width="300" :height="300"/>
-                <rect v-if="(knobs[1].value/(knobs[1].max-knobs[1].min)) > (100/14)*2" :x="" :y="" :width="300" :height=""/>
-                <rect v-if="(knobs[1].value/(knobs[1].max-knobs[1].min)) > (100/14)*3" :x="" :y="" :width="300" :height=""/>
-                <rect v-if="(knobs[1].value/(knobs[1].max-knobs[1].min)) > (100/14)*4" :x="" :y="" :width="300" :height=""/>
-                <rect v-if="(knobs[1].value/(knobs[1].max-knobs[1].min)) > (100/14)*5" :x="" :y="" :width="300" :height=""/>
-                <rect v-if="(knobs[1].value/(knobs[1].max-knobs[1].min)) > (100/14)*6" :x="" :y="" :width="300" :height=""/>
-                <rect v-if="(knobs[1].value/(knobs[1].max-knobs[1].min)) > (100/14)*7" :x="" :y="" :width="300" :height=""/>
-                <rect v-if="(knobs[1].value/(knobs[1].max-knobs[1].min)) > (100/14)*8" :x="" :y="" :width="300" :height=""/>
-                <rect v-if="(knobs[1].value/(knobs[1].max-knobs[1].min)) > (100/14)*9" :x="" :y="" :width="300" :height=""/>
-                </g> -->
-
         <!-- // <path v-if="this.module === 'lfo'"
         //       :stroke-width="strokeWidth"
         //       :d="'M ' + '" -->
@@ -79,9 +67,9 @@
 // [v] relativize and clean up the path drawing function (inc. the curve "global" variable)
 
 // lfo:
-// [] create swing
-// [] have it move for sine
-// [] have two other types
+// [v] create swing
+// [v] have it move for sine
+// [x] have two other types
 
 export default {
   name: 'display',
@@ -129,6 +117,28 @@ export default {
     updateDimensions () {
       this.displayHeight = this.$refs.displayWrapper.clientHeight
       this.displayWidth = this.$refs.displayWrapper.clientWidth
+    },
+
+    drawDelayBar (space,  width, number, wetness) {
+      // the function is used to draw a bar in delay basing on a numer of variables
+      // space is spaceBetween
+      // width is the arbitrary width of a bar
+      // number is used as a multiplier to deal with changing height of bars when dry
+      // goes together with wetness.
+
+      // how high should the bars be?
+      const basicBarHeight = this.displayHeight*0.9
+
+      // how much smaller should consective bars be?
+      const wetDiff = basicBarHeight*((number/12)*(1-wetness))
+
+      const bar = ' h ' + space +
+                  ' v ' + (-(basicBarHeight-wetDiff)) +
+                  ' h ' + width +
+                  ' v ' + (basicBarHeight-wetDiff)
+
+      return bar
+
     }
   },
   computed: {
@@ -296,6 +306,7 @@ export default {
         // [] lfo prop watched/computed
         // [] transition
         // [] stylesheetapi
+        //http://danielcwilson.com/blog/2017/10/all-the-transform-ways/
       }
 
       if (this.module === 'delay') {
@@ -304,8 +315,32 @@ export default {
         const feedback = this.knobs[1]
         const wet = this.knobs[2]
 
-        line = 'M 0, 0' +
-               'm 0, ' + this.displayHeight
+        const feedbackRatio = feedback.value/(feedback.max-feedback.min)
+        const timeRatio = time.value/(time.max-time.min)
+        const wetRatio = wet.value/(wet.max-wet.min)
+
+        const barWidth = 15
+        const spaceBetween = timeRatio*this.displayWidth/3 + 15
+
+        line = 'M 0, 2' +
+               'm 0, ' + this.displayHeight +
+               this.drawDelayBar(spaceBetween, barWidth, 0, wetRatio) +
+
+               // DRY-nasty, sure
+               // the 7.142... number is a result of 100/14
+               ((feedbackRatio > 7.142857143*2/100) ? this.drawDelayBar(spaceBetween, barWidth, 1, wetRatio):'') +
+               ((feedbackRatio > 7.142857143*3/100) ? this.drawDelayBar(spaceBetween, barWidth, 2, wetRatio):'') +
+               ((feedbackRatio > 7.142857143*4/100) ? this.drawDelayBar(spaceBetween, barWidth, 3, wetRatio):'') +
+               ((feedbackRatio > 7.142857143*5/100) ? this.drawDelayBar(spaceBetween, barWidth, 4, wetRatio):'') +
+               ((feedbackRatio > 7.142857143*6/100) ? this.drawDelayBar(spaceBetween, barWidth, 5, wetRatio):'') +
+               ((feedbackRatio > 7.142857143*7/100) ? this.drawDelayBar(spaceBetween, barWidth, 6, wetRatio):'') +
+               ((feedbackRatio > 7.142857143*8/100) ? this.drawDelayBar(spaceBetween, barWidth, 7, wetRatio):'') +
+               ((feedbackRatio > 7.142857143*9/100) ? this.drawDelayBar(spaceBetween, barWidth, 8, wetRatio):'') +
+               ((feedbackRatio > 7.142857143*10/100) ? this.drawDelayBar(spaceBetween, barWidth, 9, wetRatio):'') +
+               ((feedbackRatio > 7.142857143*11/100) ? this.drawDelayBar(spaceBetween, barWidth, 10, wetRatio):'') +
+               ((feedbackRatio > 7.142857143*12/100) ? this.drawDelayBar(spaceBetween, barWidth, 11, wetRatio):'') +
+               ((feedbackRatio > 7.142857143*13/100) ? this.drawDelayBar(spaceBetween, barWidth, 12, wetRatio):'')
+
         return line
       }
       if (this.module === 'reverb') {
@@ -328,9 +363,9 @@ export default {
     // knobs() {
     //   if (this.module === 'lfo') {
     //     const amount = this.knobs[1]
-    //
+
     //   }
-    //
+
     // }
 
   }
@@ -344,7 +379,8 @@ export default {
 
  .swing {
    /* transform: translateX(100px); */
-   animation: swing  ease-in-out 1s infinite alternate
+   animation: swing  ease-in-out 1s infinite alternate;
+   animation-name: swing
  }
 
 /* https://developer.mozilla.org/en-US/docs/Web/API/CSSStyleSheet/insertRule */
