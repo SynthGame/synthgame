@@ -98,6 +98,12 @@ export default {
     }),
     ...vuexSyncGen('oscillator', 'detune', val => {
       self.oscillator.detune.value = (val * 2) - 120
+    }),
+    ...mapState({
+      frequencyGoal: state => state.gameState.goal.oscillator.frequency,
+      typeOscGoal: state => state.gameState.goal.oscillator.typeOsc,
+      detuneGoal: state => state.gameState.goal.oscillator.detune,
+      phaseGoal: state => state.gameState.goal.oscillator.phase,
     })
   }
 }
