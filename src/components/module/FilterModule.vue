@@ -15,7 +15,7 @@
       <rotary
               v-model="type"
               :min="0"
-              :max="2"
+              :max="100"
               knobColor="#6e01d1"
               name="Type"
             ></rotary>
@@ -52,7 +52,7 @@
 </template>
 
 <script>
-import { vuexSyncGen } from '@/utils'
+import { vuexSyncGen, mapValueToRange } from '@/utils'
 
 import audio from '@/audio'
 import VueCircleSlider from '@/components/knob.vue'
@@ -98,8 +98,7 @@ export default {
       self.filter.frequency.value = Math.pow((val * 200), (val / 100)) + 20
     }),
     ...vuexSyncGen('filter', 'type', val => {
-      if(val >= self.typeArray.length) self.filter.type = self.typeArray[self.typeArray.length - 1]
-      else self.filter.type = self.typeArray[Math.round(val)]
+      self.filter.type = self.typeArray[mapValueToRange(val, 100, (self.typeArray.length - 1))]
     }),
     ...vuexSyncGen('filter', 'setQ', val => {
       self.filter.Q.value = val / 8
