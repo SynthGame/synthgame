@@ -1,41 +1,51 @@
   <template>
-  <div class="module">
-  <display class="display"
-           module="lfo"
-           fill="#5bd484"
-           :knobs="[{name: 'Rate', min:1, max:100, value: this.frequency},
-                    {name: 'Amount', min:0, max:4000, value: this.amount},
-                    {name: 'Shape', min:0, max:3, value: this.type}]"/>
-    <circle-slider
-      v-model="frequency"
-      :min="1"
-      :max="100"
-      knobColor="#5bd484"
-      name="Rate"
-    ></circle-slider>
-    <circle-slider
-      v-model="amount"
-      :min="0"
-      :max="4000"
-      knobColor="#5bd484"
-      name="Amount"
-    ></circle-slider>
-    <circle-slider
-      v-model="type"
-      :min="0"
-      :max="3"
-      knobColor="#5bd484"
-      name="Shape"
-    ></circle-slider>
-  </div>
+    <div class="module">
+      <div class="title">
+        <h2>Tats</h2>
+        <h3>Lfo</h3>
+      </div>
+        <module-display
+          class="display"
+          module="lfo"
+          fill="#5bd484"
+          :knobs="[{name: 'Rate', min:1, max:100, value: this.frequency},
+                   {name: 'Amount', min:0, max:4000, value: this.amount},
+                   {name: 'Shape', min:0, max:3, value: this.selectedType}]"/>
+        <div class="knobs">
+          <module-knob
+            v-model="frequency"
+            :min="1"
+            :max="100"
+            knobColor="#5bd484"
+            name="Rate"
+            module="lfo"
+          ></module-knob>
+          <module-knob
+            v-model="amount"
+            :min="0"
+            :max="100"
+            knobColor="#5bd484"
+            name="Amount"
+            module="lfo"
+          ></module-knob>
+          <module-knob
+            v-model="type"
+            :min="0"
+            :max="100"
+            knobColor="#5bd484"
+            name="Shape"
+            module="lfo"
+          ></module-knob>
+        </div>
+    </div>
 </template>
 
 <script>
-import { vuexSyncGen } from '@/utils'
+import { vuexSyncGen, mapValueToRange } from '@/utils'
 
 import audio from '@/audio'
-import CircleSlider from '@/components/knob.vue'
-import display from '@/components/display.vue'
+import ModuleKnob from '@/components/ModuleKnob.vue'
+import ModuleDisplay from '@/components/ModuleDisplay.vue'
 
 var self
 
@@ -52,12 +62,13 @@ export default {
         'sawtooth',
         'triangle'
       ],
+      selectedType: '',
       lfo: {}
     }
   },
   components: {
-    CircleSlider,
-    display
+    ModuleKnob,
+    ModuleDisplay
   },
   created () {
     self = this
@@ -66,14 +77,14 @@ export default {
   computed: {
     ...vuexSyncGen('lfo', 'frequency', val => {
       self.lfo.frequency.value = Math.pow(val, (val / 100)) - 1
-      console.log('self.lfo.frequency.value', self.lfo.frequency.value)
     }),
     ...vuexSyncGen('lfo', 'amount', val => {
       self.lfo.max = (val * 40)
     }),
     ...vuexSyncGen('lfo', 'type', val => {
-      if(val >= self.typeArray.length) self.lfo.type = self.typeArray[self.typeArray.length - 1]
-      else self.lfo.type = self.typeArray[val]
+      self.selectedType = self.typeArray[mapValueToRange(val, 100, (self.typeArray.length - 1))]
+      if (self.lfo.type === self.selectedType) return
+      self.lfo.type = self.selectedType
       self.lfo.stop()
       self.lfo.start()
     })

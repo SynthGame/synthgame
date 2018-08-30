@@ -1,28 +1,28 @@
 <template>
   <div class="module">
+    <div class="title">
+      <h2>Tats</h2>
+      <h3>Reverb</h3>
+    </div>
     <!-- <display class="display" module="reverb"/> -->
-    <circle-slider
-      v-model="roomSize"
-      :min="0"
-      :max="100"
-      knobColor="#3c32ff"
-      name="Room Size"
-    ></circle-slider>
-    <!-- <circle-slider
-      v-model="preDelay"
-      :step-size="0.1"
-      :min="2"
-      :max="8"
-      knobColor="#3c32ff"
-      name="Predelay"
-    ></circle-slider> -->
-    <circle-slider
-      v-model="wet"
-      :min="0"
-      :max="100"
-      knobColor="#3c32ff"
-      name="Dry/wet"
-    ></circle-slider>
+    <div class="knobs">
+      <module-knob
+        v-model="roomSize"
+        :min="0"
+        :max="100"
+        knobColor="#3c32ff"
+        name="Room Size"
+        module="reverb"
+      ></module-knob>
+      <module-knob
+        v-model="wet"
+        :min="0"
+        :max="100"
+        knobColor="#3c32ff"
+        name="Dry/wet"
+        module="reverb"
+      ></module-knob>
+    </div>
   </div>
 </template>
 
@@ -30,8 +30,8 @@
 import { vuexSyncGen } from '@/utils'
 
 import audio from '@/audio'
-import CircleSlider from '@/components/knob.vue'
-import display from '@/components/display.vue'
+import ModuleKnob from '@/components/ModuleKnob.vue'
+import ModuleDisplay from '@/components/ModuleDisplay.vue'
 
 var self
 
@@ -47,8 +47,8 @@ export default {
     }
   },
   components: {
-    CircleSlider,
-    display
+    ModuleKnob,
+    ModuleDisplay
   },
   created () {
     self = this

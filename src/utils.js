@@ -1,3 +1,4 @@
+import round from 'lodash/round'
 import store from '@/store'
 
 export const vuexSyncGen = (device, parameter, setCallback) => {
@@ -14,4 +15,9 @@ export const vuexSyncGen = (device, parameter, setCallback) => {
       }
     }
   }
+}
+
+export const mapValueToRange = (val, max, newRange) => {
+  if (val > max) return max
+  return round((val / max) * newRange)
 }

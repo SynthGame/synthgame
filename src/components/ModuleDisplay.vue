@@ -31,7 +31,25 @@
                 </g>
               </g>
 
-        <text x="45%" y="40%" fill="blue">
+              <!-- <g v-if="module === 'delay'">
+                <rect :x="" :y="" :width="300" :height="300"/>
+                <rect v-if="(knobs[1].value/(knobs[1].max-knobs[1].min)) > (100/14)*2" :x="" :y="" :width="300" :height=""/>
+                <rect v-if="(knobs[1].value/(knobs[1].max-knobs[1].min)) > (100/14)*3" :x="" :y="" :width="300" :height=""/>
+                <rect v-if="(knobs[1].value/(knobs[1].max-knobs[1].min)) > (100/14)*4" :x="" :y="" :width="300" :height=""/>
+                <rect v-if="(knobs[1].value/(knobs[1].max-knobs[1].min)) > (100/14)*5" :x="" :y="" :width="300" :height=""/>
+                <rect v-if="(knobs[1].value/(knobs[1].max-knobs[1].min)) > (100/14)*6" :x="" :y="" :width="300" :height=""/>
+                <rect v-if="(knobs[1].value/(knobs[1].max-knobs[1].min)) > (100/14)*7" :x="" :y="" :width="300" :height=""/>
+                <rect v-if="(knobs[1].value/(knobs[1].max-knobs[1].min)) > (100/14)*8" :x="" :y="" :width="300" :height=""/>
+                <rect v-if="(knobs[1].value/(knobs[1].max-knobs[1].min)) > (100/14)*9" :x="" :y="" :width="300" :height=""/>
+                </g> -->
+
+        <!-- // <path v-if="this.module === 'lfo'"
+        //       :stroke-width="strokeWidth"
+        //       :d="'M ' + '" -->
+        <!-- //       fill="black"
+        //       style="fill-rule: nozero" -->
+
+        <text x="45%" y="40%" fill="transparent">
           <tspan x="45%" y="50%">{{knobs[0].name}}: {{knobs[0].value}}</tspan>
           <tspan x="45%" y="60%">{{knobs[1].name}}: {{knobs[1].value}}</tspan>
           <tspan x="45%" y="70%">{{knobs[2].name}}: {{knobs[2].value}}</tspan>
@@ -60,7 +78,6 @@
 // [v] have the other knobs connected to the filter audio output
 // [v] relativize and clean up the path drawing function (inc. the curve "global" variable)
 
-
 // lfo:
 // [v] create swing
 // [v] have it move for sine
@@ -86,7 +103,8 @@ export default {
       displayHeight: 300,
       displayWidth: 600,
       curveAmnt: 90,
-      strokeWidth : '0.1'
+      strokeWidth: '0.1',
+      lfoRotation: 20
     }
   },
   mounted () {
@@ -184,7 +202,7 @@ export default {
         const freqDistance = (cutOffFreq.value / cutOffFreq.max) * (halfWidth)
 
         // svg path:
-        if (type.value === 0) {
+        if (type.value === 'lowpass') {
           line = 'M 0,' + this.displayHeight +
                 ' v ' + (-(halfHeight + gainAddedDistance - yOffset)) +
                 ' h ' + (freqDistance) +
@@ -193,7 +211,7 @@ export default {
                       +qDistance + ', ' + (halfHeight + gainAddedDistance) +
 
                 ' Z'
-        } else if (type.value === 1) {
+        } else if (type.value === 'highpass') {
           line = 'M 0,' + this.displayHeight +
                 ' h ' + freqDistance +
                 ' h ' + ((q.value / q.max) * (halfWidth) / 2) +
@@ -202,7 +220,7 @@ export default {
                 ' h ' + this.displayWidth +
                 ' v ' + this.displayHeight +
                 ' Z'
-        } else if (type.value === 2) {
+        } else if (type.value === 'bandpass') {
           line = 'M 0, ' + this.displayHeight +
                 ' h ' + (freqDistance + (halfWidth / 2) - qDistance) +
                 ' q ' + (qDistance / 2) + ', ' + (-(halfHeight + gainAddedDistance)) + ' ' +
@@ -228,25 +246,25 @@ export default {
 
         let wave
         // square:
-        if (type.value === 1) {
+        if (type.value === 'square') {
           wave = ' v ' + h +
                  ' h ' + iteration +
                  ' v ' + (-yAxisMiddle) +
                  ' h ' + iteration +
                  ' v ' + h
         // sine:
-      } else if (type.value === 0) {
+        } else if (type.value === 'sine') {
           wave = ' q ' + '0, ' + h + ' ' + iteration / 2 + ', ' + h +
                  ' q ' + iteration / 2 + ', 0 ' + iteration / 2 + ', ' + (-h) +
                  ' q 0, ' + (-h) + ' ' + iteration / 2 + ' ' + (-h) +
                  ' q ' + iteration / 2 + ', 0 ' + ' ' + iteration / 2 + ' ' + h
         // sawtooth:
-        } else if (type.value === 2) {
+        } else if (type.value === 'sawtooth') {
           wave = ' v ' + h +
                  ' l ' + 2 * iteration + ', ' + (-yAxisMiddle) +
                  ' v ' + h
         // triangle
-        } else if (type.value === 3) {
+        } else if (type.value === 'triangle') {
           wave = ' l ' + iteration / 2 + ', ' + h +
                  ' l ' + iteration + ', ' + (-yAxisMiddle) +
                  ' l ' + iteration / 2 + ', ' + h
@@ -260,22 +278,34 @@ export default {
 
       if (this.module === 'lfo') {
         // helpers:
-        const r = this.displayHeight/4
+        const r = this.displayHeight / 4
+        const rate = this.knobs[0]
+        const amount = this.knobs[1]
+        const shape = this.knobs[2]
+        // let position = null
+        // Bart's little experiment
+        // setInterval(function(){
+        //   console.log('this.lfoRotation',this.lfoRotation);
+        //   if (this.lfoRotation === 40) {
+        //       this.lfoRotation = -40
+        //     } else{
+        //      this.lfoRotation = 40;
+        //    }
+        //  }, rate * 10 + 1000);
 
-        //making a circle with a path..
+        // making a circle with a path..
         const circle = ' q ' + '0, ' + (-r) + ' ' + r + ', ' + (-r) +
                        ' q ' + r + ', 0 ' + r + ', ' + r +
-                       ' q ' + '0, '+ r + ' ' + (-r) + ', ' + r +
+                       ' q ' + '0, ' + r + ' ' + (-r) + ', ' + r +
                        ' q ' + (-r) + ', 0 ' + (-r) + ', ' + (-r)
 
         // the idea from https://codepen.io/jakob-e/pen/bgBegJ
-        const archCrcl= 'M'+((this.displayWidth/2)-r)+', '+ ((this.displayHeight/2))+
+        const archCrcl = 'M' + ((this.displayWidth / 2) - r) + ', ' + ((this.displayHeight / 2)) +
         // 'm '+(-r)+', 0'+
-        'a '+r+', '+r+ ' 0 1,0 '+(2*r)+',0'+
-        'a '+r+', '+r+ ' 0 1,0 '+(-2*r)+',0'
+        'a ' + r + ', ' + r + ' 0 1,0 ' + (2 * r) + ',0' +
+        'a ' + r + ', ' + r + ' 0 1,0 ' + (-2 * r) + ',0'
 
-        // not good enought, since how would it be animated?
-
+        // not good enough, since how would it be animated?
 
         // might actually go with <circle>
 
@@ -288,8 +318,6 @@ export default {
         // [] lfo prop watched/computed
         // [] transition
         // [] stylesheetapi
-
-
       }
 
       if (this.module === 'delay') {
@@ -329,29 +357,27 @@ export default {
       if (this.module === 'reverb') {
         // helpers:
 
-
-
         line = ''
         return line
       }
 
       return line
     },
-    centerLFOSwing() {
-      return 'transform: translateX('+(this.displayWidth/2) + 'px)'
-    },
+    centerLFOSwing () {
+      return 'transform: translateX(' + (this.displayWidth / 2) + 'px)'
+    }
     // moveLFOSwingUp() {
     //   return 'translateY(-' + (this.displayHeight/2) + 'px)'
     // }
   },
   watch: {
-    knobs() {
-      if (this.module === 'lfo') {
-        const amount = this.knobs[1]
-        //test out deep watcher: https://vuejs.org/v2/api/#watch
-      }
-
-    }
+    // knobs() {
+    //   if (this.module === 'lfo') {
+    //     const amount = this.knobs[1]
+    //
+    //   }
+    //
+    // }
 
   }
 }
@@ -369,8 +395,8 @@ export default {
 
 /* https://developer.mozilla.org/en-US/docs/Web/API/CSSStyleSheet/insertRule */
  @keyframes swing {
-    0% { transform: rotate(40deg); }
-    100% { transform: rotate(-40deg); }
+    0% { transform: rotate(-40deg); }
+    to { transform: rotate(40deg);}
 }
 
  </style>
