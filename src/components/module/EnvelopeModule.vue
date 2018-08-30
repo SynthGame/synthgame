@@ -4,46 +4,47 @@
       <h2>Tats</h2>
       <h3>Envelope</h3>
     </div>
-     <display fill="#e4e259"
-              module="envelope"
-              :knobs="[{name: 'attack', min: 1, max: 100, value: this.attack},
-                       {name: 'decay', min: 1, max: 100, value: this.decay},
-                       {name: 'sustain', min: 1, max: 100, value: this.sustain},
-                       {name: 'release', min: 1, max: 100, value: this.release}
-                       ]"/>
+     <module-display
+      fill="#e4e259"
+      module="envelope"
+      :knobs="[{name: 'attack', min: 1, max: 100, value: this.attack},
+                {name: 'decay', min: 1, max: 100, value: this.decay},
+                {name: 'sustain', min: 1, max: 100, value: this.sustain},
+                {name: 'release', min: 1, max: 100, value: this.release}
+                ]"/>
     <div class="knobs">
-      <circle-slider
+      <module-knob
         v-model="attack"
         :min="0"
         :max="100"
         knobColor="#e4e259"
         name="Attack"
         module="envelope"
-      ></circle-slider>
-      <circle-slider
+      ></module-knob>
+      <module-knob
         v-model="decay"
         :min="0"
         :max="100"
         knobColor="#e4e259"
         name="Decay"
         module="envelope"
-      ></circle-slider>
-      <circle-slider
+      ></module-knob>
+      <module-knob
         v-model="sustain"
         :min="0"
         :max="100"
         knobColor="#e4e259"
         name="Sustain"
         module="envelope"
-      ></circle-slider>
-      <circle-slider
+      ></module-knob>
+      <module-knob
         v-model="release"
         :min="0"
         :max="100"
         knobColor="#e4e259"
         name="Release"
         module="envelope"
-      ></circle-slider>
+      ></module-knob>
     </div>
   </div>
 </template>
@@ -52,8 +53,8 @@
 import { vuexSyncGen } from '@/utils'
 
 import audio from '@/audio'
-import CircleSlider from '@/components/knob.vue'
-import display from '@/components/display'
+import ModuleKnob from '@/components/ModuleKnob.vue'
+import ModuleDisplay from '@/components/ModuleDisplay.vue'
 
 var self
 
@@ -70,8 +71,8 @@ export default {
     }
   },
   components: {
-    CircleSlider,
-    display
+    ModuleKnob,
+    ModuleDisplay
   },
   created () {
     self = this

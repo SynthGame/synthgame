@@ -4,37 +4,38 @@
         <h2>Tats</h2>
         <h3>Lfo</h3>
       </div>
-        <display class="display"
-           module="lfo"
-           fill="#5bd484"
-           :knobs="[{name: 'Rate', min:1, max:100, value: this.frequency},
-                    {name: 'Amount', min:0, max:4000, value: this.amount},
-                    {name: 'Shape', min:0, max:3, value: this.selectedType}]"/>
+        <module-display
+          class="display"
+          module="lfo"
+          fill="#5bd484"
+          :knobs="[{name: 'Rate', min:1, max:100, value: this.frequency},
+                   {name: 'Amount', min:0, max:4000, value: this.amount},
+                   {name: 'Shape', min:0, max:3, value: this.selectedType}]"/>
         <div class="knobs">
-          <circle-slider
+          <module-knob
             v-model="frequency"
             :min="1"
             :max="100"
             knobColor="#5bd484"
             name="Rate"
             module="lfo"
-          ></circle-slider>
-          <circle-slider
+          ></module-knob>
+          <module-knob
             v-model="amount"
             :min="0"
             :max="100"
             knobColor="#5bd484"
             name="Amount"
             module="lfo"
-          ></circle-slider>
-          <circle-slider
+          ></module-knob>
+          <module-knob
             v-model="type"
             :min="0"
             :max="100"
             knobColor="#5bd484"
             name="Shape"
             module="lfo"
-          ></circle-slider>
+          ></module-knob>
         </div>
     </div>
 </template>
@@ -43,8 +44,8 @@
 import { vuexSyncGen, mapValueToRange } from '@/utils'
 
 import audio from '@/audio'
-import CircleSlider from '@/components/knob.vue'
-import display from '@/components/display.vue'
+import ModuleKnob from '@/components/ModuleKnob.vue'
+import ModuleDisplay from '@/components/ModuleDisplay.vue'
 
 var self
 
@@ -66,8 +67,8 @@ export default {
     }
   },
   components: {
-    CircleSlider,
-    display
+    ModuleKnob,
+    ModuleDisplay
   },
   created () {
     self = this

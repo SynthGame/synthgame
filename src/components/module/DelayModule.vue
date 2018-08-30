@@ -4,39 +4,39 @@
       <h2>Tats</h2>
       <h3>Delay</h3>
     </div>
-    <display class="display"
-             module="delay"
-             fill="#43bede"
-             :knobs="[{name:'Time', min: 0, max: 100, value: this.delayTime},
-                      {name:'Feedback', min: 0, max: 100, value: this.feedback},
-                      {name:'Wet', min: 0, max: 100, value: this.wet}]"
-
+    <module-display
+      class="display"
+      module="delay"
+      fill="#43bede"
+      :knobs="[{name:'Time', min: 0, max: 100, value: this.delayTime},
+              {name:'Feedback', min: 0, max: 100, value: this.feedback},
+              {name:'Wet', min: 0, max: 100, value: this.wet}]"
     />
     <div class="knobs">
-      <circle-slider
+      <module-knob
         v-model="delayTime"
         :min="0"
         :max="100"
         knobColor="#43bede"
         name="Time"
         module="delay"
-      ></circle-slider>
-      <circle-slider
+      ></module-knob>
+      <module-knob
         v-model="feedback"
         :min="0"
         :max="100"
         knobColor="#43bede"
         name="Feedback"
         module="delay"
-      ></circle-slider>
-      <circle-slider
+      ></module-knob>
+      <module-knob
         v-model="wet"
         :min="0"
         :max="100"
         knobColor="#43bede"
         name="Dry/wet"
         module="delay"
-      ></circle-slider>
+      ></module-knob>
     </div>
   </div>
 </template>
@@ -45,8 +45,8 @@
 import { vuexSyncGen } from '@/utils'
 
 import audio from '@/audio'
-import CircleSlider from '@/components/knob.vue'
-import display from '@/components/display.vue'
+import ModuleKnob from '@/components/ModuleKnob.vue'
+import ModuleDisplay from '@/components/ModuleDisplay.vue'
 
 var self
 
@@ -58,8 +58,8 @@ export default {
     }
   },
   components: {
-    CircleSlider,
-    display
+    ModuleKnob,
+    ModuleDisplay
   },
   created () {
     self = this
