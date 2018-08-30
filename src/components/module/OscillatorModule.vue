@@ -47,6 +47,7 @@
 </template>
 
 <script>
+import { mapState } from 'vuex'
 import { vuexSyncGen } from '@/utils'
 
 import audio from '@/audio'
@@ -84,11 +85,11 @@ export default {
   },
   computed: {
     ...vuexSyncGen('oscillator', 'frequency', val => {
-      if(val >= self.freqArray.length) self.oscillator.frequency.value = self.freqArray[self.freqArray.length - 1]
+      if (val >= self.freqArray.length) self.oscillator.frequency.value = self.freqArray[self.freqArray.length - 1]
       else self.oscillator.frequency.value = self.freqArray[val]
     }),
     ...vuexSyncGen('oscillator', 'typeOsc', val => {
-      if(val >= self.typeArray.length) self.oscillator.type = self.typeArray[self.typeArray.length - 1]
+      if (val >= self.typeArray.length) self.oscillator.type = self.typeArray[self.typeArray.length - 1]
       else self.oscillator.type = self.typeArray[Math.round(val)]
       self.oscillator.stop()
       self.oscillator.start()
@@ -103,7 +104,7 @@ export default {
       frequencyGoal: state => state.gameState.goal.oscillator.frequency,
       typeOscGoal: state => state.gameState.goal.oscillator.typeOsc,
       detuneGoal: state => state.gameState.goal.oscillator.detune,
-      phaseGoal: state => state.gameState.goal.oscillator.phase,
+      phaseGoal: state => state.gameState.goal.oscillator.phase
     })
   }
 }
