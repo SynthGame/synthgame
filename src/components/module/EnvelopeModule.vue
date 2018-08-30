@@ -18,6 +18,7 @@
         :max="100"
         knobColor="#e4e259"
         name="Attack"
+        module="envelope"
       ></circle-slider>
       <circle-slider
         v-model="decay"
@@ -25,6 +26,7 @@
         :max="100"
         knobColor="#e4e259"
         name="Decay"
+        module="envelope"
       ></circle-slider>
       <circle-slider
         v-model="sustain"
@@ -32,6 +34,7 @@
         :max="100"
         knobColor="#e4e259"
         name="Sustain"
+        module="envelope"
       ></circle-slider>
       <circle-slider
         v-model="release"
@@ -39,6 +42,7 @@
         :max="100"
         knobColor="#e4e259"
         name="Release"
+        module="envelope"
       ></circle-slider>
     </div>
   </div>

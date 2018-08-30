@@ -19,6 +19,7 @@
         :max="100"
         knobColor="#43bede"
         name="Time"
+        module="delay"
       ></circle-slider>
       <circle-slider
         v-model="feedback"
@@ -26,6 +27,7 @@
         :max="100"
         knobColor="#43bede"
         name="Feedback"
+        module="delay"
       ></circle-slider>
       <circle-slider
         v-model="wet"
@@ -33,6 +35,7 @@
         :max="100"
         knobColor="#43bede"
         name="Dry/wet"
+        module="delay"
       ></circle-slider>
     </div>
   </div>

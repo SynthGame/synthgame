@@ -12,21 +12,15 @@
         :max="100"
         knobColor="#3c32ff"
         name="Room Size"
+        module="reverb"
       ></circle-slider>
-      <!-- <circle-slider
-        v-model="preDelay"
-        :step-size="0.1"
-        :min="2"
-        :max="8"
-        knobColor="#3c32ff"
-        name="Predelay"
-      ></circle-slider> -->
       <circle-slider
         v-model="wet"
         :min="0"
         :max="100"
         knobColor="#3c32ff"
         name="Dry/wet"
+        module="reverb"
       ></circle-slider>
     </div>
   </div>

@@ -17,6 +17,7 @@
             :max="100"
             knobColor="#5bd484"
             name="Rate"
+            module="lfo"
           ></circle-slider>
           <circle-slider
             v-model="amount"
@@ -24,6 +25,7 @@
             :max="4000"
             knobColor="#5bd484"
             name="Amount"
+            module="lfo"
           ></circle-slider>
           <circle-slider
             v-model="type"
@@ -31,6 +33,7 @@
             :max="3"
             knobColor="#5bd484"
             name="Shape"
+            module="lfo"
           ></circle-slider>
         </div>
     </div>

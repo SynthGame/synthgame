@@ -26,6 +26,7 @@
               :max="100"
               knobColor="#6e01d1"
               name="Frequency"
+              module="filter"
             ></rotary>
 
      <rotary
@@ -34,6 +35,7 @@
               :max="100"
               knobColor="#6e01d1"
               name="Resonance"
+              module="filter"
             ></rotary>
       <!-- <rotary
               v-model="gain"
