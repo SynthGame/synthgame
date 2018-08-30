@@ -23,6 +23,12 @@ export default {
   },
   created () {
     // initialize the synth
+
+    document.bart = () => {
+      this.$store.dispatch('randomizeAudioParameters')
+        .then(() => console.log('success'))
+    }
+
     audio.init()
     // create loop wich sequences 4 notes
     const loop = audio.setMainLoop({

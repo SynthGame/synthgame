@@ -84,7 +84,7 @@ export default {
   },
   computed: {
     ...vuexSyncGen('oscillator', 'frequency', val => {
-      if(val >= self.typeArray.length) self.oscillator.frequency.value = self.freqArray[self.freqArray.length - 1]
+      if(val >= self.freqArray.length) self.oscillator.frequency.value = self.freqArray[self.freqArray.length - 1]
       else self.oscillator.frequency.value = self.freqArray[val]
     }),
     ...vuexSyncGen('oscillator', 'typeOsc', val => {
