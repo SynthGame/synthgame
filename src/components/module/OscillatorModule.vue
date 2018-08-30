@@ -1,5 +1,9 @@
 <template>
   <div class="module">
+    <div class="title">
+      <h2>Tats</h2>
+      <h3>Oscillator</h3>
+    </div>
     <display class="display"
              module="oscillator"
              fill="#ff8574"
@@ -9,34 +13,36 @@
                       {name: 'Waveform', min: 0, max:3, value: this.typeOsc},
                     ]"
              />
-    <circle-slider
-      v-model="frequency"
-      :min="0"
-      :max="7"
-      knobColor="#ff8574"
-      name="Octave"
-    ></circle-slider>
-    <circle-slider
-      v-model="detune"
-      :min="0"
-      :max="120"
-      knobColor="#ff8574"
-      name="Detune"
-    ></circle-slider>
-    <!-- <circle-slider
-      v-model="phase"
-      :min="50"
-      :max="10000"
-      knobColor="#ff8574"
-      name="Phase"
-    ></circle-slider> -->
-    <circle-slider
-      v-model="typeOsc"
-      :min="0"
-      :max="3"
-      knobColor="#ff8574"
-      name="Waveform"
-    ></circle-slider>
+    <div class="knobs">
+      <circle-slider
+        v-model="typeOsc"
+        :min="0"
+        :max="3"
+        knobColor="#ff8574"
+        name="Waveform"
+      ></circle-slider>
+      <circle-slider
+        v-model="frequency"
+        :min="0"
+        :max="7"
+        knobColor="#ff8574"
+        name="Octave"
+      ></circle-slider>
+      <circle-slider
+        v-model="detune"
+        :min="0"
+        :max="120"
+        knobColor="#ff8574"
+        name="Detune"
+      ></circle-slider>
+      <!-- <circle-slider
+        v-model="phase"
+        :min="50"
+        :max="10000"
+        knobColor="#ff8574"
+        name="Phase"
+      ></circle-slider> -->
+    </div>
   </div>
 </template>
 
@@ -78,10 +84,12 @@ export default {
   },
   computed: {
     ...vuexSyncGen('oscillator', 'frequency', val => {
-      self.oscillator.frequency.value = self.freqArray[val]
+      if(val >= self.freqArray.length) self.oscillator.frequency.value = self.freqArray[self.freqArray.length - 1]
+      else self.oscillator.frequency.value = self.freqArray[val]
     }),
     ...vuexSyncGen('oscillator', 'typeOsc', val => {
-      self.oscillator.type = self.typeArray[Math.round(val)]
+      if(val >= self.typeArray.length) self.oscillator.type = self.typeArray[self.typeArray.length - 1]
+      else self.oscillator.type = self.typeArray[Math.round(val)]
       self.oscillator.stop()
       self.oscillator.start()
     }),
@@ -98,13 +106,14 @@ export default {
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped lang="scss">
 
+h3 {
+  color: #ff8574;
+}
+
 svg.display {
     fill: #ff8574;
 }
 
-h3 {
-  margin: 40px 0 0;
-}
 ul {
   list-style-type: none;
   padding: 0;

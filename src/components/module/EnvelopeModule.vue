@@ -1,5 +1,9 @@
 <template>
   <div class="module">
+    <div class="title">
+      <h2>Tats</h2>
+      <h3>Envelope</h3>
+    </div>
      <display fill="#e4e259"
               module="envelope"
               :knobs="[{name: 'attack', min: 1, max: 100, value: this.attack},
@@ -7,34 +11,36 @@
                        {name: 'sustain', min: 1, max: 100, value: this.sustain},
                        {name: 'release', min: 1, max: 100, value: this.release}
                        ]"/>
-    <circle-slider
-      v-model="attack"
-      :min="0"
-      :max="100"
-      knobColor="#e4e259"
-      name="Attack"
-    ></circle-slider>
-    <circle-slider
-      v-model="decay"
-      :min="0"
-      :max="100"
-      knobColor="#e4e259"
-      name="Decay"
-    ></circle-slider>
-    <circle-slider
-      v-model="sustain"
-      :min="0"
-      :max="100"
-      knobColor="#e4e259"
-      name="Sustain"
-    ></circle-slider>
-    <circle-slider
-      v-model="release"
-      :min="0"
-      :max="100"
-      knobColor="#e4e259"
-      name="Release"
-    ></circle-slider>
+    <div class="knobs">
+      <circle-slider
+        v-model="attack"
+        :min="0"
+        :max="100"
+        knobColor="#e4e259"
+        name="Attack"
+      ></circle-slider>
+      <circle-slider
+        v-model="decay"
+        :min="0"
+        :max="100"
+        knobColor="#e4e259"
+        name="Decay"
+      ></circle-slider>
+      <circle-slider
+        v-model="sustain"
+        :min="0"
+        :max="100"
+        knobColor="#e4e259"
+        name="Sustain"
+      ></circle-slider>
+      <circle-slider
+        v-model="release"
+        :min="0"
+        :max="100"
+        knobColor="#e4e259"
+        name="Release"
+      ></circle-slider>
+    </div>
   </div>
 </template>
 
@@ -92,8 +98,9 @@ svg.display {
 }
 
 h3 {
-  margin: 40px 0 0;
+  color: #e4e259;
 }
+
 ul {
   list-style-type: none;
   padding: 0;

@@ -69,10 +69,11 @@ export default {
       console.log('self.lfo.frequency.value', self.lfo.frequency.value)
     }),
     ...vuexSyncGen('lfo', 'amount', val => {
-      self.lfo.max = val
+      self.lfo.max = (val * 40)
     }),
     ...vuexSyncGen('lfo', 'type', val => {
-      self.lfo.type = self.typeArray[val]
+      if(val >= self.typeArray.length) self.lfo.type = self.typeArray[self.typeArray.length - 1]
+      else self.lfo.type = self.typeArray[val]
       self.lfo.stop()
       self.lfo.start()
     })
@@ -88,8 +89,9 @@ svg.display {
 }
 
 h3 {
-  margin: 40px 0 0;
+  color: #5bd484;
 }
+
 ul {
   margin-top: 5em;
   list-style-type: none;

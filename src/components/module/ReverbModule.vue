@@ -73,8 +73,9 @@ svg.display {
 }
 
 h3 {
-  margin: 40px 0 0;
+  color: #3c32ff;
 }
+
 ul {
   list-style-type: none;
   padding: 0;

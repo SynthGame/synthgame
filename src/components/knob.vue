@@ -352,5 +352,11 @@ export default {
     margin-bottom: -150px;
     overflow: visible;
   }
+  p {
+     margin: .5em 0 0 0;
+     font-size: .7em;
+     text-transform: uppercase;
+     letter-spacing: 1px;
+  }
 }
 </style>
