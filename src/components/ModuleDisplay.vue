@@ -11,6 +11,14 @@
               style="fill-rule: nozero"
               />
 
+        <path v-if="this.module === 'oscillator'"
+              stroke="white"
+              :stroke-width="2"
+              :d="pathGoal"
+              fill="none"
+              style="fill-rule: nozero"
+              />
+
               <!-- lfo: -->
               <!--positioning wrapperfix -->
              <g :style="centerLFOSwing">
@@ -37,11 +45,17 @@
         <!-- //       fill="black"
         //       style="fill-rule: nozero" -->
 
-        <text x="45%" y="40%" fill="transparent">
+        <text x="45%" y="40%" fill="white">
           <tspan x="45%" y="50%">{{knobs[0].name}}: {{knobs[0].value}}</tspan>
           <tspan x="45%" y="60%">{{knobs[1].name}}: {{knobs[1].value}}</tspan>
           <tspan x="45%" y="70%">{{knobs[2].name}}: {{knobs[2].value}}</tspan>
           <tspan x="45%" y="80%" v-if="this.knobs[3]">{{knobs[3].name}}: {{knobs[3].value}}</tspan>
+        </text>
+        <text v-if="this.module === 'oscillator'" fill="white">
+          <tspan x="0%" y="50%">{{knobs[4].name}}: {{knobs[4].value}}</tspan>
+          <tspan x="0%" y="60%">{{knobs[5].name}}: {{knobs[5].value}}</tspan>
+          <tspan x="0%" y="70%">{{knobs[6].name}}: {{knobs[6].value}}</tspan>
+          <tspan x="0%" y="80%" v-if="this.knobs[7]">{{knobs[7].name}}: {{knobs[7].value}}</tspan>
         </text>
       </svg>
     </div>
@@ -348,6 +362,55 @@ export default {
 
         line = ''
         return line
+      }
+
+      return line
+    },
+    pathGoal () {
+      let line
+
+      if (this.module === 'oscillator') {
+        // helpers:
+        const octave = this.knobs[0]
+        const detune = this.knobs[5]
+        const phase = this.knobs[6]
+        const type = this.knobs[3]
+
+        const lineLength = 1.5 * this.displayWidth
+        const yAxisMiddle = this.displayHeight / 2
+        const h = yAxisMiddle / 2
+
+        const iteration = 1.2 * h - h * (0.6 * (octave.value / (octave.max - octave.min))) + (h * 0.2 * (1 - (detune.value / (detune.max))))
+
+        let wave
+        // square:
+        if (type.value === 'square') {
+          wave = ' v ' + h +
+                 ' h ' + iteration +
+                 ' v ' + (-yAxisMiddle) +
+                 ' h ' + iteration +
+                 ' v ' + h
+        // sine:
+        } else if (type.value === 'sine') {
+          wave =
+                ' q ' + '0, ' + h + ' ' + iteration / 2 + ', ' + h +
+                 ' q ' + iteration / 2 + ', 0 ' + iteration / 2 + ', ' + (-h) +
+                 ' q 0, ' + (-h) + ' ' + iteration / 2 + ' ' + (-h) +
+                 ' q ' + iteration / 2 + ', 0 ' + ' ' + iteration / 2 + ' ' + h
+        // sawtooth:
+        } else if (type.value === 'sawtooth') {
+          wave = ' v ' + h +
+                 ' l ' + 2 * iteration + ', ' + (-yAxisMiddle) +
+                 ' v ' + h
+        // triangle
+        } else if (type.value === 'triangle') {
+          wave = ' l ' + iteration / 2 + ', ' + h +
+                 ' l ' + iteration + ', ' + (-yAxisMiddle) +
+                 ' l ' + iteration / 2 + ', ' + h
+        }
+        line =
+              ' m -' + iteration + ', ' + yAxisMiddle +
+              wave + wave + wave + wave + wave + wave + wave + wave + wave + wave + wave
       }
 
       return line
