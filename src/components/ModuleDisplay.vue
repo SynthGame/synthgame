@@ -31,18 +31,6 @@
                 </g>
               </g>
 
-              <!-- <g v-if="module === 'delay'">
-                <rect :x="" :y="" :width="300" :height="300"/>
-                <rect v-if="(knobs[1].value/(knobs[1].max-knobs[1].min)) > (100/14)*2" :x="" :y="" :width="300" :height=""/>
-                <rect v-if="(knobs[1].value/(knobs[1].max-knobs[1].min)) > (100/14)*3" :x="" :y="" :width="300" :height=""/>
-                <rect v-if="(knobs[1].value/(knobs[1].max-knobs[1].min)) > (100/14)*4" :x="" :y="" :width="300" :height=""/>
-                <rect v-if="(knobs[1].value/(knobs[1].max-knobs[1].min)) > (100/14)*5" :x="" :y="" :width="300" :height=""/>
-                <rect v-if="(knobs[1].value/(knobs[1].max-knobs[1].min)) > (100/14)*6" :x="" :y="" :width="300" :height=""/>
-                <rect v-if="(knobs[1].value/(knobs[1].max-knobs[1].min)) > (100/14)*7" :x="" :y="" :width="300" :height=""/>
-                <rect v-if="(knobs[1].value/(knobs[1].max-knobs[1].min)) > (100/14)*8" :x="" :y="" :width="300" :height=""/>
-                <rect v-if="(knobs[1].value/(knobs[1].max-knobs[1].min)) > (100/14)*9" :x="" :y="" :width="300" :height=""/>
-                </g> -->
-
         <!-- // <path v-if="this.module === 'lfo'"
         //       :stroke-width="strokeWidth"
         //       :d="'M ' + '" -->
@@ -318,6 +306,7 @@ export default {
         // [] lfo prop watched/computed
         // [] transition
         // [] stylesheetapi
+        //http://danielcwilson.com/blog/2017/10/all-the-transform-ways/
       }
 
       if (this.module === 'delay') {
@@ -371,13 +360,13 @@ export default {
     // }
   },
   watch: {
-    // knobs() {
-    //   if (this.module === 'lfo') {
-    //     const amount = this.knobs[1]
-    //
-    //   }
-    //
-    // }
+    knobs() {
+      if (this.module === 'lfo') {
+        const amount = this.knobs[1]
+
+      }
+
+    }
 
   }
 }
@@ -390,7 +379,8 @@ export default {
 
  .swing {
    /* transform: translateX(100px); */
-   animation: swing  ease-in-out 1s infinite alternate
+   animation: swing  ease-in-out 1s infinite alternate;
+   animation-name: swing
  }
 
 /* https://developer.mozilla.org/en-US/docs/Web/API/CSSStyleSheet/insertRule */
