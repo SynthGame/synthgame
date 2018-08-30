@@ -7,7 +7,7 @@
     <display class="display"
              module="delay"
              fill="#43bede"
-             :knobs="[{name:'Time', min: 0.1, max: 100, value: this.delayTime},
+             :knobs="[{name:'Time', min: 0, max: 100, value: this.delayTime},
                       {name:'Feedback', min: 0, max: 100, value: this.feedback},
                       {name:'Wet', min: 0, max: 100, value: this.wet}]"
 
@@ -15,7 +15,7 @@
     <div class="knobs">
       <circle-slider
         v-model="delayTime"
-        :min="0.1"
+        :min="0"
         :max="100"
         knobColor="#43bede"
         name="Time"
