@@ -1,33 +1,32 @@
-<template>
+  <template>
   <div class="module">
-    <div class="title">
-      <h2>Tats</h2>
-      <h3>Lfo</h3>
-    </div>
-    <display class="display" module="lfo"/>
-    <div class="knobs">
-      <circle-slider
-        v-model="frequency"
-        :min="1"
-        :max="100"
-        knobColor="#5bd484"
-        name="Rate"
-      ></circle-slider>
-      <circle-slider
-        v-model="amount"
-        :min="0"
-        :max="100"
-        knobColor="#5bd484"
-        name="Amount"
-      ></circle-slider>
-      <circle-slider
-        v-model="type"
-        :min="0"
-        :max="3"
-        knobColor="#5bd484"
-        name="Shape"
-      ></circle-slider>
-    </div>
+  <display class="display"
+           module="lfo"
+           fill="#5bd484"
+           :knobs="[{name: 'Rate', min:1, max:100, value: this.frequency},
+                    {name: 'Amount', min:0, max:4000, value: this.amount},
+                    {name: 'Shape', min:0, max:3, value: this.type}]"/>
+    <circle-slider
+      v-model="frequency"
+      :min="1"
+      :max="100"
+      knobColor="#5bd484"
+      name="Rate"
+    ></circle-slider>
+    <circle-slider
+      v-model="amount"
+      :min="0"
+      :max="4000"
+      knobColor="#5bd484"
+      name="Amount"
+    ></circle-slider>
+    <circle-slider
+      v-model="type"
+      :min="0"
+      :max="3"
+      knobColor="#5bd484"
+      name="Shape"
+    ></circle-slider>
   </div>
 </template>
 

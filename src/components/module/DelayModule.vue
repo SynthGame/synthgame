@@ -1,33 +1,34 @@
 <template>
   <div class="module">
-    <div class="title">
-      <h2>Tats</h2>
-      <h3>Delay</h3>
-    </div>
-    <display class="display" module="delay"/>
-    <div class="knobs">
-      <circle-slider
-        v-model="delayTime"
-        :min="0"
-        :max="100"
-        knobColor="#43bede"
-        name="Time"
-      ></circle-slider>
-      <circle-slider
-        v-model="feedback"
-        :min="0"
-        :max="100"
-        knobColor="#43bede"
-        name="Feedback"
-      ></circle-slider>
-      <circle-slider
-        v-model="wet"
-        :min="0"
-        :max="100"
-        knobColor="#43bede"
-        name="Dry/wet"
-      ></circle-slider>
-    </div>
+    <display class="display"
+             module="delay"
+             fill="#43bede"
+             :knobs="[{name:'Time', min: 0.1, max: 100, value: this.delayTime},
+                      {name:'Feedback', min: 0, max: 100, value: this.feedback},
+                      {name:'Wet', min: 0, max: 100, value: this.wet}]"
+
+    />
+    <circle-slider
+      v-model="delayTime"
+      :min="0.1"
+      :max="100"
+      knobColor="#43bede"
+      name="Time"
+    ></circle-slider>
+    <circle-slider
+      v-model="feedback"
+      :min="0"
+      :max="100"
+      knobColor="#43bede"
+      name="Feedback"
+    ></circle-slider>
+    <circle-slider
+      v-model="wet"
+      :min="0"
+      :max="100"
+      knobColor="#43bede"
+      name="Dry/wet"
+    ></circle-slider>
   </div>
 </template>
 

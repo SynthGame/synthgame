@@ -1,39 +1,59 @@
 <template>
-  <!-- envelope display -->
-  <!-- <svg v-if="module=='filter'"
-  style="margin: auto; width: 100%">
-  <rect :width="displayWidth" :height="displayHeight" fill="rgb(14, 80, 186)"/>
-    <path stroke="black" stroke-width="3" :d="filterPath" fill="black" style="fill-rule: nozero"/>
-    <text x="45%" y="40%" fill="blue">
-      <tspan>L: {{lowpass}}</tspan>
-      <tspan x="45%" y="50%">H: {{highpass}}</tspan>
-      <tspan x="45%" y="60%">G: {{gain}}</tspan>
-    </text>
-  </svg> -->
-  <!-- envelope display -->
-    <!-- <svg v-else-if="module=='envelope'"
-  style="margin: auto;">
-  <rect  :width="displayWidth" :height="displayHeight" fill="rgb(244, 200, 66)"/> -->
-
-    <!-- </svg> -->
 
     <div class="display" ref="displayWrapper">
-      <!-- <svg :width="displayWidth" :height="displayHeight"> -->
       <svg width="100%" height="100%">
-        <rect :fill="fill" :width="displayWidth" :height="displayHeight" />
+        <rect :fill="fill" width="100%" height="100%" />
 
         <path stroke="black"
-              stroke-width="0.1"
+              :stroke-width="strokeWidth"
               :d="path"
               fill="black"
               style="fill-rule: nozero"
               />
 
-        <text x="45%" y="40%" fill="transparent">
+              <!-- lfo: -->
+              <!--positioning wrapperfix -->
+             <g :style="centerLFOSwing">
+
+              <!-- the swing: -->
+              <g v-if="this.module === 'lfo'"
+                stroke="black"
+                class="swing"
+                                >
+                <path
+                  :stroke-width="1"
+                  fill="black"
+                  :d="'m 0,'+ (-displayHeight/2)+
+                      ' v ' + (displayHeight)
+                      "/>
+
+                      <circle :cx="0" :cy="displayHeight*0.6" :r="displayHeight/4"/>
+                </g>
+              </g>
+
+              <!-- <g v-if="module === 'delay'">
+                <rect :x="" :y="" :width="300" :height="300"/>
+                <rect v-if="(knobs[1].value/(knobs[1].max-knobs[1].min)) > (100/14)*2" :x="" :y="" :width="300" :height=""/>
+                <rect v-if="(knobs[1].value/(knobs[1].max-knobs[1].min)) > (100/14)*3" :x="" :y="" :width="300" :height=""/>
+                <rect v-if="(knobs[1].value/(knobs[1].max-knobs[1].min)) > (100/14)*4" :x="" :y="" :width="300" :height=""/>
+                <rect v-if="(knobs[1].value/(knobs[1].max-knobs[1].min)) > (100/14)*5" :x="" :y="" :width="300" :height=""/>
+                <rect v-if="(knobs[1].value/(knobs[1].max-knobs[1].min)) > (100/14)*6" :x="" :y="" :width="300" :height=""/>
+                <rect v-if="(knobs[1].value/(knobs[1].max-knobs[1].min)) > (100/14)*7" :x="" :y="" :width="300" :height=""/>
+                <rect v-if="(knobs[1].value/(knobs[1].max-knobs[1].min)) > (100/14)*8" :x="" :y="" :width="300" :height=""/>
+                <rect v-if="(knobs[1].value/(knobs[1].max-knobs[1].min)) > (100/14)*9" :x="" :y="" :width="300" :height=""/>
+                </g> -->
+
+        <!-- // <path v-if="this.module === 'lfo'"
+        //       :stroke-width="strokeWidth"
+        //       :d="'M ' + '" -->
+        <!-- //       fill="black"
+        //       style="fill-rule: nozero" -->
+
+        <text x="45%" y="40%" fill="blue">
           <tspan x="45%" y="50%">{{knobs[0].name}}: {{knobs[0].value}}</tspan>
           <tspan x="45%" y="60%">{{knobs[1].name}}: {{knobs[1].value}}</tspan>
           <tspan x="45%" y="70%">{{knobs[2].name}}: {{knobs[2].value}}</tspan>
-          <tspan x="45%" y="80%">{{knobs[3].name}}: {{knobs[3].value}}</tspan>
+          <tspan x="45%" y="80%" v-if="this.knobs[3]">{{knobs[3].name}}: {{knobs[3].value}}</tspan>
         </text>
       </svg>
     </div>
@@ -49,19 +69,20 @@
 // [v]. make the lowpass & highpass one method
 // [v]. do something about the colors
 
-// [] REDISiGN in accrodance with knobs !!
-// embed into modules ?? actually not such a great idea!
+// [v] REDISiGN in accrodance with knobs !!
+// [] embed into modules ?? actually not such a great idea!
 // [v] trying to move them back together
 
-// type:
-//
-//
-//
-
 // ===============
-// [] the required margin data object and path
-// [] have the other knobs connected to the filter audio output
-// [] relativize and clean up the path drawing function (inc. the curve "global" variable)
+// [v] the required margin data object and path
+// [v] have the other knobs connected to the filter audio output
+// [v] relativize and clean up the path drawing function (inc. the curve "global" variable)
+
+
+// lfo:
+// [] create swing
+// [] have it move for sine
+// [] have two other types
 
 export default {
   name: 'display',
@@ -82,7 +103,8 @@ export default {
       // default values to not have the calculation derail at created()
       displayHeight: 300,
       displayWidth: 600,
-      curveAmnt: 90
+      curveAmnt: 90,
+      strokeWidth : '0.1'
     }
   },
   mounted () {
@@ -232,10 +254,79 @@ export default {
               ' Z '
       }
 
+      if (this.module === 'lfo') {
+        // helpers:
+        const r = this.displayHeight/4
+
+        //making a circle with a path..
+        const circle = ' q ' + '0, ' + (-r) + ' ' + r + ', ' + (-r) +
+                       ' q ' + r + ', 0 ' + r + ', ' + r +
+                       ' q ' + '0, '+ r + ' ' + (-r) + ', ' + r +
+                       ' q ' + (-r) + ', 0 ' + (-r) + ', ' + (-r)
+
+        // the idea from https://codepen.io/jakob-e/pen/bgBegJ
+        const archCrcl= 'M'+((this.displayWidth/2)-r)+', '+ ((this.displayHeight/2))+
+        // 'm '+(-r)+', 0'+
+        'a '+r+', '+r+ ' 0 1,0 '+(2*r)+',0'+
+        'a '+r+', '+r+ ' 0 1,0 '+(-2*r)+',0'
+
+        // not good enought, since how would it be animated?
+
+
+        // might actually go with <circle>
+
+        // line = ' M ' + (this.displayWidth/2) + ', ' + this.displayHeight/2 +
+        // archCrcl +
+        // ' Z '
+        line = ''
+
+        // ideas - GET back to it:
+        // [] lfo prop watched/computed
+        // [] transition
+        // [] stylesheetapi
+
+
+      }
+
+      if (this.module === 'delay') {
+        // helpers:
+        const time = this.knobs[0]
+        const feedback = this.knobs[1]
+        const wet = this.knobs[2]
+
+
+
+
+        line = 'M 0, 0' +
+               'm 0, ' + this.displayHeight
+        return line
+      }
+      if (this.module === 'reverb') {
+        // helpers:
+
+
+
+        line = ''
+        return line
+      }
+
       return line
-    }
+    },
+    centerLFOSwing() {
+      return 'transform: translateX('+(this.displayWidth/2) + 'px)'
+    },
+    // moveLFOSwingUp() {
+    //   return 'translateY(-' + (this.displayHeight/2) + 'px)'
+    // }
   },
   watch: {
+    knobs() {
+      if (this.module === 'lfo') {
+        const amount = this.knobs[1]
+
+      }
+
+    }
 
   }
 }
@@ -243,7 +334,18 @@ export default {
 
  <style scoped>
  path {
-   display: inline;
+   display: inline-block;
  }
+
+ .swing {
+   /* transform: translateX(100px); */
+   animation: swing  ease-in-out 1s infinite alternate
+ }
+
+/* https://developer.mozilla.org/en-US/docs/Web/API/CSSStyleSheet/insertRule */
+ @keyframes swing {
+    0% { transform: rotate(40deg); }
+    100% { transform: rotate(-40deg); }
+}
 
  </style>
