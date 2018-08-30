@@ -1,6 +1,6 @@
 <template>
   <div class="module">
-    <display class="display" module="reverb"/>
+    <!-- <display class="display" module="reverb"/> -->
     <circle-slider
       v-model="roomSize"
       :min="0"
