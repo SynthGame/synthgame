@@ -6,7 +6,7 @@
     </div>
     <display fill="#6e01d1"
         module="filter"
-        :knobs="[{name: 'type', min: 0, max: 2, value: this.type},
+        :knobs="[{name: 'type', min: 0, max: 2, value: this.selectedType},
                   {name: 'frequency', min: 0, max: 20000, value: this.cutOffFreq},
                   {name: 'q', min: 0, max: 100, value: this.setQ},
                   {name: 'gain', min: 0, max: 100, value: this.gain}
@@ -75,6 +75,7 @@ export default {
         'highpass',
         'bandpass'
       ],
+      selectedType: '',
       filter: {},
       sliderValue: 0,
       displayHeight: 300,
@@ -89,9 +90,6 @@ export default {
     self = this
     this.filter = audio.filter.state.device
   },
-  mounted () {
-    console.log('filter: mounted!')
-  },
   methods: {
 
   },
@@ -102,6 +100,9 @@ export default {
     }),
     ...vuexSyncGen('filter', 'type', val => {
       self.filter.type = self.typeArray[mapValueToRange(val, 100, (self.typeArray.length - 1))]
+      self.selectedType = self.typeArray[mapValueToRange(val, 100, (self.typeArray.length - 1))]
+      if (self.filter.type === self.selectedType) return
+      self.filter.type = self.selectedType
     }),
     ...vuexSyncGen('filter', 'setQ', val => {
       self.filter.Q.value = val / 8

@@ -7,10 +7,10 @@
     <display class="display"
              module="oscillator"
              fill="#ff8574"
-             :knobs="[{name: 'Octave', min: 0, max: 7, value: this.frequency},
+             :knobs="[{name: 'Octave', min: freqArray[0], max: freqArray[freqArray.length -1], value: this.selectedFreq},
                       {name: 'Detune', min: -120, max: 120, value: this.detune},
                       {name: 'Phase', min: 50, max: 10000, value: this.phase},
-                      {name: 'Waveform', min: 0, max:3, value: this.typeOsc},
+                      {name: 'Waveform', min: 0, max:3, value: this.selectedType},
                     ]"
              />
     <div class="knobs">
@@ -70,9 +70,11 @@ export default {
         'sawtooth',
         'triangle'
       ],
+      selectedType: '',
       freqArray: [
         33, 65, 131, 262, 523, 1047, 2093, 4186
       ],
+      selectedFreq: '',
       oscillator: {}
     }
   },
@@ -86,10 +88,13 @@ export default {
   },
   computed: {
     ...vuexSyncGen('oscillator', 'frequency', val => {
-      self.oscillator.frequency.value = self.freqArray[mapValueToRange(val, 100, (self.freqArray.length - 1))]
+      self.selectedFreq = self.freqArray[mapValueToRange(val, 100, (self.freqArray.length - 1))]
+      self.oscillator.frequency.value = self.selectedFreq
     }),
     ...vuexSyncGen('oscillator', 'typeOsc', val => {
-      self.oscillator.type = self.typeArray[mapValueToRange(val, 100, (self.typeArray.length - 1))]
+      self.selectedType = self.typeArray[mapValueToRange(val, 100, (self.typeArray.length - 1))]
+      if (self.oscillator.type === self.selectedType) return
+      self.oscillator.type = self.selectedType
       self.oscillator.stop()
       self.oscillator.start()
     }),

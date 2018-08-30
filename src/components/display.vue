@@ -225,25 +225,25 @@ export default {
 
         let wave
         // square:
-        if (type.value === 1) {
+        if (type.value === 'square') {
           wave = ' v ' + h +
                  ' h ' + iteration +
                  ' v ' + (-yAxisMiddle) +
                  ' h ' + iteration +
                  ' v ' + h
         // sine:
-      } else if (type.value === 0) {
+      } else if (type.value === 'sine') {
           wave = ' q ' + '0, ' + h + ' ' + iteration / 2 + ', ' + h +
                  ' q ' + iteration / 2 + ', 0 ' + iteration / 2 + ', ' + (-h) +
                  ' q 0, ' + (-h) + ' ' + iteration / 2 + ' ' + (-h) +
                  ' q ' + iteration / 2 + ', 0 ' + ' ' + iteration / 2 + ' ' + h
         // sawtooth:
-        } else if (type.value === 2) {
+        } else if (type.value === 'sawtooth') {
           wave = ' v ' + h +
                  ' l ' + 2 * iteration + ', ' + (-yAxisMiddle) +
                  ' v ' + h
         // triangle
-        } else if (type.value === 3) {
+        } else if (type.value === 'triangle') {
           wave = ' l ' + iteration / 2 + ', ' + h +
                  ' l ' + iteration + ', ' + (-yAxisMiddle) +
                  ' l ' + iteration / 2 + ', ' + h

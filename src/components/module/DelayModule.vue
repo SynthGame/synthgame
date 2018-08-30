@@ -69,7 +69,6 @@ export default {
     ...vuexSyncGen('delay', 'delayTime', val => {
       // const nth = 2 ** self.delayTime // 2 to the power of delaytime
       // return `${nth}n`
-      console.log('val', val)
       self.delay.delayTime.value = val / 100
     }),
     ...vuexSyncGen('delay', 'wet', val => {

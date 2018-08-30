@@ -9,7 +9,7 @@
            fill="#5bd484"
            :knobs="[{name: 'Rate', min:1, max:100, value: this.frequency},
                     {name: 'Amount', min:0, max:4000, value: this.amount},
-                    {name: 'Shape', min:0, max:3, value: this.type}]"/>
+                    {name: 'Shape', min:0, max:3, value: this.selectedType}]"/>
         <div class="knobs">
           <circle-slider
             v-model="frequency"
@@ -61,6 +61,7 @@ export default {
         'sawtooth',
         'triangle'
       ],
+      selectedType: '',
       lfo: {}
     }
   },
@@ -80,7 +81,9 @@ export default {
       self.lfo.max = (val * 40)
     }),
     ...vuexSyncGen('lfo', 'type', val => {
-      self.lfo.type = self.typeArray[mapValueToRange(val, 100, (self.typeArray.length - 1))]
+      self.selectedType = self.typeArray[mapValueToRange(val, 100, (self.typeArray.length - 1))]
+      if (self.lfo.type === self.selectedType) return
+      self.lfo.type = self.selectedType
       self.lfo.stop()
       self.lfo.start()
     })
