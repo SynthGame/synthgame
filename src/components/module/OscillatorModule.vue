@@ -20,6 +20,7 @@
         :max="3"
         knobColor="#ff8574"
         name="Waveform"
+        module="oscillator"
       ></circle-slider>
       <circle-slider
         v-model="frequency"

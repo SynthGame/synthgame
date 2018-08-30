@@ -18,6 +18,7 @@
               :max="2"
               knobColor="#6e01d1"
               name="Type"
+              module="filter"
             ></rotary>
       <rotary
               v-model="cutOffFreq"

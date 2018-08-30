@@ -19,6 +19,7 @@
               <g v-if="this.module === 'lfo'"
                 stroke="black"
                 class="swing"
+                :transform="'rotate(' + lfoRotation + ' 0 -80)'"
                                 >
                 <path
                   :stroke-width="1"
@@ -49,7 +50,7 @@
         <!-- //       fill="black"
         //       style="fill-rule: nozero" -->
 
-        <text x="45%" y="40%" fill="blue">
+        <text x="45%" y="40%" fill="WHITE">
           <tspan x="45%" y="50%">{{knobs[0].name}}: {{knobs[0].value}}</tspan>
           <tspan x="45%" y="60%">{{knobs[1].name}}: {{knobs[1].value}}</tspan>
           <tspan x="45%" y="70%">{{knobs[2].name}}: {{knobs[2].value}}</tspan>
@@ -104,7 +105,8 @@ export default {
       displayHeight: 300,
       displayWidth: 600,
       curveAmnt: 90,
-      strokeWidth : '0.1'
+      strokeWidth : '0.1',
+      lfoRotation: 20,
     }
   },
   mounted () {
@@ -257,6 +259,19 @@ export default {
       if (this.module === 'lfo') {
         // helpers:
         const r = this.displayHeight/4
+        const rate = this.knobs[0]
+        const amount = this.knobs[1]
+        const shape = this.knobs[2]
+        // let position = null
+        // Bart's little experiment
+        setInterval(function(){
+          console.log('this.lfoRotation',this.lfoRotation);
+          if (this.lfoRotation === 40) {
+              this.lfoRotation = -40
+            } else{
+             this.lfoRotation = 40;
+           }
+         }, rate * 10 + 1000);
 
         //making a circle with a path..
         const circle = ' q ' + '0, ' + (-r) + ' ' + r + ', ' + (-r) +
@@ -270,7 +285,7 @@ export default {
         'a '+r+', '+r+ ' 0 1,0 '+(2*r)+',0'+
         'a '+r+', '+r+ ' 0 1,0 '+(-2*r)+',0'
 
-        // not good enought, since how would it be animated?
+        // not good enough, since how would it be animated?
 
 
         // might actually go with <circle>
@@ -284,7 +299,6 @@ export default {
         // [] lfo prop watched/computed
         // [] transition
         // [] stylesheetapi
-
 
       }
 
@@ -320,13 +334,13 @@ export default {
     // }
   },
   watch: {
-    knobs() {
-      if (this.module === 'lfo') {
-        const amount = this.knobs[1]
-
-      }
-
-    }
+    // knobs() {
+    //   if (this.module === 'lfo') {
+    //     const amount = this.knobs[1]
+    //
+    //   }
+    //
+    // }
 
   }
 }
@@ -339,7 +353,7 @@ export default {
 
  .swing {
    /* transform: translateX(100px); */
-   animation: swing  ease-in-out 1s infinite alternate
+   /*animation: swing  ease-in-out 1s infinite alternate*/
  }
 
 /* https://developer.mozilla.org/en-US/docs/Web/API/CSSStyleSheet/insertRule */

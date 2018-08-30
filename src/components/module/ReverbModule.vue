@@ -1,28 +1,34 @@
 <template>
   <div class="module">
+    <div class="title">
+      <h2>Tats</h2>
+      <h3>Reverb</h3>
+    </div>
     <!-- <display class="display" module="reverb"/> -->
-    <circle-slider
-      v-model="roomSize"
-      :min="0"
-      :max="100"
-      knobColor="#3c32ff"
-      name="Room Size"
-    ></circle-slider>
-    <!-- <circle-slider
-      v-model="preDelay"
-      :step-size="0.1"
-      :min="2"
-      :max="8"
-      knobColor="#3c32ff"
-      name="Predelay"
-    ></circle-slider> -->
-    <circle-slider
-      v-model="wet"
-      :min="0"
-      :max="100"
-      knobColor="#3c32ff"
-      name="Dry/wet"
-    ></circle-slider>
+    <div class="knobs">
+      <circle-slider
+        v-model="roomSize"
+        :min="0"
+        :max="100"
+        knobColor="#3c32ff"
+        name="Room Size"
+      ></circle-slider>
+      <!-- <circle-slider
+        v-model="preDelay"
+        :step-size="0.1"
+        :min="2"
+        :max="8"
+        knobColor="#3c32ff"
+        name="Predelay"
+      ></circle-slider> -->
+      <circle-slider
+        v-model="wet"
+        :min="0"
+        :max="100"
+        knobColor="#3c32ff"
+        name="Dry/wet"
+      ></circle-slider>
+    </div>
   </div>
 </template>
 
