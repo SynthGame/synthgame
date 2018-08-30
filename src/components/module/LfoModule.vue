@@ -1,6 +1,11 @@
-<template>
+  <template>
   <div class="module">
-  <display class="display" module="lfo"/>
+  <display class="display"
+           module="lfo"
+           fill="#5bd484"
+           :knobs="[{name: 'Rate', min:1, max:100, value: this.frequency},
+                    {name: 'Amount', min:0, max:4000, value: this.amount},
+                    {name: 'Shape', min:0, max:3, value: this.type}]"/>
     <circle-slider
       v-model="frequency"
       :min="1"
