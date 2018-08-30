@@ -360,13 +360,13 @@ export default {
     // }
   },
   watch: {
-    knobs() {
-      if (this.module === 'lfo') {
-        const amount = this.knobs[1]
+    // knobs() {
+    //   if (this.module === 'lfo') {
+    //     const amount = this.knobs[1]
 
-      }
+    //   }
 
-    }
+    // }
 
   }
 }
