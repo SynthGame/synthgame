@@ -11,6 +11,10 @@
                       {name: 'Detune', min: -120, max: 120, value: this.detune},
                       {name: 'Phase', min: 50, max: 10000, value: this.phase},
                       {name: 'Waveform', min: 0, max:3, value: this.typeOsc},
+                      {name: 'Octave', min: 0, max: 7, value: this.frequency},
+                      {name: 'Detune', min: -120, max: 120, value: this.detune},
+                      {name: 'Phase', min: 50, max: 10000, value: this.phase},
+                      {name: 'Waveform', min: 0, max:3, value: this.typeOsc},
                     ]"
              />
     <div class="knobs">
