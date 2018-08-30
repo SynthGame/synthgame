@@ -20,21 +20,21 @@ db.settings({timestampsInSnapshots: true}) // time snapshot will change in futur
 const scoreRef = db.collection('highscores')
 
 export const getHighscores = (amount) => {
-  scoreRef.orderBy("score").limit(amount)
+  scoreRef.orderBy('score').limit(amount)
 }
 
 // too many doc reads this will ramp up costs quickly need to change structure
 export const getHighscoresByName = (name) => {
   // returns a promise
   return scoreRef.where('name', '==', name).get()
-  .then((snapshot) => {
-    let dataAsJson = []
-    snapshot.forEach((doc) => {
-      dataAsJson.push({
-        name: doc.data().name, 
-        score: doc.data().score
+    .then((snapshot) => {
+      let dataAsJson = []
+      snapshot.forEach((doc) => {
+        dataAsJson.push({
+          name: doc.data().name,
+          score: doc.data().score
+        })
       })
+      return dataAsJson
     })
-    return dataAsJson
-  })
 }
