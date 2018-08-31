@@ -36,8 +36,8 @@ export default new Vuex.Store({
       oscillator: {
         frequency: 2,
         typeOsc: 2,
-        detune: 60,
-        phase: 0
+        detune: 60
+        // phase: 0
       },
       reverb: {
         roomSize: 0,
@@ -72,8 +72,8 @@ export default new Vuex.Store({
         oscillator: {
           frequency: 2,
           typeOsc: 2,
-          detune: 40,
-          phase: 0
+          detune: 40
+          // phase: 0
         },
         reverb: {
           roomSize: 0,

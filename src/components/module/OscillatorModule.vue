@@ -10,11 +10,11 @@
       fill="#ff8574"
       :knobs="[{name: 'Octave', min: freqArray[0], max: freqArray[freqArray.length -1], value: this.selectedFreq},
               {name: 'Detune', min: -120, max: 120, value: this.detune},
-              {name: 'Phase', min: 50, max: 10000, value: this.phase},
+              {name: 'Phase', min: 50, max: 10000, value: 0},
               {name: 'Waveform', min: 0, max:3, value: this.selectedType},
               {name: 'OctaveGoal', min: freqArray[0], max: freqArray[freqArray.length -1], value: freqArray[Math.round((this.frequencyGoal/100)*(freqArray.length - 1))]},
               {name: 'DetuneGoal', min: -120, max: 120, value: this.detuneGoal},
-              {name: 'PhaseGoal', min: 50, max: 10000, value: this.phaseGoal},
+              {name: 'PhaseGoal', min: 50, max: 10000, value: 0},
               {name: 'WaveformGoal', min: 0, max:3, value: typeArray[Math.round((this.typeOscGoal/100)*(typeArray.length - 1))]},
             ]"/>
     <div class="knobs">
@@ -123,7 +123,7 @@ export default {
     dialsAreWithinMargin(val) {
       if(val === true) {
         alert('well done!')
-        this.$store.dispatch('randomizeAudioParameters')
+        // this.$store.dispatch('randomizeAudioParameters')
         this.$store.dispatch('randomizGoalParameters')
       }
     }
