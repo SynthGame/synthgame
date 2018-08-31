@@ -634,11 +634,12 @@ export default {
     lfoValue: {
       handler(newValue, oldValue) {
         if (this.module =='lfo') {
-          console.log(newValue)
-          let rateOutput = 1/(newValue*2)
+          // console.log(newValue)
+          // let rateOutput = 1/(newValue*2)
           let realFreq = this.knobs[3].value
+          console.log();
 
-          this.changeInterval(( 1 / (realFreq) ) * 1 )
+          this.changeInterval(( 1 / (realFreq) ) * 1000 )
         }
       },
       deep: true
