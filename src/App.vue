@@ -10,7 +10,7 @@
 
 <script>
 import audio from '@/audio'
-import c from '@/constants'
+import { SYNTH_BPM } from '@/constants'
 
 export default {
   name: 'App',
@@ -32,7 +32,7 @@ export default {
       audio.envelope.playNote(note)
     })
     // set BPM
-    audio.setBpm(c['BPM'])
+    audio.setBpm(SYNTH_BPM)
     // start tone general
     audio.start()
     // start loop
@@ -72,33 +72,6 @@ export default {
   border: 1px solid #fff;
   position: relative;
   margin: 0;
-  & .title {
-    width: 96%;
-    margin: 0 auto;
-    display: flex;
-    justify-content: flex-start;
-    align-items: baseline;
-    text-transform: uppercase;
-    letter-spacing: 2px;
-    h2 {
-      margin: 0;
-      font-size: 1em;
-      &:after {
-        content: '';
-        display: inline-block;
-        margin-left: .2em;
-        width: 10px;
-        height: 10px;
-        border: 1px solid white;
-        border-radius: 100%;
-      }
-    }
-    h3 {
-      font-size: 1em;
-      margin: 0 0 0 .5em;
-      font-weight: 300;
-    }
-  }
   &:before {
     content:'';
     display: block;

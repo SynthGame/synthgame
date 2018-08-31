@@ -1,9 +1,9 @@
 <template>
   <div class="module">
-    <div class="title">
-      <h2>Tats</h2>
-      <h3>Filter</h3>
-    </div>
+    <module-title :indicator-active="false" :module-color="moduleColor">
+      <h2 slot="title">Tats</h2>
+      <h3 slot="subtitle">Filter</h3>
+    </module-title>
     <module-display
       fill="#6e01d1"
       module="filter"
@@ -44,18 +44,17 @@
 
 <script>
 import { vuexSyncGen, mapValueToRange } from '@/utils'
+import { MODULE_FILTER_COLOR } from '@/constants'
 
 import audio from '@/audio'
 import ModuleKnob from '@/components/ModuleKnob.vue'
 import ModuleDisplay from '@/components/ModuleDisplay.vue'
+import ModuleTitle from './ModuleComponents/ModuleTitle.vue'
 
 var self
 
 export default {
   name: 'FilterModule',
-  props: {
-    msg: String
-  },
   data () {
     return {
       typeArray: [
@@ -67,12 +66,14 @@ export default {
       filter: {},
       sliderValue: 0,
       displayHeight: 300,
-      displayWidth: 600
+      displayWidth: 600,
+      moduleColor: MODULE_FILTER_COLOR
     }
   },
   components: {
     ModuleKnob,
-    ModuleDisplay
+    ModuleDisplay,
+    ModuleTitle
   },
   created () {
     self = this

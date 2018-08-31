@@ -1,10 +1,10 @@
 <template>
   <div class="module">
-    <div class="title">
-      <h2>Tats</h2>
-      <h3>Envelope</h3>
-    </div>
-     <module-display
+    <module-title :indicator-active="false" :module-color="moduleColor">
+      <h2 slot="title">Tats</h2>
+      <h3 slot="subtitle">Envelope</h3>
+    </module-title>
+    <module-display
       fill="#e4e259"
       module="envelope"
       :knobs="[{name: 'attack', min: 1, max: 100, value: this.attack},
@@ -51,10 +51,12 @@
 
 <script>
 import { vuexSyncGen } from '@/utils'
+import { MODULE_ENVELOPE_COLOR } from '@/constants'
 
 import audio from '@/audio'
 import ModuleKnob from '@/components/ModuleKnob.vue'
 import ModuleDisplay from '@/components/ModuleDisplay.vue'
+import ModuleTitle from './ModuleComponents/ModuleTitle.vue'
 
 var self
 
@@ -67,12 +69,14 @@ export default {
     return {
       envelope: {},
       displayHeight: 300,
-      displayWidth: 600
+      displayWidth: 600,
+      moduleColor: MODULE_ENVELOPE_COLOR
     }
   },
   components: {
     ModuleKnob,
-    ModuleDisplay
+    ModuleDisplay,
+    ModuleTitle
   },
   created () {
     self = this

@@ -1,9 +1,9 @@
 <template>
   <div class="module">
-    <div class="title">
-      <h2>Tats</h2>
-      <h3>Delay</h3>
-    </div>
+    <module-title :indicator-active="false" :module-color="moduleColor">
+      <h2 slot="title">Tats</h2>
+      <h3 slot="subtitle">Delay</h3>
+    </module-title>
     <module-display
       class="display"
       module="delay"
@@ -43,10 +43,12 @@
 
 <script>
 import { vuexSyncGen } from '@/utils'
+import { MODULE_DELAY_COLOR } from '@/constants'
 
 import audio from '@/audio'
 import ModuleKnob from '@/components/ModuleKnob.vue'
 import ModuleDisplay from '@/components/ModuleDisplay.vue'
+import ModuleTitle from './ModuleComponents/ModuleTitle.vue'
 
 var self
 
@@ -54,12 +56,14 @@ export default {
   name: 'DelayModule',
   data () {
     return {
-      delay: {}
+      delay: {},
+      moduleColor: MODULE_DELAY_COLOR
     }
   },
   components: {
     ModuleKnob,
-    ModuleDisplay
+    ModuleDisplay,
+    ModuleTitle,
   },
   created () {
     self = this

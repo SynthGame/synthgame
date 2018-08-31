@@ -1,9 +1,9 @@
   <template>
     <div class="module">
-      <div class="title">
-        <h2>Tats</h2>
-        <h3>Lfo</h3>
-      </div>
+      <module-title :indicator-active="false" :module-color="moduleColor">
+        <h2 slot="title">Tats</h2>
+        <h3 slot="subtitle">LFO</h3>
+      </module-title>
         <module-display
           class="display"
           module="lfo"
@@ -42,10 +42,12 @@
 
 <script>
 import { vuexSyncGen, mapValueToRange } from '@/utils'
+import { MODULE_LFO_COLOR } from '@/constants'
 
 import audio from '@/audio'
 import ModuleKnob from '@/components/ModuleKnob.vue'
 import ModuleDisplay from '@/components/ModuleDisplay.vue'
+import ModuleTitle from './ModuleComponents/ModuleTitle.vue'
 
 var self
 
@@ -63,12 +65,14 @@ export default {
         'triangle'
       ],
       selectedType: '',
-      lfo: {}
+      lfo: {},
+      moduleColor: MODULE_LFO_COLOR
     }
   },
   components: {
     ModuleKnob,
-    ModuleDisplay
+    ModuleDisplay,
+    ModuleTitle
   },
   created () {
     self = this

@@ -1,9 +1,9 @@
 <template>
   <div class="module">
-    <div class="title">
-      <h2>Tats</h2>
-      <h3>Oscillator</h3>
-    </div>
+    <module-title :indicator-active="dialsAreWithinMargin" :module-color="moduleColor">
+      <h2 slot="title">Tats</h2>
+      <h3 slot="subtitle">Oscillator</h3>
+    </module-title>
     <module-display
       class="display"
       module="oscillator"
@@ -54,18 +54,17 @@
 <script>
 import { mapState } from 'vuex'
 import { vuexSyncGen, mapValueToRange } from '@/utils'
+import { MODULE_OSCILLATOR_COLOR } from '@/constants'
 
 import audio from '@/audio'
 import ModuleKnob from '@/components/ModuleKnob.vue'
 import ModuleDisplay from '@/components/ModuleDisplay.vue'
+import ModuleTitle from './ModuleComponents/ModuleTitle.vue'
 
 var self
 
 export default {
   name: 'OscillatorModule',
-  props: {
-    msg: String
-  },
   data () {
     return {
       typeArray: [
@@ -79,12 +78,14 @@ export default {
         33, 65, 131, 262, 523, 1047, 2093, 4186
       ],
       selectedFreq: '',
-      oscillator: {}
+      oscillator: {},
+      moduleColor: MODULE_OSCILLATOR_COLOR
     }
   },
   components: {
     ModuleKnob,
-    ModuleDisplay
+    ModuleDisplay,
+    ModuleTitle
   },
   created () {
     self = this
