@@ -277,9 +277,9 @@ export default {
 
 
         const octaveRatio = (octave.value/(octave.max-octave.min))
-        const detuneRatio = (detune.value/detune.max)
+        const detuneRatio = ((detune.value/detune.max)*1000)/(octave.max-octave.min)
 
-        const iteration = 1.2 * h - h * (0.9 * octaveRatio) + (h * 0.1 * (1 - detuneRatio))
+        const iteration = 6.6 * h - h * (4.9 * octaveRatio) + (h * 0.3 * (1 - detuneRatio))
 
         let wave
         // square:
@@ -309,6 +309,8 @@ export default {
         line = 'M ' + iteration * (phase.value / (phase.max)) + ', 0 ' +
               ' m ' + lineLength + ', ' + yAxisMiddle +
               ' h ' + (-lineLength - iteration) +
+              wave + wave + wave + wave + wave + wave + wave + wave + wave + wave + wave +wave + wave + wave + wave + wave + wave +
+              wave + wave + wave + wave + wave + wave + wave + wave + wave + wave + wave +wave + wave + wave + wave + wave + wave +
               wave + wave + wave + wave + wave + wave + wave + wave + wave + wave + wave +wave + wave + wave + wave + wave + wave +
               ' Z '
       }
@@ -552,7 +554,10 @@ export default {
         const yAxisMiddle = this.displayHeight / 2
         const h = yAxisMiddle / 2
 
-        const iteration = 1.2 * h - h * (0.6 * (octave.value / (octave.max - octave.min))) + (h * 0.1 * (1 - (detune.value / (detune.max))))
+        const octaveRatio = (octave.value/(octave.max-octave.min))
+        const detuneRatio = ((detune.value/detune.max)*1000)/(octave.max-octave.min)
+
+        const iteration = 6.6 * h - h * (4.9 * octaveRatio) + (h * 0.3 * (1 - detuneRatio))
 
         let wave
         // square:
@@ -582,7 +587,10 @@ export default {
         }
         line =
               ' m -' + iteration + ', ' + yAxisMiddle +
-              wave + wave + wave + wave + wave + wave + wave + wave + wave + wave + wave
+              wave + wave + wave + wave + wave + wave + wave + wave + wave + wave + wave +wave + wave + wave + wave + wave + wave +
+              wave + wave + wave + wave + wave + wave + wave + wave + wave + wave + wave +wave + wave + wave + wave + wave + wave +
+              wave + wave + wave + wave + wave + wave + wave + wave + wave + wave + wave +wave + wave + wave + wave + wave + wave +
+              wave + wave + wave + wave + wave + wave + wave + wave + wave + wave + wave +wave + wave + wave + wave + wave + wave
       }
 
       return line
