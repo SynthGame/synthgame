@@ -638,7 +638,7 @@ export default {
           let rateOutput = 1/(newValue*2)
           let realFreq = this.knobs[3].value
 
-          this.changeInterval((1-(realFreq))*4000)
+          this.changeInterval(( 1 / (realFreq) ) * 1 )
         }
       },
       deep: true
