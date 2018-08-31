@@ -10,11 +10,11 @@
           fill="#5bd484"
           :knobs="[{name: 'Rate', min:1, max:100, value: this.frequency},
                    {name: 'Amount', min:0, max:4000, value: this.amount},
-                   {name: 'Shape', min:0, max:3, value: this.selectedType},
+                   {name: 'Shape', min:0, max:3, value: this.type},
                    {name: 'Fake', min:0, max:3, value: 'fake'},
                    {name: 'Rate', min:1, max:100, value: this.frequency},
                    {name: 'Amount', min:0, max:4000, value: this.amount},
-                   {name: 'Shape', min:0, max:3, value: this.selectedType},
+                   {name: 'Shape', min:0, max:3, value: this.type},
                    {name: 'Fake', min:0, max:3, value: 'fake'}
                    ]"/>
         <div class="knobs">
@@ -35,7 +35,7 @@
             module="lfo"
           ></module-knob>
           <module-knob
-            v-model="type"
+            v-model="typeDial"
             :min="0"
             :max="100"
             knobColor="#5bd484"
@@ -47,6 +47,7 @@
 </template>
 
 <script>
+import { mapState } from 'vuex'
 import { vuexSyncGen, mapValueToRange } from '@/utils'
 import { MODULE_LFO_COLOR } from '@/constants'
 
@@ -65,12 +66,7 @@ export default {
   data () {
     return {
       name: 'lfo',
-      typeArray: [
-        'sine',
-        'square',
-        'sawtooth',
-        'triangle'
-      ],
+      typeDial: 0,
       selectedType: '',
       lfo: {},
       moduleColor: MODULE_LFO_COLOR
@@ -97,12 +93,19 @@ export default {
       self.lfo.max = (val * 40)
     }),
     ...vuexSyncGen('lfo', 'type', val => {
-      self.selectedType = self.typeArray[mapValueToRange(val, 100, (self.typeArray.length - 1))]
-      if (self.lfo.type === self.selectedType) return
-      self.lfo.type = self.selectedType
+      if (self.lfo.type === val) return
+      self.lfo.type = val
       self.lfo.stop()
       self.lfo.start()
+    }),
+    ...mapState({
+      typeArray: state => state.gameState.possibleValues.lfo.type,
     })
+  },
+  watch: {
+    typeDial(val) {
+      this.type = this.typeArray[mapValueToRange(val, 100, (this.typeArray.length -1))]
+    }
   }
 }
 </script>
