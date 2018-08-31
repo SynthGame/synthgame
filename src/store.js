@@ -14,9 +14,9 @@ export default new Vuex.Store({
   state: {
     audioParameters: {
       delay: {
-        delayTime: 20,
-        wet: 0,
-        feedback: 10
+        delayTime: 40,
+        wet: 50,
+        feedback: 50
       },
       envelope: {
         attack: 11,
@@ -72,7 +72,7 @@ export default new Vuex.Store({
           amount: 0
         },
         oscillator: {
-          frequency: 33,
+          frequency: 65,
           typeOsc: 'sine',
           detune: 40
           // phase: 0
@@ -92,7 +92,7 @@ export default new Vuex.Store({
           type: ['sine', 'square', 'sawtooth', 'triangle']
         },
         oscillator: {
-          frequency: [33, 65, 131, 262, 523, 1047, 2093],
+          frequency: [65, 131, 262, 523, 1047, 2093],
           typeOsc: ['sine', 'square', 'sawtooth', 'triangle']
         },
         reverb: {}
@@ -124,6 +124,7 @@ export default new Vuex.Store({
   },
   getters: {
     allParametersMatchGoal: (state, getters) => {
+      console.log('allParametersMatchGoal triggered!');
       return flatMap(getters.audioParametersMatchGoalWithMargin, val => values(val))
         .every(val => val)
     },
