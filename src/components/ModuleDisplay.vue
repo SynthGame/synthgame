@@ -626,9 +626,6 @@ export default {
       handler(newValue, oldValue) {
         if (this.module =='lfo') {
           this.changeInterval(3000*(1-(newValue/100)))
-          console.log('newValue:', newValue)
-          console.log(`(newValue/100:`, (5000*(newValue/100)))
-
         }
       },
       deep: true
