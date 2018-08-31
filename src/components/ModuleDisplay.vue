@@ -131,6 +131,7 @@ export default {
       // max time I want the transition to go: 3
       var intervalTest =  setInterval(this.updateSeconds, 1000)
       this.intervalId = intervalTest
+
     }
     // changeInterval = (time) => {
     //  clearInterval(intervalTest)
@@ -445,20 +446,37 @@ export default {
       const rateRatio = (rate.value/(rate.max-rate.min))
       const amountRatio = (amount.value/(amount.max-amount.min))
 
+      const realFreq = this.knobs[3].value
 
-      const timeLever = this.seconds
-      const outcome = parseInt(timeLever)
+      const transitionTime = ( 1 / (realFreq) )
       const rotateAmnt = 50
 
-      const transitionTime = outcome+'s'
-      let rotateString
+
+      let transitionString;
+      if (shape.value=='sine') {
+        transitionString = transitionTime+'s'
+      } else if (shape.value == 'square') {
+        transitionString =''
+      } else if (shape.value == 'sawtooth') {
+        if (!this.shouldItGoRight) {
+          transitionString = transitionTime+'s linear'
+        }
+        else {
+          transitionString = ''
+        }
+      } else if (shape.value == 'triangle') {
+        transitionString = transitionTime+'s linear'
+      }
       let rotateAmount = 2500*amountRatio;
+      let rotateString
       if (this.shouldItGoRight){
+        // go right:
         rotateString = 'rotate('+rotateAmount+'deg)'
       } else {
+        // go left:
         rotateString = 'rotate(-'+rotateAmount+'deg)'
       }
-      return {transform: rotateString}
+      return {transform: rotateString, transition: transitionString }
     },
     pathGoal () {
       let line
