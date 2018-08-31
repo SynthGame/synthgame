@@ -13,12 +13,12 @@
 
               <!-- lfo: -->
               <!--positioning wrapperfix -->
-             <g :style="centerLFOSwing">
+             <svg :style="centerLFOSwing" ref="swing">
 
               <!-- the swing: -->
               <g v-if="this.module === 'lfo'"
                 stroke="black"
-                class="swing"
+
                                 >
                 <path
                   :stroke-width="1"
@@ -29,7 +29,7 @@
 
                       <circle :cx="0" :cy="displayHeight*0.6" :r="displayHeight/4"/>
                 </g>
-              </g>
+              </svg>
 
         <!-- // <path v-if="this.module === 'lfo'"
         //       :stroke-width="strokeWidth"
@@ -70,6 +70,7 @@
 // [v] create swing
 // [v] have it move for sine
 // [x] have two other types
+// try transitions: define two kinds of transforms with class and switch between them
 
 // delay:
 // [] drynevss shall be controlling
@@ -103,6 +104,8 @@ export default {
     // update dimentions:
     this.updateDimensions()
     window.addEventListener('resize', this.updateDimensions())
+    console.log(this.$refs)
+    this.animateSwing(this.$refs.swing)
   },
   beforeDestroy () {
     window.removeEventListener('resize', this.updateDimensions())
@@ -141,6 +144,18 @@ export default {
                   ' v ' + (basicBarHeight-diff)
 
       return bar
+
+    },
+    animateSwing(swing) {
+      const move =  {transform: 'rotate(20deg)',
+                     tranform: 'rotate(-20deg)'
+                     }
+      const timing = {duration: 3000,
+                      iterations: Infinity}
+      console.log(`swing animation target: ${this.$refs}`)
+      console.log(swing)
+      swing.animate(move, timing)
+
 
     }
   },
@@ -309,7 +324,8 @@ export default {
         // [] lfo prop watched/computed
         // [] transition
         // [] stylesheetapi
-        //http://danielcwilson.com/blog/2017/10/all-the-transform-ways/
+        //http://danielcwilson.com/blog/2017/10/all-the-transform-ways/ - does not work, the properties are not recognized
+        // https://developer.mozilla.org/en-US/docs/Web/API/Web_Animations_API
       }
 
       if (this.module === 'delay') {
