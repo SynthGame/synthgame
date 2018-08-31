@@ -11,7 +11,7 @@
               style="fill-rule: nozero"
               />
 
-        <path v-if="this.module === 'oscillator'"
+        <path v-if="this.module === 'oscillator' || 'filter'"
               stroke="white"
               :stroke-width="2"
               :d="pathGoal"
@@ -223,7 +223,7 @@ export default {
 
         // svg path:
         if (type.value === 'lowpass') {
-          line = 'M 0,' + this.displayHeight +
+          line = 'M 0,' + (this.displayHeight + 1) +
                 ' v ' + (-(halfHeight + gainAddedDistance - yOffset)) +
                 ' h ' + (freqDistance) +
                 ' h ' + ((q.value / q.max) * (halfWidth) / 2) +
@@ -232,7 +232,7 @@ export default {
 
                 ' Z'
         } else if (type.value === 'highpass') {
-          line = 'M 0,' + this.displayHeight +
+          line = 'M 0,' + (this.displayHeight + 1) +
                 ' h ' + freqDistance +
                 ' h ' + ((q.value / q.max) * (halfWidth) / 2) +
                 ' q ' + (qDistance / 2) + ', ' + (-(halfHeight + gainAddedDistance)) + ' ' +
@@ -241,7 +241,7 @@ export default {
                 ' v ' + this.displayHeight +
                 ' Z'
         } else if (type.value === 'bandpass') {
-          line = 'M 0, ' + this.displayHeight +
+          line = 'M 0, ' + (this.displayHeight + 1) +
                 ' h ' + (freqDistance + (halfWidth / 2) - qDistance) +
                 ' q ' + (qDistance / 2) + ', ' + (-(halfHeight + gainAddedDistance)) + ' ' +
                         qDistance + ', ' + (-(halfHeight + gainAddedDistance)) +
@@ -408,31 +408,24 @@ export default {
 
         // svg path:
         if (type.value === 'lowpass') {
-          line = 'M 0,' + this.displayHeight +
-                ' v ' + (-(halfHeight + gainAddedDistance - yOffset)) +
+          line = 'M 0,' + ((this.displayHeight + 1) - (halfHeight + gainAddedDistance - yOffset)) +
+                // ' v ' + (-(halfHeight + gainAddedDistance - yOffset)) +
                 ' h ' + (freqDistance) +
                 ' h ' + ((q.value / q.max) * (halfWidth) / 2) +
                 ' q ' + (qDistance / 2) + ', 0 ' +
-                      +qDistance + ', ' + (halfHeight + gainAddedDistance) +
-
-                ' Z'
+                      +qDistance + ', ' + (halfHeight + gainAddedDistance)
         } else if (type.value === 'highpass') {
-          line = 'M 0,' + this.displayHeight +
-                ' h ' + freqDistance +
-                ' h ' + ((q.value / q.max) * (halfWidth) / 2) +
+          line = 'M' + (freqDistance + ((q.value / q.max) * (halfWidth) / 2)) + ', ' + (this.displayHeight + 1) +
                 ' q ' + (qDistance / 2) + ', ' + (-(halfHeight + gainAddedDistance)) + ' ' +
                           qDistance + ', ' + (-(halfHeight + gainAddedDistance)) +
                 ' h ' + this.displayWidth +
-                ' v ' + this.displayHeight +
-                ' Z'
+                ' v ' + this.displayHeight
         } else if (type.value === 'bandpass') {
-          line = 'M 0, ' + this.displayHeight +
-                ' h ' + (freqDistance + (halfWidth / 2) - qDistance) +
+          line = 'M' + (freqDistance + (halfWidth / 2) - qDistance) + ', ' + (this.displayHeight + 1) +
                 ' q ' + (qDistance / 2) + ', ' + (-(halfHeight + gainAddedDistance)) + ' ' +
                         qDistance + ', ' + (-(halfHeight + gainAddedDistance)) +
                 ' q ' + (qDistance / 2) + ', 0 ' +
-                        qDistance + ', ' + (halfHeight + gainAddedDistance) + ' ' +
-                ' Z '
+                        qDistance + ', ' + (halfHeight + gainAddedDistance) + ' '
         }
       }
 
