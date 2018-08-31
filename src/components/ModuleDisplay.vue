@@ -11,7 +11,7 @@
               style="fill-rule: nozero"
               />
 
-        <path v-if="this.module === 'oscillator'"
+        <path v-if="this.module === 'oscillator' || this.module === 'filter' || this.module === 'envelope' || this.module === 'delay'"
               stroke="white"
               :stroke-width="2"
               :d="pathGoal"
@@ -51,7 +51,7 @@
           <tspan x="45%" y="70%">{{knobs[2].name}}: {{knobs[2].value}}</tspan>
           <tspan x="45%" y="80%" v-if="this.knobs[3]">{{knobs[3].name}}: {{knobs[3].value}}</tspan>
         </text>
-        <text v-if="this.module === 'oscillator'" fill="transparent">
+        <text v-if="this.module === 'oscillator' || 'filter'" fill="transparent">
           <tspan x="0%" y="50%">{{knobs[4].name}}: {{knobs[4].value}}</tspan>
           <tspan x="0%" y="60%">{{knobs[5].name}}: {{knobs[5].value}}</tspan>
           <tspan x="0%" y="70%">{{knobs[6].name}}: {{knobs[6].value}}</tspan>
@@ -210,13 +210,13 @@ export default {
         // release is known and shall be market with absolute position
 
         // svg path:
-        line = 'M 0, ' + this.displayHeight +
+        line = 'M 0, ' + (this.displayHeight + 1) +
               ' l ' + attackXPosition + ', ' + (-attackYPosition) + ' ' +
               ' l ' + decayXPosition + ', ' + decayYPosition + ' ' +
               // a horizontal line representing sustain level including a fix regarding adding the release:
               ' h ' + (this.displayWidth - attackXPosition - decayXPosition - (((release.value / release.max)) * fourthOfWidth)) +
               // release end position:
-              ' L ' + this.displayWidth + ', ' + this.displayHeight + ' ' +
+              ' L ' + this.displayWidth + ', ' + (this.displayHeight + 1) + ' ' +
               ' Z'
       }
 
@@ -236,7 +236,7 @@ export default {
 
         // svg path:
         if (type.value === 'lowpass') {
-          line = 'M 0,' + this.displayHeight +
+          line = 'M 0,' + (this.displayHeight + 1) +
                 ' v ' + (-(halfHeight + gainAddedDistance - yOffset)) +
                 ' h ' + (freqDistance) +
                 ' h ' + ((q.value / q.max) * (halfWidth) / 2) +
@@ -245,7 +245,7 @@ export default {
 
                 ' Z'
         } else if (type.value === 'highpass') {
-          line = 'M 0,' + this.displayHeight +
+          line = 'M 0,' + (this.displayHeight + 1) +
                 ' h ' + freqDistance +
                 ' h ' + ((q.value / q.max) * (halfWidth) / 2) +
                 ' q ' + (qDistance / 2) + ', ' + (-(halfHeight + gainAddedDistance)) + ' ' +
@@ -254,7 +254,7 @@ export default {
                 ' v ' + this.displayHeight +
                 ' Z'
         } else if (type.value === 'bandpass') {
-          line = 'M 0, ' + this.displayHeight +
+          line = 'M 0, ' + (this.displayHeight + 1) +
                 ' h ' + (freqDistance + (halfWidth / 2) - qDistance) +
                 ' q ' + (qDistance / 2) + ', ' + (-(halfHeight + gainAddedDistance)) + ' ' +
                         qDistance + ', ' + (-(halfHeight + gainAddedDistance)) +
@@ -440,6 +440,107 @@ export default {
     pathGoal () {
       let line
 
+      if (this.module === 'delay') {
+        // helpers:
+        const time = this.knobs[4]
+        const feedback = this.knobs[5]
+        const wet = this.knobs[6]
+
+        const feedbackRatio = feedback.value/(feedback.max-feedback.min)
+        const timeRatio = time.value/(time.max-time.min)
+        const wetRatio = wet.value/(wet.max-wet.min)
+
+        const barWidth = 0
+        const spaceBetween = timeRatio*this.displayWidth/3 + 30
+
+        line = 'M 0, 0 ' +
+               'm 0, ' + (this.displayHeight+this.displayHeight*(1-wetRatio)) +
+               this.drawDelayBar((spaceBetween - 7.5), barWidth, 0) +
+
+               // DRY-nasty, sure
+               // the 7.142... number is a result of 100/14
+               ((feedbackRatio > 7.142857143*2/100) ? this.drawDelayBar(spaceBetween, barWidth, 1):'') +
+               ((feedbackRatio > 7.142857143*3/100) ? this.drawDelayBar(spaceBetween, barWidth, 2):'') +
+               ((feedbackRatio > 7.142857143*4/100) ? this.drawDelayBar(spaceBetween, barWidth, 3):'') +
+               ((feedbackRatio > 7.142857143*5/100) ? this.drawDelayBar(spaceBetween, barWidth, 4):'') +
+               ((feedbackRatio > 7.142857143*6/100) ? this.drawDelayBar(spaceBetween, barWidth, 5):'') +
+               ((feedbackRatio > 7.142857143*7/100) ? this.drawDelayBar(spaceBetween, barWidth, 6):'') +
+               ((feedbackRatio > 7.142857143*8/100) ? this.drawDelayBar(spaceBetween, barWidth, 7):'') +
+               ((feedbackRatio > 7.142857143*9/100) ? this.drawDelayBar(spaceBetween, barWidth, 8):'') +
+               ((feedbackRatio > 7.142857143*10/100) ? this.drawDelayBar(spaceBetween, barWidth, 9):'') +
+               ((feedbackRatio > 7.142857143*11/100) ? this.drawDelayBar(spaceBetween, barWidth, 10):'') +
+               ((feedbackRatio > 7.142857143*12/100) ? this.drawDelayBar(spaceBetween, barWidth, 11):'') +
+               ((feedbackRatio > 7.142857143*13/100) ? this.drawDelayBar(spaceBetween, barWidth, 12):'')
+
+        return line
+      }
+
+      if (this.module === 'envelope') {
+        // helpers:
+        let fourthOfWidth = this.displayWidth / 4
+
+        const attack = this.knobs[4]
+        const decay = this.knobs[5]
+        const sustain = this.knobs[6]
+        const release = this.knobs[7]
+
+        const attackXPosition = (attack.value / attack.max) * fourthOfWidth
+        const attackYPosition = this.displayHeight * 0.75
+        const decayXPosition = (decay.value / decay.max) * fourthOfWidth
+
+        // the vertical decay position shall include a fix stopping it
+        // from going all the way down (5% height) to perserve release indication:
+        const decayYPosition = (1 - (sustain.value / sustain.max)) * (attackYPosition) - (1 - (sustain.value / sustain.max)) * (attackYPosition) * 0.05
+        // no sustain, as it basically a horizontal line
+        // release is known and shall be market with absolute position
+
+        // svg path:
+        line = 'M 0, ' + (this.displayHeight + 1) +
+              ' l ' + attackXPosition + ', ' + (-attackYPosition) + ' ' +
+              ' l ' + decayXPosition + ', ' + decayYPosition + ' ' +
+              // a horizontal line representing sustain level including a fix regarding adding the release:
+              ' h ' + (this.displayWidth - attackXPosition - decayXPosition - (((release.value / release.max)) * fourthOfWidth)) +
+              // release end position:
+              ' L ' + this.displayWidth + ', ' + (this.displayHeight + 1) + ' '
+      }
+
+      if (this.module === 'filter') {
+        // helpers:
+        const type = this.knobs[4]
+        const cutOffFreq = this.knobs[5]
+        const q = this.knobs[6]
+        const gain = this.knobs[7]
+
+        let halfHeight = this.displayHeight / 2
+        let halfWidth = this.displayWidth / 2
+        const gainAddedDistance = ((gain.value / gain.max) * halfHeight) - 5
+        const yOffset = 0
+        const qDistance = (1 - (q.value / q.max)) * (halfWidth)
+        const freqDistance = (cutOffFreq.value / cutOffFreq.max) * (halfWidth)
+
+        // svg path:
+        if (type.value === 'lowpass') {
+          line = 'M 0,' + ((this.displayHeight + 1) - (halfHeight + gainAddedDistance - yOffset)) +
+                // ' v ' + (-(halfHeight + gainAddedDistance - yOffset)) +
+                ' h ' + (freqDistance) +
+                ' h ' + ((q.value / q.max) * (halfWidth) / 2) +
+                ' q ' + (qDistance / 2) + ', 0 ' +
+                      +qDistance + ', ' + (halfHeight + gainAddedDistance)
+        } else if (type.value === 'highpass') {
+          line = 'M' + (freqDistance + ((q.value / q.max) * (halfWidth) / 2)) + ', ' + (this.displayHeight + 1) +
+                ' q ' + (qDistance / 2) + ', ' + (-(halfHeight + gainAddedDistance)) + ' ' +
+                          qDistance + ', ' + (-(halfHeight + gainAddedDistance)) +
+                ' h ' + this.displayWidth +
+                ' v ' + this.displayHeight
+        } else if (type.value === 'bandpass') {
+          line = 'M' + (freqDistance + (halfWidth / 2) - qDistance) + ', ' + (this.displayHeight + 1) +
+                ' q ' + (qDistance / 2) + ', ' + (-(halfHeight + gainAddedDistance)) + ' ' +
+                        qDistance + ', ' + (-(halfHeight + gainAddedDistance)) +
+                ' q ' + (qDistance / 2) + ', 0 ' +
+                        qDistance + ', ' + (halfHeight + gainAddedDistance) + ' '
+        }
+      }
+
       if (this.module === 'oscillator') {
         // helpers:
         const octave = this.knobs[4]
@@ -451,7 +552,7 @@ export default {
         const yAxisMiddle = this.displayHeight / 2
         const h = yAxisMiddle / 2
 
-        const iteration = 1.2 * h - h * (0.6 * (octave.value / (octave.max - octave.min))) + (h * 0.2 * (1 - (detune.value / (detune.max))))
+        const iteration = 1.2 * h - h * (0.6 * (octave.value / (octave.max - octave.min))) + (h * 0.1 * (1 - (detune.value / (detune.max))))
 
         let wave
         // square:

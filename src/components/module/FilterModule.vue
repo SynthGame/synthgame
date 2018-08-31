@@ -1,20 +1,24 @@
 <template>
   <div class="module">
-    <div class="title">
-      <h2>Tats</h2>
-      <h3>Filter</h3>
-    </div>
+    <module-title :indicator-active="dialsAreWithinMargin" :module-color="moduleColor">
+      <h2 slot="title">Tats</h2>
+      <h3 slot="subtitle">Filter</h3>
+    </module-title>
     <module-display
       fill="#6e01d1"
       module="filter"
-      :knobs="[{name: 'type', min: 0, max: 2, value: this.selectedType},
-                {name: 'frequency', min: 0, max: 100, value: this.cutOffFreq},
-                {name: 'q', min: 0, max: 100, value: this.setQ},
-                {name: 'gain', min: 0, max: 100, value: this.gain}
+      :knobs="[{name: 'type', min: 0, max: 2, value: type},
+                {name: 'frequency', min: 0, max: 100, value: cutOffFreq},
+                {name: 'q', min: 0, max: 100, value: setQ},
+                {name: 'gain', min: 0, max: 100, value: gain},
+                {name: 'typeGoal', min: 0, max: 2, value: typeGoal},
+                {name: 'frequencyGoal', min: 0, max: 100, value: cutOffFreqGoal},
+                {name: 'qGoal', min: 0, max: 100, value: setQGoal},
+                {name: 'gainGoal', min: 0, max: 100, value: gain},
                 ]"/>
     <div class="knobs">
       <module-knob
-        v-model="type"
+        v-model="typeDial"
         :min="0"
         :max="100"
         knobColor="#6e01d1"
@@ -43,36 +47,35 @@
 </template>
 
 <script>
+import { mapState } from 'vuex'
 import { vuexSyncGen, mapValueToRange } from '@/utils'
+import { MODULE_FILTER_COLOR } from '@/constants'
 
 import audio from '@/audio'
 import ModuleKnob from '@/components/ModuleKnob.vue'
 import ModuleDisplay from '@/components/ModuleDisplay.vue'
+import ModuleTitle from './ModuleComponents/ModuleTitle.vue'
 
 var self
 
 export default {
   name: 'FilterModule',
-  props: {
-    msg: String
-  },
   data () {
     return {
-      typeArray: [
-        'lowpass',
-        'highpass',
-        'bandpass'
-      ],
-      selectedType: '',
+      name: 'filter',
+      typeDial: 0,
       filter: {},
       sliderValue: 0,
       displayHeight: 300,
-      displayWidth: 600
+      displayWidth: 600,
+      gain: 60,
+      moduleColor: MODULE_FILTER_COLOR
     }
   },
   components: {
     ModuleKnob,
-    ModuleDisplay
+    ModuleDisplay,
+    ModuleTitle
   },
   created () {
     self = this
@@ -82,22 +85,35 @@ export default {
 
   },
   computed: {
+    dialsAreWithinMargin() {
+      return Object.values(this.$store.getters.audioParametersMatchGoalWithMargin[this.name])
+        .every(param => param)        
+    },
     ...vuexSyncGen('filter', 'cutOffFreq', val => {
       // self.filter.frequency.value = val
       self.filter.frequency.value = Math.pow((val * 200), (val / 100)) + 20
     }),
     ...vuexSyncGen('filter', 'type', val => {
-      self.filter.type = self.typeArray[mapValueToRange(val, 100, (self.typeArray.length - 1))]
-      self.selectedType = self.typeArray[mapValueToRange(val, 100, (self.typeArray.length - 1))]
-      if (self.filter.type === self.selectedType) return
-      self.filter.type = self.selectedType
+      if (self.filter.type === val) return
+      self.filter.type = val
     }),
     ...vuexSyncGen('filter', 'setQ', val => {
       self.filter.Q.value = val / 8
     }),
-    ...vuexSyncGen('filter', 'gain', val => {
-      self.filter.gain.value = val
+    // ...vuexSyncGen('filter', 'gain', val => {
+    //   self.filter.gain.value = val
+    // }),
+    ...mapState({
+      cutOffFreqGoal: state => state.gameState.goal.filter.cutOffFreq,
+      typeGoal: state => state.gameState.goal.filter.type,
+      setQGoal: state => state.gameState.goal.filter.setQ,
+      typeArray: state => state.gameState.possibleValues.filter.type
     })
+  },
+  watch: {
+    typeDial(val) {
+      this.type = this.typeArray[mapValueToRange(val, 100, (this.typeArray.length -1))]
+    }
   }
 }
 </script>

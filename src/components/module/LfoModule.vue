@@ -1,16 +1,22 @@
   <template>
     <div class="module">
-      <div class="title">
-        <h2>Tats</h2>
-        <h3>Lfo</h3>
-      </div>
+      <module-title :indicator-active="dialsAreWithinMargin" :module-color="moduleColor">
+        <h2 slot="title">Tats</h2>
+        <h3 slot="subtitle">LFO</h3>
+      </module-title>
         <module-display
           class="display"
           module="lfo"
           fill="#5bd484"
           :knobs="[{name: 'Rate', min:1, max:100, value: this.frequency},
                    {name: 'Amount', min:0, max:4000, value: this.amount},
-                   {name: 'Shape', min:0, max:3, value: this.selectedType}]"/>
+                   {name: 'Shape', min:0, max:3, value: this.type},
+                   {name: 'Fake', min:0, max:3, value: 'fake'},
+                   {name: 'Rate', min:1, max:100, value: this.frequency},
+                   {name: 'Amount', min:0, max:4000, value: this.amount},
+                   {name: 'Shape', min:0, max:3, value: this.type},
+                   {name: 'Fake', min:0, max:3, value: 'fake'}
+                   ]"/>
         <div class="knobs">
           <module-knob
             v-model="frequency"
@@ -29,7 +35,7 @@
             module="lfo"
           ></module-knob>
           <module-knob
-            v-model="type"
+            v-model="typeDial"
             :min="0"
             :max="100"
             knobColor="#5bd484"
@@ -41,11 +47,14 @@
 </template>
 
 <script>
+import { mapState } from 'vuex'
 import { vuexSyncGen, mapValueToRange } from '@/utils'
+import { MODULE_LFO_COLOR } from '@/constants'
 
 import audio from '@/audio'
 import ModuleKnob from '@/components/ModuleKnob.vue'
 import ModuleDisplay from '@/components/ModuleDisplay.vue'
+import ModuleTitle from './ModuleComponents/ModuleTitle.vue'
 
 var self
 
@@ -56,25 +65,27 @@ export default {
   },
   data () {
     return {
-      typeArray: [
-        'sine',
-        'square',
-        'sawtooth',
-        'triangle'
-      ],
+      name: 'lfo',
+      typeDial: 0,
       selectedType: '',
-      lfo: {}
+      lfo: {},
+      moduleColor: MODULE_LFO_COLOR
     }
   },
   components: {
     ModuleKnob,
-    ModuleDisplay
+    ModuleDisplay,
+    ModuleTitle
   },
   created () {
     self = this
     this.lfo = audio.lfo.state.device
   },
   computed: {
+    dialsAreWithinMargin() {
+      return Object.values(this.$store.getters.audioParametersMatchGoalWithMargin[this.name])
+        .every(param => param)        
+    },
     ...vuexSyncGen('lfo', 'frequency', val => {
       self.lfo.frequency.value = Math.pow(val, (val / 100)) - 1
     }),
@@ -82,12 +93,19 @@ export default {
       self.lfo.max = (val * 40)
     }),
     ...vuexSyncGen('lfo', 'type', val => {
-      self.selectedType = self.typeArray[mapValueToRange(val, 100, (self.typeArray.length - 1))]
-      if (self.lfo.type === self.selectedType) return
-      self.lfo.type = self.selectedType
+      if (self.lfo.type === val) return
+      self.lfo.type = val
       self.lfo.stop()
       self.lfo.start()
+    }),
+    ...mapState({
+      typeArray: state => state.gameState.possibleValues.lfo.type,
     })
+  },
+  watch: {
+    typeDial(val) {
+      this.type = this.typeArray[mapValueToRange(val, 100, (this.typeArray.length -1))]
+    }
   }
 }
 </script>

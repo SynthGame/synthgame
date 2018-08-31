@@ -5,6 +5,8 @@ import random from 'lodash/random'
 import values from 'lodash/values'
 import flatMap from 'lodash/flatMap'
 import inRange from 'lodash/inRange'
+import isArray from 'lodash/isArray'
+import isEqual from 'lodash/isArray'
 
 Vue.use(Vuex)
 
@@ -24,20 +26,20 @@ export default new Vuex.Store({
       },
       filter: {
         cutOffFreq: 50,
-        type: 0,
+        type: 'lowpass',
         setQ: 50,
         gain: 50
       },
       lfo: {
         frequency: 0,
-        type: 0,
+        type: 'sine',
         amount: 0
       },
       oscillator: {
-        frequency: 2,
-        typeOsc: 2,
-        detune: 60,
-        phase: 0
+        frequency: 65,
+        typeOsc: 'sine',
+        detune: 60
+        // phase: 0
       },
       reverb: {
         roomSize: 0,
@@ -49,36 +51,51 @@ export default new Vuex.Store({
       goal: {
         delay: {
           delayTime: 20,
-          wet: 0,
-          feedback: 10
+          wet: 50,
+          feedback: 90
         },
         envelope: {
           attack: 11,
-          decay: 60,
+          decay: 70,
           sustain: 52,
           release: 34
         },
         filter: {
-          cutOffFreq: 50,
-          type: 0,
+          cutOffFreq: 40,
+          type: 'highpass',
           setQ: 50,
           gain: 50
         },
         lfo: {
-          frequency: 0,
-          type: 0,
+          frequency: 10,
+          type: 'square',
           amount: 0
         },
         oscillator: {
-          frequency: 2,
-          typeOsc: 2,
-          detune: 40,
-          phase: 0
+          frequency: 33,
+          typeOsc: 'sine',
+          detune: 40
+          // phase: 0
         },
         reverb: {
-          roomSize: 0,
-          wet: 0
+          roomSize: 10,
+          wet: 20
         }
+      },
+      possibleValues: {
+        delay: {},
+        envelope: {},
+        filter: {
+          type: ['lowpass', 'highpass', 'bandpass']
+        },
+        lfo: {
+          type: ['sine', 'square', 'sawtooth', 'triangle']
+        },
+        oscillator: {
+          frequency: [33, 65, 131, 262, 523, 1047, 2093, 4186],
+          typeOsc: ['sine', 'square', 'sawtooth', 'triangle']
+        },
+        reverb: {}
       }
     }
   },
@@ -113,28 +130,39 @@ export default new Vuex.Store({
     audioParametersMatchGoalWithMargin: (state) => {
       return mapValues(state.audioParameters, (val, moduleName) => {
         return mapValues(val, (val, parameterName) => {
-          return inRange(val,
-            (state.gameState.goal[moduleName][parameterName] - state.gameState.margin),
-            (state.gameState.goal[moduleName][parameterName] + state.gameState.margin)
-          )
+          console.log(val, state.gameState.goal[moduleName][parameterName])
+          return isArray(state.gameState.possibleValues[moduleName][parameterName])
+            ? (val === state.gameState.goal[moduleName][parameterName])
+            : inRange(val,
+                (state.gameState.goal[moduleName][parameterName] - state.gameState.margin),
+                (state.gameState.goal[moduleName][parameterName] + state.gameState.margin)
+              )
         })
       })
     }
   },
   actions: {
     randomizeAudioParameters ({state, commit}) {
-      const randomizeValues = obj => mapValues(obj, val => {
-        if (typeof val === 'object') return randomizeValues(val) // recuuursion whooo
-        return random(0, 100)
+      const randomizeValues = obj => mapValues(obj, (val, moduleName) => {
+        return mapValues(val, (val, parameterName) => {
+          const parameterValDef = state.gameState.possibleValues[moduleName][parameterName]
+          return Array.isArray(parameterValDef)
+            ? parameterValDef[random(0, parameterValDef.length - 1)]
+            : random(0, 100)
+        })
       })
       return commit('setAudioParameterToPreset', {
         preset: randomizeValues(state.audioParameters)
       })
     },
     randomizGoalParameters ({state, commit}) {
-      const randomizeValues = obj => mapValues(obj, val => {
-        if (typeof val === 'object') return randomizeValues(val) // recuuursion whooo
-        return random(0, 100)
+      const randomizeValues = obj => mapValues(obj, (val, moduleName) => {
+        return mapValues(val, (val, parameterName) => {
+          const parameterValDef = state.gameState.possibleValues[moduleName][parameterName]
+          return Array.isArray(parameterValDef)
+            ? parameterValDef[random(0, parameterValDef.length - 1)]
+            : random(0, 100)
+        })
       })
       return commit('setGoalToPreset', {
         preset: randomizeValues(state.audioParameters)

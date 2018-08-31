@@ -1,16 +1,20 @@
 <template>
   <div class="module">
-    <div class="title">
-      <h2>Tats</h2>
-      <h3>Envelope</h3>
-    </div>
-     <module-display
+    <module-title :indicator-active="dialsAreWithinMargin" :module-color="moduleColor">
+      <h2 slot="title">Tats</h2>
+      <h3 slot="subtitle">Envelope</h3>
+    </module-title>
+    <module-display
       fill="#e4e259"
       module="envelope"
       :knobs="[{name: 'attack', min: 1, max: 100, value: this.attack},
                 {name: 'decay', min: 1, max: 100, value: this.decay},
                 {name: 'sustain', min: 1, max: 100, value: this.sustain},
-                {name: 'release', min: 1, max: 100, value: this.release}
+                {name: 'release', min: 1, max: 100, value: this.release},
+                {name: 'attackGoal', min: 1, max: 100, value: this.attackGoal},
+                {name: 'decayGoal', min: 1, max: 100, value: this.decayGoal},
+                {name: 'sustainGoal', min: 1, max: 100, value: this.sustainGoal},
+                {name: 'releasevGoal', min: 1, max: 100, value: this.releaseGoal}
                 ]"/>
     <div class="knobs">
       <module-knob
@@ -50,11 +54,14 @@
 </template>
 
 <script>
+import { mapState } from 'vuex'
 import { vuexSyncGen } from '@/utils'
+import { MODULE_ENVELOPE_COLOR } from '@/constants'
 
 import audio from '@/audio'
 import ModuleKnob from '@/components/ModuleKnob.vue'
 import ModuleDisplay from '@/components/ModuleDisplay.vue'
+import ModuleTitle from './ModuleComponents/ModuleTitle.vue'
 
 var self
 
@@ -65,20 +72,27 @@ export default {
   },
   data () {
     return {
+      name: 'envelope',
       envelope: {},
       displayHeight: 300,
-      displayWidth: 600
+      displayWidth: 600,
+      moduleColor: MODULE_ENVELOPE_COLOR
     }
   },
   components: {
     ModuleKnob,
-    ModuleDisplay
+    ModuleDisplay,
+    ModuleTitle
   },
   created () {
     self = this
     this.envelope = audio.envelope.state.device
   },
   computed: {
+    dialsAreWithinMargin() {
+      return Object.values(this.$store.getters.audioParametersMatchGoalWithMargin[this.name])
+        .every(param => param)        
+    },
     ...vuexSyncGen('envelope', 'attack', val => {
       self.envelope.attack = val + 0.01
     }),
@@ -90,6 +104,12 @@ export default {
     }),
     ...vuexSyncGen('envelope', 'release', val => {
       self.envelope.release = val
+    }),
+    ...mapState({
+      attackGoal: state => state.gameState.goal.envelope.attack,
+      decayGoal: state => state.gameState.goal.envelope.decay,
+      sustainGoal: state => state.gameState.goal.envelope.sustain,
+      releaseGoal: state => state.gameState.goal.envelope.release
     })
   }
 }
