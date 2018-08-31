@@ -11,7 +11,7 @@
         :min="0"
         :max="100"
         knobColor="#3c32ff"
-        name="Room Size"
+        name="Size"
         module="reverb"
       ></module-knob>
       <module-knob

@@ -10,7 +10,11 @@
       :knobs="[{name: 'attack', min: 1, max: 100, value: this.attack},
                 {name: 'decay', min: 1, max: 100, value: this.decay},
                 {name: 'sustain', min: 1, max: 100, value: this.sustain},
-                {name: 'release', min: 1, max: 100, value: this.release}
+                {name: 'release', min: 1, max: 100, value: this.release},
+                {name: 'attackGoal', min: 1, max: 100, value: this.attackGoal},
+                {name: 'decayGoal', min: 1, max: 100, value: this.decayGoal},
+                {name: 'sustainGoal', min: 1, max: 100, value: this.sustainGoal},
+                {name: 'releasevGoal', min: 1, max: 100, value: this.releaseGoal}
                 ]"/>
     <div class="knobs">
       <module-knob
@@ -50,6 +54,7 @@
 </template>
 
 <script>
+import { mapState } from 'vuex'
 import { vuexSyncGen } from '@/utils'
 
 import audio from '@/audio'
@@ -90,6 +95,12 @@ export default {
     }),
     ...vuexSyncGen('envelope', 'release', val => {
       self.envelope.release = val
+    }),
+    ...mapState({
+      attackGoal: state => state.gameState.goal.envelope.attack,
+      decayGoal: state => state.gameState.goal.envelope.decay,
+      sustainGoal: state => state.gameState.goal.envelope.sustain,
+      releaseGoal: state => state.gameState.goal.envelope.release
     })
   }
 }

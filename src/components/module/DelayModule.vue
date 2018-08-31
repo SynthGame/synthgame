@@ -10,7 +10,12 @@
       fill="#43bede"
       :knobs="[{name:'Time', min: 0, max: 100, value: this.delayTime},
               {name:'Feedback', min: 0, max: 100, value: this.feedback},
-              {name:'Wet', min: 0, max: 100, value: this.wet}]"
+              {name:'Wet', min: 0, max: 100, value: this.wet},
+              {name:'Placeholder', min: 0, max: 100, value: 'fake'},
+              {name:'TimeGoal', min: 0, max: 100, value: this.delayTimeGoal},
+              {name:'FeedbackGoal', min: 0, max: 100, value: this.feedbackGoal},
+              {name:'WetGoal', min: 0, max: 100, value: this.wetGoal},
+              {name:'PlaceholderGoal', min: 0, max: 100, value: 'fake'}]" 
     />
     <div class="knobs">
       <module-knob
@@ -42,6 +47,7 @@
 </template>
 
 <script>
+import { mapState } from 'vuex'
 import { vuexSyncGen } from '@/utils'
 
 import audio from '@/audio'
@@ -76,6 +82,11 @@ export default {
     }),
     ...vuexSyncGen('delay', 'feedback', val => {
       self.delay.feedback.value = val / 100
+    }),
+    ...mapState({
+      delayTimeGoal: state => state.gameState.goal.delay.delayTime,
+      feedbackGoal: state => state.gameState.goal.delay.feedback,
+      wetGoal: state => state.gameState.goal.delay.wet,
     })
   }
 }

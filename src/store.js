@@ -49,8 +49,8 @@ export default new Vuex.Store({
       goal: {
         delay: {
           delayTime: 20,
-          wet: 0,
-          feedback: 10
+          wet: 50,
+          feedback: 90
         },
         envelope: {
           attack: 11,

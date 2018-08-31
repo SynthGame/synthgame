@@ -11,7 +11,7 @@
               style="fill-rule: nozero"
               />
 
-        <path v-if="this.module === 'oscillator' || 'filter'"
+        <path v-if="this.module === 'oscillator' || this.module === 'filter' || this.module === 'envelope' || this.module === 'delay'"
               stroke="white"
               :stroke-width="2"
               :d="pathGoal"
@@ -45,13 +45,13 @@
         <!-- //       fill="black"
         //       style="fill-rule: nozero" -->
 
-        <text x="45%" y="40%" fill="white">
+        <text x="45%" y="40%" fill="transparent">
           <tspan x="45%" y="50%">{{knobs[0].name}}: {{knobs[0].value}}</tspan>
           <tspan x="45%" y="60%">{{knobs[1].name}}: {{knobs[1].value}}</tspan>
           <tspan x="45%" y="70%">{{knobs[2].name}}: {{knobs[2].value}}</tspan>
           <tspan x="45%" y="80%" v-if="this.knobs[3]">{{knobs[3].name}}: {{knobs[3].value}}</tspan>
         </text>
-        <text v-if="this.module === 'oscillator' || 'filter'" fill="white">
+        <text v-if="this.module === 'oscillator' || 'filter'" fill="transparent">
           <tspan x="0%" y="50%">{{knobs[4].name}}: {{knobs[4].value}}</tspan>
           <tspan x="0%" y="60%">{{knobs[5].name}}: {{knobs[5].value}}</tspan>
           <tspan x="0%" y="70%">{{knobs[6].name}}: {{knobs[6].value}}</tspan>
@@ -197,13 +197,13 @@ export default {
         // release is known and shall be market with absolute position
 
         // svg path:
-        line = 'M 0, ' + this.displayHeight +
+        line = 'M 0, ' + (this.displayHeight + 1) +
               ' l ' + attackXPosition + ', ' + (-attackYPosition) + ' ' +
               ' l ' + decayXPosition + ', ' + decayYPosition + ' ' +
               // a horizontal line representing sustain level including a fix regarding adding the release:
               ' h ' + (this.displayWidth - attackXPosition - decayXPosition - (((release.value / release.max)) * fourthOfWidth)) +
               // release end position:
-              ' L ' + this.displayWidth + ', ' + this.displayHeight + ' ' +
+              ' L ' + this.displayWidth + ', ' + (this.displayHeight + 1) + ' ' +
               ' Z'
       }
 
@@ -391,6 +391,70 @@ export default {
     },
     pathGoal () {
       let line
+
+      if (this.module === 'delay') {
+        // helpers:
+        const time = this.knobs[4]
+        const feedback = this.knobs[5]
+        const wet = this.knobs[6]
+
+        const feedbackRatio = feedback.value/(feedback.max-feedback.min)
+        const timeRatio = time.value/(time.max-time.min)
+        const wetRatio = wet.value/(wet.max-wet.min)
+
+        const barWidth = 0
+        const spaceBetween = timeRatio*this.displayWidth/3 + 30
+
+        line = 'M 0, 0 ' +
+               'm 0, ' + (this.displayHeight+this.displayHeight*(1-wetRatio)) +
+               this.drawDelayBar((spaceBetween - 7.5), barWidth, 0) +
+
+               // DRY-nasty, sure
+               // the 7.142... number is a result of 100/14
+               ((feedbackRatio > 7.142857143*2/100) ? this.drawDelayBar(spaceBetween, barWidth, 1):'') +
+               ((feedbackRatio > 7.142857143*3/100) ? this.drawDelayBar(spaceBetween, barWidth, 2):'') +
+               ((feedbackRatio > 7.142857143*4/100) ? this.drawDelayBar(spaceBetween, barWidth, 3):'') +
+               ((feedbackRatio > 7.142857143*5/100) ? this.drawDelayBar(spaceBetween, barWidth, 4):'') +
+               ((feedbackRatio > 7.142857143*6/100) ? this.drawDelayBar(spaceBetween, barWidth, 5):'') +
+               ((feedbackRatio > 7.142857143*7/100) ? this.drawDelayBar(spaceBetween, barWidth, 6):'') +
+               ((feedbackRatio > 7.142857143*8/100) ? this.drawDelayBar(spaceBetween, barWidth, 7):'') +
+               ((feedbackRatio > 7.142857143*9/100) ? this.drawDelayBar(spaceBetween, barWidth, 8):'') +
+               ((feedbackRatio > 7.142857143*10/100) ? this.drawDelayBar(spaceBetween, barWidth, 9):'') +
+               ((feedbackRatio > 7.142857143*11/100) ? this.drawDelayBar(spaceBetween, barWidth, 10):'') +
+               ((feedbackRatio > 7.142857143*12/100) ? this.drawDelayBar(spaceBetween, barWidth, 11):'') +
+               ((feedbackRatio > 7.142857143*13/100) ? this.drawDelayBar(spaceBetween, barWidth, 12):'')
+
+        return line
+      }
+
+      if (this.module === 'envelope') {
+        // helpers:
+        let fourthOfWidth = this.displayWidth / 4
+
+        const attack = this.knobs[4]
+        const decay = this.knobs[5]
+        const sustain = this.knobs[6]
+        const release = this.knobs[7]
+
+        const attackXPosition = (attack.value / attack.max) * fourthOfWidth
+        const attackYPosition = this.displayHeight * 0.75
+        const decayXPosition = (decay.value / decay.max) * fourthOfWidth
+
+        // the vertical decay position shall include a fix stopping it
+        // from going all the way down (5% height) to perserve release indication:
+        const decayYPosition = (1 - (sustain.value / sustain.max)) * (attackYPosition) - (1 - (sustain.value / sustain.max)) * (attackYPosition) * 0.05
+        // no sustain, as it basically a horizontal line
+        // release is known and shall be market with absolute position
+
+        // svg path:
+        line = 'M 0, ' + (this.displayHeight + 1) +
+              ' l ' + attackXPosition + ', ' + (-attackYPosition) + ' ' +
+              ' l ' + decayXPosition + ', ' + decayYPosition + ' ' +
+              // a horizontal line representing sustain level including a fix regarding adding the release:
+              ' h ' + (this.displayWidth - attackXPosition - decayXPosition - (((release.value / release.max)) * fourthOfWidth)) +
+              // release end position:
+              ' L ' + this.displayWidth + ', ' + (this.displayHeight + 1) + ' '
+      }
 
       if (this.module === 'filter') {
         // helpers:

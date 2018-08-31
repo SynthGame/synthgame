@@ -10,7 +10,13 @@
           fill="#5bd484"
           :knobs="[{name: 'Rate', min:1, max:100, value: this.frequency},
                    {name: 'Amount', min:0, max:4000, value: this.amount},
-                   {name: 'Shape', min:0, max:3, value: this.selectedType}]"/>
+                   {name: 'Shape', min:0, max:3, value: this.selectedType},
+                   {name: 'Fake', min:0, max:3, value: 'fake'},
+                   {name: 'Rate', min:1, max:100, value: this.frequency},
+                   {name: 'Amount', min:0, max:4000, value: this.amount},
+                   {name: 'Shape', min:0, max:3, value: this.selectedType},
+                   {name: 'Fake', min:0, max:3, value: 'fake'}
+                   ]"/>
         <div class="knobs">
           <module-knob
             v-model="frequency"
