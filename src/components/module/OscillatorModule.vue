@@ -91,6 +91,10 @@ export default {
     this.oscillator = audio.oscillator.state.device
   },
   computed: {
+    dialsAreWithinMargin() {
+      return Object.values(this.$store.getters.audioParametersMatchGoalWithMargin['oscillator'])
+        .every(param => param)        
+    },
     ...vuexSyncGen('oscillator', 'frequency', val => {
       self.selectedFreq = self.freqArray[mapValueToRange(val, 100, (self.freqArray.length - 1))]
       self.oscillator.frequency.value = self.selectedFreq
@@ -114,6 +118,15 @@ export default {
       detuneGoal: state => state.gameState.goal.oscillator.detune,
       phaseGoal: state => state.gameState.goal.oscillator.phase
     })
+  },
+  watch: {
+    dialsAreWithinMargin(val) {
+      if(val === true) {
+        alert('well done!')
+        this.$store.dispatch('randomizeAudioParameters')
+        this.$store.dispatch('randomizGoalParameters')
+      }
+    }
   }
 }
 </script>
