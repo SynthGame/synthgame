@@ -19,25 +19,25 @@
               style="fill-rule: nozero"
               />
 
-              <!-- lfo: -->
-              <!--positioning wrapperfix -->
-             <svg :style="centerLFOSwing" ref="swing">
+        <!-- lfo: -->
+        <!--positioning wrapperfix -->
+        <svg :viewBox="swingViewport" ref="swing">
 
-              <!-- the swing: -->
-              <g v-if="this.module === 'lfo'"
-                stroke="black"
+        <!-- the swing: -->
+        <g v-if="this.module === 'lfo'"
+          stroke="black"
+          :style="swingStyle"
+                          >
+          <path
+            :stroke-width="1"
+            fill="black"
+            :d="'m 0,'+ (-displayHeight/2)+
+                ' v ' + (displayHeight)
+                "/>
 
-                                >
-                <path
-                  :stroke-width="1"
-                  fill="black"
-                  :d="'m 0,'+ (-displayHeight/2)+
-                      ' v ' + (displayHeight)
-                      "/>
-
-                      <circle :cx="0" :cy="displayHeight*0.6" :r="displayHeight/4"/>
-                </g>
-              </svg>
+                <circle :cx="0" :cy="displayHeight*0.6" :r="displayHeight/4"/>
+          </g>
+        </svg>
 
         <!-- // <path v-if="this.module === 'lfo'"
         //       :stroke-width="strokeWidth"
@@ -63,6 +63,7 @@
 </template>
 
 <script>
+import store from '../store'; // path to your Vuex store
 
 // TODO:
 // [v]. translate the values so they work properly
@@ -82,12 +83,12 @@
 
 // lfo:
 // [v] create swing
-// [v] have it move for sine
+// [v] have it move for sine - but it is hardcoded
 // [x] have two other types
-// try transitions: define two kinds of transforms with class and switch between them
+// [] try transitions: define two kinds of transforms with class and switch between them
 
 // delay:
-// [] drynevss shall be controlling
+// [v] drynevss shall be controlling y positioning of all the elements
 
 export default {
   name: 'display',
@@ -110,7 +111,8 @@ export default {
       displayWidth: 600,
       curveAmnt: 90,
       strokeWidth: '0.1',
-      lfoRotation: 20
+      lfoRotation: 20,
+      seconds: null
     }
   },
   mounted () {
@@ -120,11 +122,22 @@ export default {
     window.addEventListener('resize', this.updateDimensions())
     console.log(this.$refs)
     this.animateSwing(this.$refs.swing)
+    if (this.module == 'lfo') {
+      console.log('there should be an updating interval ready')
+      const rate = this.knobs[0]
+      const relativeTime = rate.value/(rate.max-rate.min)
+      // max time I want the transition to go: 3
+      setInterval(this.updateSeconds, 3000*relativeTime)
+    }
   },
   beforeDestroy () {
     window.removeEventListener('resize', this.updateDimensions())
   },
   methods: {
+    updateSeconds() {
+     const date = new Date()
+     this.seconds = date.getSeconds()
+    },
     // curve drawing helper:
     curve (dir) {
       var mod1 = (dir === 'left-up' || dir === 'left-down') ? 1 : 0
@@ -378,16 +391,51 @@ export default {
                ((feedbackRatio > 7.142857143*12/100) ? this.drawDelayBar(spaceBetween, barWidth, 11):'') +
                ((feedbackRatio > 7.142857143*13/100) ? this.drawDelayBar(spaceBetween, barWidth, 12):'')
 
-        return line
+
       }
       if (this.module === 'reverb') {
         // helpers:
 
         line = ''
-        return line
+
       }
 
       return line
+    },
+
+    swingViewport() {
+      return (0-this.displayWidth/2) + ' 0 ' + this.displayWidth + ' ' + this.displayHeight
+    },
+    swingClass() {
+      let swing
+      if (this.seconds % 2 == 0){
+        swing = 'swing-left'
+      } else {
+        swing = 'swing-right'
+      }
+      return swing
+    },
+    swingStyle() {
+      // helpers:
+      const rate = this.knobs[0]
+      const amount = this.knobs[1]
+      const shape = this.knobs[2]
+
+      const rateRatio = (rate.value/(rate.max-rate.min))
+      const amountRatio = (amount.value/(amount.max-amount.min))
+
+      const timeLever = this.seconds*rateRatio
+      const outcome = parseInt(timeLever)
+      const rotateAmnt = 50
+
+      const transitionTime = outcome+'s'
+      let rotateString;
+      if (this.seconds % 2 == 0){
+        rotateString = 'rotate('+rotateAmnt+'deg)'
+      } else {
+        rotateString = 'rotate(-'+rotateAmnt+'deg)'
+      }
+      return {transform: rotateString, transition: '1s'}
     },
     pathGoal () {
       let line
@@ -567,7 +615,14 @@ export default {
  .swing {
    /* transform: translateX(100px); */
    animation: swing  ease-in-out 1s infinite alternate;
-   animation-name: swing
+ }
+
+ .swing-right {
+   transform: rotate(-40deg)
+ }
+
+ .swing-left {
+   transform: rotate(40deg)
  }
 
 /* https://developer.mozilla.org/en-US/docs/Web/API/CSSStyleSheet/insertRule */

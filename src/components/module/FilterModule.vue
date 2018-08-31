@@ -8,18 +8,18 @@
     <module-display
       fill="#6e01d1"
       module="filter"
-      :knobs="[{name: 'type', min: 0, max: 2, value: this.selectedType},
-                {name: 'frequency', min: 0, max: 100, value: this.cutOffFreq},
-                {name: 'q', min: 0, max: 100, value: this.setQ},
-                {name: 'gain', min: 0, max: 100, value: this.gain},
-                {name: 'typeGoal', min: 0, max: 2, value: typeArray[Math.round((this.typeGoal/100)*(typeArray.length - 1))]},
-                {name: 'frequencyGoal', min: 0, max: 100, value: this.cutOffFreqGoal},
-                {name: 'qGoal', min: 0, max: 100, value: this.setQGoal},
-                {name: 'gainGoal', min: 0, max: 100, value: this.gain},
+      :knobs="[{name: 'type', min: 0, max: 2, value: type},
+                {name: 'frequency', min: 0, max: 100, value: cutOffFreq},
+                {name: 'q', min: 0, max: 100, value: setQ},
+                {name: 'gain', min: 0, max: 100, value: gain},
+                {name: 'typeGoal', min: 0, max: 2, value: typeGoal},
+                {name: 'frequencyGoal', min: 0, max: 100, value: cutOffFreqGoal},
+                {name: 'qGoal', min: 0, max: 100, value: setQGoal},
+                {name: 'gainGoal', min: 0, max: 100, value: gain},
                 ]"/>
     <div class="knobs">
       <module-knob
-        v-model="type"
+        v-model="typeDial"
         :min="0"
         :max="100"
         knobColor="#6e01d1"
@@ -64,12 +64,7 @@ export default {
   data () {
     return {
       name: 'filter',
-      typeArray: [
-        'lowpass',
-        'highpass',
-        'bandpass'
-      ],
-      selectedType: '',
+      typeDial: 0,
       filter: {},
       sliderValue: 0,
       displayHeight: 300,
@@ -101,10 +96,8 @@ export default {
       self.filter.frequency.value = Math.pow((val * 200), (val / 100)) + 20
     }),
     ...vuexSyncGen('filter', 'type', val => {
-      self.filter.type = self.typeArray[mapValueToRange(val, 100, (self.typeArray.length - 1))]
-      self.selectedType = self.typeArray[mapValueToRange(val, 100, (self.typeArray.length - 1))]
-      if (self.filter.type === self.selectedType) return
-      self.filter.type = self.selectedType
+      if (self.filter.type === val) return
+      self.filter.type = val
     }),
     ...vuexSyncGen('filter', 'setQ', val => {
       self.filter.Q.value = val / 8
@@ -116,7 +109,13 @@ export default {
       cutOffFreqGoal: state => state.gameState.goal.filter.cutOffFreq,
       typeGoal: state => state.gameState.goal.filter.type,
       setQGoal: state => state.gameState.goal.filter.setQ,
+      typeArray: state => state.gameState.possibleValues.filter.type
     })
+  },
+  watch: {
+    typeDial(val) {
+      this.type = this.typeArray[mapValueToRange(val, 100, (this.typeArray.length -1))]
+    }
   }
 }
 </script>
