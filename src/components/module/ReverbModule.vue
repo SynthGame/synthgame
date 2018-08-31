@@ -1,6 +1,6 @@
 <template>
   <div class="module">
-    <module-title :indicator-active="false" :module-color="moduleColor">
+    <module-title :indicator-active="dialsAreWithinMargin" :module-color="moduleColor">
       <h2 slot="title">Tats</h2>
       <h3 slot="subtitle">Reverb</h3>
     </module-title>
@@ -44,6 +44,7 @@ export default {
   },
   data () {
     return {
+      name: 'reverb',
       reverb: {},
       sliderValue: 0,
       moduleColor: MODULE_REVERB_COLOR
@@ -59,6 +60,10 @@ export default {
     this.reverb = audio.reverb.state.device
   },
   computed: {
+    dialsAreWithinMargin() {
+      return Object.values(this.$store.getters.audioParametersMatchGoalWithMargin[this.name])
+        .every(param => param)        
+    },
     ...vuexSyncGen('reverb', 'wet', val => {
       self.reverb.wet.value = val / 100
     }),

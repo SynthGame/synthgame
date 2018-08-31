@@ -1,6 +1,6 @@
 <template>
   <div class="module">
-    <module-title :indicator-active="false" :module-color="moduleColor">
+    <module-title :indicator-active="dialsAreWithinMargin" :module-color="moduleColor">
       <h2 slot="title">Tats</h2>
       <h3 slot="subtitle">Filter</h3>
     </module-title>
@@ -57,6 +57,7 @@ export default {
   name: 'FilterModule',
   data () {
     return {
+      name: 'filter',
       typeArray: [
         'lowpass',
         'highpass',
@@ -83,6 +84,10 @@ export default {
 
   },
   computed: {
+    dialsAreWithinMargin() {
+      return Object.values(this.$store.getters.audioParametersMatchGoalWithMargin[this.name])
+        .every(param => param)        
+    },
     ...vuexSyncGen('filter', 'cutOffFreq', val => {
       // self.filter.frequency.value = val
       self.filter.frequency.value = Math.pow((val * 200), (val / 100)) + 20

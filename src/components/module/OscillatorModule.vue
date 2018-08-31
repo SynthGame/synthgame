@@ -67,6 +67,7 @@ export default {
   name: 'OscillatorModule',
   data () {
     return {
+      name: 'oscillator',
       typeArray: [
         'sine',
         'square',
@@ -93,7 +94,7 @@ export default {
   },
   computed: {
     dialsAreWithinMargin() {
-      return Object.values(this.$store.getters.audioParametersMatchGoalWithMargin['oscillator'])
+      return Object.values(this.$store.getters.audioParametersMatchGoalWithMargin[this.name])
         .every(param => param)        
     },
     ...vuexSyncGen('oscillator', 'frequency', val => {

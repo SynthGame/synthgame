@@ -1,6 +1,6 @@
 <template>
   <div class="module">
-    <module-title :indicator-active="false" :module-color="moduleColor">
+    <module-title :indicator-active="dialsAreWithinMargin" :module-color="moduleColor">
       <h2 slot="title">Tats</h2>
       <h3 slot="subtitle">Envelope</h3>
     </module-title>
@@ -67,6 +67,7 @@ export default {
   },
   data () {
     return {
+      name: 'envelope',
       envelope: {},
       displayHeight: 300,
       displayWidth: 600,
@@ -83,6 +84,10 @@ export default {
     this.envelope = audio.envelope.state.device
   },
   computed: {
+    dialsAreWithinMargin() {
+      return Object.values(this.$store.getters.audioParametersMatchGoalWithMargin[this.name])
+        .every(param => param)        
+    },
     ...vuexSyncGen('envelope', 'attack', val => {
       self.envelope.attack = val + 0.01
     }),

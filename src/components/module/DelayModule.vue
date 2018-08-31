@@ -1,6 +1,6 @@
 <template>
   <div class="module">
-    <module-title :indicator-active="false" :module-color="moduleColor">
+    <module-title :indicator-active="dialsAreWithinMargin" :module-color="moduleColor">
       <h2 slot="title">Tats</h2>
       <h3 slot="subtitle">Delay</h3>
     </module-title>
@@ -56,6 +56,7 @@ export default {
   name: 'DelayModule',
   data () {
     return {
+      name: 'delay',
       delay: {},
       moduleColor: MODULE_DELAY_COLOR
     }
@@ -70,6 +71,10 @@ export default {
     this.delay = audio.delay.state.device
   },
   computed: {
+    dialsAreWithinMargin() {
+      return Object.values(this.$store.getters.audioParametersMatchGoalWithMargin[this.name])
+        .every(param => param)        
+    },
     ...vuexSyncGen('delay', 'delayTime', val => {
       // const nth = 2 ** self.delayTime // 2 to the power of delaytime
       // return `${nth}n`

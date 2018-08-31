@@ -1,6 +1,6 @@
   <template>
     <div class="module">
-      <module-title :indicator-active="false" :module-color="moduleColor">
+      <module-title :indicator-active="dialsAreWithinMargin" :module-color="moduleColor">
         <h2 slot="title">Tats</h2>
         <h3 slot="subtitle">LFO</h3>
       </module-title>
@@ -58,6 +58,7 @@ export default {
   },
   data () {
     return {
+      name: 'lfo',
       typeArray: [
         'sine',
         'square',
@@ -79,6 +80,10 @@ export default {
     this.lfo = audio.lfo.state.device
   },
   computed: {
+    dialsAreWithinMargin() {
+      return Object.values(this.$store.getters.audioParametersMatchGoalWithMargin[this.name])
+        .every(param => param)        
+    },
     ...vuexSyncGen('lfo', 'frequency', val => {
       self.lfo.frequency.value = Math.pow(val, (val / 100)) - 1
     }),
