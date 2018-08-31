@@ -10,7 +10,11 @@
       :knobs="[{name: 'type', min: 0, max: 2, value: this.selectedType},
                 {name: 'frequency', min: 0, max: 100, value: this.cutOffFreq},
                 {name: 'q', min: 0, max: 100, value: this.setQ},
-                {name: 'gain', min: 0, max: 100, value: this.gain}
+                {name: 'gain', min: 0, max: 100, value: this.gain},
+                {name: 'typeGoal', min: 0, max: 2, value: typeArray[Math.round((this.typeGoal/100)*(typeArray.length - 1))]},
+                {name: 'frequencyGoal', min: 0, max: 100, value: this.cutOffFreqGoal},
+                {name: 'qGoal', min: 0, max: 100, value: this.setQGoal},
+                {name: 'gainGoal', min: 0, max: 100, value: this.gain},
                 ]"/>
     <div class="knobs">
       <module-knob
@@ -43,6 +47,7 @@
 </template>
 
 <script>
+import { mapState } from 'vuex'
 import { vuexSyncGen, mapValueToRange } from '@/utils'
 import { MODULE_FILTER_COLOR } from '@/constants'
 
@@ -68,6 +73,7 @@ export default {
       sliderValue: 0,
       displayHeight: 300,
       displayWidth: 600,
+      gain: 60,
       moduleColor: MODULE_FILTER_COLOR
     }
   },
@@ -101,8 +107,13 @@ export default {
     ...vuexSyncGen('filter', 'setQ', val => {
       self.filter.Q.value = val / 8
     }),
-    ...vuexSyncGen('filter', 'gain', val => {
-      self.filter.gain.value = val
+    // ...vuexSyncGen('filter', 'gain', val => {
+    //   self.filter.gain.value = val
+    // }),
+    ...mapState({
+      cutOffFreqGoal: state => state.gameState.goal.filter.cutOffFreq,
+      typeGoal: state => state.gameState.goal.filter.type,
+      setQGoal: state => state.gameState.goal.filter.setQ,
     })
   }
 }

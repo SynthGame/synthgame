@@ -11,7 +11,7 @@
               style="fill-rule: nozero"
               />
 
-        <path v-if="this.module === 'oscillator'"
+        <path v-if="this.module === 'oscillator' || 'filter'"
               stroke="white"
               :stroke-width="2"
               :d="pathGoal"
@@ -45,13 +45,13 @@
         <!-- //       fill="black"
         //       style="fill-rule: nozero" -->
 
-        <text x="45%" y="40%" fill="transparent">
+        <text x="45%" y="40%" fill="white">
           <tspan x="45%" y="50%">{{knobs[0].name}}: {{knobs[0].value}}</tspan>
           <tspan x="45%" y="60%">{{knobs[1].name}}: {{knobs[1].value}}</tspan>
           <tspan x="45%" y="70%">{{knobs[2].name}}: {{knobs[2].value}}</tspan>
           <tspan x="45%" y="80%" v-if="this.knobs[3]">{{knobs[3].name}}: {{knobs[3].value}}</tspan>
         </text>
-        <text v-if="this.module === 'oscillator'" fill="transparent">
+        <text v-if="this.module === 'oscillator' || 'filter'" fill="white">
           <tspan x="0%" y="50%">{{knobs[4].name}}: {{knobs[4].value}}</tspan>
           <tspan x="0%" y="60%">{{knobs[5].name}}: {{knobs[5].value}}</tspan>
           <tspan x="0%" y="70%">{{knobs[6].name}}: {{knobs[6].value}}</tspan>
@@ -223,7 +223,7 @@ export default {
 
         // svg path:
         if (type.value === 'lowpass') {
-          line = 'M 0,' + this.displayHeight +
+          line = 'M 0,' + (this.displayHeight + 1) +
                 ' v ' + (-(halfHeight + gainAddedDistance - yOffset)) +
                 ' h ' + (freqDistance) +
                 ' h ' + ((q.value / q.max) * (halfWidth) / 2) +
@@ -232,7 +232,7 @@ export default {
 
                 ' Z'
         } else if (type.value === 'highpass') {
-          line = 'M 0,' + this.displayHeight +
+          line = 'M 0,' + (this.displayHeight + 1) +
                 ' h ' + freqDistance +
                 ' h ' + ((q.value / q.max) * (halfWidth) / 2) +
                 ' q ' + (qDistance / 2) + ', ' + (-(halfHeight + gainAddedDistance)) + ' ' +
@@ -241,7 +241,7 @@ export default {
                 ' v ' + this.displayHeight +
                 ' Z'
         } else if (type.value === 'bandpass') {
-          line = 'M 0, ' + this.displayHeight +
+          line = 'M 0, ' + (this.displayHeight + 1) +
                 ' h ' + (freqDistance + (halfWidth / 2) - qDistance) +
                 ' q ' + (qDistance / 2) + ', ' + (-(halfHeight + gainAddedDistance)) + ' ' +
                         qDistance + ', ' + (-(halfHeight + gainAddedDistance)) +
@@ -391,6 +391,43 @@ export default {
     },
     pathGoal () {
       let line
+
+      if (this.module === 'filter') {
+        // helpers:
+        const type = this.knobs[4]
+        const cutOffFreq = this.knobs[5]
+        const q = this.knobs[6]
+        const gain = this.knobs[7]
+
+        let halfHeight = this.displayHeight / 2
+        let halfWidth = this.displayWidth / 2
+        const gainAddedDistance = ((gain.value / gain.max) * halfHeight) - 5
+        const yOffset = 0
+        const qDistance = (1 - (q.value / q.max)) * (halfWidth)
+        const freqDistance = (cutOffFreq.value / cutOffFreq.max) * (halfWidth)
+
+        // svg path:
+        if (type.value === 'lowpass') {
+          line = 'M 0,' + ((this.displayHeight + 1) - (halfHeight + gainAddedDistance - yOffset)) +
+                // ' v ' + (-(halfHeight + gainAddedDistance - yOffset)) +
+                ' h ' + (freqDistance) +
+                ' h ' + ((q.value / q.max) * (halfWidth) / 2) +
+                ' q ' + (qDistance / 2) + ', 0 ' +
+                      +qDistance + ', ' + (halfHeight + gainAddedDistance)
+        } else if (type.value === 'highpass') {
+          line = 'M' + (freqDistance + ((q.value / q.max) * (halfWidth) / 2)) + ', ' + (this.displayHeight + 1) +
+                ' q ' + (qDistance / 2) + ', ' + (-(halfHeight + gainAddedDistance)) + ' ' +
+                          qDistance + ', ' + (-(halfHeight + gainAddedDistance)) +
+                ' h ' + this.displayWidth +
+                ' v ' + this.displayHeight
+        } else if (type.value === 'bandpass') {
+          line = 'M' + (freqDistance + (halfWidth / 2) - qDistance) + ', ' + (this.displayHeight + 1) +
+                ' q ' + (qDistance / 2) + ', ' + (-(halfHeight + gainAddedDistance)) + ' ' +
+                        qDistance + ', ' + (-(halfHeight + gainAddedDistance)) +
+                ' q ' + (qDistance / 2) + ', 0 ' +
+                        qDistance + ', ' + (halfHeight + gainAddedDistance) + ' '
+        }
+      }
 
       if (this.module === 'oscillator') {
         // helpers:
