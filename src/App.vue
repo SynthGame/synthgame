@@ -159,6 +159,11 @@ body {
   box-sizing: border-box;
 }
 
+@keyframes blink {
+    from {opacity: 0}
+    to {opacity: 1}
+}
+
 #nav {
   padding: 30px;
   a {

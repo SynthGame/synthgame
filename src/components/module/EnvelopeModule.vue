@@ -2,7 +2,8 @@
   <div class="module">
     <module-title :indicator-active="dialsAreWithinMargin" :module-color="moduleColor">
       <h2 slot="title">Tats</h2>
-      <h3 slot="subtitle">Envelope</h3>
+      <h3 v-if="dialsAreWithinMargin" slot="subtitle">{{message}}</h3>
+      <h3 v-else slot="subtitle">Envelope</h3>
     </module-title>
     <module-display
       fill="#e4e259"
@@ -76,7 +77,15 @@ export default {
       envelope: {},
       displayHeight: 300,
       displayWidth: 600,
-      moduleColor: MODULE_ENVELOPE_COLOR
+      moduleColor: MODULE_ENVELOPE_COLOR,
+      message: 'Done',
+      messageArray: [
+        'Ya man',
+        'You rock',
+        'Nailed it',
+        'Tune!',
+        'Rad'
+      ]
     }
   },
   components: {
@@ -90,8 +99,9 @@ export default {
   },
   computed: {
     dialsAreWithinMargin() {
+      this.message = this.messageArray[Math.round(Math.random()*4)];
       return Object.values(this.$store.getters.audioParametersMatchGoalWithMargin[this.name])
-        .every(param => param)        
+        .every(param => param)
     },
     ...vuexSyncGen('envelope', 'attack', val => {
       self.envelope.attack = val + 0.01

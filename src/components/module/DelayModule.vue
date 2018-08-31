@@ -2,7 +2,8 @@
   <div class="module">
     <module-title :indicator-active="dialsAreWithinMargin" :module-color="moduleColor">
       <h2 slot="title">Tats</h2>
-      <h3 slot="subtitle">Delay</h3>
+      <h3 v-if="dialsAreWithinMargin" slot="subtitle">Done!</h3>
+      <h3 v-else slot="subtitle">Delay</h3>
     </module-title>
     <module-display
       class="display"
@@ -15,7 +16,7 @@
               {name:'TimeGoal', min: 0, max: 100, value: this.delayTimeGoal},
               {name:'FeedbackGoal', min: 0, max: 100, value: this.feedbackGoal},
               {name:'WetGoal', min: 0, max: 100, value: this.wetGoal},
-              {name:'PlaceholderGoal', min: 0, max: 100, value: 'fake'}]" 
+              {name:'PlaceholderGoal', min: 0, max: 100, value: 'fake'}]"
     />
     <div class="knobs">
       <module-knob
@@ -79,7 +80,7 @@ export default {
   computed: {
     dialsAreWithinMargin() {
       return Object.values(this.$store.getters.audioParametersMatchGoalWithMargin[this.name])
-        .every(param => param)        
+        .every(param => param)
     },
     ...vuexSyncGen('delay', 'delayTime', val => {
       // const nth = 2 ** self.delayTime // 2 to the power of delaytime

@@ -1,14 +1,15 @@
 <template>
   <div class="module__name">
     <span class="module__name__title"><slot name="title"></slot></span>
-    <span 
+    <span
       :class="{
                 'module__name__status-indicator': true,
                 'module__name__status-indicator--active': indicatorActive
-              }" 
+              }"
       :style="{
                 'background-color': indicatorActive ? moduleColor : '',
                 'box-shadow': indicatorActive ? `0px 0px 16px ${moduleColor}` : '',
+                'animation': indicatorActive ? '.5s blink alternate infinite' : '',
               }"
     ></span>
     <span class="module__name__sub-title"><slot name="subtitle"></slot></span>

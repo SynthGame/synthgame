@@ -2,7 +2,8 @@
   <div class="module">
     <module-title :indicator-active="dialsAreWithinMargin" :module-color="moduleColor">
       <h2 slot="title">Tats</h2>
-      <h3 slot="subtitle">Filter</h3>
+      <h3 v-if="dialsAreWithinMargin" slot="subtitle">Done!</h3>
+      <h3 v-else slot="subtitle">Filter</h3>
     </module-title>
     <module-display
       fill="#6e01d1"
@@ -91,8 +92,9 @@ export default {
   },
   computed: {
     dialsAreWithinMargin() {
+      this.title = 'Done!';
       return Object.values(this.$store.getters.audioParametersMatchGoalWithMargin[this.name])
-        .every(param => param)        
+        .every(param => param)
     },
     ...vuexSyncGen('filter', 'cutOffFreq', val => {
       // self.filter.frequency.value = val
