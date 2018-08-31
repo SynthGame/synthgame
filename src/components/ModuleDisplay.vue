@@ -102,7 +102,7 @@ export default {
     knobs: {
       type: Array,
       default () { return [] }
-    }
+    },
   },
   data () {
     return {
@@ -445,6 +445,7 @@ export default {
       const rateRatio = (rate.value/(rate.max-rate.min))
       const amountRatio = (amount.value/(amount.max-amount.min))
 
+
       const timeLever = this.seconds
       const outcome = parseInt(timeLever)
       const rotateAmnt = 50
@@ -633,7 +634,11 @@ export default {
     lfoValue: {
       handler(newValue, oldValue) {
         if (this.module =='lfo') {
-          this.changeInterval(3000*(1-(newValue/100)))
+          console.log(newValue)
+          let rateOutput = 1/(newValue*2)
+          let realFreq = this.knobs[3].value
+
+          this.changeInterval((1-(realFreq))*4000)
         }
       },
       deep: true

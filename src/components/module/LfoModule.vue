@@ -12,7 +12,7 @@
           :knobs="[{name: 'Rate', min:1, max:100, value: this.frequency},
                    {name: 'Amount', min:0, max:4000, value: this.amount},
                    {name: 'Shape', min:0, max:3, value: this.type},
-                   {name: 'Fake', min:0, max:3, value: 'fake'},
+                   {name: 'Real Frequency', min:0, max:3, value: this.realFrq},
                    {name: 'Rate', min:1, max:100, value: this.frequency},
                    {name: 'Amount', min:0, max:4000, value: this.amount},
                    {name: 'Shape', min:0, max:3, value: this.type},
@@ -70,7 +70,8 @@ export default {
       typeDial: 0,
       selectedType: '',
       lfo: {},
-      moduleColor: MODULE_LFO_COLOR
+      moduleColor: MODULE_LFO_COLOR,
+      realFrq: null
     }
   },
   components: {
@@ -89,8 +90,8 @@ export default {
         .every(param => param)
     },
     ...vuexSyncGen('lfo', 'frequency', val => {
-      self.lfo.frequency.value = Math.pow(val, (val / 100)) - 1;
-      console.log('self.lfo.frequency.value',self.lfo.frequency.value);
+      self.lfo.frequency.value = Math.pow(val, (val / 100)) - 1
+      self.realFrq = Math.pow(val, (val / 100)) - 1
     }),
     ...vuexSyncGen('lfo', 'amount', val => {
       self.lfo.max = (val * 40)
