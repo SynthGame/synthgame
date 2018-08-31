@@ -1,9 +1,9 @@
 <template>
   <div class="module">
-    <div class="title">
-      <h2>Tats</h2>
-      <h3>Reverb</h3>
-    </div>
+    <module-title :indicator-active="dialsAreWithinMargin" :module-color="moduleColor">
+      <h2 slot="title">Tats</h2>
+      <h3 slot="subtitle">Reverb</h3>
+    </module-title>
     <!-- <display class="display" module="reverb"/> -->
     <div class="knobs">
       <module-knob
@@ -28,10 +28,12 @@
 
 <script>
 import { vuexSyncGen } from '@/utils'
+import { MODULE_REVERB_COLOR } from '@/constants'
 
 import audio from '@/audio'
 import ModuleKnob from '@/components/ModuleKnob.vue'
 import ModuleDisplay from '@/components/ModuleDisplay.vue'
+import ModuleTitle from './ModuleComponents/ModuleTitle.vue'
 
 var self
 
@@ -42,19 +44,26 @@ export default {
   },
   data () {
     return {
+      name: 'reverb',
       reverb: {},
-      sliderValue: 0
+      sliderValue: 0,
+      moduleColor: MODULE_REVERB_COLOR
     }
   },
   components: {
     ModuleKnob,
-    ModuleDisplay
+    ModuleDisplay,
+    ModuleTitle
   },
   created () {
     self = this
     this.reverb = audio.reverb.state.device
   },
   computed: {
+    dialsAreWithinMargin() {
+      return Object.values(this.$store.getters.audioParametersMatchGoalWithMargin[this.name])
+        .every(param => param)        
+    },
     ...vuexSyncGen('reverb', 'wet', val => {
       self.reverb.wet.value = val / 100
     }),

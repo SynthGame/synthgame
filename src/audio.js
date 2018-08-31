@@ -1,8 +1,8 @@
 import Tone from 'tone'
-import c from '@/constants'
+import { DEBUG_ENABLED } from '@/constants'
 
 // define logging mechanism
-const log = (log) => c.DEBUG_ENABLED ? console.info(log) : log
+const log = (log) => DEBUG_ENABLED ? console.info(log) : log
 
 export default {
   state: {

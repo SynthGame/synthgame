@@ -54,18 +54,18 @@ export default new Vuex.Store({
         },
         envelope: {
           attack: 11,
-          decay: 60,
+          decay: 70,
           sustain: 52,
           release: 34
         },
         filter: {
-          cutOffFreq: 50,
+          cutOffFreq: 40,
           type: 0,
           setQ: 50,
           gain: 50
         },
         lfo: {
-          frequency: 0,
+          frequency: 10,
           type: 0,
           amount: 0
         },
@@ -76,8 +76,8 @@ export default new Vuex.Store({
           // phase: 0
         },
         reverb: {
-          roomSize: 0,
-          wet: 0
+          roomSize: 10,
+          wet: 20
         }
       }
     }

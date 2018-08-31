@@ -1,9 +1,9 @@
 <template>
   <div class="module">
-    <div class="title">
-      <h2>Tats</h2>
-      <h3>Filter</h3>
-    </div>
+    <module-title :indicator-active="dialsAreWithinMargin" :module-color="moduleColor">
+      <h2 slot="title">Tats</h2>
+      <h3 slot="subtitle">Filter</h3>
+    </module-title>
     <module-display
       fill="#6e01d1"
       module="filter"
@@ -49,20 +49,20 @@
 <script>
 import { mapState } from 'vuex'
 import { vuexSyncGen, mapValueToRange } from '@/utils'
+import { MODULE_FILTER_COLOR } from '@/constants'
 
 import audio from '@/audio'
 import ModuleKnob from '@/components/ModuleKnob.vue'
 import ModuleDisplay from '@/components/ModuleDisplay.vue'
+import ModuleTitle from './ModuleComponents/ModuleTitle.vue'
 
 var self
 
 export default {
   name: 'FilterModule',
-  props: {
-    msg: String
-  },
   data () {
     return {
+      name: 'filter',
       typeArray: [
         'lowpass',
         'highpass',
@@ -74,11 +74,13 @@ export default {
       displayHeight: 300,
       displayWidth: 600,
       gain: 60,
+      moduleColor: MODULE_FILTER_COLOR
     }
   },
   components: {
     ModuleKnob,
-    ModuleDisplay
+    ModuleDisplay,
+    ModuleTitle
   },
   created () {
     self = this
@@ -88,6 +90,10 @@ export default {
 
   },
   computed: {
+    dialsAreWithinMargin() {
+      return Object.values(this.$store.getters.audioParametersMatchGoalWithMargin[this.name])
+        .every(param => param)        
+    },
     ...vuexSyncGen('filter', 'cutOffFreq', val => {
       // self.filter.frequency.value = val
       self.filter.frequency.value = Math.pow((val * 200), (val / 100)) + 20
