@@ -12,10 +12,10 @@
               {name: 'Detune', min: -120, max: 120, value: this.detune},
               {name: 'Phase', min: 50, max: 10000, value: this.phase},
               {name: 'Waveform', min: 0, max:3, value: this.selectedType},
-              {name: 'OctaveGoal', min: freqArray[0], max: freqArray[freqArray.length -1], value: Math.round((this.frequencyGoal/100)*freqArray[freqArray.length -1])},
+              {name: 'OctaveGoal', min: freqArray[0], max: freqArray[freqArray.length -1], value: freqArray[Math.round((this.frequencyGoal/100)*(freqArray.length - 1))]},
               {name: 'DetuneGoal', min: -120, max: 120, value: this.detuneGoal},
               {name: 'PhaseGoal', min: 50, max: 10000, value: this.phaseGoal},
-              {name: 'WaveformGoal', min: 0, max:3, value: this.typeOscGoal},
+              {name: 'WaveformGoal', min: 0, max:3, value: typeArray[Math.round((this.typeOscGoal/100)*(typeArray.length - 1))]},
             ]"/>
     <div class="knobs">
       <module-knob
@@ -79,7 +79,6 @@ export default {
         33, 65, 131, 262, 523, 1047, 2093, 4186
       ],
       selectedFreq: '',
-      // frequencyGoal: '',
       oscillator: {}
     }
   },
@@ -96,9 +95,6 @@ export default {
       self.selectedFreq = self.freqArray[mapValueToRange(val, 100, (self.freqArray.length - 1))]
       self.oscillator.frequency.value = self.selectedFreq
     }),
-    // ...vuexSyncGen('oscillator', 'frequencyGoal', val => {
-    //   self.frequencyGoal = self.freqArray[mapValueToRange(val, 100, (self.freqArray.length - 1))]
-    // }),
     ...vuexSyncGen('oscillator', 'typeOsc', val => {
       self.selectedType = self.typeArray[mapValueToRange(val, 100, (self.typeArray.length - 1))]
       if (self.oscillator.type === self.selectedType) return

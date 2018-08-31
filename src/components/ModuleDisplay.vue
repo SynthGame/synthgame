@@ -45,13 +45,13 @@
         <!-- //       fill="black"
         //       style="fill-rule: nozero" -->
 
-        <text x="45%" y="40%" fill="white">
+        <text x="45%" y="40%" fill="transparent">
           <tspan x="45%" y="50%">{{knobs[0].name}}: {{knobs[0].value}}</tspan>
           <tspan x="45%" y="60%">{{knobs[1].name}}: {{knobs[1].value}}</tspan>
           <tspan x="45%" y="70%">{{knobs[2].name}}: {{knobs[2].value}}</tspan>
           <tspan x="45%" y="80%" v-if="this.knobs[3]">{{knobs[3].name}}: {{knobs[3].value}}</tspan>
         </text>
-        <text v-if="this.module === 'oscillator'" fill="white">
+        <text v-if="this.module === 'oscillator'" fill="transparent">
           <tspan x="0%" y="50%">{{knobs[4].name}}: {{knobs[4].value}}</tspan>
           <tspan x="0%" y="60%">{{knobs[5].name}}: {{knobs[5].value}}</tspan>
           <tspan x="0%" y="70%">{{knobs[6].name}}: {{knobs[6].value}}</tspan>
@@ -374,10 +374,10 @@ export default {
 
       if (this.module === 'oscillator') {
         // helpers:
-        const octave = this.knobs[0]
+        const octave = this.knobs[4]
         const detune = this.knobs[5]
         const phase = this.knobs[6]
-        const type = this.knobs[3]
+        const type = this.knobs[7]
 
         const lineLength = 1.5 * this.displayWidth
         const yAxisMiddle = this.displayHeight / 2
