@@ -403,7 +403,7 @@ export default {
         const yAxisMiddle = this.displayHeight / 2
         const h = yAxisMiddle / 2
 
-        const iteration = 1.2 * h - h * (0.6 * (octave.value / (octave.max - octave.min))) + (h * 0.2 * (1 - (detune.value / (detune.max))))
+        const iteration = 1.2 * h - h * (0.6 * (octave.value / (octave.max - octave.min))) + (h * 0.1 * (1 - (detune.value / (detune.max))))
 
         let wave
         // square:
