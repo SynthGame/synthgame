@@ -112,7 +112,9 @@ export default {
       curveAmnt: 90,
       strokeWidth: '0.1',
       lfoRotation: 20,
-      seconds: null
+      seconds: null,
+      shouldItGoRight: false,
+      intervalId: null
     }
   },
   mounted () {
@@ -125,10 +127,17 @@ export default {
     if (this.module == 'lfo') {
       console.log('there should be an updating interval ready')
       const rate = this.knobs[0]
-      const relativeTime = rate.value/(rate.max-rate.min)
+      // const relativeTime = rate.value/(rate.max-rate.min)
       // max time I want the transition to go: 3
-      setInterval(this.updateSeconds, 3000*relativeTime)
+      var intervalTest =  setInterval(this.updateSeconds, 1000)
+      this.intervalId = intervalTest
     }
+    // changeInterval = (time) => {
+    //  clearInterval(intervalTest)
+    //   intervalTest = setInterval(this.updateSeconds, time)
+    //   console.log('just to saaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa')
+
+    // }
   },
   beforeDestroy () {
     window.removeEventListener('resize', this.updateDimensions())
@@ -137,8 +146,15 @@ export default {
     updateSeconds() {
      const date = new Date()
      this.seconds = date.getSeconds()
+     this.shouldItGoRight=!this.shouldItGoRight
     },
-    // curve drawing helper:
+
+    changeInterval(time) {
+     clearInterval(this.intervalId)
+      this.intervalId = setInterval(this.updateSeconds, time)
+      console.log('just to saaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa')
+    },
+        // curve drawing helper:
     curve (dir) {
       var mod1 = (dir === 'left-up' || dir === 'left-down') ? 1 : 0
       var mod2 = (dir === 'left-up' || dir === 'left-down') ? 0 : (dir === 'down-right') ? -1 : 1
@@ -187,6 +203,9 @@ export default {
     }
   },
   computed: {
+    lfoValue() {
+      return this.knobs[0].value
+    },
     path () {
       let line
 
@@ -408,7 +427,7 @@ export default {
     },
     swingClass() {
       let swing
-      if (this.seconds % 2 == 0){
+      if (this.shouldItGoRight){
         swing = 'swing-left'
       } else {
         swing = 'swing-right'
@@ -424,18 +443,19 @@ export default {
       const rateRatio = (rate.value/(rate.max-rate.min))
       const amountRatio = (amount.value/(amount.max-amount.min))
 
-      const timeLever = this.seconds*rateRatio
+      const timeLever = this.seconds
       const outcome = parseInt(timeLever)
       const rotateAmnt = 50
 
       const transitionTime = outcome+'s'
-      let rotateString;
-      if (this.seconds % 2 == 0){
-        rotateString = 'rotate('+rotateAmnt+'deg)'
+      let rotateString
+      let rotateAmount = 2500*amountRatio;
+      if (this.shouldItGoRight){
+        rotateString = 'rotate('+rotateAmount+'deg)'
       } else {
-        rotateString = 'rotate(-'+rotateAmnt+'deg)'
+        rotateString = 'rotate(-'+rotateAmount+'deg)'
       }
-      return {transform: rotateString, transition: '1s'}
+      return {transform: rotateString}
     },
     pathGoal () {
       let line
@@ -602,6 +622,17 @@ export default {
     //   }
 
     // }
+    lfoValue: {
+      handler(newValue, oldValue) {
+        if (this.module =='lfo') {
+          this.changeInterval(3000*(1-(newValue/100)))
+          console.log('newValue:', newValue)
+          console.log(`(newValue/100:`, (5000*(newValue/100)))
+
+        }
+      },
+      deep: true
+    }
 
   }
 }
