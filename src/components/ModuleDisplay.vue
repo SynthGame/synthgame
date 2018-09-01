@@ -57,12 +57,6 @@
             </g>
         </svg>
 
-        <!-- // <path v-if="this.module === 'lfo'"
-        //       :stroke-width="strokeWidth"
-        //       :d="'M ' + '" -->
-        <!-- //       fill="black"
-        //       style="fill-rule: nozero" -->
-
         <text x="45%" y="40%" fill="transparent">
           <tspan x="45%" y="50%">{{knobs[0].name}}: {{knobs[0].value}}</tspan>
           <tspan x="45%" y="60%">{{knobs[1].name}}: {{knobs[1].value}}</tspan>
@@ -103,7 +97,17 @@ import store from '../store'; // path to your Vuex store
 // [v] create swing
 // [v] have it move for sine - but it is hardcoded
 // [x] have two other types
-// [] try transitions: define two kinds of transforms with class and switch between them
+// [v] lfo prop watched/computed
+// [v] transition
+// [x] stylesheetapi
+//http://danielcwilson.com/blog/2017/10/all-the-transform-ways/ - does not work, the properties are not recognized
+// https://developer.mozilla.org/en-US/docs/Web/API/Web_Animations_API
+// [~] try transitions: define two kinds of transforms with class and switch between them
+// [v] a bit more complicated : set interval with a callback function changing a bolean data property every given time, watch changes in the rate knob to call a function replacing the current interval time with a new one. Custom transition bound and used to indicate LFO's shape
+// STILL TODO:
+// [] bug: the swing does not update when the knob is held/ slowly turned
+// [] sawtooth timing
+// [v] cleanup
 
 // delay:
 // [v] drynevss shall be controlling y positioning of all the elements
@@ -130,7 +134,6 @@ export default {
       curveAmnt: 90,
       strokeWidth: '0.1',
       lfoRotation: 20,
-      seconds: null,
       shouldItGoRight: false,
       shouldGoalGoRight: false,
       intervalId: null,
@@ -142,41 +145,19 @@ export default {
     // update dimentions:
     this.updateDimensions()
     window.addEventListener('resize', this.updateDimensions())
-    console.log(this.$refs)
-    // this.animateSwing(this.$refs.swing)
-    // this.animateGoalSwing(this.$refs.swingGoal)
+
     if (this.module == 'lfo') {
-      console.log('there should be an updating interval ready')
-      // const rate = this.knobs[7]
-      //
-      // let realGoalFreq = this.knobs[7].value
-      //
-      // this.changeInterval(( 1 / (realGoalFreq) ) * 1000 )
-      // const relativeTime = rate.value/(rate.max-rate.min)
-      // max time I want the transition to go: 3
-      this.change
-      var intervalTest =  setInterval(this.updateSeconds, this.knobs[7].value)
+      var intervalTest =  setInterval(this.updateSeconds, this.knobs[3].value)
       this.intervalId = intervalTest
-
-
-        this.goalIntervalId = setInterval(this.updateGoalSeconds, (1 / (this.knobs[7].value) ) * 1000 )
-        console.log('just to saaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa')
-
+      this.goalIntervalId = setInterval(this.updateGoalSeconds, (1 / (this.knobs[7].value) ) * 1000 )
     }
-    // changeInterval = (time) => {
-    //  clearInterval(intervalTest)
-    //   intervalTest = setInterval(this.updateSeconds, time)
-    //   console.log('just to saaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa')
-
-    // }
   },
+
   beforeDestroy () {
     window.removeEventListener('resize', this.updateDimensions())
   },
   methods: {
     updateSeconds() {
-     const date = new Date()
-     this.seconds = date.getSeconds()
      this.shouldItGoRight=!this.shouldItGoRight
     },
     updateGoalSeconds() {
@@ -186,16 +167,6 @@ export default {
     changeInterval(time) {
      clearInterval(this.intervalId)
       this.intervalId = setInterval(this.updateSeconds, time)
-      console.log('just to saaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa')
-    },
-        // curve drawing helper:
-    curve (dir) {
-      var mod1 = (dir === 'left-up' || dir === 'left-down') ? 1 : 0
-      var mod2 = (dir === 'left-up' || dir === 'left-down') ? 0 : (dir === 'down-right') ? -1 : 1
-      var mod3 = 1
-      var mod4 = (dir === 'left-down' || dir === 'up-right') ? 1 : -1
-
-      return ' q ' + (this.curveAmnt * mod1) + ' ' + (this.curveAmnt * mod2) + ' ' + (this.curveAmnt * mod3) + ' ' + (this.curveAmnt * mod4)
     },
     updateDimensions () {
       this.displayHeight = this.$refs.displayWrapper.clientHeight
@@ -219,24 +190,11 @@ export default {
                   ' v ' + (-(basicBarHeight-diff)) +
                   ' h ' + width +
                   ' v ' + (basicBarHeight-diff)
-
       return bar
-
     },
-    animateSwing(swing) {
-      // const move =  {transform: 'rotate(20deg)',
-      //                tranform: 'rotate(-20deg)'
-      //                }
-      // const timing = {duration: 3000,
-      //                 iterations: Infinity}
-      // console.log(`swing animation target: ${this.$refs}`)
-      // console.log(swing)
-      // swing.animate(move, timing)
-
-
-    }
   },
   computed: {
+    // used to refer to LFO rate knob in a watcher (no way to do it directly using because of "[...]")
     lfoValue() {
       return this.knobs[0].value
     },
@@ -369,6 +327,10 @@ export default {
       }
 
       if (this.module === 'lfo') {
+
+        // NON OF THE BELOW PRESENETED APPROACHED WORKED (and should be deleted)
+        // used a custom svg in the template
+
         // helpers:
         const r = this.displayHeight / 4
         const rate = this.knobs[0]
@@ -431,21 +393,11 @@ export default {
         line = ''
 
       }
-
       return line
     },
 
     swingViewport() {
       return (0-this.displayWidth/2) + ' 0 ' + this.displayWidth + ' ' + this.displayHeight
-    },
-    swingClass() {
-      let swing
-      if (this.shouldItGoRight){
-        swing = 'swing-left'
-      } else {
-        swing = 'swing-right'
-      }
-      return swing
     },
     swingStyle() {
       // helpers:
@@ -461,15 +413,15 @@ export default {
       const transitionTime = ( 1 / (realFreq) )
       const rotateAmnt = 50
 
-
       let transitionString;
+      // differenciate shapes using transitions:
       if (shape.value=='sine') {
         transitionString = transitionTime+'s'
       } else if (shape.value == 'square') {
         transitionString =''
       } else if (shape.value == 'sawtooth') {
         if (!this.shouldItGoRight) {
-          transitionString = transitionTime+'s linear'
+          transitionString = transitionTime*2+'s linear'
         }
         else {
           transitionString = ''
@@ -715,18 +667,10 @@ export default {
     // }
   },
   watch: {
-    // knobs() {
-    //   if (this.module === 'lfo') {
-    //     const amount = this.knobs[1]
-
-    //   }
-
-    // }
+    // used to update the interval length on rate knob turn
     lfoValue: {
       handler(newValue, oldValue) {
         if (this.module =='lfo') {
-          // console.log(newValue)
-          // let rateOutput = 1/(newValue*2)
           let realFreq = this.knobs[3].value
 
           this.changeInterval(( 1 / (realFreq) ) * 1000 )
@@ -743,24 +687,4 @@ export default {
  path {
    display: inline-block;
  }
-
- .swing {
-   /* transform: translateX(100px); */
-   animation: swing  ease-in-out 1s infinite alternate;
- }
-
- .swing-right {
-   transform: rotate(-40deg)
- }
-
- .swing-left {
-   transform: rotate(40deg)
- }
-
-/* https://developer.mozilla.org/en-US/docs/Web/API/CSSStyleSheet/insertRule */
- @keyframes swing {
-    0% { transform: rotate(-40deg); }
-    to { transform: rotate(40deg);}
-}
-
  </style>
