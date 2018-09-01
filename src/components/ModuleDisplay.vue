@@ -21,10 +21,10 @@
 
         <!-- lfo: -->
         <!--positioning wrapperfix -->
-        <svg :viewBox="swingViewport" ref="swing">
+        <svg :viewBox="swingViewport">
 
         <!-- the swing: -->
-        <g v-if="this.module === 'lfo'"
+        <g v-if="this.module === 'lfo'" ref="swing"
           stroke="black"
           :style="swingStyle"
                           >
@@ -37,6 +37,24 @@
 
                 <circle :cx="0" :cy="displayHeight*0.6" :r="displayHeight/4"/>
           </g>
+
+          <g v-if="this.module === 'lfo'"
+            stroke="white"
+            fill="none"
+            ref="swingGoal"
+            :stroke-width="2"
+            :style="goalSwingStyle"
+                            >
+            <path
+              :stroke-width="2"
+              fill="none"
+              stroke="white"
+              :d="'m 0,'+ (-displayHeight/1.52)+
+                  ' v ' + (displayHeight)
+                  "/>
+
+                  <circle :cx="0" :cy="displayHeight*0.6" :r="displayHeight/4"/>
+            </g>
         </svg>
 
         <!-- // <path v-if="this.module === 'lfo'"
@@ -114,7 +132,9 @@ export default {
       lfoRotation: 20,
       seconds: null,
       shouldItGoRight: false,
-      intervalId: null
+      shouldGoalGoRight: false,
+      intervalId: null,
+      goalIntervalId: null
     }
   },
   mounted () {
@@ -123,14 +143,24 @@ export default {
     this.updateDimensions()
     window.addEventListener('resize', this.updateDimensions())
     console.log(this.$refs)
-    this.animateSwing(this.$refs.swing)
+    // this.animateSwing(this.$refs.swing)
+    // this.animateGoalSwing(this.$refs.swingGoal)
     if (this.module == 'lfo') {
       console.log('there should be an updating interval ready')
-      const rate = this.knobs[0]
+      // const rate = this.knobs[7]
+      //
+      // let realGoalFreq = this.knobs[7].value
+      //
+      // this.changeInterval(( 1 / (realGoalFreq) ) * 1000 )
       // const relativeTime = rate.value/(rate.max-rate.min)
       // max time I want the transition to go: 3
-      var intervalTest =  setInterval(this.updateSeconds, 1000)
+      this.change
+      var intervalTest =  setInterval(this.updateSeconds, this.knobs[7].value)
       this.intervalId = intervalTest
+
+
+        this.goalIntervalId = setInterval(this.updateGoalSeconds, (1 / (this.knobs[7].value) ) * 1000 )
+        console.log('just to saaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa')
 
     }
     // changeInterval = (time) => {
@@ -148,6 +178,9 @@ export default {
      const date = new Date()
      this.seconds = date.getSeconds()
      this.shouldItGoRight=!this.shouldItGoRight
+    },
+    updateGoalSeconds() {
+     this.shouldGoalGoRight=!this.shouldGoalGoRight
     },
 
     changeInterval(time) {
@@ -341,16 +374,6 @@ export default {
         const rate = this.knobs[0]
         const amount = this.knobs[1]
         const shape = this.knobs[2]
-        // let position = null
-        // Bart's little experiment
-        // setInterval(function(){
-        //   console.log('this.lfoRotation',this.lfoRotation);
-        //   if (this.lfoRotation === 40) {
-        //       this.lfoRotation = -40
-        //     } else{
-        //      this.lfoRotation = 40;
-        //    }
-        //  }, rate * 10 + 1000);
 
         // making a circle with a path..
         const circle = ' q ' + '0, ' + (-r) + ' ' + r + ', ' + (-r) +
@@ -364,21 +387,8 @@ export default {
         'a ' + r + ', ' + r + ' 0 1,0 ' + (2 * r) + ',0' +
         'a ' + r + ', ' + r + ' 0 1,0 ' + (-2 * r) + ',0'
 
-        // not good enough, since how would it be animated?
-
-        // might actually go with <circle>
-
-        // line = ' M ' + (this.displayWidth/2) + ', ' + this.displayHeight/2 +
-        // archCrcl +
-        // ' Z '
         line = ''
 
-        // ideas - GET back to it:
-        // [] lfo prop watched/computed
-        // [] transition
-        // [] stylesheetapi
-        //http://danielcwilson.com/blog/2017/10/all-the-transform-ways/ - does not work, the properties are not recognized
-        // https://developer.mozilla.org/en-US/docs/Web/API/Web_Animations_API
       }
 
       if (this.module === 'delay') {
@@ -478,8 +488,71 @@ export default {
       }
       return {transform: rotateString, transition: transitionString }
     },
+    goalSwingStyle() {
+      // helpers:
+      const rate = this.knobs[4]
+      const amount = this.knobs[5]
+      const shape = this.knobs[6]
+
+      const rateRatio = (rate.value/(rate.max-rate.min))
+      const amountRatio = (amount.value/(amount.max-amount.min))
+
+      const realGoalFreq = this.knobs[7].value
+
+      const transitionTime = ( 1 / (realGoalFreq) )
+      const rotateAmnt = 50
+
+
+      let transitionString;
+      if (shape.value=='sine') {
+        transitionString = transitionTime+'s'
+      } else if (shape.value == 'square') {
+        transitionString =''
+      } else if (shape.value == 'sawtooth') {
+        if (!this.shouldGoalGoRight) {
+          transitionString = transitionTime+'s linear'
+        }
+        else {
+          transitionString = ''
+        }
+      } else if (shape.value == 'triangle') {
+        transitionString = transitionTime+'s linear'
+      }
+      let rotateAmount = 2500*amountRatio;
+      let rotateString
+      if (this.shouldGoalGoRight){
+        // go right:
+        rotateString = 'rotate('+rotateAmount+'deg)'
+      } else {
+        // go left:
+        rotateString = 'rotate(-'+rotateAmount+'deg)'
+      }
+      return {transform: rotateString, transition: transitionString }
+    },
     pathGoal () {
       let line
+
+      if (this.module === 'lfo') {
+        // helpers:
+        const r = this.displayHeight / 4
+        const rate = this.knobs[4]
+        const amount = this.knobs[5]
+        const shape = this.knobs[6]
+
+        // making a circle with a path..
+        const circle = ' q ' + '0, ' + (-r) + ' ' + r + ', ' + (-r) +
+                       ' q ' + r + ', 0 ' + r + ', ' + r +
+                       ' q ' + '0, ' + r + ' ' + (-r) + ', ' + r +
+                       ' q ' + (-r) + ', 0 ' + (-r) + ', ' + (-r)
+
+        // the idea from https://codepen.io/jakob-e/pen/bgBegJ
+        const archCrcl = 'M' + ((this.displayWidth / 2) - r) + ', ' + ((this.displayHeight / 2)) +
+        // 'm '+(-r)+', 0'+
+        'a ' + r + ', ' + r + ' 0 1,0 ' + (2 * r) + ',0' +
+        'a ' + r + ', ' + r + ' 0 1,0 ' + (-2 * r) + ',0'
+
+        line = ''
+      }
 
       if (this.module === 'delay') {
         // helpers:
@@ -655,7 +728,6 @@ export default {
           // console.log(newValue)
           // let rateOutput = 1/(newValue*2)
           let realFreq = this.knobs[3].value
-          console.log();
 
           this.changeInterval(( 1 / (realFreq) ) * 1000 )
         }

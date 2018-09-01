@@ -12,11 +12,11 @@
           :knobs="[{name: 'Rate', min:1, max:100, value: this.frequency},
                    {name: 'Amount', min:0, max:4000, value: this.amount},
                    {name: 'Shape', min:0, max:3, value: this.type},
-                   {name: 'Real Frequency', min:0, max:3, value: this.realFrq},
-                   {name: 'Rate', min:1, max:100, value: this.frequency},
-                   {name: 'Amount', min:0, max:4000, value: this.amount},
-                   {name: 'Shape', min:0, max:3, value: this.type},
-                   {name: 'Fake', min:0, max:3, value: 'fake'}
+                   {name: 'rl', min:0, max:3, value: this.realFrq},
+                   {name: 'Rate', min:1, max:100, value: this.frequencyGoal},
+                   {name: 'Amount', min:0, max:4000, value: this.amountGoal},
+                   {name: 'Shape', min:0, max:3, value: this.typeGoal},
+                   {name: 'Rlgl', min:0, max:3, value: Math.pow(this.frequencyGoal, (this.frequencyGoal / 100)) - 1}
                    ]"/>
         <div class="knobs">
           <module-knob
@@ -104,6 +104,9 @@ export default {
     }),
     ...mapState({
       typeArray: state => state.gameState.possibleValues.lfo.type,
+      frequencyGoal: state => state.gameState.goal.lfo.frequency,
+      typeGoal: state => state.gameState.goal.lfo.type,
+      amountGoal: state => state.gameState.goal.lfo.amount,
     })
   },
   watch: {

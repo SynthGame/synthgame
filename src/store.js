@@ -42,8 +42,8 @@ export default new Vuex.Store({
         // phase: 0
       },
       reverb: {
-        roomSize: 0,
-        wet: 0
+        roomSize: 20,
+        wet: 20
       }
     },
     gameState: {
@@ -69,7 +69,7 @@ export default new Vuex.Store({
         lfo: {
           frequency: 10,
           type: 'square',
-          amount: 0
+          amount: 50
         },
         oscillator: {
           frequency: 65,
