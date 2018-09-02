@@ -364,7 +364,10 @@ export default {
         const wetRatio = wet.value/(wet.max-wet.min)
 
         const barWidth = 15
-        const spaceBetween = timeRatio*this.displayWidth/3 + 15
+        // const spaceBetween = timeRatio*this.displayWidth/3 + 15
+        const spaceBetween = timeRatio*this.displayWidth/12 + 15
+
+        const barTrigger = 100 / 7
 
         line = 'M 0, 0 ' +
                'm 0, ' + (this.displayHeight+this.displayHeight*(1-wetRatio)) +
@@ -372,18 +375,18 @@ export default {
 
                // DRY-nasty, sure
                // the 7.142... number is a result of 100/14
-               ((feedbackRatio > 7.142857143*2/100) ? this.drawDelayBar(spaceBetween, barWidth, 1):'') +
-               ((feedbackRatio > 7.142857143*3/100) ? this.drawDelayBar(spaceBetween, barWidth, 2):'') +
-               ((feedbackRatio > 7.142857143*4/100) ? this.drawDelayBar(spaceBetween, barWidth, 3):'') +
-               ((feedbackRatio > 7.142857143*5/100) ? this.drawDelayBar(spaceBetween, barWidth, 4):'') +
-               ((feedbackRatio > 7.142857143*6/100) ? this.drawDelayBar(spaceBetween, barWidth, 5):'') +
-               ((feedbackRatio > 7.142857143*7/100) ? this.drawDelayBar(spaceBetween, barWidth, 6):'') +
-               ((feedbackRatio > 7.142857143*8/100) ? this.drawDelayBar(spaceBetween, barWidth, 7):'') +
-               ((feedbackRatio > 7.142857143*9/100) ? this.drawDelayBar(spaceBetween, barWidth, 8):'') +
-               ((feedbackRatio > 7.142857143*10/100) ? this.drawDelayBar(spaceBetween, barWidth, 9):'') +
-               ((feedbackRatio > 7.142857143*11/100) ? this.drawDelayBar(spaceBetween, barWidth, 10):'') +
-               ((feedbackRatio > 7.142857143*12/100) ? this.drawDelayBar(spaceBetween, barWidth, 11):'') +
-               ((feedbackRatio > 7.142857143*13/100) ? this.drawDelayBar(spaceBetween, barWidth, 12):'')
+               ((feedbackRatio > barTrigger*2/100) ? this.drawDelayBar(spaceBetween, barWidth, 1):'') +
+               ((feedbackRatio > barTrigger*3/100) ? this.drawDelayBar(spaceBetween, barWidth, 2):'') +
+               ((feedbackRatio > barTrigger*4/100) ? this.drawDelayBar(spaceBetween, barWidth, 3):'') +
+               ((feedbackRatio > barTrigger*5/100) ? this.drawDelayBar(spaceBetween, barWidth, 4):'') +
+               ((feedbackRatio > barTrigger*6/100) ? this.drawDelayBar(spaceBetween, barWidth, 5):'') +
+               ((feedbackRatio > barTrigger*7/100) ? this.drawDelayBar(spaceBetween, barWidth, 6):'') +
+               ((feedbackRatio > barTrigger*8/100) ? this.drawDelayBar(spaceBetween, barWidth, 7):'') +
+               ((feedbackRatio > barTrigger*9/100) ? this.drawDelayBar(spaceBetween, barWidth, 8):'') +
+               ((feedbackRatio > barTrigger*10/100) ? this.drawDelayBar(spaceBetween, barWidth, 9):'') +
+               ((feedbackRatio > barTrigger*11/100) ? this.drawDelayBar(spaceBetween, barWidth, 10):'') +
+               ((feedbackRatio > barTrigger*12/100) ? this.drawDelayBar(spaceBetween, barWidth, 11):'') +
+               ((feedbackRatio > barTrigger*13/100) ? this.drawDelayBar(spaceBetween, barWidth, 12):'')
 
 
       }
@@ -517,26 +520,27 @@ export default {
         const wetRatio = wet.value/(wet.max-wet.min)
 
         const barWidth = 0
-        const spaceBetween = timeRatio*this.displayWidth/3 + 30
+        const spaceBetween = timeRatio*this.displayWidth/7 + 28
+        const barTrigger = 100 / 7
 
         line = 'M 0, 0 ' +
                'm 0, ' + (this.displayHeight+this.displayHeight*(1-wetRatio)) +
-               this.drawDelayBar((spaceBetween - 7.5), barWidth, 0) +
+               this.drawDelayBar(spaceBetween - 7, barWidth, 0) +
 
                // DRY-nasty, sure
                // the 7.142... number is a result of 100/14
-               ((feedbackRatio > 7.142857143*2/100) ? this.drawDelayBar(spaceBetween, barWidth, 1):'') +
-               ((feedbackRatio > 7.142857143*3/100) ? this.drawDelayBar(spaceBetween, barWidth, 2):'') +
-               ((feedbackRatio > 7.142857143*4/100) ? this.drawDelayBar(spaceBetween, barWidth, 3):'') +
-               ((feedbackRatio > 7.142857143*5/100) ? this.drawDelayBar(spaceBetween, barWidth, 4):'') +
-               ((feedbackRatio > 7.142857143*6/100) ? this.drawDelayBar(spaceBetween, barWidth, 5):'') +
-               ((feedbackRatio > 7.142857143*7/100) ? this.drawDelayBar(spaceBetween, barWidth, 6):'') +
-               ((feedbackRatio > 7.142857143*8/100) ? this.drawDelayBar(spaceBetween, barWidth, 7):'') +
-               ((feedbackRatio > 7.142857143*9/100) ? this.drawDelayBar(spaceBetween, barWidth, 8):'') +
-               ((feedbackRatio > 7.142857143*10/100) ? this.drawDelayBar(spaceBetween, barWidth, 9):'') +
-               ((feedbackRatio > 7.142857143*11/100) ? this.drawDelayBar(spaceBetween, barWidth, 10):'') +
-               ((feedbackRatio > 7.142857143*12/100) ? this.drawDelayBar(spaceBetween, barWidth, 11):'') +
-               ((feedbackRatio > 7.142857143*13/100) ? this.drawDelayBar(spaceBetween, barWidth, 12):'')
+               ((feedbackRatio > barTrigger*2/100) ? this.drawDelayBar(spaceBetween, barWidth, 1):'') +
+               ((feedbackRatio > barTrigger*3/100) ? this.drawDelayBar(spaceBetween, barWidth, 2):'') +
+               ((feedbackRatio > barTrigger*4/100) ? this.drawDelayBar(spaceBetween, barWidth, 3):'') +
+               ((feedbackRatio > barTrigger*5/100) ? this.drawDelayBar(spaceBetween, barWidth, 4):'') +
+               ((feedbackRatio > barTrigger*6/100) ? this.drawDelayBar(spaceBetween, barWidth, 5):'') +
+               ((feedbackRatio > barTrigger*7/100) ? this.drawDelayBar(spaceBetween, barWidth, 6):'') +
+               ((feedbackRatio > barTrigger*8/100) ? this.drawDelayBar(spaceBetween, barWidth, 7):'') +
+               ((feedbackRatio > barTrigger*9/100) ? this.drawDelayBar(spaceBetween, barWidth, 8):'') +
+               ((feedbackRatio > barTrigger*10/100) ? this.drawDelayBar(spaceBetween, barWidth, 9):'') +
+               ((feedbackRatio > barTrigger*11/100) ? this.drawDelayBar(spaceBetween, barWidth, 10):'') +
+               ((feedbackRatio > barTrigger*12/100) ? this.drawDelayBar(spaceBetween, barWidth, 11):'') +
+               ((feedbackRatio > barTrigger*13/100) ? this.drawDelayBar(spaceBetween, barWidth, 12):'')
 
         return line
       }
