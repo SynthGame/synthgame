@@ -83,6 +83,29 @@ export default {
 <style lang="scss">
 @import url('https://fonts.googleapis.com/css?family=Montserrat:300,900');
 
+.tabs {
+  display: none;
+  justify-content: space-between;
+  position: absolute;
+  bottom: 0;
+  width: 100vw;
+  height: 10vh;
+  align-items: center;
+  &__tab {
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 16.66%;
+    border: .5px solid white;
+    cursor: pointer;
+    &:hover {
+      background: white;
+      color: black;
+    }
+  }
+}
+
 .module {
   height: 50%;
   width: 33.3%;
@@ -194,5 +217,22 @@ body {
       color: #42b983;
     }
   }
+}
+
+@media only screen and (max-width: 1000px) {
+    .tabs {
+      display: flex;
+    }
+    .module {
+      width: 100vw;
+      height: 90vh;
+      position: absolute;
+      opacity: 0;
+    }
+    .module.active {
+      left: 0;
+      opacity: 1;
+      z-index: 1;
+    }
 }
 </style>
