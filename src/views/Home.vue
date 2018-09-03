@@ -1,11 +1,21 @@
 <template>
-  <div class="level">
-    <OscillatorModule />
-    <FilterModule />
-    <EnvelopeModule />
-    <LfoModule />
-    <DelayModule />
-    <ReverbModule />
+  <div class="game">
+    <div class="level">
+      <OscillatorModule :class="[(activeModule == 0 ? 'active' : '')]" />
+      <FilterModule :class="[(activeModule == 1 ? 'active' : '')]" />
+      <EnvelopeModule :class="[(activeModule == 2 ? 'active' : '')]" />
+      <LfoModule :class="[(activeModule == 3 ? 'active' : '')]" />
+      <DelayModule :class="[(activeModule == 4 ? 'active' : '')]" />
+      <ReverbModule :class="[(activeModule == 5 ? 'active' : '')]" />
+    </div>
+    <div class="tabs">
+      <div @click="showOsc" class="tabs__tab tabs__osc">Osc</div>
+      <div @click="showFil" class="tabs__tab tabs__filter">Fil</div>
+      <div @click="showEnv" class="tabs__tab tabs__env">Env</div>
+      <div @click="showLfo" class="tabs__tab tabs__lfo">Lfo</div>
+      <div @click="showDel" class="tabs__tab tabs__delay">Del</div>
+      <div @click="showRev" class="tabs__tab tabs__reverb">Rev</div>
+    </div>
   </div>
 </template>
 
@@ -20,6 +30,11 @@ import ReverbModule from '@/components/module/ReverbModule.vue'
 
 export default {
   name: 'home',
+  data () {
+    return {
+      activeModule: 0,
+    }
+  },
   components: {
     OscillatorModule,
     EnvelopeModule,
@@ -27,6 +42,34 @@ export default {
     LfoModule,
     DelayModule,
     ReverbModule
+  },
+  methods: {
+    showOsc () {
+      this.activeModule = 0;
+    },
+    showFil () {
+      this.activeModule = 1;
+    },
+    showEnv () {
+      this.activeModule = 2;
+    },
+    showLfo () {
+      this.activeModule = 3;
+    },
+    showDel () {
+      this.activeModule = 4;
+    },
+    showRev () {
+      this.activeModule = 5;
+    },
   }
 }
 </script>
+
+<style scoped lang="scss">
+
+.active {
+    left: 0;
+}
+
+</style>
