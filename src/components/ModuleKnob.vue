@@ -122,9 +122,9 @@
                 </g>
               </g>
                 <!-- <g :style="{transition: '.2s all linear'}" :transform="'rotate(' + (((this.value / (this.max - (this.min * 0.9))) * 310) + (this.max*0.9) + 18) + ' 264 285) translate(0, 206)'" > -->
-                <g :style="{transition: '.2s all linear'}" :transform="'rotate(' + (((this.value / (this.max - this.min)) * 310) + 18) + ' 264 285) translate(0, 206)'" >
+                <g :style="{transition: '.2s all linear'}" :transform="'rotate(' + (((this.value / (this.max - this.min)) * 310) + 18) + ' 264 285) translate(0, 236)'" >
                   <defs>
-                    <radialGradient id="grad1" cx="50%" cy="75%" r="50%" fx="50%" fy="75%">
+                    <radialGradient id="grad1" cx="50%" cy="75%" r="60%" fx="50%" fy="75%">
                       <stop offset="0%" style="stop-color:rgba(0,0,0,1);
                       stop-opacity:1" />
                       <stop offset="50%" style="stop-color:rgba(0,0,0,1);stop-opacity:1" />
