@@ -9,6 +9,7 @@
               :d="path"
               fill="black"
               style="fill-rule: nozero"
+              :class="{reverb: module=== 'reverb'}"
               />
 
         <path v-if="this.module === 'oscillator' || this.module === 'filter' || this.module === 'envelope' || this.module === 'delay'"
@@ -21,7 +22,7 @@
 
         <!-- lfo: -->
         <!--positioning wrapperfix -->
-        <svg :viewBox="swingViewport">
+        <svg :viewBox="lfoVB">
 
         <!-- the swing: -->
         <g v-if="this.module === 'lfo'" ref="swing"
@@ -35,7 +36,7 @@
                 ' v ' + (displayHeight)
                 "/>
 
-                <circle :cx="0" :cy="displayHeight*0.6" :r="displayHeight/4"/>
+                <circle :cx="0" :cy="displayHeight*0.6" :r="displayHeight/4" />
           </g>
 
           <g v-if="this.module === 'lfo'"
@@ -57,16 +58,59 @@
             </g>
         </svg>
 
-        <text x="45%" y="40%" fill="transparent">
+        <!-- Reverb: -->
+        <svg :viewBox="reverbVB" v-if="module==='reverb'">
+          <g>
+            <circle :r="reverbCirclesRay(1)"
+                    :cy="displayHeight/2"
+                    :cx="firstCircleLeftMargin" class="reverb"
+                    style="fill: red"/>
+            <circle :r="reverbCirclesRay(2)"
+                    :cy="displayHeight/2"
+                    :cx="spaceBetweenReverbCicles(2)"
+                    class="reverb"/>
+            <circle :r="reverbCirclesRay(3)"
+                    :cy="displayHeight/2"
+                    :cx="spaceBetweenReverbCicles(3)"
+                    class="reverb"/>
+            <circle :r="reverbCirclesRay(4)"
+                    :cy="displayHeight/2"
+                    :cx="spaceBetweenReverbCicles(4)"
+                    class="reverb"/>
+            <circle :r="reverbCirclesRay(5)"
+                    :cy="displayHeight/2"
+                    :cx="spaceBetweenReverbCicles(5)"
+                    class="reverb"/>
+            <circle :r="reverbCirclesRay(6)"
+                    :cy="displayHeight/2"
+                    :cx="spaceBetweenReverbCicles(6)"
+                    class="reverb"/>
+            <circle :r="reverbCirclesRay(7)"
+                    :cy="displayHeight/2"
+                    :cx="190"
+                    class="reverb"/>
+            <circle :r="reverbCirclesRay(8)"
+                    :cy="displayHeight/2"
+                    :cx="spaceBetweenReverbCicles(7)"
+                    class="reverb"/>
+            <circle :r="reverbCirclesRay(9)"
+                    :cy="displayHeight/2"
+                    :cx="spaceBetweenReverbCicles(8)"
+                    class="reverb"/>
+            <circle :r="reverbCirclesRay(10)" :cy="displayHeight/2" :cx="spaceBetweenReverbCicles(9)" class="reverb"/>
+          </g>
+        </svg>
+
+        <text x="45%" y="40%" fill="red">
           <tspan x="45%" y="50%">{{knobs[0].name}}: {{knobs[0].value}}</tspan>
           <tspan x="45%" y="60%">{{knobs[1].name}}: {{knobs[1].value}}</tspan>
-          <tspan x="45%" y="70%">{{knobs[2].name}}: {{knobs[2].value}}</tspan>
+          <tspan x="45%" y="70%" v-if="this.knobs[2]">{{knobs[2].name}}: {{knobs[2].value}}</tspan>
           <tspan x="45%" y="80%" v-if="this.knobs[3]">{{knobs[3].name}}: {{knobs[3].value}}</tspan>
         </text>
-        <text v-if="this.module === 'oscillator' || 'filter'" fill="transparent">
-          <tspan x="0%" y="50%">{{knobs[4].name}}: {{knobs[4].value}}</tspan>
-          <tspan x="0%" y="60%">{{knobs[5].name}}: {{knobs[5].value}}</tspan>
-          <tspan x="0%" y="70%">{{knobs[6].name}}: {{knobs[6].value}}</tspan>
+        <text v-if="this.module === 'oscillator' || 'filter'" fill="red">
+          <tspan x="0%" y="50%" v-if="this.knobs[4]">{{knobs[4].name}}: {{knobs[4].value}}</tspan>
+          <tspan x="0%" y="60%" v-if="this.knobs[5]">{{knobs[5].name}}: {{knobs[5].value}}</tspan>
+          <tspan x="0%" y="70%" v-if="this.knobs[6]">{{knobs[6].name}}: {{knobs[6].value}}</tspan>
           <tspan x="0%" y="80%" v-if="this.knobs[7]">{{knobs[7].name}}: {{knobs[7].value}}</tspan>
         </text>
       </svg>
@@ -104,10 +148,20 @@ import store from '../store'; // path to your Vuex store
 // https://developer.mozilla.org/en-US/docs/Web/API/Web_Animations_API
 // [~] try transitions: define two kinds of transforms with class and switch between them
 // [v] a bit more complicated : set interval with a callback function changing a bolean data property every given time, watch changes in the rate knob to call a function replacing the current interval time with a new one. Custom transition bound and used to indicate LFO's shape
+// [v] cleanup
 // STILL TODO:
 // [] bug: the swing does not update when the knob is held/ slowly turned
 // [] sawtooth timing
-// [v] cleanup
+
+// Week 3.:
+// [] Reverb screen
+// circles no: the design way
+// <circles> czy path?
+// size changes circles move aparart
+// dry/wet - size of the circles
+//
+//
+
 
 // delay:
 // [v] drynevss shall be controlling y positioning of all the elements
@@ -192,11 +246,54 @@ export default {
                   ' v ' + (basicBarHeight-diff)
       return bar
     },
+    drawReverbCicle (mutiplier,r) {
+      const ratio = r*mutiplier
+      const rTimes2 = 2*ratio
+      const circle = 'a '+ratio+', '+ ratio+ ' 0 1,0 ' +rTimes2+',0'+
+        'a '+ratio+', '+ratio + ' 0 1,0 '+(-rTimes2)+',0'
+      return circle
+    }
   },
   computed: {
     // used to refer to LFO rate knob in a watcher (no way to do it directly using because of "[...]")
+    firstCircleLeftMargin() {
+      let margin = ''
+      if (this.module === 'reverb'){
+        // helpers:
+        const sizeRatio = this.knobs[0].value/(this.knobs[0].max - this.knobs[0].min)
+        margin = (this.displayWidth/8)*(1-sizeRatio)
+      }
+      return margin
+    },
+    reverbCirclesRay(){
+      if (this.module =='reverb') {
+        const ratio = this.knobs[1].value/(this.knobs[1].max - this.knobs[1].min)
+        return number => this.displayHeight*(0.38-(number*3*0.01)) + 20*ratio
+       }
+      return ''
+    },
+    spaceBetweenReverbCicles() {
+      if (this.module === 'reverb') {
+        const sizeRatio = this.knobs[0].value/(this.knobs[0].max - this.knobs[0].min)
+        let max =100
+        const min = 10
+        let cumulate = this.firstCircleLeftMargin;
+        const cumulateDistances = (number) => {
+          for (let i=0; i> number.length; i++) {
+            cumulate = cumulate + (sizeRatio*max)
+          }
+          return cumulate
+        }
+        return number => {
+          return this.firstCircleLeftMargin + number*(max*sizeRatio)
+        }
+      }
+      return ''
+    },
     lfoValue() {
-      return this.knobs[0].value
+      if (this.module === 'lfo') {
+        return this.knobs[0].value
+      }
     },
     path () {
       let line
@@ -391,16 +488,43 @@ export default {
 
       }
       if (this.module === 'reverb') {
+
+
+        // Reverb path not going to work!
+        // Each circle neccessitates its own opacity
+
         // helpers:
+        const size = this.knobs[0]
+        const dry = this.knobs[1]
 
-        line = ''
+        const sizeRatio = size.value/(size.max-size.min)
+        const dryRatio = dry.value/(dry.max-dry.min)
+        const r = this.displayHeight*0.4
 
+
+        line = 'M 0,0' +
+               'm 0,' + this.displayHeight/2 +
+               this.drawReverbCicle(1,r) +
+               this.drawReverbCicle(0.9,r) +
+               this.drawReverbCicle(0.8,r) +
+               this.drawReverbCicle(0.7,r) +
+               this.drawReverbCicle(0.6,r) +
+               this.drawReverbCicle(0.5,r) +
+               this.drawReverbCicle(0.4,r) +
+               this.drawReverbCicle(0.3,r) +
+               this.drawReverbCicle(0.2,r) +
+               this.drawReverbCicle(0.1,r)
+        // disable
+        line= ''
       }
       return line
     },
 
-    swingViewport() {
+    lfoVB() {
       return (0-this.displayWidth/2) + ' 0 ' + this.displayWidth + ' ' + this.displayHeight
+    },
+    reverbVB() {
+      return '0,0,'+this.displayWidth+ ',' + this.displayHeight
     },
     swingStyle() {
       // helpers:
@@ -679,6 +803,7 @@ export default {
 
           this.changeInterval(( 1 / (realFreq) ) * 1000 )
         }
+        return
       },
       deep: true
     }
@@ -691,4 +816,7 @@ export default {
  path {
    display: inline-block;
  }
+ .reverb {
+   fill-opacity: 0.5
+}
  </style>

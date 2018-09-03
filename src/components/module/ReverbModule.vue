@@ -5,7 +5,12 @@
       <h3 v-if="dialsAreWithinMargin" slot="subtitle">Done!</h3>
       <h3 v-else slot="subtitle">Reverb</h3>
     </module-title>
-    <!-- <display class="display" module="reverb"/> -->
+    <module-display class="display"
+             module="reverb"
+             fill="#3c32ff"
+             :knobs="[{name: 'Room Size', min:1, max:100, value: this.roomSize},
+                      {name: 'Dry / Wet', min:1, max:100, value: this.wet}
+                      ]"/>
     <div class="knobs">
       <module-knob
         v-model="roomSize"
