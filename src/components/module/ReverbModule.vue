@@ -32,6 +32,7 @@ import { vuexSyncGen } from '@/utils'
 import { MODULE_REVERB_COLOR } from '@/constants'
 
 import audio from '@/audio'
+import character from '@/character'
 import ModuleKnob from '@/components/ModuleKnob.vue'
 import ModuleDisplay from '@/components/ModuleDisplay.vue'
 import ModuleTitle from './ModuleComponents/ModuleTitle.vue'
@@ -67,10 +68,10 @@ export default {
         .every(param => param)
     },
     ...vuexSyncGen('reverb', 'wet', val => {
-      self.reverb.wet.value = val / 100
+      self.reverb.wet.value = character.reverb.wet(val)
     }),
     ...vuexSyncGen('reverb', 'roomSize', val => {
-      self.reverb.roomSize.value = val / 100
+      self.reverb.roomSize.value = character.reverb.roomSize(val)
     })
   }
 }

@@ -4,7 +4,7 @@ import { DEBUG_ENABLED } from '@/constants'
 // define logging mechanism
 const log = (log) => DEBUG_ENABLED ? console.info(log) : log
 
-export default {
+const audioInstance = () => ({
   state: {
     Tone: Tone,
     loop: undefined,
@@ -175,4 +175,6 @@ export default {
       return this.state.device.generate() // generate new reverb returns promise
     }
   }
-}
+})
+
+export default {...new audioInstance(), ...{goalMirrorInstance: new audioInstance()}}

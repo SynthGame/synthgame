@@ -53,6 +53,7 @@ import { vuexSyncGen } from '@/utils'
 import { MODULE_DELAY_COLOR } from '@/constants'
 
 import audio from '@/audio'
+import character from '@/character'
 import ModuleKnob from '@/components/ModuleKnob.vue'
 import ModuleDisplay from '@/components/ModuleDisplay.vue'
 import ModuleTitle from './ModuleComponents/ModuleTitle.vue'
@@ -85,13 +86,13 @@ export default {
     ...vuexSyncGen('delay', 'delayTime', val => {
       // const nth = 2 ** self.delayTime // 2 to the power of delaytime
       // return `${nth}n`
-      self.delay.delayTime.value = val / 100
+      self.delay.delayTime.value = character.delay.delayTime(val)
     }),
     ...vuexSyncGen('delay', 'wet', val => {
-      self.delay.wet.value = val / 100
+      self.delay.wet.value = character.delay.wet(val)
     }),
     ...vuexSyncGen('delay', 'feedback', val => {
-      self.delay.feedback.value = val / 100
+      self.delay.feedback.value = character.delay.feedback(val)
     }),
     ...mapState({
       delayTimeGoal: state => state.gameState.goal.delay.delayTime,

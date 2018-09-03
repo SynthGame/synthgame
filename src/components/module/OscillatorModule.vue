@@ -58,6 +58,7 @@ import { vuexSyncGen, mapValueToRange } from '@/utils'
 import { MODULE_OSCILLATOR_COLOR } from '@/constants'
 
 import audio from '@/audio'
+import character from '@/character'
 import ModuleKnob from '@/components/ModuleKnob.vue'
 import ModuleDisplay from '@/components/ModuleDisplay.vue'
 import ModuleTitle from './ModuleComponents/ModuleTitle.vue'
@@ -91,25 +92,25 @@ export default {
         .every(param => param)
     },
     ...vuexSyncGen('oscillator', 'frequency', val => {
-      self.oscillator.frequency.value = val
+      self.oscillator.frequency.value = character.oscillator.frequency(val)
     }),
     ...vuexSyncGen('oscillator', 'typeOsc', val => {
-      if (self.oscillator.type === val) return
-      self.oscillator.type = val
+      if (self.oscillator.type === character.oscillator.typeOsc(val)) return
+      self.oscillator.type = character.oscillator.typeOsc(val)
       self.oscillator.stop()
       self.oscillator.start()
     }),
-    ...vuexSyncGen('oscillator', 'phase', val => {
-      self.oscillator.phase = val // phase in degrees
-    }),
+    // ...vuexSyncGen('oscillator', 'phase', val => {
+    //   self.oscillator.phase = character.oscillator.phase(val) // phase in degrees
+    // }),
     ...vuexSyncGen('oscillator', 'detune', val => {
-      self.oscillator.detune.value = (val * 2) - 120
+      self.oscillator.detune.value = character.oscillator.detune(val)
     }),
     ...mapState({
       frequencyGoal: state => state.gameState.goal.oscillator.frequency,
       typeOscGoal: state => state.gameState.goal.oscillator.typeOsc,
       detuneGoal: state => state.gameState.goal.oscillator.detune,
-      phaseGoal: state => state.gameState.goal.oscillator.phase,
+      // phaseGoal: state => state.gameState.goal.oscillator.phase,
       typeArray: state => state.gameState.possibleValues.oscillator.typeOsc,
       freqArray: state => state.gameState.possibleValues.oscillator.frequency,
     })

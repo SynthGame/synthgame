@@ -53,6 +53,7 @@ import { vuexSyncGen, mapValueToRange } from '@/utils'
 import { MODULE_FILTER_COLOR } from '@/constants'
 
 import audio from '@/audio'
+import character from '@/character'
 import ModuleKnob from '@/components/ModuleKnob.vue'
 import ModuleDisplay from '@/components/ModuleDisplay.vue'
 import ModuleTitle from './ModuleComponents/ModuleTitle.vue'
@@ -93,14 +94,13 @@ export default {
     },
     ...vuexSyncGen('filter', 'cutOffFreq', val => {
       // self.filter.frequency.value = val
-      self.filter.frequency.value = Math.pow((val * 200), (val / 100)) + 20
+      self.filter.frequency.value = character.filter.cutOffFreq(val)
     }),
     ...vuexSyncGen('filter', 'type', val => {
-      if (self.filter.type === val) return
-      self.filter.type = val
+      self.filter.type = character.filter.type(val)
     }),
     ...vuexSyncGen('filter', 'setQ', val => {
-      self.filter.Q.value = val / 8
+      self.filter.Q.value = character.filter.setQ(val)
     }),
     // ...vuexSyncGen('filter', 'gain', val => {
     //   self.filter.gain.value = val
