@@ -19,17 +19,16 @@ export default {
 
     }
   },
-  methods: {
-  },
   created () {
     // initialize the synth
     audio.init()
     // create loop wich sequences 4 notes
     const loop = audio.setMainLoop({
-      noteArray: ['C4', 'E4', 'G4', 'A4'], // ['c4']
+      noteArray: [0,1,2,3], // ['c4']
       subdivision: '4n'
     }, (time, note) => {
-      audio.envelope.playNote("'" + note +"'")
+      // audio.playNote(note)
+      audio.playNote(Math.round(12 * Math.random())) // let's have some fun
     })
     // set BPM
     audio.setBpm(SYNTH_BPM)
@@ -55,6 +54,23 @@ export default {
       }
       // const key = event.key
     })
+  },
+  computed: {
+    allParametersMatchGoal () {
+      return this.$store.getters.allParametersMatchGoal
+    }
+  },
+  methods: {
+    displaySuccesMessage () {
+      alert('Well done!')
+      // this.$store.dispatch('randomizeAudioParameters')
+      this.$store.dispatch('randomizGoalParameters')
+    }
+  },
+  watch: {
+    allParametersMatchGoal (val) {
+      if(val) this.displaySuccesMessage()
+    }
   }
 }
 </script>

@@ -124,14 +124,12 @@ export default new Vuex.Store({
   },
   getters: {
     allParametersMatchGoal: (state, getters) => {
-      console.log('allParametersMatchGoal triggered!');
       return flatMap(getters.audioParametersMatchGoalWithMargin, val => values(val))
         .every(val => val)
     },
     audioParametersMatchGoalWithMargin: (state) => {
       return mapValues(state.audioParameters, (val, moduleName) => {
         return mapValues(val, (val, parameterName) => {
-          console.log(val, state.gameState.goal[moduleName][parameterName])
           return isArray(state.gameState.possibleValues[moduleName][parameterName])
             ? (val === state.gameState.goal[moduleName][parameterName])
             : inRange(val,
