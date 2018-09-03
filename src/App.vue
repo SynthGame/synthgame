@@ -9,6 +9,8 @@
 </template>
 
 <script>
+import random from 'lodash/random'
+import times from 'lodash/times'
 import audio from '@/audio'
 import { SYNTH_BPM } from '@/constants'
 
@@ -24,11 +26,11 @@ export default {
     audio.init()
     // create loop wich sequences 4 notes
     const loop = audio.setMainLoop({
-      noteArray: [0,1,2,3], // ['c4']
+      noteArray: times(4).map(i => random(-12, 12)),
       subdivision: '4n'
     }, (time, note) => {
-      // audio.playNote(note)
-      audio.playNote(Math.round(12 * Math.random())) // let's have some fun
+      audio.playNote(note)
+      // audio.playNote(Math.round(12 * Math.random())) // let's have some fun
     })
     // set BPM
     audio.setBpm(SYNTH_BPM)
@@ -65,6 +67,9 @@ export default {
       alert('Well done!')
       // this.$store.dispatch('randomizeAudioParameters')
       this.$store.dispatch('randomizGoalParameters')
+      times(4).forEach(i => {
+        audio.state.loop.at(i, random(-12, 12))
+      });
     }
   },
   watch: {
