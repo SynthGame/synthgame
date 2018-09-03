@@ -60,6 +60,7 @@ import { vuexSyncGen } from '@/utils'
 import { MODULE_ENVELOPE_COLOR } from '@/constants'
 
 import audio from '@/audio'
+import character from '@/character'
 import ModuleKnob from '@/components/ModuleKnob.vue'
 import ModuleDisplay from '@/components/ModuleDisplay.vue'
 import ModuleTitle from './ModuleComponents/ModuleTitle.vue'
@@ -104,16 +105,16 @@ export default {
         .every(param => param)
     },
     ...vuexSyncGen('envelope', 'attack', val => {
-      self.envelope.attack = val + 0.01
+      self.envelope.attack = character.envelope.attack(val)
     }),
     ...vuexSyncGen('envelope', 'decay', val => {
-      self.envelope.decay = Math.pow(val, (val / 100)) - 0.99
+      self.envelope.decay = character.envelope.decay(val)
     }),
     ...vuexSyncGen('envelope', 'sustain', val => {
-      self.envelope.sustain = val / 100
+      self.envelope.sustain = character.envelope.sustain(val)
     }),
     ...vuexSyncGen('envelope', 'release', val => {
-      self.envelope.release = val
+      self.envelope.release = character.envelope.release(val)
     }),
     ...mapState({
       attackGoal: state => state.gameState.goal.envelope.attack,

@@ -53,6 +53,7 @@ import { vuexSyncGen, mapValueToRange } from '@/utils'
 import { MODULE_LFO_COLOR } from '@/constants'
 
 import audio from '@/audio'
+import character from '@/character'
 import ModuleKnob from '@/components/ModuleKnob.vue'
 import ModuleDisplay from '@/components/ModuleDisplay.vue'
 import ModuleTitle from './ModuleComponents/ModuleTitle.vue'
@@ -90,15 +91,15 @@ export default {
         .every(param => param)
     },
     ...vuexSyncGen('lfo', 'frequency', val => {
-      self.lfo.frequency.value = Math.pow(val, (val / 100)) - 1
-      self.realFrq = Math.pow(val, (val / 100)) - 1
+      self.lfo.frequency.value = character.lfo.frequency(val)
+      self.realFrq = character.lfo.frequency(val)
     }),
     ...vuexSyncGen('lfo', 'amount', val => {
-      self.lfo.max = (val * 40)
+      self.lfo.max = character.lfo.amount(val)
     }),
     ...vuexSyncGen('lfo', 'type', val => {
-      if (self.lfo.type === val) return
-      self.lfo.type = val
+      if (self.lfo.type === character.lfo.type(val)) return
+      self.lfo.type = character.lfo.type(val)
       self.lfo.stop()
       self.lfo.start()
     }),

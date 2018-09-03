@@ -4,10 +4,11 @@ import { DEBUG_ENABLED } from '@/constants'
 // define logging mechanism
 const log = (log) => DEBUG_ENABLED ? console.info(log) : log
 
-export default {
+const audioInstance = () => ({
   state: {
     Tone: Tone,
-    loop: undefined
+    loop: undefined,
+    toneLength: '16n'
   },
   init () {
     log('initializing all submodules before using')
@@ -19,6 +20,7 @@ export default {
     this.reverb.init()
 
     const oscillator = this.oscillator.state.device
+    const pitchShift = this.oscillator.state.pitchShift
     const envelope = this.envelope.state.device
     const lfo = this.lfo.state.device
     const filter = this.filter.state.device
@@ -29,8 +31,8 @@ export default {
     lfo.connect(filter.frequency).start()
     log(`Generating reverb`)
     // reverb.generate()
-    log(`Chaining oscillator => envelope => filter => delay => reverb to Master`)
-    oscillator.chain(envelope, filter, reverb, delay, Tone.Master)
+    log(`Chaining oscillator => pitch shift => envelope => filter => delay => reverb to Master`)
+    oscillator.chain(pitchShift, envelope, filter, reverb, delay, Tone.Master)
     log(`Starting oscillator`)
     oscillator.start()
   },
@@ -53,9 +55,20 @@ export default {
     // disconnect outputs?
     return channel.toMaster()
   },
+  playNote (shift) {
+    log(`Playing shifted note: ${shift}`)
+    this.oscillator.state.pitchShift.pitch = shift
+    return this.envelope.state.device.triggerAttackRelease(this.state.toneLength)
+  },
+  setToneLength (length) {
+    log(`setting envelope tone length to: ${length}`)
+    this.state.toneLength = length
+    return this.state.toneLength
+  },
   oscillator: {
     state: {
-      device: undefined
+      device: undefined,
+      pitchShift: undefined
     },
     init (options) {
       log(`Initializing oscillator with options: ${options}`)
@@ -66,12 +79,13 @@ export default {
         phase: 0,
         ...options
       })
+      log(`Initializing pitch shift effect on oscillator`)
+      this.state.pitchShift = new Tone.PitchShift()
     }
   },
   envelope: {
     state: {
-      device: undefined,
-      envelopeToneLength: '1n'
+      device: undefined
     },
     init (options) {
       log(`Initializing envelope with options: ${options}`)
@@ -84,15 +98,6 @@ export default {
         releaseCurve: 'exponential',
         ...options
       })
-    },
-    playNote (note) {
-      log(`Playing note: ${note}`)
-      return this.state.device.triggerAttackRelease(note, this.state.envelopeToneLength)
-    },
-    setToneLength (length) {
-      log(`setting envelope tone length to: ${length}`)
-      this.state.envelopeToneLength = length
-      return this.state.envelopeToneLength
     }
   },
   lfo: {
@@ -170,4 +175,6 @@ export default {
       return this.state.device.generate() // generate new reverb returns promise
     }
   }
-}
+})
+
+export default {...new audioInstance(), ...{goalMirrorInstance: new audioInstance()}}
