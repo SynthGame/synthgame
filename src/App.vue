@@ -19,8 +19,6 @@ export default {
 
     }
   },
-  methods: {
-  },
   created () {
     // initialize the synth
     audio.init()
@@ -56,6 +54,23 @@ export default {
       }
       // const key = event.key
     })
+  },
+  computed: {
+    allParametersMatchGoal () {
+      return this.$store.getters.allParametersMatchGoal
+    }
+  },
+  methods: {
+    displaySuccesMessage () {
+      alert('Well done!')
+      // this.$store.dispatch('randomizeAudioParameters')
+      this.$store.dispatch('randomizGoalParameters')
+    }
+  },
+  watch: {
+    allParametersMatchGoal (val) {
+      if(val) this.displaySuccesMessage()
+    }
   }
 }
 </script>

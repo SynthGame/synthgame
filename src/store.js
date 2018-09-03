@@ -124,7 +124,6 @@ export default new Vuex.Store({
   },
   getters: {
     allParametersMatchGoal: (state, getters) => {
-      console.log('allParametersMatchGoal triggered!');
       return flatMap(getters.audioParametersMatchGoalWithMargin, val => values(val))
         .every(val => val)
     },

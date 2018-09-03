@@ -115,13 +115,6 @@ export default {
     })
   },
   watch: {
-    dialsAreWithinMargin(val) {
-      if(val === true) {
-        alert('well done!')
-        // this.$store.dispatch('randomizeAudioParameters')
-        this.$store.dispatch('randomizGoalParameters')
-      }
-    },
     freqDial(val) {
       this.frequency = this.freqArray[mapValueToRange(val, 100, (this.freqArray.length -1))]
     },
