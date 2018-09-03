@@ -131,7 +131,6 @@ export default new Vuex.Store({
     audioParametersMatchGoalWithMargin: (state) => {
       return mapValues(state.audioParameters, (val, moduleName) => {
         return mapValues(val, (val, parameterName) => {
-          console.log(val, state.gameState.goal[moduleName][parameterName])
           return isArray(state.gameState.possibleValues[moduleName][parameterName])
             ? (val === state.gameState.goal[moduleName][parameterName])
             : inRange(val,
