@@ -64,7 +64,7 @@
             <circle :r="reverbCirclesRay(1)"
                     :cy="displayHeight/2"
                     :cx="firstCircleLeftMargin" class="reverb"
-                    style="fill: red"/>
+                    />
             <circle :r="reverbCirclesRay(2)"
                     :cy="displayHeight/2"
                     :cx="spaceBetweenReverbCicles(2)"
@@ -85,10 +85,6 @@
                     :cy="displayHeight/2"
                     :cx="spaceBetweenReverbCicles(6)"
                     class="reverb"/>
-            <circle :r="reverbCirclesRay(7)"
-                    :cy="displayHeight/2"
-                    :cx="190"
-                    class="reverb"/>
             <circle :r="reverbCirclesRay(8)"
                     :cy="displayHeight/2"
                     :cx="spaceBetweenReverbCicles(7)"
@@ -101,13 +97,13 @@
           </g>
         </svg>
 
-        <text x="45%" y="40%" fill="red">
+        <text x="45%" y="40%" fill="transparent">
           <tspan x="45%" y="50%">{{knobs[0].name}}: {{knobs[0].value}}</tspan>
           <tspan x="45%" y="60%">{{knobs[1].name}}: {{knobs[1].value}}</tspan>
           <tspan x="45%" y="70%" v-if="this.knobs[2]">{{knobs[2].name}}: {{knobs[2].value}}</tspan>
           <tspan x="45%" y="80%" v-if="this.knobs[3]">{{knobs[3].name}}: {{knobs[3].value}}</tspan>
         </text>
-        <text v-if="this.module === 'oscillator' || 'filter'" fill="red">
+        <text v-if="this.module === 'oscillator' || 'filter'" fill="transparent">
           <tspan x="0%" y="50%" v-if="this.knobs[4]">{{knobs[4].name}}: {{knobs[4].value}}</tspan>
           <tspan x="0%" y="60%" v-if="this.knobs[5]">{{knobs[5].name}}: {{knobs[5].value}}</tspan>
           <tspan x="0%" y="70%" v-if="this.knobs[6]">{{knobs[6].name}}: {{knobs[6].value}}</tspan>
