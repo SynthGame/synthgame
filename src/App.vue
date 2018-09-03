@@ -227,6 +227,7 @@ body {
     .module.active {
       left: 0;
       opacity: 1;
+      z-index: 1;
     }
 }
 </style>
