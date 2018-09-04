@@ -27,14 +27,22 @@ const audioInstance = () => ({
     const delay = this.delay.state.device
     const reverb = this.reverb.state.device
 
+    log(`Created new general output for audio device`)
+    const output = new Tone.Volume(-12)
     log(`Connecting LFO to filter frequency`)
     lfo.connect(filter.frequency).start()
     log(`Generating reverb`)
     // reverb.generate()
-    log(`Chaining oscillator => pitch shift => envelope => filter => delay => reverb to Master`)
-    oscillator.chain(pitchShift, envelope, filter, reverb, delay, Tone.Master)
+    log(`Chaining oscillator => pitch shift => envelope => filter => delay => reverb`)
+    oscillator.chain(pitchShift, envelope, filter, reverb, delay)
+
     log(`Starting oscillator`)
     oscillator.start()
+
+    log(`Connecting last node, delay, to general output ${output}`)
+    delay.connect(output)
+    return output
+
   },
   setBpm (bpm) {
     log(`setting BPM length to: ${bpm}`)
