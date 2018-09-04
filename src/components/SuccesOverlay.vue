@@ -4,6 +4,7 @@
       <div>
         <p class="heading">You completed Level{{level}}!</p>
         <p class="subheading">congratulations!!</p>
+        <p class="score">Your current score: {{gameScore}}</p>
       </div>
       <svg :style="{'transform': ballHeight}" width="37px" height="37px" viewBox="0 0 37 37" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
           <defs></defs>
@@ -58,6 +59,11 @@ export default {
       duration: 1000,
       easings: [easing.easeOut, easing.easeIn, easing.lineair]
     }).start(v => this.ballHeight = `translateY(${v.x + 20}px)`)
+  },
+  computed: {
+    gameScore () {
+      return this.$store.state.gameState.score
+    }
   }
 }
 </script>
