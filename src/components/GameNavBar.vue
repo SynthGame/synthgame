@@ -15,6 +15,11 @@ export default {
       timer: null
     }
   },
+  computed: {
+    gameIsRunning () {
+      return this.$store.state.gameState.gameIsRunning
+    }
+  },
   methods: {
     startTimer () {
       this.timer = this.timer || window.setInterval(() => {
@@ -26,6 +31,11 @@ export default {
       window.clearInterval(this.timer)
       this.timeLeftSeconds = 30
       alert('time\'s up!')
+    }
+  },
+  watch: {
+    gameIsRunning (val) {
+      if (val) this.startTimer()
     }
   }
 }
