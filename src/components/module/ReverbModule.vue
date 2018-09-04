@@ -16,14 +16,14 @@
                       {name: 'Dry / Wet Goal', min:1, max:100, value: this.wetGoal}
                       ]"/>
     <div class="knobs">
-      <module-knob
+      <!-- <module-knob
         v-model="roomSize"
         :min="0"
         :max="100"
         knobColor="#3c32ff"
         name="Size"
         module="reverb"
-      ></module-knob>
+      ></module-knob> -->
       <module-knob
         v-model="wet"
         :min="0"

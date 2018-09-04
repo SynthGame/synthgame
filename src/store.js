@@ -13,73 +13,73 @@ Vue.use(Vuex)
 export default new Vuex.Store({
   state: {
     audioParameters: {
-      delay: {
-        delayTime: 40,
-        wet: 50,
-        feedback: 50
-      },
-      envelope: {
-        attack: 11,
-        decay: 60,
-        sustain: 52,
-        release: 34
-      },
-      filter: {
-        cutOffFreq: 50,
-        type: 'lowpass',
-        setQ: 50,
-        // gain: 50
-      },
-      lfo: {
-        frequency: 0,
-        type: 'sine',
-        amount: 0
-      },
       oscillator: {
         frequency: 65,
-        typeOsc: 'sine',
+        typeOsc: 'sawtooth',
         detune: 60
         // phase: 0
       },
+      filter: {
+        cutOffFreq: 20,
+        type: 'lowpass',
+        setQ: 0,
+        // gain: 50
+      },
+      envelope: {
+        attack: 1,
+        decay: 5,
+        sustain: 10,
+        release: 10
+      },
+      lfo: {
+        frequency: 10,
+        type: 'sine',
+        amount: 1
+      },
+      delay: {
+        delayTime: 10,
+        feedback: 0,
+        wet: 2
+      },
       reverb: {
-        roomSize: 20,
-        wet: 20
+        roomSize: 10,
+        wet: 2
       }
     },
     gameState: {
       margin: 10,
       goal: {
-        delay: {
-          delayTime: 20,
-          wet: 50,
-          feedback: 90
-        },
-        envelope: {
-          attack: 11,
-          decay: 70,
-          sustain: 52,
-          release: 34
+        oscillator: {
+          frequency: 65,
+          typeOsc: 'sawtooth',
+          detune: 60
+          // phase: 0
         },
         filter: {
-          cutOffFreq: 40,
-          type: 'highpass',
-          setQ: 50,
+          cutOffFreq: 20,
+          type: 'lowpass',
+          setQ: 0,
           // gain: 50
+        },
+        envelope: {
+          attack: 1,
+          decay: 10,
+          sustain: 1,
+          release: 10
         },
         lfo: {
           frequency: 10,
-          type: 'square',
-          amount: 50
+          type: 'sine',
+          amount: 1
         },
-        oscillator: {
-          frequency: 65,
-          typeOsc: 'sine',
-          detune: 40
-          // phase: 0
+        delay: {
+          delayTime: 10,
+          feedback: 0,
+          wet: 2
         },
         reverb: {
           roomSize: 10,
-          wet: 20
+          wet: 2
         }
       },
       possibleValues: {

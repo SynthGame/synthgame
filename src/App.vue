@@ -1,6 +1,7 @@
 <template>
   <div id="app">
     <overlay v-if="isOverlayed==true" @next="isOverlayed=false"/>
+    <startscreen v-if="isStartgame==true" @next="isStartgame=false"/>
 
     <!-- <div id="nav">
       <router-link to="/">Home</router-link> |
@@ -15,17 +16,20 @@ import random from 'lodash/random'
 import times from 'lodash/times'
 import audio from '@/audio'
 import Overlay from '@/components/Overlay'
+import startscreen from '@/components/startscreen'
 import { SYNTH_BPM } from '@/constants'
 
 export default {
   name: 'App',
   data () {
     return {
-      isOverlayed: false
+      isOverlayed: false,
+      isStartgame: true
     }
   },
   components: {
-    Overlay
+    Overlay,
+    startscreen
   },
   created () {
     const masterBus = new audio.state.Tone.CrossFade(0.5)
@@ -195,6 +199,7 @@ export default {
 .level {
   display: flex;
   justify-content: space-around;
+  align-items: center;
   flex-wrap: wrap;
   width:100%;
   height:100vh;
