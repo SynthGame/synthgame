@@ -15,8 +15,8 @@ export default new Vuex.Store({
     audioParameters: {
       delay: {
         delayTime: 40,
-        wet: 50,
-        feedback: 50
+        wet: 40,
+        feedback: 0
       },
       envelope: {
         attack: 11,
@@ -36,26 +36,26 @@ export default new Vuex.Store({
         amount: 0
       },
       oscillator: {
-        frequency: 2093,
+        frequency: 65,
         typeOsc: 'sawtooth',
-        detune: 5
+        detune: 60
         // phase: 0
       },
       reverb: {
-        roomSize: 20,
-        wet: 20
+        roomSize: 10,
+        wet: 5
       }
     },
     gameState: {
       margin: 10,
       goal: {
         delay: {
-          delayTime: 20,
-          wet: 50,
-          feedback: 90
+          delayTime: 2,
+          wet: 20,
+          feedback: 0
         },
         envelope: {
-          attack: 11,
+          attack: 1,
           decay: 70,
           sustain: 52,
           release: 34
@@ -63,7 +63,7 @@ export default new Vuex.Store({
         filter: {
           cutOffFreq: 40,
           type: 'highpass',
-          setQ: 50,
+          setQ: 10,
           // gain: 50
         },
         lfo: {
@@ -72,14 +72,14 @@ export default new Vuex.Store({
           amount: 50
         },
         oscillator: {
-          frequency: 2093,
-          typeOsc: 'sawtooth',
-          detune: 90
+          frequency: 131,
+          typeOsc: 'triangle',
+          detune: 60
           // phase: 0
         },
         reverb: {
-          roomSize: 10,
-          wet: 20
+          roomSize: 2,
+          wet: 0
         }
       },
       possibleValues: {
