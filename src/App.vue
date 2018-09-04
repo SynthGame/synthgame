@@ -85,7 +85,40 @@ export default {
     displaySuccesMessage () {
       this.isOverlayed = true
       // this.$store.dispatch('randomizeAudioParameters')
-      this.$store.dispatch('randomizGoalParameters')
+      this.$store.dispatch('randomizGoalParameters', {
+      oscillator: {
+        frequency: false,
+        typeOsc: true,
+        detune: false
+        // phase: 0
+      },
+      filter: {
+        cutOffFreq: false,
+        type: true,
+        setQ: false,
+        // gain: 50
+      },
+      envelope: {
+        attack: false,
+        decay: true,
+        sustain: false,
+        release: false
+      },
+      lfo: {
+        frequency: false,
+        type: true,
+        amount: false
+      },
+      delay: {
+        delayTime: false,
+        feedback: false,
+        wet: true
+      },
+      reverb: {
+        roomSize: false,
+        wet: true
+      }
+    })
       times(4).forEach(i => {
         audio.state.loop.at(i, random(-12, 12))
       });

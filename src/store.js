@@ -141,9 +141,11 @@ export default new Vuex.Store({
     }
   },
   actions: {
-    randomizeAudioParameters ({state, commit}) {
+    randomizeAudioParameters ({state, commit}, randomizeArray) {
       const randomizeValues = obj => mapValues(obj, (val, moduleName) => {
         return mapValues(val, (val, parameterName) => {
+          // if randomizeArray is provided and the value is falsey return store value
+          if (randomizeArray && !randomizeArray[moduleName][parameterName]) return state.audioParameters[moduleName][parameterName]
           const parameterValDef = state.gameState.possibleValues[moduleName][parameterName]
           return Array.isArray(parameterValDef)
             ? parameterValDef[random(0, parameterValDef.length - 1)]
@@ -154,9 +156,11 @@ export default new Vuex.Store({
         preset: randomizeValues(state.audioParameters)
       })
     },
-    randomizGoalParameters ({state, commit}) {
+    randomizGoalParameters ({state, commit}, randomizeArray) {
       const randomizeValues = obj => mapValues(obj, (val, moduleName) => {
         return mapValues(val, (val, parameterName) => {
+          // if randomizeArray is provided and the value is falsey return store value
+          if (randomizeArray && !randomizeArray[moduleName][parameterName]) return state.gameState.goal[moduleName][parameterName]
           const parameterValDef = state.gameState.possibleValues[moduleName][parameterName]
           return Array.isArray(parameterValDef)
             ? parameterValDef[random(0, parameterValDef.length - 1)]
