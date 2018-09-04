@@ -84,7 +84,7 @@ export default {
   methods: {
     displaySuccesMessage () {
       this.isOverlayed = true
-      // this.$store.dispatch('randomizeAudioParameters')
+      this.$store.commit('stopGame')
       this.$store.dispatch('randomizGoalParameters', {
       oscillator: {
         frequency: false,

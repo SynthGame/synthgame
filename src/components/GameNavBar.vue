@@ -35,7 +35,10 @@ export default {
   },
   watch: {
     gameIsRunning (val) {
-      if (val) this.startTimer()
+      if (val) return this.startTimer()
+      window.clearInterval(this.timer)
+      this.timer = null
+      this.timeLeftSeconds = 30
     }
   }
 }
