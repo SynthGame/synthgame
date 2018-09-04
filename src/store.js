@@ -48,6 +48,7 @@ export default new Vuex.Store({
     },
     gameState: {
       margin: 10,
+      gameIsRunning: false,
       goal: {
         oscillator: {
           frequency: 65,
@@ -120,6 +121,14 @@ export default new Vuex.Store({
     setMargin (state, {newMargin}) {
       // overwrite parameters from audiostate, this will not fill in nested objects
       state.gameState.margin = newMargin
+    },
+    startGame (state) {
+      // overwrite parameters from audiostate, this will not fill in nested objects
+      state.gameState.gameIsRunning = true
+    },
+    stopGame (state) {
+      // overwrite parameters from audiostate, this will not fill in nested objects
+      state.gameState.gameIsRunning = false
     }
   },
   getters: {

@@ -16,7 +16,7 @@ import random from 'lodash/random'
 import times from 'lodash/times'
 import audio from '@/audio'
 import Overlay from '@/components/Overlay'
-import startscreen from '@/components/startscreen'
+import StartScreen from '@/components/StartScreen'
 import { SYNTH_BPM } from '@/constants'
 
 export default {
@@ -29,7 +29,7 @@ export default {
   },
   components: {
     Overlay,
-    startscreen
+    StartScreen
   },
   created () {
     const masterBus = new audio.state.Tone.CrossFade(0.5)
