@@ -87,7 +87,6 @@ export default {
   },
   computed: {
     dialsAreWithinMargin() {
-      this.title = 'Done!';
       return Object.values(this.$store.getters.audioParametersMatchGoalWithMargin[this.name])
         .every(param => param)
     },
