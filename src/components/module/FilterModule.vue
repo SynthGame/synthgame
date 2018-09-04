@@ -18,7 +18,35 @@
                 {name: 'gainGoal', min: 0, max: 100, value: gain},
                 ]"/>
     <div class="knobs">
-      <module-knob
+            <div class="button-wrapper">
+        <button @click="type=0" :class="type===0 ? 'selected': ''">
+        <svg version="1.1"
+          xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:a="http://ns.adobe.com/AdobeSVGViewerExtensions/3.0/"
+          x="0px" y="0px" width="20.6px" height="10.6px" viewBox="0 0 20.6 10.6" style="enable-background:new 0 0 20.6 10.6;"
+          xml:space="preserve">
+      <path class="st0" d="M0.6,10.6c0-5.5,4.5-10,10-10c0,0,10,0,10,0"/>
+      </svg>
+        </button>
+                <button @click="type=1" :class="type===1 ? 'selected': ''">
+        <svg version="1.1"
+            xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:a="http://ns.adobe.com/AdobeSVGViewerExtensions/3.0/"
+            x="0px" y="0px" width="20.6px" height="10.6px" viewBox="0 0 20.6 10.6" style="enable-background:new 0 0 20.6 10.6;"
+            xml:space="preserve">
+        <path class="st0" d="M0,0.6c0,0,10,0,10,0c5.5,0,10,4.5,10,10"/>
+        </svg>
+        </button>
+                <button @click="type=2" :class="type===2 ? 'selected': ''">
+        <svg version="1.1"
+            xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:a="http://ns.adobe.com/AdobeSVGViewerExtensions/3.0/"
+            x="0px" y="0px" width="21.3px" height="10.6px" viewBox="0 0 21.3 10.6" style="enable-background:new 0 0 21.3 10.6;"
+            xml:space="preserve">
+        <path class="st0" d="M0.6,10.6c0-5.5,4.5-10,10-10s10,4.5,10,10"/>
+        </svg>
+        </button>
+        <p>TYPE</p>
+      </div>
+
+      <!-- <module-knob
         v-model="typeDial"
         :min="0"
         :max="100"
@@ -26,7 +54,7 @@
         name="Type"
         module="filter"
       ></module-knob>
-      <!-- <module-knob
+      <module-knob
         v-model="cutOffFreq"
         :min="0"
         :max="100"
@@ -141,6 +169,40 @@ li {
 }
 a {
   color: #42b983;
+}
+button, input[type="submit"], input[type="reset"] {
+    background: none;
+    color: inherit;
+    border: none;
+    padding: 0;
+    font: inherit;
+    outline: inherit;
+      border: 1px #6e01d1 solid;
+  justify-content: center;
+  align-items: center;
+  display: flex;
+  min-width: 40%;
+
+  min-height: 1.3rem;
+  cursor: pointer;
+  margin: 0.1rem
+}
+
+  p {
+     margin: .5em 0 0 0;
+     font-size: .7em;
+     text-transform: uppercase;
+     letter-spacing: 1px;
+  }
+  .button-wrapper {
+      display: flex;
+      flex-wrap: wrap;
+      width: 25%;
+      min-width: 5rem;
+  }
+
+.selected {
+  background-color: #6e01d1
 }
 
 </style>
