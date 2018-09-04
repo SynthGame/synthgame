@@ -36,7 +36,7 @@ export default {
 }
 </script>
 
-<style>
+<style scoped lang="scss">
 .overlay {
   position: fixed;
   display: flex;
