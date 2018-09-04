@@ -32,9 +32,9 @@ export default new Vuex.Store({
         release: 10
       },
       lfo: {
-        frequency: 10,
+        frequency: 40,
         type: 'sine',
-        amount: 1
+        amount: 5
       },
       delay: {
         delayTime: 10,
@@ -69,9 +69,9 @@ export default new Vuex.Store({
           release: 10
         },
         lfo: {
-          frequency: 10,
+          frequency: 40,
           type: 'sine',
-          amount: 1
+          amount: 10
         },
         delay: {
           delayTime: 10,
