@@ -1,5 +1,7 @@
 <template>
   <div id="app">
+    <overlay v-if="isOverlayed==true" @next="isOverlayed=false"/>
+
     <!-- <div id="nav">
       <router-link to="/">Home</router-link> |
       <router-link to="/about">About</router-link>
@@ -12,14 +14,18 @@
 import random from 'lodash/random'
 import times from 'lodash/times'
 import audio from '@/audio'
+import Overlay from '@/components/Overlay'
 import { SYNTH_BPM } from '@/constants'
 
 export default {
   name: 'App',
   data () {
     return {
-
+      isOverlayed: false
     }
+  },
+  components: {
+    Overlay
   },
   created () {
     // initialize the synth
@@ -64,7 +70,7 @@ export default {
   },
   methods: {
     displaySuccesMessage () {
-      alert('Well done!')
+      this.isOverlayed = true
       // this.$store.dispatch('randomizeAudioParameters')
       this.$store.dispatch('randomizGoalParameters')
       times(4).forEach(i => {
