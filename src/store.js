@@ -36,9 +36,9 @@ export default new Vuex.Store({
         amount: 0
       },
       oscillator: {
-        frequency: 65,
-        typeOsc: 'sine',
-        detune: 60
+        frequency: 2093,
+        typeOsc: 'sawtooth',
+        detune: 5
         // phase: 0
       },
       reverb: {
@@ -72,9 +72,9 @@ export default new Vuex.Store({
           amount: 50
         },
         oscillator: {
-          frequency: 65,
-          typeOsc: 'sine',
-          detune: 40
+          frequency: 2093,
+          typeOsc: 'sawtooth',
+          detune: 90
           // phase: 0
         },
         reverb: {

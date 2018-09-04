@@ -140,18 +140,18 @@
           </g>
         </svg>
 
-        <text x="45%" y="40%" fill="transparent">
+        <!-- <text x="45%" y="40%" fill="white">
           <tspan x="45%" y="50%">{{knobs[0].name}}: {{knobs[0].value}}</tspan>
           <tspan x="45%" y="60%">{{knobs[1].name}}: {{knobs[1].value}}</tspan>
           <tspan x="45%" y="70%" v-if="this.knobs[2]">{{knobs[2].name}}: {{knobs[2].value}}</tspan>
           <tspan x="45%" y="80%" v-if="this.knobs[3]">{{knobs[3].name}}: {{knobs[3].value}}</tspan>
         </text>
-        <text v-if="this.module === 'oscillator' || 'filter'" fill="transparent">
+        <text v-if="this.module === 'oscillator' || 'filter'" fill="white">
           <tspan x="0%" y="50%" v-if="this.knobs[4]">{{knobs[4].name}}: {{knobs[4].value}}</tspan>
           <tspan x="0%" y="60%" v-if="this.knobs[5]">{{knobs[5].name}}: {{knobs[5].value}}</tspan>
           <tspan x="0%" y="70%" v-if="this.knobs[6]">{{knobs[6].name}}: {{knobs[6].value}}</tspan>
           <tspan x="0%" y="80%" v-if="this.knobs[7]">{{knobs[7].name}}: {{knobs[7].value}}</tspan>
-        </text>
+        </text> -->
       </svg>
     </div>
 
