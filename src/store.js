@@ -6,7 +6,7 @@ import values from 'lodash/values'
 import flatMap from 'lodash/flatMap'
 import inRange from 'lodash/inRange'
 import isArray from 'lodash/isArray'
-import isEqual from 'lodash/isArray'
+import add from 'lodash/add'
 
 Vue.use(Vuex)
 
@@ -49,6 +49,7 @@ export default new Vuex.Store({
     gameState: {
       margin: 10,
       gameIsRunning: false,
+      score: 0,
       goal: {
         oscillator: {
           frequency: 65,
@@ -129,6 +130,9 @@ export default new Vuex.Store({
     stopGame (state) {
       // overwrite parameters from audiostate, this will not fill in nested objects
       state.gameState.gameIsRunning = false
+    },
+    addValueToScore (state, val) {
+      state.gameState.score = add(state.gameState.score, val)
     }
   },
   getters: {

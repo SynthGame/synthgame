@@ -23,22 +23,25 @@ export default {
   methods: {
     startTimer () {
       this.timer = this.timer || window.setInterval(() => {
-        if(this.timeLeftSeconds === 0) return this.timerIsDone()
+        if(this.timeLeftSeconds === 0) return this.timeIsUp()
         this.timeLeftSeconds--
       }, 1000)
     },
-    timerIsDone () {
+    stopTimer () {
       window.clearInterval(this.timer)
+      this.timer = null
+      this.$store.commit('addValueToScore', this.timeLeftSeconds)
       this.timeLeftSeconds = 30
-      alert('time\'s up!')
+    },
+    timeIsUp () {
+      alert('game\'s over!')
+      this.stopTimer()
     }
   },
   watch: {
     gameIsRunning (val) {
       if (val) return this.startTimer()
-      window.clearInterval(this.timer)
-      this.timer = null
-      this.timeLeftSeconds = 30
+      this.stopTimer()
     }
   }
 }
