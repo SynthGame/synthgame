@@ -2,8 +2,8 @@
   <div class="startscreen">
     <div class="startscreen-content-wrapper">
       <div>
-    <p class="heading">Tats</p>
-    <p class="subheading">Recreate the sound before time runs out!</p>
+    <h1>Tats</h1>
+    <h2>Recreate the sound before time runs out!</h2>
       </div>
     <iframe width="560" height="315" src="https://www.youtube.com/embed/O7x-AS6idOQ?rel=0?version=3&autoplay=1&controls=0&&showinfo=0&loop=1&playlist=O7x-AS6idOQ" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
     <button class="button-next" @click="$emit('next')">Start</button>
@@ -23,11 +23,10 @@ export default {
 }
 </script>
 
-<style>
+<style scoped lang="scss">
 .startscreen {
   position: fixed;
   display: flex;
-  /* align-items: center; */
   align-content: center;
   justify-content: center;
   z-index: 9998;
@@ -39,7 +38,15 @@ export default {
   transition: opacity .3s ease;
   fill: none;
   stroke: red;
-  stroke-width: 3
+  stroke-width: 3;
+  & h1 {
+    text-transform: uppercase;
+  }
+  & h2 {
+    font-weight: 300;
+    font-size: 3em;
+    max-width: 13em;
+  }
 }
 
 .startscreen-content-wrapper {
@@ -52,17 +59,6 @@ export default {
   align-content: center;
 }
 
-.heading {
-  font-size: 4rem;
-  font-weight: 700;
-  margin-bottom: 1rem;
-}
-
-.subheading {
-  margin-top:0;
-  font-size: 3.5rem;
-  font-weight: 500
-}
 .button-next {
     background: none;
     color: inherit;
