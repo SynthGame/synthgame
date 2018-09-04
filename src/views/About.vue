@@ -1,15 +1,15 @@
 <template>
   <div class="about">
     <h1>This is an about page</h1>
-    <filter-module/>
+    <lfo-module/>
   </div>
 </template>
 
 <script>
-import FilterModule from '@/components/module/FilterModule'
+import LfoModule from '@/components/module/LfoModule'
 export default {
   components: {
-    FilterModule
+    LfoModule
   }
 }
 </script>
