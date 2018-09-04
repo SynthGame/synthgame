@@ -70,7 +70,6 @@ export default {
   },
   methods: {
     displaySuccesMessage () {
-      alert('Well done!')
       this.isOverlayed = true
       // this.$store.dispatch('randomizeAudioParameters')
       this.$store.dispatch('randomizGoalParameters')

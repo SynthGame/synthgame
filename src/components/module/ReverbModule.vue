@@ -9,7 +9,11 @@
              module="reverb"
              fill="#3c32ff"
              :knobs="[{name: 'Room Size', min:1, max:100, value: this.roomSize},
-                      {name: 'Dry / Wet', min:1, max:100, value: this.wet}
+                      {name: 'Dry / Wet', min:1, max:100, value: this.wet},
+                      {name: 'fake', min:1, max:100, value: this.roomSize},
+                      {name: 'fake', min:1, max:100, value: this.wet},
+                      {name: 'Room Size Goal', min:1, max:100, value: this.roomSizeGoal},
+                      {name: 'Dry / Wet Goal', min:1, max:100, value: this.wetGoal}
                       ]"/>
     <div class="knobs">
       <module-knob
@@ -33,6 +37,7 @@
 </template>
 
 <script>
+import { mapState } from 'vuex'
 import { vuexSyncGen } from '@/utils'
 import { MODULE_REVERB_COLOR } from '@/constants'
 
@@ -77,6 +82,10 @@ export default {
     }),
     ...vuexSyncGen('reverb', 'roomSize', val => {
       self.reverb.roomSize.value = character.reverb.roomSize(val)
+    }),
+    ...mapState({
+      roomSizeGoal: state => state.gameState.goal.reverb.roomSize,
+      wetGoal: state => state.gameState.goal.reverb.wet,
     })
   }
 }

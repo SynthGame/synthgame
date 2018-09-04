@@ -93,7 +93,50 @@
                     :cy="displayHeight/2"
                     :cx="spaceBetweenReverbCicles(8)"
                     class="reverb"/>
-            <circle :r="reverbCirclesRay(10)" :cy="displayHeight/2" :cx="spaceBetweenReverbCicles(9)" class="reverb"/>
+            <!-- <circle :r="reverbCirclesRay(10)"
+                    :cy="displayHeight/2"
+                    :cx="spaceBetweenReverbCicles(9)"
+                    class="reverb"/> -->
+          </g>
+
+          <!-- goal -->
+          <g>
+            <circle :r="reverbCirclesRayGoal(1)"
+                    :cy="displayHeight/2"
+                    :cx="firstCircleLeftMargin" class="reverb__goal"
+                    />
+            <circle :r="reverbCirclesRayGoal(2)"
+                    :cy="displayHeight/2"
+                    :cx="spaceBetweenReverbCiclesGoal(2)"
+                    class="reverb__goal"/>
+            <circle :r="reverbCirclesRayGoal(3)"
+                    :cy="displayHeight/2"
+                    :cx="spaceBetweenReverbCiclesGoal(3)"
+                    class="reverb__goal"/>
+            <circle :r="reverbCirclesRayGoal(4)"
+                    :cy="displayHeight/2"
+                    :cx="spaceBetweenReverbCiclesGoal(4)"
+                    class="reverb__goal"/>
+            <circle :r="reverbCirclesRayGoal(5)"
+                    :cy="displayHeight/2"
+                    :cx="spaceBetweenReverbCiclesGoal(5)"
+                    class="reverb__goal"/>
+            <circle :r="reverbCirclesRayGoal(6)"
+                    :cy="displayHeight/2"
+                    :cx="spaceBetweenReverbCiclesGoal(6)"
+                    class="reverb__goal"/>
+            <circle :r="reverbCirclesRayGoal(8)"
+                    :cy="displayHeight/2"
+                    :cx="spaceBetweenReverbCiclesGoal(7)"
+                    class="reverb__goal"/>
+            <circle :r="reverbCirclesRayGoal(9)"
+                    :cy="displayHeight/2"
+                    :cx="spaceBetweenReverbCiclesGoal(8)"
+                    class="reverb__goal"/>
+            <!-- <circle :r="reverbCirclesRay(10)"
+                    :cy="displayHeight/2"
+                    :cx="spaceBetweenReverbCiclesGoal(9)"
+                    class="reverb"/> -->
           </g>
         </svg>
 
@@ -261,6 +304,15 @@ export default {
       }
       return margin
     },
+    firstCircleLeftMarginGoal() {
+      let margin = ''
+      if (this.module === 'reverb'){
+        // helpers:
+        const sizeRatio = this.knobs[4].value/(this.knobs[4].max - this.knobs[4].min)
+        margin = (this.displayWidth/8)*(1-sizeRatio)
+      }
+      return margin
+    },
     reverbCirclesRay(){
       if (this.module =='reverb') {
         const ratio = this.knobs[1].value/(this.knobs[1].max - this.knobs[1].min)
@@ -268,12 +320,37 @@ export default {
        }
       return ''
     },
+    reverbCirclesRayGoal(){
+      if (this.module =='reverb') {
+        const ratio = this.knobs[5].value/(this.knobs[5].max - this.knobs[5].min)
+        return number => this.displayHeight*(0.38-(number*3*0.01)) + 20*ratio
+       }
+      return ''
+    },
     spaceBetweenReverbCicles() {
       if (this.module === 'reverb') {
         const sizeRatio = this.knobs[0].value/(this.knobs[0].max - this.knobs[0].min)
-        let max =100
+        let max = 30
         const min = 10
         let cumulate = this.firstCircleLeftMargin;
+        const cumulateDistances = (number) => {
+          for (let i=0; i> number.length; i++) {
+            cumulate = cumulate + (sizeRatio*max)
+          }
+          return cumulate
+        }
+        return number => {
+          return this.firstCircleLeftMargin + number*(max*sizeRatio)
+        }
+      }
+      return ''
+    },
+    spaceBetweenReverbCiclesGoal() {
+      if (this.module === 'reverb') {
+        const sizeRatio = this.knobs[4].value/(this.knobs[4].max - this.knobs[4].min)
+        let max = 30
+        const min = 10
+        let cumulate = this.firstCircleLeftMarginGoal;
         const cumulateDistances = (number) => {
           for (let i=0; i> number.length; i++) {
             cumulate = cumulate + (sizeRatio*max)
@@ -520,7 +597,7 @@ export default {
       return (0-this.displayWidth/2) + ' 0 ' + this.displayWidth + ' ' + this.displayHeight
     },
     reverbVB() {
-      return '0,0,'+this.displayWidth+ ',' + this.displayHeight
+      return '-90,0,'+this.displayWidth+ ',' + this.displayHeight
     },
     swingStyle() {
       // helpers:
@@ -808,11 +885,16 @@ export default {
 }
 </script>
 
- <style scoped>
+ <style scoped lang="scss">
  path {
    display: inline-block;
  }
  .reverb {
-   fill-opacity: 0.5
-}
+   fill-opacity: 0.5;
+   &__goal {
+     fill-opacity: 0;
+     stroke: white;
+     stroke-width: 2;
+     }
+  }
  </style>
