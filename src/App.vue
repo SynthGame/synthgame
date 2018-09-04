@@ -1,7 +1,7 @@
 <template>
   <div id="app">
-    <overlay v-if="isOverlayed==true" @next="isOverlayed=false"/>
-    <startscreen v-if="isStartgame==true" @next="isStartgame=false"/>
+    <succes-overlay v-if="isOverlayed==true" @next="(isOverlayed=false, $store.commit('startGame'))"/>
+    <start-screen v-if="isStartgame==true" @next="(isStartgame=false, $store.commit('startGame'))"/>
 
     <!-- <div id="nav">
       <router-link to="/">Home</router-link> |
@@ -15,7 +15,7 @@
 import random from 'lodash/random'
 import times from 'lodash/times'
 import audio from '@/audio'
-import Overlay from '@/components/Overlay'
+import SuccesOverlay from '@/components/SuccesOverlay'
 import StartScreen from '@/components/StartScreen'
 import { SYNTH_BPM } from '@/constants'
 
@@ -28,7 +28,7 @@ export default {
     }
   },
   components: {
-    Overlay,
+    SuccesOverlay,
     StartScreen
   },
   created () {
@@ -84,7 +84,7 @@ export default {
   methods: {
     displaySuccesMessage () {
       this.isOverlayed = true
-      // this.$store.dispatch('randomizeAudioParameters')
+      this.$store.commit('stopGame')
       this.$store.dispatch('randomizGoalParameters', {
       oscillator: {
         frequency: false,

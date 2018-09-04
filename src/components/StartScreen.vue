@@ -13,7 +13,7 @@
 
 <script>
 export default {
-  name: "startscreen",
+  name: 'startscreen',
   props: {
     level: {
       type: Number,
