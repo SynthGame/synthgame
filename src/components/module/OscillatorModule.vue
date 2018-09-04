@@ -48,6 +48,7 @@
         knobColor="#ff8574"
         name="Phase"
       ></module-knob> -->
+      <module-buttons module='oscillator' v-model="typeDial"/>
     </div>
   </div>
 </template>
@@ -62,6 +63,7 @@ import character from '@/character'
 import ModuleKnob from '@/components/ModuleKnob.vue'
 import ModuleDisplay from '@/components/ModuleDisplay.vue'
 import ModuleTitle from './ModuleComponents/ModuleTitle.vue'
+import ModuleButtons  from '@/components/ModuleButtons'
 
 var self
 
@@ -79,7 +81,8 @@ export default {
   components: {
     ModuleKnob,
     ModuleDisplay,
-    ModuleTitle
+    ModuleTitle,
+    ModuleButtons
   },
   created () {
     self = this
