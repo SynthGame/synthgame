@@ -27,7 +27,7 @@
         name="Waveform"
         module="oscillator"
       ></module-knob> -->
-      <module-knob
+      <!-- <module-knob
         v-model="freqDial"
         :min="0"
         :max="100"
@@ -40,7 +40,7 @@
         :max="120"
         knobColor="#ff8574"
         name="Detune"
-      ></module-knob>
+      ></module-knob> -->
       <!-- <module-knob
         v-model="phase"
         :min="50"

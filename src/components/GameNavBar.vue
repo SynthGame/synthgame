@@ -30,7 +30,11 @@ export default {
     stopTimer () {
       window.clearInterval(this.timer)
       this.timer = null
-      this.$store.commit('addValueToScore', this.timeLeftSeconds)
+      this.$store.commit('addValueToScore', this.timeLeftSeconds);
+      this.$store.commit('addValueToLevel', 1);
+      if (this.$store.state.gameState.score > this.$store.state.gameState.highScore) {
+          this.$store.commit('updateHighScore', this.$store.state.gameState.score);
+      };
       this.timeLeftSeconds = 30
     },
     timeIsUp () {

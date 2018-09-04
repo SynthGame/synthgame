@@ -2,9 +2,10 @@
   <div class="overlay">
     <div class="overlay-content-wrapper">
       <div>
-        <p class="heading">You completed Level{{level}}!</p>
-        <p class="subheading">congratulations!!</p>
-        <p class="score">Your current score: {{gameScore}}</p>
+        <h1>Level {{gameLevel}} cleared</h1>
+        <h2>Your Score: {{gameScore}}</h2>
+        <h2>High Score: {{gameHighScore}}</h2>
+        <!-- <p class="score">Your current score: {{gameScore}}</p> -->
       </div>
       <svg :style="{'transform': ballHeight}" width="37px" height="37px" viewBox="0 0 37 37" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
           <defs></defs>
@@ -27,7 +28,7 @@
         v11.2 M10.9,75.9v15c0,0,40.5-18.4,55.8-17.3s33.7,28.9,83.7,21.5s50.9-49.3,50.9-49.3"/>
 
     </svg>
-    <p>Don't stop here!</p>
+    <!-- <p>Don't stop here!</p> -->
     <button class="button-next" @click="$emit('next')">NEXT LEVEL</button>
     </div>
   </div>
@@ -63,6 +64,12 @@ export default {
   computed: {
     gameScore () {
       return this.$store.state.gameState.score
+    },
+    gameHighScore () {
+      return this.$store.state.gameState.highScore
+    },
+    gameLevel () {
+      return this.$store.state.gameState.level
     }
   }
 }
@@ -72,7 +79,6 @@ export default {
 .overlay {
   position: fixed;
   display: flex;
-  /* align-items: center; */
   align-content: center;
   justify-content: center;
   z-index: 9998;
@@ -84,7 +90,15 @@ export default {
   transition: opacity .3s ease;
   fill: none;
   stroke: red;
-  stroke-width: 3
+  stroke-width: 3;
+  & h1 {
+    text-transform: uppercase;
+  }
+  & h2 {
+    font-weight: 300;
+    font-size: 3em;
+    max-width: 13em;
+  }
 }
 
 .overlay-content-wrapper {

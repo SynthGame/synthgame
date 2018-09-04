@@ -18,7 +18,7 @@
                 {name: 'gainGoal', min: 0, max: 100, value: gain},
                 ]"/>
     <div class="knobs">
-            <div class="button-wrapper">
+            <!-- <div class="button-wrapper">
         <button @click="type=0" :class="type===0 ? 'selected': ''">
         <svg version="1.1"
           xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:a="http://ns.adobe.com/AdobeSVGViewerExtensions/3.0/"
@@ -44,9 +44,9 @@
         </svg>
         </button>
         <p>TYPE</p>
-      </div>
+      </div> -->
 
-      <!-- <module-knob
+      <module-knob
         v-model="typeDial"
         :min="0"
         :max="100"
@@ -54,7 +54,7 @@
         name="Type"
         module="filter"
       ></module-knob>
-      <module-knob
+      <!-- <module-knob
         v-model="cutOffFreq"
         :min="0"
         :max="100"
