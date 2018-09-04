@@ -28,7 +28,7 @@ export default new Vuex.Store({
         cutOffFreq: 50,
         type: 'lowpass',
         setQ: 50,
-        gain: 50
+        // gain: 50
       },
       lfo: {
         frequency: 0,
@@ -64,7 +64,7 @@ export default new Vuex.Store({
           cutOffFreq: 40,
           type: 'highpass',
           setQ: 50,
-          gain: 50
+          // gain: 50
         },
         lfo: {
           frequency: 10,
@@ -166,6 +166,29 @@ export default new Vuex.Store({
       return commit('setGoalToPreset', {
         preset: randomizeValues(state.audioParameters)
       })
+    },
+    setSynthToGoal ({state}, synth) {
+      // This is absolute garbage but really can't think of anything else
+      // if someone comes up with an elegant sollution for this I will
+      // buy them dinner & beers for 1 night - Will Willems
+      synth.delay.device.delayTime.value = state.gameState.goal.delay.delayTime
+      synth.delay.device.feedback.value = state.gameState.goal.delay.feedback
+      synth.delay.device.wet.value = state.gameState.goal.delay.wet
+      synth.envelope.device.attack = state.gameState.goal.envelope.attack
+      synth.envelope.device.decay = state.gameState.goal.envelope.decay
+      synth.envelope.device.sustain = state.gameState.goal.envelope.sustain
+      synth.envelope.device.release = state.gameState.goal.envelope.release
+      synth.filter.device.frequency.value = state.gameState.goal.filter.cutOffFreq
+      synth.filter.device.type = state.gameState.goal.filter.type
+      synth.filter.device.Q.value = state.gameState.goal.filter.setQ
+      synth.lfo.device.frequency.value = state.gameState.goal.lfo.frequency
+      synth.lfo.device.max = state.gameState.goal.lfo.max
+      synth.lfo.device.type = state.gameState.goal.lfo.type
+      synth.oscillator.device.frequency.value = state.gameState.goal.oscillator.frequency
+      synth.oscillator.device.type = state.gameState.goal.oscillator.typeOsc
+      synth.oscillator.device.detune.value = state.gameState.goal.oscillator.detune
+      synth.reverb.device.wet.value = state.gameState.goal.reverb.wet
+      synth.reverb.device.roomSize.value = state.gameState.goal.reverb.roomSize
     }
   }
 })
