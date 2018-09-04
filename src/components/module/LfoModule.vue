@@ -76,7 +76,7 @@
       <path class="st0" d="M0.4,8.4L8,0.8l7.5,7.6"/>
     </svg>
         </button>
-        <p>WAVEFORM</p>
+        <p>SHAPE</p>
       </div>
         </div>
     </div>
