@@ -19,15 +19,15 @@
               {name: 'WaveformGoal', min: 0, max:3, value: typeOscGoal},
             ]"/>
     <div class="knobs">
-      <module-knob
+      <!-- <module-knob
         v-model="typeDial"
         :min="0"
         :max="100"
         knobColor="#ff8574"
         name="Waveform"
         module="oscillator"
-      ></module-knob>
-      <!-- <module-knob
+      ></module-knob> -->
+      <module-knob
         v-model="freqDial"
         :min="0"
         :max="100"
@@ -40,7 +40,7 @@
         :max="120"
         knobColor="#ff8574"
         name="Detune"
-      ></module-knob> -->
+      ></module-knob>
       <!-- <module-knob
         v-model="phase"
         :min="50"
@@ -48,7 +48,42 @@
         knobColor="#ff8574"
         name="Phase"
       ></module-knob> -->
-      <module-buttons module='oscillator' v-model="typeDial"/>
+      <div class="button-wrapper">
+        <button @click="typeOsc='sine'" :class="typeOsc==='sine' ? 'selected': ''">
+          <svg version="1.1"
+            xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:a="http://ns.adobe.com/AdobeSVGViewerExtensions/3.0/"
+            x="0px" y="0px" width="16.3px" height="8.8px" viewBox="0 0 16.3 8.8" style="enable-background:new 0 0 16.3 8.8;"
+            xml:space="preserve">
+            <path class="st0" d="M15.7,4.4c0,2.1-1.7,3.8-3.8,3.8S8.2,6.5,8.2,4.4S6.5,0.6,4.4,0.6S0.6,2.3,0.6,4.4"/>
+          </svg>
+        </button>
+                <button @click="typeOsc='square'" :class="typeOsc==='square' ? 'selected': ''">
+    <svg version="1.1"
+      xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"   xmlns:a="http://ns.adobe.com/AdobeSVGViewerExtensions/3.0/"
+      x="0px" y="0px" width="16.3px" height="16.3px" viewBox="0 0 16.3 16.3"    style="enable-background:new 0 0 16.3 16.3;"
+      xml:space="preserve">
+      <path class="st0" d="M0.6,8.1V0.6h7.6v7.6v7.6h7.6V8.1l0,0"/>
+    </svg>
+        </button>
+                <button @click="typeOsc='sawtooth'" :class="typeOsc==='sawtooth' ? 'selected': ''">
+    <svg version="1.1"
+    xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:a="http://ns.adobe.com/AdobeSVGViewerExtensions/3.0/"
+    x="0px" y="0px" width="21.9px" height="9.9px" viewBox="0 0 21.9 9.9" style="enable-background:new 0 0 21.9 9.9;"
+    xml:space="preserve">
+    <path class="st0" d="M21.5,1.2L21.5,1.2L10.9,8.8V1.2L0.3,8.8"/>
+    </svg>
+        </button>
+                <button @click="typeOsc='triangle'" :class="typeOsc==='triangle' ? 'selected': ''">
+    <svg version="1.1"
+      xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:a="http://ns.adobe.com/AdobeSVGViewerExtensions/3.0/"
+      x="0px" y="0px" width="15.9px" height="8.8px" viewBox="0 0 15.9 8.8" style="enable-background:new 0 0 15.9 8.8;"
+      xml:space="preserve">
+      <path class="st0" d="M0.4,8.4L8,0.8l7.5,7.6"/>
+    </svg>
+        </button>
+        <p>WAVEFORM</p>
+      </div>
+
     </div>
   </div>
 </template>
@@ -63,7 +98,7 @@ import character from '@/character'
 import ModuleKnob from '@/components/ModuleKnob.vue'
 import ModuleDisplay from '@/components/ModuleDisplay.vue'
 import ModuleTitle from './ModuleComponents/ModuleTitle.vue'
-import ModuleButtons  from '@/components/ModuleButtons'
+import ModuleButton  from '@/components/ModuleButton'
 
 var self
 
@@ -82,7 +117,7 @@ export default {
     ModuleKnob,
     ModuleDisplay,
     ModuleTitle,
-    ModuleButtons
+    ModuleButton
   },
   created () {
     self = this
@@ -90,6 +125,7 @@ export default {
   },
   computed: {
     dialsAreWithinMargin() {
+      this.title = 'Done!';
       return Object.values(this.$store.getters.audioParametersMatchGoalWithMargin[this.name])
         .every(param => param)
     },
@@ -149,5 +185,40 @@ li {
 }
 a {
   color: #42b983;
+}
+button, input[type="submit"], input[type="reset"] {
+    background: none;
+    color: inherit;
+    border: none;
+    padding: 0;
+    font: inherit;
+    // cursor: pointer;
+    outline: inherit;
+      border: 1px white solid;
+  justify-content: center;
+  align-items: center;
+  display: flex;
+  min-width: 40%;
+
+  min-height: 1.3rem;
+  cursor: pointer;
+  margin: 0.1rem
+}
+
+  p {
+     margin: .5em 0 0 0;
+     font-size: .7em;
+     text-transform: uppercase;
+     letter-spacing: 1px;
+  }
+  .button-wrapper {
+      display: flex;
+      flex-wrap: wrap;
+      width: 25%;
+      min-width: 5rem;
+  }
+
+.selected {
+  background-color: #ff8574
 }
 </style>
