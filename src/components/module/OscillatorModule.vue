@@ -194,7 +194,7 @@ button, input[type="submit"], input[type="reset"] {
     font: inherit;
     // cursor: pointer;
     outline: inherit;
-      border: 1px white solid;
+      border: 1px #ff8574 solid;
   justify-content: center;
   align-items: center;
   display: flex;
