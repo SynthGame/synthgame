@@ -19,7 +19,7 @@
               {name:'PlaceholderGoal', min: 0, max: 100, value: 'fake'}]"
     />
     <div class="knobs">
-      <module-knob
+      <!-- <module-knob
         v-model="delayTime"
         :min="0"
         :max="100"
@@ -34,7 +34,7 @@
         knobColor="#43bede"
         name="Feedback"
         module="delay"
-      ></module-knob>
+      ></module-knob> -->
       <module-knob
         v-model="wet"
         :min="0"

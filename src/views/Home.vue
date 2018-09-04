@@ -1,5 +1,6 @@
 <template>
   <div class="game">
+    <game-nav-bar/>
     <div class="level">
       <OscillatorModule :class="[(activeModule == 0 ? 'active' : '')]" />
       <FilterModule :class="[(activeModule == 1 ? 'active' : '')]" />
@@ -21,6 +22,7 @@
 
 <script>
 // @ is an alias to /src
+import GameNavBar from '@/components/GameNavBar.vue'
 import OscillatorModule from '@/components/module/OscillatorModule.vue'
 import EnvelopeModule from '@/components/module/EnvelopeModule.vue'
 import FilterModule from '@/components/module/FilterModule.vue'
@@ -36,6 +38,7 @@ export default {
     }
   },
   components: {
+    GameNavBar,
     OscillatorModule,
     EnvelopeModule,
     FilterModule,

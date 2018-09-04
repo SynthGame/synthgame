@@ -6,80 +6,82 @@ import values from 'lodash/values'
 import flatMap from 'lodash/flatMap'
 import inRange from 'lodash/inRange'
 import isArray from 'lodash/isArray'
-import isEqual from 'lodash/isArray'
+import add from 'lodash/add'
 
 Vue.use(Vuex)
 
 export default new Vuex.Store({
   state: {
     audioParameters: {
-      delay: {
-        delayTime: 40,
-        wet: 50,
-        feedback: 50
-      },
-      envelope: {
-        attack: 11,
-        decay: 60,
-        sustain: 52,
-        release: 34
-      },
-      filter: {
-        cutOffFreq: 50,
-        type: 'lowpass',
-        setQ: 50,
-        gain: 50
-      },
-      lfo: {
-        frequency: 0,
-        type: 'sine',
-        amount: 0
-      },
       oscillator: {
         frequency: 65,
-        typeOsc: 'sine',
+        typeOsc: 'sawtooth',
         detune: 60
         // phase: 0
       },
+      filter: {
+        cutOffFreq: 20,
+        type: 'lowpass',
+        setQ: 0,
+        // gain: 50
+      },
+      envelope: {
+        attack: 1,
+        decay: 5,
+        sustain: 10,
+        release: 10
+      },
+      lfo: {
+        frequency: 40,
+        type: 'sine',
+        amount: 5
+      },
+      delay: {
+        delayTime: 10,
+        feedback: 0,
+        wet: 2
+      },
       reverb: {
-        roomSize: 20,
-        wet: 20
+        roomSize: 10,
+        wet: 2
       }
     },
     gameState: {
       margin: 10,
+      gameIsRunning: false,
+      score: 0,
       goal: {
-        delay: {
-          delayTime: 20,
-          wet: 50,
-          feedback: 90
-        },
-        envelope: {
-          attack: 11,
-          decay: 70,
-          sustain: 52,
-          release: 34
-        },
-        filter: {
-          cutOffFreq: 40,
-          type: 'highpass',
-          setQ: 50,
-          gain: 50
-        },
-        lfo: {
-          frequency: 10,
-          type: 'square',
-          amount: 50
-        },
         oscillator: {
           frequency: 65,
-          typeOsc: 'sine',
-          detune: 40
+          typeOsc: 'sawtooth',
+          detune: 60
           // phase: 0
+        },
+        filter: {
+          cutOffFreq: 20,
+          type: 'lowpass',
+          setQ: 0,
+          // gain: 50
+        },
+        envelope: {
+          attack: 1,
+          decay: 10,
+          sustain: 1,
+          release: 10
+        },
+        lfo: {
+          frequency: 40,
+          type: 'sine',
+          amount: 10
+        },
+        delay: {
+          delayTime: 10,
+          feedback: 0,
+          wet: 2
         },
         reverb: {
           roomSize: 10,
-          wet: 20
+          wet: 2
         }
       },
       possibleValues: {
@@ -120,6 +122,17 @@ export default new Vuex.Store({
     setMargin (state, {newMargin}) {
       // overwrite parameters from audiostate, this will not fill in nested objects
       state.gameState.margin = newMargin
+    },
+    startGame (state) {
+      // overwrite parameters from audiostate, this will not fill in nested objects
+      state.gameState.gameIsRunning = true
+    },
+    stopGame (state) {
+      // overwrite parameters from audiostate, this will not fill in nested objects
+      state.gameState.gameIsRunning = false
+    },
+    addValueToScore (state, val) {
+      state.gameState.score = add(state.gameState.score, val)
     }
   },
   getters: {
@@ -141,9 +154,11 @@ export default new Vuex.Store({
     }
   },
   actions: {
-    randomizeAudioParameters ({state, commit}) {
+    randomizeAudioParameters ({state, commit}, randomizeArray) {
       const randomizeValues = obj => mapValues(obj, (val, moduleName) => {
         return mapValues(val, (val, parameterName) => {
+          // if randomizeArray is provided and the value is falsey return store value
+          if (randomizeArray && !randomizeArray[moduleName][parameterName]) return state.audioParameters[moduleName][parameterName]
           const parameterValDef = state.gameState.possibleValues[moduleName][parameterName]
           return Array.isArray(parameterValDef)
             ? parameterValDef[random(0, parameterValDef.length - 1)]
@@ -154,9 +169,11 @@ export default new Vuex.Store({
         preset: randomizeValues(state.audioParameters)
       })
     },
-    randomizGoalParameters ({state, commit}) {
+    randomizGoalParameters ({state, commit}, randomizeArray) {
       const randomizeValues = obj => mapValues(obj, (val, moduleName) => {
         return mapValues(val, (val, parameterName) => {
+          // if randomizeArray is provided and the value is falsey return store value
+          if (randomizeArray && !randomizeArray[moduleName][parameterName]) return state.gameState.goal[moduleName][parameterName]
           const parameterValDef = state.gameState.possibleValues[moduleName][parameterName]
           return Array.isArray(parameterValDef)
             ? parameterValDef[random(0, parameterValDef.length - 1)]
@@ -166,6 +183,29 @@ export default new Vuex.Store({
       return commit('setGoalToPreset', {
         preset: randomizeValues(state.audioParameters)
       })
+    },
+    setSynthToGoal ({state}, synth) {
+      // This is absolute garbage but really can't think of anything else
+      // if someone comes up with an elegant sollution for this I will
+      // buy them dinner & beers for 1 night - Will Willems
+      synth.delay.state.device.delayTime.value = state.gameState.goal.delay.delayTime
+      synth.delay.state.device.feedback.value = state.gameState.goal.delay.feedback
+      synth.delay.state.device.wet.value = state.gameState.goal.delay.wet
+      synth.envelope.state.device.attack = state.gameState.goal.envelope.attack
+      synth.envelope.state.device.decay = state.gameState.goal.envelope.decay
+      synth.envelope.state.device.sustain = state.gameState.goal.envelope.sustain
+      synth.envelope.state.device.release = state.gameState.goal.envelope.release
+      synth.filter.state.device.frequency.value = state.gameState.goal.filter.cutOffFreq
+      synth.filter.state.device.type = state.gameState.goal.filter.type
+      synth.filter.state.device.Q.value = state.gameState.goal.filter.setQ
+      synth.lfo.state.device.frequency.value = state.gameState.goal.lfo.frequency
+      synth.lfo.state.device.max = state.gameState.goal.lfo.max
+      synth.lfo.state.device.type = state.gameState.goal.lfo.type
+      synth.oscillator.state.device.frequency.value = state.gameState.goal.oscillator.frequency
+      synth.oscillator.state.device.type = state.gameState.goal.oscillator.typeOsc
+      synth.oscillator.state.device.detune.value = state.gameState.goal.oscillator.detune
+      synth.reverb.state.device.wet.value = state.gameState.goal.reverb.wet
+      synth.reverb.state.device.roomSize.value = state.gameState.goal.reverb.roomSize
     }
   }
 })

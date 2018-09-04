@@ -1,6 +1,7 @@
 <template>
   <div id="app">
-    <overlay v-if="isOverlayed==true" @next="isOverlayed=false"/>
+    <succes-overlay v-if="isOverlayed==true" @next="(isOverlayed=false, $store.commit('startGame'))"/>
+    <start-screen v-if="isStartgame==true" @next="(isStartgame=false, $store.commit('startGame'))"/>
 
     <!-- <div id="nav">
       <router-link to="/">Home</router-link> |
@@ -14,41 +15,53 @@
 import random from 'lodash/random'
 import times from 'lodash/times'
 import audio from '@/audio'
-import Overlay from '@/components/Overlay'
+import SuccesOverlay from '@/components/SuccesOverlay'
+import StartScreen from '@/components/StartScreen'
 import { SYNTH_BPM } from '@/constants'
 
 export default {
   name: 'App',
   data () {
     return {
-      isOverlayed: false
+      isOverlayed: false,
+      isStartgame: true
     }
   },
   components: {
-    Overlay
+    SuccesOverlay,
+    StartScreen
   },
   created () {
+    const masterBus = new audio.state.Tone.CrossFade(0.5)
+    masterBus.toMaster()
     // initialize the synth
-    audio.init()
+    audio.init().connect(masterBus, 0, 0)
+    audio.goalMirrorInstance.init().connect(masterBus, 0, 1)
     // create loop wich sequences 4 notes
     const loop = audio.setMainLoop({
       noteArray: times(4).map(i => random(-12, 12)),
       subdivision: '4n'
     }, (time, note) => {
       audio.playNote(note)
+      audio.goalMirrorInstance.playNote(note)
       // audio.playNote(Math.round(12 * Math.random())) // let's have some fun
     })
     // set BPM
     audio.setBpm(SYNTH_BPM)
+    audio.goalMirrorInstance.setBpm(SYNTH_BPM)
     // start tone general
     audio.start()
+    audio.goalMirrorInstance.start()
     // start loop
     loop.start()
+    // set goal synth to goal
+    this.$store.dispatch('setSynthToGoal', audio.goalMirrorInstance)
 
     window.randomizeGoal = () => {
       this.$store.dispatch('randomizGoalParameters')
-        .then(() => console.log('success'))
+        .then(() => this.$store.dispatch('setSynthToGoal', audio.goalMirrorInstance))
     }
+    
 
     window.randomizeParams = () => {
       this.$store.dispatch('randomizeAudioParameters')
@@ -71,8 +84,41 @@ export default {
   methods: {
     displaySuccesMessage () {
       this.isOverlayed = true
-      // this.$store.dispatch('randomizeAudioParameters')
-      this.$store.dispatch('randomizGoalParameters')
+      this.$store.commit('stopGame')
+      this.$store.dispatch('randomizGoalParameters', {
+      oscillator: {
+        frequency: false,
+        typeOsc: true,
+        detune: false
+        // phase: 0
+      },
+      filter: {
+        cutOffFreq: false,
+        type: true,
+        setQ: false,
+        // gain: 50
+      },
+      envelope: {
+        attack: false,
+        decay: true,
+        sustain: false,
+        release: false
+      },
+      lfo: {
+        frequency: false,
+        type: true,
+        amount: false
+      },
+      delay: {
+        delayTime: false,
+        feedback: false,
+        wet: true
+      },
+      reverb: {
+        roomSize: false,
+        wet: true
+      }
+    })
       times(4).forEach(i => {
         audio.state.loop.at(i, random(-12, 12))
       });
@@ -186,6 +232,7 @@ export default {
 .level {
   display: flex;
   justify-content: space-around;
+  align-items: center;
   flex-wrap: wrap;
   width:100%;
   height:100vh;

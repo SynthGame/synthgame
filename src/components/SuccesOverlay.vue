@@ -2,9 +2,18 @@
   <div class="overlay">
     <div class="overlay-content-wrapper">
       <div>
-    <p class="heading">You completed Level{{level}}!</p>
-    <p class="subheading">congratulations!!</p>
+        <p class="heading">You completed Level{{level}}!</p>
+        <p class="subheading">congratulations!!</p>
+        <p class="score">Your current score: {{gameScore}}</p>
       </div>
+      <svg :style="{'transform': ballHeight}" width="37px" height="37px" viewBox="0 0 37 37" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+          <defs></defs>
+          <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+              <g id="loadingscreen_icon1-01" transform="translate(-120.000000, 0.000000)" stroke="#FFFFFF" fill-rule="nonzero" stroke-width="1.5819" fill="#FF8575">
+                  <circle id="Oval" cx="138.6" cy="18.2" r="17.3"></circle>
+              </g>
+          </g>
+      </svg>
     <svg version="1.1"
      xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:a="http://ns.adobe.com/AdobeSVGViewerExtensions/3.0/"
      x="0px" y="0px" width="205px" height="104px" viewBox="0 0 203 98" style="enable-background:new 0 0 203 98;"
@@ -25,12 +34,35 @@
 </template>
 
 <script>
+import { keyframes, easing } from 'popmotion'
 export default {
   name: "Overlay",
   props: {
     level: {
       type: Number,
       default: 1
+    }
+  },
+  data () {
+    return {
+      ballHeight: 0
+    }
+  },
+  created() {
+    keyframes({
+      values: [ // you can include anything here, jus values or '10px' or colors whatever
+        { x: 0, background: 'hsla(125, 100, 50, 1)' },
+        { x: -60, background: 'hsla(20, 100, 60, 1)' },
+        { x: 0, background: 'hsla(20, 100, 60, 1)' }
+      ],
+      loop: Infinity,
+      duration: 1000,
+      easings: [easing.easeOut, easing.easeIn, easing.lineair]
+    }).start(v => this.ballHeight = `translateY(${v.x + 20}px)`)
+  },
+  computed: {
+    gameScore () {
+      return this.$store.state.gameState.score
     }
   }
 }
