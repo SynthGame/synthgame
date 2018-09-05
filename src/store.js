@@ -238,7 +238,7 @@ export default new Vuex.Store({
     },
     setLevel ({state, commit}, {levelNumber, knobsAvailable}) {
       commit('setLevelNumber', levelNumber)
-      commit('setknobsAvailable', knobsAvailable)
+      commit('setKnobsAvailable', knobsAvailable)
     }
   }
 })
