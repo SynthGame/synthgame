@@ -49,7 +49,9 @@ export default new Vuex.Store({
     gameState: {
       margin: 10,
       gameIsRunning: false,
+      level: 0,
       score: 0,
+      highScore: 0,
       goal: {
         oscillator: {
           frequency: 65,
@@ -133,6 +135,12 @@ export default new Vuex.Store({
     },
     addValueToScore (state, val) {
       state.gameState.score = add(state.gameState.score, val)
+    },
+    addValueToLevel (state, val) {
+      state.gameState.level = add(state.gameState.level, val)
+    },
+    updateHighScore (state, val) {
+      state.gameState.highScore = val
     }
   },
   getters: {

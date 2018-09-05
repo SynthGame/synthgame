@@ -61,7 +61,7 @@ export default {
       this.$store.dispatch('randomizGoalParameters')
         .then(() => this.$store.dispatch('setSynthToGoal', audio.goalMirrorInstance))
     }
-    
+
 
     window.randomizeParams = () => {
       this.$store.dispatch('randomizeAudioParameters')

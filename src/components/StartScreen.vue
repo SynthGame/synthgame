@@ -3,9 +3,12 @@
     <div class="startscreen-content-wrapper">
       <div>
     <h1>Tats</h1>
-    <h2>Recreate the sound before time runs out!</h2>
+    <h2>Align all synthesizer controls before 00:00!</h2>
       </div>
-    <iframe width="560" height="315" src="https://www.youtube.com/embed/O7x-AS6idOQ?rel=0?version=3&autoplay=1&controls=0&&showinfo=0&loop=1&playlist=O7x-AS6idOQ" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+    <!-- <iframe width="560" height="315" src="https://www.youtube.com/embed/O7x-AS6idOQ?rel=0?version=3&autoplay=1&controls=0&&showinfo=0&loop=1&playlist=O7x-AS6idOQ" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe> -->
+    <video width="480" autoplay loop muted>
+      <source src="../../src/assets/intro.mp4" type="video/mp4">
+    </video>
     <button class="button-next" @click="$emit('next')">Start</button>
     </div>
   </div>
@@ -60,13 +63,17 @@ export default {
 }
 
 .button-next {
-    background: none;
+    background: #ff8574;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    font-size: 2em;
+    font-weight: 900;
     color: inherit;
     padding: 0;
     font: inherit;
     cursor: pointer;
     outline: inherit;
-    padding: 1rem 2rem;
-  border: 1px solid white;
+    padding: .8rem 1.4rem;
+    border: none;
 }
 </style>

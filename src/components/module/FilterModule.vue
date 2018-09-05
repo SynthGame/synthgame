@@ -32,8 +32,8 @@
         knobColor="#6e01d1"
         name="Type"
         module="filter"
-      ></module-knob>
-      <module-knob
+      ></module-knob> -->
+      <!-- <module-knob
         v-model="cutOffFreq"
         :min="0"
         :max="100"
