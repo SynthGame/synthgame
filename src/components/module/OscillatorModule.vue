@@ -18,7 +18,7 @@
               {name: 'PhaseGoal', min: 50, max: 10000, value: 0},
               {name: 'WaveformGoal', min: 0, max:3, value: typeOscGoal},
             ]"/>
-    <!-- <div class="knobs"> -->
+    <div class="knobs">
       <!-- <module-knob
         v-model="typeDial"
         :min="0"
@@ -56,7 +56,7 @@
         <p>WAVEFORM</p>
       </div>
 
-    <!-- </div> -->
+    </div>
   </div>
 </template>
 

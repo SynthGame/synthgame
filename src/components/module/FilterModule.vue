@@ -17,7 +17,7 @@
                 {name: 'qGoal', min: 0, max: 100, value: setQGoal},
                 {name: 'gainGoal', min: 0, max: 100, value: gain},
                 ]"/>
-    <!-- <div class="knobs"> -->
+    <div class="knobs">
             <div class="button-wrapper">
         <module-button color="#6e01d1" shape="lowpass" :isPressed="type==='lowpass'" @click.native="type='lowpass'"/>
         <module-button color="#6e01d1" shape="highpass" :isPressed="type==='highpass'" @click.native="type='highpass'"/>
@@ -49,7 +49,7 @@
         name="Resonance"
         module="filter"
       ></module-knob> -->
-    <!-- </div> -->
+    </div>
   </div>
 
 </template>
@@ -152,4 +152,9 @@ a {
   color: #42b983;
 }
 
+.button-wrapper{
+  button {
+    border-color: #6e01d1;
+  }
+}
 </style>

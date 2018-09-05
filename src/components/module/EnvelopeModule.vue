@@ -17,7 +17,7 @@
                 {name: 'sustainGoal', min: 1, max: 100, value: this.sustainGoal},
                 {name: 'releasevGoal', min: 1, max: 100, value: this.releaseGoal}
                 ]"/>
-    <!-- <div class="knobs"> -->
+    <div class="knobs">
       <!-- <module-knob
         v-model="attack"
         :min="0"
@@ -50,7 +50,7 @@
         name="Release"
         module="envelope"
       ></module-knob> -->
-    <!-- </div> -->
+    </div>
   </div>
 </template>
 
@@ -82,7 +82,7 @@ export default {
       message: 'Done',
       messageArray: [
         'Ya man',
-        'Nailed it',
+        // 'Nailed it',
         'Tune!',
         'Rad'
       ]

@@ -12,6 +12,7 @@ const audioInstance = () => ({
   },
   init () {
     log('initializing all submodules before using')
+    this.player.init()
     this.oscillator.init()
     this.envelope.init()
     this.lfo.init()
@@ -19,6 +20,7 @@ const audioInstance = () => ({
     this.delay.init()
     this.reverb.init()
 
+    const player = this.player.state.device
     const oscillator = this.oscillator.state.device
     const pitchShift = this.oscillator.state.pitchShift
     const envelope = this.envelope.state.device
@@ -68,10 +70,25 @@ const audioInstance = () => ({
     this.oscillator.state.pitchShift.pitch = shift
     return this.envelope.state.device.triggerAttackRelease(this.state.toneLength)
   },
+  playKick () {
+    log(`Playing kick`)
+    return this.player.state.device.start();
+  },
   setToneLength (length) {
     log(`setting envelope tone length to: ${length}`)
     this.state.toneLength = length
     return this.state.toneLength
+  },
+  player: {
+    state: {
+      device: undefined
+    },
+    init (options) {
+      log(`Initializing player with options: ${options}`)
+      this.state.device = new Tone.Player({
+        url : require('./assets/kick.wav'),
+      }).toMaster()
+    }
   },
   oscillator: {
     state: {

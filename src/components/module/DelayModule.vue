@@ -18,7 +18,7 @@
               {name:'WetGoal', min: 0, max: 100, value: this.wetGoal},
               {name:'PlaceholderGoal', min: 0, max: 100, value: 'fake'}]"
     />
-    <!-- <div class="knobs"> -->
+    <div class="knobs">
       <!-- <module-knob
         v-model="delayTime"
         :min="0"
@@ -43,7 +43,7 @@
         name="Dry/wet"
         module="delay"
       ></module-knob>
-    <!-- </div> -->
+    </div>
   </div>
 </template>
 

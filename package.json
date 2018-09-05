@@ -20,6 +20,7 @@
     "vue": "^2.5.17",
     "vue-circle-slider": "^1.0.2",
     "vue-knob-control": "^1.2.1",
+    "vue-pose": "^0.4.2",
     "vue-router": "^3.0.1",
     "vuex": "^3.0.1"
   },

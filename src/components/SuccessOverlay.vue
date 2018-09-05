@@ -70,7 +70,7 @@ export default {
         { x: 0, background: 'hsla(20, 100, 60, 1)' }
       ],
       loop: Infinity,
-      duration: 1000,
+      duration: 545,
       easings: [easing.easeOut, easing.easeIn, easing.lineair]
     }).start(v => this.ballHeight = `translateY(${v.x + 20}px)`)
   },

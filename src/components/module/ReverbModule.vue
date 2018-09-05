@@ -15,7 +15,7 @@
                       {name: 'Room Size Goal', min:1, max:100, value: this.roomSizeGoal},
                       {name: 'Dry / Wet Goal', min:1, max:100, value: this.wetGoal}
                       ]"/>
-    <!-- <div class="knobs"> -->
+    <div class="knobs">
       <!-- <module-knob
         v-model="roomSize"
         :min="0"
@@ -32,7 +32,7 @@
         name="Dry/wet"
         module="reverb"
       ></module-knob>
-    <!-- </div> -->
+    </div>
   </div>
 </template>
 

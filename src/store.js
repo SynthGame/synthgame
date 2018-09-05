@@ -34,9 +34,9 @@ export default new Vuex.Store({
         // gain: 50
       },
       envelope: {
-        attack: 1,
+        attack: 4,
         decay: 5,
-        sustain: 10,
+        sustain: 30,
         release: 10
       },
       lfo: {
@@ -75,9 +75,9 @@ export default new Vuex.Store({
           // gain: 50
         },
         envelope: {
-          attack: 1,
+          attack: 4,
           decay: 10,
-          sustain: 1,
+          sustain: 30,
           release: 10
         },
         lfo: {

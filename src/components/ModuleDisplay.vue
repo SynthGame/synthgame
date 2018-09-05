@@ -27,8 +27,8 @@
 
         <!-- the swing: -->
         <g v-if="this.module === 'lfo'" ref="swing"
-          :stroke="fill"
-          :fill="fill"
+          stroke="black"
+          fill="black"
           :style="swingStyle"
           class="swingClass"
                           >
@@ -68,42 +68,34 @@
             <circle :r="reverbCirclesRay(1)"
                     :cy="displayHeight/2"
                     :cx="firstCircleLeftMargin" class="reverb"
-                    :fill="fill"
                     />
             <circle :r="reverbCirclesRay(2)"
                     :cy="displayHeight/2"
                     :cx="spaceBetweenReverbCicles(2)"
-                    :fill="fill"
                     class="reverb"/>
             <circle :r="reverbCirclesRay(3)"
                     :cy="displayHeight/2"
                     :cx="spaceBetweenReverbCicles(3)"
-                    :fill="fill"
                     class="reverb"/>
             <circle :r="reverbCirclesRay(4)"
                     :cy="displayHeight/2"
                     :cx="spaceBetweenReverbCicles(4)"
-                    :fill="fill"
                     class="reverb"/>
             <circle :r="reverbCirclesRay(5)"
                     :cy="displayHeight/2"
                     :cx="spaceBetweenReverbCicles(5)"
-                    :fill="fill"
                     class="reverb"/>
             <circle :r="reverbCirclesRay(6)"
                     :cy="displayHeight/2"
                     :cx="spaceBetweenReverbCicles(6)"
-                    :fill="fill"
                     class="reverb"/>
             <circle :r="reverbCirclesRay(8)"
                     :cy="displayHeight/2"
                     :cx="spaceBetweenReverbCicles(7)"
-                    :fill="fill"
                     class="reverb"/>
             <circle :r="reverbCirclesRay(9)"
                     :cy="displayHeight/2"
                     :cx="spaceBetweenReverbCicles(8)"
-                    :fill="fill"
                     class="reverb"/>
             <!-- <circle :r="reverbCirclesRay(10)"
                     :cy="displayHeight/2"

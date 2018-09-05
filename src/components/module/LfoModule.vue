@@ -18,7 +18,7 @@
                    {name: 'Shape', min:0, max:3, value: this.typeGoal},
                    {name: 'Rlgl', min:0, max:3, value: Math.pow(this.frequencyGoal, (this.frequencyGoal / 100)) - 1}
                    ]"/>
-        <!-- <div class="knobs"> -->
+        <div class="knobs">
           <!-- <module-knob
             v-model="frequency"
             :min="1"
@@ -50,7 +50,7 @@
         <module-button color="#5bd484" shape="triangle" :isPressed="type==='triangle'" @click.native="type='triangle'"/>
         <p>WAVEFORM</p>
       </div>
-        <!-- </div> -->
+        </div>
     </div>
 </template>
 
@@ -149,6 +149,12 @@ li {
 }
 a {
   color: #42b983;
+}
+
+.button-wrapper{
+  button {
+    border-color: #5bd484;
+  }
 }
 
 </style>

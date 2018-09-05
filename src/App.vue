@@ -80,6 +80,7 @@ export default {
       noteArray: times(4).map(i => random(-12, 12)),
       subdivision: '4n'
     }, (time, note) => {
+      if (this.isOverlayed) {audio.playKick()};
       audio.playNote(note)
       audio.goalMirrorInstance.playNote(note)
       // audio.playNote(Math.round(12 * Math.random())) // let's have some fun
@@ -156,7 +157,7 @@ export default {
       }
     })
       times(4).forEach(i => {
-        audio.state.loop.at(i, random(-12, 12))
+        audio.state.loop.at(i, random(-12, 12));
       });
     },
     start(){
@@ -205,6 +206,7 @@ export default {
 .module {
   background: black;
   max-height: 50%;
+  width: 16em;
   margin: 0;
   padding: 1.5% 2%;
   display: flex;
@@ -214,13 +216,14 @@ export default {
   position: relative;
   .button-wrapper {
       display: flex;
-      width: 40%;
+      width: 50%;
+      height: 6em;
       margin: 0 auto;
       flex-wrap: wrap;
       justify-content: center;
       button {
-        width: 1em;
-        height: 1em;
+        width:2.5em;
+        height: 2.5em;
       }
       svg{
         height: .4em;
@@ -256,9 +259,9 @@ export default {
     right: 4%;
   }
   & .display {
-    // margin: 10% 2%;
+    margin: 10% 2%;
     height: 5em;
-    width: 10em;
+    width: 96%;
     & path {
       transition: .1s all ease-out;
     }
@@ -287,9 +290,10 @@ export default {
   }
   & .knobs {
     width: 90%;
-    height: 60%;
+    height: 55%;
     margin: auto;
     display: flex;
+    align-items: center;
     flex-wrap: wrap;
     justify-content: center;
   }
