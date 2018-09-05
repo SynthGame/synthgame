@@ -458,7 +458,9 @@ export default {
 <style scoped lang="scss">
 
 .knob {
-  width:50%;
+  width:8em;
+  height:8em;
+  // flex:1;
   color: white;
   &__bg {
     margin-bottom: -150px;

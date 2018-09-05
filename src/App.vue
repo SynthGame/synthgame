@@ -33,7 +33,7 @@ export default {
   },
   created () {
     this.$store.dispatch('setLevel', {
-      levelNumber: 1, 
+      levelNumber: 1,
       knobsAvailable: {
         oscillator: {
           frequency: false,
@@ -197,16 +197,18 @@ export default {
 
 .module {
   background: black;
-  height: 50%;
+  max-height: 50%;
   margin: 0;
-  width: 15em;
   padding: 1.5% 2%;
   display: flex;
+  max-width: fit-content;
   justify-content: space-between;
-  flex-direction: column;
+  flex-flow: column wrap;
   position: relative;
   .button-wrapper {
       display: flex;
+      width: 40%;
+      margin: 0 auto;
       flex-wrap: wrap;
       justify-content: center;
       button {
@@ -219,6 +221,7 @@ export default {
     & p {
        margin: .5em 0 0 0;
        font-size: .7em;
+       width: 100%;
        text-transform: uppercase;
        letter-spacing: 1px;
     }
@@ -246,9 +249,9 @@ export default {
     right: 4%;
   }
   & .display {
-    margin: 10% 2%;
-    height: 25%;
-    width: 95%;
+    // margin: 10% 2%;
+    height: 5em;
+    width: 10em;
     & path {
       transition: .1s all ease-out;
     }

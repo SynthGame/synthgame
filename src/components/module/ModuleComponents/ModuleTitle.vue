@@ -39,8 +39,8 @@ export default {
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style lang="scss" scoped>
   .module__name {
-    width: 96%;
-    margin: 0 auto;
+    width: 10em;
+    margin: 0;
     display: flex;
     justify-content: flex-start;
     align-items: baseline;

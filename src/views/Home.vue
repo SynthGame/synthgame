@@ -1511,7 +1511,7 @@
         </g>
     </g>
 </svg>
-      <OscillatorModule :style="'margin-left: calc(((100vw - 48em)/3)*' + (this.$store.state.visualParameters.marginOscillator/100) + ')'" :class="[(activeModule == 0 ? 'active' : '')]" />
+      <OscillatorModule :style="'margin-left: calc(((100vw - 48em)/6)*' + (this.$store.state.visualParameters.marginOscillator/100) + ')'" :class="[(activeModule == 0 ? 'active' : '')]" />
       <FilterModule :style="'margin-left: calc(((100vw - 48em)/3)*' + (this.$store.state.visualParameters.marginFilter/100) + ')'" :class="[(activeModule == 1 ? 'active' : '')]" />
       <EnvelopeModule :style="'margin-left: calc(((100vw - 48em)/3)*' + (this.$store.state.visualParameters.marginEnvelope/100) + ')'" :class="[(activeModule == 2 ? 'active' : '')]" />
       <LfoModule :style="'margin-left: calc(((100vw - 48em)/3)*' + (this.$store.state.visualParameters.marginLfo/100) + ')'" :class="[(activeModule == 3 ? 'active' : '')]" />
