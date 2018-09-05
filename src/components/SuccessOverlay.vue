@@ -50,16 +50,16 @@ export default {
     }
   },
   created() {
-    keyframes({
-      values: [ // you can include anything here, jus values or '10px' or colors whatever
-        { x: 0, background: 'hsla(125, 100, 50, 1)' },
-        { x: -60, background: 'hsla(20, 100, 60, 1)' },
-        { x: 0, background: 'hsla(20, 100, 60, 1)' }
-      ],
-      loop: Infinity,
-      duration: 1000,
-      easings: [easing.easeOut, easing.easeIn, easing.lineair]
-    }).start(v => this.ballHeight = `translateY(${v.x + 20}px)`)
+    // keyframes({
+    //   values: [ // you can include anything here, jus values or '10px' or colors whatever
+    //     { x: 0, background: 'hsla(125, 100, 50, 1)' },
+    //     { x: -60, background: 'hsla(20, 100, 60, 1)' },
+    //     { x: 0, background: 'hsla(20, 100, 60, 1)' }
+    //   ],
+    //   loop: Infinity,
+    //   duration: 1000,
+    //   easings: [easing.easeOut, easing.easeIn, easing.lineair]
+    // }).start(v => this.ballHeight = `translateY(${v.x + 20}px)`)
   },
   computed: {
     gameScore () {

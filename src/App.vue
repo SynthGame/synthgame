@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <succes-overlay v-if="isOverlayed==true" @next="(isOverlayed=false, $store.commit('startGame'))"/>
+    <success-overlay v-if="isOverlayed==true" @next="(isOverlayed=false, $store.commit('startGame'))"/>
     <start-screen v-if="isStartgame==true" @next="(isStartgame=false, $store.commit('startGame'))"/>
 
     <!-- <div id="nav">
@@ -15,7 +15,7 @@
 import random from 'lodash/random'
 import times from 'lodash/times'
 import audio from '@/audio'
-import SuccesOverlay from '@/components/SuccesOverlay'
+import SuccessOverlay from '@/components/SuccessOverlay'
 import StartScreen from '@/components/StartScreen'
 import { SYNTH_BPM } from '@/constants'
 
@@ -28,7 +28,7 @@ export default {
     }
   },
   components: {
-    SuccesOverlay,
+    SuccessOverlay,
     StartScreen
   },
   created () {
