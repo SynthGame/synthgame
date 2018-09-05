@@ -161,18 +161,18 @@ export default {
 .module {
   height: 50%;
   margin: 0;
-  width: 16em;
+  width: 15em;
   padding: 1.5% 2%;
   display: flex;
-  justify-content: flex-start;
+  justify-content: space-between;
   flex-direction: column;
-  border: 1px solid #fff;
+  // border: 1px solid #fff;
   position: relative;
   &:before {
     content:'';
     display: block;
     position: absolute;
-    background: white;
+    background: black;
     width: .5em;
     height: .5em;
     border-radius: 100%;
@@ -183,7 +183,7 @@ export default {
     content:'';
     display: block;
     position: absolute;
-    background: white;
+    background: black;
     width: .5em;
     height: .5em;
     border-radius: 100%;
@@ -192,8 +192,9 @@ export default {
   }
   & .display {
     margin: 0 2%;
-    height: 35%;
+    height: 30%;
     width: 95%;
+    background: black;
     & path {
       transition: .1s all ease-out;
     }
@@ -201,7 +202,7 @@ export default {
       content:'';
       display: block;
       position: absolute;
-      background: white;
+      background: black;
       width: .5em;
       height: .5em;
       border-radius: 100%;
@@ -212,7 +213,7 @@ export default {
       content:'';
       display: block;
       position: absolute;
-      background: white;
+      background: black;
       width: .5em;
       height: .5em;
       border-radius: 100%;
@@ -222,7 +223,7 @@ export default {
   }
   & .knobs {
     width: 100%;
-    height: fit-content;
+    height: 60%;
     display: flex;
     flex-wrap: wrap;
     justify-content: center;

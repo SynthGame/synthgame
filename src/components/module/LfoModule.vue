@@ -1,5 +1,5 @@
   <template>
-    <div class="module">
+    <div class="module" :style="'background:' + moduleColor">
       <module-title :indicator-active="dialsAreWithinMargin" :module-color="moduleColor">
         <h2 slot="title">Tats</h2>
         <h3 v-if="dialsAreWithinMargin" slot="subtitle">Done!</h3>

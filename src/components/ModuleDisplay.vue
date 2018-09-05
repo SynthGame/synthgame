@@ -2,12 +2,13 @@
 
     <div class="display" ref="displayWrapper">
       <svg width="100%" height="100%">
-        <rect :fill="fill" width="100%" height="100%" />
+        <!-- <rect :fill="fill" width="100%" height="100%" /> -->
+        <rect fill="none" width="100%" height="100%" />
 
         <path stroke="black"
               :stroke-width="strokeWidth"
               :d="path"
-              fill="black"
+              :fill="fill"
               style="fill-rule: nozero"
               :class="{reverb: module=== 'reverb'}"
               />

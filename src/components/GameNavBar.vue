@@ -1,7 +1,7 @@
 <template>
   <nav class="main">
-    <span>•</span>
     <h2 class="game_title">Tats
+    <span class="main__level">Level {{gameLevel}}</span>
     <span :class="{
                 'module__name__status-indicator': true,
                 'module__name__status-indicator--active': oscillatorComplete
@@ -65,6 +65,7 @@
     ></span>
     </h2>
     <span class="timer" @click="startTimer">00:{{timeLeftSeconds}}</span>
+    <span>•</span>
   </nav>
 </template>
 
@@ -110,11 +111,15 @@ export default {
     },
             reverbComplete() {
       return Object.values(this.$store.getters.audioParametersMatchGoalWithMargin['reverb']).every(param => param)
+    },
+    gameLevel () {
+      return this.$store.state.gameState.level
     }
   },
   methods: {
     startTimer () {
       this.$store.commit('updateModuleMargins', 1);
+      this.$store.commit('addValueToLevel', 1);
       this.timer = this.timer || window.setInterval(() => {
         if(this.timeLeftSeconds === 0) return this.timeIsUp()
         this.timeLeftSeconds--
@@ -124,7 +129,6 @@ export default {
       window.clearInterval(this.timer)
       this.timer = null
       this.$store.commit('addValueToScore', this.timeLeftSeconds);
-      this.$store.commit('addValueToLevel', 1);
       if (this.$store.state.gameState.score > this.$store.state.gameState.highScore) {
           this.$store.commit('updateHighScore', this.$store.state.gameState.score);
       };
@@ -148,29 +152,35 @@ export default {
 <style lang="scss" scoped>
 .main {
  width: 100%;
+ padding: 0 2%;
  height: 8vh;
- font-size: 2em;
+ font-size: 1rem;
  display: flex;
  flex-direction: row;
 justify-content: center;
 align-items: center;
 background: black;
-border: 1px solid white;
+// border: 1px solid white;
  align-items: center;
- justify-content: space-between
+ justify-content: space-between;
+ &__level {
+   font-weight: 300;
+   margin-left: 1em;
+ }
 }
 .game_title {
   text-transform: uppercase;
   letter-spacing: 2px;
-
+  font-size: 1em;
 }
 .timer {
   display: flex;
+  font-size: 2em;
 }
 
 .module__name__status-indicator {
   display: inline-block;
-  margin-left: .2em;
+  margin-left: .8em;
   width: 11px;
   height: 11px;
   border-radius: 100%;
