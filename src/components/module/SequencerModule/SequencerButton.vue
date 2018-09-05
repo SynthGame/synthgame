@@ -1,10 +1,12 @@
 <template>
   <button @click="$emit('click', $event)" class="sequencer-button">
-    <div :class="{
-      'sequencer-button__indicator': true,
-      'sequencer-button__indicator--active': buttonActive,
-      'sequencer-button__indicator--selected': buttonSelected
-    }"></div>
+    <div style="height: 100%; width: 100%;">
+      <div :class="{
+        'sequencer-button__indicator': true,
+        'sequencer-button__indicator--active': buttonActive,
+        'sequencer-button__indicator--selected': buttonSelected
+      }"></div>
+    </div>
   </button>
 </template>
 
