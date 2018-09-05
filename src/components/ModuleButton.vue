@@ -68,7 +68,7 @@ export default {
 }
 </script>
 
-<style>
+<style scoped>
 .st0{fill:none;stroke:#FFFFFF;stroke-width:1.1844;stroke-miterlimit:10;}
 label {
   border: 1px white solid;

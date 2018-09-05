@@ -32,6 +32,43 @@ export default {
     StartScreen
   },
   created () {
+    this.$store.dispatch('setLevel', {
+      levelNumber: 1, 
+      knobsAvailable: {
+        oscillator: {
+          frequency: false,
+          typeOsc: true,
+          detune: false
+          // phase: 0
+        },
+        filter: {
+          cutOffFreq: false,
+          type: true,
+          setQ: false,
+          // gain: 50
+        },
+        envelope: {
+          attack: false,
+          decay: true,
+          sustain: false,
+          release: false
+        },
+        lfo: {
+          frequency: false,
+          type: true,
+          amount: false
+        },
+        delay: {
+          delayTime: false,
+          feedback: false,
+          wet: true
+        },
+        reverb: {
+          roomSize: false,
+          wet: true
+        }
+      }
+    })
     const masterBus = new audio.state.Tone.CrossFade(0.5)
     masterBus.toMaster()
     // initialize the synth
