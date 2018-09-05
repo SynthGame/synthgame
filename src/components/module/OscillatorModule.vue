@@ -1,5 +1,5 @@
 <template>
-  <div class="module" :style="'background:' + moduleColor">
+  <div class="module">
     <module-title :indicator-active="dialsAreWithinMargin" :module-color="moduleColor">
       <h2 slot="title">Tats</h2>
       <h3 v-if="dialsAreWithinMargin" slot="subtitle">Done!</h3>
@@ -157,23 +157,5 @@ li {
 }
 a {
   color: #42b983;
-}
-.button-wrapper {
-    display: flex;
-    flex-wrap: wrap;
-    width: 25%;
-    min-width: 5rem;
-    justify-content: center
-    p  {
-    margin: .5em 0 0 0;
-    font-size: .7em;
-    text-transform: uppercase;
-    letter-spacing: 1px;
-    text-align: center
-  }
-}
-
-.selected {
-  background-color: #ff8574
 }
 </style>

@@ -16,7 +16,7 @@ export default {
 
 <style>
 button, input[type="submit"], input[type="reset"] {
-    background: none;
+    /*background: none;
     color: inherit;
     border: none;
     padding: 0;
@@ -27,14 +27,10 @@ button, input[type="submit"], input[type="reset"] {
   justify-content: center;
   align-items: center;
   display: flex;
-  min-width: 40%;
-
-  min-height: 1.3rem;
-  cursor: pointer;
-  margin: 0.1rem
+  cursor: pointer;*/
 }
 
-  p {
+  /*p {
      margin: .5em 0 0 0;
      font-size: .7em;
      text-transform: uppercase;
@@ -49,5 +45,5 @@ button, input[type="submit"], input[type="reset"] {
 
 .selected {
   background-color: #ff8574
-}
+}*/
 </style>

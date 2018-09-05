@@ -17,7 +17,8 @@ export default new Vuex.Store({
       marginFilter: 15,
       marginEnvelope: 10,
       marginLfo: 5,
-      marginDelay: 15
+      marginDelay: 15,
+      marginReverb: 20
     },
     audioParameters: {
       oscillator: {
@@ -39,9 +40,9 @@ export default new Vuex.Store({
         release: 10
       },
       lfo: {
-        frequency: 40,
+        frequency: 10,
         type: 'sine',
-        amount: 5
+        amount: 50
       },
       delay: {
         delayTime: 10,
@@ -79,9 +80,9 @@ export default new Vuex.Store({
           release: 10
         },
         lfo: {
-          frequency: 40,
+          frequency: 10,
           type: 'sine',
-          amount: 10
+          amount: 50
         },
         delay: {
           delayTime: 10,
@@ -155,6 +156,7 @@ export default new Vuex.Store({
       state.visualParameters.marginEnvelope = Math.random()*100;
       state.visualParameters.marginLfo = Math.random()*100;
       state.visualParameters.marginDelay = Math.random()*100;
+      state.visualParameters.marginReverb = Math.random()*100;
     }
   },
   getters: {

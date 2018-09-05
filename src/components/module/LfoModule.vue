@@ -1,5 +1,5 @@
   <template>
-    <div class="module" :style="'background:' + moduleColor">
+    <div class="module">
       <module-title :indicator-active="dialsAreWithinMargin" :module-color="moduleColor">
         <h2 slot="title">Tats</h2>
         <h3 v-if="dialsAreWithinMargin" slot="subtitle">Done!</h3>
@@ -19,7 +19,7 @@
                    {name: 'Rlgl', min:0, max:3, value: Math.pow(this.frequencyGoal, (this.frequencyGoal / 100)) - 1}
                    ]"/>
         <div class="knobs">
-          <!-- <module-knob
+          <module-knob
             v-model="frequency"
             :min="1"
             :max="100"
@@ -34,7 +34,7 @@
             knobColor="#5bd484"
             name="Amount"
             module="lfo"
-          ></module-knob> -->
+          ></module-knob>
           <!-- <module-knob
             v-model="typeDial"
             :min="0"
@@ -151,40 +151,4 @@ a {
   color: #42b983;
 }
 
-button, input[type="submit"], input[type="reset"] {
-    background: none;
-    color: inherit;
-    border: none;
-    padding: 0;
-    font: inherit;
-    // cursor: pointer;
-    outline: inherit;
-      border: 1px #5bd484 solid;
-  justify-content: center;
-  align-items: center;
-  display: flex;
-  min-width: 40%;
-
-  min-height: 1.3rem;
-  cursor: pointer;
-  margin: 0.1rem
-}
-
-.button-wrapper {
-    display: flex;
-    flex-wrap: wrap;
-    width: 25%;
-    min-width: 5rem;
-    justify-content: center
-  & p {
-     margin: .5em 0 0 0;
-     font-size: .7em;
-     text-transform: uppercase;
-     letter-spacing: 1px;
-  }
-}
-
-.selected {
-  background-color: #5bd484
-}
 </style>

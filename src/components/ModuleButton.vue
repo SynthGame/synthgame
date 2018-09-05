@@ -98,9 +98,8 @@ button, input[type="submit"], input[type="reset"] {
   justify-content: center;
   align-items: center;
   display: flex;
-  min-width: 40%;
-
-  min-height: 1.3rem;
+  min-width: 1.8em;
+  min-height: 1.8em;
   cursor: pointer;
   margin: 0.1rem
 }

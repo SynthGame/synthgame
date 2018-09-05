@@ -1,5 +1,5 @@
 <template>
-  <div class="module" :style="'background:' + moduleColor">
+  <div class="module">
     <module-title :indicator-active="dialsAreWithinMargin" :module-color="moduleColor">
       <h2 slot="title">Tats</h2>
       <h3 v-if="dialsAreWithinMargin" slot="subtitle">Done!</h3>
@@ -150,40 +150,6 @@ li {
 }
 a {
   color: #42b983;
-}
-button, input[type="submit"], input[type="reset"] {
-    background: none;
-    color: inherit;
-    border: none;
-    padding: 0;
-    font: inherit;
-    outline: inherit;
-      border: 1px #6e01d1 solid;
-  justify-content: center;
-  align-items: center;
-  display: flex;
-  min-width: 40%;
-
-  min-height: 1.3rem;
-  cursor: pointer;
-  margin: 0.1rem
-}
-
-  p {
-     margin: .5em 0 0 0;
-     font-size: .7em;
-     text-transform: uppercase;
-     letter-spacing: 1px;
-  }
-  .button-wrapper {
-      display: flex;
-      flex-wrap: wrap;
-      width: 25%;
-      min-width: 5rem;
-  }
-
-.selected {
-  background-color: #6e01d1
 }
 
 </style>

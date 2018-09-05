@@ -159,6 +159,7 @@ export default {
 }
 
 .module {
+  background: black;
   height: 50%;
   margin: 0;
   width: 15em;
@@ -166,13 +167,30 @@ export default {
   display: flex;
   justify-content: space-between;
   flex-direction: column;
-  // border: 1px solid #fff;
   position: relative;
+  .button-wrapper {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      button {
+        width: 1em;
+        height: 1em;
+      }
+      svg{
+        height: .4em;
+      }
+    & p {
+       margin: .5em 0 0 0;
+       font-size: .7em;
+       text-transform: uppercase;
+       letter-spacing: 1px;
+    }
+  }
   &:before {
     content:'';
     display: block;
     position: absolute;
-    background: black;
+    background: rgba(255,255,255,0.1);
     width: .5em;
     height: .5em;
     border-radius: 100%;
@@ -183,7 +201,7 @@ export default {
     content:'';
     display: block;
     position: absolute;
-    background: black;
+    background: rgba(255,255,255,0.1);
     width: .5em;
     height: .5em;
     border-radius: 100%;
@@ -191,10 +209,9 @@ export default {
     right: 4%;
   }
   & .display {
-    margin: 0 2%;
-    height: 30%;
+    margin: 10% 2%;
+    height: 25%;
     width: 95%;
-    background: black;
     & path {
       transition: .1s all ease-out;
     }
@@ -202,7 +219,7 @@ export default {
       content:'';
       display: block;
       position: absolute;
-      background: black;
+      background: rgba(255,255,255,0.1);
       width: .5em;
       height: .5em;
       border-radius: 100%;
@@ -213,7 +230,7 @@ export default {
       content:'';
       display: block;
       position: absolute;
-      background: black;
+      background: rgba(255,255,255,0.1);
       width: .5em;
       height: .5em;
       border-radius: 100%;
@@ -222,8 +239,9 @@ export default {
     }
   }
   & .knobs {
-    width: 100%;
+    width: 90%;
     height: 60%;
+    margin: auto;
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
@@ -232,10 +250,14 @@ export default {
 
 .level {
   display: flex;
+  position: relative;
+  background: #101010;
   justify-content: flex-start;
   flex-wrap: wrap;
   width:100%;
   height:92vh;
+  background-image: url("/src/assets/bg.svg");
+  background-size: cover;
 }
 
 body {

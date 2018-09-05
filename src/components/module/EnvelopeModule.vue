@@ -1,5 +1,5 @@
 <template>
-  <div class="module" :style="'background:' + moduleColor">
+  <div class="module">
     <module-title :indicator-active="dialsAreWithinMargin" :module-color="moduleColor">
       <h2 slot="title">Tats</h2>
       <h3 v-if="dialsAreWithinMargin" slot="subtitle">{{message}}</h3>
@@ -18,14 +18,14 @@
                 {name: 'releasevGoal', min: 1, max: 100, value: this.releaseGoal}
                 ]"/>
     <div class="knobs">
-      <!-- <module-knob
+      <module-knob
         v-model="attack"
         :min="0"
         :max="100"
         knobColor="#e4e259"
         name="Attack"
         module="envelope"
-      ></module-knob> -->
+      ></module-knob>
       <module-knob
         v-model="decay"
         :min="0"
@@ -34,22 +34,22 @@
         name="Decay"
         module="envelope"
       ></module-knob>
-      <!-- <module-knob
+      <module-knob
         v-model="sustain"
         :min="0"
         :max="100"
         knobColor="#e4e259"
         name="Sustain"
         module="envelope"
-      ></module-knob> -->
-      <!-- <module-knob
+      ></module-knob>
+      <module-knob
         v-model="release"
         :min="0"
         :max="100"
         knobColor="#e4e259"
         name="Release"
         module="envelope"
-      ></module-knob> -->
+      ></module-knob>
     </div>
   </div>
 </template>
@@ -82,7 +82,6 @@ export default {
       message: 'Done',
       messageArray: [
         'Ya man',
-        'You rock',
         'Nailed it',
         'Tune!',
         'Rad'
