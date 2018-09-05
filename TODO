@@ -1,1 +1,1 @@
-Debounce knob values going into vuex store using Lodash
+Fix knobs line visualizing state instead of position
