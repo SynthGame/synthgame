@@ -9,7 +9,6 @@
       :style="{
                 'background-color': oscillatorComplete ? oscillatorColor : '',
                 'box-shadow': oscillatorComplete ? `0px 0px 16px ${oscillatorColor}` : '',
-                'border': `1px solid ${oscillatorColor}`
 
               }"
     ></span>
@@ -20,7 +19,6 @@
           :style="{
             'background-color': filterComplete ? filterColor : '',
             'box-shadow': filterComplete ? `0px 0px 16px ${filterColor}` : '',
-                'border': `1px solid ${filterColor}`
           }"
     ></span>
         <span :class="{
@@ -30,7 +28,6 @@
           :style="{
             'background-color': envelopeComplete ? envelopeColor : '',
             'box-shadow': envelopeComplete ? `0px 0px 16px ${envelopeColor}` : '',
-            'border': `1px solid ${envelopeColor}`
           }"
     ></span>
             <span :class="{
@@ -40,7 +37,6 @@
           :style="{
             'background-color': lfoComplete ? lfoColor : '',
             'box-shadow': lfoComplete ? `0px 0px 16px ${lfoColor}` : '',
-                'border': `1px solid ${lfoColor}`
           }"
     ></span>
             <span :class="{
@@ -50,7 +46,6 @@
           :style="{
             'background-color': delayComplete ? delayColor : '',
             'box-shadow': delayComplete ? `0px 0px 16px ${delayColor}` : '',
-            'border': `1px solid ${delayColor}`
           }"
     ></span>
             <span :class="{
@@ -60,7 +55,6 @@
           :style="{
             'background-color': reverbComplete ? reverbColor : '',
             'box-shadow': reverbComplete ? `0px 0px 16px ${reverbColor}` : '',
-            'border': `1px solid ${reverbColor}`
           }"
     ></span>
     </h2>
@@ -185,9 +179,13 @@ background: black;
   height: 11px;
   border-radius: 100%;
   transition: 0.5s;
+ border: 1px solid white;
+
   &--active {
     border: none;
     transition: 0.5s;
+ border: 1px solid white;
+
   }
 }
 </style>
