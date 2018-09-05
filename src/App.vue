@@ -197,14 +197,14 @@ export default {
 
 .module {
   height: 50%;
-  width: 33.3%;
+  margin: 0;
+  width: 16em;
   padding: 1.5% 2%;
   display: flex;
-  justify-content: space-around;
+  justify-content: flex-start;
   flex-direction: column;
   border: 1px solid #fff;
   position: relative;
-  margin: 0;
   &:before {
     content:'';
     display: block;
@@ -268,11 +268,10 @@ export default {
 
 .level {
   display: flex;
-  justify-content: space-around;
-  align-items: center;
+  justify-content: flex-start;
   flex-wrap: wrap;
   width:100%;
-  height:100vh;
+  height:92vh;
 }
 
 body {

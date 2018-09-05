@@ -21,7 +21,7 @@
         :min="0"
         :max="100"
         knobColor="#3c32ff"
-        name="Size"
+        name="Length"
         module="reverb"
       ></module-knob> -->
       <module-knob

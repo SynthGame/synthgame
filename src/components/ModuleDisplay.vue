@@ -67,31 +67,31 @@
                     />
             <circle :r="reverbCirclesRay(2)"
                     :cy="displayHeight/2"
-                    :cx="spaceBetweenReverbCicles(2)"
+                    :cx="spaceBetweenReverbCicles(1)"
                     class="reverb"/>
             <circle :r="reverbCirclesRay(3)"
                     :cy="displayHeight/2"
-                    :cx="spaceBetweenReverbCicles(3)"
+                    :cx="spaceBetweenReverbCicles(2)"
                     class="reverb"/>
             <circle :r="reverbCirclesRay(4)"
                     :cy="displayHeight/2"
-                    :cx="spaceBetweenReverbCicles(4)"
+                    :cx="spaceBetweenReverbCicles(3)"
                     class="reverb"/>
             <circle :r="reverbCirclesRay(5)"
                     :cy="displayHeight/2"
-                    :cx="spaceBetweenReverbCicles(5)"
+                    :cx="spaceBetweenReverbCicles(4)"
                     class="reverb"/>
             <circle :r="reverbCirclesRay(6)"
+                    :cy="displayHeight/2"
+                    :cx="spaceBetweenReverbCicles(5)"
+                    class="reverb"/>
+            <circle :r="reverbCirclesRay(7)"
                     :cy="displayHeight/2"
                     :cx="spaceBetweenReverbCicles(6)"
                     class="reverb"/>
             <circle :r="reverbCirclesRay(8)"
                     :cy="displayHeight/2"
                     :cx="spaceBetweenReverbCicles(7)"
-                    class="reverb"/>
-            <circle :r="reverbCirclesRay(9)"
-                    :cy="displayHeight/2"
-                    :cx="spaceBetweenReverbCicles(8)"
                     class="reverb"/>
             <!-- <circle :r="reverbCirclesRay(10)"
                     :cy="displayHeight/2"
@@ -107,31 +107,31 @@
                     />
             <circle :r="reverbCirclesRayGoal(2)"
                     :cy="displayHeight/2"
-                    :cx="spaceBetweenReverbCiclesGoal(2)"
+                    :cx="spaceBetweenReverbCiclesGoal(1)"
                     class="reverb__goal"/>
             <circle :r="reverbCirclesRayGoal(3)"
                     :cy="displayHeight/2"
-                    :cx="spaceBetweenReverbCiclesGoal(3)"
+                    :cx="spaceBetweenReverbCiclesGoal(2)"
                     class="reverb__goal"/>
             <circle :r="reverbCirclesRayGoal(4)"
                     :cy="displayHeight/2"
-                    :cx="spaceBetweenReverbCiclesGoal(4)"
+                    :cx="spaceBetweenReverbCiclesGoal(3)"
                     class="reverb__goal"/>
             <circle :r="reverbCirclesRayGoal(5)"
                     :cy="displayHeight/2"
-                    :cx="spaceBetweenReverbCiclesGoal(5)"
+                    :cx="spaceBetweenReverbCiclesGoal(4)"
                     class="reverb__goal"/>
             <circle :r="reverbCirclesRayGoal(6)"
+                    :cy="displayHeight/2"
+                    :cx="spaceBetweenReverbCiclesGoal(5)"
+                    class="reverb__goal"/>
+            <circle :r="reverbCirclesRayGoal(7)"
                     :cy="displayHeight/2"
                     :cx="spaceBetweenReverbCiclesGoal(6)"
                     class="reverb__goal"/>
             <circle :r="reverbCirclesRayGoal(8)"
                     :cy="displayHeight/2"
                     :cx="spaceBetweenReverbCiclesGoal(7)"
-                    class="reverb__goal"/>
-            <circle :r="reverbCirclesRayGoal(9)"
-                    :cy="displayHeight/2"
-                    :cx="spaceBetweenReverbCiclesGoal(8)"
                     class="reverb__goal"/>
             <!-- <circle :r="reverbCirclesRay(10)"
                     :cy="displayHeight/2"
@@ -300,7 +300,7 @@ export default {
       if (this.module === 'reverb'){
         // helpers:
         const sizeRatio = this.knobs[0].value/(this.knobs[0].max - this.knobs[0].min)
-        margin = (this.displayWidth/8)*(1-sizeRatio)
+        margin = (this.displayWidth/100)-(this.displayWidth/10)*(sizeRatio)
       }
       return margin
     },
@@ -309,7 +309,7 @@ export default {
       if (this.module === 'reverb'){
         // helpers:
         const sizeRatio = this.knobs[4].value/(this.knobs[4].max - this.knobs[4].min)
-        margin = (this.displayWidth/8)*(1-sizeRatio)
+        margin = (this.displayWidth/100)-(this.displayWidth/10)*(sizeRatio)
       }
       return margin
     },

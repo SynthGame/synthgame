@@ -19,32 +19,11 @@
                 ]"/>
     <div class="knobs">
             <div class="button-wrapper">
-        <button @click="type='lowpass'" :class="type==='lowpass' ? 'selected': ''">
-        <svg version="1.1"
-            xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:a="http://ns.adobe.com/AdobeSVGViewerExtensions/3.0/"
-            x="0px" y="0px" width="20.6px" height="10.6px" viewBox="0 0 20.6 10.6" style="enable-background:new 0 0 20.6 10.6;"
-            xml:space="preserve">
-        <path class="st0" d="M0,0.6c0,0,10,0,10,0c5.5,0,10,4.5,10,10"/>
-        </svg>
-        </button>
-                <button @click="type='highpass'" :class="type==='highpass' ? 'selected': ''">
-        <svg version="1.1"
-          xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:a="http://ns.adobe.com/AdobeSVGViewerExtensions/3.0/"
-          x="0px" y="0px" width="20.6px" height="10.6px" viewBox="0 0 20.6 10.6" style="enable-background:new 0 0 20.6 10.6;"
-          xml:space="preserve">
-      <path class="st0" d="M0.6,10.6c0-5.5,4.5-10,10-10c0,0,10,0,10,0"/>
-      </svg>
-        </button>
-                <button @click="type='bandpass'" :class="type==='bandpass' ? 'selected': ''">
-        <svg version="1.1"
-            xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:a="http://ns.adobe.com/AdobeSVGViewerExtensions/3.0/"
-            x="0px" y="0px" width="21.3px" height="10.6px" viewBox="0 0 21.3 10.6" style="enable-background:new 0 0 21.3 10.6;"
-            xml:space="preserve">
-        <path class="st0" d="M0.6,10.6c0-5.5,4.5-10,10-10s10,4.5,10,10"/>
-        </svg>
-        </button>
-        <p>TYPE</p>
-      </div> -->
+        <module-button color="#6e01d1" shape="lowpass" :isPressed="type==='lowpass'" @click.native="type='lowpass'"/>
+        <module-button color="#6e01d1" shape="highpass" :isPressed="type==='highpass'" @click.native="type='highpass'"/>
+        <module-button color="#6e01d1" shape="bandpass" :isPressed="type==='bandpass'" @click.native="type='bandpass'"/>
+<p>SHAPE</p>
+      </div>
 
       <!-- <module-knob
         v-model="typeDial"
@@ -85,6 +64,7 @@ import character from '@/character'
 import ModuleKnob from '@/components/ModuleKnob.vue'
 import ModuleDisplay from '@/components/ModuleDisplay.vue'
 import ModuleTitle from './ModuleComponents/ModuleTitle.vue'
+import ModuleButton from '@/components/ModuleButton.vue'
 
 var self
 
@@ -105,7 +85,8 @@ export default {
   components: {
     ModuleKnob,
     ModuleDisplay,
-    ModuleTitle
+    ModuleTitle,
+    ModuleButton
   },
   created () {
     self = this

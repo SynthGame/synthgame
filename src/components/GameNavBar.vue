@@ -1,27 +1,114 @@
 <template>
   <nav class="main">
     <span>•</span>
+    <h2 class="game_title">Tats
+    <span :class="{
+                'module__name__status-indicator': true,
+                'module__name__status-indicator--active': oscillatorComplete
+              }"
+      :style="{
+                'background-color': oscillatorComplete ? oscillatorColor : '',
+                'box-shadow': oscillatorComplete ? `0px 0px 16px ${oscillatorColor}` : '',
+
+              }"
+    ></span>
+    <span :class="{
+            'module__name__status-indicator': true,
+            'module__name__status-indicator--active': filterComplete
+          }"
+          :style="{
+            'background-color': filterComplete ? filterColor : '',
+            'box-shadow': filterComplete ? `0px 0px 16px ${filterColor}` : '',
+          }"
+    ></span>
+        <span :class="{
+            'module__name__status-indicator': true,
+            'module__name__status-indicator--active': envelopeComplete
+          }"
+          :style="{
+            'background-color': envelopeComplete ? envelopeColor : '',
+            'box-shadow': envelopeComplete ? `0px 0px 16px ${envelopeColor}` : '',
+          }"
+    ></span>
+            <span :class="{
+            'module__name__status-indicator': true,
+            'module__name__status-indicator--active': lfoComplete
+          }"
+          :style="{
+            'background-color': lfoComplete ? lfoColor : '',
+            'box-shadow': lfoComplete ? `0px 0px 16px ${lfoColor}` : '',
+          }"
+    ></span>
+            <span :class="{
+            'module__name__status-indicator': true,
+            'module__name__status-indicator--active': delayComplete
+          }"
+          :style="{
+            'background-color': delayComplete ? delayColor : '',
+            'box-shadow': delayComplete ? `0px 0px 16px ${delayColor}` : '',
+          }"
+    ></span>
+            <span :class="{
+            'module__name__status-indicator': true,
+            'module__name__status-indicator--active': reverbComplete
+          }"
+          :style="{
+            'background-color': reverbComplete ? reverbColor : '',
+            'box-shadow': reverbComplete ? `0px 0px 16px ${reverbColor}` : '',
+          }"
+    ></span>
+    </h2>
     <span class="timer" @click="startTimer">00:{{timeLeftSeconds}}</span>
-    <span>•</span>
   </nav>
 </template>
 
 <script>
+import { MODULE_OSCILLATOR_COLOR, MODULE_ENVELOPE_COLOR, MODULE_FILTER_COLOR, MODULE_DELAY_COLOR, MODULE_REVERB_COLOR, MODULE_LFO_COLOR} from '@/constants'
+
 export default {
   name: 'gameNavBar',
   data: function () {
     return {
       timeLeftSeconds: 30,
-      timer: null
+      timer: null,
+      indicatorActive: true,
+      oscillatorColor: MODULE_OSCILLATOR_COLOR,
+      envelopeColor: MODULE_ENVELOPE_COLOR,
+      filterColor: MODULE_FILTER_COLOR,
+      lfoColor: MODULE_LFO_COLOR,
+      delayColor: MODULE_DELAY_COLOR,
+      reverbColor: MODULE_REVERB_COLOR
     }
+  },
+  created() {
+    console.log(this.$store.state)
   },
   computed: {
     gameIsRunning () {
       return this.$store.state.gameState.gameIsRunning
+    },
+    oscillatorComplete() {
+      return Object.values(this.$store.getters.audioParametersMatchGoalWithMargin['oscillator']).every(param => param)
+    },
+    filterComplete() {
+      return Object.values(this.$store.getters.audioParametersMatchGoalWithMargin['filter']).every(param => param)
+    },
+        envelopeComplete() {
+      return Object.values(this.$store.getters.audioParametersMatchGoalWithMargin['envelope']).every(param => param)
+    },
+        lfoComplete() {
+      return Object.values(this.$store.getters.audioParametersMatchGoalWithMargin['lfo']).every(param => param)
+    },
+        delayComplete() {
+      return Object.values(this.$store.getters.audioParametersMatchGoalWithMargin['delay']).every(param => param)
+    },
+            reverbComplete() {
+      return Object.values(this.$store.getters.audioParametersMatchGoalWithMargin['reverb']).every(param => param)
     }
   },
   methods: {
     startTimer () {
+      this.$store.commit('updateModuleMargins', 1);
       this.timer = this.timer || window.setInterval(() => {
         if(this.timeLeftSeconds === 0) return this.timeIsUp()
         this.timeLeftSeconds--
@@ -38,7 +125,7 @@ export default {
       this.timeLeftSeconds = 30
     },
     timeIsUp () {
-      alert('game\'s over!')
+      alert('gams over')
       this.stopTimer()
     }
   },
@@ -55,10 +142,40 @@ export default {
 <style lang="scss" scoped>
 .main {
  width: 100%;
- height: 40px;
+ height: 8vh;
+ font-size: 2em;
  display: flex;
  flex-direction: row;
- justify-content: space-between;
+justify-content: center;
+align-items: center;
+background: black;
+border: 1px solid white;
  align-items: center;
+ justify-content: space-between
+}
+.game_title {
+  text-transform: uppercase;
+  letter-spacing: 2px;
+
+}
+.timer {
+  display: flex;
+}
+
+.module__name__status-indicator {
+  display: inline-block;
+  margin-left: .2em;
+  width: 11px;
+  height: 11px;
+  border-radius: 100%;
+  transition: 0.5s;
+ border: 1px solid white;
+
+  &--active {
+    border: none;
+    transition: 0.5s;
+ border: 1px solid white;
+
+  }
 }
 </style>
