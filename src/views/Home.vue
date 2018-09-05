@@ -2,12 +2,12 @@
   <div class="game">
     <game-nav-bar/>
     <div class="level">
-      <OscillatorModule :class="[(activeModule == 0 ? 'active' : '')]" />
-      <FilterModule :class="[(activeModule == 1 ? 'active' : '')]" />
-      <EnvelopeModule :class="[(activeModule == 2 ? 'active' : '')]" />
-      <LfoModule :class="[(activeModule == 3 ? 'active' : '')]" />
-      <DelayModule :class="[(activeModule == 4 ? 'active' : '')]" />
-      <ReverbModule :class="[(activeModule == 5 ? 'active' : '')]" />
+      <OscillatorModule :style="'margin-right: calc(((100vw - 48em)/3)*' + (this.$store.state.visualParameters.marginOscillator/100) + ')'" :class="[(activeModule == 0 ? 'active' : '')]" />
+      <FilterModule :style="'margin-right: calc(((100vw - 48em)/3)*' + (this.$store.state.visualParameters.marginFilter/100) + ')'" :class="[(activeModule == 1 ? 'active' : '')]" />
+      <EnvelopeModule :style="'margin-right: calc(((100vw - 48em)/3)*' + (this.$store.state.visualParameters.marginEnvelope/100) + ')'" :class="[(activeModule == 2 ? 'active' : '')]" />
+      <LfoModule :style="'margin-right: calc(((100vw - 48em)/3)*' + (this.$store.state.visualParameters.marginLfo/100) + ')'" :class="[(activeModule == 3 ? 'active' : '')]" />
+      <DelayModule :style="'margin-right: calc(((100vw - 48em)/3)*' + (this.$store.state.visualParameters.marginDelay/100) + ')'" :class="[(activeModule == 4 ? 'active' : '')]" />
+      <ReverbModule :style="'align-self:flex-end'" :class="[(activeModule == 5 ? 'active' : '')]" />
     </div>
     <div class="tabs">
       <div @click="showOsc" class="tabs__tab tabs__osc">Osc</div>
