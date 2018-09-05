@@ -58,6 +58,7 @@ export default new Vuex.Store({
       margin: 10,
       gameIsRunning: false,
       level: 0,
+      knobsAvailable: {},
       score: 0,
       highScore: 0,
       goal: {
@@ -150,6 +151,12 @@ export default new Vuex.Store({
     updateHighScore (state, val) {
       state.gameState.highScore = val
     },
+    setLevelNumber (state, level) {
+      state.gameState.level = level
+    },
+    setKnobsAvailable (state, obj) {
+      state.gameState.knobsAvailable = obj
+    },
     updateModuleMargins (state, val) {
       state.visualParameters.marginOscillator = Math.random()*100;
       state.visualParameters.marginFilter = Math.random()*100;
@@ -230,6 +237,10 @@ export default new Vuex.Store({
       synth.oscillator.state.device.detune.value = state.gameState.goal.oscillator.detune
       synth.reverb.state.device.wet.value = state.gameState.goal.reverb.wet
       synth.reverb.state.device.roomSize.value = state.gameState.goal.reverb.roomSize
+    },
+    setLevel ({state, commit}, {levelNumber, knobsAvailable}) {
+      commit('setLevelNumber', levelNumber)
+      commit('setKnobsAvailable', knobsAvailable)
     }
   }
 })

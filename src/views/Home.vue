@@ -1526,6 +1526,7 @@
       <div @click="showDel" class="tabs__tab tabs__delay">Del</div>
       <div @click="showRev" class="tabs__tab tabs__reverb">Rev</div>
     </div>
+    <sequencer-module/>
   </div>
 </template>
 
@@ -1538,6 +1539,7 @@ import FilterModule from '@/components/module/FilterModule.vue'
 import LfoModule from '@/components/module/LfoModule.vue'
 import DelayModule from '@/components/module/DelayModule.vue'
 import ReverbModule from '@/components/module/ReverbModule.vue'
+import SequencerModule from '@/components/module/SequencerModule.vue'
 
 export default {
   name: 'home',
@@ -1553,7 +1555,8 @@ export default {
     FilterModule,
     LfoModule,
     DelayModule,
-    ReverbModule
+    ReverbModule,
+    SequencerModule
   },
   methods: {
     showOsc () {
