@@ -151,19 +151,20 @@
                     class="reverb"/> -->
           </g>
         </svg>
-
-        <!-- <text x="45%" y="40%" fill="white">
-          <tspan x="45%" y="50%">{{knobs[0].name}}: {{knobs[0].value}}</tspan>
-          <tspan x="45%" y="60%">{{knobs[1].name}}: {{knobs[1].value}}</tspan>
-          <tspan x="45%" y="70%" v-if="this.knobs[2]">{{knobs[2].name}}: {{knobs[2].value}}</tspan>
-          <tspan x="45%" y="80%" v-if="this.knobs[3]">{{knobs[3].name}}: {{knobs[3].value}}</tspan>
-        </text>
-        <text v-if="this.module === 'oscillator' || 'filter'" fill="white">
-          <tspan x="0%" y="50%" v-if="this.knobs[4]">{{knobs[4].name}}: {{knobs[4].value}}</tspan>
-          <tspan x="0%" y="60%" v-if="this.knobs[5]">{{knobs[5].name}}: {{knobs[5].value}}</tspan>
-          <tspan x="0%" y="70%" v-if="this.knobs[6]">{{knobs[6].name}}: {{knobs[6].value}}</tspan>
-          <tspan x="0%" y="80%" v-if="this.knobs[7]">{{knobs[7].name}}: {{knobs[7].value}}</tspan>
-        </text> -->
+        <g v-if="debug" class="debug-text">
+          <text x="0" y="0">
+            <tspan x="0" y="10%">{{knobs[0].name}}: {{knobs[0].value}}</tspan>
+            <tspan x="0" y="20%">{{knobs[1].name}}: {{knobs[1].value}}</tspan>
+            <tspan x="0" y="30%" v-if="this.knobs[2]">{{knobs[2].name}}: {{knobs[2].value}}</tspan>
+            <tspan x="0" y="40%" v-if="this.knobs[3]">{{knobs[3].name}}: {{knobs[3].value}}</tspan>
+          </text>
+          <text x="0" y="40%">
+            <tspan x="0%" y="60%" v-if="this.knobs[4]">{{knobs[4].name}}: {{knobs[4].value}}</tspan>
+            <tspan x="0%" y="70%" v-if="this.knobs[5]">{{knobs[5].name}}: {{knobs[5].value}}</tspan>
+            <tspan x="0%" y="80%" v-if="this.knobs[6]">{{knobs[6].name}}: {{knobs[6].value}}</tspan>
+            <tspan x="0%" y="90%" v-if="this.knobs[7]">{{knobs[7].name}}: {{knobs[7].value}}</tspan>
+          </text>
+        </g>
       </svg>
     </div>
 
@@ -230,6 +231,10 @@ export default {
       type: Array,
       default () { return [] }
     },
+    debug: {
+      type: Boolean,
+      default: false
+    }
   },
   data () {
     return {
@@ -912,4 +917,8 @@ export default {
      stroke-width: 2;
      }
   }
+.debug-text {
+  font: bold 20px sans-serif;
+  fill: red;
+}
  </style>

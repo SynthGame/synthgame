@@ -9,7 +9,7 @@
     <video width="480" autoplay loop muted>
       <source src="../../src/assets/intro.mp4" type="video/mp4">
     </video>
-    <button class="button-next" @click="$emit('next')">Start</button>
+    <button class="button-next" @click="$emit('start')">Start</button>
     </div>
   </div>
 </template>
@@ -21,6 +21,19 @@ export default {
     level: {
       type: Number,
       default: 1
+    }
+  },
+  mounted() {
+    window.addEventListener('keyup', this.emitOnKey)
+  },
+  beforeDestroy() {
+    window.removeEventListener('keyup', this.emitOnKey)
+  },
+  methods: {
+    emitOnKey() {
+      if (event.keyCode === 13) {
+        this.$emit('start');
+      }
     }
   }
 }
