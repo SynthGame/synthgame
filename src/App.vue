@@ -1,8 +1,9 @@
 <template>
   <div id="app">
-    <success-overlay v-if="isOverlayed==true" @next="(isOverlayed=false, $store.commit('startGame'))"/>
-    <start-screen v-if="isStartgame==true" @next="(isStartgame=false, $store.commit('startGame'))"/>
-
+    <start-screen v-if="isStartgame==true"
+    @start="start"/>
+    <success-overlay v-if="isOverlayed==true"
+    @next="next"/>
     <!-- <div id="nav">
       <router-link to="/">Home</router-link> |
       <router-link to="/about">About</router-link>
@@ -33,7 +34,7 @@ export default {
   },
   created () {
     this.$store.dispatch('setLevel', {
-      levelNumber: 1, 
+      levelNumber: 1,
       knobsAvailable: {
         oscillator: {
           frequency: false,
@@ -98,8 +99,6 @@ export default {
       this.$store.dispatch('randomizGoalParameters')
         .then(() => this.$store.dispatch('setSynthToGoal', audio.goalMirrorInstance))
     }
-
-
     window.randomizeParams = () => {
       this.$store.dispatch('randomizeAudioParameters')
         .then(() => console.log('success'))
@@ -159,6 +158,14 @@ export default {
       times(4).forEach(i => {
         audio.state.loop.at(i, random(-12, 12))
       });
+    },
+    start(){
+      this.isStartgame=false
+      this.$store.commit('startGame')
+    },
+    next() {
+      this.isOverlayed=false
+      this.$store.commit('startGame')
     }
   },
   watch: {
