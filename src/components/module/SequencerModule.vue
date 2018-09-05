@@ -37,8 +37,7 @@ export default {
       this.activeButton++
     },
     toggleNoteOnOff (i) {
-      // make this nicer please
-      this.noteArray = this.noteArray.splice(i, 1, !this.noteArray[i])
+      this.noteArray = this.noteArray.map((el, j) => i === j ? !el : el)
     }
   }
 }
