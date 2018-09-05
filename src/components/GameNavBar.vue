@@ -59,7 +59,6 @@
     ></span>
     </h2>
     <span class="timer" @click="startTimer">00:{{timeLeftSeconds}}</span>
-    <span>•</span>
   </nav>
 </template>
 
@@ -109,6 +108,7 @@ export default {
   },
   methods: {
     startTimer () {
+      this.$store.commit('updateModuleMargins', 1);
       this.timer = this.timer || window.setInterval(() => {
         if(this.timeLeftSeconds === 0) return this.timeIsUp()
         this.timeLeftSeconds--
@@ -125,7 +125,7 @@ export default {
       this.timeLeftSeconds = 30
     },
     timeIsUp () {
-      alert('game\'s over!')
+      alert('gams over')
       this.stopTimer()
     }
   },
@@ -142,9 +142,14 @@ export default {
 <style lang="scss" scoped>
 .main {
  width: 100%;
- height: 40px;
+ height: 8vh;
+ font-size: 2em;
  display: flex;
  flex-direction: row;
+justify-content: center;
+align-items: center;
+background: black;
+border: 1px solid white;
  align-items: center;
  justify-content: space-between
 }
