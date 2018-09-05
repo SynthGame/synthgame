@@ -2,7 +2,7 @@ import Tone from 'tone'
 import { DEBUG_ENABLED } from '@/constants'
 
 // define logging mechanism
-const log = (log) => DEBUG_ENABLED ? console.info(log) : log
+const log = (log) => false ? console.info(log) : log
 
 const audioInstance = () => ({
   state: {

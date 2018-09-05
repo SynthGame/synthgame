@@ -43,40 +43,12 @@
             name="Shape"
             module="lfo"
           ></module-knob> -->
-                <div class="button-wrapper">
-        <button @click="type='sine'" :class="type==='sine' ? 'selected': ''">
-          <svg version="1.1"
-            xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:a="http://ns.adobe.com/AdobeSVGViewerExtensions/3.0/"
-            x="0px" y="0px" width="16.3px" height="8.8px" viewBox="0 0 16.3 8.8" style="enable-background:new 0 0 16.3 8.8;"
-            xml:space="preserve">
-            <path class="st0" d="M15.7,4.4c0,2.1-1.7,3.8-3.8,3.8S8.2,6.5,8.2,4.4S6.5,0.6,4.4,0.6S0.6,2.3,0.6,4.4"/>
-          </svg>
-        </button>
-                <button @click="type='square'" :class="type==='square' ? 'selected': ''">
-    <svg version="1.1"
-      xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"   xmlns:a="http://ns.adobe.com/AdobeSVGViewerExtensions/3.0/"
-      x="0px" y="0px" width="16.3px" height="16.3px" viewBox="0 0 16.3 16.3"    style="enable-background:new 0 0 16.3 16.3;"
-      xml:space="preserve">
-      <path class="st0" d="M0.6,8.1V0.6h7.6v7.6v7.6h7.6V8.1l0,0"/>
-    </svg>
-        </button>
-                <button @click="type='sawtooth'" :class="type==='sawtooth' ? 'selected': ''">
-    <svg version="1.1"
-    xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:a="http://ns.adobe.com/AdobeSVGViewerExtensions/3.0/"
-    x="0px" y="0px" width="21.9px" height="9.9px" viewBox="0 0 21.9 9.9" style="enable-background:new 0 0 21.9 9.9;"
-    xml:space="preserve">
-    <path class="st0" d="M21.5,1.2L21.5,1.2L10.9,8.8V1.2L0.3,8.8"/>
-    </svg>
-        </button>
-                <button @click="type='triangle'" :class="type==='triangle' ? 'selected': ''">
-    <svg version="1.1"
-      xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:a="http://ns.adobe.com/AdobeSVGViewerExtensions/3.0/"
-      x="0px" y="0px" width="15.9px" height="8.8px" viewBox="0 0 15.9 8.8" style="enable-background:new 0 0 15.9 8.8;"
-      xml:space="preserve">
-      <path class="st0" d="M0.4,8.4L8,0.8l7.5,7.6"/>
-    </svg>
-        </button>
-        <p>SHAPE</p>
+      <div class="button-wrapper">
+        <module-button color="#5bd484" shape="sine" :isPressed="type==='sine'" @click.native="type='sine'"/>
+        <module-button color="#5bd484" shape="square" :isPressed="type==='square'" @click.native="type='square'"/>
+        <module-button color="#5bd484" shape="sawtooth" :isPressed="type==='sawtooth'" @click.native="type='sawtooth'"/>
+        <module-button color="#5bd484" shape="triangle" :isPressed="type==='triangle'" @click.native="type='triangle'"/>
+        <p>WAVEFORM</p>
       </div>
         </div>
     </div>
@@ -92,6 +64,7 @@ import character from '@/character'
 import ModuleKnob from '@/components/ModuleKnob.vue'
 import ModuleDisplay from '@/components/ModuleDisplay.vue'
 import ModuleTitle from './ModuleComponents/ModuleTitle.vue'
+import ModuleButton from '@/components/ModuleButton.vue'
 
 var self
 
@@ -113,7 +86,8 @@ export default {
   components: {
     ModuleKnob,
     ModuleDisplay,
-    ModuleTitle
+    ModuleTitle,
+    ModuleButton
   },
   created () {
     self = this
@@ -196,18 +170,19 @@ button, input[type="submit"], input[type="reset"] {
   margin: 0.1rem
 }
 
-  p {
+.button-wrapper {
+    display: flex;
+    flex-wrap: wrap;
+    width: 25%;
+    min-width: 5rem;
+    justify-content: center
+  & p {
      margin: .5em 0 0 0;
      font-size: .7em;
      text-transform: uppercase;
      letter-spacing: 1px;
   }
-  .button-wrapper {
-      display: flex;
-      flex-wrap: wrap;
-      width: 25%;
-      min-width: 5rem;
-  }
+}
 
 .selected {
   background-color: #5bd484
