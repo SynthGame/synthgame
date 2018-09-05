@@ -40,7 +40,7 @@ $main-synth-color: #F40056;
   height: 100px;
   width: 45px;
   display: inline-flex;
-  margin: 10px;
+  margin: 10px 5px;
   padding: 0;
   border: 2px solid $main-synth-color;
   border-radius: 2px;
