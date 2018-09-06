@@ -19,6 +19,7 @@ const audioInstance = () => ({
     this.filter.init()
     this.delay.init()
     this.reverb.init()
+    this.volume.init()
 
     const player = this.player.state.device
     const oscillator = this.oscillator.state.device
@@ -69,7 +70,7 @@ const audioInstance = () => ({
   playNote (shift, {noteLength, volume}) {
     log(`Playing shifted note: ${shift}`)
     this.oscillator.state.pitchShift.pitch = shift
-    if(volume) this.volume.state.volume.value = volume // TODO: should only set volume for this note
+    if(volume) this.volume.state.device.volume.value = volume // TODO: should only set volume for this note
     return this.envelope.state.device.triggerAttackRelease(noteLength || this.state.toneLength)
   },
   playKick () {
@@ -208,7 +209,7 @@ const audioInstance = () => ({
     },
     init (options) {
       log(`Initializing reverb with options: ${options}`)
-      this.state.device = Tone.Volume()
+      this.state.device = new Tone.Volume()
     }
   }
 })

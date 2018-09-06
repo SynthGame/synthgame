@@ -8,6 +8,14 @@
       name="Control"
       module="lfo"
     ></module-knob>
+    <div>
+      <button @click="playPauseSynth" class="sequencer-stop-button">
+
+      </button>
+      <button @click="randomizeNoteOnOff" class="sequencer-random-button">
+        random
+      </button>
+    </div>
     <div class="button-section" v-for="i in 4" :key="i">
       <span class="button-wrapper" v-for="j in getSubRange(i)" :key="j">
         <sequencer-button 
@@ -44,6 +52,7 @@ import SequencerSlider from './SequencerModule/SequencerSlider.vue'
 import { setInterval } from 'timers';
 import range from 'lodash/range'
 import fill from 'lodash/fill'
+import sample from 'lodash/sample'
 
 export default {
   name: 'SequencerModule',
@@ -54,6 +63,7 @@ export default {
   },
   data: function () {
     return {
+      toneLoop: null,
       sequencerEditState: 0,
       activeButton: 0,
       noteArray: fill(range(0,16), {
@@ -69,7 +79,7 @@ export default {
   },
   methods: {
     initSynth () {
-      const loop = audio.setMainLoop({
+      this.toneLoop = audio.setMainLoop({
         noteArray: range(1, 16),
         subdivision: '4n'
       }, (time, note) => {
@@ -79,14 +89,21 @@ export default {
           volume: this.noteArray[note].volume
         })
       })
-      loop.start()
+      this.toneLoop.start()
+    },
+    playPauseSynth () {
+      if(this.toneLoop.state === 'stopped') return this.toneLoop.start() 
+      this.toneLoop.stop()  
     },
     setStep (i) {
       if(i) return (this.activeButton = i, this.activeButton)
       if(this.activeButton === 16) this.activeButton = 0
       this.activeButton++
     },
-    toggleNoteOnOff (i) {
+    setNoteOnOff (i, val) {
+      this.noteArray = this.noteArray.map((el, j) => i === j ? {...el, selected:val} : el)
+    },
+    toggleNoteOnOff (i) { // use setNoteOnOff
       this.noteArray = this.noteArray.map((el, j) => i === j ? {...el, selected:!el.selected} : el)
     },
     setPitchValue (i, val) {
@@ -97,6 +114,11 @@ export default {
     },
     setNoteLengthValue (i, val) {
       this.noteArray = this.noteArray.map((el, j) => i === j ? {...el, noteLength: val} : el)
+    },
+    randomizeNoteOnOff () {
+      this.noteArray.forEach((el, i) => {
+        this.setNoteOnOff(i, sample([true, false]))
+      })
     },
     getSubRange (i) {
       // returns the sub step of 4 in a 16 array
@@ -114,6 +136,25 @@ $main-seq-color: #F40056;
 .main {
   width: 100%;
   height: 480px;
+}
+
+.sequencer-stop-button {
+  height: 45px;
+  width: 45px;
+  display: inline-flex;
+  margin: 10px 5px;
+  padding: 0;
+  border: 2px solid $main-seq-color;
+  background-color: unset;
+}
+
+.sequencer-random-button {
+  display: inline-flex;
+  margin: 10px 5px;
+  padding: 10px 30px;
+  border: 2px solid $main-seq-color;
+  background-color: unset;
+  color: white;
 }
 
 .button-section {
