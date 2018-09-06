@@ -16,7 +16,7 @@
         random
       </button>
     </div>
-    <div class="button-section" v-for="i in 4" :key="i">
+    <div class="button-section" v-for="i in [0,1,2,3]" :key="i">
       <span class="button-wrapper" v-for="j in getSubRange(i)" :key="j">
         <sequencer-button 
           v-if="sequencerEditState === 0"
@@ -43,7 +43,7 @@
           :value="noteArray[j] && noteArray[j].noteLength"
           @input="setNoteLengthValue(j, $event)"
         />
-        <div style="opacity: 0.7;">{{j}}</div>
+        <div style="opacity: 0.7;">{{j + 1}}</div>
       </span>
     </div>
   </div>
@@ -86,7 +86,7 @@ export default {
   methods: {
     initSynth () {
       this.toneLoop = audio.setMainLoop({
-        noteArray: range(1, 16),
+        noteArray: range(0, 15),
         subdivision: '8n'
       }, (time, note) => {
         this.setStep(note)
@@ -103,7 +103,7 @@ export default {
     },
     setStep (i) {
       if(i) return (this.activeButton = i, this.activeButton)
-      if(this.activeButton === 16) this.activeButton = 0
+      if(this.activeButton === 15) this.activeButton = 0
       this.activeButton++
     },
     setNoteOnOff (i, val) {
@@ -150,7 +150,7 @@ export default {
     },
     getSubRange (i) {
       // returns the sub step of 4 in a 16 array
-      const startArray = ((i - 1) * 4) + 1
+      const startArray = (i * 4)
       return range(startArray, startArray + 4)
     }
   }
