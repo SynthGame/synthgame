@@ -1,19 +1,19 @@
 <template>
-  <div class="game">
+  <div class="game" v-masonry transition-duration="0.3s" horizontal-order="false" item-selector=".module">
     <game-nav-bar/>
     <div class="level">
-      <!-- <OscillatorModule :style="'margin-top: calc(' + marginArray[this.$store.state.visualParameters.marginOscillator] + ' * 92vh)'" :class="[(activeModule == 0 ? 'active' : '')]" />
-      <FilterModule :style="'margin-top: calc(' + marginArray[this.$store.state.visualParameters.marginFilter] + ' * 92vh)'" :class="[(activeModule == 1 ? 'active' : '')]" />
-      <EnvelopeModule :style="'margin-top: calc(' + marginArray[this.$store.state.visualParameters.marginEnvelope] + ' * 92vh)'" :class="[(activeModule == 2 ? 'active' : '')]" />
-      <LfoModule :style="'margin-top: calc(' + marginArray[this.$store.state.visualParameters.marginLfo] + ' * 92vh)'" :class="[(activeModule == 3 ? 'active' : '')]" />
-      <DelayModule :style="'margin-top: calc(' + marginArray[this.$store.state.visualParameters.marginDelay] + ' * 92vh)'" :class="[(activeModule == 4 ? 'active' : '')]" />
-      <ReverbModule :style="'margin-top: calc(' + marginArray[this.$store.state.visualParameters.marginReverb] + ' * 92vh)'" :class="[(activeModule == 5 ? 'active' : '')]" /> -->
-      <OscillatorModule :class="[(activeModule == 0 ? 'active' : '')]" />
-      <FilterModule :class="[(activeModule == 1 ? 'active' : '')]" />
-      <EnvelopeModule :class="[(activeModule == 2 ? 'active' : '')]" />
-      <LfoModule :class="[(activeModule == 3 ? 'active' : '')]" />
-      <DelayModule :class="[(activeModule == 4 ? 'active' : '')]" />
-      <ReverbModule :class="[(activeModule == 5 ? 'active' : '')]" />
+      <OscillatorModule v-masonry-tile :style="'margin-top: calc(' + marginArray[this.$store.state.visualParameters.marginOscillator] + ' * 92vh)'" :class="[(activeModule == 0 ? 'active' : '')]" />
+      <FilterModule v-masonry-tile :style="'margin-top: calc(' + marginArray[this.$store.state.visualParameters.marginFilter] + ' * 92vh)'" :class="[(activeModule == 1 ? 'active' : '')]" />
+      <EnvelopeModule v-masonry-tile :style="'margin-top: calc(' + marginArray[this.$store.state.visualParameters.marginEnvelope] + ' * 92vh)'" :class="[(activeModule == 2 ? 'active' : '')]" />
+      <LfoModule v-masonry-tile :style="'margin-top: calc(' + marginArray[this.$store.state.visualParameters.marginLfo] + ' * 92vh)'" :class="[(activeModule == 3 ? 'active' : '')]" />
+      <DelayModule v-masonry-tile :style="'margin-top: calc(' + marginArray[this.$store.state.visualParameters.marginDelay] + ' * 92vh)'" :class="[(activeModule == 4 ? 'active' : '')]" />
+      <ReverbModule v-masonry-tile :style="'margin-top: calc(' + marginArray[this.$store.state.visualParameters.marginReverb] + ' * 92vh)'" :class="[(activeModule == 5 ? 'active' : '')]" />
+      <!-- <OscillatorModule v-masonry-tile :class="[(activeModule == 0 ? 'active' : '')]" />
+      <FilterModule v-masonry-tile :class="[(activeModule == 1 ? 'active' : '')]" />
+      <EnvelopeModule v-masonry-tile :class="[(activeModule == 2 ? 'active' : '')]" />
+      <LfoModule v-masonry-tile :class="[(activeModule == 3 ? 'active' : '')]" />
+      <DelayModule v-masonry-tile :class="[(activeModule == 4 ? 'active' : '')]" />
+      <ReverbModule v-masonry-tile :class="[(activeModule == 5 ? 'active' : '')]" /> -->
     </div>
     <div class="tabs">
       <div @click="showOsc" class="tabs__tab tabs__osc">Osc</div>
@@ -37,13 +37,14 @@ import LfoModule from '@/components/module/LfoModule.vue'
 import DelayModule from '@/components/module/DelayModule.vue'
 import ReverbModule from '@/components/module/ReverbModule.vue'
 import SequencerModule from '@/components/module/SequencerModule.vue'
+import {VueMasonryPlugin} from 'vue-masonry';
 
 export default {
   name: 'home',
   data () {
     return {
       activeModule: 0,
-      marginArray: [0,0.25,0.50,0.75]
+      marginArray: [0,0.2,0.4,0.6]
     }
   },
   components: {

@@ -205,12 +205,13 @@ export default {
 
 
 .level {
-  display: grid;
-  grid-auto-flow: column;
-  justify-content: start;
-  grid-auto-flow: dense;
-  grid-template-columns: repeat(6, 1fr);
-  grid-template-rows: repeat(5, 1fr);
+  // display: grid;
+  display: block;
+  // grid-auto-flow: column;
+  // justify-content: start;
+  // grid-auto-flow: dense;
+  // grid-template-columns: repeat(6, 1fr);
+  // grid-template-rows: repeat(5, 1fr);
   position: relative;
   background: #101010;
   background-image: url(./assets/bg.svg);
@@ -222,18 +223,19 @@ export default {
 .module {
   background: black;
   min-height: calc(0.4*92vh);
-  width: 16.66vw;
+  width: 16.67em;
   margin: 0;
   // padding: 1.5% 2%;
-  display: subgrid;
+  // display: subgrid;
+  display: block;
   position: relative;
-  justify-content: start;
-  grid-template-columns:
-    /* 1 */ 16.66vw
-    /* 2 */ 16.66vw;
-  grid-template-rows:
-    /* 1 */ 18.4vh
-    /* 2 */ 18.4vh;
+  // justify-content: start;
+  // grid-template-columns:
+  //   /* 1 */ 16.66vw
+  //   /* 2 */ 16.66vw;
+  // grid-template-rows:
+  //   /* 1 */ 18.4vh
+  //   /* 2 */ 18.4vh;
   .button-wrapper {
       display: flex;
       width: 55%;
@@ -312,6 +314,7 @@ export default {
     width: 16.66vw;
     min-height: 18.4vh;
     margin: auto;
+    padding-top: 2em;
     display: flex;
     align-items: center;
     flex-wrap: wrap;
@@ -327,6 +330,7 @@ body {
 #app {
   font-family: 'Montserrat', sans-serif;
   font-weight: 300;
+  font-size: 1vw;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;

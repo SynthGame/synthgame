@@ -458,7 +458,8 @@ export default {
 <style scoped lang="scss">
 
 .knob {
-  width:8em;
+  width:50%;
+  margin: auto 25%;
   height:18.4vh;
   // flex:1;
   color: white;
