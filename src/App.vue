@@ -303,12 +303,12 @@ export default {
   display: flex;
   position: relative;
   background: #101010;
+  background-image: url(./assets/bg.svg);
+  background-size: cover;
   justify-content: flex-start;
   flex-wrap: wrap;
   width:100%;
   height:92vh;
-  background-image: url("/src/assets/bg.svg");
-  background-size: cover;
 }
 
 body {
