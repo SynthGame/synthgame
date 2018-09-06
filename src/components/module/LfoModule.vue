@@ -20,7 +20,6 @@
                    ]"/>
         <div class="knobs">
           <module-knob
-          v-show="false"
             v-model="frequency"
             :min="1"
             :max="100"
@@ -29,7 +28,6 @@
             module="lfo"
           ></module-knob>
           <module-knob
-          v-show="false"
             v-model="amount"
             :min="0"
             :max="100"
