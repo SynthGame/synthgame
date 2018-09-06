@@ -74,7 +74,7 @@ export default {
     masterBus.toMaster()
     // initialize the synth
     audio.init().connect(masterBus, 0, 0)
-    audio.goalMirrorInstance.init().connect(masterBus, 0, 1)
+    // audio.goalMirrorInstance.init().connect(masterBus, 0, 1)
     // create loop wich sequences 4 notes
     const loop = audio.setMainLoop({
       noteArray: times(4).map(i => random(-12, 12)),
@@ -82,23 +82,23 @@ export default {
     }, (time, note) => {
       if (this.isOverlayed) {audio.playKick()};
       audio.playNote(note)
-      audio.goalMirrorInstance.playNote(note)
+      // audio.goalMirrorInstance.playNote(note)
       // audio.playNote(Math.round(12 * Math.random())) // let's have some fun
     })
     // set BPM
     audio.setBpm(SYNTH_BPM)
-    audio.goalMirrorInstance.setBpm(SYNTH_BPM)
+    // audio.goalMirrorInstance.setBpm(SYNTH_BPM)
     // start tone general
     audio.start()
-    audio.goalMirrorInstance.start()
+    // audio.goalMirrorInstance.start()
     // start loop
     loop.start()
     // set goal synth to goal
-    this.$store.dispatch('setSynthToGoal', audio.goalMirrorInstance)
+    // this.$store.dispatch('setSynthToGoal', audio.goalMirrorInstance)
 
     window.randomizeGoal = () => {
       this.$store.dispatch('randomizGoalParameters')
-        .then(() => this.$store.dispatch('setSynthToGoal', audio.goalMirrorInstance))
+        .then() //() => this.$store.dispatch('setSynthToGoal', audio.goalMirrorInstance))
     }
     window.randomizeParams = () => {
       this.$store.dispatch('randomizeAudioParameters')
