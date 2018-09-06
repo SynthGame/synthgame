@@ -249,6 +249,13 @@ export default {
       background: none;
     }
   }
+  &.sequencer {
+    // width: 1;
+    // position: absolute;
+    height: calc(92vh);
+    // bottom: 0;
+    // right: 0;
+  }
   .button-wrapper {
       display: flex;
       padding: 1em;

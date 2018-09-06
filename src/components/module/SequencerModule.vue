@@ -1,13 +1,20 @@
 <template>
   <div class="sequencer">
-    <module-knob
+    <div class="button-wrapper function">
+      <button color="#6e01d1" @click="sequencerEditStateChange(0)"/>
+      <button color="#6e01d1" @click="sequencerEditStateChange(1)"/>
+      <button color="#6e01d1" @click="sequencerEditStateChange(2)"/>
+      <button color="#6e01d1" @click="sequencerEditStateChange(3)"/>
+      <p>Function</p>
+    </div>
+    <!-- <module-knob
       v-model="sequencerEditState"
       :min="0"
       :max="3"
       knobColor="#5bd484"
       name="Control"
       module="lfo"
-    ></module-knob>
+    ></module-knob> -->
     <div>
       <button @click="playPauseSynth" class="sequencer-stop-button">
 
@@ -84,6 +91,9 @@ export default {
     this.initSynth()
   },
   methods: {
+    sequencerEditStateChange(val) {
+      this.sequencerEditState = val;
+    },
     initSynth () {
       this.toneLoop = audio.setMainLoop({
         noteArray: range(0, 15),
@@ -195,5 +205,9 @@ $main-seq-color: #F40056;
 .button-wrapper {
   display: inline-block;
   width: 55px;
+  &.function {
+    width: 100%;
+    height: fit-content;
+  }
 }
 </style>

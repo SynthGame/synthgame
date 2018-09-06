@@ -2,14 +2,17 @@
   <div class="game">
     <game-nav-bar/>
     <div class="level" v-masonry transition-duration="0.3s" item-selector=".module">
+      <sequencer-module v-masonry-tile class="module sequencer" />
       <OscillatorModule v-masonry-tile :class="[(activeModule == 0 ? 'active' : '')]" />
-      <div v-for="n in 1" v-masonry-tile class="module empty"></div>
+      <!-- <div v-for="n in 1" v-masonry-tile class="module empty"></div> -->
       <FilterModule v-masonry-tile :class="[(activeModule == 1 ? 'active' : '')]" />
       <EnvelopeModule v-masonry-tile :class="[(activeModule == 2 ? 'active' : '')]" />
-      <div v-for="n in 1" v-masonry-tile class="module empty"></div>
+      <!-- <div v-for="n in 1" v-masonry-tile class="module empty"></div> -->
       <LfoModule v-masonry-tile :class="[(activeModule == 3 ? 'active' : '')]" />
       <DelayModule v-masonry-tile :class="[(activeModule == 4 ? 'active' : '')]" />
+      <!-- <div v-for="n in 1" v-masonry-tile class="module empty"></div> -->
       <ReverbModule v-masonry-tile :class="[(activeModule == 5 ? 'active' : '')]" />
+      <!-- <div v-for="n in 1" v-masonry-tile class="module empty"></div> -->
     </div>
     <div class="tabs">
       <div @click="showOsc" class="tabs__tab tabs__osc">Osc</div>
@@ -19,7 +22,6 @@
       <div @click="showDel" class="tabs__tab tabs__delay">Del</div>
       <div @click="showRev" class="tabs__tab tabs__reverb">Rev</div>
     </div>
-    <sequencer-module/>
   </div>
 </template>
 
