@@ -1,11 +1,25 @@
 <template>
-  <input class="sequencer-slider" type="range" min="1" max="100" value="50">
+  <span class="sequencer-slider">
+    <input v-bind:value="value" v-on:input="$emit('input', $event.target.value)" type="range" :min="min" :max="max" orient="vertical">
+  </span>
 </template>
 
 <script>
 export default {
   name: 'SequencerButton',
   props: {
+    value: {
+      type: Number,
+      default: 50,
+    },
+    min: {
+      type: Number,
+      default: 0,
+    },
+    max: {
+      type: Number,
+      default: 100,
+    },
     buttonActive: {
       type: Boolean,
       default: false
@@ -29,6 +43,13 @@ export default {
 $main-synth-color: #F40056;
 
 .sequencer-slider {
-  transform: rotate(90deg);
+  // transform-origin: 0 0;
+  // transform: rotate(90deg);
+  input {
+    height: 100px;
+    width: 45px;
+    writing-mode: bt-lr; /* IE */
+    -webkit-appearance: slider-vertical; /* WebKit */
+  }
 }
 </style>

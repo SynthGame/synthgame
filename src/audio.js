@@ -19,6 +19,7 @@ const audioInstance = () => ({
     this.filter.init()
     this.delay.init()
     this.reverb.init()
+    this.volume.init()
 
     const player = this.player.state.device
     const oscillator = this.oscillator.state.device
@@ -53,6 +54,7 @@ const audioInstance = () => ({
   },
   setMainLoop ({noteArray, subdivision}, callback) {
     log(`Setting new main loop`)
+    if(this.state.loop) this.state.loop.dispose()
     this.state.loop = new Tone.Sequence(callback, noteArray, subdivision)
     return this.state.loop
   },
@@ -65,10 +67,11 @@ const audioInstance = () => ({
     // disconnect outputs?
     return channel.toMaster()
   },
-  playNote (shift) {
+  playNote (shift, {noteLength, volume}) {
     log(`Playing shifted note: ${shift}`)
     this.oscillator.state.pitchShift.pitch = shift
-    return this.envelope.state.device.triggerAttackRelease(this.state.toneLength)
+    if(volume) this.volume.state.device.volume.value = volume // TODO: should only set volume for this note
+    return this.envelope.state.device.triggerAttackRelease(noteLength || this.state.toneLength)
   },
   playKick () {
     log(`Playing kick`)
@@ -198,6 +201,15 @@ const audioInstance = () => ({
       log(`Generating new reverb based on new value: : ${parameter} = ${value}`)
       this.state.device[parameter] = value // set value directly (for properties)
       return this.state.device.generate() // generate new reverb returns promise
+    }
+  },
+  volume: {
+    state: {
+      device: undefined
+    },
+    init (options) {
+      log(`Initializing reverb with options: ${options}`)
+      this.state.device = new Tone.Volume()
     }
   }
 })

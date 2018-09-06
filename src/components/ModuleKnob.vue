@@ -14,7 +14,7 @@
             <polyline class="st3" stroke="white" stroke-width="5.796" points="408.3,496.6 388.4,516.7 388.4,516.7 408.3,535.9 	"/>
             <polyline class="st3" stroke="white" stroke-width="5.796" points="166.2,496.6 186,516.7 186,516.7 166.2,535.9 	"/>
           </g>
-          <g v-if="this.module === 'envelope'" transform="translate(-20, -30)">
+          <g v-else-if="this.module === 'envelope'" transform="translate(-20, -30)">
             <path :stroke="knobColor" stroke-width="5.796" class="st15" d="M251.6,515.8C158,500.2,85.1,420.5,81.5,322C77.3,209.3,165.3,114.7,278,110.6
           		c112.6-4.1,207.3,83.9,211.4,196.5c3.8,103.1-69.6,191.1-168.4,208.5"/>
           	<path :stroke="knobColor" stroke-width="5.796" class="st15" d="M243.9,562.2C128.7,543,39.1,445.1,34.7,323.9C29.6,185.4,137.8,69,276.3,64s254.9,103.1,259.9,241.6
@@ -22,7 +22,7 @@
           	<ellipse :stroke="knobColor" stroke-width="5.796" class="st15" cx="285.4" cy="562.6" rx="11.9" ry="11.7"/>
           	<ellipse :stroke="knobColor" stroke-width="5.796" class="st15" cx="285.4" cy="518.2" rx="11.9" ry="11.7"/>
           </g>
-          <g v-if="this.module === 'lfo'" transform="translate(-20, -30)">
+          <g v-else-if="this.module === 'lfo'" transform="translate(-20, -30)">
             <circle :stroke="knobColor" stroke-width="5.796" class="st12" cx="285.4" cy="315.2" r="184"/>
             <circle :stroke="knobColor" stroke-width="5.796" class="st12" cx="121.6" cy="478.5" r="11.9"/>
       			<circle :stroke="knobColor" stroke-width="5.796" class="st12" cx="80.3" cy="422.4" r="11.9"/>
@@ -46,13 +46,13 @@
       			<circle :stroke="knobColor" stroke-width="5.796" class="st12" cx="247.3" cy="546.1" r="11.9"/>
       			<circle :stroke="knobColor" stroke-width="5.796" class="st12" cx="177.8" cy="525.5" r="11.9"/>
           </g>
-          <g v-if="this.module === 'reverb'" transform="translate(-20, -30)">
+          <g v-else-if="this.module === 'reverb'" transform="translate(-20, -30)">
             <circle style="opacity: 0.3; fill: #3C32FF;" stroke="white" stroke-width="5.796" class="st4" cx="284.4" cy="286.6" r="262.3"/>
           	<circle style="opacity: 0.2; fill: #3C32FF;" stroke="white" stroke-width="5.796" class="st5" cx="284.4" cy="330.5" r="218.1"/>
             <circle stroke="white" stroke-width="5.796" class="st8" cx="284.4" cy="330.5" r="218.1"/>
           	<circle stroke="white" stroke-width="5.796" class="st8" cx="284.4" cy="286.6" r="262.3"/>
           </g>
-          <g v-if="this.module === 'delay'" transform="translate(-20, -30)">
+          <g v-else-if="this.module === 'delay'" transform="translate(-20, -30)">
             <line :stroke="knobColor" stroke-width="5.796" class="st9" x1="504.1" y1="314.7" x2="462.5" y2="314.7"/>
       			<line :stroke="knobColor" stroke-width="5.796" class="st9" x1="108.3" y1="314.7" x2="66.6" y2="314.7"/>
       			<line :stroke="knobColor" stroke-width="5.796" class="st9" x1="396" y1="126" x2="374.9" y2="161.9"/>
