@@ -1,14 +1,35 @@
 <template>
   <div class="main">
+    <module-knob
+      v-model="sequencerEditState"
+      :min="0"
+      :max="3"
+      knobColor="#5bd484"
+      name="Control"
+      module="lfo"
+    ></module-knob>
     <div class="button-section" v-for="i in 4" :key="i">
       <span class="button-wrapper" v-for="j in getSubRange(i)" :key="j">
         <sequencer-button 
-          v-if="true"
+          v-if="sequencerEditState === 0"
           @click="toggleNoteOnOff(j)"
           :button-active="j === activeButton" 
           :button-selected="noteArray[j] && noteArray[j].selected"
         />
-        <SequencerSlider v-else/>
+        <SequencerSlider 
+          v-else-if="sequencerEditState === 1"
+          @input="setPitchValue(j, $event)"
+        />
+        <SequencerSlider 
+          v-else-if="sequencerEditState === 2"
+          @input="setVolumeValue(j, $event)"
+          :min="-12"
+          :max="0"
+        />
+        <SequencerSlider 
+          v-else-if="sequencerEditState === 3"
+          @input="setNoteLengthValue(j, $event)"
+        />
         <div style="opacity: 0.7;">{{j}}</div>
       </span>
     </div>
@@ -16,6 +37,8 @@
 </template>
 
 <script>
+import audio from '@/audio'
+import ModuleKnob from '@/components/ModuleKnob.vue'
 import SequencerButton from './SequencerModule/SequencerButton.vue'
 import SequencerSlider from './SequencerModule/SequencerSlider.vue'
 import { setInterval } from 'timers';
@@ -26,29 +49,54 @@ export default {
   name: 'SequencerModule',
   components: {
     SequencerButton,
-    SequencerSlider
+    SequencerSlider,
+    ModuleKnob
   },
   data: function () {
     return {
+      sequencerEditState: 0,
       activeButton: 0,
       noteArray: fill(range(0,16), {
         selected: false,
         pitch: null,
         volume: null,
-        length: null
+        noteLength: null
       })
     }
   },
   created () {
-    setInterval(this.nextStep, 500) // use tone for this!
+    this.initSynth()
   },
   methods: {
-    nextStep () {
+    initSynth () {
+      const loop = audio.setMainLoop({
+        noteArray: range(1, 16),
+        subdivision: '4n'
+      }, (time, note) => {
+        this.setStep(note)
+        if(this.noteArray[note].selected) audio.playNote(this.noteArray[note].pitch, {
+          noteLength: this.noteArray[note].noteLength, 
+          volume: this.noteArray[note].volume
+        })
+      })
+      loop.start()
+    },
+    setStep (i) {
+      if(i) return (this.activeButton = i, this.activeButton)
       if(this.activeButton === 16) this.activeButton = 0
       this.activeButton++
     },
     toggleNoteOnOff (i) {
       this.noteArray = this.noteArray.map((el, j) => i === j ? {...el, selected:!el.selected} : el)
+    },
+    setPitchValue (i, val) {
+      this.noteArray = this.noteArray.map((el, j) => i === j ? {...el, pitch: val} : el)
+    },
+    setVolumeValue (i, val) {
+      this.noteArray = this.noteArray.map((el, j) => i === j ? {...el, volume: val} : el)
+    },
+    setNoteLengthValue (i, val) {
+      this.noteArray = this.noteArray.map((el, j) => i === j ? {...el, noteLength: val} : el)
     },
     getSubRange (i) {
       // returns the sub step of 4 in a 16 array
