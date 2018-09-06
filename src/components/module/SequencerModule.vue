@@ -12,11 +12,11 @@
       <button @click="playPauseSynth" class="sequencer-stop-button">
 
       </button>
-      <button @click="randomizeNoteOnOff" class="sequencer-random-button">
+      <button @click="randomizeSelectedParam" class="sequencer-random-button">
         random
       </button>
     </div>
-    <div class="button-section" v-for="i in 4" :key="i">
+    <div class="button-section" v-for="i in [0,1,2,3]" :key="i">
       <span class="button-wrapper" v-for="j in getSubRange(i)" :key="j">
         <sequencer-button 
           v-if="sequencerEditState === 0"
@@ -26,19 +26,24 @@
         />
         <SequencerSlider 
           v-else-if="sequencerEditState === 1"
+          :value="noteArray[j] && noteArray[j].pitch"
           @input="setPitchValue(j, $event)"
+          :min="-12"
+          :max="12"
         />
         <SequencerSlider 
           v-else-if="sequencerEditState === 2"
+          :value="noteArray[j] && noteArray[j].volume"
           @input="setVolumeValue(j, $event)"
           :min="-12"
           :max="0"
         />
         <SequencerSlider 
           v-else-if="sequencerEditState === 3"
+          :value="noteArray[j] && noteArray[j].noteLength"
           @input="setNoteLengthValue(j, $event)"
         />
-        <div style="opacity: 0.7;">{{j}}</div>
+        <div style="opacity: 0.7;">{{j + 1}}</div>
       </span>
     </div>
   </div>
@@ -53,6 +58,7 @@ import { setInterval } from 'timers';
 import range from 'lodash/range'
 import fill from 'lodash/fill'
 import sample from 'lodash/sample'
+import random from 'lodash/random'
 
 export default {
   name: 'SequencerModule',
@@ -80,7 +86,7 @@ export default {
   methods: {
     initSynth () {
       this.toneLoop = audio.setMainLoop({
-        noteArray: range(1, 16),
+        noteArray: range(0, 15),
         subdivision: '8n'
       }, (time, note) => {
         this.setStep(note)
@@ -97,7 +103,7 @@ export default {
     },
     setStep (i) {
       if(i) return (this.activeButton = i, this.activeButton)
-      if(this.activeButton === 16) this.activeButton = 0
+      if(this.activeButton === 15) this.activeButton = 0
       this.activeButton++
     },
     setNoteOnOff (i, val) {
@@ -115,14 +121,36 @@ export default {
     setNoteLengthValue (i, val) {
       this.noteArray = this.noteArray.map((el, j) => i === j ? {...el, noteLength: val} : el)
     },
-    randomizeNoteOnOff () {
-      this.noteArray.forEach((el, i) => {
-        this.setNoteOnOff(i, sample([true, false]))
-      })
+    randomizeSelectedParam (param) {
+      const _randomizeNoteSelected = () => this.noteArray.forEach((el, i) => this.setNoteOnOff(i, sample([true, false])))
+      const _randomizeNotePitch = () => this.noteArray.forEach((el, i) => this.setPitchValue(i, random(-12,12)))
+      const _randomizeNoteVolume = () => this.noteArray.forEach((el, i) => this.setVolumeValue(i, random(-12,0)))
+      const _randomizeNoteLength = () => this.noteArray.forEach((el, i) => this.setNoteLengthValue(i, random(0,100)))
+
+      switch(this.sequencerEditState) {
+        case 0:
+          _randomizeNoteSelected()
+          break
+        case 1:
+          _randomizeNotePitch()
+          break
+        case 2:
+          _randomizeNoteVolume()
+          break
+        case 3:
+          _randomizeNoteLength()
+          break
+        default:
+          _randomizeNoteSelected()
+          _randomizeNotePitch()
+          _randomizeNoteVolume()
+          _randomizeNoteLength()
+          break
+      }
     },
     getSubRange (i) {
       // returns the sub step of 4 in a 16 array
-      const startArray = ((i - 1) * 4) + 1
+      const startArray = (i * 4)
       return range(startArray, startArray + 4)
     }
   }
