@@ -1,5 +1,5 @@
 <template>
-  <div class="main">
+  <div class="sequencer">
     <module-knob
       v-model="sequencerEditState"
       :min="0"
@@ -18,27 +18,27 @@
     </div>
     <div class="button-section" v-for="i in [0,1,2,3]" :key="i">
       <span class="button-wrapper" v-for="j in getSubRange(i)" :key="j">
-        <sequencer-button 
+        <sequencer-button
           v-if="sequencerEditState === 0"
           @click="toggleNoteOnOff(j)"
-          :button-active="j === activeButton" 
+          :button-active="j === activeButton"
           :button-selected="noteArray[j] && noteArray[j].selected"
         />
-        <SequencerSlider 
+        <SequencerSlider
           v-else-if="sequencerEditState === 1"
           :value="noteArray[j] && noteArray[j].pitch"
           @input="setPitchValue(j, $event)"
           :min="-12"
           :max="12"
         />
-        <SequencerSlider 
+        <SequencerSlider
           v-else-if="sequencerEditState === 2"
           :value="noteArray[j] && noteArray[j].volume"
           @input="setVolumeValue(j, $event)"
           :min="-12"
           :max="0"
         />
-        <SequencerSlider 
+        <SequencerSlider
           v-else-if="sequencerEditState === 3"
           :value="noteArray[j] && noteArray[j].noteLength"
           @input="setNoteLengthValue(j, $event)"
@@ -91,15 +91,15 @@ export default {
       }, (time, note) => {
         this.setStep(note)
         if(this.noteArray[note].selected) audio.playNote(this.noteArray[note].pitch, {
-          noteLength: this.noteArray[note].noteLength, 
+          noteLength: this.noteArray[note].noteLength,
           volume: this.noteArray[note].volume
         })
       })
       this.toneLoop.start()
     },
     playPauseSynth () {
-      if(this.toneLoop.state === 'stopped') return this.toneLoop.start() 
-      this.toneLoop.stop()  
+      if(this.toneLoop.state === 'stopped') return this.toneLoop.start()
+      this.toneLoop.stop()
     },
     setStep (i) {
       if(i) return (this.activeButton = i, this.activeButton)
@@ -162,7 +162,7 @@ export default {
 $main-seq-color: #F40056;
 
 .main {
-  width: 100%;
+  width: 16.67%;
   height: 480px;
 }
 

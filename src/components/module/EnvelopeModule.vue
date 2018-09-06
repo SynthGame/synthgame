@@ -42,14 +42,14 @@
         name="Sustain"
         module="envelope"
       ></module-knob>
-      <!-- <module-knob
+      <module-knob
         v-model="release"
         :min="0"
         :max="100"
         knobColor="#e4e259"
         name="Release"
         module="envelope"
-      ></module-knob> -->
+      ></module-knob>
     </div>
   </div>
 </template>
@@ -130,10 +130,6 @@ export default {
 
 svg.display {
     fill: #e4e259;
-}
-
-h3 {
-  color: #e4e259;
 }
 
 ul {

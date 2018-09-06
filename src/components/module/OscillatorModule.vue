@@ -27,20 +27,20 @@
         name="Waveform"
         module="oscillator"
       ></module-knob> -->
-      <!-- <module-knob
+      <module-knob
         v-model="freqDial"
         :min="0"
         :max="100"
         knobColor="#ff8574"
         name="Octave"
-      ></module-knob> -->
-      <!-- <module-knob
+      ></module-knob>
+      <module-knob
         v-model="detune"
         :min="0"
         :max="120"
         knobColor="#ff8574"
         name="Detune"
-      ></module-knob> -->
+      ></module-knob>
       <!-- <module-knob
         v-model="phase"
         :min="50"
@@ -138,10 +138,6 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped lang="scss">
-
-h3 {
-  color: #ff8574;
-}
 
 svg.display {
     fill: #ff8574;

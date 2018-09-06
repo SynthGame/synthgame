@@ -215,9 +215,21 @@ export default {
   position: relative;
   background: #101010;
   background-image: url(./assets/bg.svg);
-  background-size: cover;
-  width:100%;
-  height:92vh;
+  background-size: stretch;
+  width:100vw;
+  min-height:92vh;
+}
+
+.empty {
+  display: inline-block;
+  height: calc(0.6*92vh);
+  width: 16.67em;
+  &:nth-of-type(1) {
+    height: calc(0.2*92vh);
+  }
+  &:nth-of-type(2) {
+    height: calc(0.4*92vh);
+  }
 }
 
 .module {
@@ -226,20 +238,22 @@ export default {
   width: 16.67em;
   margin: 0;
   // padding: 1.5% 2%;
-  // display: subgrid;
   display: block;
   position: relative;
-  // justify-content: start;
-  // grid-template-columns:
-  //   /* 1 */ 16.66vw
-  //   /* 2 */ 16.66vw;
-  // grid-template-rows:
-  //   /* 1 */ 18.4vh
-  //   /* 2 */ 18.4vh;
+  &.empty {
+    background: none;
+    &::after {
+      background: none;
+    }
+    &::before {
+      background: none;
+    }
+  }
   .button-wrapper {
       display: flex;
-      width: 55%;
-      height: 6em;
+      padding: 1em;
+      width: 45%;
+      height: 18.4vh;
       margin: 0 auto;
       flex-wrap: wrap;
       justify-content: center;
@@ -262,23 +276,23 @@ export default {
     content:'';
     display: block;
     position: absolute;
-    background: rgba(255,255,255,0.1);
-    width: .5em;
-    height: .5em;
+    background: #fff;
+    width: .4em;
+    height: .4em;
     border-radius: 100%;
-    top: 4%;
-    left: 4%;
+    top: .4em;
+    left: .55em;
   }
   &:after {
     content:'';
     display: block;
     position: absolute;
-    background: rgba(255,255,255,0.1);
-    width: .5em;
-    height: .5em;
+    background: #fff;
+    width: .4em;
+    height: .4em;
     border-radius: 100%;
-    top: 4%;
-    right: 4%;
+    top: .4em;
+    right: .55em;
   }
   & .display {
     // margin: 2% 2%;
@@ -291,30 +305,29 @@ export default {
       content:'';
       display: block;
       position: absolute;
-      background: rgba(255,255,255,0.1);
-      width: .5em;
-      height: .5em;
+      background: #fff;
+      width: .4em;
+      height: .4em;
       border-radius: 100%;
-      bottom: 4%;
-      left: 4%;
+      bottom: .8em;
+      left: .55em;
     }
     &:after {
       content:'';
       display: block;
       position: absolute;
-      background: rgba(255,255,255,0.1);
-      width: .5em;
-      height: .5em;
+      background: #fff;
+      width: .4em;
+      height: .4em;
       border-radius: 100%;
-      bottom: 4%;
-      right: 4%;
+      bottom: .8em;
+      right: .55em;
     }
   }
   & .knobs {
     width: 16.66vw;
     min-height: 18.4vh;
     margin: auto;
-    padding-top: 2em;
     display: flex;
     align-items: center;
     flex-wrap: wrap;

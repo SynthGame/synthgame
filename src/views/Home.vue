@@ -1,19 +1,15 @@
 <template>
-  <div class="game" v-masonry transition-duration="0.3s" horizontal-order="false" item-selector=".module">
+  <div class="game">
     <game-nav-bar/>
-    <div class="level">
-      <OscillatorModule v-masonry-tile :style="'margin-top: calc(' + marginArray[this.$store.state.visualParameters.marginOscillator] + ' * 92vh)'" :class="[(activeModule == 0 ? 'active' : '')]" />
-      <FilterModule v-masonry-tile :style="'margin-top: calc(' + marginArray[this.$store.state.visualParameters.marginFilter] + ' * 92vh)'" :class="[(activeModule == 1 ? 'active' : '')]" />
-      <EnvelopeModule v-masonry-tile :style="'margin-top: calc(' + marginArray[this.$store.state.visualParameters.marginEnvelope] + ' * 92vh)'" :class="[(activeModule == 2 ? 'active' : '')]" />
-      <LfoModule v-masonry-tile :style="'margin-top: calc(' + marginArray[this.$store.state.visualParameters.marginLfo] + ' * 92vh)'" :class="[(activeModule == 3 ? 'active' : '')]" />
-      <DelayModule v-masonry-tile :style="'margin-top: calc(' + marginArray[this.$store.state.visualParameters.marginDelay] + ' * 92vh)'" :class="[(activeModule == 4 ? 'active' : '')]" />
-      <ReverbModule v-masonry-tile :style="'margin-top: calc(' + marginArray[this.$store.state.visualParameters.marginReverb] + ' * 92vh)'" :class="[(activeModule == 5 ? 'active' : '')]" />
-      <!-- <OscillatorModule v-masonry-tile :class="[(activeModule == 0 ? 'active' : '')]" />
+    <div class="level" v-masonry transition-duration="0.3s" item-selector=".module">
+      <OscillatorModule v-masonry-tile :class="[(activeModule == 0 ? 'active' : '')]" />
+      <div v-for="n in 1" v-masonry-tile class="module empty"></div>
       <FilterModule v-masonry-tile :class="[(activeModule == 1 ? 'active' : '')]" />
       <EnvelopeModule v-masonry-tile :class="[(activeModule == 2 ? 'active' : '')]" />
+      <div v-for="n in 1" v-masonry-tile class="module empty"></div>
       <LfoModule v-masonry-tile :class="[(activeModule == 3 ? 'active' : '')]" />
       <DelayModule v-masonry-tile :class="[(activeModule == 4 ? 'active' : '')]" />
-      <ReverbModule v-masonry-tile :class="[(activeModule == 5 ? 'active' : '')]" /> -->
+      <ReverbModule v-masonry-tile :class="[(activeModule == 5 ? 'active' : '')]" />
     </div>
     <div class="tabs">
       <div @click="showOsc" class="tabs__tab tabs__osc">Osc</div>

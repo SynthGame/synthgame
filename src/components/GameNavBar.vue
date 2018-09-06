@@ -112,7 +112,6 @@ export default {
   },
   methods: {
     startTimer () {
-      this.$store.commit('updateModuleMargins', 1);
       this.$store.commit('addValueToLevel', 1);
       this.timer = this.timer || window.setInterval(() => {
         if(this.timeLeftSeconds === 0) return this.timeIsUp()

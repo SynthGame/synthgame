@@ -39,6 +39,9 @@ export default {
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style lang="scss" scoped>
   .module__name {
+    font-size: .7em;
+    padding: 5% 10%;
+    color: black;
     width: 10em;
     margin: 0;
     display: flex;
@@ -51,7 +54,7 @@ export default {
     &__title {
       h2 {
         margin: 0;
-        font-size: 1rem;
+        font-size: .7rem;
       }
     }
 
@@ -66,13 +69,13 @@ export default {
     &__status-indicator {
       display: inline-block;
       margin-left: .2em;
-      width: 11px;
       height: 11px;
       border: 1px solid white;
       border-radius: 100%;
 
       &--active {
-        border: none;
+        // border: none;
+        background:black;
       }
     }
   }

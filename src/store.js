@@ -13,12 +13,6 @@ Vue.use(Vuex)
 export default new Vuex.Store({
   state: {
     visualParameters: {
-      marginOscillator: 0,
-      marginFilter: 1,
-      marginEnvelope: 3,
-      marginLfo: 1,
-      marginDelay: 2,
-      marginReverb: 0
     },
     audioParameters: {
       oscillator: {
@@ -156,14 +150,6 @@ export default new Vuex.Store({
     },
     setKnobsAvailable (state, obj) {
       state.gameState.knobsAvailable = obj
-    },
-    updateModuleMargins (state, val) {
-      state.visualParameters.marginOscillator = Math.round(Math.random()*4);
-      state.visualParameters.marginFilter = Math.round(Math.random()*4);
-      state.visualParameters.marginEnvelope = Math.round(Math.random()*4);
-      state.visualParameters.marginLfo = Math.round(Math.random()*4);
-      state.visualParameters.marginDelay = Math.round(Math.random()*4);
-      state.visualParameters.marginReverb = Math.round(Math.random()*4);
     }
   },
   getters: {

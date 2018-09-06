@@ -33,7 +33,7 @@
         name="Type"
         module="filter"
       ></module-knob> -->
-      <!-- <module-knob
+      <module-knob
         v-model="cutOffFreq"
         :min="0"
         :max="100"
@@ -48,7 +48,7 @@
         knobColor="#6e01d1"
         name="Resonance"
         module="filter"
-      ></module-knob> -->
+      ></module-knob>
     </div>
   </div>
 
@@ -134,10 +134,6 @@ export default {
 
 svg.display {
     fill: #6e01d1;
-}
-
-h3 {
-  color: #6e01d1;
 }
 
 ul {

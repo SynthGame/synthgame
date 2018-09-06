@@ -98,10 +98,6 @@ svg.display {
     fill: #3c32ff;
 }
 
-h3 {
-  color: #3c32ff;
-}
-
 ul {
   list-style-type: none;
   padding: 0;
