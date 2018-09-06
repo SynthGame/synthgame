@@ -16,10 +16,11 @@
                    {name: 'Rate', min:1, max:100, value: this.frequencyGoal},
                    {name: 'Amount', min:0, max:4000, value: this.amountGoal},
                    {name: 'Shape', min:0, max:3, value: this.typeGoal},
-                   {name: 'Rlgl', min:0, max:3, value: Math.pow(this.frequencyGoal, (this.frequencyGoal / 100)) - 1}
+                   {name: 'Rlgl', min:0, max:3, value: Math.pow(this.frequencyGoal, (this.frequencyGoal / 100)) - 0.99}
                    ]"/>
         <div class="knobs">
-          <!-- <module-knob
+          <module-knob
+          v-show="false"
             v-model="frequency"
             :min="1"
             :max="100"
@@ -28,13 +29,14 @@
             module="lfo"
           ></module-knob>
           <module-knob
+          v-show="false"
             v-model="amount"
             :min="0"
             :max="100"
             knobColor="#5bd484"
             name="Amount"
             module="lfo"
-          ></module-knob> -->
+          ></module-knob>
           <!-- <module-knob
             v-model="typeDial"
             :min="0"
@@ -92,6 +94,9 @@ export default {
   created () {
     self = this
     this.lfo = audio.lfo.state.device
+  },
+  mounted() {
+    this.realFrq = character.lfo.type(this.lfo.frequency.value)
   },
   computed: {
     dialsAreWithinMargin() {

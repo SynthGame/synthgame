@@ -29,7 +29,7 @@
         <g v-if="this.module === 'lfo'" ref="swing"
           stroke="black"
           fill="black"
-          :style="swingStyle"
+          :style="swingMovement"
           class="swingClass"
                           >
           <path
@@ -47,7 +47,7 @@
             fill="none"
             ref="swingGoal"
             :stroke-width="2"
-            :style="goalSwingStyle"
+            :style="goalSwingMovement"
             class="swingClass"
                             >
             <path
@@ -249,7 +249,7 @@ export default {
     window.addEventListener('resize', this.updateDimensions())
 
     if (this.module == 'lfo') {
-      var intervalTest =  setInterval(this.updateSeconds, this.knobs[3].value)
+      var intervalTest =  setInterval(this.updateSeconds, ((1/this.knobs[3].value) * 1000))
       this.intervalId = intervalTest
       this.goalIntervalId = setInterval(this.updateGoalSeconds, (1 / (this.knobs[7].value) ) * 1000 )
     }
@@ -372,9 +372,9 @@ export default {
       }
       return ''
     },
-    lfoValue() {
+    lfoRealFreq() {
       if (this.module === 'lfo') {
-        return this.knobs[0].value
+        return this.knobs[3].value
       }
     },
     path () {
@@ -608,7 +608,7 @@ export default {
     reverbVB() {
       return '-90,0,'+this.displayWidth+ ',' + this.displayHeight
     },
-    swingStyle() {
+    swingMovement() {
       // helpers:
       const rate = this.knobs[0]
       const amount = this.knobs[1]
@@ -617,10 +617,15 @@ export default {
       const rateRatio = (rate.value/(rate.max-rate.min))
       const amountRatio = (amount.value/(amount.max-amount.min))
 
-      const realFreq = this.knobs[3].value
+      // a hot-fix to stop the swing from going trrrrrrrrr ---
+      // let realFreq
+      // if(this.knobs[3].value === 0) {
+      //   realFreq = 0.1
+      // } else {
+        let realFreq = this.knobs[3].value
+      // }
 
       const transitionTime = ( 1 / (realFreq) )
-      const rotateAmnt = 50
 
       let transitionString;
       // differenciate shapes using transitions:
@@ -630,7 +635,7 @@ export default {
         transitionString =''
       } else if (shape.value == 'sawtooth') {
         if (!this.shouldItGoRight) {
-          transitionString = transitionTime*2+'s linear'
+          transitionString = transitionTime+'s linear'
         }
         else {
           transitionString = ''
@@ -638,7 +643,7 @@ export default {
       } else if (shape.value == 'triangle') {
         transitionString = transitionTime+'s linear'
       }
-      let rotateAmount = 2500*amountRatio;
+      let rotateAmount = 1900*amountRatio;
       let rotateString
       if (this.shouldItGoRight){
         // go right:
@@ -649,7 +654,7 @@ export default {
       }
       return {transform: rotateString, transition: transitionString}
     },
-    goalSwingStyle() {
+    goalSwingMovement() {
       // helpers:
       const rate = this.knobs[4]
       const amount = this.knobs[5]
@@ -661,8 +666,6 @@ export default {
       const realGoalFreq = this.knobs[7].value
 
       const transitionTime = ( 1 / (realGoalFreq) )
-      const rotateAmnt = 50
-
 
       let transitionString;
       if (shape.value=='sine') {
@@ -679,7 +682,7 @@ export default {
       } else if (shape.value == 'triangle') {
         transitionString = transitionTime+'s linear'
       }
-      let rotateAmount = 2500*amountRatio;
+      let rotateAmount = 1900*amountRatio;
       let rotateString
       if (this.shouldGoalGoRight){
         // go right:
@@ -878,12 +881,11 @@ export default {
   },
   watch: {
     // used to update the interval length on rate knob turn
-    lfoValue: {
+    lfoRealFreq: {
       handler(newValue, oldValue) {
         if (this.module =='lfo') {
-          let realFreq = this.knobs[3].value
-
-          this.changeInterval(( 1 / (realFreq) ) * 1000 )
+          let realFreq = this.knobs[3]
+          this.changeInterval(( 1 / (newValue) ) * 1000 )
         }
         return
       },
