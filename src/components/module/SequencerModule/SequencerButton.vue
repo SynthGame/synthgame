@@ -34,7 +34,7 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style lang="scss" scoped>
-$main-synth-color: #F40056;
+$main-seq-color: #F40056;
 
 .sequencer-button {
   height: 100px;
@@ -42,7 +42,7 @@ $main-synth-color: #F40056;
   display: inline-flex;
   margin: 10px 5px;
   padding: 0;
-  border: 2px solid $main-synth-color;
+  border: 2px solid $main-seq-color;
   border-radius: 2px;
   background-color: unset;
 
@@ -58,7 +58,7 @@ $main-synth-color: #F40056;
     border-radius: 50%;
 
     &--selected {
-      background-color: $main-synth-color;
+      background-color: $main-seq-color;
     }
 
     &--active {
