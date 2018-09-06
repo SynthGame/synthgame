@@ -14,10 +14,10 @@ export default {
     cutOffFreq: val => Math.pow((val * 200), (val / 100)) + 20,
     type: val => val,
     setQ: val => val / 8
-    // gain: val => 
+    // gain: val =>
   },
   lfo: {
-    frequency: val => Math.pow(val, (val / 100)) - 1,
+    frequency: val => Math.pow(val, (val / 100)) - 0.99,
     type: val => val,
     amount: val => (val * 40)
   },
