@@ -81,7 +81,7 @@ export default {
     initSynth () {
       this.toneLoop = audio.setMainLoop({
         noteArray: range(1, 16),
-        subdivision: '4n'
+        subdivision: '8n'
       }, (time, note) => {
         this.setStep(note)
         if(this.noteArray[note].selected) audio.playNote(this.noteArray[note].pitch, {
