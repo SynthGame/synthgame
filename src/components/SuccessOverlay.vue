@@ -34,7 +34,6 @@
 
 <script>
 import { keyframes, easing } from 'popmotion'
-import posed from 'vue-pose';
 
 export default {
   name: "Overlay",
