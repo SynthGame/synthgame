@@ -42,6 +42,7 @@ export default {
     width: 10em;
     margin: 0;
     display: flex;
+    position: absolute;
     justify-content: flex-start;
     align-items: baseline;
     text-transform: uppercase;

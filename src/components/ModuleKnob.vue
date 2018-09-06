@@ -459,7 +459,7 @@ export default {
 
 .knob {
   width:8em;
-  height:8em;
+  height:18.4vh;
   // flex:1;
   color: white;
   &__bg {

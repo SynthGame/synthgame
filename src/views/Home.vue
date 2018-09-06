@@ -2,12 +2,18 @@
   <div class="game">
     <game-nav-bar/>
     <div class="level">
-      <OscillatorModule :style="'margin-left: calc(((100vw - 48em)/6)*' + (this.$store.state.visualParameters.marginOscillator/100) + ')'" :class="[(activeModule == 0 ? 'active' : '')]" />
-      <FilterModule :style="'margin-left: calc(((100vw - 48em)/3)*' + (this.$store.state.visualParameters.marginFilter/100) + ')'" :class="[(activeModule == 1 ? 'active' : '')]" />
-      <EnvelopeModule :style="'margin-left: calc(((100vw - 48em)/3)*' + (this.$store.state.visualParameters.marginEnvelope/100) + ')'" :class="[(activeModule == 2 ? 'active' : '')]" />
-      <LfoModule :style="'margin-left: calc(((100vw - 48em)/3)*' + (this.$store.state.visualParameters.marginLfo/100) + ')'" :class="[(activeModule == 3 ? 'active' : '')]" />
-      <DelayModule :style="'margin-left: calc(((100vw - 48em)/3)*' + (this.$store.state.visualParameters.marginDelay/100) + ')'" :class="[(activeModule == 4 ? 'active' : '')]" />
-      <ReverbModule :style="'margin-left: calc(((100vw - 48em)/3)*' + (this.$store.state.visualParameters.marginReverb/100) + ')'" :class="[(activeModule == 5 ? 'active' : '')]" />
+      <!-- <OscillatorModule :style="'margin-top: calc(' + marginArray[this.$store.state.visualParameters.marginOscillator] + ' * 92vh)'" :class="[(activeModule == 0 ? 'active' : '')]" />
+      <FilterModule :style="'margin-top: calc(' + marginArray[this.$store.state.visualParameters.marginFilter] + ' * 92vh)'" :class="[(activeModule == 1 ? 'active' : '')]" />
+      <EnvelopeModule :style="'margin-top: calc(' + marginArray[this.$store.state.visualParameters.marginEnvelope] + ' * 92vh)'" :class="[(activeModule == 2 ? 'active' : '')]" />
+      <LfoModule :style="'margin-top: calc(' + marginArray[this.$store.state.visualParameters.marginLfo] + ' * 92vh)'" :class="[(activeModule == 3 ? 'active' : '')]" />
+      <DelayModule :style="'margin-top: calc(' + marginArray[this.$store.state.visualParameters.marginDelay] + ' * 92vh)'" :class="[(activeModule == 4 ? 'active' : '')]" />
+      <ReverbModule :style="'margin-top: calc(' + marginArray[this.$store.state.visualParameters.marginReverb] + ' * 92vh)'" :class="[(activeModule == 5 ? 'active' : '')]" /> -->
+      <OscillatorModule :class="[(activeModule == 0 ? 'active' : '')]" />
+      <FilterModule :class="[(activeModule == 1 ? 'active' : '')]" />
+      <EnvelopeModule :class="[(activeModule == 2 ? 'active' : '')]" />
+      <LfoModule :class="[(activeModule == 3 ? 'active' : '')]" />
+      <DelayModule :class="[(activeModule == 4 ? 'active' : '')]" />
+      <ReverbModule :class="[(activeModule == 5 ? 'active' : '')]" />
     </div>
     <div class="tabs">
       <div @click="showOsc" class="tabs__tab tabs__osc">Osc</div>
@@ -37,6 +43,7 @@ export default {
   data () {
     return {
       activeModule: 0,
+      marginArray: [0,0.25,0.50,0.75]
     }
   },
   components: {

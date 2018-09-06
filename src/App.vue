@@ -203,20 +203,40 @@ export default {
   }
 }
 
+
+.level {
+  display: grid;
+  grid-auto-flow: column;
+  justify-content: start;
+  grid-auto-flow: dense;
+  grid-template-columns: repeat(6, 1fr);
+  grid-template-rows: repeat(5, 1fr);
+  position: relative;
+  background: #101010;
+  background-image: url(./assets/bg.svg);
+  background-size: cover;
+  width:100%;
+  height:92vh;
+}
+
 .module {
   background: black;
-  max-height: 50%;
-  width: 16em;
+  min-height: calc(0.4*92vh);
+  width: 16.66vw;
   margin: 0;
-  padding: 1.5% 2%;
-  display: flex;
-  max-width: fit-content;
-  justify-content: space-between;
-  flex-flow: column wrap;
+  // padding: 1.5% 2%;
+  display: subgrid;
   position: relative;
+  justify-content: start;
+  grid-template-columns:
+    /* 1 */ 16.66vw
+    /* 2 */ 16.66vw;
+  grid-template-rows:
+    /* 1 */ 18.4vh
+    /* 2 */ 18.4vh;
   .button-wrapper {
       display: flex;
-      width: 50%;
+      width: 55%;
       height: 6em;
       margin: 0 auto;
       flex-wrap: wrap;
@@ -259,9 +279,9 @@ export default {
     right: 4%;
   }
   & .display {
-    margin: 10% 2%;
-    height: 5em;
-    width: 96%;
+    // margin: 2% 2%;
+    height: 18.4vh;
+    width: 100%;
     & path {
       transition: .1s all ease-out;
     }
@@ -289,26 +309,14 @@ export default {
     }
   }
   & .knobs {
-    width: 90%;
-    height: 55%;
+    width: 16.66vw;
+    min-height: 18.4vh;
     margin: auto;
     display: flex;
     align-items: center;
     flex-wrap: wrap;
     justify-content: center;
   }
-}
-
-.level {
-  display: flex;
-  position: relative;
-  background: #101010;
-  background-image: url(./assets/bg.svg);
-  background-size: cover;
-  justify-content: flex-start;
-  flex-wrap: wrap;
-  width:100%;
-  height:92vh;
 }
 
 body {
