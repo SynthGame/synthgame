@@ -86,8 +86,8 @@ export default {
     console.log(this.$store.state)
   },
   computed: {
-    gameIsRunning () {
-      return this.$store.state.gameState.gameIsRunning
+    timerIsRunning () {
+      return this.$store.state.gameState.timerIsRunning
     },
     oscillatorComplete() {
       return Object.values(this.$store.getters.audioParametersMatchGoalWithMargin['oscillator']).every(param => param)
@@ -116,7 +116,6 @@ export default {
   },
   methods: {
     startTimer () {
-      this.$store.commit('addValueToLevel', 1);
       this.timer = this.timer || window.setInterval(() => {
         if(this.timeLeftSeconds === 0) return this.timeIsUp()
         this.timeLeftSeconds--
@@ -132,12 +131,12 @@ export default {
       this.timeLeftSeconds = 30
     },
     timeIsUp () {
-      alert('gams over')
+      alert('game\'s over')
       this.stopTimer()
     }
   },
   watch: {
-    gameIsRunning (val) {
+    timerIsRunning (val) {
       if (val) return this.startTimer()
       this.stopTimer()
     }

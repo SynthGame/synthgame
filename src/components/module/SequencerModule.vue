@@ -107,7 +107,7 @@ export default {
         subdivision: '8n'
       }, (time, note) => {
         this.setStep(note)
-        if (this.$store.state.gameState.gameIsRunning === false && kickTime === true && this.$store.state.gameState.level > 0) {
+        if (this.$store.state.gameState.timerIsRunning === false && kickTime === true && this.$store.state.gameState.level > 0) {
           audio.playKick();
           kickTime = false;
         } else {

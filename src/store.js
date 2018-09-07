@@ -51,7 +51,7 @@ export default new Vuex.Store({
     gameState: {
       createModeIsActive: false,
       margin: 10,
-      gameIsRunning: false,
+      timerIsRunning: false,
       level: 0,
       sequencesPassedInCurrentLevel: 0,
       knobsAvailable: {},
@@ -130,25 +130,25 @@ export default new Vuex.Store({
       // overwrite parameters from audiostate, this will not fill in nested objects
       state.gameState.margin = newMargin
     },
-    startGame (state) {
+    startTimerIsRunning (state) {
       // overwrite parameters from audiostate, this will not fill in nested objects
-      state.gameState.gameIsRunning = true
+      state.gameState.timerIsRunning = true
     },
-    stopGame (state) {
+    stopTimerIsRunning (state) {
       // overwrite parameters from audiostate, this will not fill in nested objects
-      state.gameState.gameIsRunning = false
+      state.gameState.timerIsRunning = false
     },
     addValueToScore (state, val) {
       state.gameState.score = add(state.gameState.score, val)
     },
-    addValueToLevel (state, val) {
+    increaseLevelValue (state, val) {
       state.gameState.level = add(state.gameState.level, val)
+    },
+    setLevelValue (state, level) {
+      state.gameState.level = level
     },
     updateHighScore (state, val) {
       state.gameState.highScore = val
-    },
-    setLevelNumber (state, level) {
-      state.gameState.level = level
     },
     setKnobsAvailable (state, obj) {
       state.gameState.knobsAvailable = obj
@@ -197,15 +197,16 @@ export default new Vuex.Store({
         preset: randomizeValues(state.audioParameters)
       })
     },
-    randomizGoalParameters ({state, commit}, randomizeArray) {
+    randomizGoalParameters ({state, commit}) {
       const randomizeValues = obj => mapValues(obj, (val, moduleName) => {
         return mapValues(val, (val, parameterName) => {
-          // if randomizeArray is provided and the value is falsey return store value
-          if (randomizeArray && !randomizeArray[moduleName][parameterName]) return state.gameState.goal[moduleName][parameterName]
-          const parameterValDef = state.gameState.possibleValues[moduleName][parameterName]
-          return Array.isArray(parameterValDef)
-            ? parameterValDef[random(0, parameterValDef.length - 1)]
-            : random(0, 100)
+          if (state.gameState.knobsAvailable && state.gameState.knobsAvailable[moduleName] && state.gameState.knobsAvailable[moduleName][parameterName]) {
+            const parameterValDef = state.gameState.possibleValues[moduleName][parameterName]
+            return Array.isArray(parameterValDef)
+              ? parameterValDef[random(0, parameterValDef.length - 1)]
+              : random(0, 100)
+          }
+          return state.gameState.goal[moduleName][parameterName]
         })
       })
       return commit('setGoalToPreset', {
@@ -260,16 +261,19 @@ export default new Vuex.Store({
       synth.reverb.state.device.wet.value = state.audioParameters.reverb.wet
       synth.reverb.state.device.roomSize.value = state.audioParameters.reverb.roomSize
     },
-    setLevel ({state, commit}, {levelNumber, knobsAvailable}) {
-      commit('setLevelNumber', levelNumber)
+    setLevel ({state, commit}, {knobsAvailable}) {
       commit('setKnobsAvailable', knobsAvailable)
     },
-    startNewLevel ({state, commit, dispatch}, {levelNumber, knobsAvailable}) {
-      commit('startGame')
+    startNewLevel ({state, commit, dispatch}, {knobsAvailable, level}) {
+      if(level) commit('setLevelValue', level);
+      return dispatch('setLevel', {
+        knobsAvailable
+      })
     },
-    levelFinished ({state, commit}, {timeLeft, knobsAvailable}) {
+    levelDone ({state, commit}) {
+      commit('stopTimerIsRunning')
       commit('resetSequencesPassedInCurrentLevel')
-
+      // commit('addValueToScore', timeLeft)
     },
     gameOver ({state, commit}, {}) {
       commit('resetSequencesPassedInCurrentLevel')
