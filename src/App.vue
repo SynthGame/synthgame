@@ -105,11 +105,17 @@ export default {
       audio.init().toMaster()
       // create loop wich sequences 4 notes
       const randomLoop = times(16).map(i => random(-12, 12))
+      let kickTime = true;
       this.loop = audio.setMainLoop({
         noteArray: times(16),
         subdivision: '8n'
       }, (time, i) => { // i here is just a note from the note array define above
-        if (this.isOverlayed) audio.playKick()
+        if (this.$store.state.gameState.gameIsRunning === false && kickTime === true && this.$store.state.gameState.level > 0) {
+          audio.playKick();
+          kickTime = false;
+        } else {
+          kickTime = true;
+        };
         audio.playNote(randomLoop[i], {})
 
         if (i === 15) this.$store.commit('increaseSequencesPassedInCurrentLevel')
