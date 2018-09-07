@@ -12,7 +12,7 @@ export default [
   },
   {
     oscillator: {
-      // frequency: true,
+      typeOsc: true,
     },
     filter: {
       type: true
@@ -24,7 +24,7 @@ export default [
   },
   {
     oscillator: {
-      frequency: true,
+      detune: true,
     },
     filter: {},
     envelope: {},
