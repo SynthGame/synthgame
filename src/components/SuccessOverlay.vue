@@ -8,28 +8,27 @@
         <!-- <p class="score">Your current score: {{gameScore}}</p> -->
       </div>
       <svg viewBox="0 0 250 250" height="400px" width="400px" v-if="currentAnim==='ping'">
-        <g :transform="`rotate(${anim.ping.racketTurn}) translate(0, ${anim.ping.racketYOffset})`">
-          <svg version="1.1"
-          xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:a="http://ns.adobe.com/AdobeSVGViewerExtensions/3.0/"
-          x="40px" y="100px" width="350px" height="127px"
-          xml:space="preserve">
-            <path id="loading_page_1_" class="st0" d="M10.9,90.9L0,77.2l0.5-15l10.3,13.7c0,0,6-1.1,22.6-6.9c14.8-5.5,33.4-6.6,34.3-6.6
-                c5.9,0.2,9.2,2.5,14.6,6.3c4.2,2.9,9.5,6.6,17.7,10.5c0.1,0,0.1,0,0.2,0.1c0.4,0.2,0.7,0.4,1.1,0.6c18.9,8.9,46.7,5.9,57.8,4.2
-                c30.1-4.6,47.6-26,40.6-49.7c-3.6-12.2-12.8-22.2-25.9-28.4c-11.7-5.5-25.3-7.3-39.2-5.1c-11.9,1.8-40.5,7.7-51.9,22.6l-0.1,0.1
-                c-5.4,6-8,10.7-10.1,14.4c-2.7,4.8-4.1,7.4-9.3,9.4 M78.5,28.5l23.1,52v10.7 M0.5,62.2c25.1-7.5,38.1-4,62.8-14.9l9.4,6.1l-7.4,9.1
-                v11.2 M10.9,75.9v15c0,0,40.5-18.4,55.8-17.3s33.7,28.9,83.7,21.5s50.9-49.3,50.9-49.3"/>
-
+        <!-- Ping-pong Racket -->
+        <g :transform="`rotate(${anim.ping.racketYOffset}) translate(0, 0)`" transform-origin="0px 180px" stroke-width="1.5819">
+          <svg width="203px" height="99px" version="1.1" y="110px" x="10px">
+            <g id="Sin-título-2_Mesa-de-trabajo-1" transform="translate(0.000000, 1.000000)" stroke="#FFFFFF" stroke-width="1.5819">
+              <path d="M11.8,91.4 L0.9,77.7 L1.4,62.7 L11.7,76.4 C11.7,76.4 17.7,75.3 34.3,69.5 C49.1,64 67.7,62.9 68.6,62.9 C74.5,63.1 77.8,65.4 83.2,69.2 C87.4,72.1 92.7,75.8 100.9,79.7 C101,79.7 101,79.7 101.1,79.8 C101.5,80 101.8,80.2 102.2,80.4 C121.1,89.3 148.9,86.3 160,84.6 C190.1,80 207.6,58.6 200.6,34.9 C197,22.7 187.8,12.7 174.7,6.5 C163,1 149.4,-0.8 135.5,1.4 C123.6,3.2 95,9.1 83.6,24 C83.6,24 83.5,24.1 83.5,24.1 C78.1,30.1 75.5,34.8 73.4,38.5 C70.7,43.3 69.3,45.9 64.1,47.9" id="Shape" stroke-linejoin="round"></path>
+              <polyline id="Shape" points="79.4 29.1 102.5 81.1 102.5 91.7"></polyline>
+              <path d="M1.4,62.8 C26.5,55.2 39.5,58.8 64.2,47.9 L73.6,54 L66.1,63 L66.1,74.2" id="Shape"></path>
+              <path d="M11.8,76.4 L11.8,91.4 C11.8,91.4 52.3,73 67.6,74.1 C82.9,75.2 101.3,103 151.3,95.6 C201.3,88.2 202.2,46.3 202.2,46.3" id="Shape" stroke-linecap="round" stroke-linejoin="round"></path>
+            </g>
           </svg>
         </g>
-        <svg  width="37px" height="390px" x="145px" y="-35px" viewBox="0 0 50 50" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+        <!-- The Ball -->
+        <svg  width="37px" height="390px" x="130px" y="-30px" viewBox="0 0 50 50">
           <g id="loadingscreen_icon1-01" :transform="`translate(-120.000000, ${anim.ping.ballHeight})`" stroke="#FFFFFF" fill-rule="nonzero" stroke-width="1.5819" :fill="currentColor">
-              <circle id="Oval" cx="138.6" cy="18.2" r="17.3"></circle>
+              <circle id="Oval" cx="138.6" cy="18.2" r="15"></circle>
           </g>
         </svg>
 
       </svg>
       <svg viewBox="0 0 200 200" height="400px" width="400px" v-if="currentAnim==='drum'">
-        <!-- Generator: Adobe Illustrator 22.0.1, SVG Export Plug-In  -->
+        <!-- DRUM  -->
         <svg version="1.1"
             xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:a="http://ns.adobe.com/AdobeSVGViewerExtensions/3.0/"
             x="60px" y="60px" width="79.1px" height="114px" style="enable-background:new 0 0 79.1 114;"
@@ -38,10 +37,10 @@
             M19.5,55.5V29.1 M79,46.5L59.4,29.1l-20,27.8l-20-27.8L0,46.5c0,5.8,17.7,10.4,39.5,10.4S79,52.2,79,46.5V10.4l0.1,9.2
             c0,5.8-17.7,10.4-39.5,10.4S0.1,25.3,0.1,19.6v-9.2v36.1 M5.9,114l33.7-33.6L73.2,114L39.6,79.5v-24V30l20-0.9v26.4"/>
         </svg>
-        <!-- Generator: Adobe Illustrator 22.0.1, SVG Export Plug-In  -->
+        <!-- STICK 1  -->
         <svg version="1.1"
             xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:a="http://ns.adobe.com/AdobeSVGViewerExtensions/3.0/"
-            x="20px" y="0px" width="82.8px" height="35.4px" style="enable-background:new 0 0 82.8 35.4;"
+            viewBox ="0 0 10 10" x="75px" y="20px" width="82.8px" height="35.4px" style="enable-background:new 0 0 82.8 35.4;"
             xml:space="preserve">
 
 
@@ -49,7 +48,11 @@
             c0.2-1,0.4-1.9,0.4-3c0-7-5.7-12.6-12.6-12.6S0,5.7,0,12.6s5.7,12.6,12.6,12.6c5.3,0,9.9-3.3,11.8-8l57.3,18.1c0.1,0,0.2,0,0.3,0
             c0.4,0,0.7-0.2,0.8-0.6C82.9,34.3,82.7,33.9,82.2,33.7z"/>
         </svg>
+
+
       </svg>
+
+
     <!-- <p>Don't stop here!</p> -->
     <button class="button-next" @click="$emit('next')">NEXT LEVEL</button>
     </div>
@@ -113,7 +116,7 @@ export default {
     keyframes({
       values: [ // you can include anything here, jus values or '10px' or colors whatever
         { ballY: 0, racketRotate: 0, racketYOffset: 0},
-        { ballY: -180, racketRotate: 12, racketYOffset: 15},
+        { ballY: -200, racketRotate: 12, racketYOffset: 15},
         { ballY: 0, racketRotate:0 , racketYOffset: 0}
       ],
       loop: Infinity,
