@@ -37,7 +37,7 @@ export default {
     log(`Generating reverb`)
     // reverb.generate()
     log(`Chaining oscillator => pitch shift => envelope => filter => delay => reverb`)
-    oscillator.chain(pitchShift, envelope, filter, reverb, delay)
+    oscillator.chain(pitchShift, filter, envelope, reverb, delay)
 
     log(`Starting oscillator`)
     oscillator.start()
