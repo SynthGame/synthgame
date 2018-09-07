@@ -1,5 +1,5 @@
 <template>
-  <div class="startscreen">
+  <div class="startscreen" @keydown.space="$emit('start')">
     <div class="startscreen-content-wrapper">
       <div>
         <h1>Tats</h1>
