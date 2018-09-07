@@ -39,12 +39,12 @@ export default new Vuex.Store({
         amount: 0
       },
       delay: {
-        delayTime: 10,
-        feedback: 0,
+        delayTime: 30,
+        feedback: 80,
         wet: 2
       },
       reverb: {
-        roomSize: 10,
+        roomSize: 90,
         wet: 2
       }
     },
@@ -82,12 +82,12 @@ export default new Vuex.Store({
           amount: 0
         },
         delay: {
-          delayTime: 10,
-          feedback: 0,
+          delayTime: 30,
+          feedback: 80,
           wet: 2
         },
         reverb: {
-          roomSize: 10,
+          roomSize: 90,
           wet: 2
         }
       },

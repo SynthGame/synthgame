@@ -1,5 +1,9 @@
 <template>
   <div class="sequencer">
+    <module-title :indicator-active="dialsAreWithinMargin" :module-color="moduleColor">
+      <h2 slot="title">Tats</h2>
+      <h3 slot="subtitle">Sequencer</h3>
+    </module-title>
     <div class="button-wrapper function">
       <button color="#6e01d1" @click="sequencerEditStateChange(0)">Rhythm</button>
       <button color="#6e01d1" @click="sequencerEditStateChange(1)">Pitch</button>
@@ -15,7 +19,7 @@
       name="Control"
       module="lfo"
     ></module-knob> -->
-    <div>
+    <div class="play-random">
       <button @click="playPauseSynth" class="sequencer-stop-button">
 
       </button>
@@ -59,6 +63,7 @@
 <script>
 import audio from '@/audio'
 import ModuleKnob from '@/components/ModuleKnob.vue'
+import ModuleTitle from './ModuleComponents/ModuleTitle.vue'
 import SequencerButton from './SequencerModule/SequencerButton.vue'
 import SequencerSlider from './SequencerModule/SequencerSlider.vue'
 import { setInterval } from 'timers';
@@ -72,6 +77,7 @@ export default {
   components: {
     SequencerButton,
     SequencerSlider,
+    ModuleTitle,
     ModuleKnob
   },
   data: function () {
@@ -186,6 +192,33 @@ export default {
 <style lang="scss" scoped>
 $main-seq-color: #F40056;
 
+.play-random {
+  display: flex;
+  justify-content: space-around;
+}
+
+.module__name {
+  position: relative;
+}
+
+button.sequencer-button {
+    min-height: 8em;
+    justify-content: flex-start;
+    display: flex;
+}
+
+.module__name__title {
+  h2 {
+    color: white;
+  }
+}
+
+.module__name__sub-title {
+  h3 {
+    color: white;
+  }
+}
+
 .main {
   width: 16.67%;
   height: 480px;
@@ -212,12 +245,13 @@ $main-seq-color: #F40056;
 
 .button-section {
   display: inline-block;
-  border-top: 2px solid $main-seq-color;
+  // border-top: 2px solid $main-seq-color;
   width: 220px;
-  margin: 5px;
+  margin: .4em 5px;
 }
 
 .button-wrapper {
+  margin-top: -1em;
   display: inline-block;
   width: 55px;
   &.function {
