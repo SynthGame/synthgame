@@ -231,6 +231,15 @@ export default new Vuex.Store({
     setLevel ({state, commit}, {levelNumber, knobsAvailable}) {
       commit('setLevelNumber', levelNumber)
       commit('setKnobsAvailable', knobsAvailable)
+    },
+    startNewLevel ({state, commit}, {levelNumber, knobsAvailable}) {
+
+    },
+    levelFinished ({state, commit}, {timeLeft, knobsAvailable}) {
+      
+    },
+    gameOver ({state, commit}, {}) {
+      
     }
   }
 })
