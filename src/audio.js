@@ -4,7 +4,7 @@ import { DEBUG_ENABLED } from '@/constants'
 // define logging mechanism
 const log = (log) => false ? console.info(log) : log
 
-const audioInstance = () => ({
+export default {
   state: {
     Tone: Tone,
     loop: undefined,
@@ -34,10 +34,8 @@ const audioInstance = () => ({
     const output = new Tone.Volume(-12)
     log(`Connecting LFO to filter frequency`)
     lfo.connect(oscillator.detune).start()
-    log(`Generating reverb`)
-    // reverb.generate()
     log(`Chaining oscillator => pitch shift => envelope => filter => delay => reverb`)
-    oscillator.chain(pitchShift, envelope, filter, reverb, delay)
+    oscillator.chain(pitchShift, filter, envelope, reverb, delay)
 
     log(`Starting oscillator`)
     oscillator.start()
@@ -51,6 +49,11 @@ const audioInstance = () => ({
     log(`setting BPM length to: ${bpm}`)
     this.state.Tone.Transport.bpm.value = bpm
     return this.state.Tone.Transport.bpm.value
+  },
+  resetSynth() {
+    console.log('this.reverb.state.device.dispose', this.reverb.state.device.dispose());
+    // this.reverb.state.device.dispose();
+    // this.delay.state.device.dispose();
   },
   setMainLoop ({noteArray, subdivision}, callback) {
     log(`Setting new main loop`)
@@ -102,7 +105,7 @@ const audioInstance = () => ({
       log(`Initializing oscillator with options: ${options}`)
       this.state.device = new Tone.Oscillator({
         type: 'sine',
-        frequency: 65,
+        frequency: 131,
         detune: 0,
         phase: 0,
         ...options
@@ -212,7 +215,4 @@ const audioInstance = () => ({
       this.state.device = new Tone.Volume()
     }
   }
-})
-
-// export default {...new audioInstance(), ...{goalMirrorInstance: new audioInstance()}}
-export default {...new audioInstance()}
+}

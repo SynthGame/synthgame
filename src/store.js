@@ -16,7 +16,7 @@ export default new Vuex.Store({
     },
     audioParameters: {
       oscillator: {
-        frequency: 65,
+        frequency: 131,
         typeOsc: 'sawtooth',
         detune: 60
         // phase: 0
@@ -39,25 +39,27 @@ export default new Vuex.Store({
         amount: 0
       },
       delay: {
-        delayTime: 10,
-        feedback: 0,
-        wet: 2
+        delayTime: 30,
+        feedback: 80,
+        wet: 0
       },
       reverb: {
-        roomSize: 10,
-        wet: 2
+        roomSize: 50,
+        wet: 0
       }
     },
     gameState: {
+      createModeIsActive: false,
       margin: 10,
       gameIsRunning: false,
       level: 0,
+      sequencesPassedInCurrentLevel: 0,
       knobsAvailable: {},
       score: 0,
       highScore: 0,
       goal: {
         oscillator: {
-          frequency: 65,
+          frequency: 131,
           typeOsc: 'sawtooth',
           detune: 60
           // phase: 0
@@ -69,8 +71,8 @@ export default new Vuex.Store({
           // gain: 50
         },
         envelope: {
-          attack: 1,
-          decay: 10,
+          attack: 0,
+          decay: 5,
           sustain: 30,
           release: 10
         },
@@ -80,13 +82,13 @@ export default new Vuex.Store({
           amount: 0
         },
         delay: {
-          delayTime: 10,
-          feedback: 0,
-          wet: 2
+          delayTime: 30,
+          feedback: 80,
+          wet: 0
         },
         reverb: {
-          roomSize: 10,
-          wet: 2
+          roomSize: 50,
+          wet: 0
         }
       },
       possibleValues: {
@@ -150,6 +152,15 @@ export default new Vuex.Store({
     },
     setKnobsAvailable (state, obj) {
       state.gameState.knobsAvailable = obj
+    },
+    setCreateMode (state, isActive) {
+      state.gameState.createModeIsActive = isActive
+    },
+    increaseSequencesPassedInCurrentLevel (state) {
+      state.gameState.sequencesPassedInCurrentLevel++
+    },
+    resetSequencesPassedInCurrentLevel (state) {
+      state.gameState.sequencesPassedInCurrentLevel = 0
     }
   },
   getters: {
@@ -205,6 +216,7 @@ export default new Vuex.Store({
       // This is absolute garbage but really can't think of anything else
       // if someone comes up with an elegant sollution for this I will
       // buy them dinner & beers for 1 night - Will Willems
+      console.log('setsynthtoGoal')
       synth.delay.state.device.delayTime.value = state.gameState.goal.delay.delayTime
       synth.delay.state.device.feedback.value = state.gameState.goal.delay.feedback
       synth.delay.state.device.wet.value = state.gameState.goal.delay.wet
@@ -216,7 +228,7 @@ export default new Vuex.Store({
       synth.filter.state.device.type = state.gameState.goal.filter.type
       synth.filter.state.device.Q.value = state.gameState.goal.filter.setQ
       synth.lfo.state.device.frequency.value = state.gameState.goal.lfo.frequency
-      synth.lfo.state.device.max = state.gameState.goal.lfo.max
+      synth.lfo.state.device.max = state.gameState.goal.lfo.amount
       synth.lfo.state.device.type = state.gameState.goal.lfo.type
       synth.oscillator.state.device.frequency.value = state.gameState.goal.oscillator.frequency
       synth.oscillator.state.device.type = state.gameState.goal.oscillator.typeOsc
@@ -224,9 +236,44 @@ export default new Vuex.Store({
       synth.reverb.state.device.wet.value = state.gameState.goal.reverb.wet
       synth.reverb.state.device.roomSize.value = state.gameState.goal.reverb.roomSize
     },
+    setSynthToAudioParameters ({state}, synth) {
+      // This is absolute garbage but really can't think of anything else
+      // if someone comes up with an elegant sollution for this I will
+      // buy them dinner & beers for 1 night - Will Willems
+      console.log('setsynthtoaudioparams')
+      synth.delay.state.device.delayTime.value = state.audioParameters.delay.delayTime
+      synth.delay.state.device.feedback.value = state.audioParameters.delay.feedback
+      synth.delay.state.device.wet.value = state.audioParameters.delay.wet
+      synth.envelope.state.device.attack = state.audioParameters.envelope.attack
+      synth.envelope.state.device.decay = state.audioParameters.envelope.decay
+      synth.envelope.state.device.sustain = state.audioParameters.envelope.sustain
+      synth.envelope.state.device.release = state.audioParameters.envelope.release
+      synth.filter.state.device.frequency.value = state.audioParameters.filter.cutOffFreq
+      synth.filter.state.device.type = state.audioParameters.filter.type
+      synth.filter.state.device.Q.value = state.audioParameters.filter.setQ
+      synth.lfo.state.device.frequency.value = state.audioParameters.lfo.frequency
+      synth.lfo.state.device.max = state.audioParameters.lfo.amount
+      synth.lfo.state.device.type = state.audioParameters.lfo.type
+      synth.oscillator.state.device.frequency.value = state.audioParameters.oscillator.frequency
+      synth.oscillator.state.device.type = state.audioParameters.oscillator.typeOsc
+      synth.oscillator.state.device.detune.value = state.audioParameters.oscillator.detune
+      synth.reverb.state.device.wet.value = state.audioParameters.reverb.wet
+      synth.reverb.state.device.roomSize.value = state.audioParameters.reverb.roomSize
+    },
     setLevel ({state, commit}, {levelNumber, knobsAvailable}) {
       commit('setLevelNumber', levelNumber)
       commit('setKnobsAvailable', knobsAvailable)
+    },
+    startNewLevel ({state, commit, dispatch}, {levelNumber, knobsAvailable}) {
+      commit('startGame')
+    },
+    levelFinished ({state, commit}, {timeLeft, knobsAvailable}) {
+      commit('resetSequencesPassedInCurrentLevel')
+
+    },
+    gameOver ({state, commit}, {}) {
+      commit('resetSequencesPassedInCurrentLevel')
+
     }
   }
 })

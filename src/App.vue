@@ -1,7 +1,8 @@
 <template>
   <div id="app">
     <start-screen v-if="isStartgame==true"
-    @start="start"/>
+    @start="start"
+    @create="startCreateMode"/>
     <success-overlay v-if="isOverlayed==true"
     @next="next"/>
     <!-- <div id="nav">
@@ -13,6 +14,7 @@
 </template>
 
 <script>
+import { mapState, mapGetters } from 'vuex'
 import random from 'lodash/random'
 import times from 'lodash/times'
 import audio from '@/audio'
@@ -25,7 +27,8 @@ export default {
   data () {
     return {
       isOverlayed: false,
-      isStartgame: true
+      isStartgame: true,
+      loop: null
     }
   },
   components: {
@@ -33,72 +36,10 @@ export default {
     StartScreen
   },
   created () {
-    this.$store.dispatch('setLevel', {
-      levelNumber: 0,
-      knobsAvailable: {
-        oscillator: {
-          frequency: false,
-          typeOsc: true,
-          detune: false
-          // phase: 0
-        },
-        filter: {
-          cutOffFreq: false,
-          type: true,
-          setQ: false,
-          // gain: 50
-        },
-        envelope: {
-          attack: false,
-          decay: true,
-          sustain: false,
-          release: false
-        },
-        lfo: {
-          frequency: false,
-          type: true,
-          amount: false
-        },
-        delay: {
-          delayTime: false,
-          feedback: false,
-          wet: true
-        },
-        reverb: {
-          roomSize: false,
-          wet: true
-        }
-      }
-    })
-    const masterBus = new audio.state.Tone.CrossFade(0.5)
-    masterBus.toMaster()
-    // initialize the synth
-    audio.init().connect(masterBus, 0, 0)
-    // audio.goalMirrorInstance.init().connect(masterBus, 0, 1)
-    // create loop wich sequences 4 notes
-    const loop = audio.setMainLoop({
-      noteArray: times(4).map(i => random(-12, 12)),
-      subdivision: '4n'
-    }, (time, note) => {
-      if (this.isOverlayed) {audio.playKick()};
-      audio.playNote(note)
-      // audio.goalMirrorInstance.playNote(note)
-      // audio.playNote(Math.round(12 * Math.random())) // let's have some fun
-    })
-    // set BPM
-    audio.setBpm(SYNTH_BPM)
-    // audio.goalMirrorInstance.setBpm(SYNTH_BPM)
-    // start tone general
-    audio.start()
-    // audio.goalMirrorInstance.start()
-    // start loop
-    loop.start()
-    // set goal synth to goal
-    // this.$store.dispatch('setSynthToGoal', audio.goalMirrorInstance)
-
+    this.init()
     window.randomizeGoal = () => {
       this.$store.dispatch('randomizGoalParameters')
-        .then() //() => this.$store.dispatch('setSynthToGoal', audio.goalMirrorInstance))
+        .then()
     }
     window.randomizeParams = () => {
       this.$store.dispatch('randomizeAudioParameters')
@@ -114,11 +55,72 @@ export default {
     })
   },
   computed: {
-    allParametersMatchGoal () {
-      return this.$store.getters.allParametersMatchGoal
-    }
+    ...mapState({
+      sequencesPassedInCurrentLevel: state => state.gameState.sequencesPassedInCurrentLevel,
+    }),
+    ...mapGetters({
+      allParametersMatchGoal: 'allParametersMatchGoal',
+    })
   },
   methods: {
+    init () {
+      this.$store.dispatch('setLevel', {
+        levelNumber: 0,
+        knobsAvailable: {
+          oscillator: {
+            frequency: false,
+            typeOsc: true,
+            detune: false
+            // phase: 0
+          },
+          filter: {
+            cutOffFreq: false,
+            type: true,
+            setQ: false,
+            // gain: 50
+          },
+          envelope: {
+            attack: false,
+            decay: true,
+            sustain: false,
+            release: false
+          },
+          lfo: {
+            frequency: false,
+            type: true,
+            amount: false
+          },
+          delay: {
+            delayTime: false,
+            feedback: false,
+            wet: true
+          },
+          reverb: {
+            roomSize: false,
+            wet: true
+          }
+        }
+      })
+      // initialize the synth
+      audio.init().toMaster()
+      // create loop wich sequences 4 notes
+      const randomLoop = times(16).map(i => random(-12, 12))
+      this.loop = audio.setMainLoop({
+        noteArray: times(16),
+        subdivision: '8n'
+      }, (time, i) => { // i here is just a note from the note array define above
+        if (this.isOverlayed) audio.playKick()
+        audio.playNote(randomLoop[i], {})
+
+        if (i === 15) this.$store.commit('increaseSequencesPassedInCurrentLevel')
+      })
+      // set BPM
+      audio.setBpm(SYNTH_BPM)
+      // start tone general
+      audio.start()
+      // start loop
+      //
+    },
     displaySuccesMessage () {
       this.isOverlayed = true
       this.$store.commit('stopGame')
@@ -162,7 +164,14 @@ export default {
     },
     start(){
       this.isStartgame=false
-      this.$store.commit('startGame')
+      this.$store.dispatch('setSynthToGoal', audio)
+      this.loop.start() // move start overlay to another route
+      // start game & start timer triggered in sequences passed watcher
+    },
+    startCreateMode(){
+      this.isStartgame=false
+      // this.$store.commit('startGame')
+      this.$store.commit('setCreateMode', true)
     },
     next() {
       this.isOverlayed=false
@@ -172,6 +181,16 @@ export default {
   watch: {
     allParametersMatchGoal (val) {
       if(val) this.displaySuccesMessage()
+    },
+    sequencesPassedInCurrentLevel (val) {
+      console.log(val)
+      if(val === 2) {
+        this.init()
+        this.$store.dispatch('setSynthToAudioParameters', audio)
+        this.$store.dispatch('startNewLevel', audio)
+        this.loop.start() // move start overlay to another route
+
+      }
     }
   }
 }
