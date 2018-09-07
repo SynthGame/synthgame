@@ -58,13 +58,14 @@
           }"
     ></span>
     </h2>
-    <span class="timer" @click="startTimer">00:{{timeLeftSeconds}}</span>
+    <span class="timer" @click="startTimer">{{paddedTimeLeftString}}</span>
     <span>•</span>
   </nav>
 </template>
 
 <script>
 import { MODULE_OSCILLATOR_COLOR, MODULE_ENVELOPE_COLOR, MODULE_FILTER_COLOR, MODULE_DELAY_COLOR, MODULE_REVERB_COLOR, MODULE_LFO_COLOR} from '@/constants'
+import padStart from 'lodash/padStart'
 
 export default {
   name: 'gameNavBar',
@@ -94,20 +95,23 @@ export default {
     filterComplete() {
       return Object.values(this.$store.getters.audioParametersMatchGoalWithMargin['filter']).every(param => param)
     },
-        envelopeComplete() {
+    envelopeComplete() {
       return Object.values(this.$store.getters.audioParametersMatchGoalWithMargin['envelope']).every(param => param)
     },
-        lfoComplete() {
+    lfoComplete() {
       return Object.values(this.$store.getters.audioParametersMatchGoalWithMargin['lfo']).every(param => param)
     },
-        delayComplete() {
+    delayComplete() {
       return Object.values(this.$store.getters.audioParametersMatchGoalWithMargin['delay']).every(param => param)
     },
-            reverbComplete() {
+    reverbComplete() {
       return Object.values(this.$store.getters.audioParametersMatchGoalWithMargin['reverb']).every(param => param)
     },
     gameLevel () {
       return this.$store.state.gameState.level
+    },
+    paddedTimeLeftString () {
+      return `00:${padStart(this.timeLeftSeconds, 2, '0')}`
     }
   },
   methods: {
