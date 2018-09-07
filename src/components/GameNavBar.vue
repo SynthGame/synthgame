@@ -120,6 +120,7 @@ export default {
   },
   methods: {
     startTimer () {
+      this.timeLeftSeconds = 30
       this.timer = this.timer || window.setInterval(() => {
         if(this.timeLeftSeconds === 0) return this.timeIsUp()
         this.timeLeftSeconds--
@@ -130,9 +131,8 @@ export default {
       this.timer = null
       this.$store.commit('addValueToScore', this.timeLeftSeconds);
       if (this.$store.state.gameState.score > this.$store.state.gameState.highScore) {
-          this.$store.commit('updateHighScore', this.$store.state.gameState.score);
-      };
-      this.timeLeftSeconds = 30
+          this.$store.commit('updateHighScore', this.$store.state.gameState.score)
+      }
     },
     timeIsUp () {
       alert('game\'s over')
