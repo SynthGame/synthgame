@@ -1,10 +1,10 @@
 <template>
   <div id="app">
-    <start-screen v-if="isStartgame==true"
-    @start="start"
+    <start-screen v-if="displayStartOverlay==true"
+    @start="startPlayMode"
     @create="startCreateMode"/>
-    <success-overlay v-if="isOverlayed==true"
-    @next="next"/>
+    <success-overlay v-if="displaySuccessOverlay==true"
+    @next="startNextLevel"/>
     <!-- <div id="nav">
       <router-link to="/">Home</router-link> |
       <router-link to="/about">About</router-link>
@@ -21,13 +21,14 @@ import audio from '@/audio'
 import SuccessOverlay from '@/components/SuccessOverlay'
 import StartScreen from '@/components/StartScreen'
 import { SYNTH_BPM } from '@/constants'
+import levels from '@/levels'
 
 export default {
   name: 'App',
   data () {
     return {
-      isOverlayed: false,
-      isStartgame: true,
+      displaySuccessOverlay: false,
+      displayStartOverlay: true,
       loop: null
     }
   },
@@ -37,14 +38,6 @@ export default {
   },
   created () {
     this.init()
-    window.randomizeGoal = () => {
-      this.$store.dispatch('randomizGoalParameters')
-        .then()
-    }
-    window.randomizeParams = () => {
-      this.$store.dispatch('randomizeAudioParameters')
-        .then(() => console.log('success'))
-    }
 
     // Pc keyboard listener (might be needed for mobile)
     document.addEventListener('keypress', (event) => {
@@ -57,6 +50,7 @@ export default {
   computed: {
     ...mapState({
       sequencesPassedInCurrentLevel: state => state.gameState.sequencesPassedInCurrentLevel,
+      level: state => state.gameState.level,
     }),
     ...mapGetters({
       allParametersMatchGoal: 'allParametersMatchGoal',
@@ -64,43 +58,6 @@ export default {
   },
   methods: {
     init () {
-      this.$store.dispatch('setLevel', {
-        levelNumber: 0,
-        knobsAvailable: {
-          oscillator: {
-            frequency: false,
-            typeOsc: true,
-            detune: false
-            // phase: 0
-          },
-          filter: {
-            cutOffFreq: false,
-            type: true,
-            setQ: false,
-            // gain: 50
-          },
-          envelope: {
-            attack: false,
-            decay: true,
-            sustain: false,
-            release: false
-          },
-          lfo: {
-            frequency: false,
-            type: true,
-            amount: false
-          },
-          delay: {
-            delayTime: false,
-            feedback: false,
-            wet: true
-          },
-          reverb: {
-            roomSize: false,
-            wet: true
-          }
-        }
-      })
       // initialize the synth
       audio.init().toMaster()
       // create loop wich sequences 4 notes
@@ -110,7 +67,7 @@ export default {
         noteArray: times(16),
         subdivision: '8n'
       }, (time, i) => { // i here is just a note from the note array define above
-        if (this.$store.state.gameState.gameIsRunning === false && kickTime === true && this.$store.state.gameState.level > 0) {
+        if (this.displaySuccessOverlay && kickTime === true && !this.displayStartOverlay) {
           audio.playKick();
           kickTime = false;
         } else {
@@ -128,73 +85,54 @@ export default {
       //
     },
     displaySuccesMessage () {
-      this.isOverlayed = true
-      this.$store.commit('stopGame')
-      this.$store.dispatch('randomizGoalParameters', {
-      oscillator: {
-        frequency: false,
-        typeOsc: true,
-        detune: false
-        // phase: 0
-      },
-      filter: {
-        cutOffFreq: false,
-        type: true,
-        setQ: false,
-        // gain: 50
-      },
-      envelope: {
-        attack: false,
-        decay: true,
-        sustain: false,
-        release: false
-      },
-      lfo: {
-        frequency: false,
-        type: true,
-        amount: false
-      },
-      delay: {
-        delayTime: false,
-        feedback: false,
-        wet: true
-      },
-      reverb: {
-        roomSize: false,
-        wet: true
-      }
-    })
-      times(4).forEach(i => {
-        audio.state.loop.at(i, random(-12, 12));
-      });
+      this.displaySuccessOverlay = true
     },
-    start(){
-      this.isStartgame=false
-      this.$store.dispatch('setSynthToGoal', audio)
-      this.loop.start() // move start overlay to another route
-      // start game & start timer triggered in sequences passed watcher
+    startPlayMode(){
+      this.displayStartOverlay = false // hide start overlay
+      this.startLevel(0)
     },
     startCreateMode(){
-      this.isStartgame=false
-      // this.$store.commit('startGame')
+      this.displayStartOverlay = false
       this.$store.commit('setCreateMode', true)
     },
-    next() {
-      this.isOverlayed=false
-      this.$store.commit('startGame')
+    startLevel(level) {
+      // disable all overlays
+      this.displaySuccessOverlay = false
+      this.displayStartOverlay = false
+      // import level config
+      const availableParameters = levels[level]
+
+      this.$store.dispatch('startNewLevel', {
+        knobsAvailable: availableParameters,
+        levelNumber: level || 0
+      })
+      this.$store.dispatch('randomizGoalParameters') // first randomize the goal
+      this.$store.dispatch('setSynthToGoal', audio) // then let the user hear it
+      // randomize loop melody
+      times(4).forEach(i => {
+        this.loop.at(i, random(-12, 12));
+      })
+      this.loop.start()
+      // rest will be done by watcher of sequencesPassedInCurrentLevel
+    },
+    startNextLevel(level) {
+      this.$store.commit('increaseLevelValue', 1)
+      this.startLevel(this.level) // TODO: should be + 1
     }
   },
   watch: {
     allParametersMatchGoal (val) {
-      if(val) this.displaySuccesMessage()
+      if(val === true) {
+        this.displaySuccesMessage()
+        this.$store.dispatch('levelDone') // would be nice to pass timeleft here but it is being passed by timer on gamestop
+      }
     },
     sequencesPassedInCurrentLevel (val) {
       if(val === 2) {
-        this.init()
+        // this.init()
+        // this.loop.start()
+        this.$store.commit('startTimerIsRunning')
         this.$store.dispatch('setSynthToAudioParameters', audio)
-        this.$store.dispatch('startNewLevel', audio)
-        this.loop.start() // move start overlay to another route
-
       }
     }
   }
@@ -229,13 +167,7 @@ export default {
 
 
 .level {
-  // display: grid;
   display: block;
-  // grid-auto-flow: column;
-  // justify-content: start;
-  // grid-auto-flow: dense;
-  // grid-template-columns: repeat(6, 1fr);
-  // grid-template-rows: repeat(5, 1fr);
   position: relative;
   background: #101010;
   background-image: url(./assets/bg.svg);
@@ -258,10 +190,9 @@ export default {
 
 .module {
   background: black;
-  min-height: calc(0.4*92vh);
+  min-height: calc(0.2*92vh);
   width: 16.67em;
   margin: 0;
-  // padding: 1.5% 2%;
   display: block;
   position: relative;
   &.empty {
@@ -274,11 +205,7 @@ export default {
     }
   }
   &.sequencer {
-    // width: 1;
-    // position: absolute;
     height: calc(92vh);
-    // bottom: 0;
-    // right: 0;
   }
   .button-wrapper {
       display: flex;

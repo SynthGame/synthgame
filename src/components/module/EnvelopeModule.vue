@@ -17,7 +17,7 @@
                 {name: 'sustainGoal', min: 1, max: 100, value: this.sustainGoal},
                 {name: 'releasevGoal', min: 1, max: 100, value: this.releaseGoal}
                 ]"/>
-    <div class="knobs">
+    <div class="knobs" v-show="timerIsRunning">
       <module-knob
         v-model="attack"
         v-if="knobsAvailable.attack"
@@ -102,6 +102,9 @@ export default {
     this.envelope = audio.envelope.state.device
   },
   computed: {
+    timerIsRunning () {
+      return this.$store.state.gameState.timerIsRunning
+    },
     dialsAreWithinMargin() {
       this.message = this.messageArray[Math.round(Math.random()*4)];
       return Object.values(this.$store.getters.audioParametersMatchGoalWithMargin[this.name])

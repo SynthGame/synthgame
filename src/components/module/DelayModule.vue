@@ -18,7 +18,7 @@
               {name:'WetGoal', min: 0, max: 100, value: this.wetGoal},
               {name:'PlaceholderGoal', min: 0, max: 100, value: 'fake'}]"
     />
-    <div class="knobs">
+    <div class="knobs" v-show="timerIsRunning">
       <!-- <module-knob
         v-model="delayTime"
         :min="0"
@@ -80,6 +80,9 @@ export default {
     this.delay = audio.delay.state.device
   },
   computed: {
+    timerIsRunning () {
+      return this.$store.state.gameState.timerIsRunning
+    },
     dialsAreWithinMargin() {
       return Object.values(this.$store.getters.audioParametersMatchGoalWithMargin[this.name])
         .every(param => param)

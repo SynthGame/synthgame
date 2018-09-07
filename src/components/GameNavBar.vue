@@ -1,7 +1,7 @@
 <template>
   <nav class="main">
     <h2 class="game_title">Tats
-    <span class="main__level">Level {{gameLevel}}</span>
+    <span class="main__level">Level {{gameLevel + 1}}</span>
     <span :class="{
                 'module__name__status-indicator': true,
                 'module__name__status-indicator--active': oscillatorComplete
@@ -58,8 +58,8 @@
           }"
     ></span>
     </h2>
-    <span v-if="gameIsRunning === false && createModeIsActive === false" class="timer">First listen to the sound we'll recreate</span>
-    <span v-else-if="gameIsRunning === true && createModeIsActive === false" class="timer">Now recreate the sound! Time left: {{paddedTimeLeftString}}</span>
+    <span v-if="timerIsRunning === false && createModeIsActive === false" class="timer">First listen to the sound we'll recreate</span>
+    <span v-else-if="timerIsRunning === true && createModeIsActive === false" class="timer">Now recreate the sound! Time left: {{paddedTimeLeftString}}</span>
     <span>•</span>
   </nav>
 </template>
@@ -87,8 +87,8 @@ export default {
     console.log(this.$store.state)
   },
   computed: {
-    gameIsRunning () {
-      return this.$store.state.gameState.gameIsRunning
+    timerIsRunning () {
+      return this.$store.state.gameState.timerIsRunning
     },
     createModeIsActive () {
       return this.$store.state.gameState.createModeIsActive
@@ -120,7 +120,7 @@ export default {
   },
   methods: {
     startTimer () {
-      this.$store.commit('addValueToLevel', 1);
+      this.timeLeftSeconds = 30
       this.timer = this.timer || window.setInterval(() => {
         if(this.timeLeftSeconds === 0) return this.timeIsUp()
         this.timeLeftSeconds--
@@ -131,17 +131,16 @@ export default {
       this.timer = null
       this.$store.commit('addValueToScore', this.timeLeftSeconds);
       if (this.$store.state.gameState.score > this.$store.state.gameState.highScore) {
-          this.$store.commit('updateHighScore', this.$store.state.gameState.score);
-      };
-      this.timeLeftSeconds = 30
+          this.$store.commit('updateHighScore', this.$store.state.gameState.score)
+      }
     },
     timeIsUp () {
-      alert('gams over')
+      alert('game\'s over')
       this.stopTimer()
     }
   },
   watch: {
-    gameIsRunning (val) {
+    timerIsRunning (val) {
       if (val) return this.startTimer()
       this.stopTimer()
     }

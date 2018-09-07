@@ -1,468 +1,467 @@
 <svg style="opacity:1;position:absolute;overflow:hidden;height:100vh;width:100vw;" viewBox="0 0 1800 899" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
-
-  <!-- <svg width="1801px" height="898px" viewBox="0 0 1801 898" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"> -->
+<!-- <svg width="1801px" height="898px" viewBox="0 0 1801 898" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"> -->
       <!-- Generator: Sketch 51.2 (57519) - http://www.bohemiancoding.com/sketch -->
       <desc>Created with Sketch.</desc>
       <defs></defs>
       <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-          <g id="SYNTHGAME_BG-04-01" transform="translate(1.000000, -81.000000)">
+          <g id="SYNTHGAME_BG-04-01-01" transform="translate(1.000000, -81.000000)">
               <g id="RACK" transform="translate(0.000000, 81.000000)">
-                  <g id="Group" transform="translate(25.000000, 0.000000)" stroke="#323232">
-                      <rect id="Rectangle-path" stroke-width="0.8772" x="1653.1" y="682.8" width="95.9" height="213.3"></rect>
-                      <circle id="Oval" stroke-width="0.784" cx="1675.6" cy="709.5" r="9.3"></circle>
-                      <circle id="Oval" stroke-width="0.784" cx="1726.4" cy="873.5" r="9.3"></circle>
-                      <rect id="Rectangle-path" stroke-width="0.8772" transform="translate(48.840500, 107.276000) rotate(-180.000000) translate(-48.840500, -107.276000) " x="0.890500008" y="0.525999997" width="95.9" height="213.5"></rect>
-                      <circle id="Oval" stroke-width="0.784" cx="74.3" cy="23.6" r="9.3"></circle>
-                      <circle id="Oval" stroke-width="0.784" cx="23.5" cy="187.7" r="9.3"></circle>
-                      <g transform="translate(120.000000, 36.000000)">
+                  <g id="Group" transform="translate(25.000000, 0.000000)">
+                      <rect id="Rectangle-path" stroke="#323232" stroke-width="0.8772" x="1653.1" y="682.8" width="95.9" height="213.3"></rect>
+                      <circle id="Oval" stroke="#323232" stroke-width="0.784" cx="1675.6" cy="709.5" r="9.3"></circle>
+                      <circle id="Oval" stroke="#323232" stroke-width="0.784" cx="1726.4" cy="873.5" r="9.3"></circle>
+                      <rect id="Rectangle-path" stroke="#323232" stroke-width="0.8772" x="0.9" y="0.5" width="95.9" height="213.5"></rect>
+                      <circle id="Oval" stroke="#323232" stroke-width="0.784" cx="74.3" cy="23.6" r="9.3"></circle>
+                      <circle id="Oval" stroke="#323232" stroke-width="0.784" cx="23.5" cy="187.7" r="9.3"></circle>
+                      <g transform="translate(120.000000, 36.000000)" stroke="#323232">
                           <g transform="translate(303.000000, 210.000000)">
-                              <g transform="translate(24.000000, 29.000000)" id="Oval" stroke-width="0.784">
-                                  <circle cx="9.1" cy="209.7" r="9.1"></circle>
-                                  <circle cx="9.1" cy="173.4" r="9.1"></circle>
-                                  <circle cx="27.2" cy="191.6" r="9.1"></circle>
-                                  <circle cx="45.4" cy="209.7" r="9.1"></circle>
-                                  <circle cx="9.1" cy="137.1" r="9.1"></circle>
-                                  <circle cx="27.2" cy="155.2" r="9.1"></circle>
-                                  <circle cx="45.4" cy="173.4" r="9.1"></circle>
-                                  <circle cx="63.6" cy="191.6" r="9.1"></circle>
-                                  <circle cx="81.7" cy="209.7" r="9.1"></circle>
-                                  <circle cx="9.1" cy="100.7" r="9.1"></circle>
-                                  <circle cx="27.2" cy="118.9" r="9.1"></circle>
-                                  <circle cx="45.4" cy="137.1" r="9.1"></circle>
-                                  <circle cx="63.6" cy="155.2" r="9.1"></circle>
-                                  <circle cx="81.7" cy="173.4" r="9.1"></circle>
-                                  <circle cx="99.9" cy="191.6" r="9.1"></circle>
-                                  <circle cx="118.1" cy="209.7" r="9.1"></circle>
-                                  <circle cx="9.1" cy="64.4" r="9.1"></circle>
-                                  <circle cx="27.2" cy="82.6" r="9.1"></circle>
-                                  <circle cx="45.4" cy="100.7" r="9.1"></circle>
-                                  <circle cx="63.6" cy="118.9" r="9.1"></circle>
-                                  <circle cx="81.7" cy="137.1" r="9.1"></circle>
-                                  <circle cx="99.9" cy="155.2" r="9.1"></circle>
-                                  <circle cx="118.1" cy="173.4" r="9.1"></circle>
-                                  <circle cx="136.3" cy="191.6" r="9.1"></circle>
-                                  <circle cx="154.4" cy="209.7" r="9.1"></circle>
-                                  <circle cx="9.1" cy="28.1" r="9.1"></circle>
-                                  <circle cx="27.2" cy="46.2" r="9.1"></circle>
-                                  <circle cx="45.4" cy="64.4" r="9.1"></circle>
-                                  <circle cx="63.6" cy="82.6" r="9.1"></circle>
-                                  <circle cx="81.7" cy="100.7" r="9.1"></circle>
-                                  <circle cx="99.9" cy="118.9" r="9.1"></circle>
-                                  <circle cx="118.1" cy="137.1" r="9.1"></circle>
-                                  <circle cx="136.3" cy="155.2" r="9.1"></circle>
-                                  <circle cx="154.4" cy="173.4" r="9.1"></circle>
-                                  <circle cx="172.6" cy="191.6" r="9.1"></circle>
-                                  <circle cx="190.8" cy="209.7" r="9.1"></circle>
-                                  <circle cx="27.2" cy="9.9" r="9.1"></circle>
-                                  <circle cx="45.4" cy="28.1" r="9.1"></circle>
-                                  <circle cx="63.6" cy="46.2" r="9.1"></circle>
-                                  <circle cx="81.7" cy="64.4" r="9.1"></circle>
-                                  <circle cx="99.9" cy="82.6" r="9.1"></circle>
-                                  <circle cx="118.1" cy="100.7" r="9.1"></circle>
-                                  <circle cx="136.3" cy="118.9" r="9.1"></circle>
-                                  <circle cx="154.4" cy="137.1" r="9.1"></circle>
-                                  <circle cx="172.6" cy="155.2" r="9.1"></circle>
-                                  <circle cx="190.8" cy="173.4" r="9.1"></circle>
-                                  <circle cx="208.9" cy="191.6" r="9.1"></circle>
-                                  <circle cx="227.1" cy="209.7" r="9.1"></circle>
-                                  <circle cx="63.6" cy="9.9" r="9.1"></circle>
-                                  <circle cx="81.7" cy="28.1" r="9.1"></circle>
-                                  <circle cx="99.9" cy="46.2" r="9.1"></circle>
-                                  <circle cx="118.1" cy="64.4" r="9.1"></circle>
-                                  <circle cx="136.3" cy="82.6" r="9.1"></circle>
-                                  <circle cx="154.4" cy="100.7" r="9.1"></circle>
-                                  <circle cx="172.6" cy="118.9" r="9.1"></circle>
-                                  <circle cx="190.8" cy="137.1" r="9.1"></circle>
-                                  <circle cx="208.9" cy="155.2" r="9.1"></circle>
-                                  <circle cx="227.1" cy="173.4" r="9.1"></circle>
-                                  <circle cx="245.3" cy="191.6" r="9.1"></circle>
-                                  <circle cx="263.4" cy="209.7" r="9.1"></circle>
-                                  <circle cx="99.9" cy="9.9" r="9.1"></circle>
-                                  <circle cx="118.1" cy="28.1" r="9.1"></circle>
-                                  <circle cx="136.3" cy="46.2" r="9.1"></circle>
-                                  <circle cx="154.4" cy="64.4" r="9.1"></circle>
-                                  <circle cx="172.6" cy="82.6" r="9.1"></circle>
-                                  <circle cx="190.8" cy="100.7" r="9.1"></circle>
-                                  <circle cx="208.9" cy="118.9" r="9.1"></circle>
-                                  <circle cx="227.1" cy="137.1" r="9.1"></circle>
-                                  <circle cx="245.3" cy="155.2" r="9.1"></circle>
-                                  <circle cx="263.4" cy="173.4" r="9.1"></circle>
-                                  <circle cx="281.6" cy="191.6" r="9.1"></circle>
-                                  <circle cx="299.8" cy="209.7" r="9.1"></circle>
-                                  <circle cx="136.3" cy="9.9" r="9.1"></circle>
-                                  <circle cx="154.4" cy="28.1" r="9.1"></circle>
-                                  <circle cx="172.6" cy="46.2" r="9.1"></circle>
-                                  <circle cx="190.8" cy="64.4" r="9.1"></circle>
-                                  <circle cx="208.9" cy="82.6" r="9.1"></circle>
-                                  <circle cx="227.1" cy="100.7" r="9.1"></circle>
-                                  <circle cx="245.3" cy="118.9" r="9.1"></circle>
-                                  <circle cx="263.4" cy="137.1" r="9.1"></circle>
-                                  <circle cx="281.6" cy="155.2" r="9.1"></circle>
-                                  <circle cx="299.8" cy="173.4" r="9.1"></circle>
-                                  <circle cx="317.9" cy="191.6" r="9.1"></circle>
-                                  <circle cx="336.1" cy="209.7" r="9.1"></circle>
-                                  <circle cx="172.6" cy="9.9" r="9.1"></circle>
-                                  <circle cx="190.8" cy="28.1" r="9.1"></circle>
-                                  <circle cx="208.9" cy="46.2" r="9.1"></circle>
-                                  <circle cx="227.1" cy="64.4" r="9.1"></circle>
-                                  <circle cx="245.3" cy="82.6" r="9.1"></circle>
-                                  <circle cx="263.4" cy="100.7" r="9.1"></circle>
-                                  <circle cx="281.6" cy="118.9" r="9.1"></circle>
-                                  <circle cx="299.8" cy="137.1" r="9.1"></circle>
-                                  <circle cx="317.9" cy="155.2" r="9.1"></circle>
-                                  <circle cx="336.1" cy="173.4" r="9.1"></circle>
-                                  <circle cx="354.3" cy="191.6" r="9.1"></circle>
-                                  <circle cx="372.4" cy="209.7" r="9.1"></circle>
-                                  <circle cx="208.9" cy="9.9" r="9.1"></circle>
-                                  <circle cx="227.1" cy="28.1" r="9.1"></circle>
-                                  <circle cx="245.3" cy="46.2" r="9.1"></circle>
-                                  <circle cx="263.4" cy="64.4" r="9.1"></circle>
-                                  <circle cx="281.6" cy="82.6" r="9.1"></circle>
-                                  <circle cx="299.8" cy="100.7" r="9.1"></circle>
-                                  <circle cx="317.9" cy="118.9" r="9.1"></circle>
-                                  <circle cx="336.1" cy="137.1" r="9.1"></circle>
-                                  <circle cx="354.3" cy="155.2" r="9.1"></circle>
-                                  <circle cx="372.4" cy="173.4" r="9.1"></circle>
-                                  <circle cx="245.3" cy="9.9" r="9.1"></circle>
-                                  <circle cx="263.4" cy="28.1" r="9.1"></circle>
-                                  <circle cx="281.6" cy="46.2" r="9.1"></circle>
-                                  <circle cx="299.8" cy="64.4" r="9.1"></circle>
-                                  <circle cx="317.9" cy="82.6" r="9.1"></circle>
-                                  <circle cx="336.1" cy="100.7" r="9.1"></circle>
-                                  <circle cx="354.3" cy="118.9" r="9.1"></circle>
-                                  <circle cx="372.4" cy="137.1" r="9.1"></circle>
-                                  <circle cx="281.6" cy="9.9" r="9.1"></circle>
-                                  <circle cx="299.8" cy="28.1" r="9.1"></circle>
-                                  <circle cx="317.9" cy="46.2" r="9.1"></circle>
-                                  <circle cx="336.1" cy="64.4" r="9.1"></circle>
-                                  <circle cx="354.3" cy="82.6" r="9.1"></circle>
-                                  <circle cx="372.4" cy="100.7" r="9.1"></circle>
-                                  <circle cx="317.9" cy="9.9" r="9.1"></circle>
-                                  <circle cx="336.1" cy="28.1" r="9.1"></circle>
-                                  <circle cx="354.3" cy="46.2" r="9.1"></circle>
-                                  <circle cx="372.4" cy="64.4" r="9.1"></circle>
-                                  <circle cx="354.3" cy="9.9" r="9.1"></circle>
-                                  <circle cx="372.4" cy="28.1" r="9.1"></circle>
-                                  <circle cx="9.1" cy="318.7" r="9.1"></circle>
-                                  <circle cx="27.2" cy="336.9" r="9.1"></circle>
-                                  <circle cx="9.1" cy="282.4" r="9.1"></circle>
-                                  <circle cx="27.2" cy="300.6" r="9.1"></circle>
-                                  <circle cx="45.4" cy="318.7" r="9.1"></circle>
-                                  <circle cx="63.6" cy="336.9" r="9.1"></circle>
-                                  <circle cx="9.1" cy="246.1" r="9.1"></circle>
-                                  <circle cx="27.2" cy="264.2" r="9.1"></circle>
-                                  <circle cx="45.4" cy="282.4" r="9.1"></circle>
-                                  <circle cx="63.6" cy="300.6" r="9.1"></circle>
-                                  <circle cx="81.7" cy="318.7" r="9.1"></circle>
-                                  <circle cx="99.9" cy="336.9" r="9.1"></circle>
-                                  <circle cx="27.2" cy="227.9" r="9.1"></circle>
-                                  <circle cx="45.4" cy="246.1" r="9.1"></circle>
-                                  <circle cx="63.6" cy="264.2" r="9.1"></circle>
-                                  <circle cx="81.7" cy="282.4" r="9.1"></circle>
-                                  <circle cx="99.9" cy="300.6" r="9.1"></circle>
-                                  <circle cx="118.1" cy="318.7" r="9.1"></circle>
-                                  <circle cx="136.3" cy="336.9" r="9.1"></circle>
-                                  <circle cx="63.6" cy="227.9" r="9.1"></circle>
-                                  <circle cx="81.7" cy="246.1" r="9.1"></circle>
-                                  <circle cx="99.9" cy="264.2" r="9.1"></circle>
-                                  <circle cx="118.1" cy="282.4" r="9.1"></circle>
-                                  <circle cx="136.3" cy="300.6" r="9.1"></circle>
-                                  <circle cx="154.4" cy="318.7" r="9.1"></circle>
-                                  <circle cx="172.6" cy="336.9" r="9.1"></circle>
-                                  <circle cx="99.9" cy="227.9" r="9.1"></circle>
-                                  <circle cx="118.1" cy="246.1" r="9.1"></circle>
-                                  <circle cx="136.3" cy="264.2" r="9.1"></circle>
-                                  <circle cx="154.4" cy="282.4" r="9.1"></circle>
-                                  <circle cx="172.6" cy="300.6" r="9.1"></circle>
-                                  <circle cx="190.8" cy="318.7" r="9.1"></circle>
-                                  <circle cx="208.9" cy="336.9" r="9.1"></circle>
-                                  <circle cx="136.3" cy="227.9" r="9.1"></circle>
-                                  <circle cx="154.4" cy="246.1" r="9.1"></circle>
-                                  <circle cx="172.6" cy="264.2" r="9.1"></circle>
-                                  <circle cx="190.8" cy="282.4" r="9.1"></circle>
-                                  <circle cx="208.9" cy="300.6" r="9.1"></circle>
-                                  <circle cx="227.1" cy="318.7" r="9.1"></circle>
-                                  <circle cx="245.3" cy="336.9" r="9.1"></circle>
-                                  <circle cx="172.6" cy="227.9" r="9.1"></circle>
-                                  <circle cx="190.8" cy="246.1" r="9.1"></circle>
-                                  <circle cx="208.9" cy="264.2" r="9.1"></circle>
-                                  <circle cx="227.1" cy="282.4" r="9.1"></circle>
-                                  <circle cx="245.3" cy="300.6" r="9.1"></circle>
-                                  <circle cx="263.4" cy="318.7" r="9.1"></circle>
-                                  <circle cx="281.6" cy="336.9" r="9.1"></circle>
-                                  <circle cx="208.9" cy="227.9" r="9.1"></circle>
-                                  <circle cx="227.1" cy="246.1" r="9.1"></circle>
-                                  <circle cx="245.3" cy="264.2" r="9.1"></circle>
-                                  <circle cx="263.4" cy="282.4" r="9.1"></circle>
-                                  <circle cx="281.6" cy="300.6" r="9.1"></circle>
-                                  <circle cx="299.8" cy="318.7" r="9.1"></circle>
-                                  <circle cx="317.9" cy="336.9" r="9.1"></circle>
-                                  <circle cx="245.3" cy="227.9" r="9.1"></circle>
-                                  <circle cx="263.4" cy="246.1" r="9.1"></circle>
-                                  <circle cx="281.6" cy="264.2" r="9.1"></circle>
-                                  <circle cx="299.8" cy="282.4" r="9.1"></circle>
-                                  <circle cx="317.9" cy="300.6" r="9.1"></circle>
-                                  <circle cx="336.1" cy="318.7" r="9.1"></circle>
-                                  <circle cx="354.3" cy="336.9" r="9.1"></circle>
-                                  <circle cx="281.6" cy="227.9" r="9.1"></circle>
-                                  <circle cx="299.8" cy="246.1" r="9.1"></circle>
-                                  <circle cx="317.9" cy="264.2" r="9.1"></circle>
-                                  <circle cx="336.1" cy="282.4" r="9.1"></circle>
-                                  <circle cx="354.3" cy="300.6" r="9.1"></circle>
-                                  <circle cx="372.4" cy="318.7" r="9.1"></circle>
-                                  <circle cx="317.9" cy="227.9" r="9.1"></circle>
-                                  <circle cx="336.1" cy="246.1" r="9.1"></circle>
-                                  <circle cx="354.3" cy="264.2" r="9.1"></circle>
-                                  <circle cx="372.4" cy="282.4" r="9.1"></circle>
-                                  <circle cx="354.3" cy="227.9" r="9.1"></circle>
-                                  <circle cx="372.4" cy="246.1" r="9.1"></circle>
-                                  <circle cx="391.3" cy="191.6" r="9.1"></circle>
-                                  <circle cx="409.5" cy="209.7" r="9.1"></circle>
-                                  <circle cx="391.3" cy="155.2" r="9.1"></circle>
-                                  <circle cx="409.5" cy="173.4" r="9.1"></circle>
-                                  <circle cx="427.6" cy="191.6" r="9.1"></circle>
-                                  <circle cx="445.8" cy="209.7" r="9.1"></circle>
-                                  <circle cx="391.3" cy="118.9" r="9.1"></circle>
-                                  <circle cx="409.5" cy="137.1" r="9.1"></circle>
-                                  <circle cx="427.6" cy="155.2" r="9.1"></circle>
-                                  <circle cx="445.8" cy="173.4" r="9.1"></circle>
-                                  <circle cx="464" cy="191.6" r="9.1"></circle>
-                                  <circle cx="482.1" cy="209.7" r="9.1"></circle>
-                                  <circle cx="391.3" cy="82.6" r="9.1"></circle>
-                                  <circle cx="409.5" cy="100.7" r="9.1"></circle>
-                                  <circle cx="427.6" cy="118.9" r="9.1"></circle>
-                                  <circle cx="445.8" cy="137.1" r="9.1"></circle>
-                                  <circle cx="464" cy="155.2" r="9.1"></circle>
-                                  <circle cx="482.1" cy="173.4" r="9.1"></circle>
-                                  <circle cx="500.3" cy="191.6" r="9.1"></circle>
-                                  <circle cx="518.5" cy="209.7" r="9.1"></circle>
-                                  <circle cx="391.3" cy="46.2" r="9.1"></circle>
-                                  <circle cx="409.5" cy="64.4" r="9.1"></circle>
-                                  <circle cx="427.6" cy="82.6" r="9.1"></circle>
-                                  <circle cx="445.8" cy="100.7" r="9.1"></circle>
-                                  <circle cx="464" cy="118.9" r="9.1"></circle>
-                                  <circle cx="482.1" cy="137.1" r="9.1"></circle>
-                                  <circle cx="500.3" cy="155.2" r="9.1"></circle>
-                                  <circle cx="518.5" cy="173.4" r="9.1"></circle>
-                                  <circle cx="536.6" cy="191.6" r="9.1"></circle>
-                                  <circle cx="554.8" cy="209.7" r="9.1"></circle>
-                                  <circle cx="391.3" cy="9.9" r="9.1"></circle>
-                                  <circle cx="409.5" cy="28.1" r="9.1"></circle>
-                                  <circle cx="427.6" cy="46.2" r="9.1"></circle>
-                                  <circle cx="445.8" cy="64.4" r="9.1"></circle>
-                                  <circle cx="464" cy="82.6" r="9.1"></circle>
-                                  <circle cx="482.1" cy="100.7" r="9.1"></circle>
-                                  <circle cx="500.3" cy="118.9" r="9.1"></circle>
-                                  <circle cx="518.5" cy="137.1" r="9.1"></circle>
-                                  <circle cx="536.6" cy="155.2" r="9.1"></circle>
-                                  <circle cx="554.8" cy="173.4" r="9.1"></circle>
-                                  <circle cx="573" cy="191.6" r="9.1"></circle>
-                                  <circle cx="591.1" cy="209.7" r="9.1"></circle>
-                                  <circle cx="427.6" cy="9.9" r="9.1"></circle>
-                                  <circle cx="445.8" cy="28.1" r="9.1"></circle>
-                                  <circle cx="464" cy="46.2" r="9.1"></circle>
-                                  <circle cx="482.1" cy="64.4" r="9.1"></circle>
-                                  <circle cx="500.3" cy="82.6" r="9.1"></circle>
-                                  <circle cx="518.5" cy="100.7" r="9.1"></circle>
-                                  <circle cx="536.6" cy="118.9" r="9.1"></circle>
-                                  <circle cx="554.8" cy="137.1" r="9.1"></circle>
-                                  <circle cx="573" cy="155.2" r="9.1"></circle>
-                                  <circle cx="591.1" cy="173.4" r="9.1"></circle>
-                                  <circle cx="609.3" cy="191.6" r="9.1"></circle>
-                                  <circle cx="627.5" cy="209.7" r="9.1"></circle>
-                                  <circle cx="464" cy="9.9" r="9.1"></circle>
-                                  <circle cx="482.1" cy="28.1" r="9.1"></circle>
-                                  <circle cx="500.3" cy="46.2" r="9.1"></circle>
-                                  <circle cx="518.5" cy="64.4" r="9.1"></circle>
-                                  <circle cx="536.6" cy="82.6" r="9.1"></circle>
-                                  <circle cx="554.8" cy="100.7" r="9.1"></circle>
-                                  <circle cx="573" cy="118.9" r="9.1"></circle>
-                                  <circle cx="591.1" cy="137.1" r="9.1"></circle>
-                                  <circle cx="609.3" cy="155.2" r="9.1"></circle>
-                                  <circle cx="627.5" cy="173.4" r="9.1"></circle>
-                                  <circle cx="645.6" cy="191.6" r="9.1"></circle>
-                                  <circle cx="663.8" cy="209.7" r="9.1"></circle>
-                                  <circle cx="500.3" cy="9.9" r="9.1"></circle>
-                                  <circle cx="518.5" cy="28.1" r="9.1"></circle>
-                                  <circle cx="536.6" cy="46.2" r="9.1"></circle>
-                                  <circle cx="554.8" cy="64.4" r="9.1"></circle>
-                                  <circle cx="573" cy="82.6" r="9.1"></circle>
-                                  <circle cx="591.1" cy="100.7" r="9.1"></circle>
-                                  <circle cx="609.3" cy="118.9" r="9.1"></circle>
-                                  <circle cx="627.5" cy="137.1" r="9.1"></circle>
-                                  <circle cx="645.6" cy="155.2" r="9.1"></circle>
-                                  <circle cx="663.8" cy="173.4" r="9.1"></circle>
-                                  <circle cx="682" cy="191.6" r="9.1"></circle>
-                                  <circle cx="700.1" cy="209.7" r="9.1"></circle>
-                                  <circle cx="536.6" cy="9.9" r="9.1"></circle>
-                                  <circle cx="554.8" cy="28.1" r="9.1"></circle>
-                                  <circle cx="573" cy="46.2" r="9.1"></circle>
-                                  <circle cx="591.1" cy="64.4" r="9.1"></circle>
-                                  <circle cx="609.3" cy="82.6" r="9.1"></circle>
-                                  <circle cx="627.5" cy="100.7" r="9.1"></circle>
-                                  <circle cx="645.6" cy="118.9" r="9.1"></circle>
-                                  <circle cx="663.8" cy="137.1" r="9.1"></circle>
-                                  <circle cx="682" cy="155.2" r="9.1"></circle>
-                                  <circle cx="700.1" cy="173.4" r="9.1"></circle>
-                                  <circle cx="718.3" cy="191.6" r="9.1"></circle>
-                                  <circle cx="736.5" cy="209.7" r="9.1"></circle>
-                                  <circle cx="573" cy="9.9" r="9.1"></circle>
-                                  <circle cx="591.1" cy="28.1" r="9.1"></circle>
-                                  <circle cx="609.3" cy="46.2" r="9.1"></circle>
-                                  <circle cx="627.5" cy="64.4" r="9.1"></circle>
-                                  <circle cx="645.6" cy="82.6" r="9.1"></circle>
-                                  <circle cx="663.8" cy="100.7" r="9.1"></circle>
-                                  <circle cx="682" cy="118.9" r="9.1"></circle>
-                                  <circle cx="700.1" cy="137.1" r="9.1"></circle>
-                                  <circle cx="718.3" cy="155.2" r="9.1"></circle>
-                                  <circle cx="736.5" cy="173.4" r="9.1"></circle>
-                                  <circle cx="609.3" cy="9.9" r="9.1"></circle>
-                                  <circle cx="627.5" cy="28.1" r="9.1"></circle>
-                                  <circle cx="645.6" cy="46.2" r="9.1"></circle>
-                                  <circle cx="663.8" cy="64.4" r="9.1"></circle>
-                                  <circle cx="682" cy="82.6" r="9.1"></circle>
-                                  <circle cx="700.1" cy="100.7" r="9.1"></circle>
-                                  <circle cx="718.3" cy="118.9" r="9.1"></circle>
-                                  <circle cx="736.5" cy="137.1" r="9.1"></circle>
-                                  <circle cx="645.6" cy="9.9" r="9.1"></circle>
-                                  <circle cx="663.8" cy="28.1" r="9.1"></circle>
-                                  <circle cx="682" cy="46.2" r="9.1"></circle>
-                                  <circle cx="700.1" cy="64.4" r="9.1"></circle>
-                                  <circle cx="718.3" cy="82.6" r="9.1"></circle>
-                                  <circle cx="736.5" cy="100.7" r="9.1"></circle>
-                                  <circle cx="682" cy="9.9" r="9.1"></circle>
-                                  <circle cx="700.1" cy="28.1" r="9.1"></circle>
-                                  <circle cx="718.3" cy="46.2" r="9.1"></circle>
-                                  <circle cx="736.5" cy="64.4" r="9.1"></circle>
-                                  <circle cx="718.3" cy="9.9" r="9.1"></circle>
-                                  <circle cx="736.5" cy="28.1" r="9.1"></circle>
-                                  <circle cx="391.3" cy="336.9" r="9.1"></circle>
-                                  <circle cx="391.3" cy="300.6" r="9.1"></circle>
-                                  <circle cx="409.5" cy="318.7" r="9.1"></circle>
-                                  <circle cx="427.6" cy="336.9" r="9.1"></circle>
-                                  <circle cx="391.3" cy="264.2" r="9.1"></circle>
-                                  <circle cx="409.5" cy="282.4" r="9.1"></circle>
-                                  <circle cx="427.6" cy="300.6" r="9.1"></circle>
-                                  <circle cx="445.8" cy="318.7" r="9.1"></circle>
-                                  <circle cx="464" cy="336.9" r="9.1"></circle>
-                                  <circle cx="391.3" cy="227.9" r="9.1"></circle>
-                                  <circle cx="409.5" cy="246.1" r="9.1"></circle>
-                                  <circle cx="427.6" cy="264.2" r="9.1"></circle>
-                                  <circle cx="445.8" cy="282.4" r="9.1"></circle>
-                                  <circle cx="464" cy="300.6" r="9.1"></circle>
-                                  <circle cx="482.1" cy="318.7" r="9.1"></circle>
-                                  <circle cx="500.3" cy="336.9" r="9.1"></circle>
-                                  <circle cx="427.6" cy="227.9" r="9.1"></circle>
-                                  <circle cx="445.8" cy="246.1" r="9.1"></circle>
-                                  <circle cx="464" cy="264.2" r="9.1"></circle>
-                                  <circle cx="482.1" cy="282.4" r="9.1"></circle>
-                                  <circle cx="500.3" cy="300.6" r="9.1"></circle>
-                                  <circle cx="518.5" cy="318.7" r="9.1"></circle>
-                                  <circle cx="536.6" cy="336.9" r="9.1"></circle>
-                                  <circle cx="464" cy="227.9" r="9.1"></circle>
-                                  <circle cx="482.1" cy="246.1" r="9.1"></circle>
-                                  <circle cx="500.3" cy="264.2" r="9.1"></circle>
-                                  <circle cx="518.5" cy="282.4" r="9.1"></circle>
-                                  <circle cx="536.6" cy="300.6" r="9.1"></circle>
-                                  <circle cx="554.8" cy="318.7" r="9.1"></circle>
-                                  <circle cx="573" cy="336.9" r="9.1"></circle>
-                                  <circle cx="500.3" cy="227.9" r="9.1"></circle>
-                                  <circle cx="518.5" cy="246.1" r="9.1"></circle>
-                                  <circle cx="536.6" cy="264.2" r="9.1"></circle>
-                                  <circle cx="554.8" cy="282.4" r="9.1"></circle>
-                                  <circle cx="573" cy="300.6" r="9.1"></circle>
-                                  <circle cx="591.1" cy="318.7" r="9.1"></circle>
-                                  <circle cx="609.3" cy="336.9" r="9.1"></circle>
-                                  <circle cx="536.6" cy="227.9" r="9.1"></circle>
-                                  <circle cx="554.8" cy="246.1" r="9.1"></circle>
-                                  <circle cx="573" cy="264.2" r="9.1"></circle>
-                                  <circle cx="591.1" cy="282.4" r="9.1"></circle>
-                                  <circle cx="609.3" cy="300.6" r="9.1"></circle>
-                                  <circle cx="627.5" cy="318.7" r="9.1"></circle>
-                                  <circle cx="645.6" cy="336.9" r="9.1"></circle>
-                                  <circle cx="573" cy="227.9" r="9.1"></circle>
-                                  <circle cx="591.1" cy="246.1" r="9.1"></circle>
-                                  <circle cx="609.3" cy="264.2" r="9.1"></circle>
-                                  <circle cx="627.5" cy="282.4" r="9.1"></circle>
-                                  <circle cx="645.6" cy="300.6" r="9.1"></circle>
-                                  <circle cx="663.8" cy="318.7" r="9.1"></circle>
-                                  <circle cx="682" cy="336.9" r="9.1"></circle>
-                                  <circle cx="609.3" cy="227.9" r="9.1"></circle>
-                                  <circle cx="627.5" cy="246.1" r="9.1"></circle>
-                                  <circle cx="645.6" cy="264.2" r="9.1"></circle>
-                                  <circle cx="663.8" cy="282.4" r="9.1"></circle>
-                                  <circle cx="682" cy="300.6" r="9.1"></circle>
-                                  <circle cx="700.1" cy="318.7" r="9.1"></circle>
-                                  <circle cx="718.3" cy="336.9" r="9.1"></circle>
-                                  <circle cx="645.6" cy="227.9" r="9.1"></circle>
-                                  <circle cx="663.8" cy="246.1" r="9.1"></circle>
-                                  <circle cx="682" cy="264.2" r="9.1"></circle>
-                                  <circle cx="700.1" cy="282.4" r="9.1"></circle>
-                                  <circle cx="718.3" cy="300.6" r="9.1"></circle>
-                                  <circle cx="736.5" cy="318.7" r="9.1"></circle>
-                                  <circle cx="682" cy="227.9" r="9.1"></circle>
-                                  <circle cx="700.1" cy="246.1" r="9.1"></circle>
-                                  <circle cx="718.3" cy="264.2" r="9.1"></circle>
-                                  <circle cx="736.5" cy="282.4" r="9.1"></circle>
-                                  <circle cx="718.3" cy="227.9" r="9.1"></circle>
-                                  <circle cx="736.5" cy="246.1" r="9.1"></circle>
-                                  <circle cx="755" cy="191.6" r="9.1"></circle>
-                                  <circle cx="773.2" cy="209.7" r="9.1"></circle>
-                                  <circle cx="755" cy="155.2" r="9.1"></circle>
-                                  <circle cx="773.2" cy="173.4" r="9.1"></circle>
-                                  <circle cx="791.4" cy="191.6" r="9.1"></circle>
-                                  <circle cx="809.5" cy="209.7" r="9.1"></circle>
-                                  <circle cx="755" cy="118.9" r="9.1"></circle>
-                                  <circle cx="773.2" cy="137.1" r="9.1"></circle>
-                                  <circle cx="791.4" cy="155.2" r="9.1"></circle>
-                                  <circle cx="809.5" cy="173.4" r="9.1"></circle>
-                                  <circle cx="827.7" cy="191.6" r="9.1"></circle>
-                                  <circle cx="845.9" cy="209.7" r="9.1"></circle>
-                                  <circle cx="755" cy="82.6" r="9.1"></circle>
-                                  <circle cx="773.2" cy="100.7" r="9.1"></circle>
-                                  <circle cx="791.4" cy="118.9" r="9.1"></circle>
-                                  <circle cx="809.5" cy="137.1" r="9.1"></circle>
-                                  <circle cx="827.7" cy="155.2" r="9.1"></circle>
-                                  <circle cx="845.9" cy="173.4" r="9.1"></circle>
-                                  <circle cx="755" cy="46.2" r="9.1"></circle>
-                                  <circle cx="773.2" cy="64.4" r="9.1"></circle>
-                                  <circle cx="791.4" cy="82.6" r="9.1"></circle>
-                                  <circle cx="809.5" cy="100.7" r="9.1"></circle>
-                                  <circle cx="827.7" cy="118.9" r="9.1"></circle>
-                                  <circle cx="845.9" cy="137.1" r="9.1"></circle>
-                                  <circle cx="755" cy="9.9" r="9.1"></circle>
-                                  <circle cx="773.2" cy="28.1" r="9.1"></circle>
-                                  <circle cx="791.4" cy="46.2" r="9.1"></circle>
-                                  <circle cx="809.5" cy="64.4" r="9.1"></circle>
-                                  <circle cx="827.7" cy="82.6" r="9.1"></circle>
-                                  <circle cx="845.9" cy="100.7" r="9.1"></circle>
-                                  <circle cx="791.4" cy="9.9" r="9.1"></circle>
-                                  <circle cx="809.5" cy="28.1" r="9.1"></circle>
-                                  <circle cx="827.7" cy="46.2" r="9.1"></circle>
-                                  <circle cx="845.9" cy="64.4" r="9.1"></circle>
-                                  <circle cx="827.7" cy="9.9" r="9.1"></circle>
-                                  <circle cx="845.9" cy="28.1" r="9.1"></circle>
-                                  <circle cx="755" cy="336.9" r="9.1"></circle>
-                                  <circle cx="755" cy="300.6" r="9.1"></circle>
-                                  <circle cx="773.2" cy="318.7" r="9.1"></circle>
-                                  <circle cx="791.4" cy="336.9" r="9.1"></circle>
-                                  <circle cx="755" cy="264.2" r="9.1"></circle>
-                                  <circle cx="773.2" cy="282.4" r="9.1"></circle>
-                                  <circle cx="791.4" cy="300.6" r="9.1"></circle>
-                                  <circle cx="809.5" cy="318.7" r="9.1"></circle>
-                                  <circle cx="827.7" cy="336.9" r="9.1"></circle>
-                                  <circle cx="755" cy="227.9" r="9.1"></circle>
-                                  <circle cx="773.2" cy="246.1" r="9.1"></circle>
-                                  <circle cx="791.4" cy="264.2" r="9.1"></circle>
-                                  <circle cx="809.5" cy="282.4" r="9.1"></circle>
-                                  <circle cx="827.7" cy="300.6" r="9.1"></circle>
-                                  <circle cx="845.9" cy="318.7" r="9.1"></circle>
-                                  <circle cx="791.4" cy="227.9" r="9.1"></circle>
-                                  <circle cx="809.5" cy="246.1" r="9.1"></circle>
-                                  <circle cx="827.7" cy="264.2" r="9.1"></circle>
-                                  <circle cx="845.9" cy="282.4" r="9.1"></circle>
-                                  <circle cx="827.7" cy="227.9" r="9.1"></circle>
-                                  <circle cx="845.9" cy="246.1" r="9.1"></circle>
+                              <g transform="translate(24.000000, 29.000000)" id="Oval">
+                                  <circle stroke-width="0.784" cx="9.1" cy="209.7" r="9.1"></circle>
+                                  <circle stroke-width="0.784" cx="9.1" cy="173.4" r="9.1"></circle>
+                                  <circle stroke-width="0.784" cx="27.2" cy="191.6" r="9.1"></circle>
+                                  <circle stroke-width="0.784019796" transform="translate(45.419850, 209.703150) rotate(-22.500428) translate(-45.419850, -209.703150) " cx="45.41985" cy="209.70315" r="9.10022977"></circle>
+                                  <circle stroke-width="0.784" cx="9.1" cy="137.1" r="9.1"></circle>
+                                  <circle stroke-width="0.784" cx="27.2" cy="155.2" r="9.1"></circle>
+                                  <circle stroke-width="0.784019796" transform="translate(45.419340, 173.402380) rotate(-22.500428) translate(-45.419340, -173.402380) " cx="45.41934" cy="173.40238" r="9.10022977"></circle>
+                                  <circle stroke-width="0.784" cx="63.6" cy="191.6" r="9.1"></circle>
+                                  <circle stroke-width="0.784" cx="81.7" cy="209.7" r="9.1"></circle>
+                                  <circle stroke-width="0.784" cx="9.1" cy="100.7" r="9.1"></circle>
+                                  <circle stroke-width="0.784" cx="27.2" cy="118.9" r="9.1"></circle>
+                                  <circle stroke-width="0.784011936" transform="translate(45.415290, 137.102180) rotate(-80.781636) translate(-45.415290, -137.102180) " cx="45.41529" cy="137.10218" r="9.10013855"></circle>
+                                  <circle stroke-width="0.784" cx="63.6" cy="155.2" r="9.1"></circle>
+                                  <circle stroke-width="0.784" cx="81.7" cy="173.4" r="9.1"></circle>
+                                  <circle stroke-width="0.784" cx="99.9" cy="191.6" r="9.1"></circle>
+                                  <circle stroke-width="0.784" cx="118.1" cy="209.7" r="9.1"></circle>
+                                  <circle stroke-width="0.784" cx="9.1" cy="64.4" r="9.1"></circle>
+                                  <circle stroke-width="0.784" cx="27.2" cy="82.6" r="9.1"></circle>
+                                  <circle stroke-width="0.784011936" transform="translate(45.414850, 100.701600) rotate(-80.781636) translate(-45.414850, -100.701600) " cx="45.41485" cy="100.7016" r="9.10013855"></circle>
+                                  <circle stroke-width="0.784" cx="63.6" cy="118.9" r="9.1"></circle>
+                                  <circle stroke-width="0.784" cx="81.7" cy="137.1" r="9.1"></circle>
+                                  <circle stroke-width="0.784" cx="99.9" cy="155.2" r="9.1"></circle>
+                                  <circle stroke-width="0.784" cx="118.1" cy="173.4" r="9.1"></circle>
+                                  <circle stroke-width="0.784" cx="136.3" cy="191.6" r="9.1"></circle>
+                                  <circle stroke-width="0.784" cx="154.4" cy="209.7" r="9.1"></circle>
+                                  <circle stroke-width="0.784" cx="9.1" cy="28.1" r="9.1"></circle>
+                                  <circle stroke-width="0.784" cx="27.2" cy="46.2" r="9.1"></circle>
+                                  <circle stroke-width="0.784011936" transform="translate(45.414420, 64.400940) rotate(-80.781636) translate(-45.414420, -64.400940) " cx="45.41442" cy="64.40094" r="9.10013855"></circle>
+                                  <circle stroke-width="0.784" cx="63.6" cy="82.6" r="9.1"></circle>
+                                  <circle stroke-width="0.784" cx="81.7" cy="100.7" r="9.1"></circle>
+                                  <circle stroke-width="0.784" cx="99.9" cy="118.9" r="9.1"></circle>
+                                  <circle stroke-width="0.784" cx="118.1" cy="137.1" r="9.1"></circle>
+                                  <circle stroke-width="0.784" cx="136.3" cy="155.2" r="9.1"></circle>
+                                  <circle stroke-width="0.784" cx="154.4" cy="173.4" r="9.1"></circle>
+                                  <circle stroke-width="0.784" cx="172.6" cy="191.6" r="9.1"></circle>
+                                  <circle stroke-width="0.784" cx="190.8" cy="209.7" r="9.1"></circle>
+                                  <circle stroke-width="0.784" cx="27.2" cy="9.9" r="9.1"></circle>
+                                  <circle stroke-width="0.784011936" transform="translate(45.413990, 28.100280) rotate(-80.781636) translate(-45.413990, -28.100280) " cx="45.41399" cy="28.10028" r="9.10013855"></circle>
+                                  <circle stroke-width="0.784" cx="63.6" cy="46.2" r="9.1"></circle>
+                                  <circle stroke-width="0.784" cx="81.7" cy="64.4" r="9.1"></circle>
+                                  <circle stroke-width="0.784" cx="99.9" cy="82.6" r="9.1"></circle>
+                                  <circle stroke-width="0.784" cx="118.1" cy="100.7" r="9.1"></circle>
+                                  <circle stroke-width="0.784" cx="136.3" cy="118.9" r="9.1"></circle>
+                                  <circle stroke-width="0.784" cx="154.4" cy="137.1" r="9.1"></circle>
+                                  <circle stroke-width="0.784" cx="172.6" cy="155.2" r="9.1"></circle>
+                                  <circle stroke-width="0.784" cx="190.8" cy="173.4" r="9.1"></circle>
+                                  <circle stroke-width="0.784" cx="208.9" cy="191.6" r="9.1"></circle>
+                                  <circle stroke-width="0.784" cx="227.1" cy="209.7" r="9.1"></circle>
+                                  <circle stroke-width="0.784" cx="63.6" cy="9.9" r="9.1"></circle>
+                                  <circle stroke-width="0.784" cx="81.7" cy="28.1" r="9.1"></circle>
+                                  <circle stroke-width="0.784" cx="99.9" cy="46.2" r="9.1"></circle>
+                                  <circle stroke-width="0.784" cx="118.1" cy="64.4" r="9.1"></circle>
+                                  <circle stroke-width="0.784" cx="136.3" cy="82.6" r="9.1"></circle>
+                                  <circle stroke-width="0.784" cx="154.4" cy="100.7" r="9.1"></circle>
+                                  <circle stroke-width="0.784" cx="172.6" cy="118.9" r="9.1"></circle>
+                                  <circle stroke-width="0.784" cx="190.8" cy="137.1" r="9.1"></circle>
+                                  <circle stroke-width="0.784" cx="208.9" cy="155.2" r="9.1"></circle>
+                                  <circle stroke-width="0.784" cx="227.1" cy="173.4" r="9.1"></circle>
+                                  <circle stroke-width="0.784" cx="245.3" cy="191.6" r="9.1"></circle>
+                                  <circle stroke-width="0.784" cx="263.4" cy="209.7" r="9.1"></circle>
+                                  <circle stroke-width="0.784" cx="99.9" cy="9.9" r="9.1"></circle>
+                                  <circle stroke-width="0.784" cx="118.1" cy="28.1" r="9.1"></circle>
+                                  <circle stroke-width="0.784" cx="136.3" cy="46.2" r="9.1"></circle>
+                                  <circle stroke-width="0.784" cx="154.4" cy="64.4" r="9.1"></circle>
+                                  <circle stroke-width="0.784" cx="172.6" cy="82.6" r="9.1"></circle>
+                                  <circle stroke-width="0.784" cx="190.8" cy="100.7" r="9.1"></circle>
+                                  <circle stroke-width="0.784" cx="208.9" cy="118.9" r="9.1"></circle>
+                                  <circle stroke-width="0.784" cx="227.1" cy="137.1" r="9.1"></circle>
+                                  <circle stroke-width="0.784" cx="245.3" cy="155.2" r="9.1"></circle>
+                                  <circle stroke-width="0.784" cx="263.4" cy="173.4" r="9.1"></circle>
+                                  <circle stroke-width="0.784" cx="281.6" cy="191.6" r="9.1"></circle>
+                                  <circle stroke-width="0.784" cx="299.8" cy="209.7" r="9.1"></circle>
+                                  <circle stroke-width="0.784" cx="136.3" cy="9.9" r="9.1"></circle>
+                                  <circle stroke-width="0.784" cx="154.4" cy="28.1" r="9.1"></circle>
+                                  <circle stroke-width="0.784" cx="172.6" cy="46.2" r="9.1"></circle>
+                                  <circle stroke-width="0.784" cx="190.8" cy="64.4" r="9.1"></circle>
+                                  <circle stroke-width="0.784" cx="208.9" cy="82.6" r="9.1"></circle>
+                                  <circle stroke-width="0.784" cx="227.1" cy="100.7" r="9.1"></circle>
+                                  <circle stroke-width="0.784" cx="245.3" cy="118.9" r="9.1"></circle>
+                                  <circle stroke-width="0.784" cx="263.4" cy="137.1" r="9.1"></circle>
+                                  <circle stroke-width="0.784" cx="281.6" cy="155.2" r="9.1"></circle>
+                                  <circle stroke-width="0.784" cx="299.8" cy="173.4" r="9.1"></circle>
+                                  <circle stroke-width="0.784" cx="317.9" cy="191.6" r="9.1"></circle>
+                                  <circle stroke-width="0.784" cx="336.1" cy="209.7" r="9.1"></circle>
+                                  <circle stroke-width="0.784" cx="172.6" cy="9.9" r="9.1"></circle>
+                                  <circle stroke-width="0.784" cx="190.8" cy="28.1" r="9.1"></circle>
+                                  <circle stroke-width="0.784" cx="208.9" cy="46.2" r="9.1"></circle>
+                                  <circle stroke-width="0.784" cx="227.1" cy="64.4" r="9.1"></circle>
+                                  <circle stroke-width="0.784" cx="245.3" cy="82.6" r="9.1"></circle>
+                                  <circle stroke-width="0.784" cx="263.4" cy="100.7" r="9.1"></circle>
+                                  <circle stroke-width="0.784" cx="281.6" cy="118.9" r="9.1"></circle>
+                                  <circle stroke-width="0.784" cx="299.8" cy="137.1" r="9.1"></circle>
+                                  <circle stroke-width="0.784" cx="317.9" cy="155.2" r="9.1"></circle>
+                                  <circle stroke-width="0.784" cx="336.1" cy="173.4" r="9.1"></circle>
+                                  <circle stroke-width="0.784" cx="354.3" cy="191.6" r="9.1"></circle>
+                                  <circle stroke-width="0.784" cx="372.4" cy="209.7" r="9.1"></circle>
+                                  <circle stroke-width="0.784" cx="208.9" cy="9.9" r="9.1"></circle>
+                                  <circle stroke-width="0.784" cx="227.1" cy="28.1" r="9.1"></circle>
+                                  <circle stroke-width="0.784" cx="245.3" cy="46.2" r="9.1"></circle>
+                                  <circle stroke-width="0.784" cx="263.4" cy="64.4" r="9.1"></circle>
+                                  <circle stroke-width="0.784" cx="281.6" cy="82.6" r="9.1"></circle>
+                                  <circle stroke-width="0.784" cx="299.8" cy="100.7" r="9.1"></circle>
+                                  <circle stroke-width="0.784" cx="317.9" cy="118.9" r="9.1"></circle>
+                                  <circle stroke-width="0.784" cx="336.1" cy="137.1" r="9.1"></circle>
+                                  <circle stroke-width="0.784" cx="354.3" cy="155.2" r="9.1"></circle>
+                                  <circle stroke-width="0.784" cx="372.4" cy="173.4" r="9.1"></circle>
+                                  <circle stroke-width="0.784" cx="245.3" cy="9.9" r="9.1"></circle>
+                                  <circle stroke-width="0.784" cx="263.4" cy="28.1" r="9.1"></circle>
+                                  <circle stroke-width="0.784" cx="281.6" cy="46.2" r="9.1"></circle>
+                                  <circle stroke-width="0.784" cx="299.8" cy="64.4" r="9.1"></circle>
+                                  <circle stroke-width="0.784" cx="317.9" cy="82.6" r="9.1"></circle>
+                                  <circle stroke-width="0.784" cx="336.1" cy="100.7" r="9.1"></circle>
+                                  <circle stroke-width="0.784" cx="354.3" cy="118.9" r="9.1"></circle>
+                                  <circle stroke-width="0.784" cx="372.4" cy="137.1" r="9.1"></circle>
+                                  <circle stroke-width="0.784" cx="281.6" cy="9.9" r="9.1"></circle>
+                                  <circle stroke-width="0.784" cx="299.8" cy="28.1" r="9.1"></circle>
+                                  <circle stroke-width="0.784" cx="317.9" cy="46.2" r="9.1"></circle>
+                                  <circle stroke-width="0.784" cx="336.1" cy="64.4" r="9.1"></circle>
+                                  <circle stroke-width="0.784" cx="354.3" cy="82.6" r="9.1"></circle>
+                                  <circle stroke-width="0.784" cx="372.4" cy="100.7" r="9.1"></circle>
+                                  <circle stroke-width="0.784" cx="317.9" cy="9.9" r="9.1"></circle>
+                                  <circle stroke-width="0.784" cx="336.1" cy="28.1" r="9.1"></circle>
+                                  <circle stroke-width="0.784" cx="354.3" cy="46.2" r="9.1"></circle>
+                                  <circle stroke-width="0.784" cx="372.4" cy="64.4" r="9.1"></circle>
+                                  <circle stroke-width="0.784" cx="354.3" cy="9.9" r="9.1"></circle>
+                                  <circle stroke-width="0.784" cx="372.4" cy="28.1" r="9.1"></circle>
+                                  <circle stroke-width="0.784" cx="9.1" cy="318.7" r="9.1"></circle>
+                                  <circle stroke-width="0.784" cx="27.2" cy="336.9" r="9.1"></circle>
+                                  <circle stroke-width="0.784" cx="9.1" cy="282.4" r="9.1"></circle>
+                                  <circle stroke-width="0.784" cx="27.2" cy="300.6" r="9.1"></circle>
+                                  <circle stroke-width="0.784019796" transform="translate(45.421650, 318.705450) rotate(-22.500428) translate(-45.421650, -318.705450) " cx="45.42165" cy="318.70545" r="9.10022977"></circle>
+                                  <circle stroke-width="0.784" cx="63.6" cy="336.9" r="9.1"></circle>
+                                  <circle stroke-width="0.784" cx="9.1" cy="246.1" r="9.1"></circle>
+                                  <circle stroke-width="0.784" cx="27.2" cy="264.2" r="9.1"></circle>
+                                  <circle stroke-width="0.784019796" transform="translate(45.421040, 282.404680) rotate(-22.500428) translate(-45.421040, -282.404680) " cx="45.42104" cy="282.40468" r="9.10022977"></circle>
+                                  <circle stroke-width="0.784" cx="63.6" cy="300.6" r="9.1"></circle>
+                                  <circle stroke-width="0.784" cx="81.7" cy="318.7" r="9.1"></circle>
+                                  <circle stroke-width="0.784" cx="99.9" cy="336.9" r="9.1"></circle>
+                                  <circle stroke-width="0.784" cx="27.2" cy="227.9" r="9.1"></circle>
+                                  <circle stroke-width="0.784019796" transform="translate(45.420530, 246.103910) rotate(-22.500428) translate(-45.420530, -246.103910) " cx="45.42053" cy="246.10391" r="9.10022977"></circle>
+                                  <circle stroke-width="0.784" cx="63.6" cy="264.2" r="9.1"></circle>
+                                  <circle stroke-width="0.784" cx="81.7" cy="282.4" r="9.1"></circle>
+                                  <circle stroke-width="0.784" cx="99.9" cy="300.6" r="9.1"></circle>
+                                  <circle stroke-width="0.784" cx="118.1" cy="318.7" r="9.1"></circle>
+                                  <circle stroke-width="0.784" cx="136.3" cy="336.9" r="9.1"></circle>
+                                  <circle stroke-width="0.784" cx="63.6" cy="227.9" r="9.1"></circle>
+                                  <circle stroke-width="0.784" cx="81.7" cy="246.1" r="9.1"></circle>
+                                  <circle stroke-width="0.784" cx="99.9" cy="264.2" r="9.1"></circle>
+                                  <circle stroke-width="0.784" cx="118.1" cy="282.4" r="9.1"></circle>
+                                  <circle stroke-width="0.784" cx="136.3" cy="300.6" r="9.1"></circle>
+                                  <circle stroke-width="0.784" cx="154.4" cy="318.7" r="9.1"></circle>
+                                  <circle stroke-width="0.784" cx="172.6" cy="336.9" r="9.1"></circle>
+                                  <circle stroke-width="0.784" cx="99.9" cy="227.9" r="9.1"></circle>
+                                  <circle stroke-width="0.784" cx="118.1" cy="246.1" r="9.1"></circle>
+                                  <circle stroke-width="0.784" cx="136.3" cy="264.2" r="9.1"></circle>
+                                  <circle stroke-width="0.784" cx="154.4" cy="282.4" r="9.1"></circle>
+                                  <circle stroke-width="0.784" cx="172.6" cy="300.6" r="9.1"></circle>
+                                  <circle stroke-width="0.784" cx="190.8" cy="318.7" r="9.1"></circle>
+                                  <circle stroke-width="0.784" cx="208.9" cy="336.9" r="9.1"></circle>
+                                  <circle stroke-width="0.784" cx="136.3" cy="227.9" r="9.1"></circle>
+                                  <circle stroke-width="0.784" cx="154.4" cy="246.1" r="9.1"></circle>
+                                  <circle stroke-width="0.784" cx="172.6" cy="264.2" r="9.1"></circle>
+                                  <circle stroke-width="0.784" cx="190.8" cy="282.4" r="9.1"></circle>
+                                  <circle stroke-width="0.784" cx="208.9" cy="300.6" r="9.1"></circle>
+                                  <circle stroke-width="0.784" cx="227.1" cy="318.7" r="9.1"></circle>
+                                  <circle stroke-width="0.784" cx="245.3" cy="336.9" r="9.1"></circle>
+                                  <circle stroke-width="0.784" cx="172.6" cy="227.9" r="9.1"></circle>
+                                  <circle stroke-width="0.784" cx="190.8" cy="246.1" r="9.1"></circle>
+                                  <circle stroke-width="0.784" cx="208.9" cy="264.2" r="9.1"></circle>
+                                  <circle stroke-width="0.784" cx="227.1" cy="282.4" r="9.1"></circle>
+                                  <circle stroke-width="0.784" cx="245.3" cy="300.6" r="9.1"></circle>
+                                  <circle stroke-width="0.784" cx="263.4" cy="318.7" r="9.1"></circle>
+                                  <circle stroke-width="0.784" cx="281.6" cy="336.9" r="9.1"></circle>
+                                  <circle stroke-width="0.784" cx="208.9" cy="227.9" r="9.1"></circle>
+                                  <circle stroke-width="0.784" cx="227.1" cy="246.1" r="9.1"></circle>
+                                  <circle stroke-width="0.784" cx="245.3" cy="264.2" r="9.1"></circle>
+                                  <circle stroke-width="0.784" cx="263.4" cy="282.4" r="9.1"></circle>
+                                  <circle stroke-width="0.784" cx="281.6" cy="300.6" r="9.1"></circle>
+                                  <circle stroke-width="0.784" cx="299.8" cy="318.7" r="9.1"></circle>
+                                  <circle stroke-width="0.784" cx="317.9" cy="336.9" r="9.1"></circle>
+                                  <circle stroke-width="0.784" cx="245.3" cy="227.9" r="9.1"></circle>
+                                  <circle stroke-width="0.784" cx="263.4" cy="246.1" r="9.1"></circle>
+                                  <circle stroke-width="0.784" cx="281.6" cy="264.2" r="9.1"></circle>
+                                  <circle stroke-width="0.784" cx="299.8" cy="282.4" r="9.1"></circle>
+                                  <circle stroke-width="0.784" cx="317.9" cy="300.6" r="9.1"></circle>
+                                  <circle stroke-width="0.784" cx="336.1" cy="318.7" r="9.1"></circle>
+                                  <circle stroke-width="0.784" cx="354.3" cy="336.9" r="9.1"></circle>
+                                  <circle stroke-width="0.784" cx="281.6" cy="227.9" r="9.1"></circle>
+                                  <circle stroke-width="0.784" cx="299.8" cy="246.1" r="9.1"></circle>
+                                  <circle stroke-width="0.784" cx="317.9" cy="264.2" r="9.1"></circle>
+                                  <circle stroke-width="0.784" cx="336.1" cy="282.4" r="9.1"></circle>
+                                  <circle stroke-width="0.784" cx="354.3" cy="300.6" r="9.1"></circle>
+                                  <circle stroke-width="0.784" cx="372.4" cy="318.7" r="9.1"></circle>
+                                  <circle stroke-width="0.784" cx="317.9" cy="227.9" r="9.1"></circle>
+                                  <circle stroke-width="0.784" cx="336.1" cy="246.1" r="9.1"></circle>
+                                  <circle stroke-width="0.784" cx="354.3" cy="264.2" r="9.1"></circle>
+                                  <circle stroke-width="0.784" cx="372.4" cy="282.4" r="9.1"></circle>
+                                  <circle stroke-width="0.784" cx="354.3" cy="227.9" r="9.1"></circle>
+                                  <circle stroke-width="0.784" cx="372.4" cy="246.1" r="9.1"></circle>
+                                  <circle stroke-width="0.784" cx="391.3" cy="191.6" r="9.1"></circle>
+                                  <circle stroke-width="0.784" cx="409.5" cy="209.7" r="9.1"></circle>
+                                  <circle stroke-width="0.784" cx="391.3" cy="155.2" r="9.1"></circle>
+                                  <circle stroke-width="0.784" cx="409.5" cy="173.4" r="9.1"></circle>
+                                  <circle stroke-width="0.784" cx="427.6" cy="191.6" r="9.1"></circle>
+                                  <circle stroke-width="0.784" cx="445.8" cy="209.7" r="9.1"></circle>
+                                  <circle stroke-width="0.784" cx="391.3" cy="118.9" r="9.1"></circle>
+                                  <circle stroke-width="0.784" cx="409.5" cy="137.1" r="9.1"></circle>
+                                  <circle stroke-width="0.784" cx="427.6" cy="155.2" r="9.1"></circle>
+                                  <circle stroke-width="0.784" cx="445.8" cy="173.4" r="9.1"></circle>
+                                  <circle stroke-width="0.784" cx="464" cy="191.6" r="9.1"></circle>
+                                  <circle stroke-width="0.784" cx="482.1" cy="209.7" r="9.1"></circle>
+                                  <circle stroke-width="0.784" cx="391.3" cy="82.6" r="9.1"></circle>
+                                  <circle stroke-width="0.784" cx="409.5" cy="100.7" r="9.1"></circle>
+                                  <circle stroke-width="0.784" cx="427.6" cy="118.9" r="9.1"></circle>
+                                  <circle stroke-width="0.784" cx="445.8" cy="137.1" r="9.1"></circle>
+                                  <circle stroke-width="0.784" cx="464" cy="155.2" r="9.1"></circle>
+                                  <circle stroke-width="0.784" cx="482.1" cy="173.4" r="9.1"></circle>
+                                  <circle stroke-width="0.784" cx="500.3" cy="191.6" r="9.1"></circle>
+                                  <circle stroke-width="0.784" cx="518.5" cy="209.7" r="9.1"></circle>
+                                  <circle stroke-width="0.784" cx="391.3" cy="46.2" r="9.1"></circle>
+                                  <circle stroke-width="0.784" cx="409.5" cy="64.4" r="9.1"></circle>
+                                  <circle stroke-width="0.784" cx="427.6" cy="82.6" r="9.1"></circle>
+                                  <circle stroke-width="0.784" cx="445.8" cy="100.7" r="9.1"></circle>
+                                  <circle stroke-width="0.784" cx="464" cy="118.9" r="9.1"></circle>
+                                  <circle stroke-width="0.784" cx="482.1" cy="137.1" r="9.1"></circle>
+                                  <circle stroke-width="0.784" cx="500.3" cy="155.2" r="9.1"></circle>
+                                  <circle stroke-width="0.784" cx="518.5" cy="173.4" r="9.1"></circle>
+                                  <circle stroke-width="0.784" cx="536.6" cy="191.6" r="9.1"></circle>
+                                  <circle stroke-width="0.784" cx="554.8" cy="209.7" r="9.1"></circle>
+                                  <circle stroke-width="0.784" cx="391.3" cy="9.9" r="9.1"></circle>
+                                  <circle stroke-width="0.784" cx="409.5" cy="28.1" r="9.1"></circle>
+                                  <circle stroke-width="0.784" cx="427.6" cy="46.2" r="9.1"></circle>
+                                  <circle stroke-width="0.784" cx="445.8" cy="64.4" r="9.1"></circle>
+                                  <circle stroke-width="0.784" cx="464" cy="82.6" r="9.1"></circle>
+                                  <circle stroke-width="0.784" cx="482.1" cy="100.7" r="9.1"></circle>
+                                  <circle stroke-width="0.784" cx="500.3" cy="118.9" r="9.1"></circle>
+                                  <circle stroke-width="0.784" cx="518.5" cy="137.1" r="9.1"></circle>
+                                  <circle stroke-width="0.784" cx="536.6" cy="155.2" r="9.1"></circle>
+                                  <circle stroke-width="0.784" cx="554.8" cy="173.4" r="9.1"></circle>
+                                  <circle stroke-width="0.784" cx="573" cy="191.6" r="9.1"></circle>
+                                  <circle stroke-width="0.784" cx="591.1" cy="209.7" r="9.1"></circle>
+                                  <circle stroke-width="0.784" cx="427.6" cy="9.9" r="9.1"></circle>
+                                  <circle stroke-width="0.784" cx="445.8" cy="28.1" r="9.1"></circle>
+                                  <circle stroke-width="0.784" cx="464" cy="46.2" r="9.1"></circle>
+                                  <circle stroke-width="0.784" cx="482.1" cy="64.4" r="9.1"></circle>
+                                  <circle stroke-width="0.784" cx="500.3" cy="82.6" r="9.1"></circle>
+                                  <circle stroke-width="0.784" cx="518.5" cy="100.7" r="9.1"></circle>
+                                  <circle stroke-width="0.784" cx="536.6" cy="118.9" r="9.1"></circle>
+                                  <circle stroke-width="0.784" cx="554.8" cy="137.1" r="9.1"></circle>
+                                  <circle stroke-width="0.784" cx="573" cy="155.2" r="9.1"></circle>
+                                  <circle stroke-width="0.784" cx="591.1" cy="173.4" r="9.1"></circle>
+                                  <circle stroke-width="0.784" cx="609.3" cy="191.6" r="9.1"></circle>
+                                  <circle stroke-width="0.784" cx="627.5" cy="209.7" r="9.1"></circle>
+                                  <circle stroke-width="0.784" cx="464" cy="9.9" r="9.1"></circle>
+                                  <circle stroke-width="0.784" cx="482.1" cy="28.1" r="9.1"></circle>
+                                  <circle stroke-width="0.784" cx="500.3" cy="46.2" r="9.1"></circle>
+                                  <circle stroke-width="0.784" cx="518.5" cy="64.4" r="9.1"></circle>
+                                  <circle stroke-width="0.784" cx="536.6" cy="82.6" r="9.1"></circle>
+                                  <circle stroke-width="0.784" cx="554.8" cy="100.7" r="9.1"></circle>
+                                  <circle stroke-width="0.784" cx="573" cy="118.9" r="9.1"></circle>
+                                  <circle stroke-width="0.784" cx="591.1" cy="137.1" r="9.1"></circle>
+                                  <circle stroke-width="0.784" cx="609.3" cy="155.2" r="9.1"></circle>
+                                  <circle stroke-width="0.784" cx="627.5" cy="173.4" r="9.1"></circle>
+                                  <circle stroke-width="0.784" cx="645.6" cy="191.6" r="9.1"></circle>
+                                  <circle stroke-width="0.784" cx="663.8" cy="209.7" r="9.1"></circle>
+                                  <circle stroke-width="0.784" cx="500.3" cy="9.9" r="9.1"></circle>
+                                  <circle stroke-width="0.784" cx="518.5" cy="28.1" r="9.1"></circle>
+                                  <circle stroke-width="0.784" cx="536.6" cy="46.2" r="9.1"></circle>
+                                  <circle stroke-width="0.784" cx="554.8" cy="64.4" r="9.1"></circle>
+                                  <circle stroke-width="0.784" cx="573" cy="82.6" r="9.1"></circle>
+                                  <circle stroke-width="0.784" cx="591.1" cy="100.7" r="9.1"></circle>
+                                  <circle stroke-width="0.784" cx="609.3" cy="118.9" r="9.1"></circle>
+                                  <circle stroke-width="0.784" cx="627.5" cy="137.1" r="9.1"></circle>
+                                  <circle stroke-width="0.784" cx="645.6" cy="155.2" r="9.1"></circle>
+                                  <circle stroke-width="0.784" cx="663.8" cy="173.4" r="9.1"></circle>
+                                  <circle stroke-width="0.784" cx="682" cy="191.6" r="9.1"></circle>
+                                  <circle stroke-width="0.784" cx="700.1" cy="209.7" r="9.1"></circle>
+                                  <circle stroke-width="0.784" cx="536.6" cy="9.9" r="9.1"></circle>
+                                  <circle stroke-width="0.784" cx="554.8" cy="28.1" r="9.1"></circle>
+                                  <circle stroke-width="0.784" cx="573" cy="46.2" r="9.1"></circle>
+                                  <circle stroke-width="0.784" cx="591.1" cy="64.4" r="9.1"></circle>
+                                  <circle stroke-width="0.784" cx="609.3" cy="82.6" r="9.1"></circle>
+                                  <circle stroke-width="0.784" cx="627.5" cy="100.7" r="9.1"></circle>
+                                  <circle stroke-width="0.784" cx="645.6" cy="118.9" r="9.1"></circle>
+                                  <circle stroke-width="0.784" cx="663.8" cy="137.1" r="9.1"></circle>
+                                  <circle stroke-width="0.784" cx="682" cy="155.2" r="9.1"></circle>
+                                  <circle stroke-width="0.784" cx="700.1" cy="173.4" r="9.1"></circle>
+                                  <circle stroke-width="0.784" cx="718.3" cy="191.6" r="9.1"></circle>
+                                  <circle stroke-width="0.784" cx="736.5" cy="209.7" r="9.1"></circle>
+                                  <circle stroke-width="0.784" cx="573" cy="9.9" r="9.1"></circle>
+                                  <circle stroke-width="0.784" cx="591.1" cy="28.1" r="9.1"></circle>
+                                  <circle stroke-width="0.784" cx="609.3" cy="46.2" r="9.1"></circle>
+                                  <circle stroke-width="0.784" cx="627.5" cy="64.4" r="9.1"></circle>
+                                  <circle stroke-width="0.784" cx="645.6" cy="82.6" r="9.1"></circle>
+                                  <circle stroke-width="0.784" cx="663.8" cy="100.7" r="9.1"></circle>
+                                  <circle stroke-width="0.784" cx="682" cy="118.9" r="9.1"></circle>
+                                  <circle stroke-width="0.784" cx="700.1" cy="137.1" r="9.1"></circle>
+                                  <circle stroke-width="0.784" cx="718.3" cy="155.2" r="9.1"></circle>
+                                  <circle stroke-width="0.784" cx="736.5" cy="173.4" r="9.1"></circle>
+                                  <circle stroke-width="0.784" cx="609.3" cy="9.9" r="9.1"></circle>
+                                  <circle stroke-width="0.784" cx="627.5" cy="28.1" r="9.1"></circle>
+                                  <circle stroke-width="0.784" cx="645.6" cy="46.2" r="9.1"></circle>
+                                  <circle stroke-width="0.784" cx="663.8" cy="64.4" r="9.1"></circle>
+                                  <circle stroke-width="0.784" cx="682" cy="82.6" r="9.1"></circle>
+                                  <circle stroke-width="0.784" cx="700.1" cy="100.7" r="9.1"></circle>
+                                  <circle stroke-width="0.784" cx="718.3" cy="118.9" r="9.1"></circle>
+                                  <circle stroke-width="0.784" cx="736.5" cy="137.1" r="9.1"></circle>
+                                  <circle stroke-width="0.784" cx="645.6" cy="9.9" r="9.1"></circle>
+                                  <circle stroke-width="0.784" cx="663.8" cy="28.1" r="9.1"></circle>
+                                  <circle stroke-width="0.784" cx="682" cy="46.2" r="9.1"></circle>
+                                  <circle stroke-width="0.784" cx="700.1" cy="64.4" r="9.1"></circle>
+                                  <circle stroke-width="0.784" cx="718.3" cy="82.6" r="9.1"></circle>
+                                  <circle stroke-width="0.784" cx="736.5" cy="100.7" r="9.1"></circle>
+                                  <circle stroke-width="0.784" cx="682" cy="9.9" r="9.1"></circle>
+                                  <circle stroke-width="0.784" cx="700.1" cy="28.1" r="9.1"></circle>
+                                  <circle stroke-width="0.784" cx="718.3" cy="46.2" r="9.1"></circle>
+                                  <circle stroke-width="0.784" cx="736.5" cy="64.4" r="9.1"></circle>
+                                  <circle stroke-width="0.784" cx="718.3" cy="9.9" r="9.1"></circle>
+                                  <circle stroke-width="0.784" cx="736.5" cy="28.1" r="9.1"></circle>
+                                  <circle stroke-width="0.784" cx="391.3" cy="336.9" r="9.1"></circle>
+                                  <circle stroke-width="0.784" cx="391.3" cy="300.6" r="9.1"></circle>
+                                  <circle stroke-width="0.784" cx="409.5" cy="318.7" r="9.1"></circle>
+                                  <circle stroke-width="0.784" cx="427.6" cy="336.9" r="9.1"></circle>
+                                  <circle stroke-width="0.784" cx="391.3" cy="264.2" r="9.1"></circle>
+                                  <circle stroke-width="0.784" cx="409.5" cy="282.4" r="9.1"></circle>
+                                  <circle stroke-width="0.784" cx="427.6" cy="300.6" r="9.1"></circle>
+                                  <circle stroke-width="0.784" cx="445.8" cy="318.7" r="9.1"></circle>
+                                  <circle stroke-width="0.784" cx="464" cy="336.9" r="9.1"></circle>
+                                  <circle stroke-width="0.784" cx="391.3" cy="227.9" r="9.1"></circle>
+                                  <circle stroke-width="0.784" cx="409.5" cy="246.1" r="9.1"></circle>
+                                  <circle stroke-width="0.784" cx="427.6" cy="264.2" r="9.1"></circle>
+                                  <circle stroke-width="0.784" cx="445.8" cy="282.4" r="9.1"></circle>
+                                  <circle stroke-width="0.784" cx="464" cy="300.6" r="9.1"></circle>
+                                  <circle stroke-width="0.784" cx="482.1" cy="318.7" r="9.1"></circle>
+                                  <circle stroke-width="0.784" cx="500.3" cy="336.9" r="9.1"></circle>
+                                  <circle stroke-width="0.784" cx="427.6" cy="227.9" r="9.1"></circle>
+                                  <circle stroke-width="0.784" cx="445.8" cy="246.1" r="9.1"></circle>
+                                  <circle stroke-width="0.784" cx="464" cy="264.2" r="9.1"></circle>
+                                  <circle stroke-width="0.784" cx="482.1" cy="282.4" r="9.1"></circle>
+                                  <circle stroke-width="0.784" cx="500.3" cy="300.6" r="9.1"></circle>
+                                  <circle stroke-width="0.784" cx="518.5" cy="318.7" r="9.1"></circle>
+                                  <circle stroke-width="0.784" cx="536.6" cy="336.9" r="9.1"></circle>
+                                  <circle stroke-width="0.784" cx="464" cy="227.9" r="9.1"></circle>
+                                  <circle stroke-width="0.784" cx="482.1" cy="246.1" r="9.1"></circle>
+                                  <circle stroke-width="0.784" cx="500.3" cy="264.2" r="9.1"></circle>
+                                  <circle stroke-width="0.784" cx="518.5" cy="282.4" r="9.1"></circle>
+                                  <circle stroke-width="0.784" cx="536.6" cy="300.6" r="9.1"></circle>
+                                  <circle stroke-width="0.784" cx="554.8" cy="318.7" r="9.1"></circle>
+                                  <circle stroke-width="0.784" cx="573" cy="336.9" r="9.1"></circle>
+                                  <circle stroke-width="0.784" cx="500.3" cy="227.9" r="9.1"></circle>
+                                  <circle stroke-width="0.784" cx="518.5" cy="246.1" r="9.1"></circle>
+                                  <circle stroke-width="0.784" cx="536.6" cy="264.2" r="9.1"></circle>
+                                  <circle stroke-width="0.784" cx="554.8" cy="282.4" r="9.1"></circle>
+                                  <circle stroke-width="0.784" cx="573" cy="300.6" r="9.1"></circle>
+                                  <circle stroke-width="0.784" cx="591.1" cy="318.7" r="9.1"></circle>
+                                  <circle stroke-width="0.784" cx="609.3" cy="336.9" r="9.1"></circle>
+                                  <circle stroke-width="0.784" cx="536.6" cy="227.9" r="9.1"></circle>
+                                  <circle stroke-width="0.784" cx="554.8" cy="246.1" r="9.1"></circle>
+                                  <circle stroke-width="0.784" cx="573" cy="264.2" r="9.1"></circle>
+                                  <circle stroke-width="0.784" cx="591.1" cy="282.4" r="9.1"></circle>
+                                  <circle stroke-width="0.784" cx="609.3" cy="300.6" r="9.1"></circle>
+                                  <circle stroke-width="0.784" cx="627.5" cy="318.7" r="9.1"></circle>
+                                  <circle stroke-width="0.784" cx="645.6" cy="336.9" r="9.1"></circle>
+                                  <circle stroke-width="0.784" cx="573" cy="227.9" r="9.1"></circle>
+                                  <circle stroke-width="0.784" cx="591.1" cy="246.1" r="9.1"></circle>
+                                  <circle stroke-width="0.784" cx="609.3" cy="264.2" r="9.1"></circle>
+                                  <circle stroke-width="0.784" cx="627.5" cy="282.4" r="9.1"></circle>
+                                  <circle stroke-width="0.784" cx="645.6" cy="300.6" r="9.1"></circle>
+                                  <circle stroke-width="0.784" cx="663.8" cy="318.7" r="9.1"></circle>
+                                  <circle stroke-width="0.784" cx="682" cy="336.9" r="9.1"></circle>
+                                  <circle stroke-width="0.784" cx="609.3" cy="227.9" r="9.1"></circle>
+                                  <circle stroke-width="0.784" cx="627.5" cy="246.1" r="9.1"></circle>
+                                  <circle stroke-width="0.784" cx="645.6" cy="264.2" r="9.1"></circle>
+                                  <circle stroke-width="0.784" cx="663.8" cy="282.4" r="9.1"></circle>
+                                  <circle stroke-width="0.784" cx="682" cy="300.6" r="9.1"></circle>
+                                  <circle stroke-width="0.784" cx="700.1" cy="318.7" r="9.1"></circle>
+                                  <circle stroke-width="0.784" cx="718.3" cy="336.9" r="9.1"></circle>
+                                  <circle stroke-width="0.784" cx="645.6" cy="227.9" r="9.1"></circle>
+                                  <circle stroke-width="0.784" cx="663.8" cy="246.1" r="9.1"></circle>
+                                  <circle stroke-width="0.784" cx="682" cy="264.2" r="9.1"></circle>
+                                  <circle stroke-width="0.784" cx="700.1" cy="282.4" r="9.1"></circle>
+                                  <circle stroke-width="0.784" cx="718.3" cy="300.6" r="9.1"></circle>
+                                  <circle stroke-width="0.784" cx="736.5" cy="318.7" r="9.1"></circle>
+                                  <circle stroke-width="0.784" cx="682" cy="227.9" r="9.1"></circle>
+                                  <circle stroke-width="0.784" cx="700.1" cy="246.1" r="9.1"></circle>
+                                  <circle stroke-width="0.784" cx="718.3" cy="264.2" r="9.1"></circle>
+                                  <circle stroke-width="0.784" cx="736.5" cy="282.4" r="9.1"></circle>
+                                  <circle stroke-width="0.784" cx="718.3" cy="227.9" r="9.1"></circle>
+                                  <circle stroke-width="0.784" cx="736.5" cy="246.1" r="9.1"></circle>
+                                  <circle stroke-width="0.784" cx="755" cy="191.6" r="9.1"></circle>
+                                  <circle stroke-width="0.784" cx="773.2" cy="209.7" r="9.1"></circle>
+                                  <circle stroke-width="0.784" cx="755" cy="155.2" r="9.1"></circle>
+                                  <circle stroke-width="0.784" cx="773.2" cy="173.4" r="9.1"></circle>
+                                  <circle stroke-width="0.784" cx="791.4" cy="191.6" r="9.1"></circle>
+                                  <circle stroke-width="0.784" cx="809.5" cy="209.7" r="9.1"></circle>
+                                  <circle stroke-width="0.784" cx="755" cy="118.9" r="9.1"></circle>
+                                  <circle stroke-width="0.784" cx="773.2" cy="137.1" r="9.1"></circle>
+                                  <circle stroke-width="0.784" cx="791.4" cy="155.2" r="9.1"></circle>
+                                  <circle stroke-width="0.784" cx="809.5" cy="173.4" r="9.1"></circle>
+                                  <circle stroke-width="0.784" cx="827.7" cy="191.6" r="9.1"></circle>
+                                  <circle stroke-width="0.784" cx="845.9" cy="209.7" r="9.1"></circle>
+                                  <circle stroke-width="0.784" cx="755" cy="82.6" r="9.1"></circle>
+                                  <circle stroke-width="0.784" cx="773.2" cy="100.7" r="9.1"></circle>
+                                  <circle stroke-width="0.784" cx="791.4" cy="118.9" r="9.1"></circle>
+                                  <circle stroke-width="0.784" cx="809.5" cy="137.1" r="9.1"></circle>
+                                  <circle stroke-width="0.784" cx="827.7" cy="155.2" r="9.1"></circle>
+                                  <circle stroke-width="0.784" cx="845.9" cy="173.4" r="9.1"></circle>
+                                  <circle stroke-width="0.784" cx="755" cy="46.2" r="9.1"></circle>
+                                  <circle stroke-width="0.784" cx="773.2" cy="64.4" r="9.1"></circle>
+                                  <circle stroke-width="0.784" cx="791.4" cy="82.6" r="9.1"></circle>
+                                  <circle stroke-width="0.784" cx="809.5" cy="100.7" r="9.1"></circle>
+                                  <circle stroke-width="0.784" cx="827.7" cy="118.9" r="9.1"></circle>
+                                  <circle stroke-width="0.784" cx="845.9" cy="137.1" r="9.1"></circle>
+                                  <circle stroke-width="0.784" cx="755" cy="9.9" r="9.1"></circle>
+                                  <circle stroke-width="0.784" cx="773.2" cy="28.1" r="9.1"></circle>
+                                  <circle stroke-width="0.784" cx="791.4" cy="46.2" r="9.1"></circle>
+                                  <circle stroke-width="0.784" cx="809.5" cy="64.4" r="9.1"></circle>
+                                  <circle stroke-width="0.784" cx="827.7" cy="82.6" r="9.1"></circle>
+                                  <circle stroke-width="0.784" cx="845.9" cy="100.7" r="9.1"></circle>
+                                  <circle stroke-width="0.784" cx="791.4" cy="9.9" r="9.1"></circle>
+                                  <circle stroke-width="0.784" cx="809.5" cy="28.1" r="9.1"></circle>
+                                  <circle stroke-width="0.784" cx="827.7" cy="46.2" r="9.1"></circle>
+                                  <circle stroke-width="0.784" cx="845.9" cy="64.4" r="9.1"></circle>
+                                  <circle stroke-width="0.784" cx="827.7" cy="9.9" r="9.1"></circle>
+                                  <circle stroke-width="0.784" cx="845.9" cy="28.1" r="9.1"></circle>
+                                  <circle stroke-width="0.784" cx="755" cy="336.9" r="9.1"></circle>
+                                  <circle stroke-width="0.784" cx="755" cy="300.6" r="9.1"></circle>
+                                  <circle stroke-width="0.784" cx="773.2" cy="318.7" r="9.1"></circle>
+                                  <circle stroke-width="0.784" cx="791.4" cy="336.9" r="9.1"></circle>
+                                  <circle stroke-width="0.784" cx="755" cy="264.2" r="9.1"></circle>
+                                  <circle stroke-width="0.784" cx="773.2" cy="282.4" r="9.1"></circle>
+                                  <circle stroke-width="0.784" cx="791.4" cy="300.6" r="9.1"></circle>
+                                  <circle stroke-width="0.784" cx="809.5" cy="318.7" r="9.1"></circle>
+                                  <circle stroke-width="0.784" cx="827.7" cy="336.9" r="9.1"></circle>
+                                  <circle stroke-width="0.784" cx="755" cy="227.9" r="9.1"></circle>
+                                  <circle stroke-width="0.784" cx="773.2" cy="246.1" r="9.1"></circle>
+                                  <circle stroke-width="0.784" cx="791.4" cy="264.2" r="9.1"></circle>
+                                  <circle stroke-width="0.784" cx="809.5" cy="282.4" r="9.1"></circle>
+                                  <circle stroke-width="0.784" cx="827.7" cy="300.6" r="9.1"></circle>
+                                  <circle stroke-width="0.784" cx="845.9" cy="318.7" r="9.1"></circle>
+                                  <circle stroke-width="0.784" cx="791.4" cy="227.9" r="9.1"></circle>
+                                  <circle stroke-width="0.784" cx="809.5" cy="246.1" r="9.1"></circle>
+                                  <circle stroke-width="0.784" cx="827.7" cy="264.2" r="9.1"></circle>
+                                  <circle stroke-width="0.784" cx="845.9" cy="282.4" r="9.1"></circle>
+                                  <circle stroke-width="0.784" cx="827.7" cy="227.9" r="9.1"></circle>
+                                  <circle stroke-width="0.784" cx="845.9" cy="246.1" r="9.1"></circle>
                               </g>
                               <rect id="Rectangle-path" stroke-width="0.8772" x="0.1" y="0.6" width="902.8" height="403.6"></rect>
                           </g>
@@ -673,24 +672,24 @@
                           <g stroke-width="0.8772">
                               <g transform="translate(16.000000, 178.000000)">
                                   <g transform="translate(247.000000, 154.000000)" id="Rectangle-path">
-                                      <rect transform="translate(33.121600, 7.462700) rotate(90.000000) translate(-33.121600, -7.462700) " x="29.1216" y="0.61269998" width="8" height="13.7"></rect>
-                                      <rect transform="translate(13.318300, 7.515900) rotate(90.000000) translate(-13.318300, -7.515900) " x="5.96829998" y="-5.43410002" width="14.7" height="25.9"></rect>
+                                      <rect x="26.3" y="3.5" width="13.7" height="8"></rect>
+                                      <rect x="0.4" y="0.2" width="25.9" height="14.7"></rect>
                                   </g>
                                   <g transform="translate(247.000000, 190.000000)" id="Rectangle-path">
-                                      <rect transform="translate(33.156700, 7.797800) rotate(90.000000) translate(-33.156700, -7.797800) " x="29.1567" y="0.947799978" width="8" height="13.7"></rect>
-                                      <rect transform="translate(13.353500, 7.851100) rotate(90.000000) translate(-13.353500, -7.851100) " x="6.00349998" y="-5.09890002" width="14.7" height="25.9"></rect>
+                                      <rect x="26.3" y="3.8" width="13.7" height="8"></rect>
+                                      <rect x="0.4" y="0.5" width="25.9" height="14.7"></rect>
                                   </g>
                                   <g transform="translate(247.000000, 226.000000)" id="Rectangle-path">
-                                      <rect transform="translate(33.191900, 8.132900) rotate(90.000000) translate(-33.191900, -8.132900) " x="29.1919" y="1.28289998" width="8" height="13.7"></rect>
-                                      <rect transform="translate(13.388600, 8.186200) rotate(90.000000) translate(-13.388600, -8.186200) " x="6.03859998" y="-4.76380002" width="14.7" height="25.9"></rect>
+                                      <rect x="26.3" y="4.1" width="13.7" height="8"></rect>
+                                      <rect x="0.4" y="0.8" width="25.9" height="14.7"></rect>
                                   </g>
                                   <g transform="translate(247.000000, 263.000000)" id="Rectangle-path">
-                                      <rect transform="translate(33.127000, 7.468100) rotate(90.000000) translate(-33.127000, -7.468100) " x="29.127" y="0.618099975" width="8" height="13.7"></rect>
-                                      <rect transform="translate(13.323800, 7.521300) rotate(90.000000) translate(-13.323800, -7.521300) " x="5.97379998" y="-5.42870003" width="14.7" height="25.9"></rect>
+                                      <rect x="26.3" y="3.5" width="13.7" height="8"></rect>
+                                      <rect x="0.4" y="0.2" width="25.9" height="14.7"></rect>
                                   </g>
                                   <g transform="translate(247.000000, 299.000000)" id="Rectangle-path">
-                                      <rect transform="translate(33.162100, 7.803200) rotate(90.000000) translate(-33.162100, -7.803200) " x="29.1621" y="0.953199973" width="8" height="13.7"></rect>
-                                      <rect transform="translate(13.358900, 7.856500) rotate(90.000000) translate(-13.358900, -7.856500) " x="6.00889998" y="-5.09350003" width="14.7" height="25.9"></rect>
+                                      <rect x="26.3" y="3.8" width="13.7" height="8"></rect>
+                                      <rect x="0.4" y="0.5" width="25.9" height="14.7"></rect>
                                   </g>
                                   <path d="M247.4,161.5 L111.9,161.5 C111.9,161.5 83.3,163.9 83.3,132.9 C83.3,101.9 83.3,0 83.3,0" id="Shape"></path>
                                   <path d="M247.4,197.8 L91.3,197.8 C91.3,197.8 62.7,200.2 62.7,169.2 C62.7,138.2 62.7,0.1 62.7,0.1" id="Shape"></path>
@@ -698,50 +697,50 @@
                                   <path d="M247.4,270.4 L49.7,270.4 C49.7,270.4 21.1,272.8 21.1,241.8 C21.1,210.8 21.1,-5.68434189e-14 21.1,-5.68434189e-14" id="Shape"></path>
                                   <path d="M247.4,306 L28.7,306 C28.7,306 0.1,308.4 0.1,277.4 C0.1,246.4 0.1,0.1 0.1,0.1" id="Shape"></path>
                               </g>
-                              <rect id="Rectangle-path" transform="translate(57.386000, 89.345800) rotate(-180.000000) translate(-57.386000, -89.345800) " x="0.0860000093" y="0.645799991" width="114.6" height="177.4"></rect>
+                              <rect id="Rectangle-path" x="0.1" y="0.6" width="114.6" height="177.4"></rect>
                               <g transform="translate(11.000000, 20.000000)" id="Rectangle-path">
-                                  <rect transform="translate(88.494800, 15.828100) rotate(-180.000000) translate(-88.494800, -15.828100) " x="83.3448" y="0.478099989" width="10.3" height="30.7"></rect>
-                                  <rect transform="translate(67.719900, 15.828100) rotate(-180.000000) translate(-67.719900, -15.828100) " x="62.5699" y="0.47809999" width="10.3" height="30.7"></rect>
-                                  <rect transform="translate(46.945100, 15.828100) rotate(-180.000000) translate(-46.945100, -15.828100) " x="41.7951" y="0.478099991" width="10.3" height="30.7"></rect>
-                                  <rect transform="translate(26.170200, 15.828100) rotate(-180.000000) translate(-26.170200, -15.828100) " x="21.0202" y="0.478099992" width="10.3" height="30.7"></rect>
-                                  <rect transform="translate(5.395300, 15.828100) rotate(-180.000000) translate(-5.395300, -15.828100) " x="0.245300007" y="0.478099993" width="10.3" height="30.7"></rect>
+                                  <rect x="83.3" y="0.5" width="10.3" height="30.7"></rect>
+                                  <rect x="62.6" y="0.5" width="10.3" height="30.7"></rect>
+                                  <rect x="41.8" y="0.5" width="10.3" height="30.7"></rect>
+                                  <rect x="21" y="0.5" width="10.3" height="30.7"></rect>
+                                  <rect x="0.2" y="0.5" width="10.3" height="30.7"></rect>
                               </g>
                               <g transform="translate(11.000000, 65.000000)" id="Rectangle-path">
-                                  <rect transform="translate(88.494800, 15.642500) rotate(-180.000000) translate(-88.494800, -15.642500) " x="83.3448" y="0.292499989" width="10.3" height="30.7"></rect>
-                                  <rect transform="translate(67.719900, 15.642500) rotate(-180.000000) translate(-67.719900, -15.642500) " x="62.5699" y="0.29249999" width="10.3" height="30.7"></rect>
-                                  <rect transform="translate(46.945100, 15.642500) rotate(-180.000000) translate(-46.945100, -15.642500) " x="41.7951" y="0.292499991" width="10.3" height="30.7"></rect>
-                                  <rect transform="translate(26.170200, 15.642500) rotate(-180.000000) translate(-26.170200, -15.642500) " x="21.0202" y="0.292499992" width="10.3" height="30.7"></rect>
-                                  <rect transform="translate(5.395300, 15.642500) rotate(-180.000000) translate(-5.395300, -15.642500) " x="0.245300009" y="0.292499993" width="10.3" height="30.7"></rect>
+                                  <rect x="83.3" y="0.3" width="10.3" height="30.7"></rect>
+                                  <rect x="62.6" y="0.3" width="10.3" height="30.7"></rect>
+                                  <rect x="41.8" y="0.3" width="10.3" height="30.7"></rect>
+                                  <rect x="21" y="0.3" width="10.3" height="30.7"></rect>
+                                  <rect x="0.2" y="0.3" width="10.3" height="30.7"></rect>
                               </g>
                               <g transform="translate(11.000000, 110.000000)" id="Rectangle-path">
-                                  <rect transform="translate(88.494800, 15.356800) rotate(-180.000000) translate(-88.494800, -15.356800) " x="83.3448" y="0.00679998905" width="10.3" height="30.7"></rect>
-                                  <rect transform="translate(67.719900, 15.356800) rotate(-180.000000) translate(-67.719900, -15.356800) " x="62.5699" y="0.00679998998" width="10.3" height="30.7"></rect>
-                                  <rect transform="translate(46.945100, 15.356800) rotate(-180.000000) translate(-46.945100, -15.356800) " x="41.7951" y="0.00679999091" width="10.3" height="30.7"></rect>
-                                  <rect transform="translate(26.170200, 15.356800) rotate(-180.000000) translate(-26.170200, -15.356800) " x="21.0202" y="0.00679999184" width="10.3" height="30.7"></rect>
-                                  <rect transform="translate(5.395300, 15.356800) rotate(-180.000000) translate(-5.395300, -15.356800) " x="0.245300011" y="0.00679999274" width="10.3" height="30.7"></rect>
+                                  <rect x="83.3" y="0" width="10.3" height="30.7"></rect>
+                                  <rect x="62.6" y="0" width="10.3" height="30.7"></rect>
+                                  <rect x="41.8" y="0" width="10.3" height="30.7"></rect>
+                                  <rect x="21" y="0" width="10.3" height="30.7"></rect>
+                                  <rect x="0.2" y="0" width="10.3" height="30.7"></rect>
                               </g>
                           </g>
                           <g transform="translate(1205.000000, 332.000000)" stroke-width="0.8772">
                               <g>
                                   <g transform="translate(0.000000, 146.000000)" id="Rectangle-path">
-                                      <rect transform="translate(7.378700, 7.458100) rotate(-90.000000) translate(-7.378700, -7.458100) " x="3.37870006" y="0.608100027" width="8" height="13.7"></rect>
-                                      <rect transform="translate(27.181900, 7.411300) rotate(-90.000000) translate(-27.181900, -7.411300) " x="19.8319001" y="-5.53869997" width="14.7" height="25.9"></rect>
+                                      <rect x="0.5" y="3.5" width="13.7" height="8"></rect>
+                                      <rect x="14.2" y="0.1" width="25.9" height="14.7"></rect>
                                   </g>
                                   <g transform="translate(0.000000, 109.000000)" id="Rectangle-path">
-                                      <rect transform="translate(7.313900, 8.122900) rotate(-90.000000) translate(-7.313900, -8.122900) " x="3.31390006" y="1.27290003" width="8" height="13.7"></rect>
-                                      <rect transform="translate(27.117100, 8.076100) rotate(-90.000000) translate(-27.117100, -8.076100) " x="19.7671001" y="-4.87389997" width="14.7" height="25.9"></rect>
+                                      <rect x="0.5" y="4.1" width="13.7" height="8"></rect>
+                                      <rect x="14.2" y="0.7" width="25.9" height="14.7"></rect>
                                   </g>
                                   <g transform="translate(0.000000, 73.000000)" id="Rectangle-path">
-                                      <rect transform="translate(7.349000, 7.787800) rotate(-90.000000) translate(-7.349000, -7.787800) " x="3.34900006" y="0.937800024" width="8" height="13.7"></rect>
-                                      <rect transform="translate(27.152200, 7.741000) rotate(-90.000000) translate(-27.152200, -7.741000) " x="19.8022001" y="-5.20899998" width="14.7" height="25.9"></rect>
+                                      <rect x="0.5" y="3.8" width="13.7" height="8"></rect>
+                                      <rect x="14.2" y="0.4" width="25.9" height="14.7"></rect>
                                   </g>
                                   <g transform="translate(0.000000, 37.000000)" id="Rectangle-path">
-                                      <rect transform="translate(7.384100, 7.452600) rotate(-90.000000) translate(-7.384100, -7.452600) " x="3.38410006" y="0.602600022" width="8" height="13.7"></rect>
-                                      <rect transform="translate(27.187400, 7.405800) rotate(-90.000000) translate(-27.187400, -7.405800) " x="19.8374001" y="-5.54419998" width="14.7" height="25.9"></rect>
+                                      <rect x="0.5" y="3.5" width="13.7" height="8"></rect>
+                                      <rect x="14.2" y="0.1" width="25.9" height="14.7"></rect>
                                   </g>
                                   <g id="Rectangle-path">
-                                      <rect transform="translate(7.319300, 8.117500) rotate(-90.000000) translate(-7.319300, -8.117500) " x="3.31930006" y="1.26750002" width="8" height="13.7"></rect>
-                                      <rect transform="translate(27.122500, 8.070700) rotate(-90.000000) translate(-27.122500, -8.070700) " x="19.7725001" y="-4.87929998" width="14.7" height="25.9"></rect>
+                                      <rect x="0.5" y="4.1" width="13.7" height="8"></rect>
+                                      <rect x="14.2" y="0.7" width="25.9" height="14.7"></rect>
                                   </g>
                                   <path d="M40.1,153.4 L175.6,153.4 C175.6,153.4 204.2,151 204.2,182 C204.2,213 204.2,314.9 204.2,314.9" id="Shape"></path>
                                   <path d="M40.1,117.1 L196.2,117.1 C196.2,117.1 224.8,114.7 224.8,145.7 C224.8,176.7 224.8,314.8 224.8,314.8" id="Shape"></path>
@@ -773,37 +772,79 @@
                               </g>
                           </g>
                       </g>
-                      <rect id="Rectangle-path" stroke-width="0.784" x="1365.1" y="23.6" width="221.1" height="92.9"></rect>
-                      <circle id="Oval" stroke-width="0.784" cx="1433.3" cy="97.4" r="4.3"></circle>
-                      <circle id="Oval" stroke-width="0.784" cx="1408.2" cy="97.4" r="4.3"></circle>
-                      <circle id="Oval" stroke-width="0.784" cx="1383.1" cy="97.4" r="4.3"></circle>
-                      <circle id="Oval" stroke-width="0.784" cx="1568.6" cy="97.4" r="4.3"></circle>
-                      <circle id="Oval" stroke-width="0.784" cx="1543.5" cy="97.4" r="4.3"></circle>
-                      <circle id="Oval" stroke-width="0.784" cx="1518.4" cy="97.4" r="4.3"></circle>
-                      <rect id="Rectangle-path" stroke-width="0.784" x="1510.9" y="34.7" width="65.3" height="27.4"></rect>
-                      <rect id="Rectangle-path" stroke-width="0.784" x="1379.1" y="34.7" width="8" height="46.4"></rect>
-                      <rect id="Rectangle-path" stroke-width="0.784" x="1404.2" y="34.7" width="8" height="46.4"></rect>
-                      <rect id="Rectangle-path" stroke-width="0.784" x="1429.3" y="34.7" width="8" height="46.4"></rect>
-                      <path d="M486.3,0.4 L486.3,25.5 C486.3,45.3 470.1,61.5 450.3,61.5 L399,61.5 C379.2,61.5 363,45.3 363,25.5 L363,0.4" id="Shape" stroke-width="0.784"></path>
-                      <path d="M517,0.8 L517,34.6 C517,54.4 500.8,70.6 481,70.6 L429.7,70.6 C409.9,70.6 393.7,54.4 393.7,34.6 L393.7,0.8" id="Shape" stroke-width="0.784"></path>
-                      <path d="M524.8,0.3 L524.8,37.3 C524.8,59.7 506.5,78 484.1,78 L426.1,78 C403.7,78 385.4,59.7 385.4,37.3 L385.4,0.3" id="Shape" stroke-width="0.784"></path>
-                      <path d="M494.9,0.8 C494.9,0.8 494.9,28.8 494.9,50.8 C494.9,79.9 486.1,92.2 455.3,94.8 C428.4,97.1 417.4,121.8 417.4,135.3" id="Shape" stroke-width="0.784"></path>
-                      <path d="M408.1,0.5 L408.1,70.5 C408.1,70.5 406.7,109.2 444.4,109.2 C482.1,109.2 501.3,122.3 501.3,135.3" id="Shape" stroke-width="0.784"></path>
-                      <path d="M996.7,0.4 L996.7,25.5 C996.7,45.3 1012.9,61.5 1032.7,61.5 L1084,61.5 C1103.8,61.5 1120,45.3 1120,25.5 L1120,0.4" id="Shape" stroke-width="0.784"></path>
-                      <path d="M965.9,0.8 L965.9,34.6 C965.9,54.4 982.1,70.6 1001.9,70.6 L1053.2,70.6 C1073,70.6 1089.2,54.4 1089.2,34.6 L1089.2,0.8" id="Shape" stroke-width="0.784"></path>
-                      <path d="M958.1,0.3 L958.1,37.3 C958.1,59.7 976.4,78 998.8,78 L1056.8,78 C1079.2,78 1097.5,59.7 1097.5,37.3 L1097.5,0.3" id="Shape" stroke-width="0.784"></path>
-                      <path d="M988.1,0.8 C988.1,0.8 988.1,28.8 988.1,50.8 C988.1,79.9 996.9,92.2 1027.7,94.8 C1054.6,97.1 1065.6,121.8 1065.6,135.3" id="Shape" stroke-width="0.784"></path>
-                      <path d="M1074.8,0.5 L1074.8,70.5 C1074.8,70.5 1076.2,109.2 1038.5,109.2 C1000.8,109.2 981.6,122.3 981.6,135.3" id="Shape" stroke-width="0.784"></path>
-                      <path d="M1271.4,896.8 L1271.4,872.1 C1271.4,852.3 1287.6,836.1 1307.4,836.1 L1358.7,836.1 C1378.5,836.1 1394.7,852.3 1394.7,872.1 L1394.7,896.8" id="Shape" stroke-width="0.784"></path>
-                      <path d="M1240.7,896.4 L1240.7,863.1 C1240.7,843.3 1256.9,827.1 1276.7,827.1 L1328,827.1 C1347.8,827.1 1364,843.3 1364,863.1 L1364,896.4" id="Shape" stroke-width="0.784"></path>
-                      <path d="M1232.9,896.9 L1232.9,860.3 C1232.9,837.9 1251.2,819.6 1273.6,819.6 L1331.6,819.6 C1354,819.6 1372.3,837.9 1372.3,860.3 L1372.3,896.9" id="Shape" stroke-width="0.784"></path>
-                      <path d="M1262.8,896.4 C1262.8,896.4 1262.8,868.8 1262.8,846.8 C1262.8,817.7 1271.6,805.4 1302.4,802.8 C1329.3,800.5 1340.3,775.8 1340.3,762.3" id="Shape" stroke-width="0.784"></path>
-                      <path d="M1349.6,896.7 L1349.6,827.1 C1349.6,827.1 1351,788.4 1313.3,788.4 C1275.6,788.4 1256.4,775.3 1256.4,762.3" id="Shape" stroke-width="0.784"></path>
-                      <path d="M478.3,896.8 L478.3,872.1 C478.3,852.3 462.1,836.1 442.3,836.1 L391,836.1 C371.2,836.1 355,852.3 355,872.1 L355,896.8" id="Shape" stroke-width="0.784"></path>
-                      <path d="M509.1,896.4 L509.1,863.1 C509.1,843.3 492.9,827.1 473.1,827.1 L421.8,827.1 C402,827.1 385.8,843.3 385.8,863.1 L385.8,896.4" id="Shape" stroke-width="0.784"></path>
-                      <path d="M516.9,896.9 L516.9,860.3 C516.9,837.9 498.6,819.6 476.2,819.6 L418.2,819.6 C395.8,819.6 377.5,837.9 377.5,860.3 L377.5,896.9" id="Shape" stroke-width="0.784"></path>
-                      <path d="M486.9,896.4 C486.9,896.4 486.9,868.8 486.9,846.8 C486.9,817.7 478.1,805.4 447.3,802.8 C420.4,800.5 409.4,775.8 409.4,762.3" id="Shape" stroke-width="0.784"></path>
-                      <path d="M400.2,896.7 L400.2,827.1 C400.2,827.1 398.8,788.4 436.5,788.4 C474.2,788.4 493.4,775.3 493.4,762.3" id="Shape" stroke-width="0.784"></path>
+                      <rect id="Rectangle-path" stroke="#323232" stroke-width="0.784" x="1365.1" y="23.6" width="221.1" height="92.9"></rect>
+                      <circle id="Oval" stroke="#323232" stroke-width="0.784" cx="1433.3" cy="97.4" r="4.3"></circle>
+                      <circle id="Oval" stroke="#323232" stroke-width="0.784" cx="1408.2" cy="97.4" r="4.3"></circle>
+                      <circle id="Oval" stroke="#323232" stroke-width="0.784" cx="1383.1" cy="97.4" r="4.3"></circle>
+                      <circle id="Oval" stroke="#323232" stroke-width="0.784" cx="1568.6" cy="97.4" r="4.3"></circle>
+                      <circle id="Oval" stroke="#323232" stroke-width="0.784" cx="1543.5" cy="97.4" r="4.3"></circle>
+                      <circle id="Oval" stroke="#323232" stroke-width="0.784" cx="1518.4" cy="97.4" r="4.3"></circle>
+                      <rect id="Rectangle-path" stroke="#323232" stroke-width="0.784" x="1510.9" y="34.7" width="65.3" height="27.4"></rect>
+                      <rect id="Rectangle-path" stroke="#323232" stroke-width="0.784" x="1379.1" y="34.7" width="8" height="46.4"></rect>
+                      <rect id="Rectangle-path" stroke="#323232" stroke-width="0.784" x="1404.2" y="34.7" width="8" height="46.4"></rect>
+                      <rect id="Rectangle-path" stroke="#323232" stroke-width="0.784" x="1429.3" y="34.7" width="8" height="46.4"></rect>
+                      <path d="M486.3,0.4 L486.3,25.5 C486.3,45.3 470.1,61.5 450.3,61.5 L399,61.5 C379.2,61.5 363,45.3 363,25.5 L363,0.4" id="Shape" stroke="#323232" stroke-width="0.784"></path>
+                      <path d="M517,0.8 L517,34.6 C517,54.4 500.8,70.6 481,70.6 L429.7,70.6 C409.9,70.6 393.7,54.4 393.7,34.6 L393.7,0.8" id="Shape" stroke="#323232" stroke-width="0.784"></path>
+                      <path d="M524.8,0.3 L524.8,37.3 C524.8,59.7 506.5,78 484.1,78 L426.1,78 C403.7,78 385.4,59.7 385.4,37.3 L385.4,0.3" id="Shape" stroke="#323232" stroke-width="0.784"></path>
+                      <path d="M494.9,0.8 C494.9,0.8 494.9,28.8 494.9,50.8 C494.9,79.9 486.1,92.2 455.3,94.8 C428.4,97.1 417.4,121.8 417.4,135.3" id="Shape" stroke="#323232" stroke-width="0.784"></path>
+                      <path d="M408.1,0.5 L408.1,70.5 C408.1,70.5 406.7,109.2 444.4,109.2 C482.1,109.2 501.3,122.3 501.3,135.3" id="Shape" stroke="#323232" stroke-width="0.784"></path>
+                      <path d="M996.7,0.4 L996.7,25.5 C996.7,45.3 1012.9,61.5 1032.7,61.5 L1084,61.5 C1103.8,61.5 1120,45.3 1120,25.5 L1120,0.4" id="Shape" stroke="#323232" stroke-width="0.784"></path>
+                      <path d="M965.9,0.8 L965.9,34.6 C965.9,54.4 982.1,70.6 1001.9,70.6 L1053.2,70.6 C1073,70.6 1089.2,54.4 1089.2,34.6 L1089.2,0.8" id="Shape" stroke="#323232" stroke-width="0.784"></path>
+                      <path d="M958.1,0.3 L958.1,37.3 C958.1,59.7 976.4,78 998.8,78 L1056.8,78 C1079.2,78 1097.5,59.7 1097.5,37.3 L1097.5,0.3" id="Shape" stroke="#323232" stroke-width="0.784"></path>
+                      <path d="M988.1,0.8 C988.1,0.8 988.1,28.8 988.1,50.8 C988.1,79.9 996.9,92.2 1027.7,94.8 C1054.6,97.1 1065.6,121.8 1065.6,135.3" id="Shape" stroke="#323232" stroke-width="0.784"></path>
+                      <path d="M1074.8,0.5 L1074.8,70.5 C1074.8,70.5 1076.2,109.2 1038.5,109.2 C1000.8,109.2 981.6,122.3 981.6,135.3" id="Shape" stroke="#323232" stroke-width="0.784"></path>
+                      <path d="M1271.4,896.8 L1271.4,872.1 C1271.4,852.3 1287.6,836.1 1307.4,836.1 L1358.7,836.1 C1378.5,836.1 1394.7,852.3 1394.7,872.1 L1394.7,896.8" id="Shape" stroke="#323232" stroke-width="0.784"></path>
+                      <path d="M1240.7,896.4 L1240.7,863.1 C1240.7,843.3 1256.9,827.1 1276.7,827.1 L1328,827.1 C1347.8,827.1 1364,843.3 1364,863.1 L1364,896.4" id="Shape" stroke="#323232" stroke-width="0.784"></path>
+                      <path d="M1232.9,896.9 L1232.9,860.3 C1232.9,837.9 1251.2,819.6 1273.6,819.6 L1331.6,819.6 C1354,819.6 1372.3,837.9 1372.3,860.3 L1372.3,896.9" id="Shape" stroke="#323232" stroke-width="0.784"></path>
+                      <path d="M1262.8,896.4 C1262.8,896.4 1262.8,868.8 1262.8,846.8 C1262.8,817.7 1271.6,805.4 1302.4,802.8 C1329.3,800.5 1340.3,775.8 1340.3,762.3" id="Shape" stroke="#323232" stroke-width="0.784"></path>
+                      <path d="M1349.6,896.7 L1349.6,827.1 C1349.6,827.1 1351,788.4 1313.3,788.4 C1275.6,788.4 1256.4,775.3 1256.4,762.3" id="Shape" stroke="#323232" stroke-width="0.784"></path>
+                      <path d="M478.3,896.8 L478.3,872.1 C478.3,852.3 462.1,836.1 442.3,836.1 L391,836.1 C371.2,836.1 355,852.3 355,872.1 L355,896.8" id="Shape" stroke="#323232" stroke-width="0.784"></path>
+                      <path d="M509.1,896.4 L509.1,863.1 C509.1,843.3 492.9,827.1 473.1,827.1 L421.8,827.1 C402,827.1 385.8,843.3 385.8,863.1 L385.8,896.4" id="Shape" stroke="#323232" stroke-width="0.784"></path>
+                      <path d="M516.9,896.9 L516.9,860.3 C516.9,837.9 498.6,819.6 476.2,819.6 L418.2,819.6 C395.8,819.6 377.5,837.9 377.5,860.3 L377.5,896.9" id="Shape" stroke="#323232" stroke-width="0.784"></path>
+                      <path d="M486.9,896.4 C486.9,896.4 486.9,868.8 486.9,846.8 C486.9,817.7 478.1,805.4 447.3,802.8 C420.4,800.5 409.4,775.8 409.4,762.3" id="Shape" stroke="#323232" stroke-width="0.784"></path>
+                      <path d="M400.2,896.7 L400.2,827.1 C400.2,827.1 398.8,788.4 436.5,788.4 C474.2,788.4 493.4,775.3 493.4,762.3" id="Shape" stroke="#323232" stroke-width="0.784"></path>
+                      <g transform="translate(434.000000, 256.000000)" fill="#323232" fill-rule="nonzero" id="Shape">
+                          <polygon points="3.7 3.4 0.1 3.4 0.1 0.8 10.5 0.8 10.5 3.4 7 3.4 7 12.4 3.7 12.4"></polygon>
+                          <path d="M22.3,10.1 L17.4,10.1 L16.5,12.4 L13.2,12.4 L18.3,0.8 L21.5,0.8 L26.6,12.4 L23.2,12.4 L22.3,10.1 Z M21.3,7.7 L19.8,4 L18.3,7.7 L21.3,7.7 Z"></path>
+                          <polygon points="32.7 3.4 29.1 3.4 29.1 0.8 39.5 0.8 39.5 3.4 36 3.4 36 12.4 32.7 12.4"></polygon>
+                          <path d="M43.2,11.3 L44.3,8.9 C45.3,9.6 46.8,10 48.1,10 C49.5,10 50,9.6 50,9.1 C50,7.3 43.4,8.6 43.4,4.3 C43.4,2.2 45.1,0.5 48.5,0.5 C50,0.5 51.6,0.8 52.7,1.5 L51.7,3.9 C50.6,3.3 49.5,3 48.5,3 C47.1,3 46.6,3.5 46.6,4 C46.6,5.8 53.2,4.4 53.2,8.7 C53.2,10.7 51.5,12.4 48.1,12.4 C46.2,12.6 44.3,12.1 43.2,11.3 Z"></path>
+                      </g>
+                      <g transform="translate(151.000000, 189.000000)" fill="#323232" fill-rule="nonzero" id="Shape">
+                          <polygon points="3.9 3.5 0.3 3.5 0.3 0.9 10.7 0.9 10.7 3.5 7.2 3.5 7.2 12.5 3.9 12.5"></polygon>
+                          <path d="M22.5,10.2 L17.6,10.2 L16.7,12.5 L13.4,12.5 L18.5,0.9 L21.7,0.9 L26.8,12.5 L23.4,12.5 L22.5,10.2 Z M21.5,7.8 L20,4.1 L18.5,7.8 L21.5,7.8 Z"></path>
+                          <polygon points="32.9 3.5 29.3 3.5 29.3 0.9 39.7 0.9 39.7 3.5 36.2 3.5 36.2 12.5 32.9 12.5"></polygon>
+                          <path d="M43.4,11.4 L44.5,9 C45.5,9.7 47,10.1 48.3,10.1 C49.7,10.1 50.2,9.7 50.2,9.2 C50.2,7.4 43.6,8.7 43.6,4.4 C43.6,2.3 45.3,0.6 48.7,0.6 C50.2,0.6 51.8,0.9 52.9,1.6 L51.9,4 C50.8,3.4 49.7,3.1 48.7,3.1 C47.3,3.1 46.8,3.6 46.8,4.1 C46.8,5.9 53.4,4.5 53.4,8.8 C53.4,10.8 51.7,12.5 48.3,12.5 C46.4,12.7 44.5,12.2 43.4,11.4 Z"></path>
+                      </g>
+                      <g transform="translate(1544.000000, 696.000000)" fill="#323232" fill-rule="nonzero" id="Shape">
+                          <polygon points="49.5 9.8 53.1 9.8 53.1 12.4 42.7 12.4 42.7 9.8 46.2 9.8 46.2 0.8 49.5 0.8 49.5 9.8"></polygon>
+                          <path d="M31,3.1 L35.9,3.1 L36.8,0.8 L40.1,0.8 L35,12.4 L31.8,12.4 L26.7,0.8 L30.1,0.8 L31,3.1 Z M31.9,5.5 L33.4,9.2 L34.9,5.5 L31.9,5.5 Z"></path>
+                          <polygon points="20.5 9.8 24.1 9.8 24.1 12.4 13.7 12.4 13.7 9.8 17.2 9.8 17.2 0.8 20.5 0.8 20.5 9.8"></polygon>
+                          <path d="M10,1.9 L8.9,4.3 C7.9,3.6 6.4,3.2 5.1,3.2 C3.7,3.2 3.2,3.6 3.2,4.1 C3.2,5.9 9.8,4.6 9.8,8.9 C9.8,11 8.1,12.7 4.7,12.7 C3.2,12.7 1.6,12.4 0.5,11.7 L1.5,9.3 C2.6,9.9 3.7,10.2 4.7,10.2 C6.1,10.2 6.6,9.7 6.6,9.2 C6.6,7.4 2.27373675e-13,8.8 2.27373675e-13,4.5 C2.27373675e-13,2.5 1.7,0.8 5.1,0.8 C7,0.6 8.9,1.1 10,1.9 Z"></path>
+                      </g>
+                      <g transform="translate(1261.000000, 628.000000)" fill="#323232" fill-rule="nonzero" id="Shape">
+                          <polygon points="4.2 2.8 0.6 2.8 0.6 0.2 11 0.2 11 2.8 7.5 2.8 7.5 11.8 4.2 11.8 4.2 2.8"></polygon>
+                          <path d="M22.8,9.6 L17.9,9.6 L17,11.9 L13.7,11.9 L18.8,0.3 L22,0.3 L27.1,11.9 L23.7,11.9 L22.8,9.6 Z M21.8,7.1 L20.3,3.4 L18.8,7.1 L21.8,7.1 Z"></path>
+                          <polygon points="33.2 2.8 29.6 2.8 29.6 0.2 40 0.2 40 2.8 36.5 2.8 36.5 11.8 33.2 11.8 33.2 2.8"></polygon>
+                          <path d="M43.7,10.8 L44.8,8.4 C45.8,9.1 47.3,9.5 48.6,9.5 C50,9.5 50.5,9.1 50.5,8.6 C50.5,6.8 43.9,8.1 43.9,3.8 C43.9,1.7 45.6,1.13686838e-13 49,1.13686838e-13 C50.5,1.13686838e-13 52.1,0.3 53.2,1 L52.2,3.4 C51.1,2.8 50,2.5 49,2.5 C47.6,2.5 47.1,3 47.1,3.5 C47.1,5.3 53.7,3.9 53.7,8.2 C53.7,10.2 52,11.9 48.6,11.9 C46.7,12 44.8,11.5 43.7,10.8 Z"></path>
+                      </g>
+                      <g transform="translate(1516.000000, 42.000000)" fill="#323232" fill-rule="nonzero" id="Shape">
+                          <polygon points="4.5 3.2 0.9 3.2 0.9 0.6 11.3 0.6 11.3 3.2 7.8 3.2 7.8 12.2 4.5 12.2 4.5 3.2"></polygon>
+                          <path d="M23.1,9.9 L18.2,9.9 L17.3,12.2 L14,12.2 L19.1,0.6 L22.3,0.6 L27.4,12.2 L24,12.2 L23.1,9.9 Z M22.1,7.5 L20.6,3.8 L19.1,7.5 L22.1,7.5 Z"></path>
+                          <polygon points="33.5 3.2 29.9 3.2 29.9 0.6 40.3 0.6 40.3 3.2 36.8 3.2 36.8 12.2 33.5 12.2 33.5 3.2"></polygon>
+                          <path d="M44,11.2 L45.1,8.8 C46.1,9.5 47.6,9.9 48.9,9.9 C50.3,9.9 50.8,9.5 50.8,9 C50.8,7.2 44.2,8.5 44.2,4.2 C44.2,2.1 45.9,0.4 49.3,0.4 C50.8,0.4 52.4,0.7 53.5,1.4 L52.5,3.8 C51.4,3.2 50.3,2.9 49.3,2.9 C47.9,2.9 47.4,3.4 47.4,3.9 C47.4,5.7 54,4.3 54,8.6 C54,10.6 52.3,12.3 48.9,12.3 C47,12.4 45.1,11.9 44,11.2 Z"></path>
+                      </g>
+                      <g transform="translate(340.000000, 697.000000)" fill="#323232" fill-rule="nonzero" id="Shape">
+                          <polygon points="3.8 49.5 3.8 53.1 1.2 53.1 1.2 42.7 3.8 42.7 3.8 46.2 12.8 46.2 12.8 49.5"></polygon>
+                          <path d="M10.5,31 L10.5,35.9 L12.8,36.8 L12.8,40.1 L1.2,35 L1.2,31.8 L12.8,26.7 L12.8,30.1 L10.5,31 Z M8.1,31.9 L4.4,33.4 L8.1,34.9 L8.1,31.9 Z"></path>
+                          <polygon points="3.8 20.5 3.8 24.1 1.2 24.1 1.2 13.7 3.8 13.7 3.8 17.2 12.8 17.2 12.8 20.5"></polygon>
+                          <path d="M11.7,10 L9.3,8.9 C10,7.9 10.4,6.4 10.4,5.1 C10.4,3.7 10,3.2 9.5,3.2 C7.7,3.2 9,9.8 4.7,9.8 C2.6,9.8 0.9,8.1 0.9,4.7 C0.9,3.2 1.2,1.6 1.9,0.5 L4.3,1.5 C3.7,2.6 3.4,3.7 3.4,4.7 C3.4,6.1 3.9,6.6 4.4,6.6 C6.2,6.6 4.8,0 9.1,0 C11.1,0 12.8,1.7 12.8,5.1 C13,7 12.5,8.9 11.7,10 Z"></path>
+                      </g>
+                      <g transform="translate(1388.000000, 151.000000)" fill="#323232" fill-rule="nonzero" id="Shape">
+                          <polygon points="9.6 3.5 9.6 0 12.2 0 12.2 10.4 9.6 10.4 9.6 6.9 0.6 6.9 0.6 3.6 9.6 3.6"></polygon>
+                          <path d="M2.9,22.1 L2.9,17.2 L0.6,16.3 L0.6,13 L12.2,18.1 L12.2,21.3 L0.6,26.4 L0.6,23 L2.9,22.1 Z M5.3,21.1 L9,19.6 L5.3,18.1 L5.3,21.1 Z"></path>
+                          <polygon points="9.6 32.5 9.6 29 12.2 29 12.2 39.4 9.6 39.4 9.6 35.9 0.6 35.9 0.6 32.6 9.6 32.6"></polygon>
+                          <path d="M1.7,43 L4.1,44.1 C3.4,45.1 3,46.6 3,47.9 C3,49.3 3.4,49.8 3.9,49.8 C5.7,49.8 4.4,43.2 8.7,43.2 C10.8,43.2 12.5,44.9 12.5,48.3 C12.5,49.8 12.2,51.4 11.5,52.5 L9.1,51.5 C9.7,50.4 10,49.3 10,48.3 C10,46.9 9.5,46.4 9,46.4 C7.2,46.4 8.6,53 4.3,53 C2.3,53 0.6,51.3 0.6,47.9 C0.4,46 0.9,44.1 1.7,43 Z"></path>
+                      </g>
                   </g>
                   <g id="Group" stroke="#828282">
                       <g transform="translate(274.000000, 0.000000)">
