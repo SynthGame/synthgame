@@ -15,7 +15,7 @@
                       {name: 'Room Size Goal', min:1, max:100, value: this.roomSizeGoal},
                       {name: 'Dry / Wet Goal', min:1, max:100, value: this.wetGoal}
                       ]"/>
-    <div class="knobs">
+    <div class="knobs" v-show="timerIsRunning">
       <!-- <module-knob
         v-model="roomSize"
         :min="0"
@@ -73,6 +73,9 @@ export default {
     this.reverb = audio.reverb.state.device
   },
   computed: {
+    timerIsRunning () {
+      return this.$store.state.gameState.timerIsRunning
+    },
     dialsAreWithinMargin() {
       this.title = 'Done!';
       return Object.values(this.$store.getters.audioParametersMatchGoalWithMargin[this.name])

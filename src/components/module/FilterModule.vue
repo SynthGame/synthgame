@@ -17,9 +17,10 @@
                 {name: 'qGoal', min: 0, max: 100, value: setQGoal},
                 {name: 'gainGoal', min: 0, max: 100, value: gain},
                 ]"/>
-    <div class="knobs">
-      <div 
+    <div class="knobs" v-show="timerIsRunning">
+      <div
         v-if="knobsAvailable.type"
+        v-show="timerIsRunning"
         class="button-wrapper"
       >
         <module-button color="#6e01d1" shape="lowpass" :isPressed="type==='lowpass'" @click.native="type='lowpass'"/>
@@ -92,6 +93,9 @@ export default {
 
   },
   computed: {
+    timerIsRunning () {
+      return this.$store.state.gameState.timerIsRunning
+    },
     dialsAreWithinMargin() {
       this.title = 'Done!';
       return Object.values(this.$store.getters.audioParametersMatchGoalWithMargin[this.name])

@@ -167,13 +167,7 @@ export default {
 
 
 .level {
-  // display: grid;
   display: block;
-  // grid-auto-flow: column;
-  // justify-content: start;
-  // grid-auto-flow: dense;
-  // grid-template-columns: repeat(6, 1fr);
-  // grid-template-rows: repeat(5, 1fr);
   position: relative;
   background: #101010;
   background-image: url(./assets/bg.svg);
@@ -196,10 +190,9 @@ export default {
 
 .module {
   background: black;
-  min-height: calc(0.4*92vh);
+  min-height: calc(0.2*92vh);
   width: 16.67em;
   margin: 0;
-  // padding: 1.5% 2%;
   display: block;
   position: relative;
   &.empty {
@@ -212,11 +205,7 @@ export default {
     }
   }
   &.sequencer {
-    // width: 1;
-    // position: absolute;
     height: calc(92vh);
-    // bottom: 0;
-    // right: 0;
   }
   .button-wrapper {
       display: flex;
