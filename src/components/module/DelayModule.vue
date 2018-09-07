@@ -37,6 +37,7 @@
       ></module-knob> -->
       <module-knob
         v-model="wet"
+        v-if="knobsAvailable.wet"
         :min="0"
         :max="100"
         knobColor="#43bede"
@@ -98,6 +99,7 @@ export default {
       delayTimeGoal: state => state.gameState.goal.delay.delayTime,
       feedbackGoal: state => state.gameState.goal.delay.feedback,
       wetGoal: state => state.gameState.goal.delay.wet,
+      knobsAvailable: state => state.gameState.knobsAvailable.delay,
     })
   }
 }

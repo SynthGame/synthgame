@@ -20,6 +20,7 @@
     <div class="knobs">
       <module-knob
         v-model="attack"
+        v-if="knobsAvailable.attack"
         :min="0"
         :max="100"
         knobColor="#e4e259"
@@ -28,6 +29,7 @@
       ></module-knob>
       <module-knob
         v-model="decay"
+        v-if="knobsAvailable.decay"
         :min="0"
         :max="100"
         knobColor="#e4e259"
@@ -36,6 +38,7 @@
       ></module-knob>
       <module-knob
         v-model="sustain"
+        v-if="knobsAvailable.sustain"
         :min="0"
         :max="100"
         knobColor="#e4e259"
@@ -44,6 +47,7 @@
       ></module-knob>
       <module-knob
         v-model="release"
+        v-if="knobsAvailable.release"
         :min="0"
         :max="100"
         knobColor="#e4e259"
@@ -119,7 +123,8 @@ export default {
       attackGoal: state => state.gameState.goal.envelope.attack,
       decayGoal: state => state.gameState.goal.envelope.decay,
       sustainGoal: state => state.gameState.goal.envelope.sustain,
-      releaseGoal: state => state.gameState.goal.envelope.release
+      releaseGoal: state => state.gameState.goal.envelope.release,
+      knobsAvailable: state => state.gameState.knobsAvailable.envelope,
     })
   }
 }

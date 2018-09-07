@@ -19,16 +19,9 @@
               {name: 'WaveformGoal', min: 0, max:3, value: typeOscGoal},
             ]"/>
     <div class="knobs">
-      <!-- <module-knob
-        v-model="typeDial"
-        :min="0"
-        :max="100"
-        knobColor="#ff8574"
-        name="Waveform"
-        module="oscillator"
-      ></module-knob> -->
       <module-knob
         v-model="freqDial"
+        v-if="knobsAvailable.frequency"
         :min="0"
         :max="100"
         knobColor="#ff8574"
@@ -36,6 +29,7 @@
       ></module-knob>
       <module-knob
         v-model="detune"
+        v-if="knobsAvailable.detune"
         :min="0"
         :max="120"
         knobColor="#ff8574"
@@ -48,7 +42,9 @@
         knobColor="#ff8574"
         name="Phase"
       ></module-knob> -->
-      <div class="button-wrapper">
+      <div class="button-wrapper"
+        v-if="knobsAvailable.typeOsc"
+      >
         <module-button color="#ff8574" shape="sine" :isPressed="typeOsc==='sine'" @click.native="typeOsc='sine'"/>
         <module-button color="#ff8574" shape="square" :isPressed="typeOsc==='square'" @click.native="typeOsc='square'"/>
         <module-button color="#ff8574" shape="sawtooth" :isPressed="typeOsc==='sawtooth'" @click.native="typeOsc='sawtooth'"/>
@@ -123,6 +119,7 @@ export default {
       // phaseGoal: state => state.gameState.goal.oscillator.phase,
       typeArray: state => state.gameState.possibleValues.oscillator.typeOsc,
       freqArray: state => state.gameState.possibleValues.oscillator.frequency,
+      knobsAvailable: state => state.gameState.knobsAvailable.oscillator,
     })
   },
   watch: {

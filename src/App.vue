@@ -183,7 +183,6 @@ export default {
       if(val) this.displaySuccesMessage()
     },
     sequencesPassedInCurrentLevel (val) {
-      console.log(val)
       if(val === 2) {
         this.init()
         this.$store.dispatch('setSynthToAudioParameters', audio)

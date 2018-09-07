@@ -18,23 +18,18 @@
                 {name: 'gainGoal', min: 0, max: 100, value: gain},
                 ]"/>
     <div class="knobs">
-            <div class="button-wrapper">
+      <div 
+        v-if="knobsAvailable.type"
+        class="button-wrapper"
+      >
         <module-button color="#6e01d1" shape="lowpass" :isPressed="type==='lowpass'" @click.native="type='lowpass'"/>
         <module-button color="#6e01d1" shape="highpass" :isPressed="type==='highpass'" @click.native="type='highpass'"/>
         <module-button color="#6e01d1" shape="bandpass" :isPressed="type==='bandpass'" @click.native="type='bandpass'"/>
-<p>SHAPE</p>
+        <p>SHAPE</p>
       </div>
-
-      <!-- <module-knob
-        v-model="typeDial"
-        :min="0"
-        :max="100"
-        knobColor="#6e01d1"
-        name="Type"
-        module="filter"
-      ></module-knob> -->
       <module-knob
         v-model="cutOffFreq"
+        v-if="knobsAvailable.cutOffFreq"
         :min="0"
         :max="100"
         knobColor="#6e01d1"
@@ -43,6 +38,7 @@
       ></module-knob>
       <module-knob
         v-model="setQ"
+        v-if="knobsAvailable.setQ"
         :min="0"
         :max="100"
         knobColor="#6e01d1"
@@ -118,7 +114,8 @@ export default {
       cutOffFreqGoal: state => state.gameState.goal.filter.cutOffFreq,
       typeGoal: state => state.gameState.goal.filter.type,
       setQGoal: state => state.gameState.goal.filter.setQ,
-      typeArray: state => state.gameState.possibleValues.filter.type
+      typeArray: state => state.gameState.possibleValues.filter.type,
+      knobsAvailable: state => state.gameState.knobsAvailable.filter,
     })
   },
   watch: {
