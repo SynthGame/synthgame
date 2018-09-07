@@ -21,6 +21,7 @@
         <div class="knobs">
           <module-knob
             v-model="frequency"
+            v-if="knobsAvailable.frequency"
             :min="1"
             :max="100"
             knobColor="#5bd484"
@@ -29,21 +30,16 @@
           ></module-knob>
           <module-knob
             v-model="amount"
+            v-if="knobsAvailable.amount"
             :min="0"
             :max="100"
             knobColor="#5bd484"
             name="Amount"
             module="lfo"
           ></module-knob>
-          <!-- <module-knob
-            v-model="typeDial"
-            :min="0"
-            :max="100"
-            knobColor="#5bd484"
-            name="Shape"
-            module="lfo"
-          ></module-knob> -->
-      <div class="button-wrapper">
+      <div class="button-wrapper"
+            v-if="knobsAvailable.type"
+      >
         <module-button color="#5bd484" shape="sine" :isPressed="type==='sine'" @click.native="type='sine'"/>
         <module-button color="#5bd484" shape="square" :isPressed="type==='square'" @click.native="type='square'"/>
         <module-button color="#5bd484" shape="sawtooth" :isPressed="type==='sawtooth'" @click.native="type='sawtooth'"/>
@@ -120,6 +116,7 @@ export default {
       frequencyGoal: state => state.gameState.goal.lfo.frequency,
       typeGoal: state => state.gameState.goal.lfo.type,
       amountGoal: state => state.gameState.goal.lfo.amount,
+      knobsAvailable: state => state.gameState.knobsAvailable.lfo,
     })
   },
   watch: {

@@ -26,6 +26,7 @@
       ></module-knob> -->
       <module-knob
         v-model="wet"
+        v-if="knobsAvailable.wet"
         :min="0"
         :max="100"
         knobColor="#3c32ff"
@@ -86,6 +87,7 @@ export default {
     ...mapState({
       roomSizeGoal: state => state.gameState.goal.reverb.roomSize,
       wetGoal: state => state.gameState.goal.reverb.wet,
+      knobsAvailable: state => state.gameState.knobsAvailable.reverb,
     })
   }
 }
