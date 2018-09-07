@@ -185,9 +185,11 @@ export default {
     sequencesPassedInCurrentLevel (val) {
       console.log(val)
       if(val === 2) {
-        audio.resetSynth();
+        this.init()
         this.$store.dispatch('setSynthToAudioParameters', audio)
         this.$store.dispatch('startNewLevel', audio)
+        this.loop.start() // move start overlay to another route
+
       }
     }
   }
