@@ -266,6 +266,7 @@ export default new Vuex.Store({
       commit('setKnobsAvailable', knobsAvailable)
     },
     startNewLevel ({state, commit, dispatch}, {knobsAvailable, level}) {
+      commit('resetSequencesPassedInCurrentLevel')
       if(level) commit('setLevelValue', level);
       return dispatch('setLevel', {
         knobsAvailable
@@ -273,11 +274,9 @@ export default new Vuex.Store({
     },
     levelDone ({state, commit}) {
       commit('stopTimerIsRunning')
-      commit('resetSequencesPassedInCurrentLevel')
       // commit('addValueToScore', timeLeft)
     },
     gameOver ({state, commit}, {}) {
-      commit('resetSequencesPassedInCurrentLevel')
 
     }
   }
