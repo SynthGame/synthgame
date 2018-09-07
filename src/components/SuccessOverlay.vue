@@ -27,27 +27,38 @@
         </svg>
 
       </svg>
-      <svg viewBox="0 0 200 200" height="400px" width="400px" v-if="currentAnim==='drum'">
+      <svg viewBox="0 0 190 190" height="400px" width="400px" v-if="currentAnim==='drum'">
         <!-- DRUM  -->
-        <svg version="1.1"
+        <svg version="1.1" stroke-width="1.5819" x="55" y="80"
             xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:a="http://ns.adobe.com/AdobeSVGViewerExtensions/3.0/"
-            x="60px" y="60px" width="79.1px" height="114px" style="enable-background:new 0 0 79.1 114;"
+              width="79.1px" height="114px" viewBox="0 0 79.1 114" style="enable-background:new 0 0 79.1 114;"
             xml:space="preserve">
-        <path id="loading_page_1_" class="st0" d="M39.6,0c21.8,0,39.5,4.7,39.5,10.4S61.4,20.8,39.6,20.8S0.1,16.1,0.1,10.4S17.8,0,39.6,0z
+          <g transform="translate(0.000000, 1.000000)" stroke="#FFFFFF" stroke-width="1.5819">
+
+          <path id="loading_page_1_" class="st0" d="M39.6,0c21.8,0,39.5,4.7,39.5,10.4S61.4,20.8,39.6,20.8S0.1,16.1,0.1,10.4S17.8,0,39.6,0z
             M19.5,55.5V29.1 M79,46.5L59.4,29.1l-20,27.8l-20-27.8L0,46.5c0,5.8,17.7,10.4,39.5,10.4S79,52.2,79,46.5V10.4l0.1,9.2
             c0,5.8-17.7,10.4-39.5,10.4S0.1,25.3,0.1,19.6v-9.2v36.1 M5.9,114l33.7-33.6L73.2,114L39.6,79.5v-24V30l20-0.9v26.4"/>
+          </g>
         </svg>
+
         <!-- STICK 1  -->
-        <svg version="1.1"
-            xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:a="http://ns.adobe.com/AdobeSVGViewerExtensions/3.0/"
-            viewBox ="0 0 10 10" x="75px" y="20px" width="82.8px" height="35.4px" style="enable-background:new 0 0 82.8 35.4;"
-            xml:space="preserve">
-
-
-        <path class="st0" d="M12.6,2.3C18.4,2.3,23,6.9,23,12.6S18.4,23,12.6,23S2.3,18.4,2.3,12.6S6.9,2.3,12.6,2.3z M82.2,33.7L24.9,15.6
-            c0.2-1,0.4-1.9,0.4-3c0-7-5.7-12.6-12.6-12.6S0,5.7,0,12.6s5.7,12.6,12.6,12.6c5.3,0,9.9-3.3,11.8-8l57.3,18.1c0.1,0,0.2,0,0.3,0
-            c0.4,0,0.7-0.2,0.8-0.6C82.9,34.3,82.7,33.9,82.2,33.7z"/>
+        <svg width="200px" height="200px" viewBox="0 0 350 350" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+          <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" stroke-linecap="round" stroke-linejoin="round"  :transform="`rotate(${anim.drum.stick1})`" transform-origin="30 70">
+              <svg x="80px" y="90px" id="DRUM-STICK_Mesa-de-trabajo-1-copia-2_Mesa-de-trabajo-1-copia-2" stroke="#FFFFFF" stroke-width="1.5819" fill-rule="no-zero" :fill="currentColor">
+                  <path d="M0.6,0.6 L49.8,49.3 L0.6,0.6 Z M68.9,57.9 C68.9,64.2 63.8,69.4 57.4,69.4 C51,69.4 45.9,64.3 45.9,57.9 C45.9,51.5 51,46.4 57.4,46.4 C63.8,46.4 68.9,51.6 68.9,57.9 Z" id="Shape"></path>
+              </svg>
+          </g>
         </svg>
+
+        <!-- STICK 2  -->
+<svg width="200px" height="200px" viewBox="0 0 350 350" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+
+   <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" stroke-linecap="round" stroke-linejoin="round"  :transform="`rotate(${anim.drum.stick2})`" transform-origin="400 500">
+       <svg id="DRUM-STICK2_Mesa-de-trabajo-1-copia-2_Mesa-de-trabajo-1-copia-2_Mesa-de-trabajo-1-copia-8" stroke="#FFFFFF" stroke-width="1.5819" fill-rule="no-zero" :fill="currentColor1" x="250px" y="70px">
+           <path d="M19.6,49.3 L68.8,0.6 L19.6,49.3 Z M12.1,46.4 C18.4,46.4 23.6,51.5 23.6,57.9 C23.6,64.3 18.5,69.4 12.1,69.4 C5.7,69.4 0.6,64.3 0.6,57.9 C0.6,51.5 5.8,46.4 12.1,46.4 Z" id="Shape"></path>
+       </svg>
+   </g>
+</svg>
 
 
       </svg>
@@ -70,6 +81,10 @@ export default {
     level: {
       type: Number,
       default: 1
+    },
+    duration: {
+      type: Number,
+      default: 545
     }
   },
   data () {
@@ -81,16 +96,17 @@ export default {
           racketTurn: 0,
           racketYOffset: 0
         },
-        drum: {stickHeight: 0},
+        drum: {
+          stick1: 0,
+          stick2: 0
+        },
       },
       colorArray: [],
-      currentColor: ''
+      currentColor: '',
+      currentColor1: ''
     }
   },
   created() {
-    // why doesn't it work
-  },
-  mounted() {
     // this.anim[Math.floor(Math.random()*this.anim.length)]
     // console.log(this.anim[drum])
     // randomize animation:
@@ -100,7 +116,66 @@ export default {
 
     window.addEventListener('keyup', this.emitOnKey)
     this.colorArray.push(MODULE_OSCILLATOR_COLOR, MODULE_ENVELOPE_COLOR, MODULE_FILTER_COLOR, MODULE_LFO_COLOR, MODULE_DELAY_COLOR, MODULE_REVERB_COLOR)
-    this.changeColor()
+    this.currentColor = this.changeColor()
+    this.currentColor1 = this.changeColor()
+
+  },
+
+  mounted() {
+    let conf;
+    let callback;
+
+    if (this.currentAnim == 'ping') {
+      conf = {
+        values: [ // you can include anything here, jus values or '10px' or colors whatever
+          { ballY: 0, racketRotate: 0, racketYOffset: 0, stick1: 0},
+          { ballY: -200, racketRotate: 12, racketYOffset: 15, stick1: 20},
+          { ballY: 0, racketRotate:0 , racketYOffset: 0, stick1: 0}
+        ],
+        loop: Infinity,
+        duration: this.duration,
+        easings: [easing.easeOut, easing.easeIn, easing.lineair]
+      }
+      callback = {
+        update: v => {
+          this.anim.ping.ballHeight = v.ballY
+          this.anim.ping.racketTurn = v.racketRotate
+          this.anim.ping.racketYOffset = v.racketYOffset
+          // this.anim.drum.stick1 = v.stick1
+          if (v.ballY == 0) {
+            this.currentColor = this.changeColor()
+          }
+        },
+        complete: () => {console.log('lalala')}
+      }
+    } else if (this.currentAnim == 'drum') {
+      conf = {
+        values: [ // you can include anything here, jus values or '10px' or colors whatever
+          { stick1: 0, stick2: 20},
+          { stick1: -20, stick2: 0},
+          { stick1: 0, stick2: 20},
+          { stick1: -20, stick2: 0},
+        ],
+        loop: Infinity,
+        duration: this.duration*2,
+        easings: easing.cubicBezier(.29,.06,1,-0.24)
+      }
+
+      callback = {
+        update: v => {
+          this.anim.drum.stick1 = v.stick1
+          this.anim.drum.stick2 = v.stick2
+          if (v.stick1 === 0) {
+            this.currentColor = this.changeColor()
+          }
+          if (v.stick2 === -10) {
+            this.currentColor1 = this.changeColor()
+          }
+        },
+        complete: () => {}
+      }
+    }
+    keyframes(conf).start(callback)
   },
   beforeDestroy() {
     window.removeEventListener('keyup', this.emitOnKey)
@@ -112,34 +187,13 @@ export default {
       }
     }
   },
-  created() {
-    keyframes({
-      values: [ // you can include anything here, jus values or '10px' or colors whatever
-        { ballY: 0, racketRotate: 0, racketYOffset: 0},
-        { ballY: -200, racketRotate: 12, racketYOffset: 15},
-        { ballY: 0, racketRotate:0 , racketYOffset: 0}
-      ],
-      loop: Infinity,
-      duration: 545,
-      easings: [easing.easeOut, easing.easeIn, easing.lineair]
-    }).start({
-        update: v => {
-          this.anim.ping.ballHeight = v.ballY
-          this.anim.ping.racketTurn = v.racketRotate
-          this.anim.ping.racketYOffset = v.racketYOffset
-          if (v.ballY == 0) {
-            this.changeColor()
-          }
-        },
-        complete: () => {console.log('lalala')}
-      })
-  },
   methods:{
     changeColor() {
       //make sure they do not repeat:
       // let list = this.colorArray.splice(this.colorArray.indexOf(this.currentColor), 1)
       // do so they don't repeat list.splice( list.indexOf('foo'), 1 );
-      this.currentColor = this.colorArray[Math.floor(Math.random()*this.colorArray.length)]
+      // console.log(`colorTarget should be: ${colorTarget}`)
+      return this.colorArray[Math.floor(Math.random()*this.colorArray.length)]
     }
   },
   computed: {
