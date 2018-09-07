@@ -1,6 +1,6 @@
 <template>
   <div class="knob">
-    <svg width="55%" style="overflow:visible;" viewBox="0 0 550 550" ref="_svg"
+    <svg v-if="timerIsRunning" width="55%" style="overflow:visible;" viewBox="0 0 550 550" ref="_svg"
       @touchmove="handleTouchMove"
       @click="handleClick"
       @mousedown="handleMouseDown"
@@ -151,7 +151,7 @@
         </g>
       </g>
     </svg>
-    <p>{{name}}</p>
+    <p v-if="timerIsRunning">{{name}}</p>
   </div>
 </template>
 <script>
@@ -293,6 +293,9 @@ export default {
     //     return 0
     //   }
     // },
+    timerIsRunning () {
+      return this.$store.state.gameState.timerIsRunning
+    },
     cpCenter () {
       return 550 / 2
     },
