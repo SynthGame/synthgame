@@ -7,7 +7,7 @@
         <h2>High Score: {{gameHighScore}}</h2>
         <!-- <p class="score">Your current score: {{gameScore}}</p> -->
       </div>
-      <svg viewBox="0 0 250 250" height="400px" width="400px">
+      <svg viewBox="0 0 250 250" height="400px" width="400px" v-if="currentAnim==='ping'">
         <g :transform="`rotate(${anim.ping.racketTurn}) translate(0, ${anim.ping.racketYOffset})`">
           <svg version="1.1"
           xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:a="http://ns.adobe.com/AdobeSVGViewerExtensions/3.0/"
@@ -22,9 +22,32 @@
           </svg>
         </g>
         <svg  width="37px" height="390px" x="145px" y="-35px" viewBox="0 0 50 50" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
-                <g id="loadingscreen_icon1-01" :transform="`translate(-120.000000, ${anim.ping.ballHeight})`" stroke="#FFFFFF" fill-rule="nonzero" stroke-width="1.5819" :fill="currentColor">
-                    <circle id="Oval" cx="138.6" cy="18.2" r="17.3"></circle>
-                </g>
+          <g id="loadingscreen_icon1-01" :transform="`translate(-120.000000, ${anim.ping.ballHeight})`" stroke="#FFFFFF" fill-rule="nonzero" stroke-width="1.5819" :fill="currentColor">
+              <circle id="Oval" cx="138.6" cy="18.2" r="17.3"></circle>
+          </g>
+        </svg>
+
+      </svg>
+      <svg viewBox="0 0 200 200" height="400px" width="400px" v-if="currentAnim==='drum'">
+        <!-- Generator: Adobe Illustrator 22.0.1, SVG Export Plug-In  -->
+        <svg version="1.1"
+            xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:a="http://ns.adobe.com/AdobeSVGViewerExtensions/3.0/"
+            x="60px" y="60px" width="79.1px" height="114px" style="enable-background:new 0 0 79.1 114;"
+            xml:space="preserve">
+        <path id="loading_page_1_" class="st0" d="M39.6,0c21.8,0,39.5,4.7,39.5,10.4S61.4,20.8,39.6,20.8S0.1,16.1,0.1,10.4S17.8,0,39.6,0z
+            M19.5,55.5V29.1 M79,46.5L59.4,29.1l-20,27.8l-20-27.8L0,46.5c0,5.8,17.7,10.4,39.5,10.4S79,52.2,79,46.5V10.4l0.1,9.2
+            c0,5.8-17.7,10.4-39.5,10.4S0.1,25.3,0.1,19.6v-9.2v36.1 M5.9,114l33.7-33.6L73.2,114L39.6,79.5v-24V30l20-0.9v26.4"/>
+        </svg>
+        <!-- Generator: Adobe Illustrator 22.0.1, SVG Export Plug-In  -->
+        <svg version="1.1"
+            xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:a="http://ns.adobe.com/AdobeSVGViewerExtensions/3.0/"
+            x="20px" y="0px" width="82.8px" height="35.4px" style="enable-background:new 0 0 82.8 35.4;"
+            xml:space="preserve">
+
+
+        <path class="st0" d="M12.6,2.3C18.4,2.3,23,6.9,23,12.6S18.4,23,12.6,23S2.3,18.4,2.3,12.6S6.9,2.3,12.6,2.3z M82.2,33.7L24.9,15.6
+            c0.2-1,0.4-1.9,0.4-3c0-7-5.7-12.6-12.6-12.6S0,5.7,0,12.6s5.7,12.6,12.6,12.6c5.3,0,9.9-3.3,11.8-8l57.3,18.1c0.1,0,0.2,0,0.3,0
+            c0.4,0,0.7-0.2,0.8-0.6C82.9,34.3,82.7,33.9,82.2,33.7z"/>
         </svg>
       </svg>
     <!-- <p>Don't stop here!</p> -->
@@ -55,18 +78,23 @@ export default {
           racketTurn: 0,
           racketYOffset: 0
         },
-        drum: {}
+        drum: {stickHeight: 0},
       },
       colorArray: [],
       currentColor: ''
     }
   },
   created() {
-    },
+    // why doesn't it work
+  },
   mounted() {
     // this.anim[Math.floor(Math.random()*this.anim.length)]
-    console.log(this.anim[drum])
-    this.currentAnim = Math.floor(Math.random()*this.anim.length)
+    // console.log(this.anim[drum])
+    // randomize animation:
+    const currentAnimationNumber = Math.floor(Math.random()*Object.keys(this.anim).length)
+    // this.currentAnim = Object.keys(this.anim)[currentAnimationNumber]
+    this.currentAnim="ping"
+
     window.addEventListener('keyup', this.emitOnKey)
     this.colorArray.push(MODULE_OSCILLATOR_COLOR, MODULE_ENVELOPE_COLOR, MODULE_FILTER_COLOR, MODULE_LFO_COLOR, MODULE_DELAY_COLOR, MODULE_REVERB_COLOR)
     this.changeColor()
@@ -85,7 +113,7 @@ export default {
     keyframes({
       values: [ // you can include anything here, jus values or '10px' or colors whatever
         { ballY: 0, racketRotate: 0, racketYOffset: 0},
-        { ballY: -180, racketRotate: 12, racketYOffset: 20},
+        { ballY: -180, racketRotate: 12, racketYOffset: 15},
         { ballY: 0, racketRotate:0 , racketYOffset: 0}
       ],
       loop: Infinity,
@@ -149,7 +177,7 @@ export default {
   background-color: rgba(0, 0, 0, .90);
   transition: opacity .3s ease;
   fill: none;
-  stroke: red;
+  stroke: white;
   stroke-width: 3;
   & h1 {
     text-transform: uppercase;
