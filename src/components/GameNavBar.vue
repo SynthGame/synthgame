@@ -58,7 +58,8 @@
           }"
     ></span>
     </h2>
-    <span class="timer" @click="startTimer">{{paddedTimeLeftString}}</span>
+    <span v-if="timerIsRunning === false && createModeIsActive === false" class="timer">First listen to the sound we'll recreate</span>
+    <span v-else-if="timerIsRunning === true && createModeIsActive === false" class="timer">Now recreate the sound! Time left: {{paddedTimeLeftString}}</span>
     <span>•</span>
   </nav>
 </template>
@@ -88,6 +89,9 @@ export default {
   computed: {
     timerIsRunning () {
       return this.$store.state.gameState.timerIsRunning
+    },
+    createModeIsActive () {
+      return this.$store.state.gameState.createModeIsActive
     },
     oscillatorComplete() {
       return Object.values(this.$store.getters.audioParametersMatchGoalWithMargin['oscillator']).every(param => param)
