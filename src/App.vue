@@ -129,8 +129,8 @@ export default {
     },
     sequencesPassedInCurrentLevel (val) {
       if(val === 2) {
-        this.init()
-        this.loop.start()
+        // this.init()
+        // this.loop.start()
         this.$store.commit('startTimerIsRunning')
         this.$store.dispatch('setSynthToAudioParameters', audio)
       }
