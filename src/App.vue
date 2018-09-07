@@ -71,17 +71,16 @@ export default {
         }
       }
     })
-    const masterBus = new audio.state.Tone.CrossFade(0.5) // TODO: remove crossfade element
-    masterBus.toMaster()
     // initialize the synth
-    audio.init().connect(masterBus, 0, 0)
+    audio.init().toMaster()
     // create loop wich sequences 4 notes
     const loop = audio.setMainLoop({
-      noteArray: times(4).map(i => random(-12, 12)),
-      subdivision: '4n'
+      noteArray: times(16).map(i => random(-12, 12)),
+      subdivision: '8n'
     }, (time, note) => {
-      if (this.isOverlayed) {audio.playKick()};
-      audio.playNote(note)
+      if (this.isOverlayed) audio.playKick()
+      console.log(note)
+      audio.playNote(note, {})
     })
     // set BPM
     audio.setBpm(SYNTH_BPM)
