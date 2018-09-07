@@ -67,7 +67,7 @@ export default {
         noteArray: times(16),
         subdivision: '8n'
       }, (time, i) => { // i here is just a note from the note array define above
-        if (this.$store.state.gameState.gameIsRunning === false && kickTime === true && this.$store.state.gameState.level > 0) {
+        if (this.displaySuccessOverlay && kickTime === true && !this.displayStartOverlay) {
           audio.playKick();
           kickTime = false;
         } else {
