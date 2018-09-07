@@ -49,6 +49,7 @@ export default new Vuex.Store({
       }
     },
     gameState: {
+      createModeIsActive: false,
       margin: 10,
       gameIsRunning: false,
       level: 0,
@@ -150,6 +151,9 @@ export default new Vuex.Store({
     },
     setKnobsAvailable (state, obj) {
       state.gameState.knobsAvailable = obj
+    },
+    setCreateMode (state, isActive) {
+      state.gameState.createModeIsActive = isActive
     }
   },
   getters: {
