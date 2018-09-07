@@ -1,3 +1,4 @@
 Customize favicon
 Pull out vue router
 make startscreen home route and creat and play /create and /play routes
+rename typeOsc to type
