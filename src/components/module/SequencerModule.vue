@@ -146,26 +146,32 @@ export default {
       const _randomizeNoteVolume = () => this.noteArray.forEach((el, i) => this.setVolumeValue(i, random(-12,0)))
       const _randomizeNoteLength = () => this.noteArray.forEach((el, i) => this.setNoteLengthValue(i, random(0,100)))
 
-      switch(this.sequencerEditState) {
-        case 0:
-          _randomizeNoteSelected()
-          break
-        case 1:
-          _randomizeNotePitch()
-          break
-        case 2:
-          _randomizeNoteVolume()
-          break
-        case 3:
-          _randomizeNoteLength()
-          break
-        default:
-          _randomizeNoteSelected()
-          _randomizeNotePitch()
-          _randomizeNoteVolume()
-          _randomizeNoteLength()
-          break
-      }
+      return (
+        _randomizeNoteSelected(),
+        _randomizeNotePitch(),
+        _randomizeNoteVolume(),
+        _randomizeNoteLength()
+      )
+      // switch(this.sequencerEditState) {
+      //   case 0:
+      //     _randomizeNoteSelected()
+      //     break
+      //   case 1:
+      //     _randomizeNotePitch()
+      //     break
+      //   case 2:
+      //     _randomizeNoteVolume()
+      //     break
+      //   case 3:
+      //     _randomizeNoteLength()
+      //     break
+      //   default:
+      //     _randomizeNoteSelected()
+      //     _randomizeNotePitch()
+      //     _randomizeNoteVolume()
+      //     _randomizeNoteLength()
+      //     break
+      // }
     },
     getSubRange (i) {
       // returns the sub step of 4 in a 16 array
