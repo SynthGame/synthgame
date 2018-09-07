@@ -29,6 +29,6 @@ export default {
   },
   reverb: {
     roomSize: val => val / 100,
-    wet: val => val / 100
+    wet: val => val / 200
   }
 }

@@ -22,13 +22,13 @@ export default new Vuex.Store({
         // phase: 0
       },
       filter: {
-        cutOffFreq: 20,
+        cutOffFreq: 60,
         type: 'lowpass',
         setQ: 0,
         // gain: 50
       },
       envelope: {
-        attack: 4,
+        attack: 0,
         decay: 5,
         sustain: 30,
         release: 10
@@ -36,7 +36,7 @@ export default new Vuex.Store({
       lfo: {
         frequency: 10,
         type: 'sine',
-        amount: 50
+        amount: 0
       },
       delay: {
         delayTime: 10,
@@ -63,13 +63,13 @@ export default new Vuex.Store({
           // phase: 0
         },
         filter: {
-          cutOffFreq: 20,
+          cutOffFreq: 60,
           type: 'lowpass',
           setQ: 0,
           // gain: 50
         },
         envelope: {
-          attack: 4,
+          attack: 1,
           decay: 10,
           sustain: 30,
           release: 10
@@ -77,7 +77,7 @@ export default new Vuex.Store({
         lfo: {
           frequency: 10,
           type: 'sine',
-          amount: 50
+          amount: 0
         },
         delay: {
           delayTime: 10,

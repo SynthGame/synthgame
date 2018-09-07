@@ -34,7 +34,7 @@ export default {
   },
   created () {
     this.$store.dispatch('setLevel', {
-      levelNumber: 1,
+      levelNumber: 0,
       knobsAvailable: {
         oscillator: {
           frequency: false,

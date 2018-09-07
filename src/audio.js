@@ -33,7 +33,7 @@ const audioInstance = () => ({
     log(`Created new general output for audio device`)
     const output = new Tone.Volume(-12)
     log(`Connecting LFO to filter frequency`)
-    lfo.connect(filter.frequency).start()
+    lfo.connect(oscillator.detune).start()
     log(`Generating reverb`)
     // reverb.generate()
     log(`Chaining oscillator => pitch shift => envelope => filter => delay => reverb`)
@@ -102,7 +102,7 @@ const audioInstance = () => ({
       log(`Initializing oscillator with options: ${options}`)
       this.state.device = new Tone.Oscillator({
         type: 'sine',
-        frequency: 131,
+        frequency: 65,
         detune: 0,
         phase: 0,
         ...options
@@ -214,4 +214,5 @@ const audioInstance = () => ({
   }
 })
 
-export default {...new audioInstance(), ...{goalMirrorInstance: new audioInstance()}}
+// export default {...new audioInstance(), ...{goalMirrorInstance: new audioInstance()}}
+export default {...new audioInstance()}

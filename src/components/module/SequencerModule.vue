@@ -1,10 +1,10 @@
 <template>
   <div class="sequencer">
     <div class="button-wrapper function">
-      <button color="#6e01d1" @click="sequencerEditStateChange(0)"/>
-      <button color="#6e01d1" @click="sequencerEditStateChange(1)"/>
-      <button color="#6e01d1" @click="sequencerEditStateChange(2)"/>
-      <button color="#6e01d1" @click="sequencerEditStateChange(3)"/>
+      <button color="#6e01d1" @click="sequencerEditStateChange(0)">Rhythm</button>
+      <button color="#6e01d1" @click="sequencerEditStateChange(1)">Pitch</button>
+      <!-- <button color="#6e01d1" @click="sequencerEditStateChange(2)"/>
+      <button color="#6e01d1" @click="sequencerEditStateChange(3)"/> -->
       <p>Function</p>
     </div>
     <!-- <module-knob
@@ -95,15 +95,24 @@ export default {
       this.sequencerEditState = val;
     },
     initSynth () {
+      let kickTime = true;
       this.toneLoop = audio.setMainLoop({
         noteArray: range(0, 15),
         subdivision: '8n'
       }, (time, note) => {
         this.setStep(note)
-        if(this.noteArray[note].selected) audio.playNote(this.noteArray[note].pitch, {
+        if (this.$store.state.gameState.gameIsRunning === false && kickTime === true && this.$store.state.gameState.level > 0) {
+          audio.playKick();
+          kickTime = false;
+        } else {
+          kickTime = true;
+        };
+        if(this.noteArray[note].selected) {
+          audio.playNote(this.noteArray[note].pitch, {
           noteLength: this.noteArray[note].noteLength,
           volume: this.noteArray[note].volume
         })
+        }
       })
       this.toneLoop.start()
     },
@@ -208,6 +217,9 @@ $main-seq-color: #F40056;
   &.function {
     width: 100%;
     height: fit-content;
+    button {
+      width: 50%;
+    }
   }
 }
 </style>
