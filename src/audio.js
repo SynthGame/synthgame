@@ -52,6 +52,11 @@ export default {
     this.state.Tone.Transport.bpm.value = bpm
     return this.state.Tone.Transport.bpm.value
   },
+  resetSynth() {
+    console.log('this.reverb.state.device.dispose', this.reverb.state.device.dispose());
+    // this.reverb.state.device.dispose();
+    // this.delay.state.device.dispose();
+  },
   setMainLoop ({noteArray, subdivision}, callback) {
     log(`Setting new main loop`)
     if(this.state.loop) this.state.loop.dispose()
@@ -102,7 +107,7 @@ export default {
       log(`Initializing oscillator with options: ${options}`)
       this.state.device = new Tone.Oscillator({
         type: 'sine',
-        frequency: 65,
+        frequency: 131,
         detune: 0,
         phase: 0,
         ...options

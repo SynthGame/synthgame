@@ -119,7 +119,7 @@ export default {
       // start tone general
       audio.start()
       // start loop
-      // 
+      //
     },
     displaySuccesMessage () {
       this.isOverlayed = true
@@ -185,6 +185,7 @@ export default {
     sequencesPassedInCurrentLevel (val) {
       console.log(val)
       if(val === 2) {
+        audio.resetSynth();
         this.$store.dispatch('setSynthToAudioParameters', audio)
         this.$store.dispatch('startNewLevel', audio)
       }

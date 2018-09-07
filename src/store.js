@@ -16,7 +16,7 @@ export default new Vuex.Store({
     },
     audioParameters: {
       oscillator: {
-        frequency: 65,
+        frequency: 131,
         typeOsc: 'sawtooth',
         detune: 60
         // phase: 0
@@ -41,11 +41,11 @@ export default new Vuex.Store({
       delay: {
         delayTime: 30,
         feedback: 80,
-        wet: 2
+        wet: 0
       },
       reverb: {
-        roomSize: 90,
-        wet: 2
+        roomSize: 50,
+        wet: 0
       }
     },
     gameState: {
@@ -59,7 +59,7 @@ export default new Vuex.Store({
       highScore: 0,
       goal: {
         oscillator: {
-          frequency: 65,
+          frequency: 131,
           typeOsc: 'sawtooth',
           detune: 60
           // phase: 0
@@ -84,11 +84,11 @@ export default new Vuex.Store({
         delay: {
           delayTime: 30,
           feedback: 80,
-          wet: 2
+          wet: 0
         },
         reverb: {
-          roomSize: 90,
-          wet: 2
+          roomSize: 50,
+          wet: 0
         }
       },
       possibleValues: {
@@ -241,7 +241,6 @@ export default new Vuex.Store({
       // if someone comes up with an elegant sollution for this I will
       // buy them dinner & beers for 1 night - Will Willems
       console.log('setsynthtoaudioparams')
-
       synth.delay.state.device.delayTime.value = state.audioParameters.delay.delayTime
       synth.delay.state.device.feedback.value = state.audioParameters.delay.feedback
       synth.delay.state.device.wet.value = state.audioParameters.delay.wet
@@ -270,7 +269,7 @@ export default new Vuex.Store({
     },
     levelFinished ({state, commit}, {timeLeft, knobsAvailable}) {
       commit('resetSequencesPassedInCurrentLevel')
-      
+
     },
     gameOver ({state, commit}, {}) {
       commit('resetSequencesPassedInCurrentLevel')
