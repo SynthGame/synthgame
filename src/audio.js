@@ -4,7 +4,7 @@ import { DEBUG_ENABLED } from '@/constants'
 // define logging mechanism
 const log = (log) => false ? console.info(log) : log
 
-const audioInstance = () => ({
+export default {
   state: {
     Tone: Tone,
     loop: undefined,
@@ -212,7 +212,4 @@ const audioInstance = () => ({
       this.state.device = new Tone.Volume()
     }
   }
-})
-
-// export default {...new audioInstance(), ...{goalMirrorInstance: new audioInstance()}}
-export default {...new audioInstance()}
+}
