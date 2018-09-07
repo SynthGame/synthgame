@@ -2,7 +2,7 @@
   <div class="game">
     <game-nav-bar/>
     <div class="level" v-masonry transition-duration="0.3s" item-selector=".module">
-      <sequencer-module v-masonry-tile class="module sequencer" />
+      <sequencer-module v-if="createModeIsActive" v-masonry-tile class="module sequencer" />
       <OscillatorModule v-masonry-tile :class="[(activeModule == 0 ? 'active' : '')]" />
       <!-- <div v-for="n in 1" v-masonry-tile class="module empty"></div> -->
       <FilterModule v-masonry-tile :class="[(activeModule == 1 ? 'active' : '')]" />
@@ -74,6 +74,11 @@ export default {
     showRev () {
       this.activeModule = 5;
     },
+  },
+  computed: {
+    createModeIsActive () {
+      return this.$store.state.gameState.createModeIsActive
+    }
   }
 }
 </script>

@@ -1,7 +1,8 @@
 <template>
   <div id="app">
     <start-screen v-if="isStartgame==true"
-    @start="start"/>
+    @start="start"
+    @create="startCreateMode"/>
     <success-overlay v-if="isOverlayed==true"
     @next="next"/>
     <!-- <div id="nav">
@@ -157,6 +158,11 @@ export default {
     start(){
       this.isStartgame=false
       this.$store.commit('startGame')
+    },
+    startCreateMode(){
+      this.isStartgame=false
+      this.$store.commit('startGame')
+      this.$store.commit('setCreateMode', true)
     },
     next() {
       this.isOverlayed=false
