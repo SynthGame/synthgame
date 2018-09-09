@@ -64,8 +64,6 @@
 
       </svg>
 
-
-    <!-- <p>Don't stop here!</p> -->
     <button class="button-next" @click="$emit('next')">NEXT LEVEL</button>
     </div>
   </div>
@@ -108,12 +106,9 @@ export default {
     }
   },
   created() {
-    // this.anim[Math.floor(Math.random()*this.anim.length)]
-    // console.log(this.anim[drum])
     // randomize animation:
     const currentAnimationNumber = Math.floor(Math.random()*Object.keys(this.anim).length)
     this.currentAnim = Object.keys(this.anim)[currentAnimationNumber]
-    this.currentAnim="drum"
 
     window.addEventListener('keyup', this.emitOnKey)
     this.colorArray.push(MODULE_OSCILLATOR_COLOR, MODULE_ENVELOPE_COLOR, MODULE_FILTER_COLOR, MODULE_LFO_COLOR, MODULE_DELAY_COLOR, MODULE_REVERB_COLOR)
@@ -128,7 +123,7 @@ export default {
 
     if (this.currentAnim == 'ping') {
       conf = {
-        values: [ // you can include anything here, jus values or '10px' or colors whatever
+        values: [
           { ballY: 0, racketRotate: 0, racketYOffset: 0, stick1: 0},
           { ballY: -200, racketRotate: 12, racketYOffset: 15, stick1: 20},
           { ballY: 0, racketRotate:0 , racketYOffset: 0, stick1: 0}
