@@ -54,8 +54,8 @@
         <g transform="rotate(00)">
 <svg width="200px" height="300px" viewBox="0 0 350 400" x="100px" y="18px" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
 
-   <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" stroke-linecap="round" stroke-linejoin="round"  :transform="`rotate(${anim.drum.stick2})`" transform-origin="200 30"  >
-       <svg id="DRUM-STICK2_Mesa-de-trabajo-1-copia-2_Mesa-de-trabajo-1-copia-2_Mesa-de-trabajo-1-copia-8" stroke="#FFFFFF" stroke-width="1.5819" fill-rule="no-zero" :fill="currentColor1" x="10px" y="0px">
+   <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" stroke-linecap="round" stroke-linejoin="round"  :transform="`rotate(${anim.drum.stick2})`" transform-origin="130 0">
+       <svg id="DRUM-STICK2_Mesa-de-trabajo-1-copia-2_Mesa-de-trabajo-1-copia-2_Mesa-de-trabajo-1-copia-8" stroke="#FFFFFF" stroke-width="1.5819" fill-rule="no-zero" :fill="currentColor1" x="15px" y="0px">
            <path d="M19.6,49.3 L68.8,0.6 L19.6,49.3 Z M12.1,46.4 C18.4,46.4 23.6,51.5 23.6,57.9 C23.6,64.3 18.5,69.4 12.1,69.4 C5.7,69.4 0.6,64.3 0.6,57.9 C0.6,51.5 5.8,46.4 12.1,46.4 Z" id="Shape"></path>
        </svg>
    </g>
@@ -117,8 +117,8 @@ export default {
 
     window.addEventListener('keyup', this.emitOnKey)
     this.colorArray.push(MODULE_OSCILLATOR_COLOR, MODULE_ENVELOPE_COLOR, MODULE_FILTER_COLOR, MODULE_LFO_COLOR, MODULE_DELAY_COLOR, MODULE_REVERB_COLOR)
-    this.currentColor = this.changeColor()
-    this.currentColor1 = this.changeColor()
+    this.currentColor = this.changeColor(this.currentColor)
+    this.currentColor1 = this.changeColor(this.currentColor1)
 
   },
 
@@ -151,9 +151,9 @@ export default {
       }
     } else if (this.currentAnim == 'drum') {
       conf = {
-        values: [ // you can include anything here, jus values or '10px' or colors whatever
-          { stick1: 0, stick2: 0, time: 1},
-          { stick1: -20, stick2: 0, time: 0},
+        values: [
+          { stick1: 0, stick2: 20, time: 0},
+          { stick1: -20, stick2: 0, time: 1},
           { stick1: 0, stick2: 20, time: 1},
         ],
         loop: Infinity,
@@ -165,15 +165,14 @@ export default {
         update: v => {
           this.anim.drum.stick1 = v.stick1
           this.anim.drum.stick2 = v.stick2
-          if (v.time==1) {
-            console.log('should change')
-            this.currentColor1 = this.changeColor()
+          if (v.stick1 === 0) {
+            this.currentColor = this.changeColor(this.currentColor)
+            console.log(`this.currentColor changed!`)
           }
-
-              if (v.stick1 === 0) {
-                this.currentColor = this.changeColor()
-                // this.currentColor1 =  this.changeColor()
-              }
+          if (v.stick2 < 0.1) {
+            this.currentColor1 = this.changeColor(this.currentColor1)
+            console.log(`this.currentColor1 changed!`)
+          }
         },
         complete: () => {}
       }
@@ -191,12 +190,14 @@ export default {
     }
   },
   methods:{
-    changeColor() {
-      //make sure they do not repeat:
-      // let list = this.colorArray.splice(this.colorArray.indexOf(this.currentColor), 1)
-      // do so they don't repeat list.splice( list.indexOf('foo'), 1 );
-      // console.log(`colorTarget should be: ${colorTarget}`)
-      return this.colorArray[Math.floor(Math.random()*this.colorArray.length)]
+    changeColor(current) {
+      let randomColor = this.colorArray[Math.floor(Math.random()*this.colorArray.length)]
+      // does that even work?
+      if (randomColor===current) {
+        randomColor = this.colorArray[Math.floor(Math.random()*this.colorArray.length)]
+        console.log('repeat!')
+      }
+      return randomColor
     }
   },
   computed: {
