@@ -5,7 +5,11 @@
     @create="startCreateMode"/>
     <success-overlay v-if="displaySuccessOverlay==true"
     @next="startNextLevel"/>
-    <home-view/>
+    <!-- <div id="nav">
+      <router-link to="/">Home</router-link> |
+      <router-link to="/about">About</router-link>
+    </div> -->
+    <router-view/>
   </div>
 </template>
 
@@ -16,7 +20,6 @@ import times from 'lodash/times'
 import audio from '@/audio'
 import SuccessOverlay from '@/components/SuccessOverlay'
 import StartScreen from '@/components/StartScreen'
-import HomeView from '@/views/HomeView'
 import { SYNTH_BPM } from '@/constants'
 import levels from '@/levels'
 
@@ -30,7 +33,6 @@ export default {
     }
   },
   components: {
-    HomeView,
     SuccessOverlay,
     StartScreen
   },

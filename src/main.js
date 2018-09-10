@@ -1,6 +1,7 @@
 import Vue from 'vue'
 import App from './App.vue'
 
+import router from './router'
 import store from './store'
 import db from './db'
 import './registerServiceWorker'
@@ -15,9 +16,10 @@ Vue.use(ModuleKnob)
 Vue.use(VueMasonryPlugin)
 
 new Vue({
-  el: '#app',
-  components: { App },
-  template: '<App/>',
+  el: '#app', // needed?
+  components: { App }, // needed?
+  template: '<App/>', // needed?
+  router,
   store,
   data () { return {db} },
   render: h => h(App)
