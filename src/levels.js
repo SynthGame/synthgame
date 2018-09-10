@@ -4,45 +4,7 @@ export default [
   // level 1
   {
     oscillator: {
-      typeOsc: true
-    },
-    filter: {},
-    envelope: {},
-    lfo: {},
-    delay: {},
-    reverb: {}
-  },
-  // level 2
-  {
-    oscillator: {
-      typeOsc: true,
       detune: true
-    },
-    filter: {},
-    envelope: {},
-    lfo: {},
-    delay: {},
-    reverb: {}
-  },
-  // level 3
-  {
-    oscillator: {
-      frequency: true,
-      detune: true,
-    },
-    filter: {},
-    envelope: {},
-    lfo: {},
-    delay: {},
-    reverb: {}
-  },
-  // level 4 - 6 frequency
-  // level 4
-  {
-    oscillator: {
-      frequency: true,
-      detune: true,
-      typeOsc: true,
     },
     filter: {},
     envelope: {},
@@ -53,7 +15,6 @@ export default [
   // level 5
   {
     oscillator: {
-      frequency: true,
       detune: true,
       typeOsc: true,
     },
@@ -66,11 +27,12 @@ export default [
   // level 6
   {
     oscillator: {
-      frequency: true,
       detune: true,
       typeOsc: true,
     },
-    filter: {},
+    filter: {
+      cutOffFreq: true,
+    },
     envelope: {},
     lfo: {},
     delay: {},
@@ -80,7 +42,6 @@ export default [
   // level 7
   {
     oscillator: {
-      frequency: true,
       detune: true,
       typeOsc: true,
     },
@@ -96,7 +57,6 @@ export default [
   // level 8
   {
     oscillator: {
-      frequency: true,
       detune: true,
       typeOsc: true,
     },
@@ -113,7 +73,6 @@ export default [
   // level 9
   {
     oscillator: {
-      frequency: true,
       detune: true,
       typeOsc: true,
     },
@@ -133,7 +92,6 @@ export default [
   // level 10
   {
     oscillator: {
-      frequency: true,
       detune: true,
       typeOsc: true,
     },
@@ -153,7 +111,6 @@ export default [
   // level 11
   {
     oscillator: {
-      frequency: true,
       detune: true,
       typeOsc: true,
     },
@@ -174,7 +131,6 @@ export default [
   // level 12
   {
     oscillator: {
-      frequency: true,
       detune: true,
       typeOsc: true,
     },
@@ -196,7 +152,6 @@ export default [
   // level 13
   {
     oscillator: {
-      frequency: true,
       detune: true,
       typeOsc: true,
     },
@@ -220,7 +175,6 @@ export default [
   // level 14
   {
     oscillator: {
-      frequency: true,
       detune: true,
       typeOsc: true,
     },
@@ -245,7 +199,6 @@ export default [
   // level 15
   {
     oscillator: {
-      frequency: true,
       detune: true,
       typeOsc: true,
     },

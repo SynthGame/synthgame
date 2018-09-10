@@ -3,7 +3,7 @@
     <div class="startscreen-content-wrapper">
       <div>
         <h1>Tats</h1>
-        <h2>A guide to synthesizers, played by ear.</h2>
+        <h2>A synthesizer game. Play it by ear.</h2>
       </div>
       <!-- <iframe width="560" height="315" src="https://www.youtube.com/embed/O7x-AS6idOQ?rel=0?version=3&autoplay=1&controls=0&&showinfo=0&loop=1&playlist=O7x-AS6idOQ" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe> -->
       <video width="480" autoplay loop muted>
@@ -64,7 +64,7 @@ export default {
   & h2 {
     font-weight: 300;
     font-size: 3em;
-    max-width: 13em;
+    max-width: 12em;
   }
 }
 
@@ -79,18 +79,21 @@ export default {
 }
 
 .button-next {
-    background: #ff8574;
     text-transform: uppercase;
     letter-spacing: 1px;
-    font-size: 2em;
-    font-weight: 900;
+    font-size: 1em;
     color: inherit;
     padding: 0;
     font: inherit;
     cursor: pointer;
     outline: inherit;
     padding: .8rem 1.4rem;
-    border: none;
     margin: 5px;
+    background: none;
+    border: 1px solid #ff8574;
+    transition: all .2s;
+    &:hover {
+      background: #ff8574;
+    }
 }
 </style>

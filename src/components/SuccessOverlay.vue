@@ -114,7 +114,7 @@ export default {
   created() {
     // randomize animation:
     const currentAnimationNumber = Math.floor(Math.random()*Object.keys(this.anim).length)
-    this.currentAnim = Object.keys(this.anim)[currentAnimationNumber]
+    this.currentAnim = "drum"
 
     window.addEventListener('keyup', this.emitOnKey)
     this.colorArray.push(MODULE_OSCILLATOR_COLOR, MODULE_ENVELOPE_COLOR, MODULE_FILTER_COLOR, MODULE_LFO_COLOR, MODULE_DELAY_COLOR, MODULE_REVERB_COLOR)
