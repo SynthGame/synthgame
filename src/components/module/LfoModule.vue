@@ -38,7 +38,7 @@
             module="lfo"
           ></module-knob>
       <div class="button-wrapper"
-            v-if="knobsAvailable.type"
+         v-if="knobsAvailable.type || createModeIsActive"
       >
         <module-button color="#5bd484" shape="sine" :isPressed="type==='sine'" @click.native="type='sine'"/>
         <module-button color="#5bd484" shape="square" :isPressed="type==='square'" @click.native="type='square'"/>
