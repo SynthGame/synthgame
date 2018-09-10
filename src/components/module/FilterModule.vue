@@ -19,8 +19,7 @@
                 ]"/>
     <div class="knobs">
       <div
-        v-if="knobsAvailable.type"
-        v-show="timerIsRunning"
+        v-if="knobsAvailable.type || createModeIsActive"
         class="button-wrapper"
       >
         <module-button color="#6e01d1" shape="lowpass" :isPressed="type==='lowpass'" @click.native="type='lowpass'"/>
@@ -97,7 +96,8 @@ export default {
       return this.$store.state.gameState.timerIsRunning
     },
     dialsAreWithinMargin() {
-      this.title = 'Done!';
+      if(this.createModeIsActive) return false // quick hack
+      this.title = 'Done!'
       return Object.values(this.$store.getters.audioParametersMatchGoalWithMargin[this.name])
         .every(param => param)
     },

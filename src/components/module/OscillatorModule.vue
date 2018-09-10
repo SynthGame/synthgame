@@ -43,8 +43,7 @@
         name="Phase"
       ></module-knob> -->
       <div class="button-wrapper"
-        v-if="knobsAvailable.typeOsc"
-        v-show="timerIsRunning"
+        v-if="knobsAvailable.typeOsc || createModeIsActive"
       >
         <module-button color="#ff8574" shape="sine" :isPressed="typeOsc==='sine'" @click.native="typeOsc='sine'"/>
         <module-button color="#ff8574" shape="square" :isPressed="typeOsc==='square'" @click.native="typeOsc='square'"/>
@@ -97,7 +96,8 @@ export default {
       return this.$store.state.gameState.timerIsRunning
     },
     dialsAreWithinMargin() {
-      this.title = 'Done!';
+      if(this.createModeIsActive) return false // quick hack
+      this.title = 'Done!'
       return Object.values(this.$store.getters.audioParametersMatchGoalWithMargin[this.name])
         .every(param => param)
     },
