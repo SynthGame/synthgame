@@ -135,8 +135,10 @@ export default {
       }
     },
     timeIsUp () {
-      alert('game\'s over')
+      // alert('game\'s over')
       this.stopTimer()
+      this.$store.dispatch('gameOver')
+      // this.startTimer()
     }
   },
   watch: {

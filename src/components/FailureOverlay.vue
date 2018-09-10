@@ -45,7 +45,7 @@
       </svg>
 
     <button class="button-next"
-            @click="$emit('startagain')"
+            @click="startAgain"
             @mouseover="litUpButton=true"
             @mouseout="buttonLeave"
             :style="{'background-color': litUpButton ? buttonColor: ''}">GO AGAIN</button>
@@ -164,14 +164,12 @@ export default {
   beforeDestroy() {
     window.removeEventListener('keyup', this.emitOnKey)
   },
-  methods: {
+  methods:{
     emitOnKey() {
       if (event.keyCode === 13) {
         this.$emit('next');
       }
-    }
-  },
-  methods:{
+    },
     changeColor(current) {
       let randomColor = this.colorArray[Math.floor(Math.random()*this.colorArray.length)]
       // does that even work?
@@ -185,7 +183,10 @@ export default {
       this.litUpButton = false;
       console.log(`the button leaft the building: ${this.changeColor(this.buttonColor)}`)
       this.buttonColor = this.changeColor(this.buttonColor)
-      }
+    },
+    startAgain() {
+      this.$emit('startagain')
+    }
   },
   computed: {
     gameScore () {

@@ -51,6 +51,7 @@ export default new Vuex.Store({
       createModeIsActive: false,
       margin: 10,
       timerIsRunning: false,
+      isGameOver: false,
       level: 0,
       sequencesPassedInCurrentLevel: 0,
       knobsAvailable: {
@@ -199,7 +200,14 @@ export default new Vuex.Store({
     },
     resetSequencesPassedInCurrentLevel (state) {
       state.gameState.sequencesPassedInCurrentLevel = 0
+    },
+    setTheGameToGameOver (state) {
+      state.gameState.isGameOver = true
+    },
+    setTheGameFromGameOver (state) {
+      state.gameState.isGameOver = false
     }
+
   },
   getters: {
     allParametersMatchGoal: (state, getters) => {
@@ -311,8 +319,15 @@ export default new Vuex.Store({
       commit('stopTimerIsRunning')
       // commit('addValueToScore', timeLeft)
     },
-    gameOver ({state, commit}, {}) {
-
+    gameOver ({state, commit}) {
+      commit('setTheGameToGameOver')
+      // commit('stopTimerIsRunning')
+      // console.log(`you failed at: ${state.gameState.level + 1}`)
+      // commit('setLevelValue', state.gameState.level)
+      // commit('startTimerIsRunning')
+    },
+    startAgain ({state, commit}) {
+      commit('setTheGameFromGameOver')
     }
   }
 })
