@@ -5,6 +5,9 @@
     @create="startCreateMode"/>
     <success-overlay v-if="displaySuccessOverlay==true"
     @next="startNextLevel"/>
+    <success-overlay v-if="displayFailureOverlay==true"
+    @startagain="startLevel(level)"/>
+
     <!-- <div id="nav">
       <router-link to="/">Home</router-link> |
       <router-link to="/about">About</router-link>
@@ -19,6 +22,7 @@ import random from 'lodash/random'
 import times from 'lodash/times'
 import audio from '@/audio'
 import SuccessOverlay from '@/components/SuccessOverlay'
+import FailureOverlay from '@/components/FailureOverlay'
 import StartScreen from '@/components/StartScreen'
 import { SYNTH_BPM } from '@/constants'
 import levels from '@/levels'
@@ -28,12 +32,14 @@ export default {
   data () {
     return {
       displaySuccessOverlay: false,
+      displayFailureOverlay: false,
       displayStartOverlay: true,
       loop: null
     }
   },
   components: {
     SuccessOverlay,
+    FailureOverlay,
     StartScreen
   },
   created () {
@@ -87,6 +93,9 @@ export default {
     displaySuccesMessage () {
       this.displaySuccessOverlay = true
     },
+    displayFailureMessage () {
+      this.displaySuccessOverlay = true
+    },
     startPlayMode(){
       this.displayStartOverlay = false // hide start overlay
       this.startLevel(0)
@@ -98,6 +107,7 @@ export default {
     startLevel(level) {
       // disable all overlays
       this.displaySuccessOverlay = false
+      this.displayFailureOverlay = false
       this.displayStartOverlay = false
       // import level config
       const availableParameters = levels[level]
