@@ -18,10 +18,10 @@
               {name: 'PhaseGoal', min: 50, max: 10000, value: 0},
               {name: 'WaveformGoal', min: 0, max:3, value: typeOscGoal},
             ]"/>
-    <div class="knobs" v-show="timerIsRunning">
+    <div class="knobs">
       <module-knob
         v-model="freqDial"
-        v-if="knobsAvailable.frequency"
+        v-if="knobsAvailable.frequency || createModeIsActive"
         :min="0"
         :max="100"
         knobColor="#ff8574"
@@ -29,7 +29,7 @@
       ></module-knob>
       <module-knob
         v-model="detune"
-        v-if="knobsAvailable.detune"
+        v-if="knobsAvailable.detune || createModeIsActive"
         :min="0"
         :max="120"
         knobColor="#ff8574"
@@ -124,6 +124,7 @@ export default {
       typeArray: state => state.gameState.possibleValues.oscillator.typeOsc,
       freqArray: state => state.gameState.possibleValues.oscillator.frequency,
       knobsAvailable: state => state.gameState.knobsAvailable.oscillator,
+      createModeIsActive: state => state.gameState.createModeIsActive
     })
   },
   watch: {

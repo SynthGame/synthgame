@@ -53,7 +53,14 @@ export default new Vuex.Store({
       timerIsRunning: false,
       level: 0,
       sequencesPassedInCurrentLevel: 0,
-      knobsAvailable: {},
+      knobsAvailable: {
+        oscillator: {},
+        filter: {},
+        envelope: {},
+        lfo: {},
+        delay: {},
+        reverb: {}
+      },
       score: 0,
       highScore: 0,
       goal: {

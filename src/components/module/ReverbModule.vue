@@ -15,7 +15,7 @@
                       {name: 'Room Size Goal', min:1, max:100, value: this.roomSizeGoal},
                       {name: 'Dry / Wet Goal', min:1, max:100, value: this.wetGoal}
                       ]"/>
-    <div class="knobs" v-show="timerIsRunning">
+    <div class="knobs">
       <!-- <module-knob
         v-model="roomSize"
         :min="0"
@@ -26,7 +26,7 @@
       ></module-knob> -->
       <module-knob
         v-model="wet"
-        v-if="knobsAvailable.wet"
+        v-if="knobsAvailable.wet || createModeIsActive"
         :min="0"
         :max="100"
         knobColor="#3c32ff"
@@ -91,6 +91,7 @@ export default {
       roomSizeGoal: state => state.gameState.goal.reverb.roomSize,
       wetGoal: state => state.gameState.goal.reverb.wet,
       knobsAvailable: state => state.gameState.knobsAvailable.reverb,
+      createModeIsActive: state => state.gameState.createModeIsActive
     })
   }
 }

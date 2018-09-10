@@ -18,7 +18,7 @@
               {name:'WetGoal', min: 0, max: 100, value: this.wetGoal},
               {name:'PlaceholderGoal', min: 0, max: 100, value: 'fake'}]"
     />
-    <div class="knobs" v-show="timerIsRunning">
+    <div class="knobs">
       <!-- <module-knob
         v-model="delayTime"
         :min="0"
@@ -37,7 +37,7 @@
       ></module-knob> -->
       <module-knob
         v-model="wet"
-        v-if="knobsAvailable.wet"
+        v-if="knobsAvailable.wet || createModeIsActive"
         :min="0"
         :max="100"
         knobColor="#43bede"
@@ -103,6 +103,7 @@ export default {
       feedbackGoal: state => state.gameState.goal.delay.feedback,
       wetGoal: state => state.gameState.goal.delay.wet,
       knobsAvailable: state => state.gameState.knobsAvailable.delay,
+      createModeIsActive: state => state.gameState.createModeIsActive
     })
   }
 }
