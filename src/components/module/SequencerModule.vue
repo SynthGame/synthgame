@@ -5,10 +5,10 @@
       <h3 slot="subtitle">Sequencer</h3>
     </module-title>
     <div class="button-wrapper function">
-      <button color="#6e01d1" @click="sequencerEditStateChange(0)">Rhythm</button>
+      <button color="#6e01d1" @click="sequencerEditStateChange(0)">Steps</button>
       <button color="#6e01d1" @click="sequencerEditStateChange(1)">Pitch</button>
-      <!-- <button color="#6e01d1" @click="sequencerEditStateChange(2)"/>
-      <button color="#6e01d1" @click="sequencerEditStateChange(3)"/> -->
+      <button color="#6e01d1" @click="sequencerEditStateChange(2)">Volume</button>
+      <button color="#6e01d1" @click="sequencerEditStateChange(3)">Note Length</button>
       <p>Function</p>
     </div>
     <!-- <module-knob

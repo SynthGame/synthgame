@@ -2,7 +2,7 @@
 export default [
   {
     oscillator: {
-      frequency: true,
+      frequency: true
     },
     filter: {},
     envelope: {},
@@ -12,13 +12,14 @@ export default [
   },
   {
     oscillator: {
-      typeOsc: true,
+      frequency: true
     },
     filter: {
-      type: true
     },
-    envelope: {},
-    lfo: {},
+    envelope: {
+    },
+    lfo: {
+    },
     delay: {},
     reverb: {}
   },
