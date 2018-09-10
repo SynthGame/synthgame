@@ -110,12 +110,12 @@ export default {
     displaySuccesMessage () {
       this.displaySuccessOverlay = true
     },
-    displayFailureMessage () {
-      this.displaySuccessOverlay = true
-    },
+    // displayFailureMessage () {
+    //   this.displaySuccessOverlay = true
+    // },
     startAgain(){
       this.$store.dispatch('startAgain')
-      this.init()
+      this.startLevel(this.gameLevel)
     },
     startPlayMode(){
       this.displayStartOverlay = false // hide start overlay

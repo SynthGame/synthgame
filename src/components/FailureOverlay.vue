@@ -23,7 +23,7 @@
 
         <!-- STICK 1  -->
         <svg width="200px" height="200px" viewBox="0 0 350 350" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
-          <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" stroke-linecap="round" stroke-linejoin="round"  :transform="`rotate(${anim.drum.stick1})`" transform-origin="30 70">
+          <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" stroke-linecap="round" stroke-linejoin="round"  :transform="`rotate(${anim.drum.stick1}) translate(-${anim.drum.stick1Offset}, 0)`" transform-origin="30 70">
               <svg x="80px" y="90px" id="DRUM-STICK_Mesa-de-trabajo-1-copia-2_Mesa-de-trabajo-1-copia-2" stroke="#FFFFFF" stroke-width="1.5819" fill-rule="no-zero" :fill="currentColor">
                   <path d="M0.6,0.6 L49.8,49.3 L0.6,0.6 Z M68.9,57.9 C68.9,64.2 63.8,69.4 57.4,69.4 C51,69.4 45.9,64.3 45.9,57.9 C45.9,51.5 51,46.4 57.4,46.4 C63.8,46.4 68.9,51.6 68.9,57.9 Z" id="Shape"></path>
               </svg>
@@ -31,11 +31,11 @@
         </svg>
 
         <!-- STICK 2  -->
-        <g transform="rotate(00)">
+        <g :transform="`rotate(${anim.drum.stick2AdditionalTwirl})`"   :transform-origin="`0 ${anim.drum.changedTransitionOrigin}`">
 <svg width="200px" height="300px" viewBox="0 0 350 400" x="100px" y="18px" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
 
    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" stroke-linecap="round" stroke-linejoin="round"  :transform="`rotate(${anim.drum.stick2})`" transform-origin="130 0">
-       <svg id="DRUM-STICK2_Mesa-de-trabajo-1-copia-2_Mesa-de-trabajo-1-copia-2_Mesa-de-trabajo-1-copia-8" stroke="#FFFFFF" stroke-width="1.5819" fill-rule="no-zero" :fill="currentColor1" x="15px" y="0px">
+       <svg id="DRUM-STICK2_Mesa-de-trabajo-1-copia-2_Mesa-de-trabajo-1-copia-2_Mesa-de-trabajo-1-copia-8" stroke="#FFFFFF" stroke-width="1.5819" fill-rule="no-zero" :fill="currentColor1" x="15px" y="0px"  >
            <path d="M19.6,49.3 L68.8,0.6 L19.6,49.3 Z M12.1,46.4 C18.4,46.4 23.6,51.5 23.6,57.9 C23.6,64.3 18.5,69.4 12.1,69.4 C5.7,69.4 0.6,64.3 0.6,57.9 C0.6,51.5 5.8,46.4 12.1,46.4 Z" id="Shape"></path>
        </svg>
    </g>
@@ -82,7 +82,11 @@ export default {
         },
         drum: {
           stick1: 0,
-          stick2: 0
+          stick1Offset: 0,
+          stick2: 20,
+          stick2AdditionalTwirl:0,
+          changedTransitionOrigin: -100
+
         },
       },
       colorArray: [],
@@ -106,60 +110,69 @@ export default {
   },
 
   mounted() {
-    let conf;
-    let callback;
 
-    if (this.currentAnim == 'ping') {
-      conf = {
+let conf = {
         values: [
-          { ballY: 0, racketRotate: 0, racketYOffset: 0, stick1: 0},
-          { ballY: -200, racketRotate: 12, racketYOffset: 15, stick1: 20},
-          { ballY: 0, racketRotate:0 , racketYOffset: 0, stick1: 0}
-        ],
-        loop: Infinity,
-        duration: this.duration,
-        easings: [easing.easeOut, easing.easeIn, easing.lineair]
-      }
-      callback = {
-        update: v => {
-          this.anim.ping.ballHeight = v.ballY
-          this.anim.ping.racketTurn = v.racketRotate
-          this.anim.ping.racketYOffset = v.racketYOffset
-          // this.anim.drum.stick1 = v.stick1
-          if (v.ballY == 0) {
-            this.currentColor = this.changeColor()
+          {
+            stick1: -20,
+            stick1Offset: 0,
+            stick2: 20,
+            stick2AdditionalTwirl: 0,
+            changedTransitionOrigin: 0
+          },
+          {
+            stick1: 0,
+            stick1Offset: 0,
+            stick2: 0,
+            stick2AdditionalTwirl: 0,
+            changedTransitionOrigin: 0
+          },
+                    {
+            stick1: -25,
+            stick1Offset: 0,
+            stick2: 0,
+            stick2AdditionalTwirl:0,
+            changedTransitionOrigin: 0
+          },
+                    {
+            stick1: 0,
+            stick1Offset: 0,
+            stick2: 0,
+            stick2AdditionalTwirl:0,
+            changedTransitionOrigin: 0
+          },
+          {
+            stick1: -2500,
+            stick1Offset: 130,
+            stick2: 0,
+            stick2AdditionalTwirl:300,
+            changedTransitionOrigin: 700
           }
-        },
-        complete: () => {console.log('lalala')}
-      }
-    } else if (this.currentAnim == 'drum') {
-      conf = {
-        values: [
-          { stick1: 0, stick2: 20, time: 0},
-          { stick1: -20, stick2: 0, time: 1},
-          { stick1: 0, stick2: 20, time: 1},
         ],
-        loop: 1,
+        loop: 0,
         duration: this.duration*2,
         easings: easing.cubicBezier(.29,.06,1,-0.24)
       }
 
-      callback = {
+    let  callback = {
         update: v => {
           this.anim.drum.stick1 = v.stick1
+          this.anim.drum.stick1Offset=v.stick1Offset
           this.anim.drum.stick2 = v.stick2
+          this.anim.drum.stick2AdditionalTwirl=v.stick2AdditionalTwirl
+          this.anim.drum.changedTransitionOrigin = v.changedTransitionOrigin
           if (v.stick1 === 0) {
             this.currentColor = this.changeColor(this.currentColor)
-            console.log(`this.currentColor changed!`)
+            // console.log(`this.currentColor changed!`)
           }
           if (v.stick2 < 0.1) {
             this.currentColor1 = this.changeColor(this.currentColor1)
-            console.log(`this.currentColor1 changed!`)
+            // console.log(`this.currentColor1 changed!`)
           }
         },
         complete: () => {}
       }
-    }
+
     keyframes(conf).start(callback)
     this.$refs.button.focus()
   },
@@ -177,7 +190,7 @@ export default {
       // does that even work?
       if (randomColor===current) {
         randomColor = this.colorArray[Math.floor(Math.random()*this.colorArray.length)]
-        console.log('repeat!')
+        // console.log('repeat!')
       }
       return randomColor
     },
