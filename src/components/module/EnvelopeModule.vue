@@ -106,7 +106,8 @@ export default {
       return this.$store.state.gameState.timerIsRunning
     },
     dialsAreWithinMargin() {
-      this.message = this.messageArray[Math.round(Math.random()*4)];
+      if(this.createModeIsActive) return false // quick hack
+      this.message = this.messageArray[Math.round(Math.random()*4)]
       return Object.values(this.$store.getters.audioParametersMatchGoalWithMargin[this.name])
         .every(param => param)
     },
