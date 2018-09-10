@@ -3,8 +3,6 @@
     <div class="overlay-content-wrapper">
       <div>
         <h1>Level {{gameLevel}} cleared</h1>
-        <h2>Your Score: {{gameScore}}</h2>
-        <h2>High Score: {{gameHighScore}}</h2>
         <!-- <p class="score">Your current score: {{gameScore}}</p> -->
       </div>
       <svg viewBox="0 0 250 250" height="400px" width="400px" v-if="currentAnim==='ping'">
@@ -64,12 +62,19 @@
 
       </svg>
 
+      <div class="score">
+        <p>Level score</p>
+        <h2>{{gameScore}}</h2>
+      </div>
+      <div class="score">
+        <p>High score</p>
+        <h2>{{gameHighScore}}</h2>
+      </div>
+
     <button class="button-next"
             @click="$emit('next')"
             ref="button"
-            @mouseover="litUpButton=true"
-            @mouseout="buttonLeave"
-            :style="{'background-color': litUpButton ? buttonColor: ''}">NEXT LEVEL</button>
+            >NEXT LEVEL</button>
     </div>
   </div>
 </template>
@@ -114,7 +119,7 @@ export default {
   created() {
     // randomize animation:
     const currentAnimationNumber = Math.floor(Math.random()*Object.keys(this.anim).length)
-    this.currentAnim = Object.keys(this.anim)[currentAnimationNumber]
+    this.currentAnim = "drum"
 
     window.addEventListener('keyup', this.emitOnKey)
     this.colorArray.push(MODULE_OSCILLATOR_COLOR, MODULE_ENVELOPE_COLOR, MODULE_FILTER_COLOR, MODULE_LFO_COLOR, MODULE_DELAY_COLOR, MODULE_REVERB_COLOR)
@@ -158,7 +163,8 @@ export default {
         ],
         loop: Infinity,
         duration: this.duration*2,
-        easings: easing.cubicBezier(.29,.06,1,-0.24)
+        // easings: easing.cubicBezier(.29,.06,1,-0.24)
+        easings: easing.easeIn
       }
 
       callback = {
@@ -200,11 +206,11 @@ export default {
       }
       return randomColor
     },
-    buttonLeave() {
-      this.litUpButton = false;
-      console.log(`the button leaft the building: ${this.changeColor(this.buttonColor)}`)
-      this.buttonColor = this.changeColor(this.buttonColor)
-    },
+    // buttonLeave() {
+    //   this.litUpButton = false;
+    //   console.log(`the button leaft the building: ${this.changeColor(this.buttonColor)}`)
+    //   this.buttonColor = this.changeColor(this.buttonColor)
+    // },
   },
   computed: {
     gameScore () {
@@ -253,6 +259,13 @@ export default {
     font-weight: 300;
     font-size: 3em;
     max-width: 13em;
+    margin:0;
+  }
+  & p {
+    margin:0
+  }
+  & .score {
+    margin: 1em;
   }
 }
 
@@ -278,14 +291,18 @@ export default {
   font-weight: 500
 }
 .button-next {
-    background: none;
-    color: inherit;
-    padding: 0;
-    font: inherit;
-    cursor: pointer;
-    outline: inherit;
-    padding: 1rem 2rem;
-  border: 1px solid white;
+  color: inherit;
+  padding: 0;
+  font: inherit;
+  cursor: pointer;
+  outline: inherit;
+  padding: 1rem 2rem;
+  background: none;
+  border: 1px solid #ff8574;
+  transition: all .2s;
+  &:hover {
+    background: #ff8574;
+  }
 }
 
 </style>
