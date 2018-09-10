@@ -110,33 +110,8 @@ export default {
   },
 
   mounted() {
-    let conf;
-    let callback;
 
-    if (this.currentAnim == 'ping') {
-      conf = {
-        values: [
-          { ballY: 0, racketRotate: 0, racketYOffset: 0, stick1: 0},
-          { ballY: -200, racketRotate: 12, racketYOffset: 15, stick1: 20},
-          { ballY: 0, racketRotate:0 , racketYOffset: 0, stick1: 0}
-        ],
-        loop: Infinity,
-        duration: this.duration,
-        easings: [easing.easeOut, easing.easeIn, easing.lineair]
-      }
-      callback = {
-        update: v => {
-          this.anim.ping.ballHeight = v.ballY
-          this.anim.ping.racketTurn = v.racketRotate
-          this.anim.ping.racketYOffset = v.racketYOffset
-          if (v.ballY == 0) {
-            this.currentColor = this.changeColor()
-          }
-        },
-        complete: () => {}
-      }
-    } else if (this.currentAnim == 'drum') {
-      conf = {
+let conf = {
         values: [
           {
             stick1: -20,
@@ -173,14 +148,13 @@ export default {
             stick2AdditionalTwirl:300,
             changedTransitionOrigin: 700
           }
-
         ],
         loop: 0,
         duration: this.duration*2,
         easings: easing.cubicBezier(.29,.06,1,-0.24)
       }
 
-      callback = {
+    let  callback = {
         update: v => {
           this.anim.drum.stick1 = v.stick1
           this.anim.drum.stick1Offset=v.stick1Offset
@@ -198,7 +172,7 @@ export default {
         },
         complete: () => {}
       }
-    }
+
     keyframes(conf).start(callback)
     this.$refs.button.focus()
   },
