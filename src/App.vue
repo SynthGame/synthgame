@@ -57,6 +57,7 @@ export default {
     ...mapState({
       sequencesPassedInCurrentLevel: state => state.gameState.sequencesPassedInCurrentLevel,
       level: state => state.gameState.level,
+      timerIsRunning: state => state.gameState.timerIsRunning
     }),
     ...mapGetters({
       allParametersMatchGoal: 'allParametersMatchGoal',
@@ -132,7 +133,7 @@ export default {
   },
   watch: {
     allParametersMatchGoal (val) {
-      if(val === true) {
+      if(val === true && this.timerIsRunning) {
         this.displaySuccesMessage()
         this.$store.dispatch('levelDone') // would be nice to pass timeleft here but it is being passed by timer on gamestop
       }
