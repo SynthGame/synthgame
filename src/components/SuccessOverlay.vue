@@ -64,7 +64,12 @@
 
       </svg>
 
-    <button class="button-next" @click="$emit('next')">NEXT LEVEL</button>
+    <button class="button-next"
+            @click="$emit('next')"
+            ref="button"
+            @mouseover="litUpButton=true"
+            @mouseout="buttonLeave"
+            :style="{'background-color': litUpButton ? buttonColor: ''}">NEXT LEVEL</button>
     </div>
   </div>
 </template>
@@ -102,7 +107,8 @@ export default {
       },
       colorArray: [],
       currentColor: '',
-      currentColor1: ''
+      currentColor1: '',
+      litUpButton: false
     }
   },
   created() {
@@ -114,7 +120,6 @@ export default {
     this.colorArray.push(MODULE_OSCILLATOR_COLOR, MODULE_ENVELOPE_COLOR, MODULE_FILTER_COLOR, MODULE_LFO_COLOR, MODULE_DELAY_COLOR, MODULE_REVERB_COLOR)
     this.currentColor = this.changeColor(this.currentColor)
     this.currentColor1 = this.changeColor(this.currentColor1)
-
   },
 
   mounted() {
@@ -162,17 +167,18 @@ export default {
           this.anim.drum.stick2 = v.stick2
           if (v.stick1 === 0) {
             this.currentColor = this.changeColor(this.currentColor)
-            console.log(`this.currentColor changed!`)
+            // console.log(`this.currentColor changed!`)
           }
           if (v.stick2 < 0.1) {
             this.currentColor1 = this.changeColor(this.currentColor1)
-            console.log(`this.currentColor1 changed!`)
+            // console.log(`this.currentColor1 changed!`)
           }
         },
         complete: () => {}
       }
     }
     keyframes(conf).start(callback)
+    this.$refs.button.focus()
   },
   beforeDestroy() {
     window.removeEventListener('keyup', this.emitOnKey)
@@ -190,10 +196,15 @@ export default {
       // does that even work?
       if (randomColor===current) {
         randomColor = this.colorArray[Math.floor(Math.random()*this.colorArray.length)]
-        console.log('repeat!')
+        // console.log('repeat!')
       }
       return randomColor
-    }
+    },
+    buttonLeave() {
+      this.litUpButton = false;
+      console.log(`the button leaft the building: ${this.changeColor(this.buttonColor)}`)
+      this.buttonColor = this.changeColor(this.buttonColor)
+    },
   },
   computed: {
     gameScore () {
@@ -277,12 +288,4 @@ export default {
   border: 1px solid white;
 }
 
-// ok, so apparently regular keyframes do not work unless defined somewhere higher:
-// https://stackoverflow.com/questions/47283989/why-are-css-keyframe-animations-broken-in-vue-components-with-scoped-styling
-// @keyframes racket-movement {
-//   0% { transform: rotate(0) }
-//   20% { transform: rotate(10deg)}
-//   50% { transform: rotate(20deg) }
-//   100% { transform: rotate(100%) }
-// }
 </style>

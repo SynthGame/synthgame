@@ -45,6 +45,7 @@
       </svg>
 
     <button class="button-next"
+            ref="button"
             @click="startAgain"
             @mouseover="litUpButton=true"
             @mouseout="buttonLeave"
@@ -160,6 +161,7 @@ export default {
       }
     }
     keyframes(conf).start(callback)
+    this.$refs.button.focus()
   },
   beforeDestroy() {
     window.removeEventListener('keyup', this.emitOnKey)
