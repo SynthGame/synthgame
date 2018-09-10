@@ -1,15 +1,15 @@
 <template>
   <div class="about">
     <h1>This is an about page</h1>
-    <lfo-module/>
+    <failure-overlay/>
   </div>
 </template>
 
 <script>
-import LfoModule from '@/components/module/LfoModule'
+import FailureOverlay from '@/components/FailureOverlay'
 export default {
   components: {
-    LfoModule
+    FailureOverlay
   }
 }
 </script>
