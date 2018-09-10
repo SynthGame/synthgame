@@ -4,3 +4,4 @@ make startscreen home route and creat and play /create and /play routes
 rename typeOsc to type
 cleanup unused dials, both in HTML template and in fucntions, not every store action/function assumes the same ammount and types of dials
 fix done dot blinking not correct size
+hide done dots in navbar based on available modules
