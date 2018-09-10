@@ -214,6 +214,9 @@ export default new Vuex.Store({
       return flatMap(getters.audioParametersMatchGoalWithMargin, val => values(val))
         .every(val => val)
     },
+    displayedLevel: (state, getters) => {
+      return state.gameState.level + 1
+    },
     audioParametersMatchGoalWithMargin: (state) => {
       return mapValues(state.audioParameters, (val, moduleName) => {
         return mapValues(val, (val, parameterName) => {
@@ -229,18 +232,25 @@ export default new Vuex.Store({
   },
   actions: {
     randomizeAudioParameters ({state, commit}, randomizeArray) {
-      const randomizeValues = obj => mapValues(obj, (val, moduleName) => {
+      const randomizeValues = (obj, selectObj) => mapValues(obj, (val, moduleName) => {
         return mapValues(val, (val, parameterName) => {
-          // if randomizeArray is provided and the value is falsey return store value
-          if (randomizeArray && !randomizeArray[moduleName][parameterName]) return state.audioParameters[moduleName][parameterName]
+          // if selectObj is provided and the value is falsey return store value
+          if (selectObj && !selectObj[moduleName][parameterName]) return selectObj[moduleName][parameterName]
           const parameterValDef = state.gameState.possibleValues[moduleName][parameterName]
           return Array.isArray(parameterValDef)
             ? parameterValDef[random(0, parameterValDef.length - 1)]
             : random(0, 100)
         })
       })
+      // randomizes correct values once more, no recursion here, fear of memory slurping
+      let randomPreset = randomizeValues(state.audioParameters, randomizeArray) // randomly generated preset 
+      let accedentlyCorrectValues = mapValues(randomPreset, (modulePreset, moduleName) => {
+        mergeWith(modulePreset, state.gameState.goal[moduleName], (a, b) => a === b || inRange(a, b + state.gameState.margin, b - state.gameState.margin))
+      })
+      randomPreset = randomizeValues(randomPreset, accedentlyCorrectValues)
+
       return commit('setAudioParameterToPreset', {
-        preset: randomizeValues(state.audioParameters)
+        preset: randomPreset
       })
     },
     randomizGoalParameters ({state, commit}) {

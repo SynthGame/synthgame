@@ -28,7 +28,7 @@
       </button>
     </div>
     <div class="button-section" v-for="i in [0,1,2,3]" :key="i">
-      <span class="button-wrapper" v-for="j in getSubRange(i)" :key="j">
+      <span class="step-wrapper" v-for="j in getSubRange(i)" :key="j">
         <sequencer-button
           v-if="sequencerEditState === 0"
           @click="toggleNoteOnOff(j)"
@@ -103,7 +103,7 @@ export default {
     initSynth () {
       let kickTime = true;
       this.toneLoop = audio.setMainLoop({
-        noteArray: range(0, 15),
+        noteArray: range(0, 16),
         subdivision: '8n'
       }, (time, note) => {
         this.setStep(note)
@@ -244,16 +244,14 @@ button.sequencer-button {
 }
 
 .button-section {
-  display: inline-block;
-  // border-top: 2px solid $main-seq-color;
-  width: 220px;
-  margin: .4em 5px;
+  display: flex;
+  width: 100%;
 }
 
 .button-wrapper {
   margin-top: -1em;
-  display: inline-block;
-  width: 55px;
+  display: flex;
+  width: 10%;
   &.function {
     width: 100%;
     height: fit-content;

@@ -31,7 +31,7 @@
         v-model="detune"
         v-if="knobsAvailable.detune || createModeIsActive"
         :min="0"
-        :max="120"
+        :max="100"
         knobColor="#ff8574"
         name="Detune"
       ></module-knob>

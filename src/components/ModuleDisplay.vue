@@ -473,7 +473,7 @@ export default {
         const octaveRatio = (octave.value/(octave.max-octave.min))
         const detuneRatio = ((detune.value/detune.max)*1000)/(octave.max-octave.min)
 
-        const iteration = 6.6 * h - h * (4.9 * octaveRatio) + (h * 0.3 * (1 - detuneRatio)) - 115
+        const iteration = 6.6 * h - h * (4.9 * octaveRatio) + (h * 0.3 * (1 - detuneRatio)) - 15
 
         let wave
         // square:
@@ -838,7 +838,7 @@ export default {
         const octaveRatio = (octave.value/(octave.max-octave.min))
         const detuneRatio = ((detune.value/detune.max)*1000)/(octave.max-octave.min)
 
-        const iteration = 6.6 * h - h * (4.9 * octaveRatio) + (h * 0.3 * (1 - detuneRatio)) - 115
+        const iteration = 6.6 * h - h * (4.9 * octaveRatio) + (h * 0.3 * (1 - detuneRatio)) - 15
 
         let wave
         // square:
