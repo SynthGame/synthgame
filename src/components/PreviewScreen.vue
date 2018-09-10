@@ -1,5 +1,5 @@
 <template>
-  <div class="startscreen" @keydown.space="$emit('startPreview')">
+  <div class="startscreen" @keydown.space="$emit('startLevel')">
     <div class="startscreen-content-wrapper">
       <div>
         <h1>Tats</h1>
@@ -10,8 +10,7 @@
         <source src="../../src/assets/intro.mp4" type="video/mp4">
       </video>
       <div>
-        <button class="button-next" @click="$emit('create')">Create</button>
-        <button class="button-next" @click="$emit('startPreview')">Start</button>
+        <button class="button-next" @click="$emit('startLevel')">Start</button>
       </div>
     </div>
   </div>
