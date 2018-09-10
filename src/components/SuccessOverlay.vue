@@ -215,16 +215,7 @@ export default {
     },
     gameLevel () {
       return this.$store.state.gameState.level
-    },
-    computedRackedStyles() {
-      return {'animation-name': 'racket-movement',
-                'animation-duration': '1s',
-                 'animation-iteration-count': '10',
-                  'animation-direction': 'alternate', /* or: normal */
-                  'animation-timing-function': 'ease-out', /* or: ease, ease-in, ease-in-out, linear, cubic-bezier(x1, y1, x2, y2) */
-                  'animation-fill-mode': 'forwards', /* or: backwards, both, none */
-                  'animation-delay': '2s' /* or: Xms */}
-    },
+    }
 
   }
 }
