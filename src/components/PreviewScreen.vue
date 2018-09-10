@@ -2,8 +2,8 @@
   <div class="startscreen" @keydown.space="$emit('startLevel')">
     <div class="startscreen-content-wrapper">
       <div>
-        <h1>Listen closely</h1>
-        <h2>This is the sound we're looking for. You have 30 seconds to create it.</h2>
+        <h1>Level {{gameLevel}}</h1>
+        <h2>You have 30 seconds to re-create the sound playing now.</h2>
         <!-- <h2>Listen closely to the sound, hit randomize, and re-create the sound you're hearing now.</h2> -->
       </div>
       <!-- <iframe width="560" height="315" src="https://www.youtube.com/embed/O7x-AS6idOQ?rel=0?version=3&autoplay=1&controls=0&&showinfo=0&loop=1&playlist=O7x-AS6idOQ" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe> -->
@@ -38,6 +38,11 @@ export default {
         this.$emit('start');
       }
     }
+  },
+  computed: {
+    gameLevel () {
+      return this.$store.getters.displayedLevel
+    },
   }
 }
 </script>

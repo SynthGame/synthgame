@@ -54,6 +54,8 @@ export default [
   {
     oscillator: {
       frequency: true,
+      detune: true,
+      typeOsc: true,
     },
     filter: {},
     envelope: {},
@@ -65,6 +67,8 @@ export default [
   {
     oscillator: {
       frequency: true,
+      detune: true,
+      typeOsc: true,
     },
     filter: {},
     envelope: {},
@@ -76,9 +80,14 @@ export default [
   // level 7
   {
     oscillator: {
+      frequency: true,
       detune: true,
+      typeOsc: true,
     },
-    filter: {},
+    filter: {
+      cutOffFreq: true,
+      type: true
+    },
     envelope: {},
     lfo: {},
     delay: {},
@@ -87,9 +96,15 @@ export default [
   // level 8
   {
     oscillator: {
+      frequency: true,
       detune: true,
+      typeOsc: true,
     },
-    filter: {},
+    filter: {
+      cutOffFreq: true,
+      type: true,
+      setQ: true
+    },
     envelope: {},
     lfo: {},
     delay: {},
@@ -98,10 +113,18 @@ export default [
   // level 9
   {
     oscillator: {
+      frequency: true,
       detune: true,
+      typeOsc: true,
     },
-    filter: {},
-    envelope: {},
+    filter: {
+      cutOffFreq: true,
+      type: true,
+      setQ: true
+    },
+    envelope: {
+      attack: true
+    },
     lfo: {},
     delay: {},
     reverb: {}
@@ -110,11 +133,19 @@ export default [
   // level 10
   {
     oscillator: {
+      frequency: true,
+      detune: true,
       typeOsc: true,
-      frequency: true
     },
-    filter: {},
-    envelope: {},
+    filter: {
+      cutOffFreq: true,
+      type: true,
+      setQ: true
+    },
+    envelope: {
+      attack: true,
+      decay: true
+    },
     lfo: {},
     delay: {},
     reverb: {}
@@ -122,11 +153,20 @@ export default [
   // level 11
   {
     oscillator: {
+      frequency: true,
+      detune: true,
       typeOsc: true,
-      detune: true
     },
-    filter: {},
-    envelope: {},
+    filter: {
+      cutOffFreq: true,
+      type: true,
+      setQ: true
+    },
+    envelope: {
+      attack: true,
+      decay: true,
+      sustain: true,
+    },
     lfo: {},
     delay: {},
     reverb: {}
@@ -135,10 +175,20 @@ export default [
   {
     oscillator: {
       frequency: true,
-      detune: true
+      detune: true,
+      typeOsc: true,
     },
-    filter: {},
-    envelope: {},
+    filter: {
+      cutOffFreq: true,
+      type: true,
+      setQ: true
+    },
+    envelope: {
+      attack: true,
+      decay: true,
+      sustain: true,
+      release: true
+    },
     lfo: {},
     delay: {},
     reverb: {}
@@ -147,35 +197,74 @@ export default [
   {
     oscillator: {
       frequency: true,
-      typeOsc: true
+      detune: true,
+      typeOsc: true,
     },
-    filter: {},
-    envelope: {},
-    lfo: {},
+    filter: {
+      cutOffFreq: true,
+      type: true,
+      setQ: true
+    },
+    envelope: {
+      attack: true,
+      decay: true,
+      sustain: true,
+      release: true
+    },
+    lfo: {
+      amount: true
+    },
     delay: {},
     reverb: {}
   },
   // level 14
   {
     oscillator: {
+      frequency: true,
       detune: true,
-      typeOsc: true
+      typeOsc: true,
     },
-    filter: {},
-    envelope: {},
-    lfo: {},
+    filter: {
+      cutOffFreq: true,
+      type: true,
+      setQ: true
+    },
+    envelope: {
+      attack: true,
+      decay: true,
+      sustain: true,
+      release: true
+    },
+    lfo: {
+      amount: true,
+      frequency: true
+    },
     delay: {},
     reverb: {}
   },
   // level 15
   {
     oscillator: {
+      frequency: true,
       detune: true,
-      frequency: true
+      typeOsc: true,
     },
-    filter: {},
-    envelope: {},
-    lfo: {},
+    filter: {
+      cutOffFreq: true,
+      type: true,
+      setQ: true
+    },
+    envelope: {
+      attack: true,
+      decay: true,
+      sustain: true,
+      release: true
+    },
+    lfo: {
+      amount: true,
+      frequency: true,
+      type: true
+    },
     delay: {},
     reverb: {}
   },
