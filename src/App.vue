@@ -5,8 +5,8 @@
     @create="startCreateMode"/>
     <success-overlay v-if="displaySuccessOverlay==true"
     @next="startNextLevel"/>
-    <success-overlay v-if="displayFailureOverlay==true"
-    @startagain="startLevel(level)"/>
+    <failure-overlay v-if="isGameOver==true"
+    @startagain="startAgain"/>
 
     <!-- <div id="nav">
       <router-link to="/">Home</router-link> |
@@ -61,7 +61,10 @@ export default {
     }),
     ...mapGetters({
       allParametersMatchGoal: 'allParametersMatchGoal',
-    })
+    }),
+    isGameOver() {
+      return this.$store.state.gameState.isGameOver
+    }
   },
   methods: {
     init () {
@@ -97,6 +100,10 @@ export default {
     displayFailureMessage () {
       this.displaySuccessOverlay = true
     },
+    startAgain(){
+      this.$store.dispatch('startAgain')
+      this.init()
+    },
     startPlayMode(){
       this.displayStartOverlay = false // hide start overlay
       this.startLevel(0)
@@ -129,7 +136,10 @@ export default {
     startNextLevel(level) {
       this.$store.commit('increaseLevelValue', 1)
       this.startLevel(this.level) // TODO: should be + 1
-    }
+    },
+    gameLevel () {
+      return this.$store.state.gameState.level
+    },
   },
   watch: {
     allParametersMatchGoal (val) {

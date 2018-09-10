@@ -19,8 +19,7 @@
                 ]"/>
     <div class="knobs">
       <div
-        v-if="knobsAvailable.type"
-        v-show="timerIsRunning"
+        v-if="knobsAvailable.type || createModeIsActive"
         class="button-wrapper"
       >
         <module-button color="#6e01d1" shape="lowpass" :isPressed="type==='lowpass'" @click.native="type='lowpass'"/>
