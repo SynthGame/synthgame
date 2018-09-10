@@ -103,7 +103,7 @@ export default {
     initSynth () {
       let kickTime = true;
       this.toneLoop = audio.setMainLoop({
-        noteArray: range(0, 15),
+        noteArray: range(0, 16),
         subdivision: '8n'
       }, (time, note) => {
         this.setStep(note)
