@@ -1,6 +1,6 @@
 <template>
   <div class="sequencer">
-    <module-title :indicator-active="dialsAreWithinMargin" :module-color="moduleColor">
+    <module-title>
       <h2 slot="title">Tats</h2>
       <h3 slot="subtitle">Sequencer</h3>
     </module-title>
