@@ -235,7 +235,7 @@ export default new Vuex.Store({
       const randomizeValues = (obj, selectObj) => mapValues(obj, (val, moduleName) => {
         return mapValues(val, (val, parameterName) => {
           // if selectObj is provided and the value is falsey return store value
-          if (selectObj && !selectObj[moduleName][parameterName]) return state.audioParameters[moduleName][parameterName]
+          if (selectObj && !selectObj[moduleName][parameterName]) return selectObj[moduleName][parameterName]
           const parameterValDef = state.gameState.possibleValues[moduleName][parameterName]
           return Array.isArray(parameterValDef)
             ? parameterValDef[random(0, parameterValDef.length - 1)]
@@ -248,7 +248,7 @@ export default new Vuex.Store({
         mergeWith(modulePreset, state.gameState.goal[moduleName], (a, b) => a === b || inRange(a, b + state.gameState.margin, b - state.gameState.margin))
       })
       randomPreset = randomizeValues(randomPreset, accedentlyCorrectValues)
-      
+
       return commit('setAudioParameterToPreset', {
         preset: randomPreset
       })
