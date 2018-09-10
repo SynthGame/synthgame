@@ -1,12 +1,22 @@
 <template>
   <div id="app">
-    <start-screen v-if="displayStartOverlay==true"
-    @start="startPlayMode"
-    @create="startCreateMode"/>
-    <success-overlay v-if="displaySuccessOverlay==true"
-    @next="startNextLevel"/>
-    <failure-overlay v-if="isGameOver==true"
-    @startagain="startAgain"/>
+    <start-screen 
+      v-if="displayStartOverlay"
+      @startPreview="startPlayMode"
+      @create="startCreateMode"
+    />
+    <preview-screen 
+      v-if="displayPreviewOverlay"
+      @startLevel="endPreview"
+    />
+    <success-overlay 
+      v-if="displaySuccessOverlay"
+      @next="startNextLevel"
+    />
+    <failure-overlay 
+      v-if="isGameOver"
+      @startagain="startAgain"
+    />
 
     <!-- <div id="nav">
       <router-link to="/">Home</router-link> |
@@ -24,6 +34,7 @@ import audio from '@/audio'
 import SuccessOverlay from '@/components/SuccessOverlay'
 import FailureOverlay from '@/components/FailureOverlay'
 import StartScreen from '@/components/StartScreen'
+import PreviewScreen from '@/components/PreviewScreen'
 import { SYNTH_BPM } from '@/constants'
 import levels from '@/levels'
 
@@ -34,13 +45,15 @@ export default {
       displaySuccessOverlay: false,
       displayFailureOverlay: false,
       displayStartOverlay: true,
+      displayPreviewOverlay: false,
       loop: null
     }
   },
   components: {
     SuccessOverlay,
     FailureOverlay,
-    StartScreen
+    StartScreen,
+    PreviewScreen
   },
   created () {
     this.init()
@@ -85,7 +98,7 @@ export default {
         };
         audio.playNote(randomLoop[i], {})
 
-        if (i === 15) this.$store.commit('increaseSequencesPassedInCurrentLevel')
+        // if (i === 15) this.$store.commit('increaseSequencesPassedInCurrentLevel')
       })
       // set BPM
       audio.setBpm(SYNTH_BPM)
@@ -117,6 +130,7 @@ export default {
       this.displaySuccessOverlay = false
       this.displayFailureOverlay = false
       this.displayStartOverlay = false
+      this.displayPreviewOverlay = true
       // import level config
       const availableParameters = levels[level]
 
@@ -132,6 +146,11 @@ export default {
       })
       this.loop.start()
       // rest will be done by watcher of sequencesPassedInCurrentLevel
+    },
+    endPreview () {
+      this.displayPreviewOverlay = false
+      this.$store.commit('startTimerIsRunning')
+      this.$store.dispatch('setSynthToDefaultParameters', audio)
     },
     startNextLevel(level) {
       this.$store.commit('increaseLevelValue', 1)
@@ -152,8 +171,7 @@ export default {
       if(val === 2) {
         // this.init()
         // this.loop.start()
-        this.$store.commit('startTimerIsRunning')
-        this.$store.dispatch('setSynthToDefaultParameters', audio)
+        
       }
     }
   }
