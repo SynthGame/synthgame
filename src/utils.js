@@ -17,7 +17,7 @@ export const vuexSyncGen = (device, parameter, setCallback) => {
   }
 }
 
-export const mapValueToRange = (val, max, newRange) => {
-  if (val > max) return max
-  return round((val / max) * newRange)
+export const mapValueToRange = (val, max, newMax) => {
+  if (val > max) return newMax
+  return round((val / max) * newMax)
 }
