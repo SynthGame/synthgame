@@ -37,8 +37,8 @@ export default {
 $main-seq-color: #F40056;
 
 .sequencer-button {
-  height: 100px;
-  width: 45px;
+  height: 8em;
+    width: 4em;
   display: inline-flex;
   margin: 10px 5px;
   padding: 0;
