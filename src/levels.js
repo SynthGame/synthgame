@@ -1,10 +1,10 @@
 // call me Pieter
 export default [
-  // level 1 - 3 type
+  // level 1 - 3 typeOsc
   // level 1
   {
     oscillator: {
-      type: true
+      typeOsc: true
     },
     filter: {},
     envelope: {},
@@ -15,7 +15,8 @@ export default [
   // level 2
   {
     oscillator: {
-      type: true
+      typeOsc: true,
+      detune: true
     },
     filter: {},
     envelope: {},
@@ -26,7 +27,8 @@ export default [
   // level 3
   {
     oscillator: {
-      type: true
+      frequency: true,
+      detune: true,
     },
     filter: {},
     envelope: {},
@@ -39,6 +41,8 @@ export default [
   {
     oscillator: {
       frequency: true,
+      detune: true,
+      typeOsc: true,
     },
     filter: {},
     envelope: {},
@@ -106,7 +110,7 @@ export default [
   // level 10
   {
     oscillator: {
-      type: true,
+      typeOsc: true,
       frequency: true
     },
     filter: {},
@@ -118,7 +122,7 @@ export default [
   // level 11
   {
     oscillator: {
-      type: true,
+      typeOsc: true,
       detune: true
     },
     filter: {},
@@ -143,7 +147,7 @@ export default [
   {
     oscillator: {
       frequency: true,
-      type: true
+      typeOsc: true
     },
     filter: {},
     envelope: {},
@@ -155,7 +159,7 @@ export default [
   {
     oscillator: {
       detune: true,
-      type: true
+      typeOsc: true
     },
     filter: {},
     envelope: {},
