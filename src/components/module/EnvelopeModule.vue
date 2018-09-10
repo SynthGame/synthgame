@@ -17,10 +17,10 @@
                 {name: 'sustainGoal', min: 1, max: 100, value: this.sustainGoal},
                 {name: 'releasevGoal', min: 1, max: 100, value: this.releaseGoal}
                 ]"/>
-    <div class="knobs" v-show="timerIsRunning">
+    <div class="knobs">
       <module-knob
         v-model="attack"
-        v-if="knobsAvailable.attack"
+        v-if="knobsAvailable.attack || createModeIsActive"
         :min="0"
         :max="100"
         knobColor="#e4e259"
@@ -29,7 +29,7 @@
       ></module-knob>
       <module-knob
         v-model="decay"
-        v-if="knobsAvailable.decay"
+        v-if="knobsAvailable.decay || createModeIsActive"
         :min="0"
         :max="100"
         knobColor="#e4e259"
@@ -38,7 +38,7 @@
       ></module-knob>
       <module-knob
         v-model="sustain"
-        v-if="knobsAvailable.sustain"
+        v-if="knobsAvailable.sustain || createModeIsActive"
         :min="0"
         :max="100"
         knobColor="#e4e259"
@@ -47,7 +47,7 @@
       ></module-knob>
       <module-knob
         v-model="release"
-        v-if="knobsAvailable.release"
+        v-if="knobsAvailable.release || createModeIsActive"
         :min="0"
         :max="100"
         knobColor="#e4e259"
@@ -128,6 +128,7 @@ export default {
       sustainGoal: state => state.gameState.goal.envelope.sustain,
       releaseGoal: state => state.gameState.goal.envelope.release,
       knobsAvailable: state => state.gameState.knobsAvailable.envelope,
+      createModeIsActive: state => state.gameState.createModeIsActive
     })
   }
 }

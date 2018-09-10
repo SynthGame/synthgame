@@ -17,7 +17,7 @@
                 {name: 'qGoal', min: 0, max: 100, value: setQGoal},
                 {name: 'gainGoal', min: 0, max: 100, value: gain},
                 ]"/>
-    <div class="knobs" v-show="timerIsRunning">
+    <div class="knobs">
       <div
         v-if="knobsAvailable.type"
         v-show="timerIsRunning"
@@ -30,7 +30,7 @@
       </div>
       <module-knob
         v-model="cutOffFreq"
-        v-if="knobsAvailable.cutOffFreq"
+        v-if="knobsAvailable.cutOffFreq || createModeIsActive"
         :min="0"
         :max="100"
         knobColor="#6e01d1"
@@ -39,7 +39,7 @@
       ></module-knob>
       <module-knob
         v-model="setQ"
-        v-if="knobsAvailable.setQ"
+        v-if="knobsAvailable.setQ || createModeIsActive"
         :min="0"
         :max="100"
         knobColor="#6e01d1"
@@ -120,6 +120,7 @@ export default {
       setQGoal: state => state.gameState.goal.filter.setQ,
       typeArray: state => state.gameState.possibleValues.filter.type,
       knobsAvailable: state => state.gameState.knobsAvailable.filter,
+      createModeIsActive: state => state.gameState.createModeIsActive
     })
   },
   watch: {

@@ -18,10 +18,10 @@
                    {name: 'Shape', min:0, max:3, value: this.typeGoal},
                    {name: 'Rlgl', min:0, max:3, value: Math.pow(this.frequencyGoal, (this.frequencyGoal / 100)) - 0.99}
                    ]"/>
-        <div class="knobs" v-show="timerIsRunning">
+        <div class="knobs">
           <module-knob
             v-model="frequency"
-            v-if="knobsAvailable.frequency"
+            v-if="knobsAvailable.frequency || createModeIsActive"
             :min="1"
             :max="100"
             knobColor="#5bd484"
@@ -30,7 +30,7 @@
           ></module-knob>
           <module-knob
             v-model="amount"
-            v-if="knobsAvailable.amount"
+            v-if="knobsAvailable.amount || createModeIsActive"
             :min="0"
             :max="100"
             knobColor="#5bd484"
@@ -120,6 +120,7 @@ export default {
       typeGoal: state => state.gameState.goal.lfo.type,
       amountGoal: state => state.gameState.goal.lfo.amount,
       knobsAvailable: state => state.gameState.knobsAvailable.lfo,
+      createModeIsActive: state => state.gameState.createModeIsActive
     })
   },
   watch: {

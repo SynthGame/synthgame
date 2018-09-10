@@ -8,35 +8,35 @@
         class="module sequencer"
       />
       <OscillatorModule
-        v-if="hasActiveControlls('oscillator')"
+        v-if="moduleIsUseable('oscillator')"
         v-masonry-tile
         :class="[(activeModule == 0 ? 'active' : '')]"
       />
       <!-- <div v-for="n in 1" v-masonry-tile class="module empty"></div> -->
       <FilterModule
-        v-if="hasActiveControlls('filter')"
+        v-if="moduleIsUseable('filter')"
         v-masonry-tile
         :class="[(activeModule == 1 ? 'active' : '')]"
       />
       <EnvelopeModule 
-        v-if="hasActiveControlls('envelope')"
+        v-if="moduleIsUseable('envelope')"
         v-masonry-tile
         :class="[(activeModule == 2 ? 'active' : '')]"
       />
       <!-- <div v-for="n in 1" v-masonry-tile class="module empty"></div> -->
       <LfoModule
-        v-if="hasActiveControlls('lfo')"
+        v-if="moduleIsUseable('lfo')"
         v-masonry-tile
         :class="[(activeModule == 3 ? 'active' : '')]"
       />
       <DelayModule
-        v-if="hasActiveControlls('delay')"
+        v-if="moduleIsUseable('delay')"
         v-masonry-tile
         :class="[(activeModule == 4 ? 'active' : '')]"
       />
       <!-- <div v-for="n in 1" v-masonry-tile class="module empty"></div> -->
       <ReverbModule
-        v-if="hasActiveControlls('reverb')"
+        v-if="moduleIsUseable('reverb')"
         v-masonry-tile
         :class="[(activeModule == 5 ? 'active' : '')]"
       />
@@ -103,7 +103,8 @@ export default {
     showRev () {
       this.activeModule = 5;
     },
-    hasActiveControlls (moduleName) {
+    moduleIsUseable (moduleName) {
+      if (this.createModeIsActive) return true
       return some(this.knobsAvailable[moduleName]) // some are truthy
     }
   },

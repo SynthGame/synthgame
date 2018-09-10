@@ -142,7 +142,7 @@ export default {
         // this.init()
         // this.loop.start()
         this.$store.commit('startTimerIsRunning')
-        this.$store.dispatch('setSynthToAudioParameters', audio)
+        this.$store.dispatch('setSynthToDefaultParameters', audio)
       }
     }
   }
