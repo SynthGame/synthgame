@@ -3,15 +3,15 @@
     <div class="startscreen-content-wrapper">
       <div>
         <h1>Tats</h1>
-        <h2>Align all synthesizer controls before 00:00!</h2>
+        <h2>A guide to synthesizers, played by ear.</h2>
       </div>
       <!-- <iframe width="560" height="315" src="https://www.youtube.com/embed/O7x-AS6idOQ?rel=0?version=3&autoplay=1&controls=0&&showinfo=0&loop=1&playlist=O7x-AS6idOQ" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe> -->
       <video width="480" autoplay loop muted>
         <source src="../../src/assets/intro.mp4" type="video/mp4">
       </video>
       <div>
-        <button class="button-next" @click="$emit('create')">Create</button>
-        <button class="button-next" @click="$emit('startPreview')">Start</button>
+        <button class="button-next" @click="$emit('startPreview')">Play game</button>
+        <button class="button-next" @click="$emit('create')">Create level</button>
       </div>
     </div>
   </div>

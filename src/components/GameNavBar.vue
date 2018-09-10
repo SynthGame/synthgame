@@ -1,7 +1,7 @@
 <template>
   <nav class="main">
     <h2 class="game_title">Tats
-    <span class="main__level">Level {{gameLevel + 1}}</span>
+    <span class="main__level">Level {{gameLevel}}</span>
     <span :class="{
                 'module__name__status-indicator': true,
                 'module__name__status-indicator--active': oscillatorComplete
@@ -59,7 +59,7 @@
     ></span>
     </h2>
     <span v-if="timerIsRunning === false && createModeIsActive === false" class="timer">First listen to the sound we'll recreate</span>
-    <span v-else-if="timerIsRunning === true && createModeIsActive === false" class="timer">Now recreate the sound! Time left: {{paddedTimeLeftString}}</span>
+    <span v-else-if="timerIsRunning === true && createModeIsActive === false" class="timer">{{paddedTimeLeftString}}</span>
     <span>•</span>
   </nav>
 </template>
@@ -112,7 +112,7 @@ export default {
       return Object.values(this.$store.getters.audioParametersMatchGoalWithMargin['reverb']).every(param => param)
     },
     gameLevel () {
-      return this.$store.state.gameState.level
+      return this.$store.getters.displayedLevel
     },
     paddedTimeLeftString () {
       return `00:${padStart(this.timeLeftSeconds, 2, '0')}`
