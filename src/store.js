@@ -214,6 +214,9 @@ export default new Vuex.Store({
       return flatMap(getters.audioParametersMatchGoalWithMargin, val => values(val))
         .every(val => val)
     },
+    displayedLevel: (state, getters) => {
+      return state.gameState.level + 1
+    },
     audioParametersMatchGoalWithMargin: (state) => {
       return mapValues(state.audioParameters, (val, moduleName) => {
         return mapValues(val, (val, parameterName) => {

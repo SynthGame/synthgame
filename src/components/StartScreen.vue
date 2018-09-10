@@ -10,8 +10,8 @@
         <source src="../../src/assets/intro.mp4" type="video/mp4">
       </video>
       <div>
-        <button class="button-next" @click="$emit('create')">Create</button>
-        <button class="button-next" @click="$emit('startPreview')">Start</button>
+        <button class="button-next" @click="$emit('startPreview')">Play game</button>
+        <button class="button-next" @click="$emit('create')">Create level</button>
       </div>
     </div>
   </div>

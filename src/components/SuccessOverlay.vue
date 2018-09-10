@@ -214,7 +214,7 @@ export default {
       return this.$store.state.gameState.highScore
     },
     gameLevel () {
-      return this.$store.state.gameState.level
+      return this.$store.getters.displayedLevel
     },
     computedRackedStyles() {
       return {'animation-name': 'racket-movement',
