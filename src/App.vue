@@ -1,19 +1,20 @@
 <template>
   <div id="app">
-    <start-screen 
+    <start-screen
       v-if="displayStartOverlay"
       @startPreview="startPlayMode"
       @create="startCreateMode"
     />
-    <preview-screen 
+    <preview-screen
       v-if="displayPreviewOverlay"
-      @startLevel="endPreview"
+      @startLevel="beginSvoosh"
     />
-    <success-overlay 
+    <svoosh v-if="isThereSvooshComponent" :isFired="svooshIt" @midway="endPreview" @bye="endSvoosh"/>
+    <success-overlay
       v-if="displaySuccessOverlay"
       @next="startNextLevel"
     />
-    <failure-overlay 
+    <failure-overlay
       v-if="isGameOver"
       @startagain="startAgain"
     />
@@ -35,6 +36,7 @@ import SuccessOverlay from '@/components/SuccessOverlay'
 import FailureOverlay from '@/components/FailureOverlay'
 import StartScreen from '@/components/StartScreen'
 import PreviewScreen from '@/components/PreviewScreen'
+import Svoosh from '@/components/Svoosh'
 import { SYNTH_BPM } from '@/constants'
 import levels from '@/levels'
 
@@ -46,14 +48,17 @@ export default {
       displayFailureOverlay: false,
       displayStartOverlay: true,
       displayPreviewOverlay: false,
-      loop: null
+      loop: null,
+      isThereSvooshComponent: false,
+      svooshIt: false
     }
   },
   components: {
     SuccessOverlay,
     FailureOverlay,
     StartScreen,
-    PreviewScreen
+    PreviewScreen,
+    Svoosh
   },
   created () {
     this.init()
@@ -147,6 +152,15 @@ export default {
       this.loop.start()
       // rest will be done by watcher of sequencesPassedInCurrentLevel
     },
+    beginSvoosh() {
+      console.log("begin svooshing!")
+      this.isThereSvooshComponent = true;
+      setTimeout(()=>{this.svooshIt=true}, 0)
+    },
+    endSvoosh() {
+      setTimeout(()=>{this.isThereSvooshComponent=false}, 500)
+      // this.isThereSvooshComponent=false
+    },
     endPreview () {
       this.displayPreviewOverlay = false
       this.$store.commit('startTimerIsRunning')
@@ -171,7 +185,7 @@ export default {
       if(val === 2) {
         // this.init()
         // this.loop.start()
-        
+
       }
     }
   }

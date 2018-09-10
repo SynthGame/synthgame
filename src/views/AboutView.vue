@@ -1,15 +1,31 @@
 <template>
   <div class="about">
     <h1>This is an about page</h1>
-    <failure-overlay/>
+    <svoosh :isFired="isFired" @midway="change"/>
+    <button @click="triggerSvoosh" style="z-index: 99999999999">{{content}}</button>
   </div>
 </template>
 
 <script>
-import FailureOverlay from '@/components/FailureOverlay'
+import Svoosh from '@/components/Svoosh'
 export default {
   components: {
-    FailureOverlay
+    Svoosh
+  },
+  data() {
+    return {
+      isFired: false,
+      content: 'HEHE'
+    }
+  },
+  methods: {
+    triggerSvoosh() {
+      this.isFired=!this.isFired
+      },
+    change() {
+      this.content = 'haaahaaaaaaa'
+      // this.isFired = false
+    }
   }
 }
 </script>
