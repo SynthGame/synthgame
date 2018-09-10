@@ -107,7 +107,7 @@ export default new Vuex.Store({
           type: ['sine', 'square', 'sawtooth', 'triangle']
         },
         oscillator: {
-          frequency: [65, 131, 262, 523, 1047, 2093],
+          frequency: [65, 131, 262, 523],
           typeOsc: ['sine', 'square', 'sawtooth', 'triangle']
         },
         reverb: {}
