@@ -21,16 +21,16 @@ export default new Vuex.Store({
         // phase: 0
       },
       filter: {
-        cutOffFreq: 60,
+        cutOffFreq: 70,
         type: 'lowpass',
         setQ: 0,
         // gain: 50
       },
       envelope: {
         attack: 0,
-        decay: 5,
-        sustain: 30,
-        release: 10
+        decay: 0,
+        sustain: 90,
+        release: 0
       },
       lfo: {
         frequency: 10,
@@ -72,16 +72,16 @@ export default new Vuex.Store({
           // phase: 0
         },
         filter: {
-          cutOffFreq: 60,
+          cutOffFreq: 70,
           type: 'lowpass',
           setQ: 0,
           // gain: 50
         },
         envelope: {
           attack: 0,
-          decay: 5,
-          sustain: 30,
-          release: 10
+          decay: 0,
+          sustain: 90,
+          release: 0
         },
         lfo: {
           frequency: 10,
@@ -120,15 +120,15 @@ export default new Vuex.Store({
           detune: 60
         },
         filter: {
-          cutOffFreq: 60,
+          cutOffFreq: 70,
           type: 'lowpass',
           setQ: 0
         },
         envelope: {
           attack: 0,
-          decay: 5,
-          sustain: 30,
-          release: 10
+          decay: 0,
+          sustain: 90,
+          release: 0
         },
         lfo: {
           frequency: 10,
@@ -243,7 +243,7 @@ export default new Vuex.Store({
         })
       })
       // randomizes correct values once more, no recursion here, fear of memory slurping
-      let randomPreset = randomizeValues(state.audioParameters, randomizeArray) // randomly generated preset 
+      let randomPreset = randomizeValues(state.audioParameters, randomizeArray) // randomly generated preset
       let accedentlyCorrectValues = mapValues(randomPreset, (modulePreset, moduleName) => {
         mergeWith(modulePreset, state.gameState.goal[moduleName], (a, b) => a === b || inRange(a, b + state.gameState.margin, b - state.gameState.margin))
       })

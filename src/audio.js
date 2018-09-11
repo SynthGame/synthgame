@@ -13,6 +13,7 @@ export default {
   init () {
     log('initializing all submodules before using')
     this.player.init()
+    this.sweepPlayer.init()
     this.oscillator.init()
     this.envelope.init()
     this.lfo.init()
@@ -22,6 +23,7 @@ export default {
     this.volume.init()
 
     const player = this.player.state.device
+    const sweepPlayer = this.sweepPlayer.state.device
     const oscillator = this.oscillator.state.device
     const pitchShift = this.oscillator.state.pitchShift
     const envelope = this.envelope.state.device
@@ -39,7 +41,7 @@ export default {
 
     log(`Starting oscillator`)
     oscillator.start()
-    
+
     return output
 
   },
@@ -78,6 +80,10 @@ export default {
     log(`Playing kick`)
     return this.player.state.device.start();
   },
+  playSweep () {
+    log(`Playing sweep`)
+    return this.sweepPlayer.state.device.start();
+  },
   setToneLength (length) {
     log(`setting envelope tone length to: ${length}`)
     this.state.toneLength = length
@@ -91,6 +97,17 @@ export default {
       log(`Initializing player with options: ${options}`)
       this.state.device = new Tone.Player({
         url : require('./assets/kick.wav'),
+      }).toMaster()
+    }
+  },
+  sweepPlayer: {
+    state: {
+      device: undefined
+    },
+    init (options) {
+      log(`Initializing player with options: ${options}`)
+      this.state.device = new Tone.Player({
+        url : require('./assets/sweeptats.wav'),
       }).toMaster()
     }
   },
