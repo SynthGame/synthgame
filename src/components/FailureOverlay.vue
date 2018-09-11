@@ -101,7 +101,7 @@ export default {
     const currentAnimationNumber = Math.floor(Math.random()*Object.keys(this.anim).length)
     this.currentAnim = Object.keys(this.anim)[currentAnimationNumber]
 
-    window.addEventListener('keyup', this.emitOnKey)
+    window.addEventListener('keydown', this.emitOnKey)
     this.colorArray.push(MODULE_OSCILLATOR_COLOR, MODULE_ENVELOPE_COLOR, MODULE_FILTER_COLOR, MODULE_LFO_COLOR, MODULE_DELAY_COLOR, MODULE_REVERB_COLOR)
     this.buttonColor = this.changeColor(this.buttonColor)
     this.currentColor = this.changeColor(this.currentColor)
@@ -177,7 +177,7 @@ let conf = {
     this.$refs.button.focus()
   },
   beforeDestroy() {
-    window.removeEventListener('keyup', this.emitOnKey)
+    window.removeEventListener('keydown', this.emitOnKey)
   },
   methods:{
     emitOnKey() {
