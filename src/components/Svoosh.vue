@@ -118,7 +118,7 @@ export default {
       }
     },
     randomColor() {
-    return this.black ? "#000" : this.colorArray[Math.floor(Math.random()*this.colorArray.length)]
+    return this.black ? "#5e5e5e" : this.colorArray[Math.floor(Math.random()*this.colorArray.length)]
     },
       getRandomInt(min, max) {
       return Math.floor(Math.random() * (max - min + 1)) + min;
