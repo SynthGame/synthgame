@@ -35,7 +35,7 @@ export default {
   methods: {
     emitOnKey() {
       if (event.keyCode === 13) {
-        this.$emit('start');
+        this.$emit('startLevel');
       }
     }
   },

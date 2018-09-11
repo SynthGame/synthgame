@@ -1,4 +1,4 @@
-<template>
+  <template>
   <div class="overlay">
     <div class="overlay-content-wrapper">
       <div>
@@ -182,7 +182,7 @@ let conf = {
   methods:{
     emitOnKey() {
       if (event.keyCode === 13) {
-        this.$emit('next');
+        this.$emit('startagain');
       }
     },
     changeColor(current) {
