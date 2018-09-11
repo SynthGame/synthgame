@@ -174,8 +174,9 @@ export default {
           if (v.stick1 === 0) {
             this.currentColor = this.changeColor(this.currentColor)
           }
-          if (v.stick2 < 0.05) {
+          if (v.stick2 < 0.01) {
             this.currentColor1 = this.changeColor(this.currentColor1)
+            // console.log(v.stick2)
           }
         },
         complete: () => {}

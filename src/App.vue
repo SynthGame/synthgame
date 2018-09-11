@@ -1,14 +1,18 @@
 <template>
   <div id="app">
-    <start-screen
-      v-if="displayStartOverlay"
-      @startPreview="startPlayMode"
-      @create="startCreateMode"
-    />
+    <transition name="slideout">
+      <start-screen
+        v-if="displayStartOverlay"
+        @startPreview="startPlayMode"
+        @create="startCreateMode"
+      />
+    </transition>
+    <transition name="slidein">
     <preview-screen
       v-if="displayPreviewOverlay"
       @startLevel="beginSvoosh"
     />
+    </transition>
     <svoosh
       v-if="isThereSvooshComponent"
       :isFired="svooshIt"
@@ -22,10 +26,13 @@
       @midway="displaySuccessOverlay=true"
       @bye="endSuccessSvoosh"
     />
+    <transition name="slideout">
     <success-overlay
       v-if="displaySuccessOverlay"
       @next="startNextLevel"
     />
+    </transition>
+
     <failure-overlay
       v-if="isGameOver"
       @startagain="startAgain"
@@ -416,6 +423,31 @@ body {
     &.router-link-exact-active {
       color: #42b983;
     }
+  }
+}
+
+.slideout-leave-active {
+  animation: slideout 1s
+}
+.slidein-enter-active {
+  animation: slidein 1s
+}
+
+@keyframes slideout {
+  0% {
+  transform: translateY(0);
+  }
+  100% {
+  transform: translateY(-100%)
+  }
+}
+
+@keyframes slidein {
+  0% {
+  transform: translateY(100%);
+  }
+  100% {
+  transform: translateY(0)
   }
 }
 
