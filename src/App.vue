@@ -9,7 +9,12 @@
       v-if="displayPreviewOverlay"
       @startLevel="beginSvoosh"
     />
-    <svoosh v-if="isThereSvooshComponent" :isFired="svooshIt" @midway="endPreview" @bye="endSvoosh"/>
+    <svoosh
+      v-if="isThereSvooshComponent"
+      :isFired="svooshIt"
+      @midway="endPreview"
+      @bye="endSvoosh"
+    />
     <success-overlay
       v-if="displaySuccessOverlay"
       @next="startNextLevel"
@@ -158,7 +163,10 @@ export default {
       setTimeout(()=>{this.svooshIt=true}, 0)
     },
     endSvoosh() {
-      setTimeout(()=>{this.isThereSvooshComponent=false}, 500)
+      setTimeout(()=>{
+        this.isThereSvooshComponent=false
+        this.svooshIt = false
+        }, 500)
       // this.isThereSvooshComponent=false
     },
     endPreview () {
