@@ -18,15 +18,6 @@
                 {name: 'gainGoal', min: 0, max: 100, value: gain},
                 ]"/>
     <div class="knobs">
-      <div
-        v-if="knobsAvailable.type || createModeIsActive"
-        class="button-wrapper"
-      >
-        <module-button color="#6e01d1" shape="lowpass" :isPressed="type==='lowpass'" @click.native="type='lowpass'"/>
-        <module-button color="#6e01d1" shape="highpass" :isPressed="type==='highpass'" @click.native="type='highpass'"/>
-        <module-button color="#6e01d1" shape="bandpass" :isPressed="type==='bandpass'" @click.native="type='bandpass'"/>
-        <p>SHAPE</p>
-      </div>
       <module-knob
         v-model="cutOffFreq"
         v-if="knobsAvailable.cutOffFreq || createModeIsActive"
@@ -45,6 +36,15 @@
         name="Resonance"
         module="filter"
       ></module-knob>
+      <div
+        v-if="knobsAvailable.type || createModeIsActive"
+        class="button-wrapper"
+      >
+        <module-button color="#6e01d1" shape="lowpass" :isPressed="type==='lowpass'" @click.native="type='lowpass'"/>
+        <module-button color="#6e01d1" shape="highpass" :isPressed="type==='highpass'" @click.native="type='highpass'"/>
+        <module-button color="#6e01d1" shape="bandpass" :isPressed="type==='bandpass'" @click.native="type='bandpass'"/>
+        <p>SHAPE</p>
+      </div>
     </div>
   </div>
 

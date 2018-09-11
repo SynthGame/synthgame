@@ -1,6 +1,6 @@
 <template>
   <div class="knob">
-    <svg width="55%" style="overflow:visible;" viewBox="0 0 550 550" ref="_svg"
+    <svg width="100%" style="overflow:visible;" viewBox="0 0 550 550" ref="_svg"
       @touchmove="handleTouchMove"
       @click="handleClick"
       @mousedown="handleMouseDown"
@@ -458,10 +458,9 @@ export default {
 <style scoped lang="scss">
 
 .knob {
-  width:70%;
-  margin: auto;
-  padding-top: 1.2em;
-  height:18.4vh;
+  width:35%;
+  margin: 0 .4em;
+  // height:18.4vh;
   // flex:1;
   color: white;
   &__bg {
