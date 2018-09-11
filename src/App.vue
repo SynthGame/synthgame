@@ -271,7 +271,7 @@ export default {
   background-image: url(./assets/bg.svg);
   background-size: stretch;
   width:100vw;
-  height:92vh;
+  height:92vh !important;
 }
 
 .empty {
