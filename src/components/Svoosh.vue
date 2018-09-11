@@ -18,17 +18,21 @@ export default {
     isFired: {
       type:Boolean,
       default: false
+    },
+    black: {
+      type: Boolean,
+      default: false
     }
   },
   name: 'svoosh',
   data() {
     return {
     pathArray: [], // Path elements in parent SVG. These are the layers of the overlay.
-    numPoints: 7, // Number of control points for Bezier Curve.
-    duration: 600, // Animation duration of one path element.
+    numPoints: null, // Number of control points for Bezier Curve.
+    duration: 900, // Animation duration of one path element.
     delayPointsArray: [], // Array of control points for Bezier Curve.
-    delayPointsMax: 300, // Max of delay value in all control points.
-    delayPerPath: 60, // Delay value per path.
+    delayPointsMax: null, // Max of delay value in all control points.
+    delayPerPath: null, // Delay value per path.
     timeStart: Date.now(),
     isOpened: false,
     isAnimating: false,
@@ -37,14 +41,14 @@ export default {
     }
   },
   mounted(){
+    // this.delayPointsMax = Math.floor(Math.random()*(max-min+1)+min)
     this.pathArray.push(this.$refs.path1)
     this.pathArray.push(this.$refs.path2)
     this.pathArray.push(this.$refs.path3)
     this.colorArray.push(MODULE_OSCILLATOR_COLOR, MODULE_ENVELOPE_COLOR, MODULE_FILTER_COLOR, MODULE_LFO_COLOR, MODULE_DELAY_COLOR, MODULE_REVERB_COLOR)
-    this.color = this.randomColor()
+    this.randomizeAll()
   },
   methods: {
-
     open() {
       const range = 4 * Math.random() + 6;
       for (var i = 0; i < this.numPoints; i++) {
@@ -54,11 +58,11 @@ export default {
       this.isOpened = true
       this.timeStart = Date.now();
       this.renderLoop();
-      window.setTimeout(()=>{this.$emit('midway')}, 600)
-      window.setTimeout(() =>{this.close()}, 700)
-      window.setTimeout(()=>{this.$emit('bye')}, 900)
-      this.color = this.randomColor()
-
+      window.setTimeout(()=>{
+        this.$emit('midway')
+        this.close()
+      },this.duration+200)
+      window.setTimeout(()=>{this.$emit('bye')}, this.duration*2)
     },
     close() {
       this.isOpened = false;
@@ -68,19 +72,23 @@ export default {
     updatePath(time) {
       const points = [];
       for (var i = 0; i < this.numPoints; i++) {
-        points[i] = this.cubicInOut(Math.min(Math.max(time - this.delayPointsArray[i], 0) / this.duration, 1)) * 100
-      // console.log(`time from within updatePath: ${points[i]}`)
+        // console.log(points)
+        points[i] = this.black ? this.cubicInOut(Math.min(Math.max(time - this.delayPointsArray[i], 0) / this.duration, 1)) * 100 : (1-this.cubicInOut(Math.min(Math.max(time - this.delayPointsArray[i], 0) / this.duration, 1))) * 100
       }
-    let str = '';
-    str += (this.isOpened) ? `M 0 0 V ${points[0]} ` : `M 0 ${points[0]} `;
-    for (var i = 0; i < this.numPoints - 1; i++) {
-      const p = (i + 1) / (this.numPoints - 1) * 100;
-      const cp = p - (1 / (this.numPoints - 1) * 100) / 2;
-      str += `C ${cp} ${points[i]} ${cp} ${points[i + 1]} ${p} ${points[i + 1]} `;
-    }
-    str += (this.isOpened) ? `V 0 H 0` : `V 100 H 0`;
-    return str;
-    },
+      let str = '';
+      str += (this.isOpened) ? `M 0 0 V ${points[0]} ` : `M 0 ${points[0]} `;
+      for (var i = 0; i < this.numPoints - 1; i++) {
+        const p = (i + 1) / (this.numPoints - 1) * 100;
+        const cp = p - (1 / (this.numPoints - 1) * 100) / 2;
+        str += `C ${cp} ${points[i]} ${cp} ${points[i + 1]} ${p} ${points[i + 1]} `;
+      }
+      if (this.black) {
+        str += (this.isOpened) ? `V 0 H 0` : `V 100 H 0`;
+      } else {
+        str += (this.isOpened) ? `V 100 H 0` : `V 0 H 0`;
+      }
+      return str;
+      },
     cubicInOut(t) {
       return t < 0.5
     ? 4.0 * t * t * t
@@ -110,7 +118,16 @@ export default {
       }
     },
     randomColor() {
-    return this.colorArray[Math.floor(Math.random()*this.colorArray.length)]
+    return this.black ? "#5e5e5e" : this.colorArray[Math.floor(Math.random()*this.colorArray.length)]
+    },
+      getRandomInt(min, max) {
+      return Math.floor(Math.random() * (max - min + 1)) + min;
+    },
+    randomizeAll() {
+      this.color = this.randomColor()
+      this.delayPointsMax = this.getRandomInt(50, 300)
+      this.delayPerPath = this.getRandomInt(50, 150)
+      this.numPoints = this.getRandomInt(2, 10)
     }
   },
 
@@ -128,8 +145,8 @@ export default {
 </script>
 
 <style>
-.shape-overlays path:nth-of-type(1) { fill-opacity: 0.7; }
-.shape-overlays path:nth-of-type(2) { fill-opacity: 0.9; }
+.shape-overlays path:nth-of-type(1) { fill-opacity: 0.5; }
+.shape-overlays path:nth-of-type(2) { fill-opacity: 0.7; }
 .shape-overlays path:nth-of-type(3) { fill-opacity: 1; }
 
 is-opened {

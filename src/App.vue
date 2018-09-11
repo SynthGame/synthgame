@@ -14,6 +14,13 @@
       :isFired="svooshIt"
       @midway="endPreview"
       @bye="endSvoosh"
+      black
+    />
+    <svoosh
+      v-if="isThereSuccessSvooshComponent"
+      :isFired="successSvooshIt"
+      @midway="displaySuccessOverlay=true"
+      @bye="endSuccessSvoosh"
     />
     <success-overlay
       v-if="displaySuccessOverlay"
@@ -55,7 +62,9 @@ export default {
       displayPreviewOverlay: false,
       loop: null,
       isThereSvooshComponent: false,
-      svooshIt: false
+      svooshIt: false,
+      isThereSuccessSvooshComponent: false,
+      successSvooshIt: false
     }
   },
   components: {
@@ -159,19 +168,28 @@ export default {
       // rest will be done by watcher of sequencesPassedInCurrentLevel
     },
     beginSvoosh() {
-      console.log("begin svooshing!")
       this.isThereSvooshComponent = true;
-      this.$nextTick()
-        .then(()=> this.svooshIt = true )
+      setTimeout(()=>{this.svooshIt=true}, 0)
     },
     endSvoosh() {
       setTimeout(()=>{
         this.isThereSvooshComponent=false
         this.svooshIt = false
         }, 500)
-      // this.isThereSvooshComponent=false
+
     },
-    endPreview () {
+    beginSuccessSvoosh() {
+      this.isThereSuccessSvooshComponent = true;
+      setTimeout(()=>{this.successSvooshIt=true}, 0)
+    },
+    endSuccessSvoosh() {
+      setTimeout(()=>{
+        this.isThereSuccessSvooshComponent=false
+        this.successSvooshIt = false
+        }, 500)
+
+    },
+    endPreview() {
       this.displayPreviewOverlay = false
       this.$store.commit('startTimerIsRunning')
       this.$store.dispatch('setSynthToDefaultParameters', audio)
@@ -187,7 +205,7 @@ export default {
   watch: {
     allParametersMatchGoal (val) {
       if(val === true && this.timerIsRunning) {
-        this.displaySuccesMessage()
+        this.beginSuccessSvoosh()
         this.$store.dispatch('levelDone') // would be nice to pass timeleft here but it is being passed by timer on gamestop
       }
     },
