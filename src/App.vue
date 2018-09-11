@@ -35,7 +35,7 @@
 
     <failure-overlay
       v-if="isGameOver"
-      @startagain="startAgain"
+      @startagain="startPlayMode"
     />
 
     <!-- <div id="nav">
