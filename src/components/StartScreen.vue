@@ -1,5 +1,5 @@
 <template>
-  <div class="startscreen" @keydown.space="$emit('startPreview')">
+  <div class="startscreen" >
     <div class="startscreen-content-wrapper">
       <div>
         <h1>Tats</h1>
@@ -27,15 +27,15 @@ export default {
     }
   },
   mounted() {
-    window.addEventListener('keyup', this.emitOnKey)
+    window.addEventListener('keydown', this.emitOnKey)
   },
   beforeDestroy() {
-    window.removeEventListener('keyup', this.emitOnKey)
+    window.removeEventListener('keydown', this.emitOnKey)
   },
   methods: {
     emitOnKey() {
       if (event.keyCode === 13) {
-        this.$emit('start');
+        this.$emit('startPreview');
       }
     }
   }

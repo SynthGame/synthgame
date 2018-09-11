@@ -67,12 +67,12 @@ export default {
     // this.anim[Math.floor(Math.random()*this.anim.length)]
     console.log(this.anim[drum])
     this.currentAnim = Math.floor(Math.random()*this.anim.length)
-    window.addEventListener('keyup', this.emitOnKey)
+    window.addEventListener('keydown', this.emitOnKey)
     this.colorArray.push(MODULE_OSCILLATOR_COLOR, MODULE_ENVELOPE_COLOR, MODULE_FILTER_COLOR, MODULE_LFO_COLOR, MODULE_DELAY_COLOR, MODULE_REVERB_COLOR)
     this.changeColor()
   },
   beforeDestroy() {
-    window.removeEventListener('keyup', this.emitOnKey)
+    window.removeEventListener('keydown', this.emitOnKey)
   },
   methods: {
     emitOnKey() {
