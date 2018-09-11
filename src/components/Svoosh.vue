@@ -28,11 +28,11 @@ export default {
   data() {
     return {
     pathArray: [], // Path elements in parent SVG. These are the layers of the overlay.
-    numPoints: 7, // Number of control points for Bezier Curve.
+    numPoints: null, // Number of control points for Bezier Curve.
     duration: 900, // Animation duration of one path element.
     delayPointsArray: [], // Array of control points for Bezier Curve.
-    delayPointsMax: 100, // Max of delay value in all control points.
-    delayPerPath: 90, // Delay value per path.
+    delayPointsMax: null, // Max of delay value in all control points.
+    delayPerPath: null, // Delay value per path.
     timeStart: Date.now(),
     isOpened: false,
     isAnimating: false,
@@ -46,10 +46,9 @@ export default {
     this.pathArray.push(this.$refs.path2)
     this.pathArray.push(this.$refs.path3)
     this.colorArray.push(MODULE_OSCILLATOR_COLOR, MODULE_ENVELOPE_COLOR, MODULE_FILTER_COLOR, MODULE_LFO_COLOR, MODULE_DELAY_COLOR, MODULE_REVERB_COLOR)
-    this.color = this.randomColor()
+    this.randomizeAll()
   },
   methods: {
-
     open() {
       const range = 4 * Math.random() + 6;
       for (var i = 0; i < this.numPoints; i++) {
@@ -64,7 +63,6 @@ export default {
         this.close()
       },this.duration+200)
       window.setTimeout(()=>{this.$emit('bye')}, this.duration*2)
-      this.color = this.randomColor()
     },
     close() {
       this.isOpened = false;
@@ -74,7 +72,7 @@ export default {
     updatePath(time) {
       const points = [];
       for (var i = 0; i < this.numPoints; i++) {
-
+        // console.log(points)
         points[i] = this.black ? this.cubicInOut(Math.min(Math.max(time - this.delayPointsArray[i], 0) / this.duration, 1)) * 100 : (1-this.cubicInOut(Math.min(Math.max(time - this.delayPointsArray[i], 0) / this.duration, 1))) * 100
       }
       let str = '';
@@ -122,14 +120,14 @@ export default {
     randomColor() {
     return this.black ? "#000" : this.colorArray[Math.floor(Math.random()*this.colorArray.length)]
     },
-        getRandomInt(min, max) {
+      getRandomInt(min, max) {
       return Math.floor(Math.random() * (max - min + 1)) + min;
     },
     randomizeAll() {
       this.color = this.randomColor()
       this.delayPointsMax = this.getRandomInt(50, 300)
-      this.delayPerPath = this.getRandomInt(50, 200)
-      this.numPoints = this.getRandomInt(3, 10)
+      this.delayPerPath = this.getRandomInt(50, 150)
+      this.numPoints = this.getRandomInt(2, 10)
     }
   },
 
