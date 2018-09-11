@@ -168,15 +168,14 @@ export default {
     },
     beginSvoosh() {
       this.isThereSvooshComponent = true;
-      this.$nextTick()
-        .then(()=> this.svooshIt = true )
+      setTimeout(()=>{this.svooshIt=true}, 0)
     },
     endSvoosh() {
       setTimeout(()=>{
         this.isThereSvooshComponent=false
         this.svooshIt = false
         }, 500)
-      // this.isThereSvooshComponent=false
+
     },
     beginSuccessSvoosh() {
       this.isThereSuccessSvooshComponent = true;
@@ -187,9 +186,9 @@ export default {
         this.isThereSuccessSvooshComponent=false
         this.successSvooshIt = false
         }, 500)
-      // this.isThereSvooshComponent=false
+
     },
-    endPreview () {
+    endPreview() {
       this.displayPreviewOverlay = false
       this.$store.commit('startTimerIsRunning')
       this.$store.dispatch('setSynthToDefaultParameters', audio)
