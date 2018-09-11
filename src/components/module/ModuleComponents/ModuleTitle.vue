@@ -42,7 +42,6 @@ export default {
     font-size: .7em;
     padding: 5% 10%;
     color: black;
-    width: 10em;
     margin: 0;
     display: flex;
     position: absolute;
@@ -70,6 +69,7 @@ export default {
       display: inline-block;
       margin-left: .2em;
       height: 11px;
+      width: 11px;
       border: 1px solid white;
       border-radius: 100%;
 
