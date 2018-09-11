@@ -105,12 +105,19 @@ export default {
       // create loop wich sequences 4 notes
       const randomLoop = times(16).map(i => random(-12, 12))
       let kickTime = true;
+      let sweepCounter = 0;
       this.loop = audio.setMainLoop({
         noteArray: times(16),
         subdivision: '8n'
       }, (time, i) => { // i here is just a note from the note array define above
-        if (this.$store.state.gameState.timerIsRunning === false && !this.displaySuccessOverlay) {
-          audio.playSweep();
+        if (this.$store.state.gameState.timerIsRunning === false && !this.displaySuccessOverlay && !this.displayPreviewOverlay) {
+
+          if (sweepCounter === 0) {
+            audio.playSweep();
+            sweepCounter++;
+          } else if (sweepCounter === 4){
+            sweepCounter = 0
+          }
         }
         if (this.displaySuccessOverlay && kickTime === true && !this.displayStartOverlay) {
           audio.playKick();
@@ -161,6 +168,7 @@ export default {
         levelNumber: level || 0
       })
       this.$store.dispatch('randomizGoalParameters') // first randomize the goal
+      this.$store.dispatch('randomizeAudioParameters', availableParameters) // and the audio params
       this.$store.dispatch('setSynthToGoal', audio) // then let the user hear it
       // randomize loop melody
       times(4).forEach(i => {
@@ -171,15 +179,14 @@ export default {
     },
     beginSvoosh() {
       this.isThereSvooshComponent = true;
-      this.$nextTick()
-        .then(()=> this.svooshIt = true )
+      setTimeout(()=>{this.svooshIt=true}, 0)
     },
     endSvoosh() {
       setTimeout(()=>{
         this.isThereSvooshComponent=false
         this.svooshIt = false
         }, 500)
-      // this.isThereSvooshComponent=false
+
     },
     beginSuccessSvoosh() {
       this.isThereSuccessSvooshComponent = true;
@@ -190,9 +197,9 @@ export default {
         this.isThereSuccessSvooshComponent=false
         this.successSvooshIt = false
         }, 500)
-      // this.isThereSvooshComponent=false
+
     },
-    endPreview () {
+    endPreview() {
       this.displayPreviewOverlay = false
       this.$store.commit('startTimerIsRunning')
       this.$store.dispatch('setSynthToDefaultParameters', audio)

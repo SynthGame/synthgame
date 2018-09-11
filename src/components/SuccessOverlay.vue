@@ -173,11 +173,9 @@ export default {
           this.anim.drum.stick2 = v.stick2
           if (v.stick1 === 0) {
             this.currentColor = this.changeColor(this.currentColor)
-            // console.log(`this.currentColor changed!`)
           }
-          if (v.stick2 < 0.1) {
+          if (v.stick2 < 0.05) {
             this.currentColor1 = this.changeColor(this.currentColor1)
-            // console.log(`this.currentColor1 changed!`)
           }
         },
         complete: () => {}

@@ -41,6 +41,7 @@ export default {
     }
   },
   mounted(){
+    // this.delayPointsMax = Math.floor(Math.random()*(max-min+1)+min)
     this.pathArray.push(this.$refs.path1)
     this.pathArray.push(this.$refs.path2)
     this.pathArray.push(this.$refs.path3)
@@ -48,24 +49,20 @@ export default {
     this.randomizeAll()
   },
   methods: {
-
     open() {
       const range = 4 * Math.random() + 6;
       for (var i = 0; i < this.numPoints; i++) {
         const radian = i / (this.numPoints - 1) * Math.PI;
-        // let's replace delayPoints max with a certain number...
         this.delayPointsArray[i] = (Math.sin(-radian) + Math.sin(-radian * range) + 2) / 4 * this.delayPointsMax;
       }
-        console.log(this.delayPointsArray)
       this.isOpened = true
       this.timeStart = Date.now();
       this.renderLoop();
       window.setTimeout(()=>{
         this.$emit('midway')
         this.close()
-      },(this.duration+2*this.delayPerPath+this.delayPointsMax))
+      },this.duration+200)
       window.setTimeout(()=>{this.$emit('bye')}, this.duration*2)
-      this.randomizeAll()
     },
     close() {
       this.isOpened = false;
@@ -75,11 +72,9 @@ export default {
     updatePath(time) {
       const points = [];
       for (var i = 0; i < this.numPoints; i++) {
-
-        // sometimes, the points are NaN, most probably because sometimes this.delayPointsArray is empty
+        // console.log(points)
         points[i] = this.black ? this.cubicInOut(Math.min(Math.max(time - this.delayPointsArray[i], 0) / this.duration, 1)) * 100 : (1-this.cubicInOut(Math.min(Math.max(time - this.delayPointsArray[i], 0) / this.duration, 1))) * 100
       }
-      // console.log(points)
       let str = '';
       str += (this.isOpened) ? `M 0 0 V ${points[0]} ` : `M 0 ${points[0]} `;
       for (var i = 0; i < this.numPoints - 1; i++) {
@@ -101,7 +96,7 @@ export default {
 
     },
     renderLoop() {
-      this.render();
+    this.render();
       if (Date.now() - this.timeStart < this.duration + this.delayPerPath * (3 - 1) + this.delayPointsMax) {
         requestAnimationFrame(() => {
           this.renderLoop();
@@ -123,18 +118,19 @@ export default {
       }
     },
     randomColor() {
-      return this.black ? "#5c5c5e" : this.colorArray[Math.floor(Math.random()*this.colorArray.length)]
+    return this.black ? "#5e5e5e" : this.colorArray[Math.floor(Math.random()*this.colorArray.length)]
     },
-    getRandomInt(min, max) {
+      getRandomInt(min, max) {
       return Math.floor(Math.random() * (max - min + 1)) + min;
     },
     randomizeAll() {
       this.color = this.randomColor()
       this.delayPointsMax = this.getRandomInt(50, 300)
-      this.delayPerPath = this.getRandomInt(50, 200)
-      this.numPoints = this.getRandomInt(3, 10)
+      this.delayPerPath = this.getRandomInt(50, 150)
+      this.numPoints = this.getRandomInt(2, 10)
     }
   },
+
   watch: {
     isFired() {
       this.open()

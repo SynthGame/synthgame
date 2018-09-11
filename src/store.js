@@ -7,6 +7,7 @@ import flatMap from 'lodash/flatMap'
 import inRange from 'lodash/inRange'
 import isArray from 'lodash/isArray'
 import add from 'lodash/add'
+import find from 'lodash/find'
 import character from '@/character'
 
 Vue.use(Vuex)
@@ -235,22 +236,32 @@ export default new Vuex.Store({
       const randomizeValues = (obj, selectObj) => mapValues(obj, (val, moduleName) => {
         return mapValues(val, (val, parameterName) => {
           // if selectObj is provided and the value is falsey return store value
-          if (selectObj && !selectObj[moduleName][parameterName]) return selectObj[moduleName][parameterName]
+          if (selectObj && !selectObj[moduleName][parameterName]) return state.gameState.goal[moduleName][parameterName]
           const parameterValDef = state.gameState.possibleValues[moduleName][parameterName]
           return Array.isArray(parameterValDef)
             ? parameterValDef[random(0, parameterValDef.length - 1)]
             : random(0, 100)
         })
       })
-      // randomizes correct values once more, no recursion here, fear of memory slurping
-      let randomPreset = randomizeValues(state.audioParameters, randomizeArray) // randomly generated preset
-      let accedentlyCorrectValues = mapValues(randomPreset, (modulePreset, moduleName) => {
-        mergeWith(modulePreset, state.gameState.goal[moduleName], (a, b) => a === b || inRange(a, b + state.gameState.margin, b - state.gameState.margin))
-      })
-      randomPreset = randomizeValues(randomPreset, accedentlyCorrectValues)
+
+      const randomizeWithoutMatches = (obj, selectObj) => {
+        const randomPreset = randomizeValues(obj, selectObj) // randomly generated preset
+        const accedentlyCorrectValues = mapValues(randomPreset, (modulePreset, moduleName) => {
+          return mapValues(modulePreset, (val, parameterName) => {
+            const a = val
+            const b = state.gameState.goal[moduleName][parameterName]
+            return selectObj[moduleName][parameterName]
+              ? a === b || inRange(a, b + state.gameState.margin, b - state.gameState.margin)
+              : false
+          })
+        })
+        console.log('1', find(accedentlyCorrectValues, mod => find(mod, true)))
+        if(find(accedentlyCorrectValues, mod => find(mod, true))) return randomizeValues(randomPreset, accedentlyCorrectValues)
+        return randomPreset
+      }
 
       return commit('setAudioParameterToPreset', {
-        preset: randomPreset
+        preset: randomizeWithoutMatches(state.audioParameters, randomizeArray)
       })
     },
     randomizGoalParameters ({state, commit}) {
