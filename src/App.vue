@@ -168,7 +168,8 @@ export default {
     },
     beginSvoosh() {
       this.isThereSvooshComponent = true;
-      setTimeout(()=>{this.svooshIt=true}, 0)
+      this.$nextTick()
+        .then(()=> this.svooshIt = true )
     },
     endSvoosh() {
       setTimeout(()=>{

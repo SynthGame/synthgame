@@ -35,13 +35,11 @@ export default {
     log(`Connecting LFO to filter frequency`)
     lfo.connect(oscillator.detune).start()
     log(`Chaining oscillator => pitch shift => envelope => filter => delay => reverb`)
-    oscillator.chain(pitchShift, filter, envelope)
+    oscillator.chain(pitchShift, filter, envelope, output)
 
     log(`Starting oscillator`)
     oscillator.start()
-
-    log(`Connecting last node, delay, to general output ${output}`)
-    envelope.connect(output)
+    
     return output
 
   },
