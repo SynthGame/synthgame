@@ -235,22 +235,17 @@ export default new Vuex.Store({
       const randomizeValues = (obj, selectObj) => mapValues(obj, (val, moduleName) => {
         return mapValues(val, (val, parameterName) => {
           // if selectObj is provided and the value is falsey return store value
-          if (selectObj && !selectObj[moduleName][parameterName]) return selectObj[moduleName][parameterName]
+          console.log('ppop', selectObj[moduleName])
+          if (selectObj && !selectObj[moduleName][parameterName]) return state.gameState.goal[moduleName][parameterName]
           const parameterValDef = state.gameState.possibleValues[moduleName][parameterName]
           return Array.isArray(parameterValDef)
             ? parameterValDef[random(0, parameterValDef.length - 1)]
             : random(0, 100)
         })
       })
-      // randomizes correct values once more, no recursion here, fear of memory slurping
-      let randomPreset = randomizeValues(state.audioParameters, randomizeArray) // randomly generated preset 
-      let accedentlyCorrectValues = mapValues(randomPreset, (modulePreset, moduleName) => {
-        mergeWith(modulePreset, state.gameState.goal[moduleName], (a, b) => a === b || inRange(a, b + state.gameState.margin, b - state.gameState.margin))
-      })
-      randomPreset = randomizeValues(randomPreset, accedentlyCorrectValues)
 
       return commit('setAudioParameterToPreset', {
-        preset: randomPreset
+        preset: randomizeValues(state.audioParameters, randomizeArray)
       })
     },
     randomizGoalParameters ({state, commit}) {
