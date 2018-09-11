@@ -255,7 +255,6 @@ export default new Vuex.Store({
               : false
           })
         })
-        console.log('1', find(accedentlyCorrectValues, mod => find(mod, true)))
         if(find(accedentlyCorrectValues, mod => find(mod, true))) return randomizeValues(randomPreset, accedentlyCorrectValues)
         return randomPreset
       }
