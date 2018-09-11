@@ -53,8 +53,10 @@ export default {
       const range = 4 * Math.random() + 6;
       for (var i = 0; i < this.numPoints; i++) {
         const radian = i / (this.numPoints - 1) * Math.PI;
+        // let's replace delayPoints max with a certain number...
         this.delayPointsArray[i] = (Math.sin(-radian) + Math.sin(-radian * range) + 2) / 4 * this.delayPointsMax;
       }
+        console.log(this.delayPointsArray)
       this.isOpened = true
       this.timeStart = Date.now();
       this.renderLoop();
@@ -74,8 +76,10 @@ export default {
       const points = [];
       for (var i = 0; i < this.numPoints; i++) {
 
+        // sometimes, the points are NaN, most probably because sometimes this.delayPointsArray is empty
         points[i] = this.black ? this.cubicInOut(Math.min(Math.max(time - this.delayPointsArray[i], 0) / this.duration, 1)) * 100 : (1-this.cubicInOut(Math.min(Math.max(time - this.delayPointsArray[i], 0) / this.duration, 1))) * 100
       }
+      // console.log(points)
       let str = '';
       str += (this.isOpened) ? `M 0 0 V ${points[0]} ` : `M 0 ${points[0]} `;
       for (var i = 0; i < this.numPoints - 1; i++) {
@@ -97,7 +101,7 @@ export default {
 
     },
     renderLoop() {
-    this.render();
+      this.render();
       if (Date.now() - this.timeStart < this.duration + this.delayPerPath * (3 - 1) + this.delayPointsMax) {
         requestAnimationFrame(() => {
           this.renderLoop();
@@ -119,7 +123,7 @@ export default {
       }
     },
     randomColor() {
-      return this.black ? "#000" : this.colorArray[Math.floor(Math.random()*this.colorArray.length)]
+      return this.black ? "#5c5c5e" : this.colorArray[Math.floor(Math.random()*this.colorArray.length)]
     },
     getRandomInt(min, max) {
       return Math.floor(Math.random() * (max - min + 1)) + min;
@@ -158,8 +162,8 @@ is-opened {
 .shape-overlays {
   width: 100vw;
   height: 100vh;
-  position: relative;
-  top: 400;
+  position: fixed;
+  top: 0;
   left: 0;
   z-index: 10040;
 }
