@@ -142,7 +142,7 @@ is-opened {
   width: 100vw;
   height: 100vh;
   position: fixed;
-  top: 100px;
+  top: 0;
   left: 0;
   z-index: 10040;
 }
