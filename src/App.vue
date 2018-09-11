@@ -158,6 +158,7 @@ export default {
         levelNumber: level || 0
       })
       this.$store.dispatch('randomizGoalParameters') // first randomize the goal
+      this.$store.dispatch('randomizeAudioParameters', availableParameters) // and the audio params
       this.$store.dispatch('setSynthToGoal', audio) // then let the user hear it
       // randomize loop melody
       times(4).forEach(i => {

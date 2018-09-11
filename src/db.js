@@ -19,6 +19,13 @@ db.settings({timestampsInSnapshots: true}) // time snapshot will change in futur
 
 const scoreRef = db.collection('highscores')
 
+export const addHighscore = ({name, score}) => {
+  return scoreRef.add({
+    name,
+    score
+  }) 
+}
+
 export const getHighscores = (amount) => {
   scoreRef.orderBy('score').limit(amount)
 }
