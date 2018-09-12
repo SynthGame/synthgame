@@ -311,7 +311,7 @@ export default {
       display: flex;
       padding: 0em;
       width: 85%;
-      margin: 0 0 2em 0;
+      margin: 0 0 1em 0;
       flex-wrap: wrap;
       justify-content: center;
       button {
@@ -319,7 +319,7 @@ export default {
         height: 2.5em;
       }
       svg{
-        height: .4em;
+        width: 1em;
       }
     & p {
        margin: .5em 0 0 0;
@@ -337,7 +337,7 @@ export default {
     width: .4em;
     height: .4em;
     border-radius: 100%;
-    top: .4em;
+    top: .45em;
     left: .55em;
   }
   &:after {
@@ -348,10 +348,12 @@ export default {
     width: .4em;
     height: .4em;
     border-radius: 100%;
-    top: .4em;
+    top: .45em;
     right: .55em;
   }
   & .display {
+    position: relative;
+    z-index: 99;
     margin: 2% 2%;
     height: 6em;
     width: 80%;
@@ -359,6 +361,16 @@ export default {
     & path {
       transition: .1s all ease-out;
     }
+  }
+  & .knobs {
+    width: 100%;
+    min-height: 15em;
+    margin: auto;
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
     &:before {
       content:'';
       display: block;
@@ -367,7 +379,7 @@ export default {
       width: .4em;
       height: .4em;
       border-radius: 100%;
-      bottom: .8em;
+      bottom: .55em;
       left: .55em;
     }
     &:after {
@@ -378,19 +390,9 @@ export default {
       width: .4em;
       height: .4em;
       border-radius: 100%;
-      bottom: .8em;
+      bottom: .55em;
       right: .55em;
     }
-  }
-  & .knobs {
-    width: 100%;
-    min-height: 16em;
-    margin: auto;
-    display: flex;
-    align-items: center;
-    flex-wrap: wrap;
-    justify-content: center;
-    align-items: center;
   }
 }
 

@@ -459,9 +459,7 @@ export default {
 
 .knob {
   width:35%;
-  margin: 0 .4em;
-  // height:18.4vh;
-  // flex:1;
+  margin: 0 .4em 0 .4em;
   color: white;
   &__bg {
     margin-bottom: -150px;
