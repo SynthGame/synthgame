@@ -147,7 +147,7 @@ export default {
 <style>
 .shape-overlays path:nth-of-type(1) { fill-opacity: 0.5; }
 .shape-overlays path:nth-of-type(2) { fill-opacity: 0.7; }
-.shape-overlays path:nth-of-type(3) { fill-opacity: 1; }
+.shape-overlays path:nth-of-type(3) { fill-opacity: 0.9; }
 
 is-opened {
 	opacity: 1;
