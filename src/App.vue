@@ -292,6 +292,7 @@ export default {
   height: 50%;
   margin: 0;
   display: block;
+  float: left;
   position: relative;
   border: 1px solid #b7b7b7;
   &.empty {

@@ -50,6 +50,10 @@ export default new Vuex.Store({
     },
     gameState: {
       createModeIsActive: false,
+      marginOsc: 0,
+      marginFil: 0,
+      marginEnv: 0,
+      marginLfo: 0,
       margin: 10,
       timerIsRunning: false,
       isGameOver: false,

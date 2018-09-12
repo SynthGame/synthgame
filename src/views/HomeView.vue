@@ -1,32 +1,25 @@
 <template>
   <div class="game">
     <game-nav-bar/>
-    <div class="level" v-masonry transition-duration="0.3s" item-selector=".module">
+    <div class="level">
       <sequencer-module
         v-if="createModeIsActive"
-        v-masonry-tile
         class="module sequencer"
       />
       <OscillatorModule
         v-if="moduleIsUseable('oscillator')"
-        v-masonry-tile
         :class="[(activeModule == 0 ? 'active' : '')]"
       />
-      <!-- <div v-for="n in 1" v-masonry-tile class="module empty"></div> -->
       <FilterModule
         v-if="moduleIsUseable('filter')"
-        v-masonry-tile
         :class="[(activeModule == 1 ? 'active' : '')]"
       />
       <EnvelopeModule
         v-if="moduleIsUseable('envelope')"
-        v-masonry-tile
         :class="[(activeModule == 2 ? 'active' : '')]"
       />
-      <!-- <div v-for="n in 1" v-masonry-tile class="module empty"></div> -->
       <LfoModule
         v-if="moduleIsUseable('lfo')"
-        v-masonry-tile
         :class="[(activeModule == 3 ? 'active' : '')]"
       />
       <!-- <DelayModule
@@ -34,13 +27,11 @@
         v-masonry-tile
         :class="[(activeModule == 4 ? 'active' : '')]"
       /> -->
-      <!-- <div v-for="n in 1" v-masonry-tile class="module empty"></div> -->
       <!-- <ReverbModule
         v-if="moduleIsUseable('reverb')"
         v-masonry-tile
         :class="[(activeModule == 5 ? 'active' : '')]"
       /> -->
-      <!-- <div v-for="n in 1" v-masonry-tile class="module empty"></div> -->
     </div>
     <div class="tabs">
       <div @click="showOsc" class="tabs__tab tabs__osc">Osc</div>
@@ -54,7 +45,6 @@
 </template>
 
 <script>
-import {VueMasonryPlugin} from 'vue-masonry';
 import some from 'lodash/some'
 // @ is an alias to /src
 import GameNavBar from '@/components/GameNavBar.vue'
