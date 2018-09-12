@@ -71,10 +71,10 @@ export default {
   },
   data () {
     return {
-      name: 'lfo',
+      name: 'lfo1',
       typeDial: 0,
       selectedType: '',
-      lfo: {},
+      lfo1: {},
       moduleColor: MODULE_LFO_COLOR,
       realFrq: null
     }
@@ -87,10 +87,10 @@ export default {
   },
   created () {
     self = this
-    this.lfo = audio.lfo.state.device
+    this.lfo1 = audio.lfo1.state.device
   },
   mounted() {
-    this.realFrq = character.lfo.type(this.lfo.frequency.value)
+    this.realFrq = character.lfo1.type(this.lfo1.frequency.value)
   },
   computed: {
     timerIsRunning () {
@@ -102,25 +102,25 @@ export default {
       return Object.values(this.$store.getters.audioParametersMatchGoalWithMargin[this.name])
         .every(param => param)
     },
-    ...vuexSyncGen('lfo', 'frequency', val => {
-      self.lfo.frequency.value = character.lfo.frequency(val)
-      self.realFrq = character.lfo.frequency(val)
+    ...vuexSyncGen('lfo1', 'frequency', val => {
+      self.lfo1.frequency.value = character.lfo1.frequency(val)
+      self.realFrq = character.lfo1.frequency(val)
     }),
-    ...vuexSyncGen('lfo', 'amount', val => {
-      self.lfo.max = character.lfo.amount(val)
+    ...vuexSyncGen('lfo1', 'amount', val => {
+      self.lfo1.max = character.lfo1.amount(val)
     }),
-    ...vuexSyncGen('lfo', 'type', val => {
-      if (self.lfo.type === character.lfo.type(val)) return
-      self.lfo.type = character.lfo.type(val)
-      self.lfo.stop()
-      self.lfo.start()
+    ...vuexSyncGen('lfo1', 'type', val => {
+      if (self.lfo1.type === character.lfo1.type(val)) return
+      self.lfo1.type = character.lfo1.type(val)
+      self.lfo1.stop()
+      self.lfo1.start()
     }),
     ...mapState({
-      typeArray: state => state.gameState.possibleValues.lfo.type,
-      frequencyGoal: state => state.gameState.goal.lfo.frequency,
-      typeGoal: state => state.gameState.goal.lfo.type,
-      amountGoal: state => state.gameState.goal.lfo.amount,
-      knobsAvailable: state => state.gameState.knobsAvailable.lfo,
+      typeArray: state => state.gameState.possibleValues.lfo1.type,
+      frequencyGoal: state => state.gameState.goal.lfo1.frequency,
+      typeGoal: state => state.gameState.goal.lfo1.type,
+      amountGoal: state => state.gameState.goal.lfo1.amount,
+      knobsAvailable: state => state.gameState.knobsAvailable.lfo1,
       createModeIsActive: state => state.gameState.createModeIsActive
     })
   },

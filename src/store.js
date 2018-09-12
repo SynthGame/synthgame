@@ -33,7 +33,7 @@ export default new Vuex.Store({
         sustain: 90,
         release: 0
       },
-      lfo: {
+      lfo1: {
         frequency: 10,
         type: 'sine',
         amount: 0
@@ -63,7 +63,7 @@ export default new Vuex.Store({
         oscillator: {},
         filter: {},
         envelope: {},
-        lfo: {},
+        lfo1: {},
         delay: {},
         reverb: {}
       },
@@ -88,7 +88,7 @@ export default new Vuex.Store({
           sustain: 90,
           release: 0
         },
-        lfo: {
+        lfo1: {
           frequency: 10,
           type: 'sine',
           amount: 0
@@ -109,7 +109,7 @@ export default new Vuex.Store({
         filter: {
           type: ['lowpass', 'highpass', 'bandpass']
         },
-        lfo: {
+        lfo1: {
           type: ['sine', 'square', 'sawtooth', 'triangle']
         },
         oscillator: {
@@ -135,7 +135,7 @@ export default new Vuex.Store({
           sustain: 90,
           release: 0
         },
-        lfo: {
+        lfo1: {
           frequency: 10,
           type: 'sine',
           amount: 0
@@ -297,9 +297,9 @@ export default new Vuex.Store({
       synth.filter.state.device.frequency.value = character.filter.cutOffFreq(state.gameState.goal.filter.cutOffFreq)
       synth.filter.state.device.type = character.filter.type(state.gameState.goal.filter.type)
       synth.filter.state.device.Q.value = character.filter.setQ(state.gameState.goal.filter.setQ)
-      synth.lfo.state.device.frequency.value = character.lfo.frequency(state.gameState.goal.lfo.frequency)
-      synth.lfo.state.device.max = character.lfo.amount(state.gameState.goal.lfo.amount)
-      synth.lfo.state.device.type = character.lfo.type(state.gameState.goal.lfo.type)
+      synth.lfo1.state.device.frequency.value = character.lfo1.frequency(state.gameState.goal.lfo1.frequency)
+      synth.lfo1.state.device.max = character.lfo1.amount(state.gameState.goal.lfo1.amount)
+      synth.lfo1.state.device.type = character.lfo1.type(state.gameState.goal.lfo1.type)
       synth.oscillator.state.device.frequency.value = character.oscillator.frequency(state.gameState.goal.oscillator.frequency)
       synth.oscillator.state.device.type = character.oscillator.typeOsc(state.gameState.goal.oscillator.typeOsc)
       synth.oscillator.state.device.detune.value = character.oscillator.detune(state.gameState.goal.oscillator.detune)
@@ -320,9 +320,9 @@ export default new Vuex.Store({
       synth.filter.state.device.frequency.value = character.filter.cutOffFreq(state.gameState.defaultParams.filter.cutOffFreq)
       synth.filter.state.device.type = character.filter.type(state.gameState.defaultParams.filter.type)
       synth.filter.state.device.Q.value = character.filter.setQ(state.gameState.defaultParams.filter.setQ)
-      synth.lfo.state.device.frequency.value = character.lfo.frequency(state.gameState.defaultParams.lfo.frequency)
-      synth.lfo.state.device.max = character.lfo.amount(state.gameState.defaultParams.lfo.amount)
-      synth.lfo.state.device.type = character.lfo.type(state.gameState.defaultParams.lfo.type)
+      synth.lfo1.state.device.frequency.value = character.lfo1.frequency(state.gameState.defaultParams.lfo1.frequency)
+      synth.lfo1.state.device.max = character.lfo1.amount(state.gameState.defaultParams.lfo1.amount)
+      synth.lfo1.state.device.type = character.lfo1.type(state.gameState.defaultParams.lfo1.type)
       synth.oscillator.state.device.frequency.value = character.oscillator.frequency(state.gameState.defaultParams.oscillator.frequency)
       synth.oscillator.state.device.type = character.oscillator.typeOsc(state.gameState.defaultParams.oscillator.typeOsc)
       synth.oscillator.state.device.detune.value = character.oscillator.detune(state.gameState.defaultParams.oscillator.detune)

@@ -18,7 +18,7 @@
         v-if="moduleIsUseable('envelope')"
         :class="[(activeModule == 2 ? 'active' : '')]"
       />
-      <LfoModule
+      <Lfo1Module
         v-if="moduleIsUseable('lfo')"
         :class="[(activeModule == 3 ? 'active' : '')]"
       />
@@ -51,7 +51,7 @@ import GameNavBar from '@/components/GameNavBar.vue'
 import OscillatorModule from '@/components/module/OscillatorModule.vue'
 import EnvelopeModule from '@/components/module/EnvelopeModule.vue'
 import FilterModule from '@/components/module/FilterModule.vue'
-import LfoModule from '@/components/module/LfoModule.vue'
+import Lfo1Module from '@/components/module/Lfo1Module.vue'
 import DelayModule from '@/components/module/DelayModule.vue'
 import ReverbModule from '@/components/module/ReverbModule.vue'
 import SequencerModule from '@/components/module/SequencerModule.vue'
@@ -69,7 +69,7 @@ export default {
     OscillatorModule,
     EnvelopeModule,
     FilterModule,
-    LfoModule,
+    Lfo1Module,
     DelayModule,
     ReverbModule,
     SequencerModule

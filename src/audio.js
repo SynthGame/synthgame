@@ -16,7 +16,8 @@ export default {
     this.sweepPlayer.init()
     this.oscillator.init()
     this.envelope.init()
-    this.lfo.init()
+    this.lfo1.init()
+    this.lfo2.init()
     this.filter.init()
     this.delay.init()
     this.reverb.init()
@@ -28,7 +29,8 @@ export default {
     const oscillator = this.oscillator.state.device
     const pitchShift = this.oscillator.state.pitchShift
     const envelope = this.envelope.state.device
-    const lfo = this.lfo.state.device
+    const lfo1 = this.lfo1.state.device
+    const lfo2 = this.lfo2.state.device
     const filter = this.filter.state.device
     const delay = this.delay.state.device
     const reverb = this.reverb.state.device
@@ -37,8 +39,9 @@ export default {
 
     log(`Created new general output for audio device`)
     const output = new Tone.Volume(-12)
-    log(`Connecting LFO to filter frequency`)
-    lfo.connect(oscillator.detune).start()
+    log(`Connecting LFO's to osc detune and filter frequency`)
+    lfo1.connect(oscillator.detune).start()
+    lfo2.connect(filter.frequency).start()
     log(`Chaining oscillator => pitch shift => envelope => filter => delay => reverb`)
     oscillator.chain(pitchShift, filter, envelope, compressor, output)
 
@@ -149,7 +152,27 @@ export default {
       })
     }
   },
-  lfo: {
+  lfo1: {
+    state: {
+      device: undefined
+    },
+    init (options) {
+      log(`Initializing LFO with options: ${options}`)
+      this.state.device = new Tone.LFO(
+      //   {
+      //   type: 'sine',
+      //   min: 0.1,
+      //   max: 10,
+      //   phase: 0,
+      //   frequency: 1,
+      //   amplitude: 1,
+      //   ...options
+      // }
+        '4n', 0, 8000
+      )
+    }
+  },
+  lfo2: {
     state: {
       device: undefined
     },

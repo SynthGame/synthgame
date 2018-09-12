@@ -16,7 +16,7 @@ export default {
     setQ: val => val / 8
     // gain: val =>
   },
-  lfo: {
+  lfo1: {
     frequency: val => Math.pow(val, (val / 100)) - 0.99,
     type: val => val,
     amount: val => (val * 40)
