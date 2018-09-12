@@ -21,6 +21,11 @@ export default {
     type: val => val,
     amount: val => (val * 40)
   },
+  lfo2: {
+    frequency: val => Math.pow(val, (val / 100)) - 0.99,
+    type: val => val,
+    amount: val => (val * 40)
+  },
   oscillator: {
     frequency: val => val,
     typeOsc: val => val,

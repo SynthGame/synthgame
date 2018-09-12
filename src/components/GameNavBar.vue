@@ -32,11 +32,20 @@
     ></span>
             <span :class="{
             'module__name__status-indicator': true,
-            'module__name__status-indicator--active': lfoComplete
+            'module__name__status-indicator--active': lfo1Complete
           }"
           :style="{
-            'background-color': lfoComplete ? lfoColor : '',
-            'box-shadow': lfoComplete ? `0px 0px 16px ${lfoColor}` : '',
+            'background-color': lfo1Complete ? lfoColor : '',
+            'box-shadow': lfo1Complete ? `0px 0px 16px ${lfoColor}` : '',
+          }"
+    ></span>
+            <span :class="{
+            'module__name__status-indicator': true,
+            'module__name__status-indicator--active': lfo2Complete
+          }"
+          :style="{
+            'background-color': lfo2Complete ? lfoColor : '',
+            'box-shadow': lfo2Complete ? `0px 0px 16px ${lfoColor}` : '',
           }"
     ></span>
             <span :class="{
@@ -102,8 +111,11 @@ export default {
     envelopeComplete() {
       return Object.values(this.$store.getters.audioParametersMatchGoalWithMargin['envelope']).every(param => param)
     },
-    lfoComplete() {
-      return Object.values(this.$store.getters.audioParametersMatchGoalWithMargin['lfo']).every(param => param)
+    lfo1Complete() {
+      return Object.values(this.$store.getters.audioParametersMatchGoalWithMargin['lfo1']).every(param => param)
+    },
+    lfo2Complete() {
+      return Object.values(this.$store.getters.audioParametersMatchGoalWithMargin['lfo2']).every(param => param)
     },
     delayComplete() {
       return Object.values(this.$store.getters.audioParametersMatchGoalWithMargin['delay']).every(param => param)

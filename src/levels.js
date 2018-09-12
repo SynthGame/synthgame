@@ -8,7 +8,10 @@ export default [
     },
     filter: {},
     envelope: {},
-    lfo1: {},
+    lfo1: {
+    },
+    lfo2: {
+    },
     delay: {},
     reverb: {}
   },
@@ -21,6 +24,7 @@ export default [
     filter: {},
     envelope: {},
     lfo1: {},
+    lfo2: {},
     delay: {},
     reverb: {}
   },
@@ -35,6 +39,7 @@ export default [
     },
     envelope: {},
     lfo1: {},
+    lfo2: {},
     delay: {},
     reverb: {}
   },
@@ -51,6 +56,7 @@ export default [
     },
     envelope: {},
     lfo1: {},
+    lfo2: {},
     delay: {},
     reverb: {}
   },
@@ -67,6 +73,7 @@ export default [
     },
     envelope: {},
     lfo1: {},
+    lfo2: {},
     delay: {},
     reverb: {}
   },
@@ -85,6 +92,7 @@ export default [
       attack: true
     },
     lfo1: {},
+    lfo2: {},
     delay: {},
     reverb: {}
   },
@@ -105,6 +113,7 @@ export default [
       decay: true
     },
     lfo1: {},
+    lfo2: {},
     delay: {},
     reverb: {}
   },
@@ -125,6 +134,7 @@ export default [
       sustain: true,
     },
     lfo1: {},
+    lfo2: {},
     delay: {},
     reverb: {}
   },
@@ -146,6 +156,7 @@ export default [
       release: true
     },
     lfo1: {},
+    lfo2: {},
     delay: {},
     reverb: {}
   },
