@@ -111,10 +111,20 @@ export default {
       // create loop wich sequences 4 notes
       const randomLoop = times(16).map(i => random(-12, 12))
       let kickTime = true;
+      let sweepCounter = 0;
       this.loop = audio.setMainLoop({
         noteArray: times(16),
         subdivision: '8n'
       }, (time, i) => { // i here is just a note from the note array define above
+        if (this.$store.state.gameState.timerIsRunning === false && !this.displaySuccessOverlay && !this.displayPreviewOverlay) {
+
+          if (sweepCounter === 0) {
+            audio.playSweep();
+            sweepCounter++;
+          } else if (sweepCounter === 4){
+            sweepCounter = 0
+          }
+        }
         if (this.displaySuccessOverlay && kickTime === true && !this.displayStartOverlay) {
           audio.playKick();
           kickTime = false;
@@ -261,7 +271,7 @@ export default {
   background-image: url(./assets/bg.svg);
   background-size: stretch;
   width:100vw;
-  min-height:92vh;
+  height:92vh;
 }
 
 .empty {
@@ -278,11 +288,12 @@ export default {
 
 .module {
   background: black;
-  min-height: calc(0.2*92vh);
   width: 16.67em;
+  height: 50%;
   margin: 0;
   display: block;
   position: relative;
+  border: 1px solid #b7b7b7;
   &.empty {
     background: none;
     &::after {
@@ -297,10 +308,9 @@ export default {
   }
   .button-wrapper {
       display: flex;
-      padding: 1em;
-      width: 45%;
-      height: 18.4vh;
-      margin: 0 auto;
+      padding: 0em;
+      width: 85%;
+      margin: 0 0 2em 0;
       flex-wrap: wrap;
       justify-content: center;
       button {
@@ -322,7 +332,7 @@ export default {
     content:'';
     display: block;
     position: absolute;
-    background: #fff;
+    background: #b7b7b7;
     width: .4em;
     height: .4em;
     border-radius: 100%;
@@ -333,7 +343,7 @@ export default {
     content:'';
     display: block;
     position: absolute;
-    background: #fff;
+    background: #b7b7b7;
     width: .4em;
     height: .4em;
     border-radius: 100%;
@@ -341,9 +351,10 @@ export default {
     right: .55em;
   }
   & .display {
-    // margin: 2% 2%;
-    height: 18.4vh;
-    width: 100%;
+    margin: 2% 2%;
+    height: 6em;
+    width: 80%;
+    margin-left: 10%;
     & path {
       transition: .1s all ease-out;
     }
@@ -351,7 +362,7 @@ export default {
       content:'';
       display: block;
       position: absolute;
-      background: #fff;
+      background: #b7b7b7;
       width: .4em;
       height: .4em;
       border-radius: 100%;
@@ -362,7 +373,7 @@ export default {
       content:'';
       display: block;
       position: absolute;
-      background: #fff;
+      background: #b7b7b7;
       width: .4em;
       height: .4em;
       border-radius: 100%;
@@ -371,13 +382,14 @@ export default {
     }
   }
   & .knobs {
-    width: 16.66vw;
-    min-height: 18.4vh;
+    width: 100%;
+    min-height: 16em;
     margin: auto;
     display: flex;
     align-items: center;
     flex-wrap: wrap;
     justify-content: center;
+    align-items: center;
   }
 }
 

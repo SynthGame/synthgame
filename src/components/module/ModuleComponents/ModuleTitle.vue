@@ -41,15 +41,14 @@ export default {
   .module__name {
     font-size: .7em;
     padding: 5% 10%;
-    color: black;
+    color: white;
     margin: 0;
     display: flex;
-    position: absolute;
+    position: relative;
     justify-content: flex-start;
     align-items: baseline;
     text-transform: uppercase;
     letter-spacing: 2px;
-
     &__title {
       h2 {
         margin: 0;

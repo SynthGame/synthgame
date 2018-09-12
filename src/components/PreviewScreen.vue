@@ -3,7 +3,10 @@
     <div class="startscreen-content-wrapper">
       <div>
         <h1>Level {{gameLevel}}</h1>
-        <h2>You have 30 seconds to recreate the sound playing now.</h2>
+        <h2 v-if="gameLevel === 1">You have 30 seconds to recreate the sound playing now. Use the white guidelines to get going.</h2>
+        <h2 v-if="gameLevel === 2">You unlocked waveforms!<span>Ranging from the smooth, plain sound of a sine wave, to the harmonically rich buzz of a sawtooth wave, waveforms shape the character of the sound.</span></h2>
+        <h2 v-if="gameLevel === 3">Introducing the filter!<span>The filter removes unwanted parts from a signal. adjust the frequency and hear the sound change.</span></h2>
+        <h2 v-if="gameLevel === 4">Filter types!<span>A lowpass filter passes signals with a frequency lower than a selected cutoff frequency. A highpass filter does the opposite, and a bandpass filters both ends.</span></h2>
         <!-- <h2>Listen closely to the sound, hit randomize, and re-create the sound you're hearing now.</h2> -->
       </div>
       <!-- <iframe width="560" height="315" src="https://www.youtube.com/embed/O7x-AS6idOQ?rel=0?version=3&autoplay=1&controls=0&&showinfo=0&loop=1&playlist=O7x-AS6idOQ" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe> -->
@@ -70,6 +73,13 @@ export default {
     font-weight: 300;
     font-size: 3em;
     max-width: 13em;
+    & span {
+      font-size: .6em;
+      margin-top: 1.5em;
+      line-height: 1.5em;
+      max-width: 20em;
+      display: inline-block;
+    }
   }
 }
 

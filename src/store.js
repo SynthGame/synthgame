@@ -22,16 +22,16 @@ export default new Vuex.Store({
         // phase: 0
       },
       filter: {
-        cutOffFreq: 60,
+        cutOffFreq: 70,
         type: 'lowpass',
         setQ: 0,
         // gain: 50
       },
       envelope: {
         attack: 0,
-        decay: 5,
-        sustain: 30,
-        release: 10
+        decay: 0,
+        sustain: 90,
+        release: 0
       },
       lfo: {
         frequency: 10,
@@ -73,16 +73,16 @@ export default new Vuex.Store({
           // phase: 0
         },
         filter: {
-          cutOffFreq: 60,
+          cutOffFreq: 70,
           type: 'lowpass',
           setQ: 0,
           // gain: 50
         },
         envelope: {
           attack: 0,
-          decay: 5,
-          sustain: 30,
-          release: 10
+          decay: 0,
+          sustain: 90,
+          release: 0
         },
         lfo: {
           frequency: 10,
@@ -121,15 +121,15 @@ export default new Vuex.Store({
           detune: 60
         },
         filter: {
-          cutOffFreq: 60,
+          cutOffFreq: 70,
           type: 'lowpass',
           setQ: 0
         },
         envelope: {
           attack: 0,
-          decay: 5,
-          sustain: 30,
-          release: 10
+          decay: 0,
+          sustain: 90,
+          release: 0
         },
         lfo: {
           frequency: 10,
@@ -245,7 +245,7 @@ export default new Vuex.Store({
       })
 
       const randomizeWithoutMatches = (obj, selectObj) => {
-        const randomPreset = randomizeValues(obj, selectObj) // randomly generated preset 
+        const randomPreset = randomizeValues(obj, selectObj) // randomly generated preset
         const accedentlyCorrectValues = mapValues(randomPreset, (modulePreset, moduleName) => {
           return mapValues(modulePreset, (val, parameterName) => {
             const a = val

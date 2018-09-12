@@ -58,8 +58,8 @@
           }"
     ></span>
     </h2>
-    <span v-if="timerIsRunning === false && createModeIsActive === false" class="timer">00:30</span>
-    <span v-else-if="timerIsRunning === true && createModeIsActive === false" class="timer">{{paddedTimeLeftString}}</span>
+    <!-- <span v-if="timerIsRunning === false && createModeIsActive === false" class="timer">First listen to the sound we'll recreate</span> -->
+    <span v-if="timerIsRunning === true && createModeIsActive === false" class="timer">{{paddedTimeLeftString}}</span>
     <span>•</span>
   </nav>
 </template>

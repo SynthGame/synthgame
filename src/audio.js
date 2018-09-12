@@ -13,15 +13,18 @@ export default {
   init () {
     log('initializing all submodules before using')
     this.player.init()
+    this.sweepPlayer.init()
     this.oscillator.init()
     this.envelope.init()
     this.lfo.init()
     this.filter.init()
     this.delay.init()
     this.reverb.init()
+    this.compressor.init()
     this.volume.init()
 
     const player = this.player.state.device
+    const sweepPlayer = this.sweepPlayer.state.device
     const oscillator = this.oscillator.state.device
     const pitchShift = this.oscillator.state.pitchShift
     const envelope = this.envelope.state.device
@@ -29,17 +32,19 @@ export default {
     const filter = this.filter.state.device
     const delay = this.delay.state.device
     const reverb = this.reverb.state.device
+    const compressor = this.compressor.state.device
+
 
     log(`Created new general output for audio device`)
     const output = new Tone.Volume(-12)
     log(`Connecting LFO to filter frequency`)
     lfo.connect(oscillator.detune).start()
     log(`Chaining oscillator => pitch shift => envelope => filter => delay => reverb`)
-    oscillator.chain(pitchShift, filter, envelope, output)
+    oscillator.chain(pitchShift, filter, envelope, compressor, output)
 
     log(`Starting oscillator`)
     oscillator.start()
-    
+
     return output
 
   },
@@ -78,6 +83,10 @@ export default {
     log(`Playing kick`)
     return this.player.state.device.start();
   },
+  playSweep () {
+    log(`Playing sweep`)
+    return this.sweepPlayer.state.device.start();
+  },
   setToneLength (length) {
     log(`setting envelope tone length to: ${length}`)
     this.state.toneLength = length
@@ -91,6 +100,17 @@ export default {
       log(`Initializing player with options: ${options}`)
       this.state.device = new Tone.Player({
         url : require('./assets/kick.wav'),
+      }).toMaster()
+    }
+  },
+  sweepPlayer: {
+    state: {
+      device: undefined
+    },
+    init (options) {
+      log(`Initializing player with options: ${options}`)
+      this.state.device = new Tone.Player({
+        url : require('./assets/sweeptats.wav'),
       }).toMaster()
     }
   },
@@ -147,6 +167,21 @@ export default {
       // }
         '4n', 0, 8000
       )
+    }
+  },
+  compressor: {
+    state: {
+      device: undefined
+    },
+    init (options) {
+      log(`Initializing Compressor with options: ${options}`)
+      this.state.device = new Tone.Compressor({
+      ratio  : 52 ,
+      threshold  : -24 ,
+      release  : 5.25 ,
+      attack  : 0.003 ,
+      knee  : 50
+      });
     }
   },
   filter: {

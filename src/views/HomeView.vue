@@ -18,7 +18,7 @@
         v-masonry-tile
         :class="[(activeModule == 1 ? 'active' : '')]"
       />
-      <EnvelopeModule 
+      <EnvelopeModule
         v-if="moduleIsUseable('envelope')"
         v-masonry-tile
         :class="[(activeModule == 2 ? 'active' : '')]"
@@ -29,17 +29,17 @@
         v-masonry-tile
         :class="[(activeModule == 3 ? 'active' : '')]"
       />
-      <DelayModule
+      <!-- <DelayModule
         v-if="moduleIsUseable('delay')"
         v-masonry-tile
         :class="[(activeModule == 4 ? 'active' : '')]"
-      />
+      /> -->
       <!-- <div v-for="n in 1" v-masonry-tile class="module empty"></div> -->
-      <ReverbModule
+      <!-- <ReverbModule
         v-if="moduleIsUseable('reverb')"
         v-masonry-tile
         :class="[(activeModule == 5 ? 'active' : '')]"
-      />
+      /> -->
       <!-- <div v-for="n in 1" v-masonry-tile class="module empty"></div> -->
     </div>
     <div class="tabs">
@@ -47,8 +47,8 @@
       <div @click="showFil" class="tabs__tab tabs__filter">Fil</div>
       <div @click="showEnv" class="tabs__tab tabs__env">Env</div>
       <div @click="showLfo" class="tabs__tab tabs__lfo">Lfo</div>
-      <div @click="showDel" class="tabs__tab tabs__delay">Del</div>
-      <div @click="showRev" class="tabs__tab tabs__reverb">Rev</div>
+      <!-- <div @click="showDel" class="tabs__tab tabs__delay">Del</div>
+      <div @click="showRev" class="tabs__tab tabs__reverb">Rev</div> -->
     </div>
   </div>
 </template>
