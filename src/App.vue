@@ -7,16 +7,15 @@
         @create="startCreateMode"
       />
     </transition>
-    <transition name="slidein">
-    <preview-screen
-      v-if="displayPreviewOverlay"
-      @startLevel="beginSvoosh"
-    />
+    <transition name="slide-up-slide-down">
+      <preview-screen
+        v-if="displayPreviewOverlay"
+        @startLevel="beginSvoosh"
+      />
     </transition>
     <svoosh
       v-if="isThereSvooshComponent"
       :isFired="svooshIt"
-      @midway="endPreview"
       @bye="endSvoosh"
       black
     />
@@ -27,15 +26,15 @@
       @bye="endSuccessSvoosh"
     />
     <transition name="slideout">
-    <success-overlay
-      v-if="displaySuccessOverlay"
-      @next="startNextLevel"
-    />
+      <success-overlay
+        v-if="displaySuccessOverlay"
+        @next="startNextLevel"
+      />
     </transition>
 
     <failure-overlay
       v-if="isGameOver"
-      @startagain="startPlayMode"
+      @startagain="tryAgain"
     />
 
     <!-- <div id="nav">
@@ -149,6 +148,7 @@ export default {
     },
     startCreateMode(){
       this.displayStartOverlay = false
+      this.displayFailureOverlay=false;
       this.$store.commit('setCreateMode', true)
     },
     startLevel(level) {
@@ -177,13 +177,14 @@ export default {
     beginSvoosh() {
       this.isThereSvooshComponent = true;
       setTimeout(()=>{this.svooshIt=true}, 0)
+      this.displayPreviewOverlay = false
     },
     endSvoosh() {
       setTimeout(()=>{
         this.isThereSvooshComponent=false
         this.svooshIt = false
         }, 500)
-
+      this.endPreview()
     },
     beginSuccessSvoosh() {
       this.isThereSuccessSvooshComponent = true;
@@ -197,7 +198,6 @@ export default {
 
     },
     endPreview() {
-      this.displayPreviewOverlay = false
       this.$store.commit('startTimerIsRunning')
       this.$store.dispatch('setSynthToDefaultParameters', audio)
     },
@@ -416,13 +416,25 @@ body {
   }
 }
 
+/* OVERLAYS TRANSITIONING
+*
+* the way the start screen goes away:
+*/
 .slideout-leave-active {
   animation: slideout 1s
 }
-.slidein-enter-active {
+
+/* ...and the preview screen enters: */
+.slide-up-slide-down-enter-active {
   animation: slidein 1s
 }
 
+/* and the way it disappears after a black svoosh */
+.slide-up-slide-down-leave-active {
+  animation: slidedown 900ms ease-in 0.3s
+}
+
+/* these animations, defined in keyframes: */
 @keyframes slideout {
   0% {
   transform: translateY(0);
@@ -441,20 +453,29 @@ body {
   }
 }
 
+@keyframes slidedown {
+  0% {
+  transform: translateY(0);
+  }
+  100% {
+  transform: translateY(100%)
+  }
+}
+
 @media only screen and (max-width: 1000px) {
-    .tabs {
-      display: flex;
-    }
-    .module {
-      width: 100vw;
-      height: 90vh;
-      position: absolute;
-      opacity: 0;
-    }
-    .module.active {
-      left: 0;
-      opacity: 1;
-      z-index: 1;
-    }
+  .tabs {
+    display: flex;
+  }
+  .module {
+    width: 100vw;
+    height: 90vh;
+    position: absolute;
+    opacity: 0;
+  }
+  .module.active {
+    left: 0;
+    opacity: 1;
+    z-index: 1;
+  }
 }
 </style>
