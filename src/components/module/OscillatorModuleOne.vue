@@ -3,7 +3,7 @@
     <module-title :indicator-active="dialsAreWithinMargin" :module-color="moduleColor">
       <h2 slot="title">Tats</h2>
       <h3 v-if="dialsAreWithinMargin" slot="subtitle">Done!</h3>
-      <h3 v-else slot="subtitle">Oscillator</h3>
+      <h3 v-else slot="subtitle">Oscillator 1</h3>
     </module-title>
     <module-display
       class="display"
@@ -79,7 +79,7 @@ export default {
       typeDial: 0,
       freqDial: 0,
       oscillator1: {},
-      moduleColor: MODULE_OSCILLATOR_COLOR
+      moduleColor: MODULE_OSCILLATORONE_COLOR
     }
   },
   components: {

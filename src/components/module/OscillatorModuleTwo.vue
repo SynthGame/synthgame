@@ -3,12 +3,12 @@
     <module-title :indicator-active="dialsAreWithinMargin" :module-color="moduleColor">
       <h2 slot="title">Tats</h2>
       <h3 v-if="dialsAreWithinMargin" slot="subtitle">Done!</h3>
-      <h3 v-else slot="subtitle">Oscillator</h3>
+      <h3 v-else slot="subtitle">Oscillator 2</h3>
     </module-title>
     <module-display
       class="display"
       module="oscillator"
-      fill="#ff8574"
+      fill="#43bede"
       :knobs="[{name: 'Octave', min: freqArray[0], max: freqArray[freqArray.length -1], value: frequency},
               {name: 'Detune', min: -120, max: 120, value: detune},
               {name: 'Phase', min: 50, max: 10000, value: 0},
@@ -25,7 +25,7 @@
         :min="0"
         :step="1"
         :max="freqArray.length - 1"
-        knobColor="#ff8574"
+        knobColor="#43bede"
         name="Octave"
       ></module-knob>
       <module-knob
@@ -33,7 +33,7 @@
         v-if="knobsAvailable.detune || createModeIsActive"
         :min="0"
         :max="100"
-        knobColor="#ff8574"
+        knobColor="#43bede"
         name="Detune"
       ></module-knob>
       <!-- <module-knob
@@ -46,10 +46,10 @@
       <div class="button-wrapper"
         v-if="knobsAvailable.typeOsc || createModeIsActive"
       >
-        <module-button color="#ff8574" shape="sine" :isPressed="typeOsc==='sine'" @click.native="typeOsc='sine'"/>
-        <module-button color="#ff8574" shape="square" :isPressed="typeOsc==='square'" @click.native="typeOsc='square'"/>
-        <module-button color="#ff8574" shape="sawtooth" :isPressed="typeOsc==='sawtooth'" @click.native="typeOsc='sawtooth'"/>
-        <module-button color="#ff8574" shape="triangle" :isPressed="typeOsc==='triangle'" @click.native="typeOsc='triangle'"/>
+        <module-button color="#43bede" shape="sine" :isPressed="typeOsc==='sine'" @click.native="typeOsc='sine'"/>
+        <module-button color="#43bede" shape="square" :isPressed="typeOsc==='square'" @click.native="typeOsc='square'"/>
+        <module-button color="#43bede" shape="sawtooth" :isPressed="typeOsc==='sawtooth'" @click.native="typeOsc='sawtooth'"/>
+        <module-button color="#43bede" shape="triangle" :isPressed="typeOsc==='triangle'" @click.native="typeOsc='triangle'"/>
         <p>WAVEFORM</p>
       </div>
 
@@ -79,7 +79,7 @@ export default {
       typeDial: 0,
       freqDial: 0,
       oscillator2: {},
-      moduleColor: MODULE_OSCILLATOR_COLOR
+      moduleColor: MODULE_OSCILLATORTWO_COLOR
     }
   },
   components: {
@@ -143,8 +143,12 @@ export default {
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped lang="scss">
 
+.module .button-wrapper button {
+    border: 1px solid #43bede;
+}
+
 svg.display {
-    fill: #ff8574;
+    fill: #43bede;
 }
 
 ul {
@@ -156,6 +160,6 @@ li {
   margin: 0 10px;
 }
 a {
-  color: #42b983;
+  color: #43bede;
 }
 </style>
