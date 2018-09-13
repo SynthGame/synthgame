@@ -136,7 +136,7 @@
                 <circle id="Oval" fill="#171A3D" fill-rule="nonzero" cx="262.6" cy="288.4" r="153.2"></circle>
                 <circle id="Oval" stroke="#FFFFFF" stroke-width="5.796" :fill="knobColor" fill-rule="nonzero" cx="262.6" cy="288.4" r="113.4"></circle>
                 <!-- <g :transform="'rotate(' + (((this.value / (this.max - (this.min * 0.9))) * 359.8) - ((this.max*0.9) + (this.max/20000 * 6) - 3)) + ' 264 285) translate(2, 205)'" > -->
-                <g :transform="'rotate(' + (((this.value / (this.max - this.min)) * 359.8) - 0.2) + ' 264 285) translate(2, 205)'" >
+                <g :transform="'rotate(' + degAngle + ' 264 285) translate(2, 205)'" >
                   <path d="M262.6,288.4 L262.6,81.2" id="Shape" stroke="white" stroke-width="5.796"></path>
                 </g>
             </g>
@@ -165,7 +165,7 @@ export default {
       length: this.stepsCount
     }, (_, i) => this.min + i * this.stepSize)
 
-    this.circleSliderState = new CircleSliderState(this.steps, this.startAngleOffset, this.value)
+    this.circleSliderState = new CircleSliderState(this.steps, this.rangeOffset, this.value)
     this.angle = this.circleSliderState.angleValue
     this.currentStepValue = this.circleSliderState.currentStep
 
@@ -177,14 +177,14 @@ export default {
     this.touchPosition = new TouchPosition(this.$refs._svg, this.radius, this.radius / 2)
   },
   props: {
-    startAngleOffset: {
-      type: Number,
-      required: false,
-      default: function () {
-        // return Math.PI / 20
-        return 0
-      }
-    },
+    // startAngleOffset: {
+    //   type: Number,
+    //   required: false,
+    //   default: function () {
+    //     // return Math.PI / 20
+    //     return 0
+    //   }
+    // },
     module: {
       type: String,
       default: 'oscillator'
@@ -284,7 +284,8 @@ export default {
       currentStepValue: 0,
       mousePressed: false,
       circleSliderState: null,
-      mousemoveTicks: 0
+      mousemoveTicks: 0,
+      rangeOffset: 0.7 // in rads
     }
   },
   computed: {
@@ -298,6 +299,9 @@ export default {
     },
     cpAngle () {
       return this.angle + Math.PI / 2
+    },
+    degAngle () {
+      return (this.angle)/(2 * Math.PI) * 360
     },
     cpMainCircleStrokeWidth () {
       return this.circleWidth || (550 / 2) / this.circleWidthRel

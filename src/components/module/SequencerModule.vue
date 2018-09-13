@@ -4,28 +4,30 @@
       <h2 slot="title">Tats</h2>
       <h3 slot="subtitle">Sequencer</h3>
     </module-title>
-    <div class="button-wrapper function">
-      <button color="#6e01d1" @click="sequencerEditStateChange(0)">Steps</button>
-      <button color="#6e01d1" @click="sequencerEditStateChange(1)">Pitch</button>
-      <button color="#6e01d1" @click="sequencerEditStateChange(2)">Volume</button>
-      <button color="#6e01d1" @click="sequencerEditStateChange(3)">Note Length</button>
-      <p>Function</p>
-    </div>
-    <!-- <module-knob
-      v-model="sequencerEditState"
-      :min="0"
-      :max="3"
-      knobColor="#5bd484"
-      name="Control"
-      module="lfo"
-    ></module-knob> -->
-    <div class="play-random">
-      <button @click="playPauseSynth" class="sequencer-stop-button">
+    <div class="sequencer__controls">
+      <div class="button-wrapper function">
+        <button color="#6e01d1" @click="sequencerEditStateChange(0)">Steps</button>
+        <button color="#6e01d1" @click="sequencerEditStateChange(1)">Pitch</button>
+        <button color="#6e01d1" @click="sequencerEditStateChange(2)">Volume</button>
+        <button color="#6e01d1" @click="sequencerEditStateChange(3)">Note Length</button>
+        <p>Function</p>
+      </div>
+      <!-- <module-knob
+        v-model="sequencerEditState"
+        :min="0"
+        :max="3"
+        knobColor="#5bd484"
+        name="Control"
+        module="lfo"
+      ></module-knob> -->
+      <div class="play-random">
+        <button @click="playPauseSynth" class="sequencer-stop-button">
 
-      </button>
-      <button @click="randomizeSelectedParam" class="sequencer-random-button">
-        random
-      </button>
+        </button>
+        <button @click="randomizeSelectedParam" class="sequencer-random-button">
+          random
+        </button>
+      </div>
     </div>
     <div class="button-section" v-for="i in [0,1,2,3]" :key="i">
       <span class="step-wrapper" v-for="j in getSubRange(i)" :key="j">
@@ -53,8 +55,10 @@
           v-else-if="sequencerEditState === 3"
           :value="noteArray[j] && noteArray[j].noteLength"
           @input="setNoteLengthValue(j, $event)"
+          :min="0"
+          :max="100"
         />
-        <div style="opacity: 0.7;">{{j + 1}}</div>
+        <div class="stepnumber">{{j + 1}}</div>
       </span>
     </div>
   </div>
@@ -192,19 +196,43 @@ export default {
 <style lang="scss" scoped>
 $main-seq-color: #F40056;
 
+.sequencer {
+   width: 100%;
+   height: 50%;
+   display: flex;
+   justify-content: space-between;
+   padding: 2em;
+   & .stepnumber {
+     margin-top: .5em;
+   }
+   & button {
+     cursor: pointer;
+     transition: all .2s;
+     text-transform: uppercase;
+     min-height: 45px;
+     &:hover {
+       background: rgba(255,255,255,0.1)
+     }
+   }
+}
+
 .play-random {
   display: flex;
+  width: fit-content;
   justify-content: space-around;
 }
 
 .module__name {
-  position: relative;
+  position: absolute;
+  padding: 0.833% 1.67%
 }
 
 button.sequencer-button {
     min-height: 8em;
     justify-content: flex-start;
     display: flex;
+    margin: 0;
+    margin-top: 1em;
 }
 
 .module__name__title {
@@ -230,7 +258,7 @@ button.sequencer-button {
   display: inline-flex;
   margin: 10px 5px;
   padding: 0;
-  border: 2px solid $main-seq-color;
+  border: 1px solid $main-seq-color;
   background-color: unset;
 }
 
@@ -238,14 +266,16 @@ button.sequencer-button {
   display: inline-flex;
   margin: 10px 5px;
   padding: 10px 30px;
-  border: 2px solid $main-seq-color;
+  border: 1px solid $main-seq-color;
   background-color: unset;
   color: white;
 }
 
 .button-section {
+  border-top: 1px solid $main-seq-color;
   display: flex;
-  width: 100%;
+  width: 16em;
+  justify-content: space-between;
 }
 
 .button-wrapper {
@@ -253,10 +283,13 @@ button.sequencer-button {
   display: flex;
   width: 10%;
   &.function {
-    width: 100%;
     height: fit-content;
+    width: 100%;
     button {
       width: 50%;
+      border: 1px solid $main-seq-color;
+      background-color: black;
+      color: white
     }
   }
 }

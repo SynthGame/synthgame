@@ -19,7 +19,7 @@ export default class CircleSliderState {
   /*
    */
   get angleUnit () {
-    return (Math.PI * 2 - this.offset) / this.length
+    return (Math.PI * 2 - this.offset * 2) / this.length
   }
 
   /*
