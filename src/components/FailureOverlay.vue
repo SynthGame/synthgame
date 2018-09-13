@@ -2,12 +2,12 @@
   <div class="overlay">
     <div class="overlay-content-wrapper">
       <div>
-        <p class="game-over-text">GAME<br/>
-        OVER</p>
+        <h1 class="game-over-text">GAME<br/>
+        OVER</h1>
       </div>
 
       </svg>
-      <svg viewBox="0 0 190 190" height="400px" width="400px">
+      <svg viewBox="0 0 190 190" height="400px" width="400px" class="svg">
         <!-- DRUM  -->
         <svg version="1.1" stroke-width="1.5819" x="55" y="80"
             xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:a="http://ns.adobe.com/AdobeSVGViewerExtensions/3.0/"
@@ -219,76 +219,12 @@ let conf = {
 </script>
 
 <style scoped lang="scss">
-.overlay {
-  position: fixed;
-  display: flex;
-  align-content: center;
-  justify-content: center;
-  z-index: 9998;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-color: rgba(0, 0, 0, .90);
-  transition: opacity .3s ease;
-  fill: none;
-  stroke: white;
-  stroke-width: 3;
-  & h1 {
-    text-transform: uppercase;
-  }
-  & h2 {
-    font-weight: 300;
-    font-size: 3em;
-    max-width: 13em;
-  }
-}
-
 .game-over-text {
-  font-size: 6rem;
-  margin: 1rem;
-  font-weight: 200;
+  font-size:5rem;
+  margin-bottom:0;
+}
+.svg {
+  margin-bottom: 2rem;
 }
 
-.overlay-content-wrapper {
-  padding: 1rem;
-  display: flex;
-  height: 100%;
-  flex-direction: column;
-  justify-content: space-around;
-  align-items: center;
-  align-content: center;
-}
-
-.heading {
-  font-size: 4rem;
-  font-weight: 700;
-  margin-bottom: 1rem;
-}
-
-.subheading {
-  margin-top:0;
-  font-size: 3.5rem;
-  font-weight: 500
-}
-.button-next {
-    background: none;
-    color: inherit;
-    padding: 0;
-    font: inherit;
-    cursor: pointer;
-    outline: inherit;
-    padding: 1rem 2rem;
-    font-size: 2.5rem;
-    border: 1px solid white;
-}
-
-// ok, so apparently regular keyframes do not work unless defined somewhere higher:
-// https://stackoverflow.com/questions/47283989/why-are-css-keyframe-animations-broken-in-vue-components-with-scoped-styling
-// @keyframes racket-movement {
-//   0% { transform: rotate(0) }
-//   20% { transform: rotate(10deg)}
-//   50% { transform: rotate(20deg) }
-//   100% { transform: rotate(100%) }
-// }
 </style>

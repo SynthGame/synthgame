@@ -1,14 +1,14 @@
 <template>
-  <div class="startscreen">
-    <div class="startscreen-content-wrapper">
-      <div>
+  <div class="overlay">
+    <div class="overlay-content-wrapper">
+
         <h1>Level {{gameLevel}}</h1>
         <h2 v-if="gameLevel === 1">You have 30 seconds to recreate the sound playing now. Use the white guidelines to get going.</h2>
         <h2 v-if="gameLevel === 2">You unlocked waveforms!<span>Ranging from the smooth, plain sound of a sine wave, to the harmonically rich buzz of a sawtooth wave, waveforms shape the character of the sound.</span></h2>
         <h2 v-if="gameLevel === 3">Introducing the filter!<span>The filter removes unwanted parts from a signal. adjust the frequency and hear the sound change.</span></h2>
         <h2 v-if="gameLevel === 4">Filter types!<span>A lowpass filter passes signals with a frequency lower than a selected cutoff frequency. A highpass filter does the opposite, and a bandpass filters both ends.</span></h2>
         <!-- <h2>Listen closely to the sound, hit randomize, and re-create the sound you're hearing now.</h2> -->
-      </div>
+
       <!-- <iframe width="560" height="315" src="https://www.youtube.com/embed/O7x-AS6idOQ?rel=0?version=3&autoplay=1&controls=0&&showinfo=0&loop=1&playlist=O7x-AS6idOQ" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe> -->
       <!-- <video width="480" autoplay loop muted>
         <source src="../../src/assets/intro.mp4" type="video/mp4">
@@ -51,67 +51,5 @@ export default {
 </script>
 
 <style scoped lang="scss">
-.startscreen {
-  position: fixed;
-  display: flex;
-  align-content: center;
-  justify-content: center;
-  z-index: 9998;
-  top: 0;
-  left: 0;
-  width: 100vw;
-  height: 100vh;
-  background-color: rgba(0, 0, 0, .90);
-  transition: opacity .3s ease;
-  fill: none;
-  stroke: red;
-  stroke-width: 3;
-  // position: relative;
-  z-index: 20000;
-  & h1 {
-    text-transform: uppercase;
-  }
-  & h2 {
-    font-weight: 300;
-    font-size: 3em;
-    max-width: 13em;
-    & span {
-      font-size: .6em;
-      margin-top: 1.5em;
-      line-height: 1.5em;
-      max-width: 20em;
-      display: inline-block;
-    }
-  }
-}
 
-.startscreen-content-wrapper {
-  padding: 1rem;
-  display: flex;
-  height: 100%;
-  flex-direction: column;
-  justify-content: space-around;
-  align-items: center;
-  align-content: center;
-}
-
-.button-next {
-    text-transform: uppercase;
-    letter-spacing: 1px;
-    font-size: 1em;
-    color: inherit;
-    padding: 0;
-    font: inherit;
-    cursor: pointer;
-    outline: inherit;
-    padding: .8rem 1.4rem;
-    border: none;
-    margin: 5px;
-    background: none;
-    border: 1px solid #ff8574;
-    transition: all .2s;
-    &:hover {
-      background: #ff8574;
-    }
-}
 </style>
