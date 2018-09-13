@@ -191,7 +191,7 @@ export default {
       return Object.values(this.$store.getters.audioParametersMatchGoalWithMargin['envelope']).every(param => param)
     },
     lfo1Complete() {
-      return Object.values(this.$store.getters.audioParametersMatchGoalWithMargin['lfo1']).every(param => param)
+      return Object.values(this.$store.getters.audioParametersMatchGoalWithMargin['lfo']).every(param => param)
     },
   }
 }

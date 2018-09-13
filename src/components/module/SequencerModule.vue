@@ -56,7 +56,7 @@
           :value="noteArray[j] && noteArray[j].noteLength"
           @input="setNoteLengthValue(j, $event)"
           :min="0"
-          :max="3"
+          :max="4"
         />
         <div class="stepnumber">{{j + 1}}</div>
       </span>
@@ -119,7 +119,7 @@ export default {
         };
         if(this.noteArray[note].selected) {
           audio.playNote(this.noteArray[note].pitch, {
-            noteLength: ['2n', '4n', '8n', '16n'][this.noteArray[note].noteLength],
+            noteLength: ['16t', '8n', '4n', '2n','1n'][this.noteArray[note].noteLength],
             volume: this.noteArray[note].volume
           })
         }
@@ -153,8 +153,8 @@ export default {
     randomizeSelectedParam (param) {
       const _randomizeNoteSelected = () => this.noteArray.forEach((el, i) => this.setNoteOnOff(i, sample([true, false])))
       const _randomizeNotePitch = () => this.noteArray.forEach((el, i) => this.setPitchValue(i, random(-12,12)))
-      const _randomizeNoteVolume = () => this.noteArray.forEach((el, i) => this.setVolumeValue(i, random(-12,0)))
-      const _randomizeNoteLength = () => this.noteArray.forEach((el, i) => this.setNoteLengthValue(i, random(0,100)))
+      const _randomizeNoteVolume = () => this.noteArray.forEach((el, i) => this.setVolumeValue(i, random(-20,6)))
+      const _randomizeNoteLength = () => this.noteArray.forEach((el, i) => this.setNoteLengthValue(i, random(0,5)))
 
       return (
         _randomizeNoteSelected(),
