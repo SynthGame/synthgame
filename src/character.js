@@ -5,7 +5,7 @@ export default {
     feedback: val => val / 100
   },
   envelope: {
-    attack: val => val/10 + 0.01,
+    attack: val => val/100 + 0,
     decay: val => Math.pow(val, (val / 100)) - 0.99,
     sustain: val => val / 100,
     release: val => val

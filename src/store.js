@@ -56,6 +56,7 @@ export default new Vuex.Store({
     },
     gameState: {
       createModeIsActive: false,
+      sweepArmed: true,
       marginOsc: 0,
       marginFil: 0,
       marginEnv: 0,
@@ -203,6 +204,14 @@ export default new Vuex.Store({
     stopTimerIsRunning (state) {
       // overwrite parameters from audiostate, this will not fill in nested objects
       state.gameState.timerIsRunning = false
+    },
+    armSweep (state) {
+      // overwrite parameters from audiostate, this will not fill in nested objects
+      state.gameState.sweepArmed = true
+    },
+    disarmSweep (state) {
+      // overwrite parameters from audiostate, this will not fill in nested objects
+      state.gameState.sweepArmed = false
     },
     addValueToScore (state, val) {
       state.gameState.score = add(state.gameState.score, val)

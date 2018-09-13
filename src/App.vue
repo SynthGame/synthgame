@@ -111,22 +111,19 @@ export default {
       // create loop wich sequences 4 notes
       const randomLoop = times(16).map(i => random(-12, 12))
       let kickTime = true;
-      let sweepCounter = 0;
       this.loop = audio.setMainLoop({
         noteArray: times(16),
         subdivision: '8n'
       }, (time, i) => { // i here is just a note from the note array define above
         if (this.$store.state.gameState.timerIsRunning === false && !this.displaySuccessOverlay && !this.displayPreviewOverlay) {
-
-          if (sweepCounter === 0) {
+          if (this.$store.state.gameState.sweepArmed) {
             audio.playSweep();
-            sweepCounter++;
-          } else if (sweepCounter === 4){
-            sweepCounter = 0
+            this.$store.commit('disarmSweep')
           }
         }
         if (this.displaySuccessOverlay && kickTime === true && !this.displayStartOverlay) {
           audio.playKick();
+          this.$store.commit('armSweep')
           kickTime = false;
         } else {
           kickTime = true;
@@ -193,6 +190,7 @@ export default {
       setTimeout(()=>{
         this.isThereSvooshComponent=false
         this.svooshIt = false
+        this.$store.commit('armSweep')
         }, 500)
       this.endPreview()
     },

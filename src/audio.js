@@ -92,6 +92,10 @@ export default {
     log(`Playing sweep`)
     return this.sweepPlayer.state.device.start();
   },
+  stopSweep () {
+    log(`Stopping sweep`)
+    return this.sweepPlayer.state.device.stop();
+  },
   setToneLength (length) {
     log(`setting envelope tone length to: ${length}`)
     this.state.toneLength = length
