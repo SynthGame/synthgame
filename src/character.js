@@ -16,17 +16,18 @@ export default {
     setQ: val => val / 8
     // gain: val =>
   },
-  lfo1: {
+  lfo: {
     frequency: val => Math.pow(val, (val / 100)) - 0.99,
     type: val => val,
     amount: val => (val * 40)
   },
-  lfo2: {
-    frequency: val => Math.pow(val, (val / 100)) - 0.99,
-    type: val => val,
-    amount: val => (val * 40)
+  oscillator1: {
+    frequency: val => val,
+    typeOsc: val => val,
+    detune: val => (val * 2) - 120
+    // phase: 0
   },
-  oscillator: {
+  oscillator2: {
     frequency: val => val,
     typeOsc: val => val,
     detune: val => (val * 2) - 120

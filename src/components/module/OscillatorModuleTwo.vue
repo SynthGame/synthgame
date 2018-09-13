@@ -75,10 +75,10 @@ export default {
   name: 'OscillatorModule',
   data () {
     return {
-      name: 'oscillator',
+      name: 'oscillator2',
       typeDial: 0,
       freqDial: 0,
-      oscillator: {},
+      oscillator2: {},
       moduleColor: MODULE_OSCILLATOR_COLOR
     }
   },
@@ -90,7 +90,7 @@ export default {
   },
   created () {
     self = this
-    this.oscillator = audio.oscillator.state.device
+    this.oscillator2 = audio.oscillator2.state.device
   },
   computed: {
     timerIsRunning () {
@@ -102,29 +102,29 @@ export default {
       return Object.values(this.$store.getters.audioParametersMatchGoalWithMargin[this.name])
         .every(param => param)
     },
-    ...vuexSyncGen('oscillator', 'frequency', val => {
-      self.oscillator.frequency.value = character.oscillator.frequency(val)
+    ...vuexSyncGen('oscillator2', 'frequency', val => {
+      self.oscillator2.frequency.value = character.oscillator2.frequency(val)
     }),
-    ...vuexSyncGen('oscillator', 'typeOsc', val => {
-      if (self.oscillator.type === character.oscillator.typeOsc(val)) return
-      self.oscillator.type = character.oscillator.typeOsc(val)
-      self.oscillator.stop()
-      self.oscillator.start()
+    ...vuexSyncGen('oscillator2', 'typeOsc', val => {
+      if (self.oscillator2.type === character.oscillator2.typeOsc(val)) return
+      self.oscillator2.type = character.oscillator2.typeOsc(val)
+      self.oscillator2.stop()
+      self.oscillator2.start()
     }),
-    // ...vuexSyncGen('oscillator', 'phase', val => {
-    //   self.oscillator.phase = character.oscillator.phase(val) // phase in degrees
+    // ...vuexSyncGen('oscillator2', 'phase', val => {
+    //   self.oscillator2.phase = character.oscillator2.phase(val) // phase in degrees
     // }),
-    ...vuexSyncGen('oscillator', 'detune', val => {
-      self.oscillator.detune.value = character.oscillator.detune(val)
+    ...vuexSyncGen('oscillator2', 'detune', val => {
+      self.oscillator2.detune.value = character.oscillator2.detune(val)
     }),
     ...mapState({
-      frequencyGoal: state => state.gameState.goal.oscillator.frequency,
-      typeOscGoal: state => state.gameState.goal.oscillator.typeOsc,
-      detuneGoal: state => state.gameState.goal.oscillator.detune,
-      // phaseGoal: state => state.gameState.goal.oscillator.phase,
-      typeArray: state => state.gameState.possibleValues.oscillator.typeOsc,
-      freqArray: state => state.gameState.possibleValues.oscillator.frequency,
-      knobsAvailable: state => state.gameState.knobsAvailable.oscillator,
+      frequencyGoal: state => state.gameState.goal.oscillator2.frequency,
+      typeOscGoal: state => state.gameState.goal.oscillator2.typeOsc,
+      detuneGoal: state => state.gameState.goal.oscillator2.detune,
+      // phaseGoal: state => state.gameState.goal.oscillator2.phase,
+      typeArray: state => state.gameState.possibleValues.oscillator2.typeOsc,
+      freqArray: state => state.gameState.possibleValues.oscillator2.frequency,
+      knobsAvailable: state => state.gameState.knobsAvailable.oscillator2,
       createModeIsActive: state => state.gameState.createModeIsActive
     })
   },

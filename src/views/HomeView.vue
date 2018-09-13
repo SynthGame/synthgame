@@ -2,43 +2,43 @@
   <div class="game">
     <game-nav-bar/>
     <div class="level">
-      <OscillatorModule
-        v-if="moduleIsUseable('oscillator')"
+      <oscillator-module-one
+        v-if="moduleIsUseable('oscillator1')"
         :class="[(activeModule == 0 ? 'active' : '')]"
       />
-      <FilterModule
+      <oscillator-module-two
+        v-if="moduleIsUseable('oscillator2')"
+        :class="[(activeModule == 0 ? 'active' : '')]"
+      />
+      <filter-module
         v-if="moduleIsUseable('filter')"
         :class="[(activeModule == 1 ? 'active' : '')]"
       />
-      <EnvelopeModule
+      <envelope-module
         v-if="moduleIsUseable('envelope')"
         :class="[(activeModule == 2 ? 'active' : '')]"
       />
-      <Lfo1Module
-        v-if="moduleIsUseable('lfo1')"
+      <lfo-module
+        v-if="moduleIsUseable('lfo')"
         :class="[(activeModule == 3 ? 'active' : '')]"
-      />
-      <Lfo2Module
-        v-if="moduleIsUseable('lfo2')"
-        :class="[(activeModule == 4 ? 'active' : '')]"
       />
       <sequencer-module
         v-if="createModeIsActive"
         class="module sequencer"
       />
-      <!-- <DelayModule
+      <!-- <delay-module
         v-if="moduleIsUseable('delay')"
         v-masonry-tile
         :class="[(activeModule == 4 ? 'active' : '')]"
       /> -->
-      <!-- <ReverbModule
+      <!-- <reverb-module
         v-if="moduleIsUseable('reverb')"
         v-masonry-tile
         :class="[(activeModule == 5 ? 'active' : '')]"
       /> -->
     </div>
     <div class="tabs">
-      <div @click="showOsc" class="tabs__tab tabs__osc">Osc</div>
+      <div @click="showOsc1" class="tabs__tab tabs__osc">Osc</div>
       <div @click="showFil" class="tabs__tab tabs__filter">Fil</div>
       <div @click="showEnv" class="tabs__tab tabs__env">Env</div>
       <div @click="showLfo" class="tabs__tab tabs__lfo">Lfo</div>
@@ -52,11 +52,11 @@
 import some from 'lodash/some'
 // @ is an alias to /src
 import GameNavBar from '@/components/GameNavBar.vue'
-import OscillatorModule from '@/components/module/OscillatorModule.vue'
+import OscillatorModuleOne from '@/components/module/OscillatorModuleOne.vue'
+import OscillatorModuleTwo from '@/components/module/OscillatorModuleTwo.vue'
 import EnvelopeModule from '@/components/module/EnvelopeModule.vue'
 import FilterModule from '@/components/module/FilterModule.vue'
-import Lfo1Module from '@/components/module/Lfo1Module.vue'
-import Lfo2Module from '@/components/module/Lfo2Module.vue'
+import LfoModule from '@/components/module/LfoModule.vue'
 import DelayModule from '@/components/module/DelayModule.vue'
 import ReverbModule from '@/components/module/ReverbModule.vue'
 import SequencerModule from '@/components/module/SequencerModule.vue'
@@ -71,17 +71,17 @@ export default {
   },
   components: {
     GameNavBar,
-    OscillatorModule,
+    OscillatorModuleOne,
+    OscillatorModuleTwo,
     EnvelopeModule,
     FilterModule,
-    Lfo1Module,
-    Lfo2Module,
+    LfoModule,
     DelayModule,
     ReverbModule,
     SequencerModule
   },
   methods: {
-    showOsc () {
+    showOsc1 () {
       this.activeModule = 0;
     },
     showFil () {
