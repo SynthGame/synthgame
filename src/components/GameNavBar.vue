@@ -28,8 +28,8 @@
       <span
         v-if="moduleIsUseable('filter')"
         :class="{
-                  'module__name__status-indicator': true,
-                  'module__name__status-indicator--active': filterComplete
+                  'module__name__status-indicator indicator__osctwo': true,
+                  'module__name__status-indicator--active indicator__osctwo': filterComplete
                 }"
             :style="{
                   'background-color': filterComplete ? filterColor : '',
@@ -39,8 +39,8 @@
       <span
         v-if="moduleIsUseable('envelope')"
         :class="{
-                  'module__name__status-indicator': true,
-                  'module__name__status-indicator--active': envelopeComplete
+                  'module__name__status-indicator indicator__envelope': true,
+                  'module__name__status-indicator--active indicator__envelope': envelopeComplete
                 }"
         :style="{
                   'background-color': envelopeComplete ? envelopeColor : '',
@@ -110,7 +110,7 @@
 </template>
 
 <script>
-import { MODULE_OSCILLATOR_COLOR, MODULE_ENVELOPE_COLOR, MODULE_FILTER_COLOR, MODULE_DELAY_COLOR, MODULE_REVERB_COLOR, MODULE_LFO_COLOR} from '@/constants'
+import { MODULE_OSCILLATOR_COLOR, MODULE_OSCILLATORTWO_COLOR, MODULE_ENVELOPE_COLOR, MODULE_FILTER_COLOR, MODULE_DELAY_COLOR, MODULE_REVERB_COLOR, MODULE_LFO_COLOR} from '@/constants'
 import padStart from 'lodash/padStart'
 import some from 'lodash/some'
 
@@ -122,6 +122,7 @@ export default {
       timer: null,
       indicatorActive: true,
       oscillatorColor: MODULE_OSCILLATOR_COLOR,
+      oscillatorTwoColor: MODULE_OSCILLATORTWO_COLOR,
       envelopeColor: MODULE_ENVELOPE_COLOR,
       filterColor: MODULE_FILTER_COLOR,
       lfoColor: MODULE_LFO_COLOR,
@@ -237,9 +238,9 @@ background: black;
    display: flex;
    flex-direction: column;
    width: 8em;
-   border-right: 1px solid white;
  }
  & .highscore {
+   border-left: 1px solid white;
    display: flex;
    flex-direction: column;
    width: 8em;
@@ -306,5 +307,14 @@ background: black;
 
 @keyframes blink {
     from {opacity: 0;}
+}
+
+@media only screen and (max-width: 1000px) {
+  .module__name__status-indicator {
+    display: none;
+  }
+  .highscore {
+    display: none !important;
+  }
 }
 </style>

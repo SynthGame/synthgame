@@ -231,7 +231,6 @@ export default {
       if(val === 2) {
         // this.init()
         // this.loop.start()
-
       }
     }
   }
@@ -248,18 +247,19 @@ export default {
 
 .tabs {
   display: none;
-  justify-content: space-between;
+  justify-content: flex-start;
   position: absolute;
   bottom: 0;
   width: 100vw;
   height: 10vh;
   align-items: center;
+  text-transform: uppercase;
   &__tab {
     height: 100%;
     display: flex;
     justify-content: center;
     align-items: center;
-    width: 16.66%;
+    width: 20%;
     border: .5px solid white;
     cursor: pointer;
     &:hover {
@@ -277,7 +277,7 @@ export default {
   background-image: url(./assets/bg.svg);
   background-size: stretch;
   width:100vw;
-  height:92vh !important;
+  height: 92vh;
 }
 
 .empty {
@@ -547,8 +547,20 @@ body {
 }
 
 @media only screen and (max-width: 1000px) {
+  #app {
+    font-size: .8em;
+  }
+  .level {
+    height: 82vh !important;
+  }
   .tabs {
     display: flex;
+    &__tab {
+      flex-direction: column;
+      height:100%;
+      padding: 2vh 0;
+      justify-content: space-around;
+    }
   }
   .module {
     width: 100vw;
@@ -556,10 +568,25 @@ body {
     position: absolute;
     opacity: 0;
   }
+  .module .knobs {
+    padding-top: 5vh;
+    min-height: 55vh;
+}
+.module .button-wrapper button {
+    width: 4.5em;
+    height: 4.5em;
+}
+.module .button-wrapper p {
+    font-size: 1.2em;
+}
   .module.active {
     left: 0;
     opacity: 1;
     z-index: 1;
+    height: 82vh;
+  }
+  .module .display {
+    height: 20vh;
   }
 }
 </style>
