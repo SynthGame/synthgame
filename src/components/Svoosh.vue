@@ -161,6 +161,6 @@ is-opened {
   position: fixed;
   top: 0;
   left: 0;
-  z-index: 10040;
+  z-index: 9999999;
 }
 </style>
