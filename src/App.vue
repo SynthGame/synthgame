@@ -186,7 +186,7 @@ export default {
     },
     beginSvoosh() {
       this.isThereSvooshComponent = true;
-      setTimeout(()=>{this.svooshIt=true}, 0)
+      this.$nextTick(() => this.svooshIt = true)
       this.displayPreviewOverlay = false
     },
     endSvoosh() {
@@ -197,8 +197,8 @@ export default {
       this.endPreview()
     },
     beginSuccessSvoosh() {
-      this.isThereSuccessSvooshComponent = true;
-      setTimeout(()=>{this.successSvooshIt=true}, 0)
+      this.isThereSuccessSvooshComponent = true
+      this.$nextTick(() => this.successSvooshIt=true)
     },
     endSuccessSvoosh() {
       setTimeout(()=>{
