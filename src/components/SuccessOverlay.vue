@@ -1,8 +1,8 @@
 <template>
-  <div class="overlay">
+  <div class="overlay success">
     <div class="overlay-content-wrapper">
       <div>
-        <h1>Level {{gameLevel}} cleared</h1>
+        <h2>Well done!</h2>
         <!-- <p class="score">Your current score: {{gameScore}}</p> -->
       </div>
       <svg viewBox="0 0 250 250" height="400px" width="400px" v-if="currentAnim==='ping'">
@@ -63,12 +63,12 @@
       </svg>
 
       <div class="score">
-        <p>Level score</p>
-        <h2>{{gameScore}}</h2>
+        <span>score</span>
+        <span class="data">{{paddedScoreString}}</span>
       </div>
-      <div class="score">
-        <p>High score</p>
-        <h2>{{gameHighScore}}</h2>
+      <div class="highscore">
+        <span>High score</span>
+        <span class="data">{{paddedHighScoreString}}</span>
       </div>
 
     <button class="button-next"
@@ -83,6 +83,7 @@
 import { keyframes, easing } from 'popmotion'
 import { MODULE_OSCILLATOR_COLOR, MODULE_ENVELOPE_COLOR, MODULE_FILTER_COLOR, MODULE_LFO_COLOR, MODULE_DELAY_COLOR, MODULE_REVERB_COLOR } from '@/constants'
 import { color } from 'style-value-types';
+import padStart from 'lodash/padStart'
 
 export default {
   name: "Overlay",
@@ -218,6 +219,12 @@ export default {
     gameHighScore () {
       return this.$store.state.gameState.highScore
     },
+    paddedScoreString () {
+      return `${padStart(this.gameScore, 5, '0')}`
+    },
+    paddedHighScoreString () {
+      return `${padStart(this.gameHighScore, 5, '0')}`
+    },
     gameLevel () {
       return this.$store.getters.displayedLevel
     },
@@ -236,6 +243,27 @@ export default {
 </script>
 
 <style scoped lang="scss">
+.success {
+  & .score {
+    display: flex;
+    font-size: 2em;
+    flex-direction: column;
+    width: 8em;
+  }
+  & .highscore {
+    display: flex;
+    font-size: 2em;
+    flex-direction: column;
+    width: 8em;
+  }
+  & span {
+    font-size: .7em;
+  }
+  & .data {
+    font-weight: 600;
+    font-size: 1em;
+  }
+}
 
 .score {
   & h2 {
