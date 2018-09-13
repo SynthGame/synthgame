@@ -32,6 +32,7 @@ export default {
     const envelope = this.envelope.state.device
     const lfo = this.lfo.state.device
     const filter = this.filter.state.device
+    const volume = this.volume.state.device
     const delay = this.delay.state.device
     const reverb = this.reverb.state.device
     const compressor = this.compressor.state.device
@@ -42,7 +43,7 @@ export default {
     log(`Connecting LFO to filter frequency`)
     lfo.connect(oscillator1.detune).start()
     log(`Chaining oscillator1 => pitch shift => envelope => filter => delay => reverb`)
-    oscillator1.chain(pitchShift, filter, envelope, compressor, output)
+    oscillator1.chain(pitchShift, filter, envelope, compressor, volume, output)
     oscillator2.connect(pitchShift)
 
     log(`Starting oscillator1`)

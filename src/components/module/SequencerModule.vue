@@ -48,15 +48,15 @@
           v-else-if="sequencerEditState === 2"
           :value="noteArray[j] && noteArray[j].volume"
           @input="setVolumeValue(j, $event)"
-          :min="-12"
-          :max="0"
+          :min="-60"
+          :max="6"
         />
         <SequencerSlider
           v-else-if="sequencerEditState === 3"
           :value="noteArray[j] && noteArray[j].noteLength"
           @input="setNoteLengthValue(j, $event)"
           :min="0"
-          :max="100"
+          :max="3"
         />
         <div class="stepnumber">{{j + 1}}</div>
       </span>
@@ -92,7 +92,7 @@ export default {
       noteArray: fill(range(0,16), {
         selected: false,
         pitch: null,
-        volume: null,
+        volume: 0,
         noteLength: null
       })
     }
@@ -119,9 +119,9 @@ export default {
         };
         if(this.noteArray[note].selected) {
           audio.playNote(this.noteArray[note].pitch, {
-          noteLength: this.noteArray[note].noteLength,
-          volume: this.noteArray[note].volume
-        })
+            noteLength: ['2n', '4n', '8n', '16n'][this.noteArray[note].noteLength],
+            volume: this.noteArray[note].volume
+          })
         }
       })
       this.toneLoop.start()
