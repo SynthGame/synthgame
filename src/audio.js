@@ -41,7 +41,7 @@ export default {
     const output = new Tone.Volume(-12)
     log(`Connecting LFO's to osc detune and filter frequency`)
     lfo1.connect(oscillator.detune).start()
-    lfo2.connect(filter.frequency).start()
+    lfo2.connect(lfo1.amplitude).start()
     log(`Chaining oscillator => pitch shift => envelope => filter => delay => reverb`)
     oscillator.chain(pitchShift, filter, envelope, compressor, output)
 
