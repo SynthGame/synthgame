@@ -43,12 +43,13 @@ export default {
     lfo.connect(oscillator1.detune).start()
     log(`Chaining oscillator1 => pitch shift => envelope => filter => delay => reverb`)
     oscillator1.chain(pitchShift, filter, envelope, compressor, output)
+    oscillator2.connect(pitchShift)
 
     log(`Starting oscillator1`)
     oscillator1.start()
+    oscillator2.start()
 
     return output
-
   },
   setBpm (bpm) {
     log(`setting BPM length to: ${bpm}`)
@@ -78,6 +79,7 @@ export default {
   playNote (shift, {noteLength, volume}) {
     log(`Playing shifted note: ${shift}`)
     this.oscillator1.state.pitchShift.pitch = shift
+    this.oscillator2.state.pitchShift.pitch = shift
     if(volume) this.volume.state.device.volume.value = volume // TODO: should only set volume for this note
     return this.envelope.state.device.triggerAttackRelease(noteLength || this.state.toneLength)
   },
