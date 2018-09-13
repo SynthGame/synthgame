@@ -168,7 +168,7 @@ export default {
       this.displayStartOverlay = false
       this.displayPreviewOverlay = true
       // import level config
-      const availableParameters = levels[level]
+      const availableParameters = levels[level] || levels[levels.length -1]
 
       this.$store.dispatch('startNewLevel', {
         knobsAvailable: availableParameters,
