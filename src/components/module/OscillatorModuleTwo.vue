@@ -60,7 +60,7 @@
 <script>
 import { mapState } from 'vuex'
 import { vuexSyncGen, mapValueToRange } from '@/utils'
-import { MODULE_OSCILLATOR_COLOR } from '@/constants'
+import { MODULE_OSCILLATORTWO_COLOR } from '@/constants'
 
 import audio from '@/audio'
 import character from '@/character'
