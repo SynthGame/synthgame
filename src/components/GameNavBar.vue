@@ -15,10 +15,21 @@
                 }"
       ></span>
       <span
-        v-if="moduleIsUseable('filter')"
+        v-if="moduleIsUseable('oscillator2')"
         :class="{
                   'module__name__status-indicator': true,
-                  'module__name__status-indicator--active': filterComplete
+                  'module__name__status-indicator--active': oscillator2Complete
+                }"
+        :style="{
+                  'background-color': oscillator1Complete ? oscillatorColor : '',
+                  'box-shadow': oscillator1Complete ? `0px 0px 16px ${oscillatorTwoColor}` : '',
+                }"
+      ></span>
+      <span
+        v-if="moduleIsUseable('filter')"
+        :class="{
+                  'module__name__status-indicator indicator__osctwo': true,
+                  'module__name__status-indicator--active indicator__osctwo': filterComplete
                 }"
             :style="{
                   'background-color': filterComplete ? filterColor : '',
@@ -28,8 +39,8 @@
       <span
         v-if="moduleIsUseable('envelope')"
         :class="{
-                  'module__name__status-indicator': true,
-                  'module__name__status-indicator--active': envelopeComplete
+                  'module__name__status-indicator indicator__envelope': true,
+                  'module__name__status-indicator--active indicator__envelope': envelopeComplete
                 }"
         :style="{
                   'background-color': envelopeComplete ? envelopeColor : '',
@@ -39,45 +50,12 @@
       <span
         v-if="moduleIsUseable('lfo1')"
         :class="{
-                  'module__name__status-indicator': true,
-                  'module__name__status-indicator--active': lfo1Complete
+                  'module__name__status-indicator indicator__lfo': true,
+                  'module__name__status-indicator--active indicator__lfo': lfo1Complete
                 }"
         :style="{
                   'background-color': lfo1Complete ? lfoColor : '',
                   'box-shadow': lfo1Complete ? `0px 0px 16px ${lfoColor}` : '',
-                }"
-      ></span>
-      <span
-        v-if="moduleIsUseable('lfo2')"
-        :class="{
-                  'module__name__status-indicator': true,
-                  'module__name__status-indicator--active': lfo2Complete
-                }"
-        :style="{
-                  'background-color': lfo2Complete ? lfoColor : '',
-                  'box-shadow': lfo2Complete ? `0px 0px 16px ${lfoColor}` : '',
-                }"
-      ></span>
-      <span
-        v-if="moduleIsUseable('delay')"
-        :class="{
-                  'module__name__status-indicator': true,
-                  'module__name__status-indicator--active': delayComplete
-                }"
-        :style="{
-                  'background-color': delayComplete ? delayColor : '',
-                  'box-shadow': delayComplete ? `0px 0px 16px ${delayColor}` : '',
-                }"
-      ></span>
-      <span
-        v-if="moduleIsUseable('reverb')"
-        :class="{
-                  'module__name__status-indicator': true,
-                  'module__name__status-indicator--active': reverbComplete
-                }"
-        :style="{
-                  'background-color': reverbComplete ? reverbColor : '',
-                  'box-shadow': reverbComplete ? `0px 0px 16px ${reverbColor}` : '',
                 }"
       ></span>
       </h2>
@@ -110,7 +88,7 @@
 </template>
 
 <script>
-import { MODULE_OSCILLATOR_COLOR, MODULE_ENVELOPE_COLOR, MODULE_FILTER_COLOR, MODULE_DELAY_COLOR, MODULE_REVERB_COLOR, MODULE_LFO_COLOR} from '@/constants'
+import { MODULE_OSCILLATOR_COLOR, MODULE_OSCILLATORTWO_COLOR, MODULE_ENVELOPE_COLOR, MODULE_FILTER_COLOR, MODULE_DELAY_COLOR, MODULE_REVERB_COLOR, MODULE_LFO_COLOR} from '@/constants'
 import padStart from 'lodash/padStart'
 import some from 'lodash/some'
 
@@ -122,6 +100,7 @@ export default {
       timer: null,
       indicatorActive: true,
       oscillatorColor: MODULE_OSCILLATOR_COLOR,
+      oscillatorTwoColor: MODULE_OSCILLATORTWO_COLOR,
       envelopeColor: MODULE_ENVELOPE_COLOR,
       filterColor: MODULE_FILTER_COLOR,
       lfoColor: MODULE_LFO_COLOR,
@@ -150,6 +129,9 @@ export default {
     },
     oscillator1Complete() {
       return Object.values(this.$store.getters.audioParametersMatchGoalWithMargin['oscillator1']).every(param => param)
+    },
+    oscillator2Complete() {
+      return Object.values(this.$store.getters.audioParametersMatchGoalWithMargin['oscillator2']).every(param => param)
     },
     filterComplete() {
       return Object.values(this.$store.getters.audioParametersMatchGoalWithMargin['filter']).every(param => param)
@@ -237,9 +219,9 @@ background: black;
    display: flex;
    flex-direction: column;
    width: 8em;
-   border-right: 1px solid white;
  }
  & .highscore {
+   border-left: 1px solid white;
    display: flex;
    flex-direction: column;
    width: 8em;
@@ -306,5 +288,14 @@ background: black;
 
 @keyframes blink {
     from {opacity: 0;}
+}
+
+@media only screen and (max-width: 1000px) {
+  .module__name__status-indicator {
+    display: none;
+  }
+  .highscore {
+    display: none !important;
+  }
 }
 </style>

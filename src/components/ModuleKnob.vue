@@ -478,4 +478,10 @@ export default {
      position: relative;
   }
 }
+
+@media only screen and (max-width: 1000px) {
+  .knob p {
+      font-size: 1.2em;
+  }
+}
 </style>
