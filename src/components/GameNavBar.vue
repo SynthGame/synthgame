@@ -15,6 +15,17 @@
                 }"
       ></span>
       <span
+        v-if="moduleIsUseable('oscillator2')"
+        :class="{
+                  'module__name__status-indicator': true,
+                  'module__name__status-indicator--active': oscillator2Complete
+                }"
+        :style="{
+                  'background-color': oscillator2Complete ? oscillatorColor : '',
+                  'box-shadow': oscillator2Complete ? `0px 0px 16px ${oscillatorColor}` : '',
+                }"
+      ></span>
+      <span
         v-if="moduleIsUseable('filter')"
         :class="{
                   'module__name__status-indicator': true,
@@ -37,25 +48,14 @@
                 }"
       ></span>
       <span
-        v-if="moduleIsUseable('lfo1')"
+        v-if="moduleIsUseable('lfo')"
         :class="{
                   'module__name__status-indicator': true,
-                  'module__name__status-indicator--active': lfo1Complete
+                  'module__name__status-indicator--active': lfoComplete
                 }"
         :style="{
-                  'background-color': lfo1Complete ? lfoColor : '',
-                  'box-shadow': lfo1Complete ? `0px 0px 16px ${lfoColor}` : '',
-                }"
-      ></span>
-      <span
-        v-if="moduleIsUseable('lfo2')"
-        :class="{
-                  'module__name__status-indicator': true,
-                  'module__name__status-indicator--active': lfo2Complete
-                }"
-        :style="{
-                  'background-color': lfo2Complete ? lfoColor : '',
-                  'box-shadow': lfo2Complete ? `0px 0px 16px ${lfoColor}` : '',
+                  'background-color': lfoComplete ? lfoColor : '',
+                  'box-shadow': lfoComplete ? `0px 0px 16px ${lfoColor}` : '',
                 }"
       ></span>
       <span
@@ -151,17 +151,17 @@ export default {
     oscillator1Complete() {
       return Object.values(this.$store.getters.audioParametersMatchGoalWithMargin['oscillator1']).every(param => param)
     },
+    oscillator2Complete() {
+      return Object.values(this.$store.getters.audioParametersMatchGoalWithMargin['oscillator2']).every(param => param)
+    },
     filterComplete() {
       return Object.values(this.$store.getters.audioParametersMatchGoalWithMargin['filter']).every(param => param)
     },
     envelopeComplete() {
       return Object.values(this.$store.getters.audioParametersMatchGoalWithMargin['envelope']).every(param => param)
     },
-    lfo1Complete() {
-      return Object.values(this.$store.getters.audioParametersMatchGoalWithMargin['lfo1']).every(param => param)
-    },
-    lfo2Complete() {
-      return Object.values(this.$store.getters.audioParametersMatchGoalWithMargin['lfo2']).every(param => param)
+    lfoComplete() {
+      return Object.values(this.$store.getters.audioParametersMatchGoalWithMargin['lfo']).every(param => param)
     },
     delayComplete() {
       return Object.values(this.$store.getters.audioParametersMatchGoalWithMargin['delay']).every(param => param)
