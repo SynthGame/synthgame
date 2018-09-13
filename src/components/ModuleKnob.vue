@@ -285,7 +285,7 @@ export default {
       mousePressed: false,
       circleSliderState: null,
       mousemoveTicks: 0,
-      rangeOffset: 1 // in rads
+      rangeOffset: 0.7 // in rads
     }
   },
   computed: {
