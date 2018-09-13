@@ -5,10 +5,10 @@ export default {
     feedback: val => val / 100
   },
   envelope: {
-    attack: val => val/100 + 0,
+    attack: val => val/100 + 0.01,
     decay: val => Math.pow(val, (val / 100)) - 0.99,
     sustain: val => val / 100,
-    release: val => val
+    release: val => val / 100
   },
   filter: {
     cutOffFreq: val => Math.pow((val * 200), (val / 100)) + 20,
