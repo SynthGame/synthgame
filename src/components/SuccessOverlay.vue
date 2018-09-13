@@ -25,7 +25,7 @@
         </svg>
 
       </svg>
-      <svg viewBox="0 0 190 190" height="400px" width="400px" v-if="currentAnim==='drum'">
+      <svg class="drum" viewBox="0 0 190 190" height="400px" width="400px" v-if="currentAnim==='drum'">
         <!-- DRUM  -->
         <svg version="1.1" stroke-width="1.5819" x="70" y="60"
             xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:a="http://ns.adobe.com/AdobeSVGViewerExtensions/3.0/"
@@ -243,6 +243,10 @@ export default {
 </script>
 
 <style scoped lang="scss">
+.drum {
+  margin: -75px 0 -75px 0;
+}
+
 .success {
   & .score {
     display: flex;

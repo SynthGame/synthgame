@@ -441,6 +441,7 @@ body {
     font-weight: 300;
     font-size: 3em;
     max-width: 12em;
+    margin: 0;
     & span {
       font-size: .6em;
       margin-top: 1.5em;
