@@ -23,7 +23,8 @@
         v-model="freqDial"
         v-if="knobsAvailable.frequency || createModeIsActive"
         :min="0"
-        :max="100"
+        :step="1"
+        :max="freqArray.length - 1"
         knobColor="#ff8574"
         name="Octave"
       ></module-knob>
@@ -129,7 +130,8 @@ export default {
   },
   watch: {
     freqDial(val) {
-      this.frequency = this.freqArray[mapValueToRange(val, 100, (this.freqArray.length -1))]
+      this.frequency = this.freqArray[val]
+      // this.frequency = this.freqArray[mapValueToRange(val, 100, (this.freqArray.length -1))]
     },
     typeDial(val) {
       this.typeOsc = this.typeArray[mapValueToRange(val, 100, (this.typeArray.length -1))]
