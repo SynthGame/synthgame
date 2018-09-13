@@ -1,6 +1,6 @@
 <template>
   <button @click="$emit('click', $event)" class="sequencer-button">
-    <div style="height: 100%; width: 100%;">
+    <div class="sequencer-button__content">
       <div :class="{
         'sequencer-button__indicator': true,
         'sequencer-button__indicator--active': buttonActive,
@@ -39,12 +39,20 @@ $main-seq-color: #F40056;
 .sequencer-button {
   height: 8em;
   width: 4em;
-  display: inline-flex;
+  display: flex;
   margin: 10px 5px;
   padding: 0;
-  border: 2px solid $main-seq-color;
+  border: 1px solid $main-seq-color;
   border-radius: 2px;
   background-color: unset;
+
+  &__content {
+    width: 100%;
+    margin-top: -3em;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+  }
 
   &:active {
     background-color: #292929;
@@ -53,16 +61,18 @@ $main-seq-color: #F40056;
   &__indicator {
     height: 15px;
     width: 15px;
-    margin: 10px auto;
-    border: 2px solid white;
+    margin: 0 auto;
+    border: 1px solid white;
     border-radius: 50%;
 
     &--selected {
       background-color: $main-seq-color;
+      box-shadow: 0px 0px 16px $main-seq-color;
     }
 
     &--active {
       background-color: white;
+      box-shadow: 0px 0px 16px white;
     }
   }
 }

@@ -2,10 +2,6 @@
   <div class="game">
     <game-nav-bar/>
     <div class="level">
-      <sequencer-module
-        v-if="createModeIsActive"
-        class="module sequencer"
-      />
       <OscillatorModule
         v-if="moduleIsUseable('oscillator')"
         :class="[(activeModule == 0 ? 'active' : '')]"
@@ -25,6 +21,10 @@
       <Lfo2Module
         v-if="moduleIsUseable('lfo2')"
         :class="[(activeModule == 4 ? 'active' : '')]"
+      />
+      <sequencer-module
+        v-if="createModeIsActive"
+        class="module sequencer"
       />
       <!-- <DelayModule
         v-if="moduleIsUseable('delay')"
