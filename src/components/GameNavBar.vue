@@ -1,75 +1,98 @@
 <template>
   <nav class="main">
-    <h2 class="game_title">Tats
-    <span class="main__level">Level {{gameLevel}}</span>
-    <span :class="{
-                'module__name__status-indicator': true,
-                'module__name__status-indicator--active': oscillatorComplete
-              }"
-      :style="{
-                'background-color': oscillatorComplete ? oscillatorColor : '',
-                'box-shadow': oscillatorComplete ? `0px 0px 16px ${oscillatorColor}` : '',
+    <div class="left">
+      <h2 class="game_title">Tats
+      <span class="main__level">Level {{gameLevel}}</span>
+      <span :class="{
+                  'module__name__status-indicator': true,
+                  'module__name__status-indicator--active': oscillatorComplete
+                }"
+        :style="{
+                  'background-color': oscillatorComplete ? oscillatorColor : '',
+                  'box-shadow': oscillatorComplete ? `0px 0px 16px ${oscillatorColor}` : '',
 
-              }"
-    ></span>
-    <span :class="{
-            'module__name__status-indicator': true,
-            'module__name__status-indicator--active': filterComplete
-          }"
-          :style="{
-            'background-color': filterComplete ? filterColor : '',
-            'box-shadow': filterComplete ? `0px 0px 16px ${filterColor}` : '',
-          }"
-    ></span>
-        <span :class="{
-            'module__name__status-indicator': true,
-            'module__name__status-indicator--active': envelopeComplete
-          }"
-          :style="{
-            'background-color': envelopeComplete ? envelopeColor : '',
-            'box-shadow': envelopeComplete ? `0px 0px 16px ${envelopeColor}` : '',
-          }"
-    ></span>
-            <span :class="{
-            'module__name__status-indicator': true,
-            'module__name__status-indicator--active': lfo1Complete
-          }"
-          :style="{
-            'background-color': lfo1Complete ? lfoColor : '',
-            'box-shadow': lfo1Complete ? `0px 0px 16px ${lfoColor}` : '',
-          }"
-    ></span>
-            <span :class="{
-            'module__name__status-indicator': true,
-            'module__name__status-indicator--active': lfo2Complete
-          }"
-          :style="{
-            'background-color': lfo2Complete ? lfoColor : '',
-            'box-shadow': lfo2Complete ? `0px 0px 16px ${lfoColor}` : '',
-          }"
-    ></span>
-            <span :class="{
-            'module__name__status-indicator': true,
-            'module__name__status-indicator--active': delayComplete
-          }"
-          :style="{
-            'background-color': delayComplete ? delayColor : '',
-            'box-shadow': delayComplete ? `0px 0px 16px ${delayColor}` : '',
-          }"
-    ></span>
-            <span :class="{
-            'module__name__status-indicator': true,
-            'module__name__status-indicator--active': reverbComplete
-          }"
-          :style="{
-            'background-color': reverbComplete ? reverbColor : '',
-            'box-shadow': reverbComplete ? `0px 0px 16px ${reverbColor}` : '',
-          }"
-    ></span>
-    </h2>
+                }"
+      ></span>
+      <span :class="{
+              'module__name__status-indicator': true,
+              'module__name__status-indicator--active': filterComplete
+            }"
+            :style="{
+              'background-color': filterComplete ? filterColor : '',
+              'box-shadow': filterComplete ? `0px 0px 16px ${filterColor}` : '',
+            }"
+      ></span>
+          <span :class="{
+              'module__name__status-indicator': true,
+              'module__name__status-indicator--active': envelopeComplete
+            }"
+            :style="{
+              'background-color': envelopeComplete ? envelopeColor : '',
+              'box-shadow': envelopeComplete ? `0px 0px 16px ${envelopeColor}` : '',
+            }"
+      ></span>
+              <span :class="{
+              'module__name__status-indicator': true,
+              'module__name__status-indicator--active': lfo1Complete
+            }"
+            :style="{
+              'background-color': lfo1Complete ? lfoColor : '',
+              'box-shadow': lfo1Complete ? `0px 0px 16px ${lfoColor}` : '',
+            }"
+      ></span>
+              <span :class="{
+              'module__name__status-indicator': true,
+              'module__name__status-indicator--active': lfo2Complete
+            }"
+            :style="{
+              'background-color': lfo2Complete ? lfoColor : '',
+              'box-shadow': lfo2Complete ? `0px 0px 16px ${lfoColor}` : '',
+            }"
+      ></span>
+              <span :class="{
+              'module__name__status-indicator': true,
+              'module__name__status-indicator--active': delayComplete
+            }"
+            :style="{
+              'background-color': delayComplete ? delayColor : '',
+              'box-shadow': delayComplete ? `0px 0px 16px ${delayColor}` : '',
+            }"
+      ></span>
+              <span :class="{
+              'module__name__status-indicator': true,
+              'module__name__status-indicator--active': reverbComplete
+            }"
+            :style="{
+              'background-color': reverbComplete ? reverbColor : '',
+              'box-shadow': reverbComplete ? `0px 0px 16px ${reverbColor}` : '',
+            }"
+      ></span>
+      </h2>
+    </div>
     <!-- <span v-if="timerIsRunning === false && createModeIsActive === false" class="timer">First listen to the sound we'll recreate</span> -->
-    <span v-if="timerIsRunning === true && createModeIsActive === false" class="timer">{{paddedTimeLeftString}}</span>
-    <span>•</span>
+    <span :style="{
+      'animation': timeLeftSeconds < 11 ? '.5s infinite blink' : '',
+      'color': timeLeftSeconds < 5 ? oscillatorColor : '',
+    }" v-if="timerIsRunning === true && createModeIsActive === false" class="timer">{{paddedTimeLeftString}}</span>
+
+    <div class="right">
+      <div v-if="createModeIsActive === false" class="score">
+        <span>score</span>
+        <span class="data">{{paddedScoreString}}</span>
+      </div>
+      <div v-if="createModeIsActive === false" class="highscore">
+        <span>highscore</span>
+        <span class="data">{{paddedHighScoreString}}</span>
+      </div>
+      <svg class="exit" width="18px" height="17px" viewBox="0 0 18 17" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+          <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+              <g id="exit_icon" fill="#7D00DA" fill-rule="nonzero" stroke="#FFFFFF" stroke-width="1.785">
+                  <path d="M16.6,0.6 L0.9,16.3" id="Shape"></path>
+                  <path d="M16.6,16.3 L0.9,0.6" id="Shape"></path>
+              </g>
+          </g>
+      </svg>
+    </div>
   </nav>
 </template>
 
@@ -98,6 +121,12 @@ export default {
   computed: {
     timerIsRunning () {
       return this.$store.state.gameState.timerIsRunning
+    },
+    score () {
+      return this.$store.state.gameState.score
+    },
+    highScore () {
+      return this.$store.state.gameState.highScore
     },
     createModeIsActive () {
       return this.$store.state.gameState.createModeIsActive
@@ -128,7 +157,13 @@ export default {
     },
     paddedTimeLeftString () {
       return `00:${padStart(this.timeLeftSeconds, 2, '0')}`
-    }
+    },
+    paddedScoreString () {
+      return `${padStart(this.score, 5, '0')}`
+    },
+    paddedHighScoreString () {
+      return `${padStart(this.highScore, 5, '0')}`
+    },
   },
   methods: {
     startTimer () {
@@ -166,17 +201,55 @@ export default {
 <style lang="scss" scoped>
 .main {
  width: 100%;
- padding: 0 2%;
+ text-transform: uppercase;
+ padding: 0 1.5%;
  height: 8vh;
  font-size: 1rem;
  display: flex;
- flex-direction: row;
-justify-content: center;
+justify-content: space-between;
 align-items: center;
 background: black;
 // border: 1px solid white;
  align-items: center;
  justify-content: space-between;
+ & .score {
+   display: flex;
+   flex-direction: column;
+   width: 8em;
+   border-right: 1px solid white;
+ }
+ & .highscore {
+   display: flex;
+   flex-direction: column;
+   width: 8em;
+ }
+ & .exit {
+   transform:scale(.8);
+   transition: all .5s;
+   cursor: pointer;
+   &:hover {
+     transform: rotate(90deg)
+   }
+ }
+ & .left {
+   width:40%;
+   display: flex;
+   justify-content: flex-start;
+   align-items: center;
+ }
+ & .right {
+   & span {
+     font-size: .7em;
+   }
+   & .data {
+     font-weight: 600;
+     font-size: 1em;
+   }
+   width:40%;
+   display: flex;
+   justify-content: flex-end;
+   align-items: center;
+ }
  &__level {
    font-weight: 300;
    margin-left: 1em;
@@ -190,6 +263,7 @@ background: black;
 .timer {
   display: flex;
   font-size: 2em;
+  font-family: ledscreen;
 }
 
 .module__name__status-indicator {
@@ -207,5 +281,9 @@ background: black;
  border: 1px solid white;
 
   }
+}
+
+@keyframes blink {
+    from {opacity: 0;}
 }
 </style>
