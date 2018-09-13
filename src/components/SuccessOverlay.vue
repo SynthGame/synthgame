@@ -5,7 +5,7 @@
         <h2>Well done!</h2>
         <!-- <p class="score">Your current score: {{gameScore}}</p> -->
       </div>
-      <svg viewBox="0 0 250 250" height="400px" width="400px" v-if="currentAnim==='ping'">
+      <svg viewBox="0 0 250 250" height="200px" width="200px" v-if="currentAnim==='ping'">
         <!-- Ping-pong Racket -->
         <g :transform="`rotate(${anim.ping.racketYOffset}) translate(0, 0)`" transform-origin="0px 180px" stroke-width="1.5819">
           <svg width="203px" height="99px" version="1.1" y="110px" x="10px">
@@ -27,9 +27,9 @@
       </svg>
       <svg viewBox="0 0 190 190" height="400px" width="400px" v-if="currentAnim==='drum'">
         <!-- DRUM  -->
-        <svg version="1.1" stroke-width="1.5819" x="55" y="80"
+        <svg version="1.1" stroke-width="1.5819" x="70" y="60"
             xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:a="http://ns.adobe.com/AdobeSVGViewerExtensions/3.0/"
-              width="79.1px" height="114px" viewBox="0 0 79.1 114" style="enable-background:new 0 0 79.1 114;"
+              width="49.1px" height="114px" viewBox="0 0 79.1 114" style="enable-background:new 0 0 79.1 114;"
             xml:space="preserve">
           <g transform="translate(0.000000, 1.000000)" stroke="#FFFFFF" stroke-width="1.5819">
 
@@ -50,7 +50,7 @@
 
         <!-- STICK 2  -->
         <g transform="rotate(00)">
-<svg width="200px" height="300px" viewBox="0 0 350 400" x="100px" y="18px" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+<svg width="200px" height="300px" viewBox="0 0 350 400" x="96px" y="16px" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
 
    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" stroke-linecap="round" stroke-linejoin="round"  :transform="`rotate(${anim.drum.stick2})`" transform-origin="130 0">
        <svg id="DRUM-STICK2_Mesa-de-trabajo-1-copia-2_Mesa-de-trabajo-1-copia-2_Mesa-de-trabajo-1-copia-8" stroke="#FFFFFF" stroke-width="1.5819" fill-rule="no-zero" :fill="currentColor1" x="15px" y="0px">
