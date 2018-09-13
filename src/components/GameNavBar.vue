@@ -21,8 +21,8 @@
                   'module__name__status-indicator--active': oscillator2Complete
                 }"
         :style="{
-                  'background-color': oscillator1Complete ? oscillatorColor : '',
-                  'box-shadow': oscillator1Complete ? `0px 0px 16px ${oscillatorTwoColor}` : '',
+                  'background-color': oscillator2Complete ? oscillatorColor : '',
+                  'box-shadow': oscillator2Complete ? `0px 0px 16px ${oscillatorColor}` : '',
                 }"
       ></span>
       <span
@@ -48,14 +48,36 @@
                 }"
       ></span>
       <span
-        v-if="moduleIsUseable('lfo1')"
+        v-if="moduleIsUseable('lfo')"
         :class="{
-                  'module__name__status-indicator indicator__lfo': true,
-                  'module__name__status-indicator--active indicator__lfo': lfo1Complete
+                  'module__name__status-indicator': true,
+                  'module__name__status-indicator--active': lfoComplete
                 }"
         :style="{
-                  'background-color': lfo1Complete ? lfoColor : '',
-                  'box-shadow': lfo1Complete ? `0px 0px 16px ${lfoColor}` : '',
+                  'background-color': lfoComplete ? lfoColor : '',
+                  'box-shadow': lfoComplete ? `0px 0px 16px ${lfoColor}` : '',
+                }"
+      ></span>
+      <span
+        v-if="moduleIsUseable('delay')"
+        :class="{
+                  'module__name__status-indicator': true,
+                  'module__name__status-indicator--active': delayComplete
+                }"
+        :style="{
+                  'background-color': delayComplete ? delayColor : '',
+                  'box-shadow': delayComplete ? `0px 0px 16px ${delayColor}` : '',
+                }"
+      ></span>
+      <span
+        v-if="moduleIsUseable('reverb')"
+        :class="{
+                  'module__name__status-indicator': true,
+                  'module__name__status-indicator--active': reverbComplete
+                }"
+        :style="{
+                  'background-color': reverbComplete ? reverbColor : '',
+                  'box-shadow': reverbComplete ? `0px 0px 16px ${reverbColor}` : '',
                 }"
       ></span>
       </h2>
@@ -139,11 +161,8 @@ export default {
     envelopeComplete() {
       return Object.values(this.$store.getters.audioParametersMatchGoalWithMargin['envelope']).every(param => param)
     },
-    lfo1Complete() {
-      return Object.values(this.$store.getters.audioParametersMatchGoalWithMargin['lfo1']).every(param => param)
-    },
-    lfo2Complete() {
-      return Object.values(this.$store.getters.audioParametersMatchGoalWithMargin['lfo2']).every(param => param)
+    lfoComplete() {
+      return Object.values(this.$store.getters.audioParametersMatchGoalWithMargin['lfo']).every(param => param)
     },
     delayComplete() {
       return Object.values(this.$store.getters.audioParametersMatchGoalWithMargin['delay']).every(param => param)

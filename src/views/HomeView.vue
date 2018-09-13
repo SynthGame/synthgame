@@ -82,14 +82,14 @@
                 }"
       ></span></div>
       <div @click="showLfo" v-if="moduleIsUseable('lfo')" class="tabs__tab tabs__lfo"><span>Lfo</span><span
-        v-if="moduleIsUseable('lfo1')"
+        v-if="moduleIsUseable('lfo')"
         :class="{
                   'module__name__status-indicator indicator__lfo': true,
-                  'module__name__status-indicator--active indicator__lfo': lfo1Complete
+                  'module__name__status-indicator--active indicator__lfo': lfoComplete
                 }"
         :style="{
-                  'background-color': lfo1Complete ? lfoColor : '',
-                  'box-shadow': lfo1Complete ? `0px 0px 16px ${lfoColor}` : '',
+                  'background-color': lfoComplete ? lfoColor : '',
+                  'box-shadow': lfoComplete ? `0px 0px 16px ${lfoColor}` : '',
                 }"
       ></span></div>
       <!-- <div @click="showDel" class="tabs__tab tabs__delay">Del</div>
@@ -190,7 +190,7 @@ export default {
     envelopeComplete() {
       return Object.values(this.$store.getters.audioParametersMatchGoalWithMargin['envelope']).every(param => param)
     },
-    lfo1Complete() {
+    lfoComplete() {
       return Object.values(this.$store.getters.audioParametersMatchGoalWithMargin['lfo']).every(param => param)
     },
   }
