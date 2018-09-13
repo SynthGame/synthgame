@@ -2,69 +2,82 @@
   <nav class="main">
     <h2 class="game_title">Tats
     <span class="main__level">Level {{gameLevel}}</span>
-    <span :class="{
+    <span
+      v-if="moduleIsUseable('oscillator')"
+      :class="{
                 'module__name__status-indicator': true,
                 'module__name__status-indicator--active': oscillatorComplete
               }"
       :style="{
                 'background-color': oscillatorComplete ? oscillatorColor : '',
                 'box-shadow': oscillatorComplete ? `0px 0px 16px ${oscillatorColor}` : '',
-
               }"
     ></span>
-    <span :class="{
-            'module__name__status-indicator': true,
-            'module__name__status-indicator--active': filterComplete
-          }"
+    <span
+      v-if="moduleIsUseable('filter')"
+      :class="{
+                'module__name__status-indicator': true,
+                'module__name__status-indicator--active': filterComplete
+              }"
           :style="{
-            'background-color': filterComplete ? filterColor : '',
-            'box-shadow': filterComplete ? `0px 0px 16px ${filterColor}` : '',
-          }"
+                'background-color': filterComplete ? filterColor : '',
+                'box-shadow': filterComplete ? `0px 0px 16px ${filterColor}` : '',
+              }"
     ></span>
-        <span :class="{
-            'module__name__status-indicator': true,
-            'module__name__status-indicator--active': envelopeComplete
-          }"
-          :style="{
-            'background-color': envelopeComplete ? envelopeColor : '',
-            'box-shadow': envelopeComplete ? `0px 0px 16px ${envelopeColor}` : '',
-          }"
+    <span
+      v-if="moduleIsUseable('envelope')"
+      :class="{
+                'module__name__status-indicator': true,
+                'module__name__status-indicator--active': envelopeComplete
+              }"
+      :style="{
+                'background-color': envelopeComplete ? envelopeColor : '',
+                'box-shadow': envelopeComplete ? `0px 0px 16px ${envelopeColor}` : '',
+              }"
     ></span>
-            <span :class="{
-            'module__name__status-indicator': true,
-            'module__name__status-indicator--active': lfo1Complete
-          }"
-          :style="{
-            'background-color': lfo1Complete ? lfoColor : '',
-            'box-shadow': lfo1Complete ? `0px 0px 16px ${lfoColor}` : '',
-          }"
+    <span
+      v-if="moduleIsUseable('lfo1')"
+      :class="{
+                'module__name__status-indicator': true,
+                'module__name__status-indicator--active': lfo1Complete
+              }"
+      :style="{
+                'background-color': lfo1Complete ? lfoColor : '',
+                'box-shadow': lfo1Complete ? `0px 0px 16px ${lfoColor}` : '',
+              }"
     ></span>
-            <span :class="{
-            'module__name__status-indicator': true,
-            'module__name__status-indicator--active': lfo2Complete
-          }"
-          :style="{
-            'background-color': lfo2Complete ? lfoColor : '',
-            'box-shadow': lfo2Complete ? `0px 0px 16px ${lfoColor}` : '',
-          }"
+    <span
+      v-if="moduleIsUseable('lfo2')"
+      :class="{
+                'module__name__status-indicator': true,
+                'module__name__status-indicator--active': lfo2Complete
+              }"
+      :style="{
+                'background-color': lfo2Complete ? lfoColor : '',
+                'box-shadow': lfo2Complete ? `0px 0px 16px ${lfoColor}` : '',
+              }"
     ></span>
-            <span :class="{
-            'module__name__status-indicator': true,
-            'module__name__status-indicator--active': delayComplete
-          }"
-          :style="{
-            'background-color': delayComplete ? delayColor : '',
-            'box-shadow': delayComplete ? `0px 0px 16px ${delayColor}` : '',
-          }"
+    <span
+      v-if="moduleIsUseable('delay')"
+      :class="{
+                'module__name__status-indicator': true,
+                'module__name__status-indicator--active': delayComplete
+              }"
+      :style="{
+                'background-color': delayComplete ? delayColor : '',
+                'box-shadow': delayComplete ? `0px 0px 16px ${delayColor}` : '',
+              }"
     ></span>
-            <span :class="{
-            'module__name__status-indicator': true,
-            'module__name__status-indicator--active': reverbComplete
-          }"
-          :style="{
-            'background-color': reverbComplete ? reverbColor : '',
-            'box-shadow': reverbComplete ? `0px 0px 16px ${reverbColor}` : '',
-          }"
+    <span
+      v-if="moduleIsUseable('reverb')"
+      :class="{
+                'module__name__status-indicator': true,
+                'module__name__status-indicator--active': reverbComplete
+              }"
+      :style="{
+                'background-color': reverbComplete ? reverbColor : '',
+                'box-shadow': reverbComplete ? `0px 0px 16px ${reverbColor}` : '',
+              }"
     ></span>
     </h2>
     <!-- <span v-if="timerIsRunning === false && createModeIsActive === false" class="timer">First listen to the sound we'll recreate</span> -->
@@ -76,6 +89,7 @@
 <script>
 import { MODULE_OSCILLATOR_COLOR, MODULE_ENVELOPE_COLOR, MODULE_FILTER_COLOR, MODULE_DELAY_COLOR, MODULE_REVERB_COLOR, MODULE_LFO_COLOR} from '@/constants'
 import padStart from 'lodash/padStart'
+import some from 'lodash/some'
 
 export default {
   name: 'gameNavBar',
@@ -101,6 +115,9 @@ export default {
     },
     createModeIsActive () {
       return this.$store.state.gameState.createModeIsActive
+    },
+    knobsAvailable () {
+      return this.$store.state.gameState.knobsAvailable
     },
     oscillatorComplete() {
       return Object.values(this.$store.getters.audioParametersMatchGoalWithMargin['oscillator']).every(param => param)
@@ -151,6 +168,10 @@ export default {
       this.stopTimer()
       this.$store.dispatch('gameOver')
       // this.startTimer()
+    },
+    moduleIsUseable (moduleName) {
+      if (this.createModeIsActive) return true
+      return some(this.knobsAvailable[moduleName]) // some are truthy
     }
   },
   watch: {
