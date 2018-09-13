@@ -6,7 +6,6 @@
         <!-- <rect fill="black" width="100%" height="100%" /> -->
 
         <path stroke="black"
-              v-show="timerIsRunning"
               :stroke-width="strokeWidth"
               :d="path"
               fill="black"
@@ -16,6 +15,7 @@
 
         <path v-if="this.module === 'oscillator' || this.module === 'filter' || this.module === 'envelope' || this.module === 'delay'"
               stroke="white"
+              v-show="!createModeIsActive"
               :stroke-width="2"
               :d="pathGoal"
               fill="none"
@@ -45,6 +45,7 @@
 
           <g v-if="this.module === 'lfo'"
             stroke="white"
+            v-show="!createModeIsActive"
             fill="none"
             ref="swingGoal"
             :stroke-width="2"
@@ -304,8 +305,8 @@ export default {
     }
   },
   computed: {
-    timerIsRunning () {
-      return this.$store.state.gameState.timerIsRunning
+    createModeIsActive() {
+      return this.$store.state.gameState.createModeIsActive
     },
     // used to refer to LFO rate knob in a watcher (no way to do it directly using because of "[...]")
     firstCircleLeftMargin() {
