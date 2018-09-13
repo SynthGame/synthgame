@@ -108,7 +108,7 @@ export default {
     init (options) {
       log(`Initializing player with options: ${options}`)
       this.state.device = new Tone.Player({
-        url : require('./assets/kick.wav'),
+        url : require('./assets/beat.mp3'),
       }).toMaster()
     }
   },

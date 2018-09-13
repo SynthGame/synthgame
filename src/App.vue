@@ -62,6 +62,7 @@ export default {
   name: 'App',
   data () {
     return {
+      kickTime: 0,
       displaySuccessOverlay: false,
       displayFailureOverlay: false,
       displayStartOverlay: true,
@@ -110,7 +111,6 @@ export default {
       audio.init().toMaster()
       // create loop wich sequences 4 notes
       const randomLoop = times(16).map(i => random(-12, 12))
-      let kickTime = true;
       this.loop = audio.setMainLoop({
         noteArray: times(16),
         subdivision: '8n'
@@ -121,13 +121,16 @@ export default {
             this.$store.commit('disarmSweep')
           }
         }
-        if (this.displaySuccessOverlay && kickTime === true && !this.displayStartOverlay) {
+        if (this.displaySuccessOverlay && this.kickTime === 0 && !this.displayStartOverlay) {
           audio.playKick();
           this.$store.commit('armSweep')
-          kickTime = false;
+          this.kickTime++
+        } else if (this.kickTime < 15) {
+          this.kickTime++
         } else {
-          kickTime = true;
-        };
+          this.kickTime = 0;
+        }
+        ;
         audio.playNote(randomLoop[i], {})
 
         // if (i === 15) this.$store.commit('increaseSequencesPassedInCurrentLevel')
