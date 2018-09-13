@@ -11,7 +11,7 @@
       </video>
       <div>
         <button class="button-next" @click="$emit('startPreview')">Play game</button>
-        <button class="button-next" @click="$emit('create')">Create level</button>
+        <button class="button-next" @click="$emit('create')">Make a melody</button>
       </div>
     </div>
   </div>

@@ -2,7 +2,7 @@
   <div class="module">
     <module-title :indicator-active="dialsAreWithinMargin" :module-color="moduleColor">
       <h2 slot="title">Tats</h2>
-      <h3 v-if="dialsAreWithinMargin" slot="subtitle">{{message}}</h3>
+      <h3 v-if="dialsAreWithinMargin" slot="subtitle">Done!</h3>
       <h3 v-else slot="subtitle">Envelope</h3>
     </module-title>
     <module-display
@@ -107,7 +107,6 @@ export default {
     },
     dialsAreWithinMargin() {
       if(this.createModeIsActive) return false // quick hack
-      this.message = this.messageArray[Math.round(Math.random()*4)]
       return Object.values(this.$store.getters.audioParametersMatchGoalWithMargin[this.name])
         .every(param => param)
     },
