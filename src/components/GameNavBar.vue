@@ -4,14 +4,14 @@
       <h2 class="game_title">Tats
       <span class="main__level">Level {{gameLevel}}</span>
       <span
-        v-if="moduleIsUseable('oscillator')"
+        v-if="moduleIsUseable('oscillator1')"
         :class="{
                   'module__name__status-indicator': true,
-                  'module__name__status-indicator--active': oscillatorComplete
+                  'module__name__status-indicator--active': oscillator1Complete
                 }"
         :style="{
-                  'background-color': oscillatorComplete ? oscillatorColor : '',
-                  'box-shadow': oscillatorComplete ? `0px 0px 16px ${oscillatorColor}` : '',
+                  'background-color': oscillator1Complete ? oscillatorColor : '',
+                  'box-shadow': oscillator1Complete ? `0px 0px 16px ${oscillatorColor}` : '',
                 }"
       ></span>
       <span
@@ -148,8 +148,8 @@ export default {
     knobsAvailable () {
       return this.$store.state.gameState.knobsAvailable
     },
-    oscillatorComplete() {
-      return Object.values(this.$store.getters.audioParametersMatchGoalWithMargin['oscillator']).every(param => param)
+    oscillator1Complete() {
+      return Object.values(this.$store.getters.audioParametersMatchGoalWithMargin['oscillator1']).every(param => param)
     },
     filterComplete() {
       return Object.values(this.$store.getters.audioParametersMatchGoalWithMargin['filter']).every(param => param)
