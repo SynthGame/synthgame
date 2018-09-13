@@ -236,71 +236,14 @@ export default {
 </script>
 
 <style scoped lang="scss">
-.overlay {
-  position: fixed;
-  display: flex;
-  align-content: center;
-  justify-content: center;
-  z-index: 9998;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-color: rgba(0, 0, 0, .90);
-  transition: opacity .3s ease;
-  fill: none;
-  stroke: white;
-  stroke-width: 3;
-  & h1 {
-    text-transform: uppercase;
-  }
+
+.score {
   & h2 {
-    font-weight: 300;
-    font-size: 3em;
-    max-width: 13em;
-    margin:0;
-  }
+  margin: 0.5rem;
+}
   & p {
-    margin:0
-  }
-  & .score {
-    margin: 1em;
-  }
-}
-
-.overlay-content-wrapper {
-  padding: 1rem;
-  display: flex;
-  height: 100%;
-  flex-direction: column;
-  justify-content: space-around;
-  align-items: center;
-  align-content: center;
-}
-
-.heading {
-  font-size: 4rem;
-  font-weight: 700;
-  margin-bottom: 1rem;
-}
-
-.subheading {
-  margin-top:0;
-  font-size: 3.5rem;
-  font-weight: 500
-}
-.button-next {
-  color: inherit;
-  padding: 0;
-  font: inherit;
-  cursor: pointer;
-  outline: inherit;
-  padding: 1rem 2rem;
-  background: none;
-  border: 1px solid #ff8574;
-  transition: all .2s;
-  &:hover {
-    background: #ff8574;
+    font-size: 2rem;
+    margin: 0.5rem;
   }
 }
 

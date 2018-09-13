@@ -168,7 +168,7 @@ export default {
       this.displayStartOverlay = false
       this.displayPreviewOverlay = true
       // import level config
-      const availableParameters = levels[level]
+      const availableParameters = levels[level] || levels[levels.length -1]
 
       this.$store.dispatch('startNewLevel', {
         knobsAvailable: availableParameters,
@@ -414,6 +414,69 @@ body {
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: white;
+}
+
+.overlay {
+  position: fixed;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 9998;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, .90);
+  transition: opacity .3s ease;
+  fill: none;
+  stroke: red;
+  stroke-width: 3;
+  // position: relative;
+  z-index: 20000;
+  & h1 {
+    text-transform: uppercase;
+  }
+  & h2 {
+    font-weight: 300;
+    font-size: 3em;
+    max-width: 12em;
+    & span {
+      font-size: .6em;
+      margin-top: 1.5em;
+      line-height: 1.5em;
+      max-width: 20em;
+      display: inline-block;
+    }
+  }
+}
+
+.overlay-content-wrapper {
+  padding: 1rem;
+  height: 80%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.button-next {
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    font-size: 1em;
+    color: inherit;
+    padding: 0;
+    font: inherit;
+    cursor: pointer;
+    outline: inherit;
+    padding: .8rem 1.4rem;
+    border: none;
+    margin: 5px;
+    background: none;
+    border: 1px solid #ff8574;
+    transition: all .2s;
+    &:hover {
+      background: #ff8574;
+    }
 }
 
 * {

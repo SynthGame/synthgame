@@ -15,7 +15,13 @@ Vue.use(Vuex)
 export default new Vuex.Store({
   state: {
     audioParameters: {
-      oscillator: {
+      oscillator1: {
+        frequency: 131,
+        typeOsc: 'sawtooth',
+        detune: 60
+        // phase: 0
+      },
+      oscillator2: {
         frequency: 131,
         typeOsc: 'sawtooth',
         detune: 60
@@ -33,12 +39,7 @@ export default new Vuex.Store({
         sustain: 90,
         release: 0
       },
-      lfo1: {
-        frequency: 10,
-        type: 'sine',
-        amount: 0
-      },
-      lfo2: {
+      lfo: {
         frequency: 10,
         type: 'sine',
         amount: 0
@@ -65,18 +66,24 @@ export default new Vuex.Store({
       level: 0,
       sequencesPassedInCurrentLevel: 0,
       knobsAvailable: {
-        oscillator: {},
+        oscillator1: {},
+        oscillator2: {},
         filter: {},
         envelope: {},
-        lfo1: {},
-        lfo2: {},
+        lfo: {},
         delay: {},
         reverb: {}
       },
       score: 0,
       highScore: 0,
       goal: {
-        oscillator: {
+        oscillator1: {
+          frequency: 131,
+          typeOsc: 'sawtooth',
+          detune: 60
+          // phase: 0
+        },
+        oscillator2: {
           frequency: 131,
           typeOsc: 'sawtooth',
           detune: 60
@@ -94,12 +101,7 @@ export default new Vuex.Store({
           sustain: 90,
           release: 0
         },
-        lfo1: {
-          frequency: 10,
-          type: 'sine',
-          amount: 0
-        },
-        lfo2: {
+        lfo: {
           frequency: 10,
           type: 'sine',
           amount: 0
@@ -120,20 +122,26 @@ export default new Vuex.Store({
         filter: {
           type: ['lowpass', 'highpass', 'bandpass']
         },
-        lfo1: {
+        lfo: {
           type: ['sine', 'square', 'sawtooth', 'triangle']
         },
-        lfo2: {
-          type: ['sine', 'square', 'sawtooth', 'triangle']
+        oscillator1: {
+          frequency: ['65', '131', '262', '523'],
+          typeOsc: ['sine', 'square', 'sawtooth', 'triangle']
         },
-        oscillator: {
+        oscillator2: {
           frequency: ['65', '131', '262', '523'],
           typeOsc: ['sine', 'square', 'sawtooth', 'triangle']
         },
         reverb: {}
       },
       defaultParams: {
-        oscillator: {
+        oscillator1: {
+          frequency: 131,
+          typeOsc: 'sawtooth',
+          detune: 60
+        },
+        oscillator2: {
           frequency: 131,
           typeOsc: 'sawtooth',
           detune: 60
@@ -149,12 +157,7 @@ export default new Vuex.Store({
           sustain: 90,
           release: 0
         },
-        lfo1: {
-          frequency: 10,
-          type: 'sine',
-          amount: 0
-        },
-        lfo2: {
+        lfo: {
           frequency: 10,
           type: 'sine',
           amount: 0
@@ -316,15 +319,15 @@ export default new Vuex.Store({
       synth.filter.state.device.frequency.value = character.filter.cutOffFreq(state.gameState.goal.filter.cutOffFreq)
       synth.filter.state.device.type = character.filter.type(state.gameState.goal.filter.type)
       synth.filter.state.device.Q.value = character.filter.setQ(state.gameState.goal.filter.setQ)
-      synth.lfo1.state.device.frequency.value = character.lfo1.frequency(state.gameState.goal.lfo1.frequency)
-      synth.lfo1.state.device.max = character.lfo1.amount(state.gameState.goal.lfo1.amount)
-      synth.lfo1.state.device.type = character.lfo1.type(state.gameState.goal.lfo1.type)
-      synth.lfo2.state.device.frequency.value = character.lfo2.frequency(state.gameState.goal.lfo2.frequency)
-      synth.lfo2.state.device.max = character.lfo2.amount(state.gameState.goal.lfo2.amount)
-      synth.lfo2.state.device.type = character.lfo2.type(state.gameState.goal.lfo2.type)
-      synth.oscillator.state.device.frequency.value = character.oscillator.frequency(state.gameState.goal.oscillator.frequency)
-      synth.oscillator.state.device.type = character.oscillator.typeOsc(state.gameState.goal.oscillator.typeOsc)
-      synth.oscillator.state.device.detune.value = character.oscillator.detune(state.gameState.goal.oscillator.detune)
+      synth.lfo.state.device.frequency.value = character.lfo.frequency(state.gameState.goal.lfo.frequency)
+      synth.lfo.state.device.max = character.lfo.amount(state.gameState.goal.lfo.amount)
+      synth.lfo.state.device.type = character.lfo.type(state.gameState.goal.lfo.type)
+      synth.oscillator1.state.device.frequency.value = character.oscillator1.frequency(state.gameState.goal.oscillator1.frequency)
+      synth.oscillator1.state.device.type = character.oscillator1.typeOsc(state.gameState.goal.oscillator1.typeOsc)
+      synth.oscillator1.state.device.detune.value = character.oscillator1.detune(state.gameState.goal.oscillator1.detune)
+      synth.oscillator2.state.device.frequency.value = character.oscillator2.frequency(state.gameState.goal.oscillator2.frequency)
+      synth.oscillator2.state.device.type = character.oscillator2.typeOsc(state.gameState.goal.oscillator2.typeOsc)
+      synth.oscillator2.state.device.detune.value = character.oscillator2.detune(state.gameState.goal.oscillator2.detune)
       synth.reverb.state.device.wet.value = character.reverb.wet(state.gameState.goal.reverb.wet)
       synth.reverb.state.device.roomSize.value = character.reverb.roomSize(state.gameState.goal.reverb.roomSize)
     },
@@ -342,15 +345,15 @@ export default new Vuex.Store({
       synth.filter.state.device.frequency.value = character.filter.cutOffFreq(state.gameState.defaultParams.filter.cutOffFreq)
       synth.filter.state.device.type = character.filter.type(state.gameState.defaultParams.filter.type)
       synth.filter.state.device.Q.value = character.filter.setQ(state.gameState.defaultParams.filter.setQ)
-      synth.lfo1.state.device.frequency.value = character.lfo1.frequency(state.gameState.defaultParams.lfo1.frequency)
-      synth.lfo1.state.device.max = character.lfo1.amount(state.gameState.defaultParams.lfo1.amount)
-      synth.lfo1.state.device.type = character.lfo1.type(state.gameState.defaultParams.lfo1.type)
-      synth.lfo2.state.device.frequency.value = character.lfo2.frequency(state.gameState.defaultParams.lfo2.frequency)
-      synth.lfo2.state.device.max = character.lfo2.amount(state.gameState.defaultParams.lfo2.amount)
-      synth.lfo2.state.device.type = character.lfo2.type(state.gameState.defaultParams.lfo2.type)
-      synth.oscillator.state.device.frequency.value = character.oscillator.frequency(state.gameState.defaultParams.oscillator.frequency)
-      synth.oscillator.state.device.type = character.oscillator.typeOsc(state.gameState.defaultParams.oscillator.typeOsc)
-      synth.oscillator.state.device.detune.value = character.oscillator.detune(state.gameState.defaultParams.oscillator.detune)
+      synth.lfo.state.device.frequency.value = character.lfo.frequency(state.gameState.defaultParams.lfo.frequency)
+      synth.lfo.state.device.max = character.lfo.amount(state.gameState.defaultParams.lfo.amount)
+      synth.lfo.state.device.type = character.lfo.type(state.gameState.defaultParams.lfo.type)
+      synth.oscillator1.state.device.frequency.value = character.oscillator1.frequency(state.gameState.defaultParams.oscillator1.frequency)
+      synth.oscillator1.state.device.type = character.oscillator1.typeOsc(state.gameState.defaultParams.oscillator1.typeOsc)
+      synth.oscillator1.state.device.detune.value = character.oscillator1.detune(state.gameState.defaultParams.oscillator1.detune)
+      synth.oscillator2.state.device.frequency.value = character.oscillator2.frequency(state.gameState.defaultParams.oscillator2.frequency)
+      synth.oscillator2.state.device.type = character.oscillator2.typeOsc(state.gameState.defaultParams.oscillator2.typeOsc)
+      synth.oscillator2.state.device.detune.value = character.oscillator2.detune(state.gameState.defaultParams.oscillator2.detune)
       synth.reverb.state.device.wet.value = character.reverb.wet(state.gameState.defaultParams.reverb.wet)
       synth.reverb.state.device.roomSize.value = character.reverb.roomSize(state.gameState.defaultParams.reverb.roomSize)
     },
