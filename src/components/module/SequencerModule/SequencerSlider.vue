@@ -6,7 +6,7 @@
 
 <script>
 export default {
-  name: 'SequencerButton',
+  name: 'SequencerSlider',
   props: {
     value: {
       type: Number,

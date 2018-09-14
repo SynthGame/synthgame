@@ -49,7 +49,9 @@
 import { mapState, mapGetters } from 'vuex'
 import random from 'lodash/random'
 import times from 'lodash/times'
+import mapValues from 'lodash/mapValues'
 import audio from '@/audio'
+import { getPresetById } from '@/db'
 import SuccessOverlay from '@/components/SuccessOverlay'
 import FailureOverlay from '@/components/FailureOverlay'
 import StartScreen from '@/components/StartScreen'
@@ -83,6 +85,10 @@ export default {
   },
   created () {
     this.init()
+    if(this.$route.query.preset) {
+      getPresetById(this.$route.query.preset)
+        .then(data => this.startPreset(data.parameterValues))
+    }
 
     // Pc keyboard listener (might be needed for mobile)
     document.addEventListener('keypress', (event) => {
@@ -184,6 +190,33 @@ export default {
       this.loop.start()
       // rest will be done by watcher of sequencesPassedInCurrentLevel
     },
+    startPreset(parameters) {
+      const usedParameters = mapValues(parameters, 
+      audioModule => mapValues(audioModule, 
+      parameter => !!parameter))
+
+      // disable all overlays
+      this.displaySuccessOverlay = false
+      this.displayFailureOverlay = false
+      this.displayStartOverlay = false
+      this.displayPreviewOverlay = true
+
+      this.$store.dispatch('startNewLevel', {
+        knobsAvailable: usedParameters,
+        levelNumber: 0
+      })
+      this.$store.commit('setGoalToPreset', {
+        preset: parameters
+      })
+      this.$store.dispatch('randomizeAudioParameters', usedParameters) // and the audio params
+      this.$store.dispatch('setSynthToGoal', audio) // then let the user hear it
+      // randomize loop melody
+      times(4).forEach(i => {
+        this.loop.at(i, random(-12, 12));
+      })
+      this.loop.start()
+      // rest will be done by watcher of sequencesPassedInCurrentLevel
+    },
     beginSvoosh() {
       this.isThereSvooshComponent = true;
       this.$nextTick(() => this.svooshIt = true)
@@ -225,12 +258,6 @@ export default {
       if(val === true && this.timerIsRunning) {
         this.beginSuccessSvoosh()
         this.$store.dispatch('levelDone') // would be nice to pass timeleft here but it is being passed by timer on gamestop
-      }
-    },
-    sequencesPassedInCurrentLevel (val) {
-      if(val === 2) {
-        // this.init()
-        // this.loop.start()
       }
     }
   }
