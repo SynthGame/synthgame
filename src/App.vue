@@ -76,6 +76,8 @@ export default {
       svooshIt: false,
       isThereSuccessSvooshComponent: false,
       successSvooshIt: false,
+      customLevelIsActive: false,
+      customLevelSequence: [],
       showCreatePreview: false
     }
   },
@@ -91,7 +93,11 @@ export default {
     this.init()
     if(this.$route.query.preset) {
       getPresetById(this.$route.query.preset)
-        .then(data => this.startPreset(data.parameterValues))
+        .then(data => {
+          this.customLevelIsActive = true
+          this.customLevelSequence = data.sequenceArray
+          this.startPreset(data.parameterValues)
+        })
     }
 
     // Pc keyboard listener (might be needed for mobile)
@@ -142,7 +148,14 @@ export default {
         } else {
           this.kickTime = 0;
         };
-        audio.playNote(randomLoop[i], {})
+        if (!this.customLevelIsActive) {
+          audio.playNote(randomLoop[i], {})
+        } else {
+          if(this.customLevelSequence[i].selected) audio.playNote(this.customLevelSequence[i].pitch, {
+            noteLength: ['16t', '8n', '4n', '2n','1n'][this.customLevelSequence[i].noteLength],
+            volume: this.customLevelSequence[i].volume
+          })
+        }
 
         // if (i === 15) this.$store.commit('increaseSequencesPassedInCurrentLevel')
       })
@@ -187,10 +200,7 @@ export default {
       this.$store.dispatch('randomizGoalParameters') // first randomize the goal
       this.$store.dispatch('randomizeAudioParameters', availableParameters) // and the audio params
       this.$store.dispatch('setSynthToGoal', audio) // then let the user hear it
-      // randomize loop melody
-      times(4).forEach(i => {
-        this.loop.at(i, random(-12, 12));
-      })
+
       this.loop.start()
       // rest will be done by watcher of sequencesPassedInCurrentLevel
     },
@@ -214,10 +224,7 @@ export default {
       })
       this.$store.dispatch('randomizeAudioParameters', usedParameters) // and the audio params
       this.$store.dispatch('setSynthToGoal', audio) // then let the user hear it
-      // randomize loop melody
-      times(4).forEach(i => {
-        this.loop.at(i, random(-12, 12));
-      })
+
       this.loop.start()
       // rest will be done by watcher of sequencesPassedInCurrentLevel
     },

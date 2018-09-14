@@ -69,7 +69,10 @@ export default {
   },
   setMainLoop ({noteArray, subdivision}, callback) {
     log(`Setting new main loop`)
-    if(this.state.loop) this.state.loop.dispose()
+    try {
+      this.state.loop.cancel()
+      this.state.loop.dispose()
+    } catch (e) {}
     this.state.loop = new Tone.Sequence(callback, noteArray, subdivision)
     return this.state.loop
   },
@@ -243,7 +246,7 @@ export default {
       threshold  : -18 ,
       release  : 0.11 ,
       attack  : 0.003 ,
-      knee  : 20
+      knee  : 0
       });
     }
   },

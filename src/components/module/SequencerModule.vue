@@ -94,9 +94,9 @@ export default {
       activeButton: 0,
       noteArray: fill(range(0,16), {
         selected: false,
-        pitch: null,
+        pitch: 0,
         volume: 0,
-        noteLength: null
+        noteLength: '4n'
       }),
       bpmKnob: 110
     }

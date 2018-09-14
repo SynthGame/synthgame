@@ -35,10 +35,10 @@ export default new Vuex.Store({
         // gain: 50
       },
       envelope: {
-        attack: 0,
-        decay: 0,
-        sustain: 90,
-        release: 0
+        attack: 50,
+        decay: 25,
+        sustain: 10,
+        release: 90
       },
       lfo: {
         frequency: 10,
@@ -132,10 +132,10 @@ export default new Vuex.Store({
           setQ: 0
         },
         envelope: {
-          attack: 0,
-          decay: 0,
-          sustain: 90,
-          release: 0
+          attack: 50,
+          decay: 25,
+          sustain: 10,
+          release: 90
         },
         lfo: {
           frequency: 10,
