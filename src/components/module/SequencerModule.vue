@@ -12,14 +12,16 @@
         <button color="#6e01d1" @click="sequencerEditStateChange(3)">Note Length</button>
         <p>Function</p>
       </div>
-      <!-- <module-knob
-        v-model="sequencerEditState"
-        :min="0"
-        :max="3"
-        knobColor="#5bd484"
-        name="Control"
-        module="lfo"
-      ></module-knob> -->
+      <div height="200px">
+        <module-knob
+          v-model="bpmKnob"
+          :min="80"
+          :max="140"
+          knobColor="#5bd484"
+          name="BPM"
+          module="lfo"
+        ></module-knob>
+      </div>
       <div class="play-random">
         <button @click="playPauseSynth" class="sequencer-stop-button">
 
@@ -48,15 +50,15 @@
           v-else-if="sequencerEditState === 2"
           :value="noteArray[j] && noteArray[j].volume"
           @input="setVolumeValue(j, $event)"
-          :min="-12"
-          :max="0"
+          :min="-60"
+          :max="6"
         />
         <SequencerSlider
           v-else-if="sequencerEditState === 3"
           :value="noteArray[j] && noteArray[j].noteLength"
           @input="setNoteLengthValue(j, $event)"
           :min="0"
-          :max="100"
+          :max="4"
         />
         <div class="stepnumber">{{j + 1}}</div>
       </span>
@@ -92,9 +94,10 @@ export default {
       noteArray: fill(range(0,16), {
         selected: false,
         pitch: null,
-        volume: null,
+        volume: 0,
         noteLength: null
-      })
+      }),
+      bpmKnob: 110
     }
   },
   created () {
@@ -119,9 +122,9 @@ export default {
         };
         if(this.noteArray[note].selected) {
           audio.playNote(this.noteArray[note].pitch, {
-          noteLength: this.noteArray[note].noteLength,
-          volume: this.noteArray[note].volume
-        })
+            noteLength: ['16t', '8n', '4n', '2n','1n'][this.noteArray[note].noteLength],
+            volume: this.noteArray[note].volume
+          })
         }
       })
       this.toneLoop.start()
@@ -153,8 +156,8 @@ export default {
     randomizeSelectedParam (param) {
       const _randomizeNoteSelected = () => this.noteArray.forEach((el, i) => this.setNoteOnOff(i, sample([true, false])))
       const _randomizeNotePitch = () => this.noteArray.forEach((el, i) => this.setPitchValue(i, random(-12,12)))
-      const _randomizeNoteVolume = () => this.noteArray.forEach((el, i) => this.setVolumeValue(i, random(-12,0)))
-      const _randomizeNoteLength = () => this.noteArray.forEach((el, i) => this.setNoteLengthValue(i, random(0,100)))
+      const _randomizeNoteVolume = () => this.noteArray.forEach((el, i) => this.setVolumeValue(i, random(-20,6)))
+      const _randomizeNoteLength = () => this.noteArray.forEach((el, i) => this.setNoteLengthValue(i, random(0,5)))
 
       return (
         _randomizeNoteSelected(),
@@ -187,8 +190,13 @@ export default {
       // returns the sub step of 4 in a 16 array
       const startArray = (i * 4)
       return range(startArray, startArray + 4)
+    },
+  },
+  watch: {
+      bpmKnob (val) {
+        return audio.setBpm(val)
+      }
     }
-  }
 }
 </script>
 
@@ -202,6 +210,7 @@ $main-seq-color: #F40056;
    display: flex;
    justify-content: space-between;
    padding: 2em;
+
    & .stepnumber {
      margin-top: .5em;
    }
@@ -210,7 +219,8 @@ $main-seq-color: #F40056;
      transition: all .2s;
      text-transform: uppercase;
      min-height: 45px;
-     &:hover {
+
+     &:active {
        background: rgba(255,255,255,0.1)
      }
    }

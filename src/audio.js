@@ -14,10 +14,10 @@ export default {
     log('initializing all submodules before using')
     this.player.init()
     this.sweepPlayer.init()
-    this.oscillator.init()
+    this.oscillator1.init()
+    this.oscillator2.init()
     this.envelope.init()
-    this.lfo1.init()
-    this.lfo2.init()
+    this.lfo.init()
     this.filter.init()
     this.delay.init()
     this.reverb.init()
@@ -26,12 +26,13 @@ export default {
 
     const player = this.player.state.device
     const sweepPlayer = this.sweepPlayer.state.device
-    const oscillator = this.oscillator.state.device
-    const pitchShift = this.oscillator.state.pitchShift
+    const oscillator1 = this.oscillator1.state.device
+    const oscillator2 = this.oscillator2.state.device
+    const pitchShift = this.oscillator1.state.pitchShift
     const envelope = this.envelope.state.device
-    const lfo1 = this.lfo1.state.device
-    const lfo2 = this.lfo2.state.device
+    const lfo = this.lfo.state.device
     const filter = this.filter.state.device
+    const volume = this.volume.state.device
     const delay = this.delay.state.device
     const reverb = this.reverb.state.device
     const compressor = this.compressor.state.device
@@ -39,17 +40,17 @@ export default {
 
     log(`Created new general output for audio device`)
     const output = new Tone.Volume(-12)
-    log(`Connecting LFO's to osc detune and filter frequency`)
-    lfo1.connect(oscillator.detune).start()
-    lfo2.connect(lfo1.amplitude).start()
-    log(`Chaining oscillator => pitch shift => envelope => filter => delay => reverb`)
-    oscillator.chain(pitchShift, filter, envelope, compressor, output)
+    log(`Connecting LFO to filter frequency`)
+    lfo.connect(oscillator1.detune).start()
+    log(`Chaining oscillator1 => pitch shift => envelope => filter => delay => reverb`)
+    oscillator1.chain(pitchShift, filter, envelope, compressor, volume, output)
+    oscillator2.connect(pitchShift)
 
-    log(`Starting oscillator`)
-    oscillator.start()
+    log(`Starting oscillator1`)
+    oscillator1.start()
+    oscillator2.start()
 
     return output
-
   },
   setBpm (bpm) {
     log(`setting BPM length to: ${bpm}`)
@@ -78,7 +79,8 @@ export default {
   },
   playNote (shift, {noteLength, volume}) {
     log(`Playing shifted note: ${shift}`)
-    this.oscillator.state.pitchShift.pitch = shift
+    this.oscillator1.state.pitchShift.pitch = shift
+    this.oscillator2.state.pitchShift.pitch = shift
     if(volume) this.volume.state.device.volume.value = volume // TODO: should only set volume for this note
     return this.envelope.state.device.triggerAttackRelease(noteLength || this.state.toneLength)
   },
@@ -89,6 +91,10 @@ export default {
   playSweep () {
     log(`Playing sweep`)
     return this.sweepPlayer.state.device.start();
+  },
+  stopSweep () {
+    log(`Stopping sweep`)
+    return this.sweepPlayer.state.device.stop();
   },
   setToneLength (length) {
     log(`setting envelope tone length to: ${length}`)
@@ -102,7 +108,7 @@ export default {
     init (options) {
       log(`Initializing player with options: ${options}`)
       this.state.device = new Tone.Player({
-        url : require('./assets/kick.wav'),
+        url : require('./assets/beat.mp3'),
       }).toMaster()
     }
   },
@@ -117,13 +123,13 @@ export default {
       }).toMaster()
     }
   },
-  oscillator: {
+  oscillator1: {
     state: {
       device: undefined,
       pitchShift: undefined
     },
     init (options) {
-      log(`Initializing oscillator with options: ${options}`)
+      log(`Initializing oscillator1 with options: ${options}`)
       this.state.device = new Tone.Oscillator({
         type: 'sine',
         frequency: 131,
@@ -131,7 +137,25 @@ export default {
         phase: 0,
         ...options
       })
-      log(`Initializing pitch shift effect on oscillator`)
+      log(`Initializing pitch shift effect on oscillator1`)
+      this.state.pitchShift = new Tone.PitchShift()
+    }
+  },
+  oscillator2: {
+    state: {
+      device: undefined,
+      pitchShift: undefined
+    },
+    init (options) {
+      log(`Initializing oscillator2 with options: ${options}`)
+      this.state.device = new Tone.Oscillator({
+        type: 'sine',
+        frequency: 131,
+        detune: 0,
+        phase: 0,
+        ...options
+      })
+      log(`Initializing pitch shift effect on oscillator2`)
       this.state.pitchShift = new Tone.PitchShift()
     }
   },
@@ -152,27 +176,7 @@ export default {
       })
     }
   },
-  lfo1: {
-    state: {
-      device: undefined
-    },
-    init (options) {
-      log(`Initializing LFO with options: ${options}`)
-      this.state.device = new Tone.LFO(
-      //   {
-      //   type: 'sine',
-      //   min: 0.1,
-      //   max: 10,
-      //   phase: 0,
-      //   frequency: 1,
-      //   amplitude: 1,
-      //   ...options
-      // }
-        '4n', 0, 8000
-      )
-    }
-  },
-  lfo2: {
+  lfo: {
     state: {
       device: undefined
     },

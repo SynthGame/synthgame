@@ -62,6 +62,7 @@ export default {
   name: 'App',
   data () {
     return {
+      kickTime: 0,
       displaySuccessOverlay: false,
       displayFailureOverlay: false,
       displayStartOverlay: true,
@@ -110,27 +111,26 @@ export default {
       audio.init().toMaster()
       // create loop wich sequences 4 notes
       const randomLoop = times(16).map(i => random(-12, 12))
-      let kickTime = true;
-      let sweepCounter = 0;
       this.loop = audio.setMainLoop({
         noteArray: times(16),
         subdivision: '8n'
       }, (time, i) => { // i here is just a note from the note array define above
         if (this.$store.state.gameState.timerIsRunning === false && !this.displaySuccessOverlay && !this.displayPreviewOverlay) {
-
-          if (sweepCounter === 0) {
+          if (this.$store.state.gameState.sweepArmed) {
             audio.playSweep();
-            sweepCounter++;
-          } else if (sweepCounter === 4){
-            sweepCounter = 0
+            this.$store.commit('disarmSweep')
           }
         }
-        if (this.displaySuccessOverlay && kickTime === true && !this.displayStartOverlay) {
+        if (this.displaySuccessOverlay && this.kickTime === 0 && !this.displayStartOverlay) {
           audio.playKick();
-          kickTime = false;
+          this.$store.commit('armSweep')
+          this.kickTime++
+        } else if (this.kickTime < 15) {
+          this.kickTime++
         } else {
-          kickTime = true;
-        };
+          this.kickTime = 0;
+        }
+        ;
         audio.playNote(randomLoop[i], {})
 
         // if (i === 15) this.$store.commit('increaseSequencesPassedInCurrentLevel')
@@ -168,7 +168,7 @@ export default {
       this.displayStartOverlay = false
       this.displayPreviewOverlay = true
       // import level config
-      const availableParameters = levels[level]
+      const availableParameters = levels[level] || levels[levels.length -1]
 
       this.$store.dispatch('startNewLevel', {
         knobsAvailable: availableParameters,
@@ -186,19 +186,20 @@ export default {
     },
     beginSvoosh() {
       this.isThereSvooshComponent = true;
-      setTimeout(()=>{this.svooshIt=true}, 0)
+      this.$nextTick(() => this.svooshIt = true)
       this.displayPreviewOverlay = false
     },
     endSvoosh() {
       setTimeout(()=>{
         this.isThereSvooshComponent=false
         this.svooshIt = false
+        this.$store.commit('armSweep')
         }, 500)
       this.endPreview()
     },
     beginSuccessSvoosh() {
-      this.isThereSuccessSvooshComponent = true;
-      setTimeout(()=>{this.successSvooshIt=true}, 0)
+      this.isThereSuccessSvooshComponent = true
+      this.$nextTick(() => this.successSvooshIt=true)
     },
     endSuccessSvoosh() {
       setTimeout(()=>{
@@ -230,7 +231,6 @@ export default {
       if(val === 2) {
         // this.init()
         // this.loop.start()
-
       }
     }
   }
@@ -238,22 +238,28 @@ export default {
 </script>
 
 <style lang="scss">
-@import url('https://fonts.googleapis.com/css?family=Montserrat:300,900');
+@import url('https://fonts.googleapis.com/css?family=Montserrat:300,600,900');
+
+@font-face {
+    font-family: ledscreen;
+    src: url(./assets/ledscreen.ttf);
+}
 
 .tabs {
   display: none;
-  justify-content: space-between;
+  justify-content: flex-start;
   position: absolute;
   bottom: 0;
   width: 100vw;
   height: 10vh;
   align-items: center;
+  text-transform: uppercase;
   &__tab {
     height: 100%;
     display: flex;
     justify-content: center;
     align-items: center;
-    width: 16.66%;
+    width: 20%;
     border: .5px solid white;
     cursor: pointer;
     &:hover {
@@ -271,7 +277,7 @@ export default {
   background-image: url(./assets/bg.svg);
   background-size: stretch;
   width:100vw;
-  height:92vh !important;
+  height: 92vh;
 }
 
 .empty {
@@ -541,8 +547,20 @@ body {
 }
 
 @media only screen and (max-width: 1000px) {
+  #app {
+    font-size: .8em;
+  }
+  .level {
+    height: 82vh !important;
+  }
   .tabs {
     display: flex;
+    &__tab {
+      flex-direction: column;
+      height:100%;
+      padding: 2vh 0;
+      justify-content: space-around;
+    }
   }
   .module {
     width: 100vw;
@@ -550,10 +568,25 @@ body {
     position: absolute;
     opacity: 0;
   }
+  .module .knobs {
+    padding-top: 5vh;
+    min-height: 55vh;
+}
+.module .button-wrapper button {
+    width: 4.5em;
+    height: 4.5em;
+}
+.module .button-wrapper p {
+    font-size: 1.2em;
+}
   .module.active {
     left: 0;
     opacity: 1;
     z-index: 1;
+    height: 82vh;
+  }
+  .module .display {
+    height: 20vh;
   }
 }
 </style>

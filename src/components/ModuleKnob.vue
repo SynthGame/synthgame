@@ -124,7 +124,7 @@
                 <!-- <g :style="{transition: '.2s all linear'}" :transform="'rotate(' + (((this.value / (this.max - (this.min * 0.9))) * 310) + (this.max*0.9) + 18) + ' 264 285) translate(0, 206)'" > -->
                 <g :style="{transition: '.2s all linear'}" :transform="'rotate(' + (((this.value / (this.max - this.min)) * 310) + 18) + ' 264 285) translate(0, 236)'" >
                   <defs>
-                    <radialGradient id="grad1" cx="50%" cy="75%" r="60%" fx="50%" fy="75%">
+                    <radialGradient id="grad1" cx="50%" cy="65%" r="60%" fx="50%" fy="75%">
                       <stop offset="0%" style="stop-color:rgba(0,0,0,1);
                       stop-opacity:1" />
                       <stop offset="50%" style="stop-color:rgba(0,0,0,1);stop-opacity:1" />
@@ -147,7 +147,7 @@
               <feDropShadow dx="0" dy="0" stdDeviation="35" flood-color="#3C32FF" flood-opacity="1" />
             </filter>
           </defs>
-          <circle style="filter:url(#dropshadow);cursor:grab" :fill="knobColor" r="30" :cx="(cpPathX - 10)" :cy="(cpPathY + 10)" stroke="white" stroke-width="6"></circle>
+          <circle style="filter:url(#dropshadow);cursor:grab;" :fill="knobColor" r="30" :cx="(cpPathX - 10)" :cy="(cpPathY + 10)" stroke="white" stroke-width="6"></circle>
         </g>
       </g>
     </svg>
@@ -474,6 +474,14 @@ export default {
      font-size: .7em;
      text-transform: uppercase;
      letter-spacing: 1px;
+     z-index:9;
+     position: relative;
+  }
+}
+
+@media only screen and (max-width: 1000px) {
+  .knob p {
+      font-size: 1.2em;
   }
 }
 </style>

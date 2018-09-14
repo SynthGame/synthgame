@@ -3,7 +3,7 @@
     <module-title :indicator-active="dialsAreWithinMargin" :module-color="moduleColor">
       <h2 slot="title">Tats</h2>
       <h3 v-if="dialsAreWithinMargin" slot="subtitle">Done!</h3>
-      <h3 v-else slot="subtitle">Oscillator</h3>
+      <h3 v-else slot="subtitle">Oscillator 1</h3>
     </module-title>
     <module-display
       class="display"
@@ -23,7 +23,8 @@
         v-model="freqDial"
         v-if="knobsAvailable.frequency || createModeIsActive"
         :min="0"
-        :max="100"
+        :step="1"
+        :max="freqArray.length - 1"
         knobColor="#ff8574"
         name="Octave"
       ></module-knob>
@@ -59,7 +60,7 @@
 <script>
 import { mapState } from 'vuex'
 import { vuexSyncGen, mapValueToRange } from '@/utils'
-import { MODULE_OSCILLATOR_COLOR } from '@/constants'
+import { MODULE_OSCILLATORONE_COLOR } from '@/constants'
 
 import audio from '@/audio'
 import character from '@/character'
@@ -74,11 +75,11 @@ export default {
   name: 'OscillatorModule',
   data () {
     return {
-      name: 'oscillator',
+      name: 'oscillator1',
       typeDial: 0,
       freqDial: 0,
-      oscillator: {},
-      moduleColor: MODULE_OSCILLATOR_COLOR
+      oscillator1: {},
+      moduleColor: MODULE_OSCILLATORONE_COLOR
     }
   },
   components: {
@@ -89,7 +90,7 @@ export default {
   },
   created () {
     self = this
-    this.oscillator = audio.oscillator.state.device
+    this.oscillator1 = audio.oscillator1.state.device
   },
   computed: {
     timerIsRunning () {
@@ -101,35 +102,36 @@ export default {
       return Object.values(this.$store.getters.audioParametersMatchGoalWithMargin[this.name])
         .every(param => param)
     },
-    ...vuexSyncGen('oscillator', 'frequency', val => {
-      self.oscillator.frequency.value = character.oscillator.frequency(val)
+    ...vuexSyncGen('oscillator1', 'frequency', val => {
+      self.oscillator1.frequency.value = character.oscillator1.frequency(val)
     }),
-    ...vuexSyncGen('oscillator', 'typeOsc', val => {
-      if (self.oscillator.type === character.oscillator.typeOsc(val)) return
-      self.oscillator.type = character.oscillator.typeOsc(val)
-      self.oscillator.stop()
-      self.oscillator.start()
+    ...vuexSyncGen('oscillator1', 'typeOsc', val => {
+      if (self.oscillator1.type === character.oscillator1.typeOsc(val)) return
+      self.oscillator1.type = character.oscillator1.typeOsc(val)
+      self.oscillator1.stop()
+      self.oscillator1.start()
     }),
-    // ...vuexSyncGen('oscillator', 'phase', val => {
-    //   self.oscillator.phase = character.oscillator.phase(val) // phase in degrees
+    // ...vuexSyncGen('oscillator1', 'phase', val => {
+    //   self.oscillator1.phase = character.oscillator1.phase(val) // phase in degrees
     // }),
-    ...vuexSyncGen('oscillator', 'detune', val => {
-      self.oscillator.detune.value = character.oscillator.detune(val)
+    ...vuexSyncGen('oscillator1', 'detune', val => {
+      self.oscillator1.detune.value = character.oscillator1.detune(val)
     }),
     ...mapState({
-      frequencyGoal: state => state.gameState.goal.oscillator.frequency,
-      typeOscGoal: state => state.gameState.goal.oscillator.typeOsc,
-      detuneGoal: state => state.gameState.goal.oscillator.detune,
-      // phaseGoal: state => state.gameState.goal.oscillator.phase,
-      typeArray: state => state.gameState.possibleValues.oscillator.typeOsc,
-      freqArray: state => state.gameState.possibleValues.oscillator.frequency,
-      knobsAvailable: state => state.gameState.knobsAvailable.oscillator,
+      frequencyGoal: state => state.gameState.goal.oscillator1.frequency,
+      typeOscGoal: state => state.gameState.goal.oscillator1.typeOsc,
+      detuneGoal: state => state.gameState.goal.oscillator1.detune,
+      // phaseGoal: state => state.gameState.goal.oscillator1.phase,
+      typeArray: state => state.gameState.possibleValues.oscillator1.typeOsc,
+      freqArray: state => state.gameState.possibleValues.oscillator1.frequency,
+      knobsAvailable: state => state.gameState.knobsAvailable.oscillator1,
       createModeIsActive: state => state.gameState.createModeIsActive
     })
   },
   watch: {
     freqDial(val) {
-      this.frequency = this.freqArray[mapValueToRange(val, 100, (this.freqArray.length -1))]
+      this.frequency = this.freqArray[val]
+      // this.frequency = this.freqArray[mapValueToRange(val, 100, (this.freqArray.length -1))]
     },
     typeDial(val) {
       this.typeOsc = this.typeArray[mapValueToRange(val, 100, (this.typeArray.length -1))]
