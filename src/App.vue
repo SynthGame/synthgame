@@ -49,7 +49,9 @@
 import { mapState, mapGetters } from 'vuex'
 import random from 'lodash/random'
 import times from 'lodash/times'
+import mapValues from 'lodash/mapValues'
 import audio from '@/audio'
+import { getPresetById } from '@/db'
 import SuccessOverlay from '@/components/SuccessOverlay'
 import FailureOverlay from '@/components/FailureOverlay'
 import StartScreen from '@/components/StartScreen'
@@ -83,6 +85,10 @@ export default {
   },
   created () {
     this.init()
+    if(this.$route.query.preset) {
+      getPresetById(this.$route.query.preset)
+        .then(data => this.startPreset(data.parameterValues))
+    }
 
     // Pc keyboard listener (might be needed for mobile)
     document.addEventListener('keypress', (event) => {
@@ -107,6 +113,8 @@ export default {
   },
   methods: {
     init () {
+      // Retrieve highscore from local storage
+        this.$store.commit('updateHighScore', localStorage.getItem("highscore"))
       // initialize the synth
       audio.init().toMaster()
       // create loop wich sequences 4 notes
@@ -117,11 +125,11 @@ export default {
       }, (time, i) => { // i here is just a note from the note array define above
         if (this.$store.state.gameState.timerIsRunning === false && !this.displaySuccessOverlay && !this.displayPreviewOverlay) {
           if (this.$store.state.gameState.sweepArmed) {
-            audio.playSweep();
+            audio.playSweep(); //plan this ahead?
             this.$store.commit('disarmSweep')
           }
         }
-        if (this.displaySuccessOverlay && this.kickTime === 0 && !this.displayStartOverlay) {
+        if ((this.displayPreviewOverlay && this.kickTime === 0 && !this.displayStartOverlay) || (this.displaySuccessOverlay && this.kickTime === 0 && !this.displayStartOverlay)) {
           audio.playKick();
           this.$store.commit('armSweep')
           this.kickTime++
@@ -129,8 +137,7 @@ export default {
           this.kickTime++
         } else {
           this.kickTime = 0;
-        }
-        ;
+        };
         audio.playNote(randomLoop[i], {})
 
         // if (i === 15) this.$store.commit('increaseSequencesPassedInCurrentLevel')
@@ -149,8 +156,7 @@ export default {
     //   this.displaySuccessOverlay = true
     // },
     startAgain(){
-      this.$store.dispatch('startAgain')
-      this.startLevel(this.gameLevel)
+      location.reload();
     },
     startPlayMode(){
       this.displayStartOverlay = false // hide start overlay
@@ -176,6 +182,33 @@ export default {
       })
       this.$store.dispatch('randomizGoalParameters') // first randomize the goal
       this.$store.dispatch('randomizeAudioParameters', availableParameters) // and the audio params
+      this.$store.dispatch('setSynthToGoal', audio) // then let the user hear it
+      // randomize loop melody
+      times(4).forEach(i => {
+        this.loop.at(i, random(-12, 12));
+      })
+      this.loop.start()
+      // rest will be done by watcher of sequencesPassedInCurrentLevel
+    },
+    startPreset(parameters) {
+      const usedParameters = mapValues(parameters, 
+      audioModule => mapValues(audioModule, 
+      parameter => !!parameter))
+
+      // disable all overlays
+      this.displaySuccessOverlay = false
+      this.displayFailureOverlay = false
+      this.displayStartOverlay = false
+      this.displayPreviewOverlay = true
+
+      this.$store.dispatch('startNewLevel', {
+        knobsAvailable: usedParameters,
+        levelNumber: 0
+      })
+      this.$store.commit('setGoalToPreset', {
+        preset: parameters
+      })
+      this.$store.dispatch('randomizeAudioParameters', usedParameters) // and the audio params
       this.$store.dispatch('setSynthToGoal', audio) // then let the user hear it
       // randomize loop melody
       times(4).forEach(i => {
@@ -225,12 +258,6 @@ export default {
       if(val === true && this.timerIsRunning) {
         this.beginSuccessSvoosh()
         this.$store.dispatch('levelDone') // would be nice to pass timeleft here but it is being passed by timer on gamestop
-      }
-    },
-    sequencesPassedInCurrentLevel (val) {
-      if(val === 2) {
-        // this.init()
-        // this.loop.start()
       }
     }
   }
@@ -441,6 +468,7 @@ body {
     font-weight: 300;
     font-size: 3em;
     max-width: 12em;
+    margin: 0;
     & span {
       font-size: .6em;
       margin-top: 1.5em;

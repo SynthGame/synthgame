@@ -13,6 +13,7 @@ export default {
   init () {
     log('initializing all submodules before using')
     this.player.init()
+    this.gameOverPlayer.init()
     this.sweepPlayer.init()
     this.oscillator1.init()
     this.oscillator2.init()
@@ -23,6 +24,7 @@ export default {
     this.volume.init()
 
     const player = this.player.state.device
+    const gameOverPlayer = this.gameOverPlayer.state.device
     const sweepPlayer = this.sweepPlayer.state.device
     const oscillator1 = this.oscillator1.state.device
     const oscillator2 = this.oscillator2.state.device
@@ -35,10 +37,23 @@ export default {
 
 
     log(`Created new general output for audio device`)
-    const output = new Tone.Volume(-12)
+    const output = new Tone.Volume(6)
     log(`Connecting LFO to filter frequency`)
     lfo.connect(oscillator1.detune).start()
-    log(`Chaining oscillator1 => pitch shift => filter => envelope => compressor => volume`)
+    log(`Connecting player to compressor`)
+    player.connect(compressor)
+    log(`Connecting sweepPlayer to compressor`)
+    sweepPlayer.connect(compressor)
+    log(`Connecting gameOverPlayer to compressor`)
+    gameOverPlayer.connect(compressor)
+    log(`Adjusting volume to make an ok mix`)
+    player.volume.value = 0
+    sweepPlayer.volume.value = 3
+    gameOverPlayer.volume.value = 0
+    oscillator1.volume.value = -12
+    oscillator2.volume.value = -12
+    lfo.connect(oscillator1.detune).start()
+    log(`Chaining oscillator1 => pitch shift => envelope => filter => delay => reverb`)
     oscillator1.chain(pitchShift, filter, envelope, compressor, volume, output)
     oscillator2.connect(pitchShift)
 
@@ -57,6 +72,11 @@ export default {
     if(this.state.loop) this.state.loop.dispose()
     this.state.loop = new Tone.Sequence(callback, noteArray, subdivision)
     return this.state.loop
+  },
+  stopMainLoop () {
+    this.state.loop.stop();
+    this.oscillator1.state.device.stop()
+    this.oscillator2.state.device.stop()
   },
   start () {
     log(`starting Tone.js Transport`)
@@ -78,7 +98,15 @@ export default {
   },
   playKick () {
     log(`Playing kick`)
-    return this.player.state.device.start();
+    return this.player.state.device.start('+0.11');
+  },
+  stopKick () {
+    log(`Playing kick`)
+    return this.player.state.device.stop();
+  },
+  playGameOver () {
+    log(`Playing Game Over`)
+    return this.gameOverPlayer.state.device.start();
   },
   playSweep () {
     log(`Playing sweep`)
@@ -105,7 +133,19 @@ export default {
       log(`Initializing player with options: ${options}`)
       this.state.device = new Tone.Player({
         url : require('./assets/beat.mp3'),
-      }).toMaster()
+        loop  : true ,
+      })
+    }
+  },
+  gameOverPlayer: {
+    state: {
+      device: undefined
+    },
+    init (options) {
+      log(`Initializing player with options: ${options}`)
+      this.state.device = new Tone.Player({
+        url : require('./assets/gameover.mp3'),
+      })
     }
   },
   sweepPlayer: {
@@ -116,7 +156,7 @@ export default {
       log(`Initializing player with options: ${options}`)
       this.state.device = new Tone.Player({
         url : require('./assets/sweeptats.wav'),
-      }).toMaster()
+      })
     }
   },
   oscillator1: {
@@ -199,11 +239,11 @@ export default {
     init (options) {
       log(`Initializing Compressor with options: ${options}`)
       this.state.device = new Tone.Compressor({
-      ratio  : 52 ,
-      threshold  : -24 ,
-      release  : 5.25 ,
+      ratio  : 10 ,
+      threshold  : -18 ,
+      release  : 0.11 ,
       attack  : 0.003 ,
-      knee  : 50
+      knee  : 20
       });
     }
   },

@@ -193,10 +193,13 @@ export default {
     },
   },
   watch: {
-      bpmKnob (val) {
-        return audio.setBpm(val)
-      }
+    bpmKnob (val) {
+      return audio.setBpm(val)
+    },
+    noteArray (val) {
+      this.$store.commit('setActiveSequence', val)
     }
+  }
 }
 </script>
 
