@@ -48,7 +48,6 @@ export default {
 
     log(`Starting oscillator1`)
     oscillator1.start()
-    oscillator2.start()
 
     return output
   },
@@ -95,6 +94,10 @@ export default {
   stopSweep () {
     log(`Stopping sweep`)
     return this.sweepPlayer.state.device.stop();
+  },
+  setSecondOscillatorPlayingTo (state) {
+    if (state) this.oscillator2.state.device.start()
+    else this.oscillator2.state.device.stop()
   },
   setToneLength (length) {
     log(`setting envelope tone length to: ${length}`)
