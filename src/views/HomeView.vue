@@ -26,16 +26,6 @@
         v-if="createModeIsActive"
         class="module sequencer"
       />
-      <!-- <delay-module
-        v-if="moduleIsUseable('delay')"
-        v-masonry-tile
-        :class="[(activeModule == 4 ? 'active' : '')]"
-      /> -->
-      <!-- <reverb-module
-        v-if="moduleIsUseable('reverb')"
-        v-masonry-tile
-        :class="[(activeModule == 5 ? 'active' : '')]"
-      /> -->
     </div>
     <div class="tabs">
       <div @click="showOsc1" v-if="moduleIsUseable('oscillator1')" class="tabs__tab tabs__osc"><span>Osc 1</span><span
@@ -92,8 +82,6 @@
                   'box-shadow': lfoComplete ? `0px 0px 16px ${lfoColor}` : '',
                 }"
       ></span></div>
-      <!-- <div @click="showDel" class="tabs__tab tabs__delay">Del</div>
-      <div @click="showRev" class="tabs__tab tabs__reverb">Rev</div> -->
     </div>
   </div>
 </template>
@@ -108,8 +96,6 @@ import OscillatorModuleTwo from '@/components/module/OscillatorModuleTwo.vue'
 import EnvelopeModule from '@/components/module/EnvelopeModule.vue'
 import FilterModule from '@/components/module/FilterModule.vue'
 import LfoModule from '@/components/module/LfoModule.vue'
-import DelayModule from '@/components/module/DelayModule.vue'
-import ReverbModule from '@/components/module/ReverbModule.vue'
 import SequencerModule from '@/components/module/SequencerModule.vue'
 
 export default {
@@ -133,8 +119,6 @@ export default {
     EnvelopeModule,
     FilterModule,
     LfoModule,
-    DelayModule,
-    ReverbModule,
     SequencerModule
   },
   methods: {
@@ -156,12 +140,6 @@ export default {
     },
     showLfo () {
       this.activeModule = 4;
-    },
-    showDel () {
-      this.activeModule = 5;
-    },
-    showRev () {
-      this.activeModule = 6;
     },
     moduleIsUseable (moduleName) {
       if (this.createModeIsActive) return true

@@ -10,10 +10,9 @@
               :d="path"
               fill="black"
               style="fill-rule: nozero"
-              :class="{reverb: module=== 'reverb'}"
               />
 
-        <path v-if="this.module === 'oscillator' || this.module === 'filter' || this.module === 'envelope' || this.module === 'delay'"
+        <path v-if="this.module === 'oscillator' || this.module === 'filter' || this.module === 'envelope'"
               stroke="white"
               v-show="!createModeIsActive"
               :stroke-width="2"
@@ -62,88 +61,6 @@
 
                   <circle :cx="0" :cy="displayHeight*0.6" :r="displayHeight/4"/>
             </g>
-        </svg>
-
-        <!-- Reverb: -->
-        <svg :viewBox="reverbVB" v-if="module==='reverb'">
-          <g>
-            <circle :r="reverbCirclesRay(1)"
-                    :cy="displayHeight/2"
-                    :cx="firstCircleLeftMargin" class="reverb"
-                    />
-            <circle :r="reverbCirclesRay(2)"
-                    :cy="displayHeight/2"
-                    :cx="spaceBetweenReverbCicles(2)"
-                    class="reverb"/>
-            <circle :r="reverbCirclesRay(3)"
-                    :cy="displayHeight/2"
-                    :cx="spaceBetweenReverbCicles(3)"
-                    class="reverb"/>
-            <circle :r="reverbCirclesRay(4)"
-                    :cy="displayHeight/2"
-                    :cx="spaceBetweenReverbCicles(4)"
-                    class="reverb"/>
-            <circle :r="reverbCirclesRay(5)"
-                    :cy="displayHeight/2"
-                    :cx="spaceBetweenReverbCicles(5)"
-                    class="reverb"/>
-            <circle :r="reverbCirclesRay(6)"
-                    :cy="displayHeight/2"
-                    :cx="spaceBetweenReverbCicles(6)"
-                    class="reverb"/>
-            <circle :r="reverbCirclesRay(8)"
-                    :cy="displayHeight/2"
-                    :cx="spaceBetweenReverbCicles(7)"
-                    class="reverb"/>
-            <circle :r="reverbCirclesRay(9)"
-                    :cy="displayHeight/2"
-                    :cx="spaceBetweenReverbCicles(8)"
-                    class="reverb"/>
-            <!-- <circle :r="reverbCirclesRay(10)"
-                    :cy="displayHeight/2"
-                    :cx="spaceBetweenReverbCicles(9)"
-                    class="reverb"/> -->
-          </g>
-
-          <!-- goal -->
-          <g>
-            <circle :r="reverbCirclesRayGoal(1)"
-                    :cy="displayHeight/2"
-                    :cx="firstCircleLeftMargin" class="reverb__goal"
-                    />
-            <circle :r="reverbCirclesRayGoal(2)"
-                    :cy="displayHeight/2"
-                    :cx="spaceBetweenReverbCiclesGoal(2)"
-                    class="reverb__goal"/>
-            <circle :r="reverbCirclesRayGoal(3)"
-                    :cy="displayHeight/2"
-                    :cx="spaceBetweenReverbCiclesGoal(3)"
-                    class="reverb__goal"/>
-            <circle :r="reverbCirclesRayGoal(4)"
-                    :cy="displayHeight/2"
-                    :cx="spaceBetweenReverbCiclesGoal(4)"
-                    class="reverb__goal"/>
-            <circle :r="reverbCirclesRayGoal(5)"
-                    :cy="displayHeight/2"
-                    :cx="spaceBetweenReverbCiclesGoal(5)"
-                    class="reverb__goal"/>
-            <circle :r="reverbCirclesRayGoal(6)"
-                    :cy="displayHeight/2"
-                    :cx="spaceBetweenReverbCiclesGoal(6)"
-                    class="reverb__goal"/>
-            <circle :r="reverbCirclesRayGoal(8)"
-                    :cy="displayHeight/2"
-                    :cx="spaceBetweenReverbCiclesGoal(7)"
-                    class="reverb__goal"/>
-            <circle :r="reverbCirclesRayGoal(9)"
-                    :cy="displayHeight/2"
-                    :cx="spaceBetweenReverbCiclesGoal(8)"
-                    class="reverb__goal"/>
-            <!-- <circle :r="reverbCirclesRay(10)"
-                    :cy="displayHeight/2"
-                    :cx="spaceBetweenReverbCiclesGoal(9)"
-                    class="reverb"/> -->
-          </g>
         </svg>
         <g v-if="debug" class="debug-text">
           <text x="0" y="0">
@@ -200,17 +117,12 @@ import store from '../store'; // path to your Vuex store
 // [] sawtooth timing
 
 // Week 3.:
-// [] Reverb screen
 // circles no: the design way
 // <circles> czy path?
 // size changes circles move aparart
 // dry/wet - size of the circles
 //
 //
-
-
-// delay:
-// [v] drynevss shall be controlling y positioning of all the elements
 
 export default {
   name: 'display',
@@ -275,33 +187,6 @@ export default {
     updateDimensions () {
       this.displayHeight = this.$refs.displayWrapper.clientHeight
       this.displayWidth = this.$refs.displayWrapper.clientWidth
-    },
-
-    drawDelayBar (space,  width, number) {
-      // the function is used to draw a bar in delay basing on a numer of variables
-      // space is spaceBetween
-      // width is the arbitrary width of a bar
-      // number is used as a multiplier to deal with changing height of bars when dry
-      // goes together with wetness.
-
-      // how high should the bars be?
-      const basicBarHeight = this.displayHeight*0.9
-
-      // how much smaller should consective bars be?
-      const diff = basicBarHeight*((number/12))
-
-      const bar = ' h ' + space +
-                  ' v ' + (-(basicBarHeight-diff)) +
-                  ' h ' + width +
-                  ' v ' + (basicBarHeight-diff)
-      return bar
-    },
-    drawReverbCicle (mutiplier,r) {
-      const ratio = r*mutiplier
-      const rTimes2 = 2*ratio
-      const circle = 'a '+ratio+', '+ ratio+ ' 0 1,0 ' +rTimes2+',0'+
-        'a '+ratio+', '+ratio + ' 0 1,0 '+(-rTimes2)+',0'
-      return circle
     }
   },
   computed: {
@@ -311,71 +196,11 @@ export default {
     // used to refer to LFO rate knob in a watcher (no way to do it directly using because of "[...]")
     firstCircleLeftMargin() {
       let margin = ''
-      if (this.module === 'reverb'){
-        // helpers:
-        const sizeRatio = this.knobs[0].value/(this.knobs[0].max - this.knobs[0].min)
-        margin = (this.displayWidth/8)*(1-sizeRatio)
-      }
       return margin
     },
     firstCircleLeftMarginGoal() {
       let margin = ''
-      if (this.module === 'reverb'){
-        // helpers:
-        const sizeRatio = this.knobs[4].value/(this.knobs[4].max - this.knobs[4].min)
-        margin = (this.displayWidth/8)*(1-sizeRatio)
-      }
       return margin
-    },
-    reverbCirclesRay(){
-      if (this.module =='reverb') {
-        const ratio = this.knobs[1].value/(this.knobs[1].max - this.knobs[1].min)
-        return number => this.displayHeight*(0.38-(number*3*0.01)) + 20*ratio
-       }
-      return ''
-    },
-    reverbCirclesRayGoal(){
-      if (this.module =='reverb') {
-        const ratio = this.knobs[5].value/(this.knobs[5].max - this.knobs[5].min)
-        return number => this.displayHeight*(0.38-(number*3*0.01)) + 20*ratio
-       }
-      return ''
-    },
-    spaceBetweenReverbCicles() {
-      if (this.module === 'reverb') {
-        const sizeRatio = this.knobs[0].value/(this.knobs[0].max - this.knobs[0].min)
-        let max = 30
-        const min = 10
-        let cumulate = this.firstCircleLeftMargin;
-        const cumulateDistances = (number) => {
-          for (let i=0; i> number.length; i++) {
-            cumulate = cumulate + (sizeRatio*max)
-          }
-          return cumulate
-        }
-        return number => {
-          return this.firstCircleLeftMargin + number*(max*sizeRatio)
-        }
-      }
-      return ''
-    },
-    spaceBetweenReverbCiclesGoal() {
-      if (this.module === 'reverb') {
-        const sizeRatio = this.knobs[4].value/(this.knobs[4].max - this.knobs[4].min)
-        let max = 30
-        const min = 10
-        let cumulate = this.firstCircleLeftMarginGoal;
-        const cumulateDistances = (number) => {
-          for (let i=0; i> number.length; i++) {
-            cumulate = cumulate + (sizeRatio*max)
-          }
-          return cumulate
-        }
-        return number => {
-          return this.firstCircleLeftMargin + number*(max*sizeRatio)
-        }
-      }
-      return ''
     },
     lfoRealFreq() {
       if (this.module === 'lfo') {
@@ -536,82 +361,11 @@ export default {
         line = ''
 
       }
-
-      if (this.module === 'delay') {
-        // helpers:
-        const time = this.knobs[0]
-        const feedback = this.knobs[1]
-        const wet = this.knobs[2]
-
-        const feedbackRatio = feedback.value/(feedback.max-feedback.min)
-        const timeRatio = time.value/(time.max-time.min)
-        const wetRatio = wet.value/(wet.max-wet.min)
-
-        const barWidth = 15
-        // const spaceBetween = timeRatio*this.displayWidth/3 + 15
-        const spaceBetween = timeRatio*this.displayWidth/12 + 15
-
-        const barTrigger = 100 / 7
-
-        line = 'M 0, 0 ' +
-               'm 0, ' + (this.displayHeight+this.displayHeight*(1-wetRatio)) +
-               this.drawDelayBar(spaceBetween, barWidth, 0) +
-
-               // DRY-nasty, sure
-               // the 7.142... number is a result of 100/14
-               ((feedbackRatio > barTrigger*2/100) ? this.drawDelayBar(spaceBetween, barWidth, 1):'') +
-               ((feedbackRatio > barTrigger*3/100) ? this.drawDelayBar(spaceBetween, barWidth, 2):'') +
-               ((feedbackRatio > barTrigger*4/100) ? this.drawDelayBar(spaceBetween, barWidth, 3):'') +
-               ((feedbackRatio > barTrigger*5/100) ? this.drawDelayBar(spaceBetween, barWidth, 4):'') +
-               ((feedbackRatio > barTrigger*6/100) ? this.drawDelayBar(spaceBetween, barWidth, 5):'') +
-               ((feedbackRatio > barTrigger*7/100) ? this.drawDelayBar(spaceBetween, barWidth, 6):'') +
-               ((feedbackRatio > barTrigger*8/100) ? this.drawDelayBar(spaceBetween, barWidth, 7):'') +
-               ((feedbackRatio > barTrigger*9/100) ? this.drawDelayBar(spaceBetween, barWidth, 8):'') +
-               ((feedbackRatio > barTrigger*10/100) ? this.drawDelayBar(spaceBetween, barWidth, 9):'') +
-               ((feedbackRatio > barTrigger*11/100) ? this.drawDelayBar(spaceBetween, barWidth, 10):'') +
-               ((feedbackRatio > barTrigger*12/100) ? this.drawDelayBar(spaceBetween, barWidth, 11):'') +
-               ((feedbackRatio > barTrigger*13/100) ? this.drawDelayBar(spaceBetween, barWidth, 12):'')
-
-
-      }
-      if (this.module === 'reverb') {
-
-
-        // Reverb path not going to work!
-        // Each circle neccessitates its own opacity
-
-        // helpers:
-        const size = this.knobs[0]
-        const dry = this.knobs[1]
-
-        const sizeRatio = size.value/(size.max-size.min)
-        const dryRatio = dry.value/(dry.max-dry.min)
-        const r = this.displayHeight*0.4
-
-
-        line = 'M 0,0' +
-               'm 0,' + this.displayHeight/2 +
-               this.drawReverbCicle(1,r) +
-               this.drawReverbCicle(0.9,r) +
-               this.drawReverbCicle(0.8,r) +
-               this.drawReverbCicle(0.7,r) +
-               this.drawReverbCicle(0.6,r) +
-               this.drawReverbCicle(0.5,r) +
-               this.drawReverbCicle(0.4,r) +
-               this.drawReverbCicle(0.3,r) +
-               this.drawReverbCicle(0.2,r) +
-               this.drawReverbCicle(0.1,r)
-        // disable
-        line= ''
-      }
       return line
     },
 
     lfoVB() {
       return (0-this.displayWidth/2) + ' 0 ' + this.displayWidth + ' ' + this.displayHeight
-    },
-    reverbVB() {
-      return '-90,0,'+this.displayWidth+ ',' + this.displayHeight
     },
     swingMovement() {
       // helpers:
@@ -721,42 +475,6 @@ export default {
         'a ' + r + ', ' + r + ' 0 1,0 ' + (-2 * r) + ',0'
 
         line = ''
-      }
-
-      if (this.module === 'delay') {
-        // helpers:
-        const time = this.knobs[4]
-        const feedback = this.knobs[5]
-        const wet = this.knobs[6]
-
-        const feedbackRatio = feedback.value/(feedback.max-feedback.min)
-        const timeRatio = time.value/(time.max-time.min)
-        const wetRatio = wet.value/(wet.max-wet.min)
-
-        const barWidth = 0
-        const spaceBetween = timeRatio*this.displayWidth/7 + 28
-        const barTrigger = 100 / 7
-
-        line = 'M 0, 0 ' +
-               'm 0, ' + (this.displayHeight+this.displayHeight*(1-wetRatio)) +
-               this.drawDelayBar(spaceBetween - 7, barWidth, 0) +
-
-               // DRY-nasty, sure
-               // the 7.142... number is a result of 100/14
-               ((feedbackRatio > barTrigger*2/100) ? this.drawDelayBar(spaceBetween, barWidth, 1):'') +
-               ((feedbackRatio > barTrigger*3/100) ? this.drawDelayBar(spaceBetween, barWidth, 2):'') +
-               ((feedbackRatio > barTrigger*4/100) ? this.drawDelayBar(spaceBetween, barWidth, 3):'') +
-               ((feedbackRatio > barTrigger*5/100) ? this.drawDelayBar(spaceBetween, barWidth, 4):'') +
-               ((feedbackRatio > barTrigger*6/100) ? this.drawDelayBar(spaceBetween, barWidth, 5):'') +
-               ((feedbackRatio > barTrigger*7/100) ? this.drawDelayBar(spaceBetween, barWidth, 6):'') +
-               ((feedbackRatio > barTrigger*8/100) ? this.drawDelayBar(spaceBetween, barWidth, 7):'') +
-               ((feedbackRatio > barTrigger*9/100) ? this.drawDelayBar(spaceBetween, barWidth, 8):'') +
-               ((feedbackRatio > barTrigger*10/100) ? this.drawDelayBar(spaceBetween, barWidth, 9):'') +
-               ((feedbackRatio > barTrigger*11/100) ? this.drawDelayBar(spaceBetween, barWidth, 10):'') +
-               ((feedbackRatio > barTrigger*12/100) ? this.drawDelayBar(spaceBetween, barWidth, 11):'') +
-               ((feedbackRatio > barTrigger*13/100) ? this.drawDelayBar(spaceBetween, barWidth, 12):'')
-
-        return line
       }
 
       if (this.module === 'envelope') {
@@ -901,23 +619,15 @@ export default {
 }
 </script>
 
- <style scoped lang="scss">
- path {
-   display: inline-block;
- }
- .swingClass {
-   transform-origin: 0% -40%;
- }
- .reverb {
-   fill-opacity: 0.5;
-   &__goal {
-     fill-opacity: 0;
-     stroke: white;
-     stroke-width: 2;
-     }
+<style scoped lang="scss">
+  path {
+    display: inline-block;
   }
-.debug-text {
-  font: bold 20px sans-serif;
-  fill: red;
-}
- </style>
+  .swingClass {
+    transform-origin: 0% -40%;
+  }
+  .debug-text {
+    font: bold 20px sans-serif;
+    fill: red;
+  }
+</style>
