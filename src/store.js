@@ -43,15 +43,6 @@ export default new Vuex.Store({
         frequency: 10,
         type: 'sine',
         amount: 0
-      },
-      delay: {
-        delayTime: 30,
-        feedback: 80,
-        wet: 0
-      },
-      reverb: {
-        roomSize: 50,
-        wet: 0
       }
     },
     gameState: {
@@ -71,9 +62,7 @@ export default new Vuex.Store({
         oscillator2: {},
         filter: {},
         envelope: {},
-        lfo: {},
-        delay: {},
-        reverb: {}
+        lfo: {}
       },
       score: 0,
       highScore: 0,
@@ -106,19 +95,9 @@ export default new Vuex.Store({
           frequency: 10,
           type: 'sine',
           amount: 0
-        },
-        delay: {
-          delayTime: 30,
-          feedback: 80,
-          wet: 0
-        },
-        reverb: {
-          roomSize: 50,
-          wet: 0
         }
       },
       possibleValues: {
-        delay: {},
         envelope: {},
         filter: {
           type: ['lowpass', 'highpass', 'bandpass']
@@ -133,8 +112,7 @@ export default new Vuex.Store({
         oscillator2: {
           frequency: ['65', '131', '262', '523'],
           typeOsc: ['sine', 'square', 'sawtooth', 'triangle']
-        },
-        reverb: {}
+        }
       },
       defaultParams: {
         oscillator1: {
@@ -162,15 +140,6 @@ export default new Vuex.Store({
           frequency: 10,
           type: 'sine',
           amount: 0
-        },
-        delay: {
-          delayTime: 30,
-          feedback: 80,
-          wet: 0
-        },
-        reverb: {
-          roomSize: 50,
-          wet: 0
         }
       }
     }
@@ -321,9 +290,6 @@ export default new Vuex.Store({
       // This is absolute garbage but really can't think of anything else
       // if someone comes up with an elegant sollution for this I will
       // buy them dinner & beers for 1 night - Will Willems
-      synth.delay.state.device.delayTime.value = character.delay.delayTime(state.gameState.goal.delay.delayTime)
-      synth.delay.state.device.feedback.value = character.delay.feedback(state.gameState.goal.delay.feedback)
-      synth.delay.state.device.wet.value = character.delay.wet(state.gameState.goal.delay.wet)
       synth.envelope.state.device.attack = character.envelope.attack(state.gameState.goal.envelope.attack)
       synth.envelope.state.device.decay = character.envelope.decay(state.gameState.goal.envelope.decay)
       synth.envelope.state.device.sustain = character.envelope.sustain(state.gameState.goal.envelope.sustain)
@@ -340,16 +306,11 @@ export default new Vuex.Store({
       synth.oscillator2.state.device.frequency.value = character.oscillator2.frequency(state.gameState.goal.oscillator2.frequency)
       synth.oscillator2.state.device.type = character.oscillator2.typeOsc(state.gameState.goal.oscillator2.typeOsc)
       synth.oscillator2.state.device.detune.value = character.oscillator2.detune(state.gameState.goal.oscillator2.detune)
-      synth.reverb.state.device.wet.value = character.reverb.wet(state.gameState.goal.reverb.wet)
-      synth.reverb.state.device.roomSize.value = character.reverb.roomSize(state.gameState.goal.reverb.roomSize)
     },
     setSynthToDefaultParameters ({state}, synth) {
       // This is absolute garbage but really can't think of anything else
       // if someone comes up with an elegant sollution for this I will
       // buy them dinner & beers for 1 night - Will Willems
-      synth.delay.state.device.delayTime.value = character.delay.delayTime(state.gameState.defaultParams.delay.delayTime)
-      synth.delay.state.device.feedback.value = character.delay.feedback(state.gameState.defaultParams.delay.feedback)
-      synth.delay.state.device.wet.value = character.delay.wet(state.gameState.defaultParams.delay.wet)
       synth.envelope.state.device.attack = character.envelope.attack(state.gameState.defaultParams.envelope.attack)
       synth.envelope.state.device.decay = character.envelope.decay(state.gameState.defaultParams.envelope.decay)
       synth.envelope.state.device.sustain = character.envelope.sustain(state.gameState.defaultParams.envelope.sustain)
@@ -366,8 +327,6 @@ export default new Vuex.Store({
       synth.oscillator2.state.device.frequency.value = character.oscillator2.frequency(state.gameState.defaultParams.oscillator2.frequency)
       synth.oscillator2.state.device.type = character.oscillator2.typeOsc(state.gameState.defaultParams.oscillator2.typeOsc)
       synth.oscillator2.state.device.detune.value = character.oscillator2.detune(state.gameState.defaultParams.oscillator2.detune)
-      synth.reverb.state.device.wet.value = character.reverb.wet(state.gameState.defaultParams.reverb.wet)
-      synth.reverb.state.device.roomSize.value = character.reverb.roomSize(state.gameState.defaultParams.reverb.roomSize)
     },
     setLevel ({state, commit}, {knobsAvailable}) {
       commit('setKnobsAvailable', knobsAvailable)

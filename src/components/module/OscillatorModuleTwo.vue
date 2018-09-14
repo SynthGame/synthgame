@@ -91,6 +91,12 @@ export default {
   created () {
     self = this
     this.oscillator2 = audio.oscillator2.state.device
+    // start the second oscillator
+    this.oscillator2.start()
+  },
+  beforeDestroy () {
+    // stop the second oscillator
+    this.oscillator2.stop()
   },
   computed: {
     timerIsRunning () {

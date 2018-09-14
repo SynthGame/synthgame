@@ -1,9 +1,4 @@
 export default {
-  delay: {
-    delayTime: val => val / 100,
-    wet: val => val / 100,
-    feedback: val => val / 100
-  },
   envelope: {
     attack: val => val/100 + 0.01,
     decay: val => Math.pow(val, (val / 100)) - 0.99,
@@ -32,9 +27,5 @@ export default {
     typeOsc: val => val,
     detune: val => (val * 2) - 120
     // phase: 0
-  },
-  reverb: {
-    roomSize: val => val / 100,
-    wet: val => val / 200
   }
 }

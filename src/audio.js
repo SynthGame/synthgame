@@ -8,7 +8,7 @@ export default {
   state: {
     Tone: Tone,
     loop: undefined,
-    toneLength: '16n'
+    toneLength: '8n'
   },
   init () {
     log('initializing all submodules before using')
@@ -20,8 +20,6 @@ export default {
     this.envelope.init()
     this.lfo.init()
     this.filter.init()
-    this.delay.init()
-    this.reverb.init()
     this.compressor.init()
     this.volume.init()
 
@@ -35,8 +33,6 @@ export default {
     const lfo = this.lfo.state.device
     const filter = this.filter.state.device
     const volume = this.volume.state.device
-    const delay = this.delay.state.device
-    const reverb = this.reverb.state.device
     const compressor = this.compressor.state.device
 
 
@@ -63,7 +59,6 @@ export default {
 
     log(`Starting oscillator1`)
     oscillator1.start()
-    oscillator2.start()
 
     return output
   },
@@ -71,11 +66,6 @@ export default {
     log(`setting BPM length to: ${bpm}`)
     this.state.Tone.Transport.bpm.value = bpm
     return this.state.Tone.Transport.bpm.value
-  },
-  resetSynth() {
-    console.log('this.reverb.state.device.dispose', this.reverb.state.device.dispose());
-    // this.reverb.state.device.dispose();
-    // this.delay.state.device.dispose();
   },
   setMainLoop ({noteArray, subdivision}, callback) {
     log(`Setting new main loop`)
@@ -99,10 +89,12 @@ export default {
   },
   playNote (shift, {noteLength, volume}) {
     log(`Playing shifted note: ${shift}`)
-    this.oscillator1.state.pitchShift.pitch = shift
-    this.oscillator2.state.pitchShift.pitch = shift
+    if (Number.isInteger(shift)) {
+      this.oscillator1.state.pitchShift.pitch = shift
+      this.oscillator2.state.pitchShift.pitch = shift
+    }
     if(volume) this.volume.state.device.volume.value = volume // TODO: should only set volume for this note
-    return this.envelope.state.device.triggerAttackRelease(noteLength || this.state.toneLength)
+    return this.envelope.state.device.triggerAttackRelease(noteLength || this.state.toneLength) // TODO: Error: timeConstant must be greater than 0
   },
   playKick () {
     log(`Playing kick`)
@@ -123,6 +115,10 @@ export default {
   stopSweep () {
     log(`Stopping sweep`)
     return this.sweepPlayer.state.device.stop();
+  },
+  setSecondOscillatorPlayingTo (state) {
+    if (state) this.oscillator2.state.device.start()
+    else this.oscillator2.state.device.stop()
   },
   setToneLength (length) {
     log(`setting envelope tone length to: ${length}`)
@@ -269,49 +265,12 @@ export default {
       )
     }
   },
-  delay: {
-    state: {
-      device: undefined
-    },
-    init (options) {
-      log(`Initializing delay with options: ${options}`)
-      this.state.device = new Tone.FeedbackDelay(
-      //   {
-      //   delayTime: 0.25,
-      //   maxDelay: 1,
-      //   ...options
-      // }
-        '8n', 0.5
-      )
-    }
-  },
-  reverb: {
-    state: {
-      device: undefined
-    },
-    init (options) {
-      log(`Initializing reverb with options: ${options}`)
-      this.state.device = new Tone.JCReverb(
-      //   {
-      //   decay: 1.5,
-      //   preDelay: 0.01,
-      //   ...options
-      // }
-        0.9
-      )
-    },
-    setParameter (parameter, value) {
-      log(`Generating new reverb based on new value: : ${parameter} = ${value}`)
-      this.state.device[parameter] = value // set value directly (for properties)
-      return this.state.device.generate() // generate new reverb returns promise
-    }
-  },
   volume: {
     state: {
       device: undefined
     },
     init (options) {
-      log(`Initializing reverb with options: ${options}`)
+      log(`Initializing volume with options: ${options}`)
       this.state.device = new Tone.Volume()
     }
   }

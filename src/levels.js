@@ -10,8 +10,6 @@ export default [
     filter: {},
     envelope: {},
     lfo: {},
-    delay: {},
-    reverb: {},
     levelData: {
       text: 'You have 30 seconds to recreate the sound playing now. Use the white guidelines to get going.'
     }
@@ -25,8 +23,6 @@ export default [
     filter: {},
     envelope: {},
     lfo: {},
-    delay: {},
-    reverb: {},
     levelData: {
       text: 'Detune<span>Very detune, you have tune but you have even better: detune.</span>'
     }
@@ -40,8 +36,6 @@ export default [
     filter: {},
     envelope: {},
     lfo: {},
-    delay: {},
-    reverb: {},
     levelData: {
       text: 'Introducing the filter!<span>The filter removes unwanted parts from a signal. adjust the frequency and hear the sound change.</span>'
     }
@@ -56,8 +50,6 @@ export default [
     filter: {},
     envelope: {},
     lfo: {},
-    delay: {},
-    reverb: {},
     levelData: {
       text: 'Filter types!<span>A lowpass filter passes signals with a frequency lower than a selected cutoff frequency. A highpass filter does the opposite, and a bandpass filters both ends.</span>'
     }
@@ -72,8 +64,6 @@ export default [
     filter: {},
     envelope: {},
     lfo: {},
-    delay: {},
-    reverb: {},
     levelData: {
       text: 'Filter types!<span>A lowpass filter passes signals with a frequency lower than a selected cutoff frequency. A highpass filter does the opposite, and a bandpass filters both ends.</span>'
     }
@@ -88,8 +78,6 @@ export default [
     filter: {},
     envelope: {},
     lfo: {},
-    delay: {},
-    reverb: {},
     levelData: {
       text: 'Filter types!<span>A lowpass filter passes signals with a frequency lower than a selected cutoff frequency. A highpass filter does the opposite, and a bandpass filters both ends.</span>'
     }
@@ -103,8 +91,6 @@ export default [
     filter: {},
     envelope: {},
     lfo: {},
-    delay: {},
-    reverb: {},
     levelData: {
       text: 'Filter types!<span>A lowpass filter passes signals with a frequency lower than a selected cutoff frequency. A highpass filter does the opposite, and a bandpass filters both ends.</span>'
     }
@@ -118,8 +104,6 @@ export default [
     filter: {},
     envelope: {},
     lfo: {},
-    delay: {},
-    reverb: {},
     levelData: {
       text: 'Filter types!<span>A lowpass filter passes signals with a frequency lower than a selected cutoff frequency. A highpass filter does the opposite, and a bandpass filters both ends.</span>'
     }
@@ -133,8 +117,6 @@ export default [
     filter: {},
     envelope: {},
     lfo: {},
-    delay: {},
-    reverb: {},
     levelData: {
       text: 'Filter types!<span>A lowpass filter passes signals with a frequency lower than a selected cutoff frequency. A highpass filter does the opposite, and a bandpass filters both ends.</span>'
     }
@@ -149,8 +131,6 @@ export default [
     filter: {},
     envelope: {},
     lfo: {},
-    delay: {},
-    reverb: {},
     levelData: {
       text: 'Filter types!<span>A lowpass filter passes signals with a frequency lower than a selected cutoff frequency. A highpass filter does the opposite, and a bandpass filters both ends.</span>'
     }
@@ -165,8 +145,6 @@ export default [
     filter: {},
     envelope: {},
     lfo: {},
-    delay: {},
-    reverb: {},
     levelData: {
       text: 'Filter types!<span>A lowpass filter passes signals with a frequency lower than a selected cutoff frequency. A highpass filter does the opposite, and a bandpass filters both ends.</span>'
     }
@@ -182,8 +160,6 @@ export default [
     filter: {},
     envelope: {},
     lfo: {},
-    delay: {},
-    reverb: {},
     levelData: {
       text: 'Filter types!<span>A lowpass filter passes signals with a frequency lower than a selected cutoff frequency. A highpass filter does the opposite, and a bandpass filters both ends.</span>'
     }
@@ -199,8 +175,6 @@ export default [
     filter: {},
     envelope: {},
     lfo: {},
-    delay: {},
-    reverb: {},
     levelData: {
       text: 'Filter types!<span>A lowpass filter passes signals with a frequency lower than a selected cutoff frequency. A highpass filter does the opposite, and a bandpass filters both ends.</span>'
     }
@@ -216,8 +190,6 @@ export default [
     filter: {},
     envelope: {},
     lfo: {},
-    delay: {},
-    reverb: {},
     levelData: {
       text: 'Filter types!<span>A lowpass filter passes signals with a frequency lower than a selected cutoff frequency. A highpass filter does the opposite, and a bandpass filters both ends.</span>'
     }
@@ -233,8 +205,6 @@ export default [
     filter: {},
     envelope: {},
     lfo: {},
-    delay: {},
-    reverb: {},
     levelData: {
       text: 'Filter types!<span>A lowpass filter passes signals with a frequency lower than a selected cutoff frequency. A highpass filter does the opposite, and a bandpass filters both ends.</span>'
     }
@@ -251,8 +221,6 @@ export default [
     filter: {},
     envelope: {},
     lfo: {},
-    delay: {},
-    reverb: {},
     levelData: {
       text: 'Filter types!<span>A lowpass filter passes signals with a frequency lower than a selected cutoff frequency. A highpass filter does the opposite, and a bandpass filters both ends.</span>'
     }
@@ -269,8 +237,6 @@ export default [
     filter: {},
     envelope: {},
     lfo: {},
-    delay: {},
-    reverb: {},
     levelData: {
       text: 'Filter types!<span>A lowpass filter passes signals with a frequency lower than a selected cutoff frequency. A highpass filter does the opposite, and a bandpass filters both ends.</span>'
     }
@@ -287,8 +253,6 @@ export default [
     filter: {},
     envelope: {},
     lfo: {},
-    delay: {},
-    reverb: {},
     levelData: {
       text: 'Filter types!<span>A lowpass filter passes signals with a frequency lower than a selected cutoff frequency. A highpass filter does the opposite, and a bandpass filters both ends.</span>'
     }
@@ -305,8 +269,6 @@ export default [
     filter: {},
     envelope: {},
     lfo: {},
-    delay: {},
-    reverb: {},
     levelData: {
       text: 'Filter types!<span>A lowpass filter passes signals with a frequency lower than a selected cutoff frequency. A highpass filter does the opposite, and a bandpass filters both ends.</span>'
     }
@@ -323,8 +285,6 @@ export default [
     filter: {},
     envelope: {},
     lfo: {},
-    delay: {},
-    reverb: {},
     levelData: {
       text: 'Filter types!<span>A lowpass filter passes signals with a frequency lower than a selected cutoff frequency. A highpass filter does the opposite, and a bandpass filters both ends.</span>'
     }
@@ -340,8 +300,6 @@ export default [
     filter: {},
     envelope: {},
     lfo: {},
-    delay: {},
-    reverb: {},
     levelData: {
       text: 'Filter types!<span>A lowpass filter passes signals with a frequency lower than a selected cutoff frequency. A highpass filter does the opposite, and a bandpass filters both ends.</span>'
     }
@@ -357,8 +315,6 @@ export default [
     filter: {},
     envelope: {},
     lfo: {},
-    delay: {},
-    reverb: {},
     levelData: {
       text: 'Filter types!<span>A lowpass filter passes signals with a frequency lower than a selected cutoff frequency. A highpass filter does the opposite, and a bandpass filters both ends.</span>'
     }
@@ -374,8 +330,6 @@ export default [
     filter: {},
     envelope: {},
     lfo: {},
-    delay: {},
-    reverb: {},
     levelData: {
       text: 'Filter types!<span>A lowpass filter passes signals with a frequency lower than a selected cutoff frequency. A highpass filter does the opposite, and a bandpass filters both ends.</span>'
     }
@@ -392,8 +346,6 @@ export default [
     filter: {},
     envelope: {},
     lfo: {},
-    delay: {},
-    reverb: {},
     levelData: {
       text: 'Filter types!<span>A lowpass filter passes signals with a frequency lower than a selected cutoff frequency. A highpass filter does the opposite, and a bandpass filters both ends.</span>'
     }
@@ -411,8 +363,6 @@ export default [
     filter: {},
     envelope: {},
     lfo: {},
-    delay: {},
-    reverb: {},
     levelData: {
       text: 'Filter types!<span>A lowpass filter passes signals with a frequency lower than a selected cutoff frequency. A highpass filter does the opposite, and a bandpass filters both ends.</span>'
     }
@@ -430,8 +380,6 @@ export default [
     },
     envelope: {},
     lfo: {},
-    delay: {},
-    reverb: {},
     levelData: {
       text: 'Filter types!<span>A lowpass filter passes signals with a frequency lower than a selected cutoff frequency. A highpass filter does the opposite, and a bandpass filters both ends.</span>'
     }
@@ -449,8 +397,6 @@ export default [
     },
     envelope: {},
     lfo: {},
-    delay: {},
-    reverb: {},
     levelData: {
       text: 'Filter types!<span>A lowpass filter passes signals with a frequency lower than a selected cutoff frequency. A highpass filter does the opposite, and a bandpass filters both ends.</span>'
     }
@@ -468,8 +414,6 @@ export default [
     },
     envelope: {},
     lfo: {},
-    delay: {},
-    reverb: {},
     levelData: {
       text: 'Filter types!<span>A lowpass filter passes signals with a frequency lower than a selected cutoff frequency. A highpass filter does the opposite, and a bandpass filters both ends.</span>'
     }
@@ -487,8 +431,6 @@ export default [
     },
     envelope: {},
     lfo: {},
-    delay: {},
-    reverb: {},
     levelData: {
       text: 'Filter types!<span>A lowpass filter passes signals with a frequency lower than a selected cutoff frequency. A highpass filter does the opposite, and a bandpass filters both ends.</span>'
     }
@@ -506,8 +448,6 @@ export default [
     },
     envelope: {},
     lfo: {},
-    delay: {},
-    reverb: {},
     levelData: {
       text: 'Filter types!<span>A lowpass filter passes signals with a frequency lower than a selected cutoff frequency. A highpass filter does the opposite, and a bandpass filters both ends.</span>'
     }
@@ -525,8 +465,6 @@ export default [
     },
     envelope: {},
     lfo: {},
-    delay: {},
-    reverb: {},
     levelData: {
       text: 'Filter types!<span>A lowpass filter passes signals with a frequency lower than a selected cutoff frequency. A highpass filter does the opposite, and a bandpass filters both ends.</span>'
     }
@@ -544,8 +482,6 @@ export default [
     },
     envelope: {},
     lfo: {},
-    delay: {},
-    reverb: {},
     levelData: {
       text: 'Filter types!<span>A lowpass filter passes signals with a frequency lower than a selected cutoff frequency. A highpass filter does the opposite, and a bandpass filters both ends.</span>'
     }
@@ -563,8 +499,6 @@ export default [
     },
     envelope: {},
     lfo: {},
-    delay: {},
-    reverb: {},
     levelData: {
       text: 'Filter types!<span>A lowpass filter passes signals with a frequency lower than a selected cutoff frequency. A highpass filter does the opposite, and a bandpass filters both ends.</span>'
     }
@@ -582,8 +516,6 @@ export default [
     },
     envelope: {},
     lfo: {},
-    delay: {},
-    reverb: {},
     levelData: {
       text: 'Filter types!<span>A lowpass filter passes signals with a frequency lower than a selected cutoff frequency. A highpass filter does the opposite, and a bandpass filters both ends.</span>'
     }
@@ -602,8 +534,6 @@ export default [
     },
     envelope: {},
     lfo: {},
-    delay: {},
-    reverb: {},
     levelData: {
       text: 'Filter types!<span>A lowpass filter passes signals with a frequency lower than a selected cutoff frequency. A highpass filter does the opposite, and a bandpass filters both ends.</span>'
     }
@@ -622,8 +552,6 @@ export default [
     },
     envelope: {},
     lfo: {},
-    delay: {},
-    reverb: {},
     levelData: {
       text: 'Filter types!<span>A lowpass filter passes signals with a frequency lower than a selected cutoff frequency. A highpass filter does the opposite, and a bandpass filters both ends.</span>'
     }
@@ -642,8 +570,6 @@ export default [
     },
     envelope: {},
     lfo: {},
-    delay: {},
-    reverb: {},
     levelData: {
       text: 'Filter types!<span>A lowpass filter passes signals with a frequency lower than a selected cutoff frequency. A highpass filter does the opposite, and a bandpass filters both ends.</span>'
     }
@@ -662,8 +588,6 @@ export default [
     },
     envelope: {},
     lfo: {},
-    delay: {},
-    reverb: {},
     levelData: {
       text: 'Filter types!<span>A lowpass filter passes signals with a frequency lower than a selected cutoff frequency. A highpass filter does the opposite, and a bandpass filters both ends.</span>'
     }
@@ -683,8 +607,6 @@ export default [
     },
     envelope: {},
     lfo: {},
-    delay: {},
-    reverb: {},
     levelData: {
       text: 'Filter types!<span>A lowpass filter passes signals with a frequency lower than a selected cutoff frequency. A highpass filter does the opposite, and a bandpass filters both ends.</span>'
     }
@@ -704,8 +626,6 @@ export default [
     },
     envelope: {},
     lfo: {},
-    delay: {},
-    reverb: {},
     levelData: {
       text: 'Filter types!<span>A lowpass filter passes signals with a frequency lower than a selected cutoff frequency. A highpass filter does the opposite, and a bandpass filters both ends.</span>'
     }
@@ -725,8 +645,6 @@ export default [
     },
     envelope: {},
     lfo: {},
-    delay: {},
-    reverb: {},
     levelData: {
       text: 'Filter types!<span>A lowpass filter passes signals with a frequency lower than a selected cutoff frequency. A highpass filter does the opposite, and a bandpass filters both ends.</span>'
     }
@@ -740,8 +658,6 @@ export default [
       attack: true
     },
     lfo: {},
-    delay: {},
-    reverb: {},
     levelData: {
       text: 'Filter types!<span>A lowpass filter passes signals with a frequency lower than a selected cutoff frequency. A highpass filter does the opposite, and a bandpass filters both ends.</span>'
     }
@@ -755,8 +671,6 @@ export default [
       attack: true
     },
     lfo: {},
-    delay: {},
-    reverb: {},
     levelData: {
       text: 'Filter types!<span>A lowpass filter passes signals with a frequency lower than a selected cutoff frequency. A highpass filter does the opposite, and a bandpass filters both ends.</span>'
     }
@@ -770,8 +684,6 @@ export default [
       decay: true
     },
     lfo: {},
-    delay: {},
-    reverb: {},
     levelData: {
       text: 'Filter types!<span>A lowpass filter passes signals with a frequency lower than a selected cutoff frequency. A highpass filter does the opposite, and a bandpass filters both ends.</span>'
     }
@@ -785,8 +697,6 @@ export default [
       decay: true
     },
     lfo: {},
-    delay: {},
-    reverb: {},
     levelData: {
       text: 'Filter types!<span>A lowpass filter passes signals with a frequency lower than a selected cutoff frequency. A highpass filter does the opposite, and a bandpass filters both ends.</span>'
     }
@@ -800,8 +710,6 @@ export default [
       sustain: true
     },
     lfo: {},
-    delay: {},
-    reverb: {},
     levelData: {
       text: 'Filter types!<span>A lowpass filter passes signals with a frequency lower than a selected cutoff frequency. A highpass filter does the opposite, and a bandpass filters both ends.</span>'
     }
@@ -815,8 +723,6 @@ export default [
       sustain: true
     },
     lfo: {},
-    delay: {},
-    reverb: {},
     levelData: {
       text: 'Filter types!<span>A lowpass filter passes signals with a frequency lower than a selected cutoff frequency. A highpass filter does the opposite, and a bandpass filters both ends.</span>'
     }
@@ -830,8 +736,6 @@ export default [
       release: true
     },
     lfo: {},
-    delay: {},
-    reverb: {},
     levelData: {
       text: 'Filter types!<span>A lowpass filter passes signals with a frequency lower than a selected cutoff frequency. A highpass filter does the opposite, and a bandpass filters both ends.</span>'
     }
@@ -845,8 +749,6 @@ export default [
       release: true
     },
     lfo: {},
-    delay: {},
-    reverb: {},
     levelData: {
       text: 'Filter types!<span>A lowpass filter passes signals with a frequency lower than a selected cutoff frequency. A highpass filter does the opposite, and a bandpass filters both ends.</span>'
     }
@@ -861,8 +763,6 @@ export default [
       decay: true
     },
     lfo: {},
-    delay: {},
-    reverb: {},
     levelData: {
       text: 'Filter types!<span>A lowpass filter passes signals with a frequency lower than a selected cutoff frequency. A highpass filter does the opposite, and a bandpass filters both ends.</span>'
     }
@@ -877,8 +777,6 @@ export default [
       sustain: true
     },
     lfo: {},
-    delay: {},
-    reverb: {},
     levelData: {
       text: 'Filter types!<span>A lowpass filter passes signals with a frequency lower than a selected cutoff frequency. A highpass filter does the opposite, and a bandpass filters both ends.</span>'
     }
@@ -893,8 +791,6 @@ export default [
       release: true
     },
     lfo: {},
-    delay: {},
-    reverb: {},
     levelData: {
       text: 'Filter types!<span>A lowpass filter passes signals with a frequency lower than a selected cutoff frequency. A highpass filter does the opposite, and a bandpass filters both ends.</span>'
     }
@@ -909,8 +805,6 @@ export default [
       release: true
     },
     lfo: {},
-    delay: {},
-    reverb: {},
     levelData: {
       text: 'Filter types!<span>A lowpass filter passes signals with a frequency lower than a selected cutoff frequency. A highpass filter does the opposite, and a bandpass filters both ends.</span>'
     }
@@ -926,8 +820,6 @@ export default [
       attack: true,
     },
     lfo: {},
-    delay: {},
-    reverb: {},
     levelData: {
       text: 'Filter types!<span>A lowpass filter passes signals with a frequency lower than a selected cutoff frequency. A highpass filter does the opposite, and a bandpass filters both ends.</span>'
     }
@@ -943,8 +835,6 @@ export default [
       attack: true,
     },
     lfo: {},
-    delay: {},
-    reverb: {},
     levelData: {
       text: 'Filter types!<span>A lowpass filter passes signals with a frequency lower than a selected cutoff frequency. A highpass filter does the opposite, and a bandpass filters both ends.</span>'
     }
@@ -961,8 +851,6 @@ export default [
       release: true
     },
     lfo: {},
-    delay: {},
-    reverb: {},
     levelData: {
       text: 'Filter types!<span>A lowpass filter passes signals with a frequency lower than a selected cutoff frequency. A highpass filter does the opposite, and a bandpass filters both ends.</span>'
     }
@@ -976,8 +864,6 @@ export default [
     lfo: {
       amount: true
     },
-    delay: {},
-    reverb: {},
     levelData: {
       text: 'Filter types!<span>A lowpass filter passes signals with a frequency lower than a selected cutoff frequency. A highpass filter does the opposite, and a bandpass filters both ends.</span>'
     }
@@ -991,8 +877,6 @@ export default [
     lfo: {
       amount: true
     },
-    delay: {},
-    reverb: {},
     levelData: {
       text: 'Filter types!<span>A lowpass filter passes signals with a frequency lower than a selected cutoff frequency. A highpass filter does the opposite, and a bandpass filters both ends.</span>'
     }
@@ -1006,8 +890,6 @@ export default [
     lfo: {
       amount: true
     },
-    delay: {},
-    reverb: {},
     levelData: {
       text: 'Filter types!<span>A lowpass filter passes signals with a frequency lower than a selected cutoff frequency. A highpass filter does the opposite, and a bandpass filters both ends.</span>'
     }
@@ -1022,8 +904,6 @@ export default [
       amount: true,
       frequency: true,
     },
-    delay: {},
-    reverb: {},
     levelData: {
       text: 'Filter types!<span>A lowpass filter passes signals with a frequency lower than a selected cutoff frequency. A highpass filter does the opposite, and a bandpass filters both ends.</span>'
     }
@@ -1038,8 +918,6 @@ export default [
       amount: true,
       frequency: true,
     },
-    delay: {},
-    reverb: {},
     levelData: {
       text: 'Filter types!<span>A lowpass filter passes signals with a frequency lower than a selected cutoff frequency. A highpass filter does the opposite, and a bandpass filters both ends.</span>'
     }
@@ -1054,8 +932,6 @@ export default [
       amount: true,
       frequency: true,
     },
-    delay: {},
-    reverb: {},
     levelData: {
       text: 'Filter types!<span>A lowpass filter passes signals with a frequency lower than a selected cutoff frequency. A highpass filter does the opposite, and a bandpass filters both ends.</span>'
     }
@@ -1069,8 +945,6 @@ export default [
     lfo: {
       type: true
     },
-    delay: {},
-    reverb: {},
     levelData: {
       text: 'Filter types!<span>A lowpass filter passes signals with a frequency lower than a selected cutoff frequency. A highpass filter does the opposite, and a bandpass filters both ends.</span>'
     }
@@ -1084,8 +958,6 @@ export default [
     lfo: {
       type: true
     },
-    delay: {},
-    reverb: {},
     levelData: {
       text: 'Filter types!<span>A lowpass filter passes signals with a frequency lower than a selected cutoff frequency. A highpass filter does the opposite, and a bandpass filters both ends.</span>'
     }
@@ -1101,8 +973,6 @@ export default [
       frequency: true,
       type: true
     },
-    delay: {},
-    reverb: {},
     levelData: {
       text: 'Filter types!<span>A lowpass filter passes signals with a frequency lower than a selected cutoff frequency. A highpass filter does the opposite, and a bandpass filters both ends.</span>'
     }
@@ -1121,8 +991,6 @@ export default [
     envelope: {},
     lfo: {
     },
-    delay: {},
-    reverb: {},
     levelData: {
       text: 'Filter types!<span>A lowpass filter passes signals with a frequency lower than a selected cutoff frequency. A highpass filter does the opposite, and a bandpass filters both ends.</span>'
     }
@@ -1143,8 +1011,6 @@ export default [
     envelope: {},
     lfo: {
     },
-    delay: {},
-    reverb: {},
     levelData: {
       text: 'Filter types!<span>A lowpass filter passes signals with a frequency lower than a selected cutoff frequency. A highpass filter does the opposite, and a bandpass filters both ends.</span>'
     }
@@ -1165,8 +1031,6 @@ export default [
     envelope: {},
     lfo: {
     },
-    delay: {},
-    reverb: {},
     levelData: {
       text: 'Filter types!<span>A lowpass filter passes signals with a frequency lower than a selected cutoff frequency. A highpass filter does the opposite, and a bandpass filters both ends.</span>'
     }
@@ -1199,8 +1063,6 @@ export default [
       amount: true,
       type: true
     },
-    delay: {},
-    reverb: {},
     levelData: {
       text: "Let's mix things up!<span>You're on your own from here.</span>"
     }
@@ -1233,8 +1095,6 @@ export default [
       amount: true,
       type: true
     },
-    delay: {},
-    reverb: {},
     levelData: {
       text: "Let's mix things up!<span>You're on your own from here.</span>"
     }
@@ -1260,8 +1120,6 @@ export default [
     lfo: {
       amount: true,
     },
-    delay: {},
-    reverb: {},
     levelData: {
       text: "Let's mix things up!<span>You're on your own from here.</span>"
     }
@@ -1288,8 +1146,6 @@ export default [
     },
     lfo: {
     },
-    delay: {},
-    reverb: {},
     levelData: {
       text: "Let's mix things up!<span>You're on your own from here.</span>"
     }
@@ -1320,8 +1176,6 @@ export default [
     lfo: {
       amount: true,
     },
-    delay: {},
-    reverb: {},
     levelData: {
       text: "Let's mix things up!<span>You're on your own from here.</span>"
     }
@@ -1350,8 +1204,6 @@ export default [
       frequency: true,
       amount: true,
     },
-    delay: {},
-    reverb: {},
     levelData: {
       text: "Let's mix things up!<span>You're on your own from here.</span>"
     }
@@ -1381,8 +1233,6 @@ export default [
       amount: true,
       type: true
     },
-    delay: {},
-    reverb: {},
     levelData: {
       text: "Let's mix things up!<span>You're on your own from here.</span>"
     }
@@ -1415,8 +1265,6 @@ export default [
       amount: true,
       type: true
     },
-    delay: {},
-    reverb: {},
     levelData: {
       text: "Let's mix things up!<span>You're on your own from here.</span>"
     }
