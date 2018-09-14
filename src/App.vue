@@ -4,9 +4,10 @@
       <start-screen
         v-if="displayStartOverlay"
         @startPreview="startPlayMode"
-        @create="startCreateMode"
+        @create="showCreatePreview=true"
       />
     </transition>
+    <before-create-overlay v-if="showCreatePreview" @showCreate="showCreate"/>
     <transition name="slide-up-slide-down">
       <preview-screen
         v-if="displayPreviewOverlay"
@@ -54,6 +55,7 @@ import audio from '@/audio'
 import { getPresetById } from '@/db'
 import SuccessOverlay from '@/components/SuccessOverlay'
 import FailureOverlay from '@/components/FailureOverlay'
+import BeforeCreateOverlay from '@/components/BeforeCreateOverlay'
 import StartScreen from '@/components/StartScreen'
 import PreviewScreen from '@/components/PreviewScreen'
 import Svoosh from '@/components/Svoosh'
@@ -73,7 +75,8 @@ export default {
       isThereSvooshComponent: false,
       svooshIt: false,
       isThereSuccessSvooshComponent: false,
-      successSvooshIt: false
+      successSvooshIt: false,
+      showCreatePreview: false
     }
   },
   components: {
@@ -81,7 +84,8 @@ export default {
     FailureOverlay,
     StartScreen,
     PreviewScreen,
-    Svoosh
+    Svoosh,
+    BeforeCreateOverlay
   },
   created () {
     this.init()
@@ -191,8 +195,8 @@ export default {
       // rest will be done by watcher of sequencesPassedInCurrentLevel
     },
     startPreset(parameters) {
-      const usedParameters = mapValues(parameters, 
-      audioModule => mapValues(audioModule, 
+      const usedParameters = mapValues(parameters,
+      audioModule => mapValues(audioModule,
       parameter => !!parameter))
 
       // disable all overlays
@@ -252,6 +256,10 @@ export default {
     gameLevel () {
       return this.$store.state.gameState.level
     },
+    showCreate() {
+      this.showCreatePreview=false
+      this.startCreateMode()
+    }
   },
   watch: {
     allParametersMatchGoal (val) {
