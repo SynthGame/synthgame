@@ -106,9 +106,6 @@ export default {
       lfoColor: MODULE_LFO_COLOR
     }
   },
-  created() {
-    console.log(this.$store.state)
-  },
   computed: {
     timerIsRunning () {
       return this.$store.state.gameState.timerIsRunning
