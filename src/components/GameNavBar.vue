@@ -81,6 +81,7 @@
         <input v-model="exportPresetName"/>
         <button @click="submitPreset">submit</button>
       </template>
+      <after-create-overlay v-if="showAfterCreateOverlay" :link="exportPresetLink" @closeCreate="exitGame"/>
       <svg @click="exitGame" class="exit" width="18px" height="17px" viewBox="0 0 18 17" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
           <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
               <g id="exit_icon" fill="#7D00DA" fill-rule="nonzero" stroke="#FFFFFF" stroke-width="1.785">
@@ -97,6 +98,7 @@
 import { MODULE_OSCILLATOR_COLOR, MODULE_OSCILLATORTWO_COLOR, MODULE_ENVELOPE_COLOR, MODULE_FILTER_COLOR, MODULE_DELAY_COLOR, MODULE_REVERB_COLOR, MODULE_LFO_COLOR} from '@/constants'
 import padStart from 'lodash/padStart'
 import some from 'lodash/some'
+import AfterCreateOverlay from "@/components/AfterCreateOverlay"
 
 export default {
   name: 'gameNavBar',
@@ -106,12 +108,17 @@ export default {
       timer: null,
       indicatorActive: true,
       exportPresetName: '',
+      exportPresetLink: '',
       oscillatorColor: MODULE_OSCILLATOR_COLOR,
       oscillatorTwoColor: MODULE_OSCILLATORTWO_COLOR,
       envelopeColor: MODULE_ENVELOPE_COLOR,
       filterColor: MODULE_FILTER_COLOR,
-      lfoColor: MODULE_LFO_COLOR
+      lfoColor: MODULE_LFO_COLOR,
+      showAfterCreateOverlay: false
     }
+  },
+  components: {
+    AfterCreateOverlay
   },
   computed: {
     timerIsRunning () {
@@ -187,9 +194,11 @@ export default {
       location.reload();
     },
     submitPreset () {
+      this.showAfterCreateOverlay=true
       this.$store.dispatch('exportPreset', {name: this.exportPresetName})
         .then(presetId => {
           alert(`${window.location.origin}/?preset=${presetId}`)
+          this.exportPresetLink=`${window.location.origin}/?preset=${presetId}`
         })
     }
   },

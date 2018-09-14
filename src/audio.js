@@ -69,7 +69,10 @@ export default {
   },
   setMainLoop ({noteArray, subdivision}, callback) {
     log(`Setting new main loop`)
-    if(this.state.loop) this.state.loop.dispose()
+    try {
+      this.state.loop.cancel()
+      this.state.loop.dispose()
+    } catch (e) {}
     this.state.loop = new Tone.Sequence(callback, noteArray, subdivision)
     return this.state.loop
   },

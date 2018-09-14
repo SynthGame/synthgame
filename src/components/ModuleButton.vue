@@ -2,31 +2,45 @@
     <button class="button" :style="isPressed ? pickedColor :''">
 
     <!-- changing the stroke color when label ==value -->
+    <!-- SINE -->
+    <svg version="1.1"
+      v-if="shape === 'sine'"
+      x="0px" y="0px" width="12.3px" height="12.6px" viewBox="0 0 12.3 6.6" style="enable-background:new 0 0 12.3 6.6;"
+      xml:space="preserve">
+      <g>
+          <path class="st0" d="M0.4,3.3c0-1.6,1.3-2.9,2.8-2.9s2.8,1.3,2.8,2.9"/>
+          <path class="st0" d="M11.8,3.3c0,1.6-1.3,2.9-2.9,2.9S6.1,4.9,6.1,3.3"/>
+      </g>
+    </svg>
 
-    <svg version="1.1" v-if="shape === 'sine'"
-     xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:a="http://ns.adobe.com/AdobeSVGViewerExtensions/3.0/"
-     x="0px" y="0px" width="16.3px" height="8.8px" viewBox="0 0 16.3 8.8" style="enable-background:new 0 0 16.3 8.8;"
-     xml:space="preserve">
-      <path class="st0" d="M15.7,4.4c0,2.1-1.7,3.8-3.8,3.8S8.2,6.5,8.2,4.4S6.5,0.6,4.4,0.6S0.6,2.3,0.6,4.4"/>
+    <!--SQUARE -->
+    <svg version="1.1"
+        v-if="shape === 'square'"
+        x="0px" y="0px" width="12.3px" height="12.6px" viewBox="0 0 12.3 6.6" style="enable-background:new 0 0 12.3 6.6;"
+        xml:space="preserve">
+      <g>
+        <polyline class="st0" points="0.4,3.3 0.4,0.4 6.1,0.4 6.1,3.3 6.1,6.2 11.8,6.2 11.8,3.3 11.8,3.3     "/>
+      </g>
     </svg>
-    <svg version="1.1" v-if="shape === 'square'"
-      xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"   xmlns:a="http://ns.adobe.com/AdobeSVGViewerExtensions/3.0/"
-      x="0px" y="0px" width="16.3px" height="16.3px" viewBox="0 0 16.3 16.3"    style="enable-background:new 0 0 16.3 16.3;"
-      xml:space="preserve">
-      <path class="st0" d="M0.6,8.1V0.6h7.6v7.6v7.6h7.6V8.1l0,0"/>
+
+    <!-- SAWTOOTH -->
+        <svg version="1.1"  v-if="shape === 'sawtooth'"
+            x="0px" y="0px" width="12.3px" height="12.6px" viewBox="0 0 12.3 6.6" style="enable-background:new 0 0 12.3 6.6;"
+            xml:space="preserve">
+        <g>
+            <polyline class="st0" points="12.1,2.2 6.1,5.8 6.1,0.8 0.2,4.4     "/>
+        </g>
+        </svg>
+
+    <!-- TRIANGLE -->
+    <svg version="1.1"  v-if="shape === 'triangle'"
+        x="0px" y="0px" width="12.3px" height="12.6px" viewBox="0 0 12.3 6.6" style="enable-background:new 0 0 12.3 6.6;"
+        xml:space="preserve">
+    <g>
+        <polyline class="st0" points="12,6.2 6.3,0.6 0.3,6.2     "/>
+    </g>
     </svg>
-    <svg version="1.1" v-if="shape === 'triangle'"
-      xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:a="http://ns.adobe.com/AdobeSVGViewerExtensions/3.0/"
-      x="0px" y="0px" width="15.9px" height="8.8px" viewBox="0 0 15.9 8.8" style="enable-background:new 0 0 15.9 8.8;"
-      xml:space="preserve">
-      <path class="st0" d="M0.4,8.4L8,0.8l7.5,7.6"/>
-    </svg>
-    <svg version="1.1" v-if="shape === 'sawtooth'"
-    xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:a="http://ns.adobe.com/AdobeSVGViewerExtensions/3.0/"
-    x="0px" y="0px" width="21.9px" height="9.9px" viewBox="0 0 21.9 9.9" style="enable-background:new 0 0 21.9 9.9;"
-    xml:space="preserve">
-    <path class="st0" d="M21.5,1.2L21.5,1.2L10.9,8.8V1.2L0.3,8.8"/>
-    </svg>
+
     <svg version="1.1" v-if="shape === 'highpass'"
       xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:a="http://ns.adobe.com/AdobeSVGViewerExtensions/3.0/"
       x="0px" y="0px" width="20.6px" height="10.6px" viewBox="0 0 20.6 10.6" style="enable-background:new 0 0 20.6 10.6;"
@@ -68,7 +82,7 @@ export default {
 }
 </script>
 
-<style scoped>
+<style scoped lang="scss">
 .st0{fill:none;stroke:#FFFFFF;stroke-width:1.1844;stroke-miterlimit:10;}
 label {
   border: 1px white solid;
@@ -87,21 +101,27 @@ input {
 }
 
 button, input[type="submit"], input[type="reset"] {
-    background: none;
-    color: inherit;
-    border: none;
-    padding: 0;
-    font: inherit;
-     cursor: pointer;
-    outline: inherit;
-      border: 1px #ff8574 solid;
+  background: none;
+  color: inherit;
+  border: none;
+  padding: 0;
+  font: inherit;
+  cursor: pointer;
+  outline: inherit;
+  border: 1px #ff8574 solid;
   justify-content: center;
   align-items: center;
   display: flex;
   min-width: 1.8em;
   min-height: 1.8em;
   cursor: pointer;
-  margin: 0.1rem
+  margin: 0.1rem;
+    &:hover {
+      border: 3.4px #ff8574 solid;
+      & .st0 {
+        stroke-width: 2;
+      }
+  }
 }
 
 </style>
