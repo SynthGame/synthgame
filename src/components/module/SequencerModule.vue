@@ -13,7 +13,15 @@
         <p>Function</p>
       </div>
       <div height="200px">
+      <div class="play-random">
+        <button @click="playPauseSynth" class="sequencer-stop-button">
+▶ ️
+        </button>
+        <button @click="randomizeSelectedParam" class="sequencer-random-button">
+          random
+        </button>
         <module-knob
+        style="width:4rem"
           v-model="bpmKnob"
           :min="80"
           :max="140"
@@ -22,13 +30,6 @@
           module="lfo"
         ></module-knob>
       </div>
-      <div class="play-random">
-        <button @click="playPauseSynth" class="sequencer-stop-button">
-
-        </button>
-        <button @click="randomizeSelectedParam" class="sequencer-random-button">
-          random
-        </button>
       </div>
     </div>
     <div class="button-section" v-for="i in [0,1,2,3]" :key="i">
@@ -268,11 +269,14 @@ button.sequencer-button {
 .sequencer-stop-button {
   height: 45px;
   width: 45px;
-  display: inline-flex;
+  display: flex;
   margin: 10px 5px;
   padding: 0;
   border: 1px solid $main-seq-color;
   background-color: unset;
+  color: #ffffff;
+  align-items: center;
+  align-content: center
 }
 
 .sequencer-random-button {
@@ -287,7 +291,10 @@ button.sequencer-button {
 .button-section {
   border-top: 1px solid $main-seq-color;
   display: flex;
-  width: 16em;
+  // align-items: center;
+  // width: 10em;
+  margin-top: 11vh;
+  max-height: 10rem;
   justify-content: space-between;
 }
 
@@ -299,11 +306,16 @@ button.sequencer-button {
     height: fit-content;
     width: 100%;
     button {
-      width: 50%;
+      width: 40%;
       border: 1px solid $main-seq-color;
+      margin: 0.3rem;
       background-color: black;
       color: white
     }
   }
+}
+
+.sequencer__controls {
+  margin-top: 3.4rem;
 }
 </style>
