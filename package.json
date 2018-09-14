@@ -3,15 +3,25 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
+    "install": "cd functions && yarn",
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
-    "lint": "vue-cli-service lint"
+    "lint": "vue-cli-service lint",
+    "deploy": "yarn build && firebase deploy",
+    "deploy-production": "yarn build && firebase deploy --project production"
   },
   "dependencies": {
     "firebase": "^5.4.0",
+    "firebase-functions": "^2.0.5",
+    "lodash": "^4.17.10",
+    "popmotion": "^8.3.8",
     "register-service-worker": "^1.0.0",
-    "tone": "^0.12.80",
+    "tone": "^13.3.1",
     "vue": "^2.5.17",
+    "vue-circle-slider": "^1.0.2",
+    "vue-knob-control": "^1.2.1",
+    "vue-masonry": "^0.11.6",
+    "vue-pose": "^0.4.2",
     "vue-router": "^3.0.1",
     "vuex": "^3.0.1"
   },
@@ -21,6 +31,7 @@
     "@vue/cli-plugin-pwa": "^3.0.0",
     "@vue/cli-service": "^3.0.0",
     "@vue/eslint-config-standard": "^3.0.1",
+    "firebase-tools": "^4.2.0",
     "node-sass": "^4.9.0",
     "sass-loader": "^7.0.1",
     "vue-template-compiler": "^2.5.17"
