@@ -246,7 +246,7 @@ export default {
       threshold  : -18 ,
       release  : 0.11 ,
       attack  : 0.003 ,
-      knee  : 20
+      knee  : 0
       });
     }
   },

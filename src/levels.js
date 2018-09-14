@@ -11,7 +11,7 @@ export default [
     envelope: {},
     lfo: {},
     levelData: {
-      text: 'Listen to the sound playingy. Once you hit Ready, you have 30 seconds to recreate it.'
+      text: 'Listen to the sound playing. Once you hit Ready, you have 30 seconds to recreate it.'
     }
   },
   // level 2
@@ -24,7 +24,7 @@ export default [
     envelope: {},
     lfo: {},
     levelData: {
-      text: 'Tip: The white guidelines show you the way.'
+      text: 'Tip: the white guidelines show you the way.'
     }
   },
   // level 3
@@ -65,7 +65,7 @@ export default [
     envelope: {},
     lfo: {},
     levelData: {
-      text: 'Octave changes the pitch with steps of 12 notes.'
+      text: 'Octave changes the pitch 12 notes a time.'
     }
   },
   // level 6
@@ -79,7 +79,7 @@ export default [
     envelope: {},
     lfo: {},
     levelData: {
-      text: 'Detune changes the pitch with cents. An octave contains 1200 cents.'
+      text: 'Detune changes the pitch by cents. An octave contains 1200 cents.'
     }
   },
   // level 7
@@ -132,7 +132,7 @@ export default [
     envelope: {},
     lfo: {},
     levelData: {
-      text: 'The octave and detune set the amount the waveform is repeated in a second: hertz.'
+      text: 'The octave and detune determine the amount the waveform is repeated in a second: hertz.'
     }
   },
   // level 11
@@ -146,7 +146,7 @@ export default [
     envelope: {},
     lfo: {},
     levelData: {
-      text: 'The more waveform iterations in a second, the higher the sound.'
+      text: 'The more waveform iterations in a second, the higher the pitch.'
     }
   },
   // level 12
@@ -206,7 +206,7 @@ export default [
     envelope: {},
     lfo: {},
     levelData: {
-      text: 'Wondering why the sound is still thin, compared to what you hear in most music?'
+      text: 'Wonder why the sound is thin, compared to what you hear in most music?'
     }
   },
   // level 16 OSC 2
@@ -222,7 +222,7 @@ export default [
     envelope: {},
     lfo: {},
     levelData: {
-      text: 'You unlocked the second osc!'
+      text: 'You unlocked the second oscillator!'
     }
   },
   // level 17
@@ -331,7 +331,7 @@ export default [
     envelope: {},
     lfo: {},
     levelData: {
-      text: 'One more chance to play around with just waveforms.'
+      text: 'One more chance to play around with only waveforms.'
     }
   },
   // level 24
@@ -364,7 +364,7 @@ export default [
     envelope: {},
     lfo: {},
     levelData: {
-      text: 'Or if we combine waveform, detune and octave controls?'
+      text: 'Or if we combine waveform, detune, and octave controls?'
     }
   },
   // level 26 Filter
@@ -398,7 +398,7 @@ export default [
     envelope: {},
     lfo: {},
     levelData: {
-      text: 'Filters can be of different types. Try them!'
+      text: 'There are different types of filters. Try them!'
     }
   },
   // level 28
@@ -415,7 +415,7 @@ export default [
     envelope: {},
     lfo: {},
     levelData: {
-      text: 'A filter passes signals with a frequency lower, or higher than a selected cutoff frequency, or both.'
+      text: 'A filter passes signals with a frequency lower or higher than the selected cutoff, or both.'
     }
   },
   // level 29
@@ -432,7 +432,7 @@ export default [
     envelope: {},
     lfo: {},
     levelData: {
-      text: 'Introducing the one control we love most: cutoff frequency.'
+      text: 'Introducing the control we love most: cutoff frequency.'
     }
   },
   // level 30
@@ -449,7 +449,7 @@ export default [
     envelope: {},
     lfo: {},
     levelData: {
-      text: 'Use the cutoff frequency to take out unwanted parts of sound.'
+      text: 'Use the cutoff frequency to take out unwanted parts of the sound.'
     }
   },
   // level 31
@@ -500,7 +500,7 @@ export default [
     envelope: {},
     lfo: {},
     levelData: {
-      text: 'Set the resonance to low, and sliglty cut off unwanted parts.'
+      text: 'Set the resonance low, and gradually cut off unwanted parts.'
     }
   },
   // level 34
@@ -517,7 +517,7 @@ export default [
     envelope: {},
     lfo: {},
     levelData: {
-      text: 'Set the resonance to high, and cut off the unwanted parts exactly where your cutoff is.'
+      text: 'Set the resonance to high, and cut off the unwanted parts more precisely.'
     }
   },
   // level 35
@@ -535,7 +535,7 @@ export default [
     envelope: {},
     lfo: {},
     levelData: {
-      text: 'Play around with both cutoff and resonance.'
+      text: 'Play around with both resonance and cutoff.'
     }
   },
   // level 36
@@ -571,7 +571,7 @@ export default [
     envelope: {},
     lfo: {},
     levelData: {
-      text: 'Yes you have been filtering all along.'
+      text: 'Yes, you have been filtering all along.'
     }
   },
   // level 38
@@ -672,7 +672,7 @@ export default [
     },
     lfo: {},
     levelData: {
-      text: 'With attack, you can control how long it takes the sound to reach its peak volume on every hit.'
+      text: 'With attack, you can control how long it takes the sound to reach its peak volume.'
     }
   },
   // level 44
@@ -685,7 +685,7 @@ export default [
     },
     lfo: {},
     levelData: {
-      text: 'From the attack peak, control how long the sound drops until reaching the sustain level, with decay.'
+      text: 'With decay, control how long it takes for the sound to drop from its peak to the sustain level.'
     }
   },
   // level 45
@@ -698,7 +698,7 @@ export default [
     },
     lfo: {},
     levelData: {
-      text: "A low decay level results often into a plucky sound."
+      text: "A low decay level results in a plucky sound."
     }
   },
   // level 46
@@ -711,7 +711,7 @@ export default [
     },
     lfo: {},
     levelData: {
-      text: 'Sustain sets the volume at which the sound will remain, for as long the note is held.'
+      text: 'Sustain sets the volume at which the sound remains, for as long the note is held.'
     }
   },
   // level 47
@@ -724,7 +724,7 @@ export default [
     },
     lfo: {},
     levelData: {
-      text: 'With a short attack and decay, sustain basically sets the volume of the note.'
+      text: 'With a short attack and decay, sustain essentially sets the volume of the note.'
     }
   },
   // level 48
@@ -778,7 +778,7 @@ export default [
     },
     lfo: {},
     levelData: {
-      text: 'Your close to fully equiped now.'
+      text: "You're close to fully equiped now."
     }
   },
   // level 52
@@ -792,7 +792,7 @@ export default [
     },
     lfo: {},
     levelData: {
-      text: 'After this we have one more module to cover.'
+      text: 'After this, we have one more module to cover.'
     }
   },
   // level 53
@@ -836,7 +836,7 @@ export default [
     },
     lfo: {},
     levelData: {
-      text: ''
+      text: "We're impresed."
     }
   },
   // level 56
@@ -852,7 +852,7 @@ export default [
     },
     lfo: {},
     levelData: {
-      text: 'You might just be the next super star producer.'
+      text: 'You might just be the next star producer.'
     }
   },
   // level 57 LFO
@@ -865,7 +865,7 @@ export default [
       amount: true
     },
     levelData: {
-      text: 'Unlocked the lfo!'
+      text: 'You unlocked the LFO!'
     }
   },
   // level 58
@@ -891,7 +891,7 @@ export default [
       amount: true
     },
     levelData: {
-      text: "It's connected to oscillator 1 frequency, making the pitch go up and down."
+      text: "It's connected to the first oscillator's frequency, making it go up and down."
     }
   },
   // level 60
@@ -905,7 +905,7 @@ export default [
       frequency: true,
     },
     levelData: {
-      text: 'Adjust the frequency, and hear the sound go up and down slower or faster.'
+      text: 'Adjust the frequency, and hear the pitch go up and down at different speeds.'
     }
   },
   // level 61
@@ -919,7 +919,7 @@ export default [
       frequency: true,
     },
     levelData: {
-      text: 'Right now we use a sinewave, which eases the effect it has on the pitch.'
+      text: 'Right now, we use a sinewave, which eases the effect LFO has on the pitch.'
     }
   },
   // level 62
@@ -933,7 +933,7 @@ export default [
       frequency: true,
     },
     levelData: {
-      text: 'But we can use other waveforms too, just like regular oscillators.'
+      text: 'But we can use other waveforms, too, just like regular oscillators.'
     }
   },
   // level 63
@@ -947,7 +947,7 @@ export default [
       type: true
     },
     levelData: {
-      text: 'There you go: try some other waveforms.'
+      text: 'Now, try some other waveforms.'
     }
   },
   // level 64
@@ -976,7 +976,7 @@ export default [
       type: true
     },
     levelData: {
-      text: 'Now play around with all lfo controls.'
+      text: 'Now, play around with all the LFO controls.'
     }
   },
   // level 66
@@ -1034,7 +1034,7 @@ export default [
     lfo: {
     },
     levelData: {
-      text: 'At this point you might be wondering if there even is an end to this game.'
+      text: 'At this point, you might be wondering if there is even an end to this game.'
     }
   },
   // level 69
@@ -1149,7 +1149,7 @@ export default [
     lfo: {
     },
     levelData: {
-      text: "This is unreal. You must some famous producer."
+      text: "This is unreal. You must be a famous producer."
     }
   },
   // level 73
