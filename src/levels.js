@@ -11,7 +11,10 @@ export default [
     envelope: {},
     lfo: {},
     delay: {},
-    reverb: {}
+    reverb: {},
+    levelData: {
+      text: 'You have 30 seconds to recreate the sound playing now. Use the white guidelines to get going.'
+    }
   },
   // level 5
   {
@@ -24,7 +27,10 @@ export default [
     envelope: {},
     lfo: {},
     delay: {},
-    reverb: {}
+    reverb: {},
+    levelData: {
+      text: 'You unlocked waveforms!<span>Ranging from the smooth, plain sound of a sine wave, to the harmonically rich buzz of a sawtooth wave, waveforms shape the character of the sound.</span>'
+    }
   },
   // level 6
   {
@@ -39,7 +45,10 @@ export default [
     envelope: {},
     lfo: {},
     delay: {},
-    reverb: {}
+    reverb: {},
+    levelData: {
+      text: 'Introducing the filter!<span>The filter removes unwanted parts from a signal. adjust the frequency and hear the sound change.</span>'
+    }
   },
   // level 7 - 9 detune
   // level 7
@@ -56,7 +65,10 @@ export default [
     envelope: {},
     lfo: {},
     delay: {},
-    reverb: {}
+    reverb: {},
+    levelData: {
+      text: 'Filter types!<span>A lowpass filter passes signals with a frequency lower than a selected cutoff frequency. A highpass filter does the opposite, and a bandpass filters both ends.</span>'
+    }
   },
   // level 8
   {
@@ -73,7 +85,8 @@ export default [
     envelope: {},
     lfo: {},
     delay: {},
-    reverb: {}
+    reverb: {},
+    levelData: {}
   },
   // level 9
   {
@@ -92,7 +105,8 @@ export default [
     },
     lfo: {},
     delay: {},
-    reverb: {}
+    reverb: {},
+    levelData: {}
   },
   // level 10 - 15 2 controls
   // level 10
@@ -113,7 +127,8 @@ export default [
     },
     lfo: {},
     delay: {},
-    reverb: {}
+    reverb: {},
+    levelData: {}
   },
   // level 11
   {
@@ -134,7 +149,8 @@ export default [
     },
     lfo: {},
     delay: {},
-    reverb: {}
+    reverb: {},
+    levelData: {}
   },
   // level 12
   {
@@ -156,7 +172,8 @@ export default [
     },
     lfo: {},
     delay: {},
-    reverb: {}
+    reverb: {},
+    levelData: {}
   },
   // level 13
   {
@@ -180,7 +197,8 @@ export default [
       amount: true
     },
     delay: {},
-    reverb: {}
+    reverb: {},
+    levelData: {}
   },
   // level 14
   {
@@ -205,7 +223,8 @@ export default [
       frequency: true
     },
     delay: {},
-    reverb: {}
+    reverb: {},
+    levelData: {}
   },
   // level 15
   {
@@ -231,6 +250,7 @@ export default [
       type: true
     },
     delay: {},
-    reverb: {}
+    reverb: {},
+    levelData: {}
   },
 ]
