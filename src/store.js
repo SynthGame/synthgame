@@ -9,6 +9,7 @@ import isArray from 'lodash/isArray'
 import add from 'lodash/add'
 import find from 'lodash/find'
 import character from '@/character'
+import { addPreset } from '@/db'
 
 Vue.use(Vuex)
 
@@ -211,8 +212,10 @@ export default new Vuex.Store({
     },
     setTheGameFromGameOver (state) {
       state.gameState.isGameOver = false
+    },
+    setActiveSequence (state, sequence) {
+      state.activeSequence = sequence
     }
-
   },
   getters: {
     allParametersMatchGoal: (state, getters) => {
@@ -324,6 +327,13 @@ export default new Vuex.Store({
       synth.oscillator2.state.device.frequency.value = character.oscillator2.frequency(state.gameState.defaultParams.oscillator2.frequency)
       synth.oscillator2.state.device.type = character.oscillator2.typeOsc(state.gameState.defaultParams.oscillator2.typeOsc)
       synth.oscillator2.state.device.detune.value = character.oscillator2.detune(state.gameState.defaultParams.oscillator2.detune)
+    },
+    exportPreset ({state}) {
+      return addPreset({
+        name: 'test', 
+        parameterValues: state.audioParameters,
+        sequenceArray: state.activeSequence
+      })
     },
     setLevel ({state, commit}, {knobsAvailable}) {
       commit('setKnobsAvailable', knobsAvailable)

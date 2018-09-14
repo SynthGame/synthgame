@@ -67,14 +67,20 @@
     }" v-if="timerIsRunning === true && createModeIsActive === false" class="timer">{{paddedTimeLeftString}}</span>
 
     <div class="right">
-      <div v-if="createModeIsActive === false" class="score">
+      <template v-if="createModeIsActive === false">
+      <div class="score">
         <span>score</span>
         <span class="data">{{paddedScoreString}}</span>
       </div>
-      <div v-if="createModeIsActive === false" class="highscore">
+      <div class="highscore">
         <span>highscore</span>
         <span class="data">{{paddedHighScoreString}}</span>
       </div>
+      </template>
+      <template v-else>
+        <input v-model="exportPresetName"/>
+        <button @click="submitPreset">submit</button>
+      </template>
       <svg class="exit" width="18px" height="17px" viewBox="0 0 18 17" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
           <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
               <g id="exit_icon" fill="#7D00DA" fill-rule="nonzero" stroke="#FFFFFF" stroke-width="1.785">
@@ -99,6 +105,7 @@ export default {
       timeLeftSeconds: 30,
       timer: null,
       indicatorActive: true,
+      exportPresetName: '',
       oscillatorColor: MODULE_OSCILLATOR_COLOR,
       oscillatorTwoColor: MODULE_OSCILLATORTWO_COLOR,
       envelopeColor: MODULE_ENVELOPE_COLOR,
@@ -175,6 +182,10 @@ export default {
     moduleIsUseable (moduleName) {
       if (this.createModeIsActive) return true
       return some(this.knobsAvailable[moduleName]) // some are truthy
+    },
+    submitPreset () {
+      this.$store.dispatch('exportPreset', {name: this.exportPresetName})
+        .then(alert)
     }
   },
   watch: {

@@ -56,13 +56,15 @@ export const getHighscoresByName = (name) => {
  *  @param  {Object} obj - Object with data
  *  @param  {String} obj.name - The name of the new preset
  *  @param  {Object} obj.parameterValues - The values of the audio components 
+ *  @param  {Object} obj.sequenceArray - Array with 16 objects that define the steps in the sequence
  *  @return {Promise} Returns the uid of the newly created preset
  */
-export const addPreset = ({name, parameterValues}) => {
+export const addPreset = ({name, parameterValues, sequenceArray}) => {
   return presetRef
     .add({
       name,
-      parameterValues
+      parameterValues,
+      sequenceArray
     })
     .then(docRef => {
       return docRef.id
