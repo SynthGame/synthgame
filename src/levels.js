@@ -11,7 +11,7 @@ export default [
     envelope: {},
     lfo: {},
     levelData: {
-      text: 'You have 30 seconds to recreate the sound playing now. Use the white guidelines to get going.'
+      text: 'Listen to the sound playingy. Once you hit Ready, you have 30 seconds to recreate it.'
     }
   },
   // level 2
@@ -24,7 +24,7 @@ export default [
     envelope: {},
     lfo: {},
     levelData: {
-      text: 'Detune<span>Very detune, you have tune but you have even better: detune.</span>'
+      text: 'Tip: The white guidelines show you the way.'
     }
   },
   // level 3
@@ -37,7 +37,7 @@ export default [
     envelope: {},
     lfo: {},
     levelData: {
-      text: 'Introducing the filter!<span>The filter removes unwanted parts from a signal. adjust the frequency and hear the sound change.</span>'
+      text: "The oscillator is the source of electronic sound. You’ll use the knobs and dials to shape the outputted signal. "
     }
   },
   // level 4
@@ -51,7 +51,7 @@ export default [
     envelope: {},
     lfo: {},
     levelData: {
-      text: 'Filter types!<span>A lowpass filter passes signals with a frequency lower than a selected cutoff frequency. A highpass filter does the opposite, and a bandpass filters both ends.</span>'
+      text: 'Both detune and octave control the pitch.'
     }
   },
   // level 5
@@ -65,7 +65,7 @@ export default [
     envelope: {},
     lfo: {},
     levelData: {
-      text: 'Filter types!<span>A lowpass filter passes signals with a frequency lower than a selected cutoff frequency. A highpass filter does the opposite, and a bandpass filters both ends.</span>'
+      text: 'Octave changes the pitch with steps of 12 notes.'
     }
   },
   // level 6
@@ -79,7 +79,7 @@ export default [
     envelope: {},
     lfo: {},
     levelData: {
-      text: 'Filter types!<span>A lowpass filter passes signals with a frequency lower than a selected cutoff frequency. A highpass filter does the opposite, and a bandpass filters both ends.</span>'
+      text: 'Detune changes the pitch with cents. An octave contains 1200 cents.'
     }
   },
   // level 7
@@ -92,7 +92,7 @@ export default [
     envelope: {},
     lfo: {},
     levelData: {
-      text: 'Filter types!<span>A lowpass filter passes signals with a frequency lower than a selected cutoff frequency. A highpass filter does the opposite, and a bandpass filters both ends.</span>'
+      text: 'A waveform is the shape of the outputted signal.'
     }
   },
   // level 8
@@ -105,7 +105,7 @@ export default [
     envelope: {},
     lfo: {},
     levelData: {
-      text: 'Filter types!<span>A lowpass filter passes signals with a frequency lower than a selected cutoff frequency. A highpass filter does the opposite, and a bandpass filters both ends.</span>'
+      text: 'A sine results in a smooth, plain sound, while a sawtooth results in a harmonically rich buzz.'
     }
   },
   // level 9
@@ -118,7 +118,7 @@ export default [
     envelope: {},
     lfo: {},
     levelData: {
-      text: 'Filter types!<span>A lowpass filter passes signals with a frequency lower than a selected cutoff frequency. A highpass filter does the opposite, and a bandpass filters both ends.</span>'
+      text: 'The waveform is the most fundamental building block in synthesis.'
     }
   },
   // level 10
@@ -132,7 +132,7 @@ export default [
     envelope: {},
     lfo: {},
     levelData: {
-      text: 'Filter types!<span>A lowpass filter passes signals with a frequency lower than a selected cutoff frequency. A highpass filter does the opposite, and a bandpass filters both ends.</span>'
+      text: 'The octave and detune set the amount the waveform is repeated in a second: hertz.'
     }
   },
   // level 11
@@ -146,7 +146,7 @@ export default [
     envelope: {},
     lfo: {},
     levelData: {
-      text: 'Filter types!<span>A lowpass filter passes signals with a frequency lower than a selected cutoff frequency. A highpass filter does the opposite, and a bandpass filters both ends.</span>'
+      text: 'The more waveform iterations in a second, the higher the sound.'
     }
   },
   // level 12
@@ -161,7 +161,7 @@ export default [
     envelope: {},
     lfo: {},
     levelData: {
-      text: 'Filter types!<span>A lowpass filter passes signals with a frequency lower than a selected cutoff frequency. A highpass filter does the opposite, and a bandpass filters both ends.</span>'
+      text: 'Play around with all 3 controls to hear the sound change. Watch the timer though!'
     }
   },
   // level 13
@@ -176,7 +176,7 @@ export default [
     envelope: {},
     lfo: {},
     levelData: {
-      text: 'Filter types!<span>A lowpass filter passes signals with a frequency lower than a selected cutoff frequency. A highpass filter does the opposite, and a bandpass filters both ends.</span>'
+      text: "Now that you understand the basics, let's step it up a notch."
     }
   },
   // level 14
@@ -191,7 +191,7 @@ export default [
     envelope: {},
     lfo: {},
     levelData: {
-      text: 'Filter types!<span>A lowpass filter passes signals with a frequency lower than a selected cutoff frequency. A highpass filter does the opposite, and a bandpass filters both ends.</span>'
+      text: 'Enjoy this easy level, it will get trickier soon.'
     }
   },
   // level 15
@@ -206,7 +206,7 @@ export default [
     envelope: {},
     lfo: {},
     levelData: {
-      text: 'Filter types!<span>A lowpass filter passes signals with a frequency lower than a selected cutoff frequency. A highpass filter does the opposite, and a bandpass filters both ends.</span>'
+      text: 'Wondering why the sound is still thin, compared to what you hear in most music?'
     }
   },
   // level 16 OSC 2
@@ -222,7 +222,7 @@ export default [
     envelope: {},
     lfo: {},
     levelData: {
-      text: 'Filter types!<span>A lowpass filter passes signals with a frequency lower than a selected cutoff frequency. A highpass filter does the opposite, and a bandpass filters both ends.</span>'
+      text: 'You unlocked the second osc!'
     }
   },
   // level 17
@@ -238,7 +238,7 @@ export default [
     envelope: {},
     lfo: {},
     levelData: {
-      text: 'Filter types!<span>A lowpass filter passes signals with a frequency lower than a selected cutoff frequency. A highpass filter does the opposite, and a bandpass filters both ends.</span>'
+      text: 'Two oscillators result in a fatter sound.'
     }
   },
   // level 18
@@ -254,7 +254,7 @@ export default [
     envelope: {},
     lfo: {},
     levelData: {
-      text: 'Filter types!<span>A lowpass filter passes signals with a frequency lower than a selected cutoff frequency. A highpass filter does the opposite, and a bandpass filters both ends.</span>'
+      text: 'The sound gets even fatter when you tune the oscs differently.'
     }
   },
   // level 19
@@ -270,7 +270,7 @@ export default [
     envelope: {},
     lfo: {},
     levelData: {
-      text: 'Filter types!<span>A lowpass filter passes signals with a frequency lower than a selected cutoff frequency. A highpass filter does the opposite, and a bandpass filters both ends.</span>'
+      text: 'Try setting the oscillators to different octaves.'
     }
   },
   // level 20
@@ -286,7 +286,7 @@ export default [
     envelope: {},
     lfo: {},
     levelData: {
-      text: 'Filter types!<span>A lowpass filter passes signals with a frequency lower than a selected cutoff frequency. A highpass filter does the opposite, and a bandpass filters both ends.</span>'
+      text: 'And yes, we too can do this all day.'
     }
   },
   // level 21
@@ -301,7 +301,7 @@ export default [
     envelope: {},
     lfo: {},
     levelData: {
-      text: 'Filter types!<span>A lowpass filter passes signals with a frequency lower than a selected cutoff frequency. A highpass filter does the opposite, and a bandpass filters both ends.</span>'
+      text: 'Back by popular demand: waveforms.'
     }
   },
   // level 22
@@ -316,7 +316,7 @@ export default [
     envelope: {},
     lfo: {},
     levelData: {
-      text: 'Filter types!<span>A lowpass filter passes signals with a frequency lower than a selected cutoff frequency. A highpass filter does the opposite, and a bandpass filters both ends.</span>'
+      text: 'Try combining waveforms and hear what that sounds like.'
     }
   },
   // level 23
@@ -331,7 +331,7 @@ export default [
     envelope: {},
     lfo: {},
     levelData: {
-      text: 'Filter types!<span>A lowpass filter passes signals with a frequency lower than a selected cutoff frequency. A highpass filter does the opposite, and a bandpass filters both ends.</span>'
+      text: 'One more chance to play around with just waveforms.'
     }
   },
   // level 24
@@ -347,7 +347,7 @@ export default [
     envelope: {},
     lfo: {},
     levelData: {
-      text: 'Filter types!<span>A lowpass filter passes signals with a frequency lower than a selected cutoff frequency. A highpass filter does the opposite, and a bandpass filters both ends.</span>'
+      text: 'But what if we have different waveforms and slightly detune the oscs?'
     }
   },
   // level 25
@@ -364,7 +364,7 @@ export default [
     envelope: {},
     lfo: {},
     levelData: {
-      text: 'Filter types!<span>A lowpass filter passes signals with a frequency lower than a selected cutoff frequency. A highpass filter does the opposite, and a bandpass filters both ends.</span>'
+      text: 'Or if we combine waveform, detune and octave controls?'
     }
   },
   // level 26 Filter
@@ -381,7 +381,7 @@ export default [
     envelope: {},
     lfo: {},
     levelData: {
-      text: 'Filter types!<span>A lowpass filter passes signals with a frequency lower than a selected cutoff frequency. A highpass filter does the opposite, and a bandpass filters both ends.</span>'
+      text: 'You unlocked the filter!'
     }
   },
   // level 27
@@ -398,7 +398,7 @@ export default [
     envelope: {},
     lfo: {},
     levelData: {
-      text: 'Filter types!<span>A lowpass filter passes signals with a frequency lower than a selected cutoff frequency. A highpass filter does the opposite, and a bandpass filters both ends.</span>'
+      text: 'Filters can be of different types. Try them!'
     }
   },
   // level 28
@@ -415,7 +415,7 @@ export default [
     envelope: {},
     lfo: {},
     levelData: {
-      text: 'Filter types!<span>A lowpass filter passes signals with a frequency lower than a selected cutoff frequency. A highpass filter does the opposite, and a bandpass filters both ends.</span>'
+      text: 'A filter passes signals with a frequency lower, or higher than a selected cutoff frequency, or both.'
     }
   },
   // level 29
@@ -432,7 +432,7 @@ export default [
     envelope: {},
     lfo: {},
     levelData: {
-      text: 'Filter types!<span>A lowpass filter passes signals with a frequency lower than a selected cutoff frequency. A highpass filter does the opposite, and a bandpass filters both ends.</span>'
+      text: 'Introducing the one control we love most: cutoff frequency.'
     }
   },
   // level 30
@@ -449,7 +449,7 @@ export default [
     envelope: {},
     lfo: {},
     levelData: {
-      text: 'Filter types!<span>A lowpass filter passes signals with a frequency lower than a selected cutoff frequency. A highpass filter does the opposite, and a bandpass filters both ends.</span>'
+      text: 'Use the cutoff frequency to take out unwanted parts of sound.'
     }
   },
   // level 31
@@ -466,7 +466,7 @@ export default [
     envelope: {},
     lfo: {},
     levelData: {
-      text: 'Filter types!<span>A lowpass filter passes signals with a frequency lower than a selected cutoff frequency. A highpass filter does the opposite, and a bandpass filters both ends.</span>'
+      text: 'The filter is the essence of subtractive synthesis.'
     }
   },
   // level 32
@@ -483,7 +483,7 @@ export default [
     envelope: {},
     lfo: {},
     levelData: {
-      text: 'Filter types!<span>A lowpass filter passes signals with a frequency lower than a selected cutoff frequency. A highpass filter does the opposite, and a bandpass filters both ends.</span>'
+      text: 'Resonance controls how sharp the cutoff is.'
     }
   },
   // level 33
@@ -500,7 +500,7 @@ export default [
     envelope: {},
     lfo: {},
     levelData: {
-      text: 'Filter types!<span>A lowpass filter passes signals with a frequency lower than a selected cutoff frequency. A highpass filter does the opposite, and a bandpass filters both ends.</span>'
+      text: 'Set the resonance to low, and sliglty cut off unwanted parts.'
     }
   },
   // level 34
@@ -517,7 +517,7 @@ export default [
     envelope: {},
     lfo: {},
     levelData: {
-      text: 'Filter types!<span>A lowpass filter passes signals with a frequency lower than a selected cutoff frequency. A highpass filter does the opposite, and a bandpass filters both ends.</span>'
+      text: 'Set the resonance to high, and cut off the unwanted parts exactly where your cutoff is.'
     }
   },
   // level 35
@@ -535,7 +535,7 @@ export default [
     envelope: {},
     lfo: {},
     levelData: {
-      text: 'Filter types!<span>A lowpass filter passes signals with a frequency lower than a selected cutoff frequency. A highpass filter does the opposite, and a bandpass filters both ends.</span>'
+      text: 'Play around with both cutoff and resonance.'
     }
   },
   // level 36
@@ -553,7 +553,7 @@ export default [
     envelope: {},
     lfo: {},
     levelData: {
-      text: 'Filter types!<span>A lowpass filter passes signals with a frequency lower than a selected cutoff frequency. A highpass filter does the opposite, and a bandpass filters both ends.</span>'
+      text: 'Fun fact: equalizers are filters too.'
     }
   },
   // level 37
@@ -571,7 +571,7 @@ export default [
     envelope: {},
     lfo: {},
     levelData: {
-      text: 'Filter types!<span>A lowpass filter passes signals with a frequency lower than a selected cutoff frequency. A highpass filter does the opposite, and a bandpass filters both ends.</span>'
+      text: 'Yes you have been filtering all along.'
     }
   },
   // level 38
@@ -589,7 +589,7 @@ export default [
     envelope: {},
     lfo: {},
     levelData: {
-      text: 'Filter types!<span>A lowpass filter passes signals with a frequency lower than a selected cutoff frequency. A highpass filter does the opposite, and a bandpass filters both ends.</span>'
+      text: 'Use this knowledge when you adjust the eq of your car radio, and impress your friends.'
     }
   },
   // level 39
@@ -608,7 +608,7 @@ export default [
     envelope: {},
     lfo: {},
     levelData: {
-      text: 'Filter types!<span>A lowpass filter passes signals with a frequency lower than a selected cutoff frequency. A highpass filter does the opposite, and a bandpass filters both ends.</span>'
+      text: 'But first clear a few more levels.'
     }
   },
   // level 40
@@ -627,7 +627,7 @@ export default [
     envelope: {},
     lfo: {},
     levelData: {
-      text: 'Filter types!<span>A lowpass filter passes signals with a frequency lower than a selected cutoff frequency. A highpass filter does the opposite, and a bandpass filters both ends.</span>'
+      text: "You came this far, don't give up now."
     }
   },
   // level 41
@@ -646,7 +646,7 @@ export default [
     envelope: {},
     lfo: {},
     levelData: {
-      text: 'Filter types!<span>A lowpass filter passes signals with a frequency lower than a selected cutoff frequency. A highpass filter does the opposite, and a bandpass filters both ends.</span>'
+      text: 'Last level before we move on to the next module.'
     }
   },
   // level 42 Envelope
@@ -659,7 +659,7 @@ export default [
     },
     lfo: {},
     levelData: {
-      text: 'Filter types!<span>A lowpass filter passes signals with a frequency lower than a selected cutoff frequency. A highpass filter does the opposite, and a bandpass filters both ends.</span>'
+      text: 'You unlocked Envelope!'
     }
   },
   // level 43
@@ -672,7 +672,7 @@ export default [
     },
     lfo: {},
     levelData: {
-      text: 'Filter types!<span>A lowpass filter passes signals with a frequency lower than a selected cutoff frequency. A highpass filter does the opposite, and a bandpass filters both ends.</span>'
+      text: 'With attack, you can control how long it takes the sound to reach its peak volume on every hit.'
     }
   },
   // level 44
@@ -685,7 +685,7 @@ export default [
     },
     lfo: {},
     levelData: {
-      text: 'Filter types!<span>A lowpass filter passes signals with a frequency lower than a selected cutoff frequency. A highpass filter does the opposite, and a bandpass filters both ends.</span>'
+      text: 'From the attack peak, control how long the sound drops until reaching the sustain level, with decay.'
     }
   },
   // level 45
@@ -698,7 +698,7 @@ export default [
     },
     lfo: {},
     levelData: {
-      text: 'Filter types!<span>A lowpass filter passes signals with a frequency lower than a selected cutoff frequency. A highpass filter does the opposite, and a bandpass filters both ends.</span>'
+      text: "A low decay level results often into a plucky sound."
     }
   },
   // level 46
@@ -711,7 +711,7 @@ export default [
     },
     lfo: {},
     levelData: {
-      text: 'Filter types!<span>A lowpass filter passes signals with a frequency lower than a selected cutoff frequency. A highpass filter does the opposite, and a bandpass filters both ends.</span>'
+      text: 'Sustain sets the volume at which the sound will remain, for as long the note is held.'
     }
   },
   // level 47
@@ -724,7 +724,7 @@ export default [
     },
     lfo: {},
     levelData: {
-      text: 'Filter types!<span>A lowpass filter passes signals with a frequency lower than a selected cutoff frequency. A highpass filter does the opposite, and a bandpass filters both ends.</span>'
+      text: 'With a short attack and decay, sustain basically sets the volume of the note.'
     }
   },
   // level 48
@@ -737,7 +737,7 @@ export default [
     },
     lfo: {},
     levelData: {
-      text: 'Filter types!<span>A lowpass filter passes signals with a frequency lower than a selected cutoff frequency. A highpass filter does the opposite, and a bandpass filters both ends.</span>'
+      text: 'Release controls the time it takes for the sound to return to zero, after sustain.'
     }
   },
   // level 49
@@ -750,7 +750,7 @@ export default [
     },
     lfo: {},
     levelData: {
-      text: 'Filter types!<span>A lowpass filter passes signals with a frequency lower than a selected cutoff frequency. A highpass filter does the opposite, and a bandpass filters both ends.</span>'
+      text: 'A short release results in snappy sounds. Try it!'
     }
   },
   // level 50
@@ -764,7 +764,7 @@ export default [
     },
     lfo: {},
     levelData: {
-      text: 'Filter types!<span>A lowpass filter passes signals with a frequency lower than a selected cutoff frequency. A highpass filter does the opposite, and a bandpass filters both ends.</span>'
+      text: 'Time to start mixing the controls of the envelope.'
     }
   },
   // level 51
@@ -778,7 +778,7 @@ export default [
     },
     lfo: {},
     levelData: {
-      text: 'Filter types!<span>A lowpass filter passes signals with a frequency lower than a selected cutoff frequency. A highpass filter does the opposite, and a bandpass filters both ends.</span>'
+      text: 'Your close to fully equiped now.'
     }
   },
   // level 52
@@ -792,7 +792,7 @@ export default [
     },
     lfo: {},
     levelData: {
-      text: 'Filter types!<span>A lowpass filter passes signals with a frequency lower than a selected cutoff frequency. A highpass filter does the opposite, and a bandpass filters both ends.</span>'
+      text: 'After this we have one more module to cover.'
     }
   },
   // level 53
@@ -806,7 +806,7 @@ export default [
     },
     lfo: {},
     levelData: {
-      text: 'Filter types!<span>A lowpass filter passes signals with a frequency lower than a selected cutoff frequency. A highpass filter does the opposite, and a bandpass filters both ends.</span>'
+      text: 'You should reconsider your career by now.'
     }
   },
   // level 54
@@ -821,7 +821,7 @@ export default [
     },
     lfo: {},
     levelData: {
-      text: 'Filter types!<span>A lowpass filter passes signals with a frequency lower than a selected cutoff frequency. A highpass filter does the opposite, and a bandpass filters both ends.</span>'
+      text: 'It takes some serious decication to get to this level.'
     }
   },
   // level 55
@@ -836,7 +836,7 @@ export default [
     },
     lfo: {},
     levelData: {
-      text: 'Filter types!<span>A lowpass filter passes signals with a frequency lower than a selected cutoff frequency. A highpass filter does the opposite, and a bandpass filters both ends.</span>'
+      text: ''
     }
   },
   // level 56
@@ -852,7 +852,7 @@ export default [
     },
     lfo: {},
     levelData: {
-      text: 'Filter types!<span>A lowpass filter passes signals with a frequency lower than a selected cutoff frequency. A highpass filter does the opposite, and a bandpass filters both ends.</span>'
+      text: 'You might just be the next super star producer.'
     }
   },
   // level 57 LFO
@@ -865,7 +865,7 @@ export default [
       amount: true
     },
     levelData: {
-      text: 'Filter types!<span>A lowpass filter passes signals with a frequency lower than a selected cutoff frequency. A highpass filter does the opposite, and a bandpass filters both ends.</span>'
+      text: 'Unlocked the lfo!'
     }
   },
   // level 58
@@ -878,7 +878,7 @@ export default [
       amount: true
     },
     levelData: {
-      text: 'Filter types!<span>A lowpass filter passes signals with a frequency lower than a selected cutoff frequency. A highpass filter does the opposite, and a bandpass filters both ends.</span>'
+      text: 'Same as the oscillator, LFO produces a signal, but at a low frequency.'
     }
   },
   // level 59
@@ -891,7 +891,7 @@ export default [
       amount: true
     },
     levelData: {
-      text: 'Filter types!<span>A lowpass filter passes signals with a frequency lower than a selected cutoff frequency. A highpass filter does the opposite, and a bandpass filters both ends.</span>'
+      text: "It's connected to oscillator 1 frequency, making the pitch go up and down."
     }
   },
   // level 60
@@ -905,7 +905,7 @@ export default [
       frequency: true,
     },
     levelData: {
-      text: 'Filter types!<span>A lowpass filter passes signals with a frequency lower than a selected cutoff frequency. A highpass filter does the opposite, and a bandpass filters both ends.</span>'
+      text: 'Adjust the frequency, and hear the sound go up and down slower or faster.'
     }
   },
   // level 61
@@ -919,7 +919,7 @@ export default [
       frequency: true,
     },
     levelData: {
-      text: 'Filter types!<span>A lowpass filter passes signals with a frequency lower than a selected cutoff frequency. A highpass filter does the opposite, and a bandpass filters both ends.</span>'
+      text: 'Right now we use a sinewave, which eases the effect it has on the pitch.'
     }
   },
   // level 62
@@ -933,7 +933,7 @@ export default [
       frequency: true,
     },
     levelData: {
-      text: 'Filter types!<span>A lowpass filter passes signals with a frequency lower than a selected cutoff frequency. A highpass filter does the opposite, and a bandpass filters both ends.</span>'
+      text: 'But we can use other waveforms too, just like regular oscillators.'
     }
   },
   // level 63
@@ -943,10 +943,11 @@ export default [
     filter: {},
     envelope: {},
     lfo: {
+      amount: true,
       type: true
     },
     levelData: {
-      text: 'Filter types!<span>A lowpass filter passes signals with a frequency lower than a selected cutoff frequency. A highpass filter does the opposite, and a bandpass filters both ends.</span>'
+      text: 'There you go: try some other waveforms.'
     }
   },
   // level 64
@@ -956,10 +957,11 @@ export default [
     filter: {},
     envelope: {},
     lfo: {
+      amount: true,
       type: true
     },
     levelData: {
-      text: 'Filter types!<span>A lowpass filter passes signals with a frequency lower than a selected cutoff frequency. A highpass filter does the opposite, and a bandpass filters both ends.</span>'
+      text: 'Use square to get that glitch sound.'
     }
   },
   // level 65
@@ -974,7 +976,7 @@ export default [
       type: true
     },
     levelData: {
-      text: 'Filter types!<span>A lowpass filter passes signals with a frequency lower than a selected cutoff frequency. A highpass filter does the opposite, and a bandpass filters both ends.</span>'
+      text: 'Now play around with all lfo controls.'
     }
   },
   // level 66
@@ -992,7 +994,7 @@ export default [
     lfo: {
     },
     levelData: {
-      text: 'Filter types!<span>A lowpass filter passes signals with a frequency lower than a selected cutoff frequency. A highpass filter does the opposite, and a bandpass filters both ends.</span>'
+      text: 'You did it! You mastered the basics of subtractive synthesis.'
     }
   },
   // level 67
@@ -1012,7 +1014,7 @@ export default [
     lfo: {
     },
     levelData: {
-      text: 'Filter types!<span>A lowpass filter passes signals with a frequency lower than a selected cutoff frequency. A highpass filter does the opposite, and a bandpass filters both ends.</span>'
+      text: 'Now the real fun starts.'
     }
   },
   // level 68
@@ -1032,7 +1034,7 @@ export default [
     lfo: {
     },
     levelData: {
-      text: 'Filter types!<span>A lowpass filter passes signals with a frequency lower than a selected cutoff frequency. A highpass filter does the opposite, and a bandpass filters both ends.</span>'
+      text: 'At this point you might be wondering if there even is an end to this game.'
     }
   },
   // level 69
@@ -1064,7 +1066,7 @@ export default [
       type: true
     },
     levelData: {
-      text: "Let's mix things up!<span>You're on your own from here.</span>"
+      text: "Just like subtractive synthesis, there is no end to this game."
     }
   },
   // level 70
@@ -1096,7 +1098,7 @@ export default [
       type: true
     },
     levelData: {
-      text: "Let's mix things up!<span>You're on your own from here.</span>"
+      text: "Thank you for playing. You're on your own now."
     }
   },
   // level 71
@@ -1121,7 +1123,7 @@ export default [
       amount: true,
     },
     levelData: {
-      text: "Let's mix things up!<span>You're on your own from here.</span>"
+      text: "Is there even anyone that will ever read this?"
     }
   },
   // level 72
@@ -1147,7 +1149,7 @@ export default [
     lfo: {
     },
     levelData: {
-      text: "Let's mix things up!<span>You're on your own from here.</span>"
+      text: "This is unreal. You must some famous producer."
     }
   },
   // level 73
@@ -1177,7 +1179,7 @@ export default [
       amount: true,
     },
     levelData: {
-      text: "Let's mix things up!<span>You're on your own from here.</span>"
+      text: "Well, if so, why don't you teach us?"
     }
   },
   // level 74
@@ -1205,7 +1207,7 @@ export default [
       amount: true,
     },
     levelData: {
-      text: "Let's mix things up!<span>You're on your own from here.</span>"
+      text: "Shoot an email to bart@okbye.io"
     }
   },
   // level 75
@@ -1234,7 +1236,7 @@ export default [
       type: true
     },
     levelData: {
-      text: "Let's mix things up!<span>You're on your own from here.</span>"
+      text: "We need people like you."
     }
   },
   // level 76
@@ -1266,7 +1268,7 @@ export default [
       type: true
     },
     levelData: {
-      text: "Let's mix things up!<span>You're on your own from here.</span>"
+      text: "Ok Bye"
     }
   },
 ]
