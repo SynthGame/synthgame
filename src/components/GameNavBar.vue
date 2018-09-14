@@ -97,7 +97,7 @@
         <span>highscore</span>
         <span class="data">{{paddedHighScoreString}}</span>
       </div>
-      <svg class="exit" width="18px" height="17px" viewBox="0 0 18 17" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+      <svg @click="exitGame" class="exit" width="18px" height="17px" viewBox="0 0 18 17" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
           <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
               <g id="exit_icon" fill="#7D00DA" fill-rule="nonzero" stroke="#FFFFFF" stroke-width="1.785">
                   <path d="M16.6,0.6 L0.9,16.3" id="Shape"></path>
@@ -208,6 +208,9 @@ export default {
     moduleIsUseable (moduleName) {
       if (this.createModeIsActive) return true
       return some(this.knobsAvailable[moduleName]) // some are truthy
+    },
+    exitGame () {
+      location.reload();
     }
   },
   watch: {

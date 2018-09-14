@@ -13,7 +13,7 @@ require('tone')
 
 Vue.use(ModuleKnob)
 
-new Vue({
+var vm = new Vue({
   el: '#app', // needed?
   components: { App }, // needed?
   template: '<App/>', // needed?

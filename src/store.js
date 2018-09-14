@@ -223,7 +223,10 @@ export default new Vuex.Store({
       state.gameState.level = level
     },
     updateHighScore (state, val) {
-      state.gameState.highScore = val
+      state.gameState.highScore = val;
+      if (localStorage.getItem("highscore") < val) {
+        localStorage.setItem("highscore", val);
+      }
     },
     setKnobsAvailable (state, obj) {
       state.gameState.knobsAvailable = obj

@@ -1,13 +1,13 @@
   <template>
-  <div class="overlay">
+  <div class="overlay gameover">
     <div class="overlay-content-wrapper">
       <div>
-        <h1 class="game-over-text">GAME<br/>
+        <h1 class="game-over-text">GAME
         OVER</h1>
       </div>
 
       </svg>
-      <svg viewBox="0 0 190 190" height="400px" width="400px" class="svg">
+      <svg viewBox="0 0 190 190" height="300px" width="300px" class="svg">
         <!-- DRUM  -->
         <svg version="1.1" stroke-width="1.5819" x="55" y="80"
             xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:a="http://ns.adobe.com/AdobeSVGViewerExtensions/3.0/"
@@ -44,12 +44,19 @@
 
       </svg>
 
+      <div class="score">
+        <span>score</span>
+        <span class="data">{{paddedScoreString}}</span>
+      </div>
+      <div class="highscore">
+        <span>High score</span>
+        <span class="data">{{paddedHighScoreString}}</span>
+      </div>
+
     <button class="button-next"
             ref="button"
             @click="startAgain"
-            @mouseover="litUpButton=true"
-            @mouseout="buttonLeave"
-            :style="{'background-color': litUpButton ? buttonColor: ''}">GO AGAIN</button>
+            >TRY AGAIN</button>
     </div>
   </div>
 </template>
@@ -58,6 +65,8 @@
 import { keyframes, easing } from 'popmotion'
 import { MODULE_OSCILLATOR_COLOR, MODULE_ENVELOPE_COLOR, MODULE_FILTER_COLOR, MODULE_LFO_COLOR, MODULE_DELAY_COLOR, MODULE_REVERB_COLOR } from '@/constants'
 import { color } from 'style-value-types';
+import padStart from 'lodash/padStart'
+import audio from '@/audio'
 
 export default {
   name: "Overlay",
@@ -97,6 +106,12 @@ export default {
     }
   },
   created() {
+    //stop beat
+      audio.stopKick();
+      // stop loop
+      audio.stopMainLoop();
+      // Play gameover
+      audio.playGameOver();
     // randomize animation:
     const currentAnimationNumber = Math.floor(Math.random()*Object.keys(this.anim).length)
     this.currentAnim = Object.keys(this.anim)[currentAnimationNumber]
@@ -194,11 +209,6 @@ let conf = {
       }
       return randomColor
     },
-    buttonLeave() {
-      this.litUpButton = false;
-      console.log(`the button leaft the building: ${this.changeColor(this.buttonColor)}`)
-      this.buttonColor = this.changeColor(this.buttonColor)
-    },
     startAgain() {
       this.$emit('startagain')
     }
@@ -212,7 +222,13 @@ let conf = {
     },
     gameLevel () {
       return this.$store.state.gameState.level
-    }
+    },
+    paddedScoreString () {
+      return `${padStart(this.gameScore, 5, '0')}`
+    },
+    paddedHighScoreString () {
+      return `${padStart(this.gameHighScore, 5, '0')}`
+    },
 
   }
 }
@@ -224,7 +240,42 @@ let conf = {
   margin-bottom:0;
 }
 .svg {
-  margin-bottom: 2rem;
+  margin: -75px 0 0 0;
+}
+
+.gameover {
+  & h1 {
+    margin: 0
+  }
+  & .score {
+    display: flex;
+    font-size: 2em;
+    flex-direction: column;
+    width: 8em;
+  }
+  & .highscore {
+    display: flex;
+    font-size: 2em;
+    flex-direction: column;
+    width: 8em;
+  }
+  & span {
+    font-size: .7em;
+  }
+  & .data {
+    font-weight: 600;
+    font-size: 1em;
+  }
+}
+
+.score {
+  & h2 {
+  margin: 0.5rem;
+}
+  & p {
+    font-size: 2rem;
+    margin: 0.5rem;
+  }
 }
 
 </style>

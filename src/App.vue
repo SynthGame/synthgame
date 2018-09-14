@@ -107,6 +107,8 @@ export default {
   },
   methods: {
     init () {
+      // Retrieve highscore from local storage
+        this.$store.commit('updateHighScore', localStorage.getItem("highscore"))
       // initialize the synth
       audio.init().toMaster()
       // create loop wich sequences 4 notes
@@ -117,11 +119,11 @@ export default {
       }, (time, i) => { // i here is just a note from the note array define above
         if (this.$store.state.gameState.timerIsRunning === false && !this.displaySuccessOverlay && !this.displayPreviewOverlay) {
           if (this.$store.state.gameState.sweepArmed) {
-            audio.playSweep();
+            audio.playSweep(); //plan this ahead?
             this.$store.commit('disarmSweep')
           }
         }
-        if (this.displaySuccessOverlay && this.kickTime === 0 && !this.displayStartOverlay) {
+        if ((this.displayPreviewOverlay && this.kickTime === 0 && !this.displayStartOverlay) || (this.displaySuccessOverlay && this.kickTime === 0 && !this.displayStartOverlay)) {
           audio.playKick();
           this.$store.commit('armSweep')
           this.kickTime++
@@ -129,8 +131,7 @@ export default {
           this.kickTime++
         } else {
           this.kickTime = 0;
-        }
-        ;
+        };
         audio.playNote(randomLoop[i], {})
 
         // if (i === 15) this.$store.commit('increaseSequencesPassedInCurrentLevel')
@@ -149,8 +150,7 @@ export default {
     //   this.displaySuccessOverlay = true
     // },
     startAgain(){
-      this.$store.dispatch('startAgain')
-      this.startLevel(this.gameLevel)
+      location.reload();
     },
     startPlayMode(){
       this.displayStartOverlay = false // hide start overlay
