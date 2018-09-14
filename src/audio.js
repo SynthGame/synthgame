@@ -8,7 +8,7 @@ export default {
   state: {
     Tone: Tone,
     loop: undefined,
-    toneLength: '16n'
+    toneLength: '8n'
   },
   init () {
     log('initializing all submodules before using')
@@ -69,10 +69,12 @@ export default {
   },
   playNote (shift, {noteLength, volume}) {
     log(`Playing shifted note: ${shift}`)
-    this.oscillator1.state.pitchShift.pitch = shift
-    this.oscillator2.state.pitchShift.pitch = shift
+    if (Number.isInteger(shift)) {
+      this.oscillator1.state.pitchShift.pitch = shift
+      this.oscillator2.state.pitchShift.pitch = shift
+    }
     if(volume) this.volume.state.device.volume.value = volume // TODO: should only set volume for this note
-    return this.envelope.state.device.triggerAttackRelease(noteLength || this.state.toneLength)
+    return this.envelope.state.device.triggerAttackRelease(noteLength || this.state.toneLength) // TODO: Error: timeConstant must be greater than 0
   },
   playKick () {
     log(`Playing kick`)
