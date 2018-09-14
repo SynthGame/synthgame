@@ -188,7 +188,9 @@ export default {
     },
     submitPreset () {
       this.$store.dispatch('exportPreset', {name: this.exportPresetName})
-        .then(alert)
+        .then(presetId => {
+          alert(`${window.location.origin}/?preset=${presetId}`)
+        })
     }
   },
   watch: {
