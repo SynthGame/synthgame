@@ -58,28 +58,6 @@
                   'box-shadow': lfoComplete ? `0px 0px 16px ${lfoColor}` : '',
                 }"
       ></span>
-      <span
-        v-if="moduleIsUseable('delay')"
-        :class="{
-                  'module__name__status-indicator': true,
-                  'module__name__status-indicator--active': delayComplete
-                }"
-        :style="{
-                  'background-color': delayComplete ? delayColor : '',
-                  'box-shadow': delayComplete ? `0px 0px 16px ${delayColor}` : '',
-                }"
-      ></span>
-      <span
-        v-if="moduleIsUseable('reverb')"
-        :class="{
-                  'module__name__status-indicator': true,
-                  'module__name__status-indicator--active': reverbComplete
-                }"
-        :style="{
-                  'background-color': reverbComplete ? reverbColor : '',
-                  'box-shadow': reverbComplete ? `0px 0px 16px ${reverbColor}` : '',
-                }"
-      ></span>
       </h2>
     </div>
     <!-- <span v-if="timerIsRunning === false && createModeIsActive === false" class="timer">First listen to the sound we'll recreate</span> -->
@@ -125,9 +103,7 @@ export default {
       oscillatorTwoColor: MODULE_OSCILLATORTWO_COLOR,
       envelopeColor: MODULE_ENVELOPE_COLOR,
       filterColor: MODULE_FILTER_COLOR,
-      lfoColor: MODULE_LFO_COLOR,
-      delayColor: MODULE_DELAY_COLOR,
-      reverbColor: MODULE_REVERB_COLOR
+      lfoColor: MODULE_LFO_COLOR
     }
   },
   created() {
@@ -163,12 +139,6 @@ export default {
     },
     lfoComplete() {
       return Object.values(this.$store.getters.audioParametersMatchGoalWithMargin['lfo']).every(param => param)
-    },
-    delayComplete() {
-      return Object.values(this.$store.getters.audioParametersMatchGoalWithMargin['delay']).every(param => param)
-    },
-    reverbComplete() {
-      return Object.values(this.$store.getters.audioParametersMatchGoalWithMargin['reverb']).every(param => param)
     },
     gameLevel () {
       return this.$store.getters.displayedLevel
