@@ -13,29 +13,28 @@
 
 <script>
 export default {
-  name: "display",
-  props:['data'],
-  mounted() {
+  name: 'display',
+  props: ['data'],
+  mounted () {
     console.log('display: mounted!')
   },
   methods: {
-    calucatePoints() {
+    calucatePoints () {
       let startingPoint = {}
-
     }
   },
   computed: {
-    lineDimentions() {
+    lineDimentions () {
       // do a curve point! C300,5 300,11 300,20
       // as of now:
-      let data = this.data*2
-      let line = "M0,5 H "+data+"C"+data+",5 "+data+",20 "+data+",30 V150"
+      let data = this.data * 2
+      let line = 'M0,5 H ' + data + 'C' + data + ',5 ' + data + ',20 ' + data + ',30 V150'
       return line
     }
   },
   watch: {
-    data() {
-      console.log("data changed! ",this.data )
+    data () {
+      console.log('data changed! ', this.data)
       this.calucatePoints()
     }
   }

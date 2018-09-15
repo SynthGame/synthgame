@@ -103,13 +103,13 @@ export default {
   data () {
     return {
       activeModule: 0,
-      marginArray: [0,0.2,0.4,0.6],
+      marginArray: [0, 0.2, 0.4, 0.6],
       indicatorActive: true,
       oscillatorColor: MODULE_OSCILLATOR_COLOR,
       oscillatorTwoColor: MODULE_OSCILLATORTWO_COLOR,
       envelopeColor: MODULE_ENVELOPE_COLOR,
       filterColor: MODULE_FILTER_COLOR,
-      lfoColor: MODULE_LFO_COLOR,
+      lfoColor: MODULE_LFO_COLOR
     }
   },
   components: {
@@ -127,19 +127,19 @@ export default {
       return some(this.knobsAvailable[moduleName]) // some are truthy
     },
     showOsc1 () {
-      this.activeModule = 0;
+      this.activeModule = 0
     },
     showOsc2 () {
-      this.activeModule = 1;
+      this.activeModule = 1
     },
     showFil () {
-      this.activeModule = 2;
+      this.activeModule = 2
     },
     showEnv () {
-      this.activeModule = 3;
+      this.activeModule = 3
     },
     showLfo () {
-      this.activeModule = 4;
+      this.activeModule = 4
     },
     moduleIsUseable (moduleName) {
       if (this.createModeIsActive) return true
@@ -156,21 +156,21 @@ export default {
     knobsAvailable () {
       return this.$store.state.gameState.knobsAvailable
     },
-    oscillator1Complete() {
+    oscillator1Complete () {
       return Object.values(this.$store.getters.audioParametersMatchGoalWithMargin['oscillator1']).every(param => param)
     },
-    oscillator2Complete() {
+    oscillator2Complete () {
       return Object.values(this.$store.getters.audioParametersMatchGoalWithMargin['oscillator2']).every(param => param)
     },
-    filterComplete() {
+    filterComplete () {
       return Object.values(this.$store.getters.audioParametersMatchGoalWithMargin['filter']).every(param => param)
     },
-    envelopeComplete() {
+    envelopeComplete () {
       return Object.values(this.$store.getters.audioParametersMatchGoalWithMargin['envelope']).every(param => param)
     },
-    lfoComplete() {
+    lfoComplete () {
       return Object.values(this.$store.getters.audioParametersMatchGoalWithMargin['lfo']).every(param => param)
-    },
+    }
   }
 }
 </script>

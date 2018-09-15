@@ -82,11 +82,11 @@
 <script>
 import { keyframes, easing } from 'popmotion'
 import { MODULE_OSCILLATOR_COLOR, MODULE_ENVELOPE_COLOR, MODULE_FILTER_COLOR, MODULE_LFO_COLOR, MODULE_DELAY_COLOR, MODULE_REVERB_COLOR } from '@/constants'
-import { color } from 'style-value-types';
+import { color } from 'style-value-types'
 import padStart from 'lodash/padStart'
 
 export default {
-  name: "Overlay",
+  name: 'Overlay',
   props: {
     level: {
       type: Number,
@@ -109,7 +109,7 @@ export default {
         drum: {
           stick1: 0,
           stick2: 0
-        },
+        }
       },
       colorArray: [],
       currentColor: '',
@@ -117,10 +117,10 @@ export default {
       litUpButton: false
     }
   },
-  created() {
+  created () {
     // randomize animation:
-    const currentAnimationNumber = Math.floor(Math.random()*Object.keys(this.anim).length)
-    this.currentAnim = "drum"
+    const currentAnimationNumber = Math.floor(Math.random() * Object.keys(this.anim).length)
+    this.currentAnim = 'drum'
 
     window.addEventListener('keydown', this.emitOnKey)
     this.colorArray.push(MODULE_OSCILLATOR_COLOR, MODULE_ENVELOPE_COLOR, MODULE_FILTER_COLOR, MODULE_LFO_COLOR, MODULE_DELAY_COLOR, MODULE_REVERB_COLOR)
@@ -128,16 +128,16 @@ export default {
     this.currentColor1 = this.changeColor(this.currentColor1)
   },
 
-  mounted() {
-    let conf;
-    let callback;
+  mounted () {
+    let conf
+    let callback
 
     if (this.currentAnim == 'ping') {
       conf = {
         values: [
           { ballY: 0, racketRotate: 0, racketYOffset: 0, stick1: 0},
           { ballY: -200, racketRotate: 12, racketYOffset: 15, stick1: 20},
-          { ballY: 0, racketRotate:0 , racketYOffset: 0, stick1: 0}
+          { ballY: 0, racketRotate: 0, racketYOffset: 0, stick1: 0}
         ],
         loop: Infinity,
         duration: this.duration,
@@ -153,17 +153,17 @@ export default {
             this.currentColor = this.changeColor()
           }
         },
-        complete: () => {console.log('lalala')}
+        complete: () => { console.log('lalala') }
       }
     } else if (this.currentAnim == 'drum') {
       conf = {
         values: [
           { stick1: 0, stick2: 20, time: 0},
           { stick1: -20, stick2: 0, time: 1},
-          { stick1: 0, stick2: 20, time: 1},
+          { stick1: 0, stick2: 20, time: 1}
         ],
         loop: Infinity,
-        duration: this.duration*2,
+        duration: this.duration * 2,
         // easings: easing.cubicBezier(.29,.06,1,-0.24)
         easings: easing.easeIn
       }
@@ -186,26 +186,26 @@ export default {
     keyframes(conf).start(callback)
     this.$refs.button.focus()
   },
-  beforeDestroy() {
+  beforeDestroy () {
     window.removeEventListener('keydown', this.emitOnKey)
   },
   methods: {
-    emitOnKey() {
+    emitOnKey () {
       if (event.keyCode === 13) {
-        this.$emit('next');
+        this.$emit('next')
       }
     }
   },
-  methods:{
-    changeColor(current) {
-      let randomColor = this.colorArray[Math.floor(Math.random()*this.colorArray.length)]
+  methods: {
+    changeColor (current) {
+      let randomColor = this.colorArray[Math.floor(Math.random() * this.colorArray.length)]
       // does that even work?
-      if (randomColor===current) {
-        randomColor = this.colorArray[Math.floor(Math.random()*this.colorArray.length)]
+      if (randomColor === current) {
+        randomColor = this.colorArray[Math.floor(Math.random() * this.colorArray.length)]
         // console.log('repeat!')
       }
       return randomColor
-    },
+    }
     // buttonLeave() {
     //   this.litUpButton = false;
     //   console.log(`the button leaft the building: ${this.changeColor(this.buttonColor)}`)
@@ -228,15 +228,15 @@ export default {
     gameLevel () {
       return this.$store.getters.displayedLevel
     },
-    computedRackedStyles() {
+    computedRackedStyles () {
       return {'animation-name': 'racket-movement',
-                'animation-duration': '1s',
-                 'animation-iteration-count': '10',
-                  'animation-direction': 'alternate', /* or: normal */
-                  'animation-timing-function': 'ease-out', /* or: ease, ease-in, ease-in-out, linear, cubic-bezier(x1, y1, x2, y2) */
-                  'animation-fill-mode': 'forwards', /* or: backwards, both, none */
-                  'animation-delay': '2s' /* or: Xms */}
-    },
+        'animation-duration': '1s',
+        'animation-iteration-count': '10',
+        'animation-direction': 'alternate', /* or: normal */
+        'animation-timing-function': 'ease-out', /* or: ease, ease-in, ease-in-out, linear, cubic-bezier(x1, y1, x2, y2) */
+        'animation-fill-mode': 'forwards', /* or: backwards, both, none */
+        'animation-delay': '2s' /* or: Xms */}
+    }
 
   }
 }

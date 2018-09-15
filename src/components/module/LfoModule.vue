@@ -89,16 +89,16 @@ export default {
     self = this
     this.lfo = audio.lfo.state.device
   },
-  mounted() {
+  mounted () {
     this.realFrq = character.lfo.type(this.lfo.frequency.value)
   },
   computed: {
     timerIsRunning () {
       return this.$store.state.gameState.timerIsRunning
     },
-    dialsAreWithinMargin() {
-      if(this.createModeIsActive) return false // quick hack
-      this.title = 'Done!';
+    dialsAreWithinMargin () {
+      if (this.createModeIsActive) return false // quick hack
+      this.title = 'Done!'
       return Object.values(this.$store.getters.audioParametersMatchGoalWithMargin[this.name])
         .every(param => param)
     },
@@ -125,8 +125,8 @@ export default {
     })
   },
   watch: {
-    typeDial(val) {
-      this.type = this.typeArray[mapValueToRange(val, 100, (this.typeArray.length -1))]
+    typeDial (val) {
+      this.type = this.typeArray[mapValueToRange(val, 100, (this.typeArray.length - 1))]
     }
   }
 }

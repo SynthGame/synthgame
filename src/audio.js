@@ -35,7 +35,6 @@ export default {
     const volume = this.volume.state.device
     const compressor = this.compressor.state.device
 
-
     log(`Created new general output for audio device`)
     const output = new Tone.Volume(6)
     log(`Connecting LFO to filter frequency`)
@@ -77,7 +76,7 @@ export default {
     return this.state.loop
   },
   stopMainLoop () {
-    this.state.loop.stop();
+    this.state.loop.stop()
     this.oscillator1.state.device.stop()
     this.oscillator2.state.device.stop()
   },
@@ -96,28 +95,28 @@ export default {
       this.oscillator1.state.pitchShift.pitch = shift
       this.oscillator2.state.pitchShift.pitch = shift
     }
-    if(volume) this.volume.state.device.volume.value = volume // TODO: should only set volume for this note
+    if (volume) this.volume.state.device.volume.value = volume // TODO: should only set volume for this note
     return this.envelope.state.device.triggerAttackRelease(noteLength || this.state.toneLength) // TODO: Error: timeConstant must be greater than 0
   },
   playKick () {
     log(`Playing kick`)
-    return this.player.state.device.start('+0.11');
+    return this.player.state.device.start('+0.11')
   },
   stopKick () {
     log(`Playing kick`)
-    return this.player.state.device.stop();
+    return this.player.state.device.stop()
   },
   playGameOver () {
     log(`Playing Game Over`)
-    return this.gameOverPlayer.state.device.start();
+    return this.gameOverPlayer.state.device.start()
   },
   playSweep () {
     log(`Playing sweep`)
-    return this.sweepPlayer.state.device.start();
+    return this.sweepPlayer.state.device.start()
   },
   stopSweep () {
     log(`Stopping sweep`)
-    return this.sweepPlayer.state.device.stop();
+    return this.sweepPlayer.state.device.stop()
   },
   setSecondOscillatorPlayingTo (state) {
     if (state) this.oscillator2.state.device.start()
@@ -135,8 +134,8 @@ export default {
     init (options) {
       log(`Initializing player with options: ${options}`)
       this.state.device = new Tone.Player({
-        url : require('./assets/beat.mp3'),
-        loop  : true ,
+        url: require('./assets/beat.mp3'),
+        loop: true
       })
     }
   },
@@ -147,7 +146,7 @@ export default {
     init (options) {
       log(`Initializing player with options: ${options}`)
       this.state.device = new Tone.Player({
-        url : require('./assets/gameover.mp3'),
+        url: require('./assets/gameover.mp3')
       })
     }
   },
@@ -158,7 +157,7 @@ export default {
     init (options) {
       log(`Initializing player with options: ${options}`)
       this.state.device = new Tone.Player({
-        url : require('./assets/sweeptats.wav'),
+        url: require('./assets/sweeptats.wav')
       })
     }
   },
@@ -242,12 +241,12 @@ export default {
     init (options) {
       log(`Initializing Compressor with options: ${options}`)
       this.state.device = new Tone.Compressor({
-      ratio  : 10 ,
-      threshold  : -18 ,
-      release  : 0.11 ,
-      attack  : 0.003 ,
-      knee  : 0
-      });
+        ratio: 10,
+        threshold: -18,
+        release: 0.11,
+        attack: 0.003,
+        knee: 0
+      })
     }
   },
   filter: {

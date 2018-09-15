@@ -31,7 +31,7 @@ export default new Vuex.Store({
       filter: {
         cutOffFreq: 70,
         type: 'lowpass',
-        setQ: 0,
+        setQ: 0
         // gain: 50
       },
       envelope: {
@@ -83,7 +83,7 @@ export default new Vuex.Store({
         filter: {
           cutOffFreq: 70,
           type: 'lowpass',
-          setQ: 0,
+          setQ: 0
           // gain: 50
         },
         envelope: {
@@ -193,9 +193,9 @@ export default new Vuex.Store({
       state.gameState.level = level
     },
     updateHighScore (state, val) {
-      state.gameState.highScore = val;
-      if (localStorage.getItem("highscore") < val) {
-        localStorage.setItem("highscore", val);
+      state.gameState.highScore = val
+      if (localStorage.getItem('highscore') < val) {
+        localStorage.setItem('highscore', val)
       }
     },
     setKnobsAvailable (state, obj) {
@@ -234,9 +234,9 @@ export default new Vuex.Store({
           return isArray(state.gameState.possibleValues[moduleName][parameterName])
             ? (val === state.gameState.goal[moduleName][parameterName])
             : inRange(val,
-                (state.gameState.goal[moduleName][parameterName] - state.gameState.margin),
-                (state.gameState.goal[moduleName][parameterName] + state.gameState.margin)
-              )
+              (state.gameState.goal[moduleName][parameterName] - state.gameState.margin),
+              (state.gameState.goal[moduleName][parameterName] + state.gameState.margin)
+            )
         })
       })
     }
@@ -255,7 +255,7 @@ export default new Vuex.Store({
       })
 
       const randomizeWithoutMatches = (obj, selectObj, itrs = 0) => {
-        if(itrs === 20) return obj
+        if (itrs === 20) return obj
         const randomPreset = randomizeValues(obj, selectObj) // randomly generated preset
         const accedentlyCorrectValues = mapValues(randomPreset, (modulePreset, moduleName) => {
           return mapValues(modulePreset, (val, parameterName) => {
@@ -266,8 +266,7 @@ export default new Vuex.Store({
               : false
           })
         })
-        console.log(itrs, randomPreset, accedentlyCorrectValues, selectObj)
-        if(!!find(accedentlyCorrectValues, mod => !!find(mod, par => par === true))) return randomizeWithoutMatches(randomPreset, accedentlyCorrectValues, itrs + 1)
+        if (find(accedentlyCorrectValues, mod => !!find(mod, par => par === true))) return randomizeWithoutMatches(randomPreset, accedentlyCorrectValues, itrs + 1)
         return randomPreset
       }
 
@@ -329,7 +328,7 @@ export default new Vuex.Store({
     },
     exportPreset ({state}) {
       return addPreset({
-        name: 'test', 
+        name: 'test',
         parameterValues: state.audioParameters,
         sequenceArray: state.activeSequence
       })
@@ -339,7 +338,7 @@ export default new Vuex.Store({
     },
     startNewLevel ({state, commit, dispatch}, {knobsAvailable, level}) {
       commit('resetSequencesPassedInCurrentLevel')
-      if(level) commit('setLevelValue', level);
+      if (level) commit('setLevelValue', level)
       return dispatch('setLevel', {
         knobsAvailable
       })

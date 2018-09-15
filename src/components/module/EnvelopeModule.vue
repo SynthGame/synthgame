@@ -105,14 +105,14 @@ export default {
     timerIsRunning () {
       return this.$store.state.gameState.timerIsRunning
     },
-    dialsAreWithinMargin() {
-      if(this.createModeIsActive) return false // quick hack
+    dialsAreWithinMargin () {
+      if (this.createModeIsActive) return false // quick hack
       return Object.values(this.$store.getters.audioParametersMatchGoalWithMargin[this.name])
         .every(param => param)
     },
     ...vuexSyncGen('envelope', 'attack', val => {
-       // somehow these values cause weird problems when they're 0
-       // this is not a proper fix but if it works it's not stupid
+      // somehow these values cause weird problems when they're 0
+      // this is not a proper fix but if it works it's not stupid
       self.envelope.attack = character.envelope.attack(val || 1)
     }),
     ...vuexSyncGen('envelope', 'decay', val => {

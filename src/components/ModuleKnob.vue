@@ -233,7 +233,7 @@ export default {
       return this.angle + Math.PI / 2
     },
     degAngle () {
-      return (this.angle)/(2 * Math.PI) * 360
+      return (this.angle) / (2 * Math.PI) * 360
     },
     cpMainCircleStrokeWidth () {
       return this.circleWidth || (550 / 2) / this.circleWidthRel

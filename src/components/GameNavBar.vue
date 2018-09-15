@@ -98,7 +98,7 @@
 import { MODULE_OSCILLATOR_COLOR, MODULE_OSCILLATORTWO_COLOR, MODULE_ENVELOPE_COLOR, MODULE_FILTER_COLOR, MODULE_DELAY_COLOR, MODULE_REVERB_COLOR, MODULE_LFO_COLOR} from '@/constants'
 import padStart from 'lodash/padStart'
 import some from 'lodash/some'
-import AfterCreateOverlay from "@/components/AfterCreateOverlay"
+import AfterCreateOverlay from '@/components/AfterCreateOverlay'
 
 export default {
   name: 'gameNavBar',
@@ -136,19 +136,19 @@ export default {
     knobsAvailable () {
       return this.$store.state.gameState.knobsAvailable
     },
-    oscillator1Complete() {
+    oscillator1Complete () {
       return Object.values(this.$store.getters.audioParametersMatchGoalWithMargin['oscillator1']).every(param => param)
     },
-    oscillator2Complete() {
+    oscillator2Complete () {
       return Object.values(this.$store.getters.audioParametersMatchGoalWithMargin['oscillator2']).every(param => param)
     },
-    filterComplete() {
+    filterComplete () {
       return Object.values(this.$store.getters.audioParametersMatchGoalWithMargin['filter']).every(param => param)
     },
-    envelopeComplete() {
+    envelopeComplete () {
       return Object.values(this.$store.getters.audioParametersMatchGoalWithMargin['envelope']).every(param => param)
     },
-    lfoComplete() {
+    lfoComplete () {
       return Object.values(this.$store.getters.audioParametersMatchGoalWithMargin['lfo']).every(param => param)
     },
     gameLevel () {
@@ -162,22 +162,22 @@ export default {
     },
     paddedHighScoreString () {
       return `${padStart(this.highScore, 5, '0')}`
-    },
+    }
   },
   methods: {
     startTimer () {
       this.timeLeftSeconds = 30
       this.timer = this.timer || window.setInterval(() => {
-        if(this.timeLeftSeconds === 0) return this.timeIsUp()
+        if (this.timeLeftSeconds === 0) return this.timeIsUp()
         this.timeLeftSeconds--
       }, 1000)
     },
     stopTimer () {
       window.clearInterval(this.timer)
       this.timer = null
-      this.$store.commit('addValueToScore', this.timeLeftSeconds);
+      this.$store.commit('addValueToScore', this.timeLeftSeconds)
       if (this.$store.state.gameState.score > this.$store.state.gameState.highScore) {
-          this.$store.commit('updateHighScore', this.$store.state.gameState.score)
+        this.$store.commit('updateHighScore', this.$store.state.gameState.score)
       }
     },
     timeIsUp () {
@@ -191,14 +191,14 @@ export default {
       return some(this.knobsAvailable[moduleName]) // some are truthy
     },
     exitGame () {
-      location.reload();
+      location.reload()
     },
     submitPreset () {
-      this.showAfterCreateOverlay=true
+      this.showAfterCreateOverlay = true
       this.$store.dispatch('exportPreset', {name: this.exportPresetName})
         .then(presetId => {
           alert(`${window.location.origin}/?preset=${presetId}`)
-          this.exportPresetLink=`${window.location.origin}/?preset=${presetId}`
+          this.exportPresetLink = `${window.location.origin}/?preset=${presetId}`
         })
     }
   },

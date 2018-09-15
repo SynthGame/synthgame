@@ -91,7 +91,7 @@ export default {
   },
   created () {
     this.init()
-    if(this.$route.query.preset) {
+    if (this.$route.query.preset) {
       getPresetById(this.$route.query.preset)
         .then(data => {
           this.customLevelIsActive = true
@@ -117,16 +117,16 @@ export default {
       timerIsRunning: state => state.gameState.timerIsRunning
     }),
     ...mapGetters({
-      allParametersMatchGoal: 'allParametersMatchGoal',
+      allParametersMatchGoal: 'allParametersMatchGoal'
     }),
-    isGameOver() {
+    isGameOver () {
       return this.$store.state.gameState.isGameOver
     }
   },
   methods: {
     init () {
       // Retrieve highscore from local storage
-        this.$store.commit('updateHighScore', localStorage.getItem("highscore"))
+      this.$store.commit('updateHighScore', localStorage.getItem('highscore'))
       // initialize the synth
       audio.init().toMaster()
       // create loop wich sequences 4 notes
@@ -137,26 +137,28 @@ export default {
       }, (time, i) => { // i here is just a note from the note array define above
         if (this.$store.state.gameState.timerIsRunning === false && !this.displaySuccessOverlay && !this.displayPreviewOverlay) {
           if (this.$store.state.gameState.sweepArmed) {
-            audio.playSweep(); //plan this ahead?
+            audio.playSweep() // plan this ahead?
             this.$store.commit('disarmSweep')
           }
         }
         if ((this.displayPreviewOverlay && this.kickTime === 0 && !this.displayStartOverlay) || (this.displaySuccessOverlay && this.kickTime === 0 && !this.displayStartOverlay)) {
-          audio.playKick();
+          audio.playKick()
           this.$store.commit('armSweep')
           this.kickTime++
         } else if (this.kickTime < 15) {
           this.kickTime++
         } else {
-          this.kickTime = 0;
+          this.kickTime = 0
         };
         if (!this.customLevelIsActive) {
           audio.playNote(randomLoop[i], {})
         } else {
-          if(this.customLevelSequence[i].selected) audio.playNote(this.customLevelSequence[i].pitch, {
-            noteLength: ['16t', '8n', '4n', '2n','1n'][this.customLevelSequence[i].noteLength],
-            volume: this.customLevelSequence[i].volume
-          })
+          if (this.customLevelSequence[i].selected) {
+            audio.playNote(this.customLevelSequence[i].pitch, {
+              noteLength: ['16t', '8n', '4n', '2n', '1n'][this.customLevelSequence[i].noteLength],
+              volume: this.customLevelSequence[i].volume
+            })
+          }
         }
 
         // if (i === 15) this.$store.commit('increaseSequencesPassedInCurrentLevel')
@@ -171,16 +173,17 @@ export default {
     initM () {
       navigator.requestMIDIAccess()
         .then(access => {
-          if(access.inputs.size > 0) {
-            const input = access.inputs.values().next().value; // get the first input
-            console.log(input.name);
+          if (access.inputs.size > 0) {
+            const input = access.inputs.values().next().value // get the first input
+            console.log(input.name)
             input.onmidimessage = e => {
               if (e.data.length !== 3) return
               const pS = e.data[1]
               const value = e.data[2]
-              const device = Object.keys(this.$store.state.audioParameters)[(''+pS)[0]-1]
-              const parameter = Object.keys(this.$store.state.audioParameters[device])[(''+pS)[1]]
-              this.$store.commit('setAudioParameter', { device, parameter,
+              const device = Object.keys(this.$store.state.audioParameters)[('' + pS)[0] - 1]
+              const parameter = Object.keys(this.$store.state.audioParameters[device])[('' + pS)[1]]
+              this.$store.commit('setAudioParameter', { device,
+                parameter,
                 value: this.$store.state.gameState.possibleValues[device][parameter]
                   ? this.$store.state.gameState.possibleValues[device][parameter][e.data[2]]
                   : e.data[2]
@@ -195,26 +198,26 @@ export default {
     // displayFailureMessage () {
     //   this.displaySuccessOverlay = true
     // },
-    startAgain(){
-      location.reload();
+    startAgain () {
+      location.reload()
     },
-    startPlayMode(){
+    startPlayMode () {
       this.displayStartOverlay = false // hide start overlay
       this.startLevel(0)
     },
-    startCreateMode(){
+    startCreateMode () {
       this.displayStartOverlay = false
-      this.displayFailureOverlay=false;
+      this.displayFailureOverlay = false
       this.$store.commit('setCreateMode', true)
     },
-    startLevel(level) {
+    startLevel (level) {
       // disable all overlays
       this.displaySuccessOverlay = false
       this.displayFailureOverlay = false
       this.displayStartOverlay = false
       this.displayPreviewOverlay = true
       // import level config
-      const availableParameters = levels[level] || levels[levels.length -1]
+      const availableParameters = levels[level] || levels[levels.length - 1]
 
       this.$store.dispatch('startNewLevel', {
         knobsAvailable: availableParameters,
@@ -227,10 +230,10 @@ export default {
       this.loop.start()
       // rest will be done by watcher of sequencesPassedInCurrentLevel
     },
-    startPreset(parameters) {
+    startPreset (parameters) {
       const usedParameters = mapValues(parameters,
-      audioModule => mapValues(audioModule,
-      parameter => !!parameter))
+        audioModule => mapValues(audioModule,
+          parameter => !!parameter))
 
       // disable all overlays
       this.displaySuccessOverlay = false
@@ -251,49 +254,48 @@ export default {
       this.loop.start()
       // rest will be done by watcher of sequencesPassedInCurrentLevel
     },
-    beginSvoosh() {
-      this.isThereSvooshComponent = true;
+    beginSvoosh () {
+      this.isThereSvooshComponent = true
       this.$nextTick(() => this.svooshIt = true)
       this.displayPreviewOverlay = false
     },
-    endSvoosh() {
-      setTimeout(()=>{
-        this.isThereSvooshComponent=false
+    endSvoosh () {
+      setTimeout(() => {
+        this.isThereSvooshComponent = false
         this.svooshIt = false
         this.$store.commit('armSweep')
-        }, 500)
+      }, 500)
       this.endPreview()
     },
-    beginSuccessSvoosh() {
+    beginSuccessSvoosh () {
       this.isThereSuccessSvooshComponent = true
-      this.$nextTick(() => this.successSvooshIt=true)
+      this.$nextTick(() => this.successSvooshIt = true)
     },
-    endSuccessSvoosh() {
-      setTimeout(()=>{
-        this.isThereSuccessSvooshComponent=false
+    endSuccessSvoosh () {
+      setTimeout(() => {
+        this.isThereSuccessSvooshComponent = false
         this.successSvooshIt = false
-        }, 500)
-
+      }, 500)
     },
-    endPreview() {
+    endPreview () {
       this.$store.commit('startTimerIsRunning')
       this.$store.dispatch('setSynthToDefaultParameters', audio)
     },
-    startNextLevel(level) {
+    startNextLevel (level) {
       this.$store.commit('increaseLevelValue', 1)
       this.startLevel(this.level) // TODO: should be + 1
     },
     gameLevel () {
       return this.$store.state.gameState.level
     },
-    showCreate() {
-      this.showCreatePreview=false
+    showCreate () {
+      this.showCreatePreview = false
       this.startCreateMode()
     }
   },
   watch: {
     allParametersMatchGoal (val) {
-      if(val === true && this.timerIsRunning) {
+      if (val === true && this.timerIsRunning) {
         this.beginSuccessSvoosh()
         this.$store.dispatch('levelDone') // would be nice to pass timeleft here but it is being passed by timer on gamestop
       }
@@ -333,7 +335,6 @@ export default {
     }
   }
 }
-
 
 .level {
   display: block;

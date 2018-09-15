@@ -67,7 +67,7 @@ import character from '@/character'
 import ModuleKnob from '@/components/ModuleKnob.vue'
 import ModuleDisplay from '@/components/ModuleDisplay.vue'
 import ModuleTitle from './ModuleComponents/ModuleTitle.vue'
-import ModuleButton  from '@/components/ModuleButton'
+import ModuleButton from '@/components/ModuleButton'
 
 var self
 
@@ -102,8 +102,8 @@ export default {
     timerIsRunning () {
       return this.$store.state.gameState.timerIsRunning
     },
-    dialsAreWithinMargin() {
-      if(this.createModeIsActive) return false // quick hack
+    dialsAreWithinMargin () {
+      if (this.createModeIsActive) return false // quick hack
       this.title = 'Done!'
       return Object.values(this.$store.getters.audioParametersMatchGoalWithMargin[this.name])
         .every(param => param)
@@ -135,12 +135,12 @@ export default {
     })
   },
   watch: {
-    freqDial(val) {
+    freqDial (val) {
       this.frequency = this.freqArray[val]
       // this.frequency = this.freqArray[mapValueToRange(val, 100, (this.freqArray.length -1))]
     },
-    typeDial(val) {
-      this.typeOsc = this.typeArray[mapValueToRange(val, 100, (this.typeArray.length -1))]
+    typeDial (val) {
+      this.typeOsc = this.typeArray[mapValueToRange(val, 100, (this.typeArray.length - 1))]
     }
   }
 }

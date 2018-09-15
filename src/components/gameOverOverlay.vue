@@ -36,10 +36,10 @@
 <script>
 import { keyframes, easing } from 'popmotion'
 import { MODULE_OSCILLATOR_COLOR, MODULE_ENVELOPE_COLOR, MODULE_FILTER_COLOR, MODULE_LFO_COLOR, MODULE_DELAY_COLOR, MODULE_REVERB_COLOR } from '@/constants'
-import { color } from 'style-value-types';
+import { color } from 'style-value-types'
 
 export default {
-  name: "Overlay",
+  name: 'Overlay',
   props: {
     level: {
       type: Number,
@@ -61,54 +61,54 @@ export default {
       currentColor: ''
     }
   },
-  created() {
-    },
-  mounted() {
+  created () {
+  },
+  mounted () {
     // this.anim[Math.floor(Math.random()*this.anim.length)]
     console.log(this.anim[drum])
-    this.currentAnim = Math.floor(Math.random()*this.anim.length)
+    this.currentAnim = Math.floor(Math.random() * this.anim.length)
     window.addEventListener('keydown', this.emitOnKey)
     this.colorArray.push(MODULE_OSCILLATOR_COLOR, MODULE_ENVELOPE_COLOR, MODULE_FILTER_COLOR, MODULE_LFO_COLOR, MODULE_DELAY_COLOR, MODULE_REVERB_COLOR)
     this.changeColor()
   },
-  beforeDestroy() {
+  beforeDestroy () {
     window.removeEventListener('keydown', this.emitOnKey)
   },
   methods: {
-    emitOnKey() {
+    emitOnKey () {
       if (event.keyCode === 13) {
-        this.$emit('next');
+        this.$emit('next')
       }
     }
   },
-  created() {
+  created () {
     keyframes({
       values: [ // you can include anything here, jus values or '10px' or colors whatever
         { ballY: 0, racketRotate: 0, racketYOffset: 0},
         { ballY: -180, racketRotate: 12, racketYOffset: 20},
-        { ballY: 0, racketRotate:0 , racketYOffset: 0}
+        { ballY: 0, racketRotate: 0, racketYOffset: 0}
       ],
       loop: Infinity,
       duration: 545,
       easings: [easing.easeOut, easing.easeIn, easing.lineair]
     }).start({
-        update: v => {
-          this.anim.ping.ballHeight = v.ballY
-          this.anim.ping.racketTurn = v.racketRotate
-          this.anim.ping.racketYOffset = v.racketYOffset
-          if (v.ballY == 0) {
-            this.changeColor()
-          }
-        },
-        complete: () => {console.log('lalala')}
-      })
+      update: v => {
+        this.anim.ping.ballHeight = v.ballY
+        this.anim.ping.racketTurn = v.racketRotate
+        this.anim.ping.racketYOffset = v.racketYOffset
+        if (v.ballY == 0) {
+          this.changeColor()
+        }
+      },
+      complete: () => { console.log('lalala') }
+    })
   },
-  methods:{
-    changeColor() {
-      //make sure they do not repeat:
+  methods: {
+    changeColor () {
+      // make sure they do not repeat:
       // let list = this.colorArray.splice(this.colorArray.indexOf(this.currentColor), 1)
       // do so they don't repeat list.splice( list.indexOf('foo'), 1 );
-      this.currentColor = this.colorArray[Math.floor(Math.random()*this.colorArray.length)]
+      this.currentColor = this.colorArray[Math.floor(Math.random() * this.colorArray.length)]
     }
   },
   computed: {
@@ -121,15 +121,15 @@ export default {
     gameLevel () {
       return this.$store.state.gameState.level
     },
-    computedRackedStyles() {
+    computedRackedStyles () {
       return {'animation-name': 'racket-movement',
-                'animation-duration': '1s',
-                 'animation-iteration-count': '10',
-                  'animation-direction': 'alternate', /* or: normal */
-                  'animation-timing-function': 'ease-out', /* or: ease, ease-in, ease-in-out, linear, cubic-bezier(x1, y1, x2, y2) */
-                  'animation-fill-mode': 'forwards', /* or: backwards, both, none */
-                  'animation-delay': '2s' /* or: Xms */}
-    },
+        'animation-duration': '1s',
+        'animation-iteration-count': '10',
+        'animation-direction': 'alternate', /* or: normal */
+        'animation-timing-function': 'ease-out', /* or: ease, ease-in, ease-in-out, linear, cubic-bezier(x1, y1, x2, y2) */
+        'animation-fill-mode': 'forwards', /* or: backwards, both, none */
+        'animation-delay': '2s' /* or: Xms */}
+    }
 
   }
 }

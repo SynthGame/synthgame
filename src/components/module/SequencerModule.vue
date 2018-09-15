@@ -73,7 +73,7 @@ import ModuleKnob from '@/components/ModuleKnob.vue'
 import ModuleTitle from './ModuleComponents/ModuleTitle.vue'
 import SequencerButton from './SequencerModule/SequencerButton.vue'
 import SequencerSlider from './SequencerModule/SequencerSlider.vue'
-import { setInterval } from 'timers';
+import { setInterval } from 'timers'
 import range from 'lodash/range'
 import fill from 'lodash/fill'
 import sample from 'lodash/sample'
@@ -92,7 +92,7 @@ export default {
       toneLoop: null,
       sequencerEditState: 0,
       activeButton: 0,
-      noteArray: fill(range(0,16), {
+      noteArray: fill(range(0, 16), {
         selected: false,
         pitch: 0,
         volume: 0,
@@ -105,25 +105,25 @@ export default {
     this.initSynth()
   },
   methods: {
-    sequencerEditStateChange(val) {
-      this.sequencerEditState = val;
+    sequencerEditStateChange (val) {
+      this.sequencerEditState = val
     },
     initSynth () {
-      let kickTime = true;
+      let kickTime = true
       this.toneLoop = audio.setMainLoop({
         noteArray: range(0, 16),
         subdivision: '8n'
       }, (time, note) => {
         this.setStep(note)
         if (this.$store.state.gameState.timerIsRunning === false && kickTime === true && this.$store.state.gameState.level > 0) {
-          audio.playKick();
-          kickTime = false;
+          audio.playKick()
+          kickTime = false
         } else {
-          kickTime = true;
+          kickTime = true
         };
-        if(this.noteArray[note].selected) {
+        if (this.noteArray[note].selected) {
           audio.playNote(this.noteArray[note].pitch, {
-            noteLength: ['16t', '8n', '4n', '2n','1n'][this.noteArray[note].noteLength],
+            noteLength: ['16t', '8n', '4n', '2n', '1n'][this.noteArray[note].noteLength],
             volume: this.noteArray[note].volume
           })
         }
@@ -131,19 +131,19 @@ export default {
       this.toneLoop.start()
     },
     playPauseSynth () {
-      if(this.toneLoop.state === 'stopped') return this.toneLoop.start()
+      if (this.toneLoop.state === 'stopped') return this.toneLoop.start()
       this.toneLoop.stop()
     },
     setStep (i) {
-      if(i) return (this.activeButton = i, this.activeButton)
-      if(this.activeButton === 15) this.activeButton = 0
+      if (i) return (this.activeButton = i, this.activeButton)
+      if (this.activeButton === 15) this.activeButton = 0
       this.activeButton++
     },
     setNoteOnOff (i, val) {
-      this.noteArray = this.noteArray.map((el, j) => i === j ? {...el, selected:val} : el)
+      this.noteArray = this.noteArray.map((el, j) => i === j ? {...el, selected: val} : el)
     },
     toggleNoteOnOff (i) { // use setNoteOnOff
-      this.noteArray = this.noteArray.map((el, j) => i === j ? {...el, selected:!el.selected} : el)
+      this.noteArray = this.noteArray.map((el, j) => i === j ? {...el, selected: !el.selected} : el)
     },
     setPitchValue (i, val) {
       this.noteArray = this.noteArray.map((el, j) => i === j ? {...el, pitch: val} : el)
@@ -156,9 +156,9 @@ export default {
     },
     randomizeSelectedParam (param) {
       const _randomizeNoteSelected = () => this.noteArray.forEach((el, i) => this.setNoteOnOff(i, sample([true, false])))
-      const _randomizeNotePitch = () => this.noteArray.forEach((el, i) => this.setPitchValue(i, random(-12,12)))
-      const _randomizeNoteVolume = () => this.noteArray.forEach((el, i) => this.setVolumeValue(i, random(-20,6)))
-      const _randomizeNoteLength = () => this.noteArray.forEach((el, i) => this.setNoteLengthValue(i, random(0,5)))
+      const _randomizeNotePitch = () => this.noteArray.forEach((el, i) => this.setPitchValue(i, random(-12, 12)))
+      const _randomizeNoteVolume = () => this.noteArray.forEach((el, i) => this.setVolumeValue(i, random(-20, 6)))
+      const _randomizeNoteLength = () => this.noteArray.forEach((el, i) => this.setNoteLengthValue(i, random(0, 5)))
 
       return (
         _randomizeNoteSelected(),
@@ -191,7 +191,7 @@ export default {
       // returns the sub step of 4 in a 16 array
       const startArray = (i * 4)
       return range(startArray, startArray + 4)
-    },
+    }
   },
   watch: {
     bpmKnob (val) {

@@ -20,13 +20,13 @@ db.settings({timestampsInSnapshots: true}) // time snapshot will change in futur
 const scoreRef = db.collection('highscores')
 const presetRef = db.collection('customPresets')
 
-// Highscore funtions 
+// Highscore funtions
 
 export const addHighscore = ({name, score}) => {
   return scoreRef.add({
     name,
     score
-  }) 
+  })
 }
 
 export const getHighscores = (amount) => {
@@ -55,7 +55,7 @@ export const getHighscoresByName = (name) => {
  *  Adds a user created preset to the databse
  *  @param  {Object} obj - Object with data
  *  @param  {String} obj.name - The name of the new preset
- *  @param  {Object} obj.parameterValues - The values of the audio components 
+ *  @param  {Object} obj.parameterValues - The values of the audio components
  *  @param  {Object} obj.sequenceArray - Array with 16 objects that define the steps in the sequence
  *  @return {Promise} Returns the uid of the newly created preset
  */

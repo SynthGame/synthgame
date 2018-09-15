@@ -64,12 +64,12 @@
 <script>
 import { keyframes, easing } from 'popmotion'
 import { MODULE_OSCILLATOR_COLOR, MODULE_ENVELOPE_COLOR, MODULE_FILTER_COLOR, MODULE_LFO_COLOR, MODULE_DELAY_COLOR, MODULE_REVERB_COLOR } from '@/constants'
-import { color } from 'style-value-types';
+import { color } from 'style-value-types'
 import padStart from 'lodash/padStart'
 import audio from '@/audio'
 
 export default {
-  name: "Overlay",
+  name: 'Overlay',
   props: {
     level: {
       type: Number,
@@ -93,10 +93,10 @@ export default {
           stick1: 0,
           stick1Offset: 0,
           stick2: 20,
-          stick2AdditionalTwirl:0,
+          stick2AdditionalTwirl: 0,
           changedTransitionOrigin: -100
 
-        },
+        }
       },
       colorArray: [],
       currentColor: '',
@@ -105,15 +105,15 @@ export default {
       litUpButton: false
     }
   },
-  created() {
-    //stop beat
-      audio.stopKick();
-      // stop loop
-      audio.stopMainLoop();
-      // Play gameover
-      audio.playGameOver();
+  created () {
+    // stop beat
+    audio.stopKick()
+    // stop loop
+    audio.stopMainLoop()
+    // Play gameover
+    audio.playGameOver()
     // randomize animation:
-    const currentAnimationNumber = Math.floor(Math.random()*Object.keys(this.anim).length)
+    const currentAnimationNumber = Math.floor(Math.random() * Object.keys(this.anim).length)
     this.currentAnim = Object.keys(this.anim)[currentAnimationNumber]
 
     window.addEventListener('keydown', this.emitOnKey)
@@ -121,95 +121,93 @@ export default {
     this.buttonColor = this.changeColor(this.buttonColor)
     this.currentColor = this.changeColor(this.currentColor)
     this.currentColor1 = this.changeColor(this.currentColor1)
-
   },
 
-  mounted() {
-
-let conf = {
-        values: [
-          {
-            stick1: -20,
-            stick1Offset: 0,
-            stick2: 20,
-            stick2AdditionalTwirl: 0,
-            changedTransitionOrigin: 0
-          },
-          {
-            stick1: 0,
-            stick1Offset: 0,
-            stick2: 0,
-            stick2AdditionalTwirl: 0,
-            changedTransitionOrigin: 0
-          },
-                    {
-            stick1: -25,
-            stick1Offset: 0,
-            stick2: 0,
-            stick2AdditionalTwirl:0,
-            changedTransitionOrigin: 0
-          },
-                    {
-            stick1: 0,
-            stick1Offset: 0,
-            stick2: 0,
-            stick2AdditionalTwirl:0,
-            changedTransitionOrigin: 0
-          },
-          {
-            stick1: -2500,
-            stick1Offset: 130,
-            stick2: 0,
-            stick2AdditionalTwirl:300,
-            changedTransitionOrigin: 700
-          }
-        ],
-        loop: 0,
-        duration: this.duration*2,
-        easings: easing.cubicBezier(.29,.06,1,-0.24)
-      }
-
-    let  callback = {
-        update: v => {
-          this.anim.drum.stick1 = v.stick1
-          this.anim.drum.stick1Offset=v.stick1Offset
-          this.anim.drum.stick2 = v.stick2
-          this.anim.drum.stick2AdditionalTwirl=v.stick2AdditionalTwirl
-          this.anim.drum.changedTransitionOrigin = v.changedTransitionOrigin
-          if (v.stick1 === 0) {
-            this.currentColor = this.changeColor(this.currentColor)
-            // console.log(`this.currentColor changed!`)
-          }
-          if (v.stick2 < 0.1) {
-            this.currentColor1 = this.changeColor(this.currentColor1)
-            // console.log(`this.currentColor1 changed!`)
-          }
+  mounted () {
+    let conf = {
+      values: [
+        {
+          stick1: -20,
+          stick1Offset: 0,
+          stick2: 20,
+          stick2AdditionalTwirl: 0,
+          changedTransitionOrigin: 0
         },
-        complete: () => {}
-      }
+        {
+          stick1: 0,
+          stick1Offset: 0,
+          stick2: 0,
+          stick2AdditionalTwirl: 0,
+          changedTransitionOrigin: 0
+        },
+        {
+          stick1: -25,
+          stick1Offset: 0,
+          stick2: 0,
+          stick2AdditionalTwirl: 0,
+          changedTransitionOrigin: 0
+        },
+        {
+          stick1: 0,
+          stick1Offset: 0,
+          stick2: 0,
+          stick2AdditionalTwirl: 0,
+          changedTransitionOrigin: 0
+        },
+        {
+          stick1: -2500,
+          stick1Offset: 130,
+          stick2: 0,
+          stick2AdditionalTwirl: 300,
+          changedTransitionOrigin: 700
+        }
+      ],
+      loop: 0,
+      duration: this.duration * 2,
+      easings: easing.cubicBezier(0.29, 0.06, 1, -0.24)
+    }
+
+    let callback = {
+      update: v => {
+        this.anim.drum.stick1 = v.stick1
+        this.anim.drum.stick1Offset = v.stick1Offset
+        this.anim.drum.stick2 = v.stick2
+        this.anim.drum.stick2AdditionalTwirl = v.stick2AdditionalTwirl
+        this.anim.drum.changedTransitionOrigin = v.changedTransitionOrigin
+        if (v.stick1 === 0) {
+          this.currentColor = this.changeColor(this.currentColor)
+          // console.log(`this.currentColor changed!`)
+        }
+        if (v.stick2 < 0.1) {
+          this.currentColor1 = this.changeColor(this.currentColor1)
+          // console.log(`this.currentColor1 changed!`)
+        }
+      },
+      complete: () => {}
+    }
 
     keyframes(conf).start(callback)
     this.$refs.button.focus()
   },
-  beforeDestroy() {
+  beforeDestroy () {
     window.removeEventListener('keydown', this.emitOnKey)
   },
-  methods:{
-    emitOnKey() {
+  methods: {
+    emitOnKey () {
       if (event.keyCode === 13) {
-        this.$emit('startagain');
+        this.$emit('startagain')
       }
     },
-    changeColor(current) {
-      let randomColor = this.colorArray[Math.floor(Math.random()*this.colorArray.length)]
+    changeColor (current) {
+      let randomColor = this.colorArray[Math.floor(Math.random() * this.colorArray.length)]
       // does that even work?
-      if (randomColor===current) {
-        randomColor = this.colorArray[Math.floor(Math.random()*this.colorArray.length)]
+      if (randomColor === current) {
+        randomColor = this.colorArray[Math.floor(Math.random() * this.colorArray.length)]
         // console.log('repeat!')
       }
       return randomColor
     },
-    startAgain() {
+    startAgain () {
       this.$emit('startagain')
     }
   },
@@ -228,7 +226,7 @@ let conf = {
     },
     paddedHighScoreString () {
       return `${padStart(this.gameHighScore, 5, '0')}`
-    },
+    }
 
   }
 }

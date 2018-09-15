@@ -10,15 +10,15 @@ export default {
   props: {
     value: {
       type: Number,
-      default: 50,
+      default: 50
     },
     min: {
       type: Number,
-      default: 0,
+      default: 0
     },
     max: {
       type: Number,
-      default: 100,
+      default: 100
     },
     buttonActive: {
       type: Boolean,

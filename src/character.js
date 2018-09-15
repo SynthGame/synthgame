@@ -1,6 +1,6 @@
 export default {
   envelope: {
-    attack: val => val/100 + 0.01,
+    attack: val => val / 100 + 0.01,
     decay: val => Math.pow(val, (val / 100)) - 0.99,
     sustain: val => val / 100,
     release: val => val / 100

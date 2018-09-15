@@ -12,11 +12,10 @@ import { MODULE_OSCILLATOR_COLOR, MODULE_ENVELOPE_COLOR, MODULE_FILTER_COLOR, MO
 // big thanks go to Yoichi Kobayashi
 // https://tympanus.net/codrops/2017/10/17/dynamic-shape-overlays-with-svg/
 
-
 export default {
-  props:{
+  props: {
     isFired: {
-      type:Boolean,
+      type: Boolean,
       default: false
     },
     black: {
@@ -25,22 +24,22 @@ export default {
     }
   },
   name: 'svoosh',
-  data() {
+  data () {
     return {
-    pathArray: [], // Path elements in parent SVG. These are the layers of the overlay.
-    numPoints: null, // Number of control points for Bezier Curve.
-    duration: 900, // Animation duration of one path element.
-    delayPointsArray: [], // Array of control points for Bezier Curve.
-    delayPointsMax: null, // Max of delay value in all control points.
-    delayPerPath: null, // Delay value per path.
-    timeStart: Date.now(),
-    isOpened: false,
-    isAnimating: false,
-    color: '',
-    colorArray: []
+      pathArray: [], // Path elements in parent SVG. These are the layers of the overlay.
+      numPoints: null, // Number of control points for Bezier Curve.
+      duration: 900, // Animation duration of one path element.
+      delayPointsArray: [], // Array of control points for Bezier Curve.
+      delayPointsMax: null, // Max of delay value in all control points.
+      delayPerPath: null, // Delay value per path.
+      timeStart: Date.now(),
+      isOpened: false,
+      isAnimating: false,
+      color: '',
+      colorArray: []
     }
   },
-  mounted(){
+  mounted () {
     // this.delayPointsMax = Math.floor(Math.random()*(max-min+1)+min)
     this.pathArray.push(this.$refs.path1)
     this.pathArray.push(this.$refs.path2)
@@ -49,81 +48,79 @@ export default {
     this.randomizeAll()
   },
   methods: {
-    open() {
-      const range = 4 * Math.random() + 6;
+    open () {
+      const range = 4 * Math.random() + 6
       for (var i = 0; i < this.numPoints; i++) {
-        const radian = i / (this.numPoints - 1) * Math.PI;
-        this.delayPointsArray[i] = (Math.sin(-radian) + Math.sin(-radian * range) + 2) / 4 * this.delayPointsMax;
+        const radian = i / (this.numPoints - 1) * Math.PI
+        this.delayPointsArray[i] = (Math.sin(-radian) + Math.sin(-radian * range) + 2) / 4 * this.delayPointsMax
       }
       this.isOpened = true
-      this.timeStart = Date.now();
-      this.renderLoop();
-      window.setTimeout(()=>{
+      this.timeStart = Date.now()
+      this.renderLoop()
+      window.setTimeout(() => {
         this.$emit('midway')
         this.close()
-      },this.duration+200)
-      window.setTimeout(()=>{this.$emit('bye')}, this.duration*2)
+      }, this.duration + 200)
+      window.setTimeout(() => { this.$emit('bye') }, this.duration * 2)
     },
-    close() {
-      this.isOpened = false;
-      this.timeStart = Date.now();
-      this.renderLoop();
+    close () {
+      this.isOpened = false
+      this.timeStart = Date.now()
+      this.renderLoop()
     },
-    updatePath(time) {
-      const points = [];
+    updatePath (time) {
+      const points = []
       for (var i = 0; i < this.numPoints; i++) {
         // console.log(points)
-        points[i] = this.black ? this.cubicInOut(Math.min(Math.max(time - this.delayPointsArray[i], 0) / this.duration, 1)) * 100 : (1-this.cubicInOut(Math.min(Math.max(time - this.delayPointsArray[i], 0) / this.duration, 1))) * 100
+        points[i] = this.black ? this.cubicInOut(Math.min(Math.max(time - this.delayPointsArray[i], 0) / this.duration, 1)) * 100 : (1 - this.cubicInOut(Math.min(Math.max(time - this.delayPointsArray[i], 0) / this.duration, 1))) * 100
       }
-      let str = '';
-      str += (this.isOpened) ? `M 0 0 V ${points[0]} ` : `M 0 ${points[0]} `;
+      let str = ''
+      str += (this.isOpened) ? `M 0 0 V ${points[0]} ` : `M 0 ${points[0]} `
       for (var i = 0; i < this.numPoints - 1; i++) {
-        const p = (i + 1) / (this.numPoints - 1) * 100;
-        const cp = p - (1 / (this.numPoints - 1) * 100) / 2;
-        str += `C ${cp} ${points[i]} ${cp} ${points[i + 1]} ${p} ${points[i + 1]} `;
+        const p = (i + 1) / (this.numPoints - 1) * 100
+        const cp = p - (1 / (this.numPoints - 1) * 100) / 2
+        str += `C ${cp} ${points[i]} ${cp} ${points[i + 1]} ${p} ${points[i + 1]} `
       }
       if (this.black) {
-        str += (this.isOpened) ? `V 0 H 0` : `V 100 H 0`;
+        str += (this.isOpened) ? `V 0 H 0` : `V 100 H 0`
       } else {
-        str += (this.isOpened) ? `V 100 H 0` : `V 0 H 0`;
+        str += (this.isOpened) ? `V 100 H 0` : `V 0 H 0`
       }
-      return str;
-      },
-    cubicInOut(t) {
-      return t < 0.5
-    ? 4.0 * t * t * t
-    : 0.5 * Math.pow(2.0 * t - 2.0, 3.0) + 1.0;
-
+      return str
     },
-    renderLoop() {
-    this.render();
+    cubicInOut (t) {
+      return t < 0.5
+        ? 4.0 * t * t * t
+        : 0.5 * Math.pow(2.0 * t - 2.0, 3.0) + 1.0
+    },
+    renderLoop () {
+      this.render()
       if (Date.now() - this.timeStart < this.duration + this.delayPerPath * (3 - 1) + this.delayPointsMax) {
         requestAnimationFrame(() => {
-          this.renderLoop();
-        });
-      }
-      else {
-        this.isAnimating = false;
+          this.renderLoop()
+        })
+      } else {
+        this.isAnimating = false
       }
     },
-    render() {
+    render () {
       if (this.isOpened) {
         for (var i = 0; i < 3; i++) {
-          this.pathArray[i].setAttribute('d', this.updatePath(Date.now() - (this.timeStart + this.delayPerPath * i)));
+          this.pathArray[i].setAttribute('d', this.updatePath(Date.now() - (this.timeStart + this.delayPerPath * i)))
         }
       } else {
         for (var i = 0; i < 3; i++) {
-          this.pathArray[i].setAttribute('d', this.updatePath(Date.now() - (this.timeStart + this.delayPerPath * (3 - i - 1))));
+          this.pathArray[i].setAttribute('d', this.updatePath(Date.now() - (this.timeStart + this.delayPerPath * (3 - i - 1))))
         }
       }
     },
-    randomColor() {
-    return this.black ? "#000" : this.colorArray[Math.floor(Math.random()*this.colorArray.length)]
+    randomColor () {
+      return this.black ? '#000' : this.colorArray[Math.floor(Math.random() * this.colorArray.length)]
     },
-      getRandomInt(min, max) {
-      return Math.floor(Math.random() * (max - min + 1)) + min;
+    getRandomInt (min, max) {
+      return Math.floor(Math.random() * (max - min + 1)) + min
     },
-    randomizeAll() {
+    randomizeAll () {
       this.color = this.randomColor()
       this.delayPointsMax = this.getRandomInt(50, 300)
       this.delayPerPath = this.getRandomInt(50, 150)
@@ -132,10 +129,10 @@ export default {
   },
 
   watch: {
-    isFired() {
+    isFired () {
       this.open()
     },
-    isOpen() {
+    isOpen () {
 
       // this.intervalID = window.setTimeout(this.toggle(), 6000)
       // this.toggle()

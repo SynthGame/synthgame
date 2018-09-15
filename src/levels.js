@@ -17,7 +17,7 @@ export default [
   // level 2
   {
     oscillator1: {
-      detune: true,
+      detune: true
     },
     oscillator2: {},
     filter: {},
@@ -30,21 +30,21 @@ export default [
   // level 3
   {
     oscillator1: {
-      detune: true,
+      detune: true
     },
     oscillator2: {},
     filter: {},
     envelope: {},
     lfo: {},
     levelData: {
-      text: "The oscillator is the source of electronic sound. You’ll use the knobs and dials to shape the outputted signal. "
+      text: 'The oscillator is the source of electronic sound. You’ll use the knobs and dials to shape the outputted signal. '
     }
   },
   // level 4
   {
     oscillator1: {
       frequency: true,
-      detune: true,
+      detune: true
     },
     oscillator2: {},
     filter: {},
@@ -58,7 +58,7 @@ export default [
   {
     oscillator1: {
       frequency: true,
-      detune: true,
+      detune: true
     },
     oscillator2: {},
     filter: {},
@@ -72,7 +72,7 @@ export default [
   {
     oscillator1: {
       frequency: true,
-      detune: true,
+      detune: true
     },
     oscillator2: {},
     filter: {},
@@ -85,7 +85,7 @@ export default [
   // level 7
   {
     oscillator1: {
-      typeOsc: true,
+      typeOsc: true
     },
     oscillator2: {},
     filter: {},
@@ -98,7 +98,7 @@ export default [
   // level 8
   {
     oscillator1: {
-      typeOsc: true,
+      typeOsc: true
     },
     oscillator2: {},
     filter: {},
@@ -111,7 +111,7 @@ export default [
   // level 9
   {
     oscillator1: {
-      typeOsc: true,
+      typeOsc: true
     },
     oscillator2: {},
     filter: {},
@@ -125,7 +125,7 @@ export default [
   {
     oscillator1: {
       frequency: true,
-      detune: true,
+      detune: true
     },
     oscillator2: {},
     filter: {},
@@ -139,7 +139,7 @@ export default [
   {
     oscillator1: {
       frequency: true,
-      typeOsc: true,
+      typeOsc: true
     },
     oscillator2: {},
     filter: {},
@@ -216,7 +216,7 @@ export default [
       frequency: true
     },
     oscillator2: {
-      detune: true,
+      detune: true
     },
     filter: {},
     envelope: {},
@@ -232,7 +232,7 @@ export default [
       frequency: true
     },
     oscillator2: {
-      detune: true,
+      detune: true
     },
     filter: {},
     envelope: {},
@@ -248,7 +248,7 @@ export default [
       frequency: true
     },
     oscillator2: {
-      detune: true,
+      detune: true
     },
     filter: {},
     envelope: {},
@@ -264,7 +264,7 @@ export default [
       frequency: true
     },
     oscillator2: {
-      detune: true,
+      detune: true
     },
     filter: {},
     envelope: {},
@@ -280,7 +280,7 @@ export default [
       frequency: true
     },
     oscillator2: {
-      detune: true,
+      detune: true
     },
     filter: {},
     envelope: {},
@@ -295,7 +295,7 @@ export default [
       typeOsc: true
     },
     oscillator2: {
-      typeOsc: true,
+      typeOsc: true
     },
     filter: {},
     envelope: {},
@@ -310,7 +310,7 @@ export default [
       typeOsc: true
     },
     oscillator2: {
-      typeOsc: true,
+      typeOsc: true
     },
     filter: {},
     envelope: {},
@@ -325,7 +325,7 @@ export default [
       typeOsc: true
     },
     oscillator2: {
-      typeOsc: true,
+      typeOsc: true
     },
     filter: {},
     envelope: {},
@@ -341,7 +341,7 @@ export default [
       detune: true
     },
     oscillator2: {
-      detune: true,
+      detune: true
     },
     filter: {},
     envelope: {},
@@ -370,7 +370,7 @@ export default [
   // level 26 Filter
   {
     oscillator1: {
-      typeOsc: true,
+      typeOsc: true
     },
     oscillator2: {
       typeOsc: true
@@ -387,7 +387,7 @@ export default [
   // level 27
   {
     oscillator1: {
-      typeOsc: true,
+      typeOsc: true
     },
     oscillator2: {
       typeOsc: true
@@ -404,7 +404,7 @@ export default [
   // level 28
   {
     oscillator1: {
-      typeOsc: true,
+      typeOsc: true
     },
     oscillator2: {
       typeOsc: true
@@ -421,7 +421,7 @@ export default [
   // level 29
   {
     oscillator1: {
-      typeOsc: true,
+      typeOsc: true
     },
     oscillator2: {
       typeOsc: true
@@ -438,7 +438,7 @@ export default [
   // level 30
   {
     oscillator1: {
-      typeOsc: true,
+      typeOsc: true
     },
     oscillator2: {
       typeOsc: true
@@ -455,7 +455,7 @@ export default [
   // level 31
   {
     oscillator1: {
-      typeOsc: true,
+      typeOsc: true
     },
     oscillator2: {
       typeOsc: true
@@ -472,7 +472,7 @@ export default [
   // level 32
   {
     oscillator1: {
-      typeOsc: true,
+      typeOsc: true
     },
     oscillator2: {
       typeOsc: true
@@ -489,7 +489,7 @@ export default [
   // level 33
   {
     oscillator1: {
-      typeOsc: true,
+      typeOsc: true
     },
     oscillator2: {
       typeOsc: true
@@ -506,7 +506,7 @@ export default [
   // level 34
   {
     oscillator1: {
-      typeOsc: true,
+      typeOsc: true
     },
     oscillator2: {
       typeOsc: true
@@ -523,7 +523,7 @@ export default [
   // level 35
   {
     oscillator1: {
-      typeOsc: true,
+      typeOsc: true
     },
     oscillator2: {
       typeOsc: true
@@ -541,7 +541,7 @@ export default [
   // level 36
   {
     oscillator1: {
-      typeOsc: true,
+      typeOsc: true
     },
     oscillator2: {
       typeOsc: true
@@ -559,7 +559,7 @@ export default [
   // level 37
   {
     oscillator1: {
-      typeOsc: true,
+      typeOsc: true
     },
     oscillator2: {
       typeOsc: true
@@ -577,7 +577,7 @@ export default [
   // level 38
   {
     oscillator1: {
-      typeOsc: true,
+      typeOsc: true
     },
     oscillator2: {
       typeOsc: true
@@ -595,7 +595,7 @@ export default [
   // level 39
   {
     oscillator1: {
-      typeOsc: true,
+      typeOsc: true
     },
     oscillator2: {
       typeOsc: true
@@ -614,7 +614,7 @@ export default [
   // level 40
   {
     oscillator1: {
-      typeOsc: true,
+      typeOsc: true
     },
     oscillator2: {
       typeOsc: true
@@ -633,7 +633,7 @@ export default [
   // level 41
   {
     oscillator1: {
-      typeOsc: true,
+      typeOsc: true
     },
     oscillator2: {
       typeOsc: true
@@ -698,7 +698,7 @@ export default [
     },
     lfo: {},
     levelData: {
-      text: "A low decay level results in a plucky sound."
+      text: 'A low decay level results in a plucky sound.'
     }
   },
   // level 46
@@ -817,7 +817,7 @@ export default [
     envelope: {
       decay: true,
       release: true,
-      attack: true,
+      attack: true
     },
     lfo: {},
     levelData: {
@@ -832,7 +832,7 @@ export default [
     envelope: {
       decay: true,
       sustain: true,
-      attack: true,
+      attack: true
     },
     lfo: {},
     levelData: {
@@ -902,7 +902,7 @@ export default [
     envelope: {},
     lfo: {
       amount: true,
-      frequency: true,
+      frequency: true
     },
     levelData: {
       text: 'Adjust the frequency, and hear the pitch go up and down at different speeds.'
@@ -916,7 +916,7 @@ export default [
     envelope: {},
     lfo: {
       amount: true,
-      frequency: true,
+      frequency: true
     },
     levelData: {
       text: 'Right now, we use a sinewave, which eases the effect LFO has on the pitch.'
@@ -930,7 +930,7 @@ export default [
     envelope: {},
     lfo: {
       amount: true,
-      frequency: true,
+      frequency: true
     },
     levelData: {
       text: 'But we can use other waveforms, too, just like regular oscillators.'
@@ -982,7 +982,7 @@ export default [
   // level 66
   {
     oscillator1: {
-      typeOsc: true,
+      typeOsc: true
     },
     oscillator2: {
       detune: true
@@ -1066,7 +1066,7 @@ export default [
       type: true
     },
     levelData: {
-      text: "Just like subtractive synthesis, there is no end to this game."
+      text: 'Just like subtractive synthesis, there is no end to this game.'
     }
   },
   // level 70
@@ -1114,16 +1114,16 @@ export default [
       typeOsc: true
     },
     filter: {
-      type: true,
+      type: true
     },
     envelope: {
-      decay: true,
+      decay: true
     },
     lfo: {
-      amount: true,
+      amount: true
     },
     levelData: {
-      text: "Is there even anyone that will ever read this?"
+      text: 'Is there even anyone that will ever read this?'
     }
   },
   // level 72
@@ -1149,7 +1149,7 @@ export default [
     lfo: {
     },
     levelData: {
-      text: "This is unreal. You must be a famous producer."
+      text: 'This is unreal. You must be a famous producer.'
     }
   },
   // level 73
@@ -1176,7 +1176,7 @@ export default [
       release: true
     },
     lfo: {
-      amount: true,
+      amount: true
     },
     levelData: {
       text: "Well, if so, why don't you teach us?"
@@ -1189,7 +1189,7 @@ export default [
       frequency: true
     },
     oscillator2: {
-      detune: true,
+      detune: true
     },
     filter: {
       type: true,
@@ -1204,10 +1204,10 @@ export default [
     },
     lfo: {
       frequency: true,
-      amount: true,
+      amount: true
     },
     levelData: {
-      text: "Shoot an email to bart@okbye.io"
+      text: 'Shoot an email to bart@okbye.io'
     }
   },
   // level 75
@@ -1224,7 +1224,7 @@ export default [
     },
     filter: {
       type: true,
-      cutOffFreq: true,
+      cutOffFreq: true
     },
     envelope: {
       attack: true,
@@ -1236,7 +1236,7 @@ export default [
       type: true
     },
     levelData: {
-      text: "We need people like you."
+      text: 'We need people like you.'
     }
   },
   // level 76
@@ -1268,7 +1268,7 @@ export default [
       type: true
     },
     levelData: {
-      text: "Ok Bye"
+      text: 'Ok Bye'
     }
-  },
+  }
 ]

@@ -82,7 +82,7 @@
 </template>
 
 <script>
-import store from '../store'; // path to your Vuex store
+import store from '../store' // path to your Vuex store
 
 // TODO:
 // [v]. translate the values so they work properly
@@ -107,7 +107,7 @@ import store from '../store'; // path to your Vuex store
 // [v] lfo prop watched/computed
 // [v] transition
 // [x] stylesheetapi
-//http://danielcwilson.com/blog/2017/10/all-the-transform-ways/ - does not work, the properties are not recognized
+// http://danielcwilson.com/blog/2017/10/all-the-transform-ways/ - does not work, the properties are not recognized
 // https://developer.mozilla.org/en-US/docs/Web/API/Web_Animations_API
 // [~] try transitions: define two kinds of transforms with class and switch between them
 // [v] a bit more complicated : set interval with a callback function changing a bolean data property every given time, watch changes in the rate knob to call a function replacing the current interval time with a new one. Custom transition bound and used to indicate LFO's shape
@@ -163,9 +163,9 @@ export default {
     window.addEventListener('resize', this.updateDimensions())
 
     if (this.module == 'lfo') {
-      var intervalTest =  setInterval(this.updateSeconds, ((1/this.knobs[3].value) * 1000))
+      var intervalTest = setInterval(this.updateSeconds, ((1 / this.knobs[3].value) * 1000))
       this.intervalId = intervalTest
-      this.goalIntervalId = setInterval(this.updateGoalSeconds, (1 / (this.knobs[7].value) ) * 1000 )
+      this.goalIntervalId = setInterval(this.updateGoalSeconds, (1 / (this.knobs[7].value)) * 1000)
     }
   },
 
@@ -173,15 +173,15 @@ export default {
     window.removeEventListener('resize', this.updateDimensions())
   },
   methods: {
-    updateSeconds() {
-     this.shouldItGoRight=!this.shouldItGoRight
+    updateSeconds () {
+      this.shouldItGoRight = !this.shouldItGoRight
     },
-    updateGoalSeconds() {
-     this.shouldGoalGoRight=!this.shouldGoalGoRight
+    updateGoalSeconds () {
+      this.shouldGoalGoRight = !this.shouldGoalGoRight
     },
 
-    changeInterval(time) {
-     clearInterval(this.intervalId)
+    changeInterval (time) {
+      clearInterval(this.intervalId)
       this.intervalId = setInterval(this.updateSeconds, time)
     },
     updateDimensions () {
@@ -190,19 +190,19 @@ export default {
     }
   },
   computed: {
-    createModeIsActive() {
+    createModeIsActive () {
       return this.$store.state.gameState.createModeIsActive
     },
     // used to refer to LFO rate knob in a watcher (no way to do it directly using because of "[...]")
-    firstCircleLeftMargin() {
+    firstCircleLeftMargin () {
       let margin = ''
       return margin
     },
-    firstCircleLeftMarginGoal() {
+    firstCircleLeftMarginGoal () {
       let margin = ''
       return margin
     },
-    lfoRealFreq() {
+    lfoRealFreq () {
       if (this.module === 'lfo') {
         return this.knobs[3].value
       }
@@ -295,9 +295,8 @@ export default {
         const yAxisMiddle = this.displayHeight / 2
         const h = yAxisMiddle / 2
 
-
-        const octaveRatio = (octave.value/(octave.max-octave.min))
-        const detuneRatio = ((detune.value/detune.max)*1000)/(octave.max-octave.min)
+        const octaveRatio = (octave.value / (octave.max - octave.min))
+        const detuneRatio = ((detune.value / detune.max) * 1000) / (octave.max - octave.min)
 
         const iteration = 6.6 * h - h * (4.9 * octaveRatio) + (h * 0.3 * (1 - detuneRatio)) - 15
 
@@ -329,14 +328,13 @@ export default {
         line = 'M ' + iteration * (phase.value / (phase.max)) + ', 0 ' +
               ' m ' + lineLength + ', ' + yAxisMiddle +
               ' h ' + (-lineLength - iteration) +
-              wave + wave + wave + wave + wave + wave + wave + wave + wave + wave + wave +wave + wave + wave + wave + wave + wave +
-              wave + wave + wave + wave + wave + wave + wave + wave + wave + wave + wave +wave + wave + wave + wave + wave + wave +
-              wave + wave + wave + wave + wave + wave + wave + wave + wave + wave + wave +wave + wave + wave + wave + wave + wave +
+              wave + wave + wave + wave + wave + wave + wave + wave + wave + wave + wave + wave + wave + wave + wave + wave + wave +
+              wave + wave + wave + wave + wave + wave + wave + wave + wave + wave + wave + wave + wave + wave + wave + wave + wave +
+              wave + wave + wave + wave + wave + wave + wave + wave + wave + wave + wave + wave + wave + wave + wave + wave + wave +
               ' Z '
       }
 
       if (this.module === 'lfo') {
-
         // NON OF THE BELOW PRESENETED APPROACHED WORKED (and should be deleted)
         // used a custom svg in the template
 
@@ -359,96 +357,93 @@ export default {
         'a ' + r + ', ' + r + ' 0 1,0 ' + (-2 * r) + ',0'
 
         line = ''
-
       }
       return line
     },
 
-    lfoVB() {
-      return (0-this.displayWidth/2) + ' 0 ' + this.displayWidth + ' ' + this.displayHeight
+    lfoVB () {
+      return (0 - this.displayWidth / 2) + ' 0 ' + this.displayWidth + ' ' + this.displayHeight
     },
-    swingMovement() {
+    swingMovement () {
       // helpers:
       const rate = this.knobs[0]
       const amount = this.knobs[1]
       const shape = this.knobs[2]
 
-      const rateRatio = (rate.value/(rate.max-rate.min))
-      const amountRatio = (amount.value/(amount.max-amount.min))
+      const rateRatio = (rate.value / (rate.max - rate.min))
+      const amountRatio = (amount.value / (amount.max - amount.min))
 
       // a hot-fix to stop the swing from going trrrrrrrrr ---
       // let realFreq
       // if(this.knobs[3].value === 0) {
       //   realFreq = 0.1
       // } else {
-        let realFreq = this.knobs[3].value
+      let realFreq = this.knobs[3].value
       // }
 
-      const transitionTime = ( 1 / (realFreq) )
+      const transitionTime = (1 / (realFreq))
 
-      let transitionString;
+      let transitionString
       // differenciate shapes using transitions:
-      if (shape.value=='sine') {
-        transitionString = transitionTime+'s'
+      if (shape.value == 'sine') {
+        transitionString = transitionTime + 's'
       } else if (shape.value == 'square') {
-        transitionString =''
+        transitionString = ''
       } else if (shape.value == 'sawtooth') {
         if (!this.shouldItGoRight) {
-          transitionString = transitionTime+'s linear'
-        }
-        else {
+          transitionString = transitionTime + 's linear'
+        } else {
           transitionString = ''
         }
       } else if (shape.value == 'triangle') {
-        transitionString = transitionTime+'s linear'
+        transitionString = transitionTime + 's linear'
       }
-      let rotateAmount = 1900*amountRatio;
+      let rotateAmount = 1900 * amountRatio
       let rotateString
-      if (this.shouldItGoRight){
+      if (this.shouldItGoRight) {
         // go right:
-        rotateString = 'rotate('+rotateAmount+'deg)'
+        rotateString = 'rotate(' + rotateAmount + 'deg)'
       } else {
         // go left:
-        rotateString = 'rotate(-'+rotateAmount+'deg)'
+        rotateString = 'rotate(-' + rotateAmount + 'deg)'
       }
       return {transform: rotateString, transition: transitionString}
     },
-    goalSwingMovement() {
+    goalSwingMovement () {
       // helpers:
       const rate = this.knobs[4]
       const amount = this.knobs[5]
       const shape = this.knobs[6]
 
-      const rateRatio = (rate.value/(rate.max-rate.min))
-      const amountRatio = (amount.value/(amount.max-amount.min))
+      const rateRatio = (rate.value / (rate.max - rate.min))
+      const amountRatio = (amount.value / (amount.max - amount.min))
 
       const realGoalFreq = this.knobs[7].value
 
-      const transitionTime = ( 1 / (realGoalFreq) )
+      const transitionTime = (1 / (realGoalFreq))
 
-      let transitionString;
-      if (shape.value=='sine') {
-        transitionString = transitionTime+'s'
+      let transitionString
+      if (shape.value == 'sine') {
+        transitionString = transitionTime + 's'
       } else if (shape.value == 'square') {
-        transitionString =''
+        transitionString = ''
       } else if (shape.value == 'sawtooth') {
         if (!this.shouldGoalGoRight) {
-          transitionString = transitionTime+'s linear'
-        }
-        else {
+          transitionString = transitionTime + 's linear'
+        } else {
           transitionString = ''
         }
       } else if (shape.value == 'triangle') {
-        transitionString = transitionTime+'s linear'
+        transitionString = transitionTime + 's linear'
       }
-      let rotateAmount = 1900*amountRatio;
+      let rotateAmount = 1900 * amountRatio
       let rotateString
-      if (this.shouldGoalGoRight){
+      if (this.shouldGoalGoRight) {
         // go right:
-        rotateString = 'rotate('+rotateAmount+'deg)'
+        rotateString = 'rotate(' + rotateAmount + 'deg)'
       } else {
         // go left:
-        rotateString = 'rotate(-'+rotateAmount+'deg)'
+        rotateString = 'rotate(-' + rotateAmount + 'deg)'
       }
       return {transform: rotateString, transition: transitionString }
     },
@@ -554,8 +549,8 @@ export default {
         const yAxisMiddle = this.displayHeight / 2
         const h = yAxisMiddle / 2
 
-        const octaveRatio = (octave.value/(octave.max-octave.min))
-        const detuneRatio = ((detune.value/detune.max)*1000)/(octave.max-octave.min)
+        const octaveRatio = (octave.value / (octave.max - octave.min))
+        const detuneRatio = ((detune.value / detune.max) * 1000) / (octave.max - octave.min)
 
         const iteration = 6.6 * h - h * (4.9 * octaveRatio) + (h * 0.3 * (1 - detuneRatio)) - 15
 
@@ -587,10 +582,10 @@ export default {
         }
         line =
               ' m -' + iteration + ', ' + yAxisMiddle +
-              wave + wave + wave + wave + wave + wave + wave + wave + wave + wave + wave +wave + wave + wave + wave + wave + wave +
-              wave + wave + wave + wave + wave + wave + wave + wave + wave + wave + wave +wave + wave + wave + wave + wave + wave +
-              wave + wave + wave + wave + wave + wave + wave + wave + wave + wave + wave +wave + wave + wave + wave + wave + wave +
-              wave + wave + wave + wave + wave + wave + wave + wave + wave + wave + wave +wave + wave + wave + wave + wave + wave
+              wave + wave + wave + wave + wave + wave + wave + wave + wave + wave + wave + wave + wave + wave + wave + wave + wave +
+              wave + wave + wave + wave + wave + wave + wave + wave + wave + wave + wave + wave + wave + wave + wave + wave + wave +
+              wave + wave + wave + wave + wave + wave + wave + wave + wave + wave + wave + wave + wave + wave + wave + wave + wave +
+              wave + wave + wave + wave + wave + wave + wave + wave + wave + wave + wave + wave + wave + wave + wave + wave + wave
       }
 
       return line
@@ -605,12 +600,11 @@ export default {
   watch: {
     // used to update the interval length on rate knob turn
     lfoRealFreq: {
-      handler(newValue, oldValue) {
-        if (this.module =='lfo') {
+      handler (newValue, oldValue) {
+        if (this.module == 'lfo') {
           let realFreq = this.knobs[3]
-          this.changeInterval(( 1 / (newValue) ) * 1000 )
+          this.changeInterval((1 / (newValue)) * 1000)
         }
-        return
       },
       deep: true
     }

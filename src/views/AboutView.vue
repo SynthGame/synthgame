@@ -12,17 +12,17 @@ export default {
   components: {
     Svoosh
   },
-  data() {
+  data () {
     return {
       isFired: false,
       content: 'HEHE'
     }
   },
   methods: {
-    triggerSvoosh() {
-      this.isFired=!this.isFired
-      },
-    change() {
+    triggerSvoosh () {
+      this.isFired = !this.isFired
+    },
+    change () {
       this.content = 'haaahaaaaaaa'
       // this.isFired = false
     }

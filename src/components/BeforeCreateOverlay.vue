@@ -19,16 +19,16 @@ export default {
       default: 1
     }
   },
-  mounted() {
+  mounted () {
     window.addEventListener('keydown', this.emitOnKey)
   },
-  beforeDestroy() {
+  beforeDestroy () {
     window.removeEventListener('keydown', this.emitOnKey)
   },
   methods: {
-    emitOnKey() {
+    emitOnKey () {
       if (event.keyCode === 13) {
-        this.$emit('showCreate');
+        this.$emit('showCreate')
       }
     }
   },

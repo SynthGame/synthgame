@@ -95,8 +95,8 @@ export default {
     timerIsRunning () {
       return this.$store.state.gameState.timerIsRunning
     },
-    dialsAreWithinMargin() {
-      if(this.createModeIsActive) return false // quick hack
+    dialsAreWithinMargin () {
+      if (this.createModeIsActive) return false // quick hack
       this.title = 'Done!'
       return Object.values(this.$store.getters.audioParametersMatchGoalWithMargin[this.name])
         .every(param => param)
@@ -124,8 +124,8 @@ export default {
     })
   },
   watch: {
-    typeDial(val) {
-      this.type = this.typeArray[mapValueToRange(val, 100, (this.typeArray.length -1))]
+    typeDial (val) {
+      this.type = this.typeArray[mapValueToRange(val, 100, (this.typeArray.length - 1))]
     }
   }
 }

@@ -22,31 +22,31 @@ export default {
       default: 'a link'
     }
   },
-  data() {
+  data () {
     return {
       copyButtonText: 'copy'
     }
   },
-  mounted() {
+  mounted () {
     window.addEventListener('keydown', this.emitOnKey)
   },
-  beforeDestroy() {
+  beforeDestroy () {
     window.removeEventListener('keydown', this.emitOnKey)
   },
   methods: {
-    emitOnKey() {
+    emitOnKey () {
       if (event.keyCode === 13) {
-        this.$emit('closeCreate');
+        this.$emit('closeCreate')
       }
     },
-    copy() {
-      const el = document.createElement('textarea');
-      el.value = this.link;
-      document.body.appendChild(el);
-      el.select();
-      document.execCommand('copy');
-      document.body.removeChild(el);
-      this.copyButtonText="copied!"
+    copy () {
+      const el = document.createElement('textarea')
+      el.value = this.link
+      document.body.appendChild(el)
+      el.select()
+      document.execCommand('copy')
+      document.body.removeChild(el)
+      this.copyButtonText = 'copied!'
     }
   },
   computed: {

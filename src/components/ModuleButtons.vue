@@ -40,28 +40,28 @@ export default {
   components: {
     ModuleButton
   },
-  data() {
+  data () {
     return {
       selectedValue: null
     }
   },
   computed: {
-    border() {
+    border () {
       return '1px ' + this.color + ' solid'
     }
   },
   methods: {
-    changeOscillatorShape(newShape) {
+    changeOscillatorShape (newShape) {
       this.selectedValue = newShape
-      this.$emit("oscShape", newShape)
+      this.$emit('oscShape', newShape)
     },
-    changeFilterShape(newShape) {
+    changeFilterShape (newShape) {
       this.selectedValue = newShape
-      this.$emit("filterShape", newShape)
+      this.$emit('filterShape', newShape)
     },
-    changeLFOShape(newShape) {
+    changeLFOShape (newShape) {
       this.selectedValue = newShape
-      this.$emit("lfoShape", newShape)
+      this.$emit('lfoShape', newShape)
     }
   }
 }

@@ -28,16 +28,16 @@ export default {
       default: 1
     }
   },
-  mounted() {
+  mounted () {
     window.addEventListener('keydown', this.emitOnKey)
   },
-  beforeDestroy() {
+  beforeDestroy () {
     window.removeEventListener('keydown', this.emitOnKey)
   },
   methods: {
-    emitOnKey() {
+    emitOnKey () {
       if (event.keyCode === 13) {
-        this.$emit('startLevel');
+        this.$emit('startLevel')
       }
     }
   },
@@ -46,9 +46,9 @@ export default {
       return this.$store.getters.displayedLevel
     },
     gameLevelText () {
-      if(this.$store.state.gameState.level >= levels.length) return levels[levels.length - 1].levelData.text || ''
+      if (this.$store.state.gameState.level >= levels.length) return levels[levels.length - 1].levelData.text || ''
       return levels[this.$store.state.gameState.level].levelData.text || ''
-    },
+    }
   }
 }
 </script>

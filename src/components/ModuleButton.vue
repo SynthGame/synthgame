@@ -67,15 +67,15 @@ export default {
   props: ['shape', 'color', 'isPressed'],
   computed: {
     picked: {
-      get: function() {
-          return this.value
+      get: function () {
+        return this.value
       },
-      set: function() {
-          // Communicate the change to parent component so that selectedValue can be updated
-          this.$emit("change", this.label)
+      set: function () {
+        // Communicate the change to parent component so that selectedValue can be updated
+        this.$emit('change', this.label)
       }
     },
-    pickedColor() {
+    pickedColor () {
       return {'background-color': this.color}
     }
   }
