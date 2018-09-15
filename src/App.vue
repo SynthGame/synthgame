@@ -100,6 +100,8 @@ export default {
         })
     }
 
+    window.letsPlay = () => this.initM()
+
     // Pc keyboard listener (might be needed for mobile)
     document.addEventListener('keypress', (event) => {
       if (audio.state.Tone.context.state !== 'running') {
@@ -165,6 +167,27 @@ export default {
       audio.start()
       // start loop
       //
+    },
+    initM () {
+      navigator.requestMIDIAccess()
+        .then(access => {
+          if(access.inputs.size > 0) {
+            const input = access.inputs.values().next().value; // get the first input
+            console.log(input.name);
+            input.onmidimessage = e => {
+              if (e.data.length !== 3) return
+              const pS = e.data[1]
+              const value = e.data[2]
+              const device = Object.keys(this.$store.state.audioParameters)[(''+pS)[0]-1]
+              const parameter = Object.keys(this.$store.state.audioParameters[device])[(''+pS)[1]]
+              this.$store.commit('setAudioParameter', { device, parameter,
+                value: this.$store.state.gameState.possibleValues[device][parameter]
+                  ? this.$store.state.gameState.possibleValues[device][parameter][e.data[2]]
+                  : e.data[2]
+              })
+            }
+          }
+        }, error => console.log)
     },
     displaySuccesMessage () {
       this.displaySuccessOverlay = true
@@ -447,6 +470,7 @@ export default {
 body {
   background: black;
   margin: 0;
+  user-select: none;
 }
 
 #app {

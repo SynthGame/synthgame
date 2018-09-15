@@ -57,6 +57,7 @@ export default {
 <style scoped lang="scss">
 
 .link {
+  user-select: text;
   text-transform: none;
   background-color:  #fff;
   color: #000;

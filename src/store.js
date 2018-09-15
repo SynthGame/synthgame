@@ -254,7 +254,8 @@ export default new Vuex.Store({
         })
       })
 
-      const randomizeWithoutMatches = (obj, selectObj) => {
+      const randomizeWithoutMatches = (obj, selectObj, itrs = 0) => {
+        if(itrs === 20) return obj
         const randomPreset = randomizeValues(obj, selectObj) // randomly generated preset
         const accedentlyCorrectValues = mapValues(randomPreset, (modulePreset, moduleName) => {
           return mapValues(modulePreset, (val, parameterName) => {
@@ -265,7 +266,8 @@ export default new Vuex.Store({
               : false
           })
         })
-        if(find(accedentlyCorrectValues, mod => find(mod, true))) return randomizeValues(randomPreset, accedentlyCorrectValues)
+        console.log(itrs, randomPreset, accedentlyCorrectValues, selectObj)
+        if(!!find(accedentlyCorrectValues, mod => !!find(mod, par => par === true))) return randomizeWithoutMatches(randomPreset, accedentlyCorrectValues, itrs + 1)
         return randomPreset
       }
 
@@ -290,9 +292,6 @@ export default new Vuex.Store({
       })
     },
     setSynthToGoal ({state}, synth) {
-      // This is absolute garbage but really can't think of anything else
-      // if someone comes up with an elegant sollution for this I will
-      // buy them dinner & beers for 1 night - Will Willems
       synth.envelope.state.device.attack = character.envelope.attack(state.gameState.goal.envelope.attack)
       synth.envelope.state.device.decay = character.envelope.decay(state.gameState.goal.envelope.decay)
       synth.envelope.state.device.sustain = character.envelope.sustain(state.gameState.goal.envelope.sustain)
@@ -311,9 +310,6 @@ export default new Vuex.Store({
       synth.oscillator2.state.device.detune.value = character.oscillator2.detune(state.gameState.goal.oscillator2.detune)
     },
     setSynthToDefaultParameters ({state}, synth) {
-      // This is absolute garbage but really can't think of anything else
-      // if someone comes up with an elegant sollution for this I will
-      // buy them dinner & beers for 1 night - Will Willems
       synth.envelope.state.device.attack = character.envelope.attack(state.gameState.defaultParams.envelope.attack)
       synth.envelope.state.device.decay = character.envelope.decay(state.gameState.defaultParams.envelope.decay)
       synth.envelope.state.device.sustain = character.envelope.sustain(state.gameState.defaultParams.envelope.sustain)
