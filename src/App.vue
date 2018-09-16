@@ -36,6 +36,7 @@
     <failure-overlay
       v-if="isGameOver"
       @startagain="startAgain"
+      @startlastlevel="startLastLevel"
     />
 
     <!-- <div id="nav">
@@ -200,6 +201,14 @@ export default {
     // },
     startAgain () {
       location.reload()
+    },
+    startLastLevel () {
+      this.startLevel(this.$store.state.gameState.level);
+      this.displayFailureOverlay = false;
+      audio.startMainLoop();
+      this.$store.commit('setTheGameFromGameOver');
+      this.$store.commit('stopTimerIsRunning');
+        // this.$nextTick(() => this.$store.commit('startTimerIsRunning'))
     },
     startPlayMode () {
       this.displayStartOverlay = false // hide start overlay
@@ -567,6 +576,8 @@ body {
     }
   }
 }
+
+*:focus {outline:0 !important}
 
 /* OVERLAYS TRANSITIONING
 *

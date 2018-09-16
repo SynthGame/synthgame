@@ -80,6 +80,11 @@ export default {
     this.oscillator1.state.device.stop()
     this.oscillator2.state.device.stop()
   },
+  startMainLoop() {
+    this.state.loop.start()
+    this.oscillator1.state.device.start()
+    this.oscillator2.state.device.start()
+  },
   start () {
     log(`starting Tone.js Transport`)
     return this.state.Tone.Transport.start()

@@ -1,7 +1,7 @@
 <template>
   <div class="overlay">
     <div class="overlay-content-wrapper">
-        <h2>Use the sequencer to make a melody. Hit "Submit" for a chance to win a prize!</h2>
+        <h2>Put your skills to practice: create the music for this game. On nov 17 Tatsuya Takahashi picks 1 lucky winner, who wins a trip to Musikmesse 2019!</h2>
       <div>
         <button class="button-next" @click="$emit('showCreate')">Ready</button>
       </div>

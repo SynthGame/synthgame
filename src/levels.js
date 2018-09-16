@@ -648,378 +648,379 @@ export default [
   //     text: 'Last level before we move on to the next module.'
   //   }
   // },
-  // level 42 Envelope
-  {
-    oscillator1: {},
-    oscillator2: {},
-    filter: {},
-    envelope: {
-      attack: true
-    },
-    lfo: {},
-    levelData: {
-      text: 'You unlocked Envelope!'
-    }
-  },
-  // level 43
-  {
-    oscillator1: {},
-    oscillator2: {},
-    filter: {},
-    envelope: {
-      attack: true
-    },
-    lfo: {},
-    levelData: {
-      text: 'With attack, you can control how long it takes the sound to reach its peak volume.'
-    }
-  },
-  // level 44
-  {
-    oscillator1: {},
-    oscillator2: {},
-    filter: {},
-    envelope: {
-      decay: true
-    },
-    lfo: {},
-    levelData: {
-      text: 'With decay, control how long it takes for the sound to drop from its peak to the sustain level.'
-    }
-  },
-  // level 45
-  {
-    oscillator1: {},
-    oscillator2: {},
-    filter: {},
-    envelope: {
-      decay: true
-    },
-    lfo: {},
-    levelData: {
-      text: 'A low decay level results in a plucky sound.'
-    }
-  },
-  // level 46
-  {
-    oscillator1: {},
-    oscillator2: {},
-    filter: {},
-    envelope: {
-      sustain: true
-    },
-    lfo: {},
-    levelData: {
-      text: 'Sustain sets the volume at which the sound remains, for as long the note is held.'
-    }
-  },
-  // level 47
-  {
-    oscillator1: {},
-    oscillator2: {},
-    filter: {},
-    envelope: {
-      sustain: true
-    },
-    lfo: {},
-    levelData: {
-      text: 'With a short attack and decay, sustain essentially sets the volume of the note.'
-    }
-  },
-  // level 48
-  {
-    oscillator1: {},
-    oscillator2: {},
-    filter: {},
-    envelope: {
-      release: true
-    },
-    lfo: {},
-    levelData: {
-      text: 'Release controls the time it takes for the sound to return to zero, after sustain.'
-    }
-  },
-  // level 49
-  {
-    oscillator1: {},
-    oscillator2: {},
-    filter: {},
-    envelope: {
-      release: true
-    },
-    lfo: {},
-    levelData: {
-      text: 'A short release results in snappy sounds. Try it!'
-    }
-  },
-  // level 50
-  {
-    oscillator1: {},
-    oscillator2: {},
-    filter: {},
-    envelope: {
-      attack: true,
-      decay: true
-    },
-    lfo: {},
-    levelData: {
-      text: 'Time to start mixing the controls of the envelope.'
-    }
-  },
-  // level 51
-  {
-    oscillator1: {},
-    oscillator2: {},
-    filter: {},
-    envelope: {
-      attack: true,
-      sustain: true
-    },
-    lfo: {},
-    levelData: {
-      text: "You're close to fully equiped now."
-    }
-  },
-  // level 52
-  {
-    oscillator1: {},
-    oscillator2: {},
-    filter: {},
-    envelope: {
-      decay: true,
-      release: true
-    },
-    lfo: {},
-    levelData: {
-      text: 'After this, we have one more module to cover.'
-    }
-  },
-  // level 53
-  {
-    oscillator1: {},
-    oscillator2: {},
-    filter: {},
-    envelope: {
-      decay: true,
-      release: true
-    },
-    lfo: {},
-    levelData: {
-      text: 'You should reconsider your career by now.'
-    }
-  },
-  // level 54
-  {
-    oscillator1: {},
-    oscillator2: {},
-    filter: {},
-    envelope: {
-      decay: true,
-      release: true,
-      attack: true
-    },
-    lfo: {},
-    levelData: {
-      text: 'It takes some serious decication to get to this level.'
-    }
-  },
-  // level 55
-  {
-    oscillator1: {},
-    oscillator2: {},
-    filter: {},
-    envelope: {
-      decay: true,
-      sustain: true,
-      attack: true
-    },
-    lfo: {},
-    levelData: {
-      text: "We're impresed."
-    }
-  },
-  // level 56
-  {
-    oscillator1: {},
-    oscillator2: {},
-    filter: {},
-    envelope: {
-      decay: true,
-      sustain: true,
-      attack: true,
-      release: true
-    },
-    lfo: {},
-    levelData: {
-      text: 'You might just be the next star producer.'
-    }
-  },
-  // level 57 LFO
-  {
-    oscillator1: {},
-    oscillator2: {},
-    filter: {},
-    envelope: {},
-    lfo: {
-      amount: true
-    },
-    levelData: {
-      text: 'You unlocked the LFO!'
-    }
-  },
-  // level 58
-  {
-    oscillator1: {},
-    oscillator2: {},
-    filter: {},
-    envelope: {},
-    lfo: {
-      amount: true
-    },
-    levelData: {
-      text: 'Same as the oscillator, LFO produces a signal, but at a low frequency.'
-    }
-  },
-  // level 59
-  {
-    oscillator1: {},
-    oscillator2: {},
-    filter: {},
-    envelope: {},
-    lfo: {
-      amount: true
-    },
-    levelData: {
-      text: "It's connected to the first oscillator's frequency, making it go up and down."
-    }
-  },
-  // level 60
-  {
-    oscillator1: {},
-    oscillator2: {},
-    filter: {},
-    envelope: {},
-    lfo: {
-      amount: true,
-      frequency: true
-    },
-    levelData: {
-      text: 'Tip: the height is determined by amount, the speed by frequency.'
-    }
-  },
-  // level 61
-  {
-    oscillator1: {},
-    oscillator2: {},
-    filter: {},
-    envelope: {},
-    lfo: {
-      amount: true,
-      frequency: true
-    },
-    levelData: {
-      text: 'Right now, we use a sinewave, which eases the effect LFO has on the pitch.'
-    }
-  },
-  // level 62
-  {
-    oscillator1: {},
-    oscillator2: {},
-    filter: {},
-    envelope: {},
-    lfo: {
-      amount: true,
-      frequency: true
-    },
-    levelData: {
-      text: 'But we can use other waveforms, too, just like regular oscillators.'
-    }
-  },
-  // level 63
-  {
-    oscillator1: {},
-    oscillator2: {},
-    filter: {},
-    envelope: {},
-    lfo: {
-      amount: true,
-      type: true
-    },
-    levelData: {
-      text: 'Notice the difference in the animation, when you switch waveforms.'
-    }
-  },
-  // level 64
-  {
-    oscillator1: {},
-    oscillator2: {},
-    filter: {},
-    envelope: {},
-    lfo: {
-      amount: true,
-      type: true
-    },
-    levelData: {
-      text: 'Use square to get that glitch sound.'
-    }
-  },
-  // level 65
-  {
-    oscillator1: {},
-    oscillator2: {},
-    filter: {},
-    envelope: {},
-    lfo: {
-      amount: true,
-      frequency: true,
-      type: true
-    },
-    levelData: {
-      text: 'Now, play around with all the LFO controls.'
-    }
-  },
-  // level 66
-  {
-    oscillator1: {
-      typeOsc: true
-    },
-    oscillator2: {
-      detune: true
-    },
-    filter: {
-      cutOffFreq: true
-    },
-    envelope: {},
-    lfo: {
-    },
-    levelData: {
-      text: 'You did it! You mastered the basics of subtractive synthesis.'
-    }
-  },
-  // level 67
-  {
-    oscillator1: {
-      detune: true,
-      frequency: true
-    },
-    oscillator2: {
-      detune: true,
-      typeOsc: true
-    },
-    filter: {
-      type: true
-    },
-    envelope: {},
-    lfo: {
-    },
-    levelData: {
-      text: 'Now the real fun starts.'
-    }
-  },
+  // // level 42 Envelope
+  // {
+  //   oscillator1: {},
+  //   oscillator2: {},
+  //   filter: {},
+  //   envelope: {
+  //     attack: true
+  //   },
+  //   lfo: {},
+  //   levelData: {
+  //     text: 'You unlocked Envelope!'
+  //   }
+  // },
+  // // level 43
+  // {
+  //   oscillator1: {},
+  //   oscillator2: {},
+  //   filter: {},
+  //   envelope: {
+  //     attack: true
+  //   },
+  //   lfo: {},
+  //   levelData: {
+  //     text: 'With attack, you can control how long it takes the sound to reach its peak volume.'
+  //   }
+  // },
+  // // level 44
+  // {
+  //   oscillator1: {},
+  //   oscillator2: {},
+  //   filter: {},
+  //   envelope: {
+  //     decay: true
+  //   },
+  //   lfo: {},
+  //   levelData: {
+  //     text: 'With decay, control how long it takes for the sound to drop from its peak to the sustain level.'
+  //   }
+  // },
+  // // level 45
+  // {
+  //   oscillator1: {},
+  //   oscillator2: {},
+  //   filter: {},
+  //   envelope: {
+  //     decay: true
+  //   },
+  //   lfo: {},
+  //   levelData: {
+  //     text: 'A low decay level results in a plucky sound.'
+  //   }
+  // },
+  // // level 46
+  // {
+  //   oscillator1: {},
+  //   oscillator2: {},
+  //   filter: {},
+  //   envelope: {
+  //     sustain: true
+  //   },
+  //   lfo: {},
+  //   levelData: {
+  //     text: 'Sustain sets the volume at which the sound remains, for as long the note is held.'
+  //   }
+  // },
+  // // level 47
+  // {
+  //   oscillator1: {},
+  //   oscillator2: {},
+  //   filter: {},
+  //   envelope: {
+  //     sustain: true
+  //   },
+  //   lfo: {},
+  //   levelData: {
+  //     text: 'With a short attack and decay, sustain essentially sets the volume of the note.'
+  //   }
+  // },
+  // // level 48
+  // {
+  //   oscillator1: {},
+  //   oscillator2: {},
+  //   filter: {},
+  //   envelope: {
+  //     release: true
+  //   },
+  //   lfo: {},
+  //   levelData: {
+  //     text: 'Release controls the time it takes for the sound to return to zero, after sustain.'
+  //   }
+  // },
+  // // level 49
+  // {
+  //   oscillator1: {},
+  //   oscillator2: {},
+  //   filter: {},
+  //   envelope: {
+  //     release: true
+  //   },
+  //   lfo: {},
+  //   levelData: {
+  //     text: 'A short release results in snappy sounds. Try it!'
+  //   }
+  // },
+  // // level 50
+  // {
+  //   oscillator1: {},
+  //   oscillator2: {},
+  //   filter: {},
+  //   envelope: {
+  //     attack: true,
+  //     decay: true
+  //   },
+  //   lfo: {},
+  //   levelData: {
+  //     text: 'Time to start mixing the controls of the envelope.'
+  //   }
+  // },
+  // // level 51
+  // {
+  //   oscillator1: {},
+  //   oscillator2: {},
+  //   filter: {},
+  //   envelope: {
+  //     attack: true,
+  //     sustain: true
+  //   },
+  //   lfo: {},
+  //   levelData: {
+  //     text: "You're close to fully equiped now."
+  //   }
+  // },
+  // // level 52
+  // {
+  //   oscillator1: {},
+  //   oscillator2: {},
+  //   filter: {},
+  //   envelope: {
+  //     decay: true,
+  //     release: true
+  //   },
+  //   lfo: {},
+  //   levelData: {
+  //     text: 'After this, we have one more module to cover.'
+  //   }
+  // },
+  // // level 53
+  // {
+  //   oscillator1: {},
+  //   oscillator2: {},
+  //   filter: {},
+  //   envelope: {
+  //     decay: true,
+  //     release: true
+  //   },
+  //   lfo: {},
+  //   levelData: {
+  //     text: 'You should reconsider your career by now.'
+  //   }
+  // },
+  // // level 54
+  // {
+  //   oscillator1: {},
+  //   oscillator2: {},
+  //   filter: {},
+  //   envelope: {
+  //     decay: true,
+  //     release: true,
+  //     attack: true
+  //   },
+  //   lfo: {},
+  //   levelData: {
+  //     text: 'It takes some serious decication to get to this level.'
+  //   }
+  // },
+  // // level 55
+  // {
+  //   oscillator1: {},
+  //   oscillator2: {},
+  //   filter: {},
+  //   envelope: {
+  //     decay: true,
+  //     sustain: true,
+  //     attack: true
+  //   },
+  //   lfo: {},
+  //   levelData: {
+  //     text: "We're impresed."
+  //   }
+  // },
+  // // level 56
+  // {
+  //   oscillator1: {},
+  //   oscillator2: {},
+  //   filter: {},
+  //   envelope: {
+  //     decay: true,
+  //     sustain: true,
+  //     attack: true,
+  //     release: true
+  //   },
+  //   lfo: {},
+  //   levelData: {
+  //     text: 'You might just be the next star producer.'
+  //   }
+  // },
+  // // level 57 LFO
+  // {
+  //   oscillator1: {},
+  //   oscillator2: {},
+  //   filter: {},
+  //   envelope: {},
+  //   lfo: {
+  //     amount: true
+  //   },
+  //   levelData: {
+  //     text: 'You unlocked the LFO!'
+  //   }
+  // },
+  // // level 58
+  // {
+  //   oscillator1: {},
+  //   oscillator2: {},
+  //   filter: {},
+  //   envelope: {},
+  //   lfo: {
+  //     amount: true
+  //   },
+  //   levelData: {
+  //     text: 'Same as the oscillator, LFO produces a signal, but at a low frequency.'
+  //   }
+  // },
+  // // level 59
+  // {
+  //   oscillator1: {},
+  //   oscillator2: {},
+  //   filter: {},
+  //   envelope: {},
+  //   lfo: {
+  //     amount: true
+  //   },
+  //   levelData: {
+  //     text: "It's connected to the first oscillator's frequency, making it go up and down."
+  //   }
+  // },
+  // // level 60
+  // {
+  //   oscillator1: {},
+  //   oscillator2: {},
+  //   filter: {},
+  //   envelope: {},
+  //   lfo: {
+  //     amount: true,
+  //     frequency: true
+  //   },
+  //   levelData: {
+  //     text: 'Tip: the height is determined by amount, the speed by frequency.'
+  //   }
+  // },
+  // // level 61
+  // {
+  //   oscillator1: {},
+  //   oscillator2: {},
+  //   filter: {},
+  //   envelope: {},
+  //   lfo: {
+  //     amount: true,
+  //     frequency: true
+  //   },
+  //   levelData: {
+  //     text: 'Right now, we use a sinewave, which eases the effect LFO has on the pitch.'
+  //   }
+  // },
+  // // level 62
+  // {
+  //   oscillator1: {},
+  //   oscillator2: {},
+  //   filter: {},
+  //   envelope: {},
+  //   lfo: {
+  //     amount: true,
+  //     frequency: true
+  //   },
+  //   levelData: {
+  //     text: 'But we can use other waveforms, too, just like regular oscillators.'
+  //   }
+  // },
+  // // level 63
+  // {
+  //   oscillator1: {},
+  //   oscillator2: {},
+  //   filter: {},
+  //   envelope: {},
+  //   lfo: {
+  //     amount: true,
+  //     type: true
+  //   },
+  //   levelData: {
+  //     text: 'Notice the difference in the animation, when you switch waveforms.'
+  //   }
+  // },
+  // // level 64
+  // {
+  //   oscillator1: {},
+  //   oscillator2: {},
+  //   filter: {},
+  //   envelope: {},
+  //   lfo: {
+  //     amount: true,
+  //     type: true
+  //   },
+  //   levelData: {
+  //     text: 'Use square to get that glitch sound.'
+  //   }
+  // },
+  // // level 65
+  // {
+  //   oscillator1: {},
+  //   oscillator2: {},
+  //   filter: {},
+  //   envelope: {},
+  //   lfo: {
+  //     amount: true,
+  //     frequency: true,
+  //     type: true
+  //   },
+  //   levelData: {
+  //     text: 'Now, play around with all the LFO controls.'
+  //   }
+  // },
+  // // level 66
+  // {
+  //   oscillator1: {
+  //     typeOsc: true
+  //   },
+  //   oscillator2: {
+  //     detune: true
+  //   },
+  //   filter: {
+  //     cutOffFreq: true
+  //   },
+  //   envelope: {},
+  //   lfo: {
+  //   },
+  //   levelData: {
+  //     text: 'You did it! You mastered the basics of subtractive synthesis.'
+  //   }
+  // },
+  // // level 67
+  // {
+  //   oscillator1: {
+  //     detune: true,
+  //     frequency: true
+  //   },
+  //   oscillator2: {
+  //     detune: true,
+  //     typeOsc: true
+  //   },
+  //   filter: {
+  //     type: true
+  //   },
+  //   envelope: {},
+  //   lfo: {
+  //   },
+  //   levelData: {
+  //     text: 'Now the real fun starts.'
+  //   }
+  // },
   // level 68
   {
     oscillator1: {
       detune: true,
+      frequency: true,
       typeOsc: true
     },
     oscillator2: {
@@ -1039,9 +1040,7 @@ export default [
   // level 69
   {
     oscillator1: {
-      detune: true,
       typeOsc: true,
-      frequency: true
     },
     oscillator2: {
       detune: true,
@@ -1051,16 +1050,12 @@ export default [
     filter: {
       type: true,
       cutOffFreq: true,
-      setQ: true
     },
     envelope: {
       attack: true,
-      decay: true,
-      sustain: true,
       release: true
     },
     lfo: {
-      frequency: true,
       amount: true,
       type: true
     },
@@ -1076,8 +1071,6 @@ export default [
       frequency: true
     },
     oscillator2: {
-      detune: true,
-      frequency: true,
       typeOsc: true
     },
     filter: {
@@ -1087,12 +1080,9 @@ export default [
     },
     envelope: {
       attack: true,
-      decay: true,
-      sustain: true,
       release: true
     },
     lfo: {
-      frequency: true,
       amount: true,
       type: true
     },
@@ -1188,7 +1178,8 @@ export default [
       frequency: true
     },
     oscillator2: {
-      detune: true
+      detune: true,
+      frequency: true
     },
     filter: {
       type: true,

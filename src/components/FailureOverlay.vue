@@ -52,11 +52,18 @@
         <span>High score</span>
         <span class="data">{{paddedHighScoreString}}</span>
       </div>
-
-    <button class="button-next"
-            ref="button"
-            @click="startAgain"
-            >TRY AGAIN</button>
+      <div class="highscore">
+        <span>Make a melody and win a trip to Musikmesse!</span>
+      </div>
+      <div class="">
+        <button class="button-next"
+                @click="startLastLevel"
+                >TRY AGAIN</button>
+        <button class="button-next"
+                ref="button"
+                @click="startAgain"
+                >MENU</button>
+      </div>
     </div>
   </div>
 </template>
@@ -209,6 +216,10 @@ export default {
     },
     startAgain () {
       this.$emit('startagain')
+    },
+    startLastLevel () {
+      this.$emit('startlastlevel');
+      console.log('startlastlevel in failure method triggered');
     }
   },
   computed: {
@@ -226,8 +237,7 @@ export default {
     },
     paddedHighScoreString () {
       return `${padStart(this.gameHighScore, 5, '0')}`
-    }
-
+    },
   }
 }
 </script>
