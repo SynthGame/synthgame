@@ -147,10 +147,10 @@ export default {
       this.noteArray = this.noteArray.map((el, j) => i === j ? {...el, selected: !el.selected} : el)
     },
     setPitchValue (i, val) {
-      this.noteArray = this.noteArray.map((el, j) => i === j ? {...el, pitch: val} : el)
+      this.noteArray = this.noteArray.map((el, j) => i === j ? {...el, pitch: Number(val)} : el)
     },
     setVolumeValue (i, val) {
-      this.noteArray = this.noteArray.map((el, j) => i === j ? {...el, volume: val} : el)
+      this.noteArray = this.noteArray.map((el, j) => i === j ? {...el, volume: Number(val)} : el)
     },
     setNoteLengthValue (i, val) {
       this.noteArray = this.noteArray.map((el, j) => i === j ? {...el, noteLength: val} : el)
