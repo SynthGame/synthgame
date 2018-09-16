@@ -285,7 +285,7 @@ export default new Vuex.Store({
               ? parameterValDef[random(0, parameterValDef.length - 1)]
               : random(0, 100)
           }
-          return state.gameState.goal[moduleName][parameterName]
+          return state.gameState.defaultParams[moduleName][parameterName]
         })
       })
       return commit('setGoalToPreset', {
