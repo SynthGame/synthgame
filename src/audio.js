@@ -95,7 +95,7 @@ export default {
       this.oscillator1.state.pitchShift.pitch = shift
       this.oscillator2.state.pitchShift.pitch = shift
     }
-    this.volume.state.device.volume.value = volume; // TODO: should only set volume for this note
+    if (volume !== undefined) this.volume.state.device.volume.value = volume; // TODO: should only set volume for this note
     // this.envelope.state.device.triggerRelease();
     return this.envelope.state.device.triggerAttackRelease(noteLength || this.state.toneLength) // TODO: Error: timeConstant must be greater than 0
   },
