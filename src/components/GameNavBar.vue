@@ -22,8 +22,8 @@
                   'module__name__status-indicator--active': oscillator2Complete
                 }"
         :style="{
-                  'background-color': oscillator2Complete ? oscillatorColor : '',
-                  'box-shadow': oscillator2Complete ? `0px 0px 16px ${oscillatorColor}` : '',
+                  'background-color': oscillator2Complete ? oscillatorTwoColor : '',
+                  'box-shadow': oscillator2Complete ? `0px 0px 16px ${oscillatorTwoColor}` : '',
                 }"
       ></span>
       <span
