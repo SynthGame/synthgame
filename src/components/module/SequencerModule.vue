@@ -103,6 +103,7 @@ export default {
   },
   created () {
     this.initSynth()
+    this.$store.commit('setActiveSequence', this.noteArray)
   },
   methods: {
     sequencerEditStateChange (val) {
