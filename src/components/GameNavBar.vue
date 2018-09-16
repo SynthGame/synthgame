@@ -320,6 +320,11 @@ button {
   font-family: montserrat;
   font-weight: 600;
   outline: 0;
+  cursor: pointer;
+  transition: all .2s;
+  &:hover {
+    background: rgb(255, 133, 116);
+  }
 }
 
 @keyframes blink {

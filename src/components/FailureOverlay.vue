@@ -52,8 +52,8 @@
         <span>High score</span>
         <span class="data">{{paddedHighScoreString}}</span>
       </div>
-      <div class="highscore">
-        <span>Make a melody and win a trip to Musikmesse!</span>
+      <div class="makemusic">
+        <span>Make the music for this game and win a trip to Musikmesse!</span>
       </div>
       <div class="">
         <button class="button-next"
@@ -62,7 +62,7 @@
         <button class="button-next"
                 ref="button"
                 @click="startAgain"
-                >MENU</button>
+                >EXIT</button>
       </div>
     </div>
   </div>
@@ -133,27 +133,27 @@ export default {
   mounted () {
     let conf = {
       values: [
-        {
-          stick1: -20,
-          stick1Offset: 0,
-          stick2: 20,
-          stick2AdditionalTwirl: 0,
-          changedTransitionOrigin: 0
-        },
-        {
-          stick1: 0,
-          stick1Offset: 0,
-          stick2: 0,
-          stick2AdditionalTwirl: 0,
-          changedTransitionOrigin: 0
-        },
-        {
-          stick1: -25,
-          stick1Offset: 0,
-          stick2: 0,
-          stick2AdditionalTwirl: 0,
-          changedTransitionOrigin: 0
-        },
+        // {
+        //   stick1: -20,
+        //   stick1Offset: 0,
+        //   stick2: 20,
+        //   stick2AdditionalTwirl: 0,
+        //   changedTransitionOrigin: 0
+        // },
+        // {
+        //   stick1: 0,
+        //   stick1Offset: 0,
+        //   stick2: 0,
+        //   stick2AdditionalTwirl: 0,
+        //   changedTransitionOrigin: 0
+        // },
+        // {
+        //   stick1: -25,
+        //   stick1Offset: 0,
+        //   stick2: 0,
+        //   stick2AdditionalTwirl: 0,
+        //   changedTransitionOrigin: 0
+        // },
         {
           stick1: 0,
           stick1Offset: 0,
@@ -266,6 +266,12 @@ export default {
     font-size: 2em;
     flex-direction: column;
     width: 8em;
+  }
+  .makemusic {
+    display: flex;
+    font-size: 2em;
+    flex-direction: column;
+    width: 11em;
   }
   & span {
     font-size: .7em;
