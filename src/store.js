@@ -17,13 +17,13 @@ export default new Vuex.Store({
   state: {
     audioParameters: {
       oscillator1: {
-        frequency: 131,
+        frequency: '131',
         typeOsc: 'sawtooth',
         detune: 60
         // phase: 0
       },
       oscillator2: {
-        frequency: 131,
+        frequency: '131',
         typeOsc: 'sawtooth',
         detune: 60
         // phase: 0
@@ -69,13 +69,13 @@ export default new Vuex.Store({
       highScore: 0,
       goal: {
         oscillator1: {
-          frequency: 131,
+          frequency: '131',
           typeOsc: 'sawtooth',
           detune: 60
           // phase: 0
         },
         oscillator2: {
-          frequency: 131,
+          frequency: '131',
           typeOsc: 'sawtooth',
           detune: 60
           // phase: 0
@@ -117,12 +117,12 @@ export default new Vuex.Store({
       },
       defaultParams: {
         oscillator1: {
-          frequency: 131,
+          frequency: '131',
           typeOsc: 'sawtooth',
           detune: 20
         },
         oscillator2: {
-          frequency: 131,
+          frequency: '131',
           typeOsc: 'sawtooth',
           detune: 10
         },
