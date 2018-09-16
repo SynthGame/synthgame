@@ -76,8 +76,6 @@ export default {
   data () {
     return {
       name: 'oscillator1',
-      typeDial: 0,
-      freqDial: 0,
       oscillator1: {},
       moduleColor: MODULE_OSCILLATORONE_COLOR
     }
@@ -101,6 +99,14 @@ export default {
       this.title = 'Done!'
       return Object.values(this.$store.getters.audioParametersMatchGoalWithMargin[this.name])
         .every(param => param)
+    },
+    freqDial: {
+      get () {
+        return this.freqArray.findIndex(el => el == this.frequency)
+      },
+      set (val) {
+        this.frequency = this.freqArray[val]
+      }
     },
     ...vuexSyncGen('oscillator1', 'frequency', val => {
       self.oscillator1.frequency.value = character.oscillator1.frequency(val)
@@ -127,15 +133,6 @@ export default {
       knobsAvailable: state => state.gameState.knobsAvailable.oscillator1,
       createModeIsActive: state => state.gameState.createModeIsActive
     })
-  },
-  watch: {
-    freqDial (val) {
-      this.frequency = this.freqArray[val]
-      // this.frequency = this.freqArray[mapValueToRange(val, 100, (this.freqArray.length -1))]
-    },
-    typeDial (val) {
-      this.typeOsc = this.typeArray[mapValueToRange(val, 100, (this.typeArray.length - 1))]
-    }
   }
 }
 </script>
