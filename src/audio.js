@@ -95,7 +95,8 @@ export default {
       this.oscillator1.state.pitchShift.pitch = shift
       this.oscillator2.state.pitchShift.pitch = shift
     }
-    if (volume !== undefined) this.volume.state.device.volume.value = volume // TODO: should only set volume for this note
+    if (volume !== undefined) this.volume.state.device.volume.value = volume; // TODO: should only set volume for this note
+    // this.envelope.state.device.triggerRelease();
     return this.envelope.state.device.triggerAttackRelease(noteLength || this.state.toneLength) // TODO: Error: timeConstant must be greater than 0
   },
   playKick () {
@@ -169,7 +170,7 @@ export default {
     init (options) {
       log(`Initializing oscillator1 with options: ${options}`)
       this.state.device = new Tone.Oscillator({
-        type: 'sine',
+        type: 'sawtooth',
         frequency: 131,
         detune: 0,
         phase: 0,
@@ -187,7 +188,7 @@ export default {
     init (options) {
       log(`Initializing oscillator2 with options: ${options}`)
       this.state.device = new Tone.Oscillator({
-        type: 'sine',
+        type: 'sawtooth',
         frequency: 131,
         detune: 0,
         phase: 0,
