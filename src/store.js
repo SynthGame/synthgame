@@ -119,12 +119,12 @@ export default new Vuex.Store({
         oscillator1: {
           frequency: 131,
           typeOsc: 'sawtooth',
-          detune: 60
+          detune: 20
         },
         oscillator2: {
           frequency: 131,
           typeOsc: 'sawtooth',
-          detune: 60
+          detune: 10
         },
         filter: {
           cutOffFreq: 70,
@@ -245,8 +245,8 @@ export default new Vuex.Store({
     randomizeAudioParameters ({state, commit}, randomizeArray) {
       const randomizeValues = (obj, selectObj) => mapValues(obj, (val, moduleName) => {
         return mapValues(val, (val, parameterName) => {
-          // if selectObj is provided and the value is falsey return store value
-          if (selectObj && !selectObj[moduleName][parameterName]) return state.gameState.goal[moduleName][parameterName]
+          // if selectObj is provided and the value is falsey return obj value
+          if (selectObj && !selectObj[moduleName][parameterName]) return obj[moduleName][parameterName]
           const parameterValDef = state.gameState.possibleValues[moduleName][parameterName]
           return Array.isArray(parameterValDef)
             ? parameterValDef[random(0, parameterValDef.length - 1)]
@@ -257,13 +257,15 @@ export default new Vuex.Store({
       const randomizeWithoutMatches = (obj, selectObj, itrs = 0) => {
         if (itrs === 20) return obj
         const randomPreset = randomizeValues(obj, selectObj) // randomly generated preset
-        const accedentlyCorrectValues = mapValues(randomPreset, (modulePreset, moduleName) => {
-          return mapValues(modulePreset, (val, parameterName) => {
-            const a = val
-            const b = state.gameState.goal[moduleName][parameterName]
-            return selectObj[moduleName][parameterName]
-              ? a === b || inRange(a, b + state.gameState.margin, b - state.gameState.margin)
-              : false
+        const accedentlyCorrectValues = mapValues(randomPreset, (val, moduleName) => {
+          return mapValues(val, (val, parameterName) => {
+            if (selectObj[moduleName][parameterName] !== true) return false
+            return isArray(state.gameState.possibleValues[moduleName][parameterName])
+              ? (val === state.gameState.goal[moduleName][parameterName])
+              : inRange(val,
+                (state.gameState.goal[moduleName][parameterName] - state.gameState.margin),
+                (state.gameState.goal[moduleName][parameterName] + state.gameState.margin)
+              )
           })
         })
         if (find(accedentlyCorrectValues, mod => !!find(mod, par => par === true))) return randomizeWithoutMatches(randomPreset, accedentlyCorrectValues, itrs + 1)
@@ -271,7 +273,7 @@ export default new Vuex.Store({
       }
 
       return commit('setAudioParameterToPreset', {
-        preset: randomizeWithoutMatches(state.audioParameters, randomizeArray)
+        preset: randomizeWithoutMatches(state.gameState.goal, randomizeArray)
       })
     },
     randomizGoalParameters ({state, commit}) {
