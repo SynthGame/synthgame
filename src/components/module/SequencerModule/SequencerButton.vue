@@ -38,7 +38,7 @@ $main-seq-color: #F40056;
 
 .sequencer-button {
   height: 8em;
-  width: 3em;
+  width: 100%;
   display: flex;
   margin: 10px 5px;
   padding: 0;

@@ -26,7 +26,7 @@
           :min="80"
           :max="140"
           knobColor="#5bd484"
-          name="BPM"
+          name="TEMPO"
           module="lfo"
         ></module-knob>
       </div>
@@ -293,7 +293,8 @@ button.sequencer-button {
   border-top: 1px solid $main-seq-color;
   display: flex;
   // align-items: center;
-  // width: 10em;
+  width: 23%;
+  margin-right: 1vw;
   margin-top: 11vh;
   max-height: 10rem;
   justify-content: space-between;
@@ -302,7 +303,7 @@ button.sequencer-button {
 .button-wrapper {
   margin-top: -1em;
   display: flex;
-  width: 10%;
+  width: 25%;
   &.function {
     height: fit-content;
     width: 100%;
@@ -313,6 +314,14 @@ button.sequencer-button {
       background-color: black;
       color: white
     }
+  }
+}
+
+.step-wrapper {
+  width: 100%;
+  margin-left: 1vw;
+  &:first-of-type {
+    margin-left: 0;
   }
 }
 
