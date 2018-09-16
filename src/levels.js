@@ -1,654 +1,653 @@
-// call me Pieter
 export default [
   // level 1 - 3 typeOsc
   // level 1
-  {
-    oscillator1: {
-      detune: true
-    },
-    oscillator2: {},
-    filter: {},
-    envelope: {},
-    lfo: {},
-    levelData: {
-      text: 'Listen to the sound playing. Once you hit Ready, you have 30 seconds to recreate it.'
-    }
-  },
-  // level 2
-  {
-    oscillator1: {
-      detune: true
-    },
-    oscillator2: {},
-    filter: {},
-    envelope: {},
-    lfo: {},
-    levelData: {
-      text: 'Tip: the white guidelines show you the way.'
-    }
-  },
-  // level 3
-  {
-    oscillator1: {
-      detune: true
-    },
-    oscillator2: {},
-    filter: {},
-    envelope: {},
-    lfo: {},
-    levelData: {
-      text: 'The oscillator is the source of electronic sound. You’ll use the knobs and dials to shape the outputted signal. '
-    }
-  },
-  // level 4
-  {
-    oscillator1: {
-      frequency: true,
-      detune: true
-    },
-    oscillator2: {},
-    filter: {},
-    envelope: {},
-    lfo: {},
-    levelData: {
-      text: 'Both detune and octave control the pitch.'
-    }
-  },
-  // level 5
-  {
-    oscillator1: {
-      frequency: true,
-      detune: true
-    },
-    oscillator2: {},
-    filter: {},
-    envelope: {},
-    lfo: {},
-    levelData: {
-      text: 'Octave changes the pitch 12 notes a time.'
-    }
-  },
-  // level 6
-  {
-    oscillator1: {
-      frequency: true,
-      detune: true
-    },
-    oscillator2: {},
-    filter: {},
-    envelope: {},
-    lfo: {},
-    levelData: {
-      text: 'Detune changes the pitch by cents. An octave contains 1200 cents.'
-    }
-  },
-  // level 7
-  {
-    oscillator1: {
-      typeOsc: true
-    },
-    oscillator2: {},
-    filter: {},
-    envelope: {},
-    lfo: {},
-    levelData: {
-      text: 'A waveform is the shape of the outputted signal.'
-    }
-  },
-  // level 8
-  {
-    oscillator1: {
-      typeOsc: true
-    },
-    oscillator2: {},
-    filter: {},
-    envelope: {},
-    lfo: {},
-    levelData: {
-      text: 'A sine results in a smooth, plain sound, while a sawtooth results in a harmonically rich buzz.'
-    }
-  },
-  // level 9
-  {
-    oscillator1: {
-      typeOsc: true
-    },
-    oscillator2: {},
-    filter: {},
-    envelope: {},
-    lfo: {},
-    levelData: {
-      text: 'The waveform is the most fundamental building block in synthesis.'
-    }
-  },
-  // level 10
-  {
-    oscillator1: {
-      frequency: true,
-      detune: true
-    },
-    oscillator2: {},
-    filter: {},
-    envelope: {},
-    lfo: {},
-    levelData: {
-      text: 'The octave and detune determine the amount the waveform is repeated in a second: hertz.'
-    }
-  },
-  // level 11
-  {
-    oscillator1: {
-      frequency: true,
-      typeOsc: true
-    },
-    oscillator2: {},
-    filter: {},
-    envelope: {},
-    lfo: {},
-    levelData: {
-      text: 'The more waveform iterations in a second, the higher the pitch.'
-    }
-  },
-  // level 12
-  {
-    oscillator1: {
-      typeOsc: true,
-      detune: true,
-      frequency: true
-    },
-    oscillator2: {},
-    filter: {},
-    envelope: {},
-    lfo: {},
-    levelData: {
-      text: 'Play around with all 3 controls to hear the sound change. Watch the timer though!'
-    }
-  },
-  // level 13
-  {
-    oscillator1: {
-      detune: true,
-      frequency: true,
-      typeOsc: true
-    },
-    oscillator2: {},
-    filter: {},
-    envelope: {},
-    lfo: {},
-    levelData: {
-      text: "Now that you understand the basics, let's step it up a notch."
-    }
-  },
-  // level 14
-  {
-    oscillator1: {
-      detune: true,
-      frequency: true,
-      typeOsc: true
-    },
-    oscillator2: {},
-    filter: {},
-    envelope: {},
-    lfo: {},
-    levelData: {
-      text: 'Enjoy this easy level, it will get trickier soon.'
-    }
-  },
-  // level 15
-  {
-    oscillator1: {
-      detune: true,
-      frequency: true,
-      typeOsc: true
-    },
-    oscillator2: {},
-    filter: {},
-    envelope: {},
-    lfo: {},
-    levelData: {
-      text: 'Wonder why the sound is thin, compared to what you hear in most music?'
-    }
-  },
-  // level 16 OSC 2
-  {
-    oscillator1: {
-      detune: true,
-      frequency: true
-    },
-    oscillator2: {
-      detune: true
-    },
-    filter: {},
-    envelope: {},
-    lfo: {},
-    levelData: {
-      text: 'You unlocked the second oscillator!'
-    }
-  },
-  // level 17
-  {
-    oscillator1: {
-      detune: true,
-      frequency: true
-    },
-    oscillator2: {
-      detune: true
-    },
-    filter: {},
-    envelope: {},
-    lfo: {},
-    levelData: {
-      text: 'Two oscillators result in a fatter sound.'
-    }
-  },
-  // level 18
-  {
-    oscillator1: {
-      detune: true,
-      frequency: true
-    },
-    oscillator2: {
-      detune: true
-    },
-    filter: {},
-    envelope: {},
-    lfo: {},
-    levelData: {
-      text: 'The sound gets even fatter when you tune the oscs differently.'
-    }
-  },
-  // level 19
-  {
-    oscillator1: {
-      detune: true,
-      frequency: true
-    },
-    oscillator2: {
-      detune: true
-    },
-    filter: {},
-    envelope: {},
-    lfo: {},
-    levelData: {
-      text: 'Try setting the oscillators to different octaves.'
-    }
-  },
-  // level 20
-  {
-    oscillator1: {
-      detune: true,
-      frequency: true
-    },
-    oscillator2: {
-      detune: true
-    },
-    filter: {},
-    envelope: {},
-    lfo: {},
-    levelData: {
-      text: 'And yes, we too can do this all day.'
-    }
-  },
-  // level 21
-  {
-    oscillator1: {
-      typeOsc: true
-    },
-    oscillator2: {
-      typeOsc: true
-    },
-    filter: {},
-    envelope: {},
-    lfo: {},
-    levelData: {
-      text: 'Back by popular demand: waveforms.'
-    }
-  },
-  // level 22
-  {
-    oscillator1: {
-      typeOsc: true
-    },
-    oscillator2: {
-      typeOsc: true
-    },
-    filter: {},
-    envelope: {},
-    lfo: {},
-    levelData: {
-      text: 'Try combining waveforms and hear what that sounds like.'
-    }
-  },
-  // level 23
-  {
-    oscillator1: {
-      typeOsc: true
-    },
-    oscillator2: {
-      typeOsc: true
-    },
-    filter: {},
-    envelope: {},
-    lfo: {},
-    levelData: {
-      text: 'One more chance to play around with only waveforms.'
-    }
-  },
-  // level 24
-  {
-    oscillator1: {
-      typeOsc: true,
-      detune: true
-    },
-    oscillator2: {
-      detune: true
-    },
-    filter: {},
-    envelope: {},
-    lfo: {},
-    levelData: {
-      text: 'But what if we have different waveforms and slightly detune the oscs?'
-    }
-  },
-  // level 25
-  {
-    oscillator1: {
-      typeOsc: true,
-      detune: true
-    },
-    oscillator2: {
-      detune: true,
-      frequency: true
-    },
-    filter: {},
-    envelope: {},
-    lfo: {},
-    levelData: {
-      text: 'Or if we combine waveform, detune, and octave controls?'
-    }
-  },
-  // level 26 Filter
-  {
-    oscillator1: {
-      typeOsc: true
-    },
-    oscillator2: {
-      typeOsc: true
-    },
-    filter: {
-      type: true
-    },
-    envelope: {},
-    lfo: {},
-    levelData: {
-      text: 'You unlocked the filter!'
-    }
-  },
-  // level 27
-  {
-    oscillator1: {
-      typeOsc: true
-    },
-    oscillator2: {
-      typeOsc: true
-    },
-    filter: {
-      type: true
-    },
-    envelope: {},
-    lfo: {},
-    levelData: {
-      text: 'There are different types of filters. Try them!'
-    }
-  },
-  // level 28
-  {
-    oscillator1: {
-      typeOsc: true
-    },
-    oscillator2: {
-      typeOsc: true
-    },
-    filter: {
-      type: true
-    },
-    envelope: {},
-    lfo: {},
-    levelData: {
-      text: 'A filter passes signals with a frequency lower or higher than the selected cutoff, or both.'
-    }
-  },
-  // level 29
-  {
-    oscillator1: {
-      typeOsc: true
-    },
-    oscillator2: {
-      typeOsc: true
-    },
-    filter: {
-      cutOffFreq: true
-    },
-    envelope: {},
-    lfo: {},
-    levelData: {
-      text: 'Introducing the control we love most: cutoff frequency.'
-    }
-  },
-  // level 30
-  {
-    oscillator1: {
-      typeOsc: true
-    },
-    oscillator2: {
-      typeOsc: true
-    },
-    filter: {
-      cutOffFreq: true
-    },
-    envelope: {},
-    lfo: {},
-    levelData: {
-      text: 'Use the cutoff frequency to take out unwanted parts of the sound.'
-    }
-  },
-  // level 31
-  {
-    oscillator1: {
-      typeOsc: true
-    },
-    oscillator2: {
-      typeOsc: true
-    },
-    filter: {
-      cutOffFreq: true
-    },
-    envelope: {},
-    lfo: {},
-    levelData: {
-      text: 'The filter is the essence of subtractive synthesis.'
-    }
-  },
-  // level 32
-  {
-    oscillator1: {
-      typeOsc: true
-    },
-    oscillator2: {
-      typeOsc: true
-    },
-    filter: {
-      setQ: true
-    },
-    envelope: {},
-    lfo: {},
-    levelData: {
-      text: 'Resonance controls how sharp the cutoff is.'
-    }
-  },
-  // level 33
-  {
-    oscillator1: {
-      typeOsc: true
-    },
-    oscillator2: {
-      typeOsc: true
-    },
-    filter: {
-      setQ: true
-    },
-    envelope: {},
-    lfo: {},
-    levelData: {
-      text: 'Set the resonance low, and gradually cut off unwanted parts.'
-    }
-  },
-  // level 34
-  {
-    oscillator1: {
-      typeOsc: true
-    },
-    oscillator2: {
-      typeOsc: true
-    },
-    filter: {
-      setQ: true
-    },
-    envelope: {},
-    lfo: {},
-    levelData: {
-      text: 'Set the resonance to high, and cut off the unwanted parts more precisely.'
-    }
-  },
-  // level 35
-  {
-    oscillator1: {
-      typeOsc: true
-    },
-    oscillator2: {
-      typeOsc: true
-    },
-    filter: {
-      frequency: true,
-      setQ: true
-    },
-    envelope: {},
-    lfo: {},
-    levelData: {
-      text: 'Play around with both resonance and cutoff.'
-    }
-  },
-  // level 36
-  {
-    oscillator1: {
-      typeOsc: true
-    },
-    oscillator2: {
-      typeOsc: true
-    },
-    filter: {
-      frequency: true,
-      cutOffFreq: true
-    },
-    envelope: {},
-    lfo: {},
-    levelData: {
-      text: 'Fun fact: equalizers are filters too.'
-    }
-  },
-  // level 37
-  {
-    oscillator1: {
-      typeOsc: true
-    },
-    oscillator2: {
-      typeOsc: true
-    },
-    filter: {
-      frequency: true,
-      type: true
-    },
-    envelope: {},
-    lfo: {},
-    levelData: {
-      text: 'Yes, you have been filtering all along.'
-    }
-  },
-  // level 38
-  {
-    oscillator1: {
-      typeOsc: true
-    },
-    oscillator2: {
-      typeOsc: true
-    },
-    filter: {
-      type: true,
-      setQ: true
-    },
-    envelope: {},
-    lfo: {},
-    levelData: {
-      text: 'Use this knowledge when you adjust the eq of your car radio, and impress your friends.'
-    }
-  },
-  // level 39
-  {
-    oscillator1: {
-      typeOsc: true
-    },
-    oscillator2: {
-      typeOsc: true
-    },
-    filter: {
-      type: true,
-      setQ: true,
-      cutOffFreq: true
-    },
-    envelope: {},
-    lfo: {},
-    levelData: {
-      text: 'But first clear a few more levels.'
-    }
-  },
-  // level 40
-  {
-    oscillator1: {
-      typeOsc: true
-    },
-    oscillator2: {
-      typeOsc: true
-    },
-    filter: {
-      type: true,
-      setQ: true,
-      cutOffFreq: true
-    },
-    envelope: {},
-    lfo: {},
-    levelData: {
-      text: "You came this far, don't give up now."
-    }
-  },
-  // level 41
-  {
-    oscillator1: {
-      typeOsc: true
-    },
-    oscillator2: {
-      typeOsc: true
-    },
-    filter: {
-      type: true,
-      setQ: true,
-      cutOffFreq: true
-    },
-    envelope: {},
-    lfo: {},
-    levelData: {
-      text: 'Last level before we move on to the next module.'
-    }
-  },
+  // {
+  //   oscillator1: {
+  //     detune: true
+  //   },
+  //   oscillator2: {},
+  //   filter: {},
+  //   envelope: {},
+  //   lfo: {},
+  //   levelData: {
+  //     text: 'Listen to the sound playing. Once you hit Ready, you have 30 seconds to recreate it.'
+  //   }
+  // },
+  // // level 2
+  // {
+  //   oscillator1: {
+  //     detune: true
+  //   },
+  //   oscillator2: {},
+  //   filter: {},
+  //   envelope: {},
+  //   lfo: {},
+  //   levelData: {
+  //     text: 'Tip: the white guidelines show you the way.'
+  //   }
+  // },
+  // // level 3
+  // {
+  //   oscillator1: {
+  //     detune: true
+  //   },
+  //   oscillator2: {},
+  //   filter: {},
+  //   envelope: {},
+  //   lfo: {},
+  //   levelData: {
+  //     text: 'The oscillator is the source of electronic sound. You’ll use the knobs and dials to shape the outputted signal. '
+  //   }
+  // },
+  // // level 4
+  // {
+  //   oscillator1: {
+  //     frequency: true,
+  //     detune: true
+  //   },
+  //   oscillator2: {},
+  //   filter: {},
+  //   envelope: {},
+  //   lfo: {},
+  //   levelData: {
+  //     text: 'Both detune and octave control the pitch.'
+  //   }
+  // },
+  // // level 5
+  // {
+  //   oscillator1: {
+  //     frequency: true,
+  //     detune: true
+  //   },
+  //   oscillator2: {},
+  //   filter: {},
+  //   envelope: {},
+  //   lfo: {},
+  //   levelData: {
+  //     text: 'Octave changes the pitch 12 notes a time.'
+  //   }
+  // },
+  // // level 6
+  // {
+  //   oscillator1: {
+  //     frequency: true,
+  //     detune: true
+  //   },
+  //   oscillator2: {},
+  //   filter: {},
+  //   envelope: {},
+  //   lfo: {},
+  //   levelData: {
+  //     text: 'Detune changes the pitch by cents. An octave contains 1200 cents.'
+  //   }
+  // },
+  // // level 7
+  // {
+  //   oscillator1: {
+  //     typeOsc: true
+  //   },
+  //   oscillator2: {},
+  //   filter: {},
+  //   envelope: {},
+  //   lfo: {},
+  //   levelData: {
+  //     text: 'A waveform is the shape of the outputted signal.'
+  //   }
+  // },
+  // // level 8
+  // {
+  //   oscillator1: {
+  //     typeOsc: true
+  //   },
+  //   oscillator2: {},
+  //   filter: {},
+  //   envelope: {},
+  //   lfo: {},
+  //   levelData: {
+  //     text: 'A sine results in a smooth, plain sound, while a sawtooth results in a harmonically rich buzz.'
+  //   }
+  // },
+  // // level 9
+  // {
+  //   oscillator1: {
+  //     typeOsc: true
+  //   },
+  //   oscillator2: {},
+  //   filter: {},
+  //   envelope: {},
+  //   lfo: {},
+  //   levelData: {
+  //     text: 'The waveform is the most fundamental building block in synthesis.'
+  //   }
+  // },
+  // // level 10
+  // {
+  //   oscillator1: {
+  //     frequency: true,
+  //     detune: true
+  //   },
+  //   oscillator2: {},
+  //   filter: {},
+  //   envelope: {},
+  //   lfo: {},
+  //   levelData: {
+  //     text: 'The octave and detune determine the amount the waveform is repeated in a second: hertz.'
+  //   }
+  // },
+  // // level 11
+  // {
+  //   oscillator1: {
+  //     frequency: true,
+  //     typeOsc: true
+  //   },
+  //   oscillator2: {},
+  //   filter: {},
+  //   envelope: {},
+  //   lfo: {},
+  //   levelData: {
+  //     text: 'The more waveform iterations in a second, the higher the pitch.'
+  //   }
+  // },
+  // // level 12
+  // {
+  //   oscillator1: {
+  //     typeOsc: true,
+  //     detune: true,
+  //     frequency: true
+  //   },
+  //   oscillator2: {},
+  //   filter: {},
+  //   envelope: {},
+  //   lfo: {},
+  //   levelData: {
+  //     text: 'Play around with all 3 controls to hear the sound change. Watch the timer though!'
+  //   }
+  // },
+  // // level 13
+  // {
+  //   oscillator1: {
+  //     detune: true,
+  //     frequency: true,
+  //     typeOsc: true
+  //   },
+  //   oscillator2: {},
+  //   filter: {},
+  //   envelope: {},
+  //   lfo: {},
+  //   levelData: {
+  //     text: "Now that you understand the basics, let's step it up a notch."
+  //   }
+  // },
+  // // level 14
+  // {
+  //   oscillator1: {
+  //     detune: true,
+  //     frequency: true,
+  //     typeOsc: true
+  //   },
+  //   oscillator2: {},
+  //   filter: {},
+  //   envelope: {},
+  //   lfo: {},
+  //   levelData: {
+  //     text: 'Enjoy this easy level, it will get trickier soon.'
+  //   }
+  // },
+  // // level 15
+  // {
+  //   oscillator1: {
+  //     detune: true,
+  //     frequency: true,
+  //     typeOsc: true
+  //   },
+  //   oscillator2: {},
+  //   filter: {},
+  //   envelope: {},
+  //   lfo: {},
+  //   levelData: {
+  //     text: 'Wonder why the sound is thin, compared to what you hear in most music?'
+  //   }
+  // },
+  // // level 16 OSC 2
+  // {
+  //   oscillator1: {
+  //     detune: true,
+  //     frequency: true
+  //   },
+  //   oscillator2: {
+  //     detune: true
+  //   },
+  //   filter: {},
+  //   envelope: {},
+  //   lfo: {},
+  //   levelData: {
+  //     text: 'You unlocked the second oscillator!'
+  //   }
+  // },
+  // // level 17
+  // {
+  //   oscillator1: {
+  //     detune: true,
+  //     frequency: true
+  //   },
+  //   oscillator2: {
+  //     detune: true
+  //   },
+  //   filter: {},
+  //   envelope: {},
+  //   lfo: {},
+  //   levelData: {
+  //     text: 'Two oscillators result in a fatter sound.'
+  //   }
+  // },
+  // // level 18
+  // {
+  //   oscillator1: {
+  //     detune: true,
+  //     frequency: true
+  //   },
+  //   oscillator2: {
+  //     detune: true
+  //   },
+  //   filter: {},
+  //   envelope: {},
+  //   lfo: {},
+  //   levelData: {
+  //     text: 'The sound gets even fatter when you tune the oscs differently.'
+  //   }
+  // },
+  // // level 19
+  // {
+  //   oscillator1: {
+  //     detune: true,
+  //     frequency: true
+  //   },
+  //   oscillator2: {
+  //     detune: true
+  //   },
+  //   filter: {},
+  //   envelope: {},
+  //   lfo: {},
+  //   levelData: {
+  //     text: 'Try setting the oscillators to different octaves.'
+  //   }
+  // },
+  // // level 20
+  // {
+  //   oscillator1: {
+  //     detune: true,
+  //     frequency: true
+  //   },
+  //   oscillator2: {
+  //     detune: true
+  //   },
+  //   filter: {},
+  //   envelope: {},
+  //   lfo: {},
+  //   levelData: {
+  //     text: 'And yes, we too can do this all day.'
+  //   }
+  // },
+  // // level 21
+  // {
+  //   oscillator1: {
+  //     typeOsc: true
+  //   },
+  //   oscillator2: {
+  //     typeOsc: true
+  //   },
+  //   filter: {},
+  //   envelope: {},
+  //   lfo: {},
+  //   levelData: {
+  //     text: 'Back by popular demand: waveforms.'
+  //   }
+  // },
+  // // level 22
+  // {
+  //   oscillator1: {
+  //     typeOsc: true
+  //   },
+  //   oscillator2: {
+  //     typeOsc: true
+  //   },
+  //   filter: {},
+  //   envelope: {},
+  //   lfo: {},
+  //   levelData: {
+  //     text: 'Try combining waveforms and hear what that sounds like.'
+  //   }
+  // },
+  // // level 23
+  // {
+  //   oscillator1: {
+  //     typeOsc: true
+  //   },
+  //   oscillator2: {
+  //     typeOsc: true
+  //   },
+  //   filter: {},
+  //   envelope: {},
+  //   lfo: {},
+  //   levelData: {
+  //     text: 'One more chance to play around with only waveforms.'
+  //   }
+  // },
+  // // level 24
+  // {
+  //   oscillator1: {
+  //     typeOsc: true,
+  //     detune: true
+  //   },
+  //   oscillator2: {
+  //     detune: true
+  //   },
+  //   filter: {},
+  //   envelope: {},
+  //   lfo: {},
+  //   levelData: {
+  //     text: 'But what if we have different waveforms and slightly detune the oscs?'
+  //   }
+  // },
+  // // level 25
+  // {
+  //   oscillator1: {
+  //     typeOsc: true,
+  //     detune: true
+  //   },
+  //   oscillator2: {
+  //     detune: true,
+  //     frequency: true
+  //   },
+  //   filter: {},
+  //   envelope: {},
+  //   lfo: {},
+  //   levelData: {
+  //     text: 'Or if we combine waveform, detune, and octave controls?'
+  //   }
+  // },
+  // // level 26 Filter
+  // {
+  //   oscillator1: {
+  //     typeOsc: true
+  //   },
+  //   oscillator2: {
+  //     typeOsc: true
+  //   },
+  //   filter: {
+  //     type: true
+  //   },
+  //   envelope: {},
+  //   lfo: {},
+  //   levelData: {
+  //     text: 'You unlocked the filter!'
+  //   }
+  // },
+  // // level 27
+  // {
+  //   oscillator1: {
+  //     typeOsc: true
+  //   },
+  //   oscillator2: {
+  //     typeOsc: true
+  //   },
+  //   filter: {
+  //     type: true
+  //   },
+  //   envelope: {},
+  //   lfo: {},
+  //   levelData: {
+  //     text: 'There are different types of filters. Try them!'
+  //   }
+  // },
+  // // level 28
+  // {
+  //   oscillator1: {
+  //     typeOsc: true
+  //   },
+  //   oscillator2: {
+  //     typeOsc: true
+  //   },
+  //   filter: {
+  //     type: true
+  //   },
+  //   envelope: {},
+  //   lfo: {},
+  //   levelData: {
+  //     text: 'A filter passes signals with a frequency lower or higher than the selected cutoff, or both.'
+  //   }
+  // },
+  // // level 29
+  // {
+  //   oscillator1: {
+  //     typeOsc: true
+  //   },
+  //   oscillator2: {
+  //     typeOsc: true
+  //   },
+  //   filter: {
+  //     cutOffFreq: true
+  //   },
+  //   envelope: {},
+  //   lfo: {},
+  //   levelData: {
+  //     text: 'Introducing the control we love most: cutoff frequency.'
+  //   }
+  // },
+  // // level 30
+  // {
+  //   oscillator1: {
+  //     typeOsc: true
+  //   },
+  //   oscillator2: {
+  //     typeOsc: true
+  //   },
+  //   filter: {
+  //     cutOffFreq: true
+  //   },
+  //   envelope: {},
+  //   lfo: {},
+  //   levelData: {
+  //     text: 'Use the cutoff frequency to take out unwanted parts of the sound.'
+  //   }
+  // },
+  // // level 31
+  // {
+  //   oscillator1: {
+  //     typeOsc: true
+  //   },
+  //   oscillator2: {
+  //     typeOsc: true
+  //   },
+  //   filter: {
+  //     cutOffFreq: true
+  //   },
+  //   envelope: {},
+  //   lfo: {},
+  //   levelData: {
+  //     text: 'The filter is the essence of subtractive synthesis.'
+  //   }
+  // },
+  // // level 32
+  // {
+  //   oscillator1: {
+  //     typeOsc: true
+  //   },
+  //   oscillator2: {
+  //     typeOsc: true
+  //   },
+  //   filter: {
+  //     setQ: true
+  //   },
+  //   envelope: {},
+  //   lfo: {},
+  //   levelData: {
+  //     text: 'Resonance controls how sharp the cutoff is.'
+  //   }
+  // },
+  // // level 33
+  // {
+  //   oscillator1: {
+  //     typeOsc: true
+  //   },
+  //   oscillator2: {
+  //     typeOsc: true
+  //   },
+  //   filter: {
+  //     setQ: true
+  //   },
+  //   envelope: {},
+  //   lfo: {},
+  //   levelData: {
+  //     text: 'Set the resonance low, and gradually cut off unwanted parts.'
+  //   }
+  // },
+  // // level 34
+  // {
+  //   oscillator1: {
+  //     typeOsc: true
+  //   },
+  //   oscillator2: {
+  //     typeOsc: true
+  //   },
+  //   filter: {
+  //     setQ: true
+  //   },
+  //   envelope: {},
+  //   lfo: {},
+  //   levelData: {
+  //     text: 'Set the resonance to high, and cut off the unwanted parts more precisely.'
+  //   }
+  // },
+  // // level 35
+  // {
+  //   oscillator1: {
+  //     typeOsc: true
+  //   },
+  //   oscillator2: {
+  //     typeOsc: true
+  //   },
+  //   filter: {
+  //     frequency: true,
+  //     setQ: true
+  //   },
+  //   envelope: {},
+  //   lfo: {},
+  //   levelData: {
+  //     text: 'Play around with both resonance and cutoff.'
+  //   }
+  // },
+  // // level 36
+  // {
+  //   oscillator1: {
+  //     typeOsc: true
+  //   },
+  //   oscillator2: {
+  //     typeOsc: true
+  //   },
+  //   filter: {
+  //     frequency: true,
+  //     cutOffFreq: true
+  //   },
+  //   envelope: {},
+  //   lfo: {},
+  //   levelData: {
+  //     text: 'Fun fact: equalizers are filters too.'
+  //   }
+  // },
+  // // level 37
+  // {
+  //   oscillator1: {
+  //     typeOsc: true
+  //   },
+  //   oscillator2: {
+  //     typeOsc: true
+  //   },
+  //   filter: {
+  //     frequency: true,
+  //     type: true
+  //   },
+  //   envelope: {},
+  //   lfo: {},
+  //   levelData: {
+  //     text: 'Yes, you have been filtering all along.'
+  //   }
+  // },
+  // // level 38
+  // {
+  //   oscillator1: {
+  //     typeOsc: true
+  //   },
+  //   oscillator2: {
+  //     typeOsc: true
+  //   },
+  //   filter: {
+  //     type: true,
+  //     setQ: true
+  //   },
+  //   envelope: {},
+  //   lfo: {},
+  //   levelData: {
+  //     text: 'Use this knowledge when you adjust the eq of your car radio, and impress your friends.'
+  //   }
+  // },
+  // // level 39
+  // {
+  //   oscillator1: {
+  //     typeOsc: true
+  //   },
+  //   oscillator2: {
+  //     typeOsc: true
+  //   },
+  //   filter: {
+  //     type: true,
+  //     setQ: true,
+  //     cutOffFreq: true
+  //   },
+  //   envelope: {},
+  //   lfo: {},
+  //   levelData: {
+  //     text: 'But first clear a few more levels.'
+  //   }
+  // },
+  // // level 40
+  // {
+  //   oscillator1: {
+  //     typeOsc: true
+  //   },
+  //   oscillator2: {
+  //     typeOsc: true
+  //   },
+  //   filter: {
+  //     type: true,
+  //     setQ: true,
+  //     cutOffFreq: true
+  //   },
+  //   envelope: {},
+  //   lfo: {},
+  //   levelData: {
+  //     text: "You came this far, don't give up now."
+  //   }
+  // },
+  // // level 41
+  // {
+  //   oscillator1: {
+  //     typeOsc: true
+  //   },
+  //   oscillator2: {
+  //     typeOsc: true
+  //   },
+  //   filter: {
+  //     type: true,
+  //     setQ: true,
+  //     cutOffFreq: true
+  //   },
+  //   envelope: {},
+  //   lfo: {},
+  //   levelData: {
+  //     text: 'Last level before we move on to the next module.'
+  //   }
+  // },
   // level 42 Envelope
   {
     oscillator1: {},
@@ -905,7 +904,7 @@ export default [
       frequency: true
     },
     levelData: {
-      text: 'Adjust the frequency, and hear the pitch go up and down at different speeds.'
+      text: 'Tip: the height is determined by amount, the speed by frequency.'
     }
   },
   // level 61
@@ -947,7 +946,7 @@ export default [
       type: true
     },
     levelData: {
-      text: 'Now, try some other waveforms.'
+      text: 'Notice the difference in the animation, when you switch waveforms.'
     }
   },
   // level 64
@@ -1066,7 +1065,7 @@ export default [
       type: true
     },
     levelData: {
-      text: 'Just like subtractive synthesis, there is no end to this game.'
+      text: 'But just like subtractive synthesis, there is no end to this game.'
     }
   },
   // level 70
