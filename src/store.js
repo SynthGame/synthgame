@@ -19,13 +19,14 @@ export default new Vuex.Store({
       oscillator1: {
         frequency: '131',
         typeOsc: 'sawtooth',
-        detune: 60
+        detune: 50
         // phase: 0
       },
       oscillator2: {
         frequency: '131',
         typeOsc: 'sawtooth',
-        detune: 60
+        detune: 50,
+        volume: 0,
         // phase: 0
       },
       filter: {
@@ -39,6 +40,13 @@ export default new Vuex.Store({
         decay: 25,
         sustain: 10,
         release: 90
+      },
+      envelope2: {
+        attack: 50,
+        decay: 25,
+        sustain: 10,
+        release: 90,
+        assign: 'filtercutoff'
       },
       lfo: {
         frequency: 10,
@@ -63,6 +71,7 @@ export default new Vuex.Store({
         oscillator2: {},
         filter: {},
         envelope: {},
+        envelope2: {},
         lfo: {}
       },
       score: 0,
@@ -71,13 +80,14 @@ export default new Vuex.Store({
         oscillator1: {
           frequency: '131',
           typeOsc: 'sawtooth',
-          detune: 60
+          detune: 50
           // phase: 0
         },
         oscillator2: {
           frequency: '131',
           typeOsc: 'sawtooth',
-          detune: 60
+          detune: 50,
+          volume: 0,
           // phase: 0
         },
         filter: {
@@ -92,6 +102,13 @@ export default new Vuex.Store({
           sustain: 90,
           release: 0
         },
+        envelope2: {
+          attack: 50,
+          decay: 25,
+          sustain: 10,
+          release: 90,
+          assign: 'filtercutoff'
+        },
         lfo: {
           frequency: 10,
           type: 'sine',
@@ -100,6 +117,9 @@ export default new Vuex.Store({
       },
       possibleValues: {
         envelope: {},
+        envelope2: {
+          assign: ['filtercutoff']
+        },
         filter: {
           type: ['lowpass', 'highpass', 'bandpass']
         },
@@ -119,12 +139,13 @@ export default new Vuex.Store({
         oscillator1: {
           frequency: '131',
           typeOsc: 'sawtooth',
-          detune: 20
+          detune: 50
         },
         oscillator2: {
           frequency: '131',
           typeOsc: 'sawtooth',
-          detune: 10
+          detune: 50,
+          volume: 0,
         },
         filter: {
           cutOffFreq: 70,
@@ -136,6 +157,13 @@ export default new Vuex.Store({
           decay: 25,
           sustain: 10,
           release: 90
+        },
+        envelope2: {
+          attack: 50,
+          decay: 25,
+          sustain: 10,
+          release: 90,
+          assign: 'filtercutoff'
         },
         lfo: {
           frequency: 10,
@@ -297,6 +325,10 @@ export default new Vuex.Store({
       synth.envelope.state.device.decay = character.envelope.decay(state.gameState.goal.envelope.decay)
       synth.envelope.state.device.sustain = character.envelope.sustain(state.gameState.goal.envelope.sustain)
       synth.envelope.state.device.release = character.envelope.release(state.gameState.goal.envelope.release)
+      synth.envelope2.state.device.attack = character.envelope2.attack(state.gameState.goal.envelope2.attack)
+      synth.envelope2.state.device.decay = character.envelope2.decay(state.gameState.goal.envelope2.decay)
+      synth.envelope2.state.device.sustain = character.envelope2.sustain(state.gameState.goal.envelope2.sustain)
+      synth.envelope2.state.device.release = character.envelope2.release(state.gameState.goal.envelope2.release)
       synth.filter.state.device.frequency.value = character.filter.cutOffFreq(state.gameState.goal.filter.cutOffFreq)
       synth.filter.state.device.type = character.filter.type(state.gameState.goal.filter.type)
       synth.filter.state.device.Q.value = character.filter.setQ(state.gameState.goal.filter.setQ)
@@ -308,13 +340,18 @@ export default new Vuex.Store({
       synth.oscillator1.state.device.detune.value = character.oscillator1.detune(state.gameState.goal.oscillator1.detune)
       synth.oscillator2.state.device.frequency.value = character.oscillator2.frequency(state.gameState.goal.oscillator2.frequency)
       synth.oscillator2.state.device.type = character.oscillator2.typeOsc(state.gameState.goal.oscillator2.typeOsc)
-      synth.oscillator2.state.device.detune.value = character.oscillator2.detune(state.gameState.goal.oscillator2.detune)
+      // synth.oscillator2.state.device.detune.value = character.oscillator2.detune(state.gameState.goal.oscillator2.detune)
+      synth.oscillator2.state.device.volume.value = character.oscillator2.volume(state.gameState.goal.oscillator2.volume)
     },
     setSynthToDefaultParameters ({state}, synth) {
       synth.envelope.state.device.attack = character.envelope.attack(state.gameState.defaultParams.envelope.attack)
       synth.envelope.state.device.decay = character.envelope.decay(state.gameState.defaultParams.envelope.decay)
       synth.envelope.state.device.sustain = character.envelope.sustain(state.gameState.defaultParams.envelope.sustain)
       synth.envelope.state.device.release = character.envelope.release(state.gameState.defaultParams.envelope.release)
+      synth.envelope2.state.device.attack = character.envelope2.attack(state.gameState.defaultParams.envelope2.attack)
+      synth.envelope2.state.device.decay = character.envelope2.decay(state.gameState.defaultParams.envelope2.decay)
+      synth.envelope2.state.device.sustain = character.envelope2.sustain(state.gameState.defaultParams.envelope2.sustain)
+      synth.envelope2.state.device.release = character.envelope2.release(state.gameState.defaultParams.envelope2.release)
       synth.filter.state.device.frequency.value = character.filter.cutOffFreq(state.gameState.defaultParams.filter.cutOffFreq)
       synth.filter.state.device.type = character.filter.type(state.gameState.defaultParams.filter.type)
       synth.filter.state.device.Q.value = character.filter.setQ(state.gameState.defaultParams.filter.setQ)
@@ -326,7 +363,8 @@ export default new Vuex.Store({
       synth.oscillator1.state.device.detune.value = character.oscillator1.detune(state.gameState.defaultParams.oscillator1.detune)
       synth.oscillator2.state.device.frequency.value = character.oscillator2.frequency(state.gameState.defaultParams.oscillator2.frequency)
       synth.oscillator2.state.device.type = character.oscillator2.typeOsc(state.gameState.defaultParams.oscillator2.typeOsc)
-      synth.oscillator2.state.device.detune.value = character.oscillator2.detune(state.gameState.defaultParams.oscillator2.detune)
+      // synth.oscillator2.state.device.detune.value = character.oscillator2.detune(state.gameState.defaultParams.oscillator2.detune)
+      synth.oscillator2.state.device.volume.value = character.oscillator2.volume(state.gameState.defaultParams.oscillator2.volume)
     },
     exportPreset ({state}) {
       return addPreset({

@@ -8,6 +8,7 @@ export default [
     oscillator2: {},
     filter: {},
     envelope: {},
+    envelope2: {},
     lfo: {},
     levelData: {
       text: 'Listen to the sound playing. Once you hit Ready, you have 30 seconds to recreate it.'

@@ -8,18 +8,24 @@
       <div class="button-wrapper function">
         <button color="#6e01d1" @click="sequencerEditStateChange(0)">Steps</button>
         <button color="#6e01d1" @click="sequencerEditStateChange(1)">Pitch</button>
-        <button color="#6e01d1" @click="sequencerEditStateChange(2)">Volume</button>
-        <button color="#6e01d1" @click="sequencerEditStateChange(3)">Note Length</button>
-        <p>Function</p>
+        <p>Synth</p>
+        <!-- <button color="#6e01d1" @click="sequencerEditStateChange(2)">Accent</button>
+        <button color="#6e01d1" @click="sequencerEditStateChange(3)">Note Length</button> -->
+        <button color="#6e01d1" @click="sequencerEditStateChange(4)">Kick</button>
+        <button color="#6e01d1" @click="sequencerEditStateChange(5)">Hat</button>
+        <p>Drums</p>
       </div>
       <div height="200px">
       <div class="play-random">
         <button @click="playPauseSynth" class="sequencer-stop-button">
 ▶ ️
         </button>
-        <button @click="randomizeSelectedParam" class="sequencer-random-button">
+        <!-- <button @click="randomizeSelectedParam" class="sequencer-random-button">
           random
-        </button>
+        </button> -->
+        <!-- <button @click="playPauseBeat" class="sequencer-random-button">
+          Beat
+        </button> -->
         <module-knob
         style="width:4rem"
           v-model="bpmKnob"
@@ -44,15 +50,33 @@
           v-else-if="sequencerEditState === 1"
           :value="noteArray[j] && noteArray[j].pitch"
           @input="setPitchValue(j, $event)"
-          :min="-12"
+          :min="0"
           :max="12"
         />
-        <SequencerSlider
+        <!-- <SequencerSlider
           v-else-if="sequencerEditState === 2"
           :value="noteArray[j] && noteArray[j].volume"
           @input="setVolumeValue(j, $event)"
-          :min="-60"
+          :min="0"
           :max="6"
+        /> -->
+        <sequencer-button
+          v-if="sequencerEditState === 4"
+          @click="toggleKickOnOff(j)"
+          :button-active="j === activeButton"
+          :button-selected="noteArray[j] && noteArray[j].kick"
+        />
+        <sequencer-button
+          v-if="sequencerEditState === 5"
+          @click="toggleHatOnOff(j)"
+          :button-active="j === activeButton"
+          :button-selected="noteArray[j] && noteArray[j].hat"
+        />
+        <sequencer-button
+          v-if="sequencerEditState === 2"
+          @click="setVolumeValue(j)"
+          :button-active="j === activeButton"
+          :button-selected="noteArray[j] && noteArray[j].volume"
         />
         <SequencerSlider
           v-else-if="sequencerEditState === 3"
@@ -110,29 +134,34 @@ export default {
       this.sequencerEditState = val
     },
     initSynth () {
-      let kickTime = true
       this.toneLoop = audio.setMainLoop({
         noteArray: range(0, 16),
         subdivision: '8n'
       }, (time, note) => {
         this.setStep(note)
-        if (this.$store.state.gameState.timerIsRunning === false && kickTime === true && this.$store.state.gameState.level > 0) {
-          audio.playKick()
-          kickTime = false
-        } else {
-          kickTime = true
-        };
+        // if (note%2==0) {
+        //   audio.playKick()
+        // };
         if (this.noteArray[note].selected) {
           audio.playNote(this.noteArray[note].pitch, {
             noteLength: ['16t', '8n', '4n', '2n', '1n'][this.noteArray[note].noteLength],
             volume: this.noteArray[note].volume
           })
         }
+        if (this.noteArray[note].kick) {
+          audio.playKick()
+        }
+        if (this.noteArray[note].hat) {
+          audio.playHat()
+        }
       })
       this.toneLoop.start()
     },
     playPauseSynth () {
       if (this.toneLoop.state === 'stopped') return this.toneLoop.start()
+      this.toneLoop.stop()
+    },
+    playPauseBeat () {
       this.toneLoop.stop()
     },
     setStep (i) {
@@ -146,11 +175,18 @@ export default {
     toggleNoteOnOff (i) { // use setNoteOnOff
       this.noteArray = this.noteArray.map((el, j) => i === j ? {...el, selected: !el.selected} : el)
     },
+    toggleKickOnOff (i) { // use setNoteOnOff
+      this.noteArray = this.noteArray.map((el, j) => i === j ? {...el, kick: !el.kick} : el)
+    },
+    toggleHatOnOff (i) { // use setNoteOnOff
+      this.noteArray = this.noteArray.map((el, j) => i === j ? {...el, hat: !el.hat} : el)
+    },
     setPitchValue (i, val) {
       this.noteArray = this.noteArray.map((el, j) => i === j ? {...el, pitch: Number(val)} : el)
     },
     setVolumeValue (i, val) {
-      this.noteArray = this.noteArray.map((el, j) => i === j ? {...el, volume: Number(val)} : el)
+      // this.noteArray = this.noteArray.map((el, j) => i === j ? {...el, volume: Number(val)} : el)
+      this.noteArray = this.noteArray.map((el, j) => i === j ? {...el, volume: 3} : el)
     },
     setNoteLengthValue (i, val) {
       this.noteArray = this.noteArray.map((el, j) => i === j ? {...el, noteLength: val} : el)
@@ -210,7 +246,7 @@ export default {
 $main-seq-color: #F40056;
 
 .sequencer {
-   width: 100%;
+   width: 83.33%;
    height: 50%;
    display: flex;
    justify-content: space-between;

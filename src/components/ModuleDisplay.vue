@@ -288,44 +288,45 @@ export default {
         // helpers:
         const octave = this.knobs[0]
         const detune = this.knobs[1]
-        const phase = this.knobs[2]
+        const volume = this.knobs[2]
         const type = this.knobs[3]
 
         const lineLength = 1.5 * this.displayWidth
         const yAxisMiddle = this.displayHeight / 2
-        const h = yAxisMiddle / 2
+        const h = (yAxisMiddle / 2)
+        const hv = (yAxisMiddle / 2) * (volume.value / (volume.max - volume.min))
 
         const octaveRatio = (octave.value / (octave.max - octave.min))
         const detuneRatio = ((detune.value / detune.max) * 1000) / (octave.max - octave.min)
 
-        const iteration = 6.6 * h - h * (4.9 * octaveRatio) + (h * 0.3 * (1 - detuneRatio)) - 15
+        const iteration = 5.5 * h - h * (4.5 * octaveRatio) + (h * 0.3 * (1 - detuneRatio)) + 4.5
 
         let wave
         // square:
         if (type.value === 'square') {
-          wave = ' v ' + h +
+          wave = ' v ' + hv +
                  ' h ' + iteration +
-                 ' v ' + (-yAxisMiddle) +
+                 ' v ' + (-hv*2) +
                  ' h ' + iteration +
-                 ' v ' + h
+                 ' v ' + hv
         // sine:
         } else if (type.value === 'sine') {
-          wave = ' q ' + '0, ' + h + ' ' + iteration / 2 + ', ' + h +
-                 ' q ' + iteration / 2 + ', 0 ' + iteration / 2 + ', ' + (-h) +
-                 ' q 0, ' + (-h) + ' ' + iteration / 2 + ' ' + (-h) +
-                 ' q ' + iteration / 2 + ', 0 ' + ' ' + iteration / 2 + ' ' + h
+          wave = ' q ' + '0, ' + hv + ' ' + iteration / 2 + ', ' + hv +
+                 ' q ' + iteration / 2 + ', 0 ' + iteration / 2 + ', ' + (-hv) +
+                 ' q 0, ' + (-hv) + ' ' + iteration / 2 + ' ' + (-hv) +
+                 ' q ' + iteration / 2 + ', 0 ' + ' ' + iteration / 2 + ' ' + hv
         // sawtooth:
         } else if (type.value === 'sawtooth') {
-          wave = ' v ' + h +
-                 ' l ' + 2 * iteration + ', ' + (-yAxisMiddle) +
-                 ' v ' + h
+          wave = ' v ' + hv +
+                 ' l ' + 2 * iteration + ', ' + (-hv*2) +
+                 ' v ' + hv
         // triangle
         } else if (type.value === 'triangle') {
-          wave = ' l ' + iteration / 2 + ', ' + h +
-                 ' l ' + iteration + ', ' + (-yAxisMiddle) +
-                 ' l ' + iteration / 2 + ', ' + h
+          wave = ' l ' + iteration / 2 + ', ' + hv +
+                 ' l ' + iteration + ', ' + (-hv*2) +
+                 ' l ' + iteration / 2 + ', ' + hv
         }
-        line = 'M ' + iteration * (phase.value / (phase.max)) + ', 0 ' +
+        line = 'M ' + iteration * 0 + ', 0 ' +
               ' m ' + lineLength + ', ' + yAxisMiddle +
               ' h ' + (-lineLength - iteration) +
               wave + wave + wave + wave + wave + wave + wave + wave + wave + wave + wave + wave + wave + wave + wave + wave + wave +
@@ -542,47 +543,46 @@ export default {
         // helpers:
         const octave = this.knobs[4]
         const detune = this.knobs[5]
-        const phase = this.knobs[6]
+        const volume = this.knobs[6]
         const type = this.knobs[7]
 
         const lineLength = 1.5 * this.displayWidth
         const yAxisMiddle = this.displayHeight / 2
-        const h = yAxisMiddle / 2
+        const h = (yAxisMiddle / 2)
+        const hv = (yAxisMiddle / 2) * (volume.value / (volume.max - volume.min))
 
         const octaveRatio = (octave.value / (octave.max - octave.min))
         const detuneRatio = ((detune.value / detune.max) * 1000) / (octave.max - octave.min)
 
-        const iteration = 6.6 * h - h * (4.9 * octaveRatio) + (h * 0.3 * (1 - detuneRatio)) - 15
+        const iteration = 5.5 * h - h * (4.5 * octaveRatio) + (h * 0.3 * (1 - detuneRatio)) + 4.5
 
         let wave
         // square:
         if (type.value === 'square') {
-          wave = ' v ' + h +
+          wave = ' v ' + hv +
                  ' h ' + iteration +
-                 ' v ' + (-yAxisMiddle) +
+                 ' v ' + (-hv*2) +
                  ' h ' + iteration +
-                 ' v ' + h
+                 ' v ' + hv
         // sine:
         } else if (type.value === 'sine') {
-          wave =
-                ' q ' + '0, ' + h + ' ' + iteration / 2 + ', ' + h +
-                 ' q ' + iteration / 2 + ', 0 ' + iteration / 2 + ', ' + (-h) +
-                 ' q 0, ' + (-h) + ' ' + iteration / 2 + ' ' + (-h) +
-                 ' q ' + iteration / 2 + ', 0 ' + ' ' + iteration / 2 + ' ' + h
+          wave = ' q ' + '0, ' + hv + ' ' + iteration / 2 + ', ' + hv +
+                 ' q ' + iteration / 2 + ', 0 ' + iteration / 2 + ', ' + (-hv) +
+                 ' q 0, ' + (-hv) + ' ' + iteration / 2 + ' ' + (-hv) +
+                 ' q ' + iteration / 2 + ', 0 ' + ' ' + iteration / 2 + ' ' + hv
         // sawtooth:
         } else if (type.value === 'sawtooth') {
-          wave = ' v ' + h +
-                 ' l ' + 2 * iteration + ', ' + (-yAxisMiddle) +
-                 ' v ' + h
+          wave = ' v ' + hv +
+                 ' l ' + 2 * iteration + ', ' + (-hv*2) +
+                 ' v ' + hv
         // triangle
         } else if (type.value === 'triangle') {
-          wave = ' l ' + iteration / 2 + ', ' + h +
-                 ' l ' + iteration + ', ' + (-yAxisMiddle) +
-                 ' l ' + iteration / 2 + ', ' + h
+          wave = ' l ' + iteration / 2 + ', ' + hv +
+                 ' l ' + iteration + ', ' + (-hv*2) +
+                 ' l ' + iteration / 2 + ', ' + hv
         }
         line =
               ' m -' + iteration + ', ' + yAxisMiddle +
-              wave + wave + wave + wave + wave + wave + wave + wave + wave + wave + wave + wave + wave + wave + wave + wave + wave +
               wave + wave + wave + wave + wave + wave + wave + wave + wave + wave + wave + wave + wave + wave + wave + wave + wave +
               wave + wave + wave + wave + wave + wave + wave + wave + wave + wave + wave + wave + wave + wave + wave + wave + wave +
               wave + wave + wave + wave + wave + wave + wave + wave + wave + wave + wave + wave + wave + wave + wave + wave + wave

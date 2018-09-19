@@ -27,7 +27,7 @@
         name="Frequency"
         module="filter"
       ></module-knob>
-      <module-knob
+      <!-- <module-knob
         v-model="setQ"
         v-if="knobsAvailable.setQ || createModeIsActive"
         :min="0"
@@ -35,7 +35,7 @@
         knobColor="#6e01d1"
         name="Resonance"
         module="filter"
-      ></module-knob>
+      ></module-knob> -->
       <div
         v-if="knobsAvailable.type || createModeIsActive"
         class="button-wrapper"
@@ -87,9 +87,12 @@ export default {
   created () {
     self = this
     this.filter = audio.filter.state.device
+    this.envelope2 = audio.envelope2.state.device
   },
   methods: {
-
+    envTwoAssigned () {
+      return this.$store.state.envelope2.assign
+    },
   },
   computed: {
     timerIsRunning () {
@@ -102,8 +105,10 @@ export default {
         .every(param => param)
     },
     ...vuexSyncGen('filter', 'cutOffFreq', val => {
-      // self.filter.frequency.value = val
-      self.filter.frequency.value = character.filter.cutOffFreq(val)
+      self.filter.frequency.value = character.filter.cutOffFreq(val);
+      if (self.envTwoAssigned === 'filtercutoff') {
+        self.envelope2.max = character.filter.cutOffFreq(val)
+      }
     }),
     ...vuexSyncGen('filter', 'type', val => {
       self.filter.type = character.filter.type(val)
