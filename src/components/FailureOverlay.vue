@@ -52,11 +52,18 @@
         <span>High score</span>
         <span class="data">{{paddedHighScoreString}}</span>
       </div>
-
-    <button class="button-next"
-            ref="button"
-            @click="startAgain"
-            >TRY AGAIN</button>
+      <div class="makemusic">
+        <span>Make the music for this game and win a trip to Mess foundation!</span>
+      </div>
+      <div class="">
+        <button class="button-next"
+                @click="startLastLevel"
+                >TRY AGAIN</button>
+        <button class="button-next"
+                ref="button"
+                @click="startAgain"
+                >EXIT</button>
+      </div>
     </div>
   </div>
 </template>
@@ -126,27 +133,27 @@ export default {
   mounted () {
     let conf = {
       values: [
-        {
-          stick1: -20,
-          stick1Offset: 0,
-          stick2: 20,
-          stick2AdditionalTwirl: 0,
-          changedTransitionOrigin: 0
-        },
-        {
-          stick1: 0,
-          stick1Offset: 0,
-          stick2: 0,
-          stick2AdditionalTwirl: 0,
-          changedTransitionOrigin: 0
-        },
-        {
-          stick1: -25,
-          stick1Offset: 0,
-          stick2: 0,
-          stick2AdditionalTwirl: 0,
-          changedTransitionOrigin: 0
-        },
+        // {
+        //   stick1: -20,
+        //   stick1Offset: 0,
+        //   stick2: 20,
+        //   stick2AdditionalTwirl: 0,
+        //   changedTransitionOrigin: 0
+        // },
+        // {
+        //   stick1: 0,
+        //   stick1Offset: 0,
+        //   stick2: 0,
+        //   stick2AdditionalTwirl: 0,
+        //   changedTransitionOrigin: 0
+        // },
+        // {
+        //   stick1: -25,
+        //   stick1Offset: 0,
+        //   stick2: 0,
+        //   stick2AdditionalTwirl: 0,
+        //   changedTransitionOrigin: 0
+        // },
         {
           stick1: 0,
           stick1Offset: 0,
@@ -209,6 +216,10 @@ export default {
     },
     startAgain () {
       this.$emit('startagain')
+    },
+    startLastLevel () {
+      this.$emit('startlastlevel');
+      console.log('startlastlevel in failure method triggered');
     }
   },
   computed: {
@@ -226,8 +237,7 @@ export default {
     },
     paddedHighScoreString () {
       return `${padStart(this.gameHighScore, 5, '0')}`
-    }
-
+    },
   }
 }
 </script>
@@ -256,6 +266,12 @@ export default {
     font-size: 2em;
     flex-direction: column;
     width: 8em;
+  }
+  .makemusic {
+    display: flex;
+    font-size: 2em;
+    flex-direction: column;
+    width: 11em;
   }
   & span {
     font-size: .7em;

@@ -2,9 +2,10 @@
   <nav class="main">
     <div class="left">
       <h2 class="game_title">Tats
-      <span class="main__level">Level {{gameLevel}}</span>
+      <span v-if="!createModeIsActive" class="main__level">Level {{gameLevel}}</span>
+      <span v-if="createModeIsActive" class="main__level">Artist</span>
       <span
-        v-if="moduleIsUseable('oscillator1')"
+        v-if="moduleIsUseable('oscillator1') && !createModeIsActive"
         :class="{
                   'module__name__status-indicator': true,
                   'module__name__status-indicator--active': oscillator1Complete
@@ -15,18 +16,18 @@
                 }"
       ></span>
       <span
-        v-if="moduleIsUseable('oscillator2')"
+        v-if="moduleIsUseable('oscillator2') && !createModeIsActive"
         :class="{
                   'module__name__status-indicator': true,
                   'module__name__status-indicator--active': oscillator2Complete
                 }"
         :style="{
-                  'background-color': oscillator2Complete ? oscillatorColor : '',
-                  'box-shadow': oscillator2Complete ? `0px 0px 16px ${oscillatorColor}` : '',
+                  'background-color': oscillator2Complete ? oscillatorTwoColor : '',
+                  'box-shadow': oscillator2Complete ? `0px 0px 16px ${oscillatorTwoColor}` : '',
                 }"
       ></span>
       <span
-        v-if="moduleIsUseable('filter')"
+        v-if="moduleIsUseable('filter') && !createModeIsActive"
         :class="{
                   'module__name__status-indicator indicator__osctwo': true,
                   'module__name__status-indicator--active indicator__osctwo': filterComplete
@@ -37,7 +38,7 @@
                 }"
       ></span>
       <span
-        v-if="moduleIsUseable('envelope')"
+        v-if="moduleIsUseable('envelope') && !createModeIsActive"
         :class="{
                   'module__name__status-indicator indicator__envelope': true,
                   'module__name__status-indicator--active indicator__envelope': envelopeComplete
@@ -48,7 +49,7 @@
                 }"
       ></span>
       <span
-        v-if="moduleIsUseable('lfo')"
+        v-if="moduleIsUseable('lfo') && !createModeIsActive"
         :class="{
                   'module__name__status-indicator': true,
                   'module__name__status-indicator--active': lfoComplete
@@ -78,7 +79,7 @@
       </div>
       </template>
       <template v-else>
-        <input v-model="exportPresetName"/>
+        <input class="name-input" placeholder="Enter your Soundcloud username" v-model="exportPresetName"/>
         <button @click="submitPreset">submit</button>
       </template>
       <after-create-overlay v-if="showAfterCreateOverlay" :link="exportPresetLink" @closeCreate="exitGame"/>
@@ -294,6 +295,35 @@ background: black;
     transition: 0.5s;
  border: 1px solid white;
 
+  }
+}
+
+.name-input {
+  min-width: 20em;
+  color: white;
+  background: unset;
+  border: unset;
+  border-bottom: 1px solid white;
+  margin-right: 1em;
+  font-size: 1.2em;
+  font-family: montserrat;
+  outline: 0;
+}
+
+button {
+  border: 1px solid rgb(255, 133, 116);
+  background: unset;
+  color: white;
+  text-transform: uppercase;
+  margin-right: 2em;
+  padding: .5em 1em;
+  font-family: montserrat;
+  font-weight: 600;
+  outline: 0;
+  cursor: pointer;
+  transition: all .2s;
+  &:hover {
+    background: rgb(255, 133, 116);
   }
 }
 

@@ -3,10 +3,10 @@
     <module-title :indicator-active="dialsAreWithinMargin" :module-color="moduleColor">
       <h2 slot="title">Tats</h2>
       <h3 v-if="dialsAreWithinMargin" slot="subtitle">Done!</h3>
-      <h3 v-else slot="subtitle">Envelope</h3>
+      <h3 v-else slot="subtitle">Envelope 2</h3>
     </module-title>
     <module-display
-      fill="#e4e259"
+      fill="#4b1bff"
       module="envelope"
       :knobs="[{name: 'attack', min: 1, max: 100, value: this.attack},
                 {name: 'decay', min: 1, max: 100, value: this.decay},
@@ -23,7 +23,7 @@
         v-if="knobsAvailable.attack || createModeIsActive"
         :min="0"
         :max="100"
-        knobColor="#e4e259"
+        knobColor="#4b1bff"
         name="Attack"
         module="envelope"
       ></module-knob>
@@ -32,7 +32,7 @@
         v-if="knobsAvailable.decay || createModeIsActive"
         :min="0"
         :max="100"
-        knobColor="#e4e259"
+        knobColor="#4b1bff"
         name="Decay"
         module="envelope"
       ></module-knob>
@@ -41,7 +41,7 @@
         v-if="knobsAvailable.sustain || createModeIsActive"
         :min="0"
         :max="100"
-        knobColor="#e4e259"
+        knobColor="#4b1bff"
         name="Sustain"
         module="envelope"
       ></module-knob>
@@ -50,7 +50,7 @@
         v-if="knobsAvailable.release || createModeIsActive"
         :min="0"
         :max="100"
-        knobColor="#e4e259"
+        knobColor="#4b1bff"
         name="Release"
         module="envelope"
       ></module-knob>
@@ -78,8 +78,8 @@ export default {
   },
   data () {
     return {
-      name: 'envelope',
-      envelope: {},
+      name: 'envelope2',
+      envelope2: {},
       displayHeight: 300,
       displayWidth: 600,
       moduleColor: MODULE_ENVELOPE_COLOR,
@@ -99,8 +99,14 @@ export default {
   },
   created () {
     self = this
-    this.envelope = audio.envelope.state.device
+    this.envelope2 = audio.envelope2.state.device
   },
+  // watch: {
+  //   filterFreqMaxUpdate () {
+  //
+  //     this.$store.filter.max
+  //   }
+  // },
   computed: {
     timerIsRunning () {
       return this.$store.state.gameState.timerIsRunning
@@ -110,26 +116,31 @@ export default {
       return Object.values(this.$store.getters.audioParametersMatchGoalWithMargin[this.name])
         .every(param => param)
     },
-    ...vuexSyncGen('envelope', 'attack', val => {
+    ...vuexSyncGen('envelope2', 'attack', val => {
       // somehow these values cause weird problems when they're 0
       // this is not a proper fix but if it works it's not stupid
-      self.envelope.attack = character.envelope.attack(val || 1)
+      self.envelope2.attack = character.envelope2.attack(val || 1)
     }),
-    ...vuexSyncGen('envelope', 'decay', val => {
-      self.envelope.decay = character.envelope.decay(val || 1)
+    ...vuexSyncGen('envelope2', 'decay', val => {
+      self.envelope2.decay = character.envelope2.decay(val || 1)
     }),
-    ...vuexSyncGen('envelope', 'sustain', val => {
-      self.envelope.sustain = character.envelope.sustain(val)
+    ...vuexSyncGen('envelope2', 'sustain', val => {
+      self.envelope2.sustain = character.envelope2.sustain(val)
     }),
-    ...vuexSyncGen('envelope', 'release', val => {
-      self.envelope.release = character.envelope.release(val || 1)
+    ...vuexSyncGen('envelope2', 'release', val => {
+      self.envelope2.release = character.envelope2.release(val || 1)
     }),
+    // ...vuexSyncGen('envelope2', 'max', val => {
+    //   // when filter updates, update env2 to TODO: only when connected to filter
+    //   self.envelope2.max = this.$store.filter.cutOffFreq;
+    //   console.log('self.envelope2.max', self.envelope2.max);
+    // }),
     ...mapState({
-      attackGoal: state => state.gameState.goal.envelope.attack,
-      decayGoal: state => state.gameState.goal.envelope.decay,
-      sustainGoal: state => state.gameState.goal.envelope.sustain,
-      releaseGoal: state => state.gameState.goal.envelope.release,
-      knobsAvailable: state => state.gameState.knobsAvailable.envelope,
+      attackGoal: state => state.gameState.goal.envelope2.attack,
+      decayGoal: state => state.gameState.goal.envelope2.decay,
+      sustainGoal: state => state.gameState.goal.envelope2.sustain,
+      releaseGoal: state => state.gameState.goal.envelope2.release,
+      knobsAvailable: state => state.gameState.knobsAvailable.envelope2,
       createModeIsActive: state => state.gameState.createModeIsActive
     })
   }
@@ -140,7 +151,7 @@ export default {
 <style scoped lang="scss">
 
 svg.display {
-    fill: #e4e259;
+    fill: #4b1bff;
 }
 
 ul {
@@ -152,6 +163,6 @@ li {
   margin: 0 10px;
 }
 a {
-  color: #42b983;
+  color: #4b1bff;
 }
 </style>

@@ -1,8 +1,9 @@
 <template>
   <div class="about">
-    <h1>This is an about page</h1>
-    <svoosh :isFired="isFired" @midway="change"/>
-    <button @click="triggerSvoosh" style="z-index: 99999999999">{{content}}</button>
+    
+    <!-- <h1>This is an about page</h1> -->
+    <!-- <svoosh :isFired="isFired" @midway="change"/>
+    <button @click="triggerSvoosh" style="z-index: 99999999999">{{content}}</button> -->
   </div>
 </template>
 

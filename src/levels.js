@@ -1,4 +1,3 @@
-// call me Pieter
 export default [
   // level 1 - 3 typeOsc
   // level 1
@@ -9,6 +8,7 @@ export default [
     oscillator2: {},
     filter: {},
     envelope: {},
+    envelope2: {},
     lfo: {},
     levelData: {
       text: 'Listen to the sound playing. Once you hit Ready, you have 30 seconds to recreate it.'
@@ -905,7 +905,7 @@ export default [
       frequency: true
     },
     levelData: {
-      text: 'Adjust the frequency, and hear the pitch go up and down at different speeds.'
+      text: 'Tip: the height is determined by amount, the speed by frequency.'
     }
   },
   // level 61
@@ -947,7 +947,7 @@ export default [
       type: true
     },
     levelData: {
-      text: 'Now, try some other waveforms.'
+      text: 'Notice the difference in the animation, when you switch waveforms.'
     }
   },
   // level 64
@@ -1021,6 +1021,7 @@ export default [
   {
     oscillator1: {
       detune: true,
+      frequency: true,
       typeOsc: true
     },
     oscillator2: {
@@ -1040,9 +1041,7 @@ export default [
   // level 69
   {
     oscillator1: {
-      detune: true,
       typeOsc: true,
-      frequency: true
     },
     oscillator2: {
       detune: true,
@@ -1052,21 +1051,17 @@ export default [
     filter: {
       type: true,
       cutOffFreq: true,
-      setQ: true
     },
     envelope: {
       attack: true,
-      decay: true,
-      sustain: true,
       release: true
     },
     lfo: {
-      frequency: true,
       amount: true,
       type: true
     },
     levelData: {
-      text: 'Just like subtractive synthesis, there is no end to this game.'
+      text: 'But just like subtractive synthesis, there is no end to this game.'
     }
   },
   // level 70
@@ -1077,8 +1072,6 @@ export default [
       frequency: true
     },
     oscillator2: {
-      detune: true,
-      frequency: true,
       typeOsc: true
     },
     filter: {
@@ -1088,12 +1081,9 @@ export default [
     },
     envelope: {
       attack: true,
-      decay: true,
-      sustain: true,
       release: true
     },
     lfo: {
-      frequency: true,
       amount: true,
       type: true
     },
@@ -1189,7 +1179,8 @@ export default [
       frequency: true
     },
     oscillator2: {
-      detune: true
+      detune: true,
+      frequency: true
     },
     filter: {
       type: true,

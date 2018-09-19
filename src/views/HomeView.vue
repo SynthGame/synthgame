@@ -18,6 +18,10 @@
         v-if="moduleIsUseable('envelope')"
         :class="[(activeModule == 3 ? 'active' : '')]"
       />
+      <envelope-module-two
+        v-if="moduleIsUseable('envelope2')"
+        :class="[(activeModule == 5 ? 'active' : '')]"
+      />
       <lfo-module
         v-if="moduleIsUseable('lfo')"
         :class="[(activeModule == 4 ? 'active' : '')]"
@@ -71,6 +75,17 @@
                   'box-shadow': envelopeComplete ? `0px 0px 16px ${envelopeColor}` : '',
                 }"
       ></span></div>
+      <div @click="showEnv2" v-if="moduleIsUseable('envelope2')" class="tabs__tab tabs__env"><span>Env 2</span><span
+        v-if="moduleIsUseable('envelope2')"
+        :class="{
+                  'module__name__status-indicator indicator__envelope': true,
+                  'module__name__status-indicator--active indicator__envelope': envelope2Complete
+                }"
+        :style="{
+                  'background-color': envelope2Complete ? envelopeColor : '',
+                  'box-shadow': envelope2Complete ? `0px 0px 16px ${envelopeColor}` : '',
+                }"
+      ></span></div>
       <div @click="showLfo" v-if="moduleIsUseable('lfo')" class="tabs__tab tabs__lfo"><span>Lfo</span><span
         v-if="moduleIsUseable('lfo')"
         :class="{
@@ -94,6 +109,7 @@ import GameNavBar from '@/components/GameNavBar.vue'
 import OscillatorModuleOne from '@/components/module/OscillatorModuleOne.vue'
 import OscillatorModuleTwo from '@/components/module/OscillatorModuleTwo.vue'
 import EnvelopeModule from '@/components/module/EnvelopeModule.vue'
+import EnvelopeModuleTwo from '@/components/module/EnvelopeModuleTwo.vue'
 import FilterModule from '@/components/module/FilterModule.vue'
 import LfoModule from '@/components/module/LfoModule.vue'
 import SequencerModule from '@/components/module/SequencerModule.vue'
@@ -117,6 +133,7 @@ export default {
     OscillatorModuleOne,
     OscillatorModuleTwo,
     EnvelopeModule,
+    EnvelopeModuleTwo,
     FilterModule,
     LfoModule,
     SequencerModule
@@ -137,6 +154,9 @@ export default {
     },
     showEnv () {
       this.activeModule = 3
+    },
+    showEnv2 () {
+      this.activeModule = 5
     },
     showLfo () {
       this.activeModule = 4
@@ -167,6 +187,9 @@ export default {
     },
     envelopeComplete () {
       return Object.values(this.$store.getters.audioParametersMatchGoalWithMargin['envelope']).every(param => param)
+    },
+    envelope2Complete () {
+      return Object.values(this.$store.getters.audioParametersMatchGoalWithMargin['envelope2']).every(param => param)
     },
     lfoComplete () {
       return Object.values(this.$store.getters.audioParametersMatchGoalWithMargin['lfo']).every(param => param)

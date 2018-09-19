@@ -36,6 +36,7 @@
     <failure-overlay
       v-if="isGameOver"
       @startagain="startAgain"
+      @startlastlevel="startLastLevel"
     />
 
     <!-- <div id="nav">
@@ -201,6 +202,14 @@ export default {
     startAgain () {
       location.reload()
     },
+    startLastLevel () {
+      this.startLevel(this.$store.state.gameState.level);
+      this.displayFailureOverlay = false;
+      audio.startMainLoop();
+      this.$store.commit('setTheGameFromGameOver');
+      this.$store.commit('stopTimerIsRunning');
+        // this.$nextTick(() => this.$store.commit('startTimerIsRunning'))
+    },
     startPlayMode () {
       this.displayStartOverlay = false // hide start overlay
       this.startLevel(0)
@@ -363,6 +372,7 @@ export default {
   width: 16.67em;
   height: 50%;
   margin: 0;
+  margin-right: -.5px;
   display: block;
   float: left;
   position: relative;
@@ -378,6 +388,40 @@ export default {
   }
   &.sequencer {
     height: calc(92vh);
+  }
+  .octave-wrapper {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 40%;
+    height: 6.9em;
+    margin-top: .5em;
+    .switch {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      width: fit-content;
+      margin: auto;
+    }
+    button {
+      width: 3em;
+      height: 3em;
+      margin: auto;
+      background: unset;
+      border: none;
+      cursor: pointer;
+    }
+    svg{
+      width: 1em;
+      stroke: white;
+    }
+    & p {
+       margin: .5em 0 0 0;
+       font-size: .7em;
+       width: 100%;
+       text-transform: uppercase;
+       letter-spacing: 1px;
+    }
   }
   .button-wrapper {
       display: flex;
@@ -567,6 +611,8 @@ body {
     }
   }
 }
+
+*:focus {outline:0 !important}
 
 /* OVERLAYS TRANSITIONING
 *
