@@ -1,6 +1,6 @@
 <template>
   <div class="game">
-    <game-nav-bar/>
+    <game-nav-bar />
     <div class="level">
       <oscillator-module-one
         v-if="moduleIsUseable('oscillator1')"

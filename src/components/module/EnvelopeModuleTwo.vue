@@ -61,7 +61,7 @@
 <script>
 import { mapState } from 'vuex'
 import { vuexSyncGen } from '@/utils'
-import { MODULE_ENVELOPE_COLOR } from '@/constants'
+import { MODULE_ENVELOPETWO_COLOR } from '@/constants'
 
 import audio from '@/audio'
 import character from '@/character'
@@ -82,7 +82,7 @@ export default {
       envelope2: {},
       displayHeight: 300,
       displayWidth: 600,
-      moduleColor: MODULE_ENVELOPE_COLOR,
+      moduleColor: MODULE_ENVELOPETWO_COLOR,
       message: 'Done',
       messageArray: [
         'Ya man',

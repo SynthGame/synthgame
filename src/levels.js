@@ -3,9 +3,10 @@ export default [
   // level 1
   {
     oscillator1: {
-      detune: true
+      typeOsc: true
     },
-    oscillator2: {},
+    oscillator2: {
+    },
     filter: {},
     envelope: {},
     envelope2: {},
@@ -17,9 +18,10 @@ export default [
   // level 2
   {
     oscillator1: {
-      detune: true
+      typeOsc: true
     },
-    oscillator2: {},
+    oscillator2: {
+    },
     filter: {},
     envelope: {},
     lfo: {},
@@ -85,7 +87,9 @@ export default [
   // level 7
   {
     oscillator1: {
-      typeOsc: true
+      typeOsc: true,
+      frequency: true,
+      detune: true
     },
     oscillator2: {},
     filter: {},
@@ -98,7 +102,9 @@ export default [
   // level 8
   {
     oscillator1: {
-      typeOsc: true
+      typeOsc: true,
+      frequency: true,
+      detune: true
     },
     oscillator2: {},
     filter: {},
@@ -111,7 +117,9 @@ export default [
   // level 9
   {
     oscillator1: {
-      typeOsc: true
+      typeOsc: true,
+      frequency: true,
+      detune: true
     },
     oscillator2: {},
     filter: {},
@@ -124,6 +132,7 @@ export default [
   // level 10
   {
     oscillator1: {
+      typeOsc: true,
       frequency: true,
       detune: true
     },
@@ -138,8 +147,9 @@ export default [
   // level 11
   {
     oscillator1: {
+      typeOsc: true,
       frequency: true,
-      typeOsc: true
+      detune: true
     },
     oscillator2: {},
     filter: {},
@@ -212,11 +222,12 @@ export default [
   // level 16 OSC 2
   {
     oscillator1: {
-      detune: true,
-      frequency: true
+      typeOsc: true,
+      frequency: true,
+      detune: true
     },
     oscillator2: {
-      detune: true
+      volume: true
     },
     filter: {},
     envelope: {},
@@ -232,7 +243,7 @@ export default [
       frequency: true
     },
     oscillator2: {
-      detune: true
+      volume: true
     },
     filter: {},
     envelope: {},

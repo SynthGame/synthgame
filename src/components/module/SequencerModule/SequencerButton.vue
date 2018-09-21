@@ -1,5 +1,5 @@
 <template>
-  <button @click="$emit('click', $event)" class="sequencer-button">
+  <button @mousedown="$emit('click', $event)" @mouseover="toggleOnOff($event)" class="sequencer-button">
     <div class="sequencer-button__content">
       <div :class="{
         'sequencer-button__indicator': true,
@@ -11,6 +11,16 @@
 </template>
 
 <script>
+let mouseIsDown = 0;
+document.body.onmousedown = function() {
+  mouseIsDown = mouseIsDown + 1;
+  console.log(mouseIsDown);
+}
+document.body.onmouseup = function() {
+  mouseIsDown = mouseIsDown - 1;
+  console.log(mouseIsDown);
+}
+
 export default {
   name: 'SequencerButton',
   props: {
@@ -25,9 +35,15 @@ export default {
   },
   data: function () {
     return {
+      mouseIsDown: 0
     }
   },
   methods: {
+    toggleOnOff (e) {
+      if (mouseIsDown > 0) {
+        this.$emit('click', e)
+      }
+    }
   }
 }
 </script>

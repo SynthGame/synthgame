@@ -25,7 +25,7 @@ export default new Vuex.Store({
       oscillator2: {
         frequency: '131',
         typeOsc: 'sawtooth',
-        detune: 50,
+        // detune: 50,
         volume: 0,
         // phase: 0
       },
@@ -64,6 +64,7 @@ export default new Vuex.Store({
       margin: 10,
       timerIsRunning: false,
       isGameOver: false,
+      nextLevelRequested: false,
       level: 0,
       sequencesPassedInCurrentLevel: 0,
       knobsAvailable: {
@@ -86,7 +87,7 @@ export default new Vuex.Store({
         oscillator2: {
           frequency: '131',
           typeOsc: 'sawtooth',
-          detune: 50,
+          // detune: 50,
           volume: 0,
           // phase: 0
         },
@@ -144,7 +145,7 @@ export default new Vuex.Store({
         oscillator2: {
           frequency: '131',
           typeOsc: 'sawtooth',
-          detune: 50,
+          // detune: 50,
           volume: 0,
         },
         filter: {
@@ -241,6 +242,12 @@ export default new Vuex.Store({
     setTheGameToGameOver (state) {
       state.gameState.isGameOver = true
     },
+    setRequestNextLevelToTrue (state) {
+      state.gameState.nextLevelRequested = true
+    },
+    setRequestNextLevelToFalse (state) {
+      state.gameState.nextLevelRequested = false
+    },
     setTheGameFromGameOver (state) {
       state.gameState.isGameOver = false
     },
@@ -252,6 +259,9 @@ export default new Vuex.Store({
     allParametersMatchGoal: (state, getters) => {
       return flatMap(getters.audioParametersMatchGoalWithMargin, val => values(val))
         .every(val => val)
+    },
+    nextLevelClickedInNavBar: (state) => {
+      return state.gameState.nextLevelRequested ? 'true' : 'false'
     },
     displayedLevel: (state, getters) => {
       return state.gameState.level + 1
@@ -393,6 +403,12 @@ export default new Vuex.Store({
       // console.log(`you failed at: ${state.gameState.level + 1}`)
       // commit('setLevelValue', state.gameState.level)
       // commit('startTimerIsRunning')
+    },
+    nextLevel ({state, commit}) {
+      commit('setRequestNextLevelToTrue')
+    },
+    notNextLevel ({state, commit}) {
+      commit('setRequestNextLevelToFalse')
     },
     startAgain ({state, commit}) {
       commit('setTheGameFromGameOver')

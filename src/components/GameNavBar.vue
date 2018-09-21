@@ -61,11 +61,17 @@
       ></span>
       </h2>
     </div>
-    <!-- <span v-if="timerIsRunning === false && createModeIsActive === false" class="timer">First listen to the sound we'll recreate</span> -->
+
     <span :style="{
       'animation': timeLeftSeconds < 11 ? '.5s infinite blink' : '',
       'color': timeLeftSeconds < 5 ? oscillatorColor : '',
     }" v-if="timerIsRunning === true && createModeIsActive === false" class="timer">{{paddedTimeLeftString}}</span>
+    <span v-if="createModeIsActive === false && timerIsRunning === false && timeLeftSeconds < 30">
+      <button class="button-next"
+              @click="requestNextLevel"
+              ref="button"
+              >NEXT LEVEL</button>
+    </span>
 
     <div class="right">
       <template v-if="createModeIsActive === false">
@@ -201,6 +207,10 @@ export default {
           alert(`${window.location.origin}/?preset=${presetId}`)
           this.exportPresetLink = `${window.location.origin}/?preset=${presetId}`
         })
+    },
+    requestNextLevel () {
+      console.log('requestNextLevel fired in gamenavbar');
+      this.$store.dispatch('nextLevel')
     }
   },
   watch: {

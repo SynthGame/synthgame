@@ -26,12 +26,12 @@
       @midway="displaySuccessOverlay=true"
       @bye="endSuccessSvoosh"
     />
-    <transition name="slideout">
+    <!-- <transition name="slideout">
       <success-overlay
         v-if="displaySuccessOverlay"
         @next="startNextLevel"
       />
-    </transition>
+    </transition> -->
 
     <failure-overlay
       v-if="isGameOver"
@@ -115,14 +115,22 @@ export default {
     ...mapState({
       sequencesPassedInCurrentLevel: state => state.gameState.sequencesPassedInCurrentLevel,
       level: state => state.gameState.level,
-      timerIsRunning: state => state.gameState.timerIsRunning
+      timerIsRunning: state => state.gameState.timerIsRunning,
+      // nextLevelRequested: state => state.gameState.nextLevelRequested
     }),
     ...mapGetters({
-      allParametersMatchGoal: 'allParametersMatchGoal'
+      allParametersMatchGoal: 'allParametersMatchGoal',
+      nextLevelClickedInNavBar: 'nextLevelClickedInNavBar'
     }),
     isGameOver () {
       return this.$store.state.gameState.isGameOver
-    }
+    },
+    // nextLevelRequested () {
+    //   if (this.$store.state.gameState.nextLevelRequested) {
+    //     console.log('hiiieeaaa working finally');
+    //   }
+    //   // return this.$store.state.gameState.nextLevelRequested
+    // }
   },
   methods: {
     init () {
@@ -136,21 +144,6 @@ export default {
         noteArray: times(16),
         subdivision: '8n'
       }, (time, i) => { // i here is just a note from the note array define above
-        if (this.$store.state.gameState.timerIsRunning === false && !this.displaySuccessOverlay && !this.displayPreviewOverlay) {
-          if (this.$store.state.gameState.sweepArmed) {
-            audio.playSweep() // plan this ahead?
-            this.$store.commit('disarmSweep')
-          }
-        }
-        if ((this.displayPreviewOverlay && this.kickTime === 0 && !this.displayStartOverlay) || (this.displaySuccessOverlay && this.kickTime === 0 && !this.displayStartOverlay)) {
-          audio.playKick()
-          this.$store.commit('armSweep')
-          this.kickTime++
-        } else if (this.kickTime < 15) {
-          this.kickTime++
-        } else {
-          this.kickTime = 0
-        };
         if (!this.customLevelIsActive) {
           audio.playNote(randomLoop[i], {})
         } else {
@@ -220,11 +213,16 @@ export default {
       this.$store.commit('setCreateMode', true)
     },
     startLevel (level) {
-      // disable all overlays
-      this.displaySuccessOverlay = false
-      this.displayFailureOverlay = false
-      this.displayStartOverlay = false
-      this.displayPreviewOverlay = true
+
+      this.beginSuccessSvoosh()
+      setTimeout(() => {
+        // disable all overlays when svoosh is done
+        this.displaySuccessOverlay = false
+        this.displayFailureOverlay = false
+        this.displayStartOverlay = false
+        this.displayPreviewOverlay = true
+      }, 1400)
+      audio.playSweep()
       // import level config
       const availableParameters = levels[level] || levels[levels.length - 1]
 
@@ -267,13 +265,14 @@ export default {
       this.isThereSvooshComponent = true
       this.$nextTick(() => this.svooshIt = true)
       this.displayPreviewOverlay = false
+      audio.playSweep()
     },
     endSvoosh () {
       setTimeout(() => {
         this.isThereSvooshComponent = false
         this.svooshIt = false
         this.$store.commit('armSweep')
-      }, 500)
+      }, 300)
       this.endPreview()
     },
     beginSuccessSvoosh () {
@@ -305,8 +304,16 @@ export default {
   watch: {
     allParametersMatchGoal (val) {
       if (val === true && this.timerIsRunning) {
-        this.beginSuccessSvoosh()
+        // this.beginSuccessSvoosh()
         this.$store.dispatch('levelDone') // would be nice to pass timeleft here but it is being passed by timer on gamestop
+      }
+    },
+    nextLevelClickedInNavBar (val) {
+      console.log('nextLevelClickedInNavBar', val);
+      if (val === 'true') {
+        console.log('nextLevelClickedInNavBar triggered in app.vue');
+        this.$store.dispatch('notNextLevel')
+        this.startNextLevel();
       }
     }
   }

@@ -122,14 +122,12 @@ export default {
   },
   methods: {
     incrementOctave () {
-      console.log('increment');
       let currentOctave = this.freqArray.findIndex(el => el == this.frequency);
       if (currentOctave < 3) {
         this.frequency = this.freqArray[currentOctave+1]
       };
     },
     decrementOctave () {
-      console.log('decrement');
       let currentOctave = this.freqArray.findIndex(el => el == this.frequency);
       if (currentOctave > 0) {
         this.frequency = this.freqArray[currentOctave-1]

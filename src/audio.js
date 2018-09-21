@@ -14,6 +14,12 @@ export default {
     log('initializing all submodules before using')
     this.player.init()
     this.hatPlayer.init()
+    this.clapPlayer.init()
+    this.clap2Player.init()
+    this.cymbalPlayer.init()
+    this.labmycPlayer.init()
+    this.noisePlayer.init()
+    this.snarePlayer.init()
     this.gameOverPlayer.init()
     this.sweepPlayer.init()
     this.oscillator1.init()
@@ -27,6 +33,12 @@ export default {
 
     const player = this.player.state.device
     const hatPlayer = this.hatPlayer.state.device
+    const clapPlayer = this.clapPlayer.state.device
+    const clap2Player = this.clap2Player.state.device
+    const cymbalPlayer = this.cymbalPlayer.state.device
+    const labmycPlayer = this.labmycPlayer.state.device
+    const noisePlayer = this.noisePlayer.state.device
+    const snarePlayer = this.snarePlayer.state.device
     const gameOverPlayer = this.gameOverPlayer.state.device
     const sweepPlayer = this.sweepPlayer.state.device
     const oscillator1 = this.oscillator1.state.device
@@ -47,6 +59,18 @@ export default {
     player.connect(compressor)
     log(`Connecting hatPlayer to compressor`)
     hatPlayer.connect(compressor)
+    log(`Connecting hatPlayer to compressor`)
+    clapPlayer.connect(compressor)
+    log(`Connecting hatPlayer to compressor`)
+    clap2Player.connect(compressor)
+    log(`Connecting hatPlayer to compressor`)
+    cymbalPlayer.connect(compressor)
+    log(`Connecting hatPlayer to compressor`)
+    labmycPlayer.connect(compressor)
+    log(`Connecting hatPlayer to compressor`)
+    noisePlayer.connect(compressor)
+    log(`Connecting hatPlayer to compressor`)
+    snarePlayer.connect(compressor)
     log(`Connecting sweepPlayer to compressor`)
     sweepPlayer.connect(compressor)
     log(`Connecting gameOverPlayer to compressor`)
@@ -120,6 +144,30 @@ export default {
     log(`Playing hat`)
     return this.hatPlayer.state.device.start()
   },
+  playClap () {
+    log(`Playing clap`)
+    return this.clapPlayer.state.device.start()
+  },
+  playClap2 () {
+    log(`Playing clap2`)
+    return this.clap2Player.state.device.start()
+  },
+  playCymbal () {
+    log(`Playing cymbal`)
+    return this.cymbalPlayer.state.device.start()
+  },
+  playLabmyc () {
+    log(`Playing labmyc`)
+    return this.labmycPlayer.state.device.start()
+  },
+  playNoise () {
+    log(`Playing noise`)
+    return this.noisePlayer.state.device.start()
+  },
+  playSnare () {
+    log(`Playing snare`)
+    return this.snarePlayer.state.device.start()
+  },
   stopKick () {
     log(`Playing kick`)
     return this.player.state.device.stop()
@@ -164,6 +212,72 @@ export default {
       log(`Initializing player with options: ${options}`)
       this.state.device = new Tone.Player({
         url: require('./assets/hat.mp3'),
+      })
+    }
+  },
+  clapPlayer: {
+    state: {
+      device: undefined
+    },
+    init (options) {
+      log(`Initializing player with options: ${options}`)
+      this.state.device = new Tone.Player({
+        url: require('./assets/clap.mp3'),
+      })
+    }
+  },
+  clap2Player: {
+    state: {
+      device: undefined
+    },
+    init (options) {
+      log(`Initializing player with options: ${options}`)
+      this.state.device = new Tone.Player({
+        url: require('./assets/clap2.mp3'),
+      })
+    }
+  },
+  cymbalPlayer: {
+    state: {
+      device: undefined
+    },
+    init (options) {
+      log(`Initializing player with options: ${options}`)
+      this.state.device = new Tone.Player({
+        url: require('./assets/cymbal.mp3'),
+      })
+    }
+  },
+  labmycPlayer: {
+    state: {
+      device: undefined
+    },
+    init (options) {
+      log(`Initializing player with options: ${options}`)
+      this.state.device = new Tone.Player({
+        url: require('./assets/labmyc.mp3'),
+      })
+    }
+  },
+  noisePlayer: {
+    state: {
+      device: undefined
+    },
+    init (options) {
+      log(`Initializing player with options: ${options}`)
+      this.state.device = new Tone.Player({
+        url: require('./assets/noise.mp3'),
+      })
+    }
+  },
+  snarePlayer: {
+    state: {
+      device: undefined
+    },
+    init (options) {
+      log(`Initializing player with options: ${options}`)
+      this.state.device = new Tone.Player({
+        url: require('./assets/snare.mp3'),
       })
     }
   },

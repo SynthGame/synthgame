@@ -1,6 +1,6 @@
 <template>
   <div class="sequencer">
-    <module-title>
+    <module-title :module-color="moduleColor">
       <h2 slot="title">Tats</h2>
       <h3 slot="subtitle">Sequencer</h3>
     </module-title>
@@ -13,6 +13,12 @@
         <button color="#6e01d1" @click="sequencerEditStateChange(3)">Note Length</button> -->
         <button color="#6e01d1" @click="sequencerEditStateChange(4)">Kick</button>
         <button color="#6e01d1" @click="sequencerEditStateChange(5)">Hat</button>
+        <button color="#6e01d1" @click="sequencerEditStateChange(6)">Clap 1</button>
+        <button color="#6e01d1" @click="sequencerEditStateChange(7)">Clap 2</button>
+        <button color="#6e01d1" @click="sequencerEditStateChange(8)">Cymbal</button>
+        <button color="#6e01d1" @click="sequencerEditStateChange(9)">Labmyc</button>
+        <button color="#6e01d1" @click="sequencerEditStateChange(10)">Noise</button>
+        <button color="#6e01d1" @click="sequencerEditStateChange(11)">Snare</button>
         <p>Drums</p>
       </div>
       <div height="200px">
@@ -73,6 +79,42 @@
           :button-selected="noteArray[j] && noteArray[j].hat"
         />
         <sequencer-button
+          v-if="sequencerEditState === 6"
+          @click="toggleClapOnOff(j)"
+          :button-active="j === activeButton"
+          :button-selected="noteArray[j] && noteArray[j].clap"
+        />
+        <sequencer-button
+          v-if="sequencerEditState === 7"
+          @click="toggleClap2OnOff(j)"
+          :button-active="j === activeButton"
+          :button-selected="noteArray[j] && noteArray[j].clap2"
+        />
+        <sequencer-button
+          v-if="sequencerEditState === 8"
+          @click="toggleCymbalOnOff(j)"
+          :button-active="j === activeButton"
+          :button-selected="noteArray[j] && noteArray[j].cymbal"
+        />
+        <sequencer-button
+          v-if="sequencerEditState === 9"
+          @click="toggleLabmycOnOff(j)"
+          :button-active="j === activeButton"
+          :button-selected="noteArray[j] && noteArray[j].labmyc"
+        />
+        <sequencer-button
+          v-if="sequencerEditState === 10"
+          @click="toggleNoiseOnOff(j)"
+          :button-active="j === activeButton"
+          :button-selected="noteArray[j] && noteArray[j].noise"
+        />
+        <sequencer-button
+          v-if="sequencerEditState === 11"
+          @click="toggleSnareOnOff(j)"
+          :button-active="j === activeButton"
+          :button-selected="noteArray[j] && noteArray[j].snare"
+        />
+        <sequencer-button
           v-if="sequencerEditState === 2"
           @click="setVolumeValue(j)"
           :button-active="j === activeButton"
@@ -102,6 +144,7 @@ import range from 'lodash/range'
 import fill from 'lodash/fill'
 import sample from 'lodash/sample'
 import random from 'lodash/random'
+import { MODULE_SEQUENCER_COLOR } from '@/constants'
 
 export default {
   name: 'SequencerModule',
@@ -115,6 +158,7 @@ export default {
     return {
       toneLoop: null,
       sequencerEditState: 0,
+      moduleColor: MODULE_SEQUENCER_COLOR,
       activeButton: 0,
       noteArray: fill(range(0, 16), {
         selected: false,
@@ -154,6 +198,24 @@ export default {
         if (this.noteArray[note].hat) {
           audio.playHat()
         }
+        if (this.noteArray[note].clap) {
+          audio.playClap()
+        }
+        if (this.noteArray[note].clap2) {
+          audio.playClap2()
+        }
+        if (this.noteArray[note].cymbal) {
+          audio.playCymbal()
+        }
+        if (this.noteArray[note].labmyc) {
+          audio.playLabmyc()
+        }
+        if (this.noteArray[note].noise) {
+          audio.playNoise()
+        }
+        if (this.noteArray[note].snare) {
+          audio.playSnare()
+        }
       })
       this.toneLoop.start()
     },
@@ -180,6 +242,24 @@ export default {
     },
     toggleHatOnOff (i) { // use setNoteOnOff
       this.noteArray = this.noteArray.map((el, j) => i === j ? {...el, hat: !el.hat} : el)
+    },
+    toggleClapOnOff (i) { // use setNoteOnOff
+      this.noteArray = this.noteArray.map((el, j) => i === j ? {...el, clap: !el.clap} : el)
+    },
+    toggleClap2OnOff (i) { // use setNoteOnOff
+      this.noteArray = this.noteArray.map((el, j) => i === j ? {...el, clap2: !el.clap2} : el)
+    },
+    toggleCymbalOnOff (i) { // use setNoteOnOff
+      this.noteArray = this.noteArray.map((el, j) => i === j ? {...el, cymbal: !el.cymbal} : el)
+    },
+    toggleLabmycOnOff (i) { // use setNoteOnOff
+      this.noteArray = this.noteArray.map((el, j) => i === j ? {...el, labmyc: !el.labmyc} : el)
+    },
+    toggleNoiseOnOff (i) { // use setNoteOnOff
+      this.noteArray = this.noteArray.map((el, j) => i === j ? {...el, noise: !el.noise} : el)
+    },
+    toggleSnareOnOff (i) { // use setNoteOnOff
+      this.noteArray = this.noteArray.map((el, j) => i === j ? {...el, snare: !el.snare} : el)
     },
     setPitchValue (i, val) {
       this.noteArray = this.noteArray.map((el, j) => i === j ? {...el, pitch: Number(val)} : el)
@@ -288,12 +368,6 @@ button.sequencer-button {
 
 .module__name__title {
   h2 {
-    color: white;
-  }
-}
-
-.module__name__sub-title {
-  h3 {
     color: white;
   }
 }
