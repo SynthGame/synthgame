@@ -14,11 +14,9 @@
 let mouseIsDown = 0;
 document.body.onmousedown = function() {
   mouseIsDown = mouseIsDown + 1;
-  console.log(mouseIsDown);
 }
 document.body.onmouseup = function() {
   mouseIsDown = mouseIsDown - 1;
-  console.log(mouseIsDown);
 }
 
 export default {
@@ -35,7 +33,6 @@ export default {
   },
   data: function () {
     return {
-      mouseIsDown: 0
     }
   },
   methods: {

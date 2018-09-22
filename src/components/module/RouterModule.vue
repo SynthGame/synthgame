@@ -1,0 +1,200 @@
+<template>
+  <div class="module">
+    <module-title :indicator-active="dialsAreWithinMargin" :module-color="moduleColor">
+      <h2 slot="title">Tats</h2>
+      <h3 v-if="dialsAreWithinMargin" slot="subtitle">Done!</h3>
+      <h3 v-else slot="subtitle">Router</h3>
+    </module-title>
+    <module-display
+      class="display"
+      module="oscillator"
+      fill="#ff8574"
+      :knobs="[{name: 'Lfo', min: 0, max: 100, value: 0},
+              {name: 'Detune', min: -120, max: 120, value: 0},
+              {name: 'Volume', min: 0, max: 1, value: 0},
+              {name: 'Waveform', min: 0, max:3, value: 0},
+              {name: 'OctaveGoal', min: 0, max: 100, value: 0},
+              {name: 'DetuneGoal', min: -120, max: 120, value: 0},
+              {name: 'VolumeGoal', min: 0, max: 1, value: 0},
+              {name: 'WaveformGoal', min: 0, max:3, value: 0},
+            ]"/>
+    <div class="knobs">
+      <!-- <module-knob
+        v-model="freqDial"
+        v-if="knobsAvailable.frequency || createModeIsActive"
+        :min="0"
+        :step="1"
+        :max="freqArray.length - 1"
+        knobColor="#ff8574"
+        name="Octave"
+      ></module-knob> -->
+      <!-- <div class="octave-wrapper"
+        v-if="knobsAvailable.frequency || createModeIsActive"
+      >
+        <div class="switch">
+          <button color="#ff8574" @click="incrementOctave">
+            <svg version="1.1"
+              x="0px" y="0px" width="12.3px" height="12.6px" viewBox="0 0 12.3 6.6" style="enable-background:new 0 0 12.3 6.6;"
+              xml:space="preserve">
+              <g>
+                  <polyline class="st0" points="12,6.2 6.3,0.6 0.3,6.2     "/>
+              </g>
+            </svg>
+          </button>
+          <button color="#ff8574" @click="decrementOctave">  <svg version="1.1"
+              x="0px" y="0px" width="12.3px" height="12.6px" viewBox="0 0 12.3 6.6" style="transform: rotate(180deg);enable-background:new 0 0 12.3 6.6;"
+              xml:space="preserve">
+              <g>
+                  <polyline class="st0" points="12,6.2 6.3,0.6 0.3,6.2     "/>
+              </g>
+            </svg>
+          </button>
+        </div>
+        <p>OCTAVE</p>
+      </div> -->
+      <!-- <module-knob
+        v-model="detune"
+        v-if="knobsAvailable.detune || createModeIsActive"
+        :min="0"
+        :max="100"
+        knobColor="#ff8574"
+        name="Pitch"
+      ></module-knob> -->
+      <!-- <module-knob
+        v-model="phase"
+        :min="50"
+        :max="10000"
+        knobColor="#ff8574"
+        name="Phase"
+      ></module-knob> -->
+      <div class="button-wrapper"
+        v-if="knobsAvailable.lfo || createModeIsActive"
+      >
+        <module-button color="#ff8574" shape="osc1 frq" :isPressed="lfo==='osc1Detune'" @click.native="lfo='osc1Detune'"/>
+        <module-button color="#ff8574" shape="osc2 vol" :isPressed="lfo==='osc2Volume'" @click.native="lfo='osc2Volume'"/>
+        <module-button color="#ff8574" shape="fil frq" :isPressed="lfo==='filterCutoff'" @click.native="lfo='filterCutoff'"/>
+        <p>LFO</p>
+      </div>
+      <div class="button-wrapper"
+        v-if="knobsAvailable.envelope2 || createModeIsActive"
+      >
+      <module-button color="#ff8574" shape="osc1 frq" :isPressed="envelope2==='osc1Detune'" @click.native="envelope2='osc1Detune'"/>
+      <module-button color="#ff8574" shape="osc2 vol" :isPressed="envelope2==='osc2Volume'" @click.native="envelope2='osc2Volume'"/>
+      <module-button color="#ff8574" shape="fil frq" :isPressed="envelope2==='filterCutoff'" @click.native="envelope2='filterCutoff'"/>
+      <module-button color="#ff8574" shape="lfo frq" :isPressed="envelope2==='lfoFrequency'" @click.native="envelope2='lfoFrequency'"/>
+        <p>Envelope 2</p>
+      </div>
+
+    </div>
+  </div>
+</template>
+
+<script>
+import { mapState } from 'vuex'
+import { vuexSyncGen, mapValueToRange } from '@/utils'
+import { MODULE_OSCILLATORONE_COLOR } from '@/constants'
+
+import audio from '@/audio'
+import character from '@/character'
+import ModuleKnob from '@/components/ModuleKnob.vue'
+import ModuleDisplay from '@/components/ModuleDisplay.vue'
+import ModuleTitle from './ModuleComponents/ModuleTitle.vue'
+import ModuleButton from '@/components/ModuleButton'
+
+var self
+
+export default {
+  name: 'RouterModule',
+  data () {
+    return {
+      name: 'router',
+      oscillator1: {},
+      moduleColor: MODULE_OSCILLATORONE_COLOR
+    }
+  },
+  components: {
+    ModuleKnob,
+    ModuleDisplay,
+    ModuleTitle,
+    ModuleButton
+  },
+  created () {
+    self = this
+    this.lfo = audio.lfo.state.device
+  },
+  methods: {
+  },
+  computed: {
+    timerIsRunning () {
+      return this.$store.state.gameState.timerIsRunning
+    },
+    dialsAreWithinMargin () {
+      if (this.createModeIsActive) return false // quick hack
+      this.title = 'Done!'
+      return Object.values(this.$store.getters.audioParametersMatchGoalWithMargin[this.name])
+        .every(param => param)
+    },
+    // ...vuexSyncGen('oscillator1', 'frequency', val => {
+    //   self.oscillator1.frequency.value = character.oscillator1.frequency(val)
+    // }),
+    ...vuexSyncGen('router', 'lfo', val => {
+      // if (self.router.lfo === character.router.lfo(val)) return TODO check if this statement needs to be there?
+      audio.connectLfo(val)
+      // self.router.lfo = character.router.lfo(val)
+      // self.router.stop()
+      // self.router.start()
+    }),
+    ...vuexSyncGen('router', 'envelope2', val => {
+      // if (self.router.lfo === character.router.lfo(val)) return TODO check if this statement needs to be there?
+      audio.connectEnvelope2(val)
+      // self.router.lfo = character.router.lfo(val)
+      // self.router.stop()
+      // self.router.start()
+    }),
+    // ...vuexSyncGen('oscillator1', 'detune', val => {
+    //   self.oscillator1.detune.value = character.oscillator1.detune(val)
+    // }),
+    ...mapState({
+      lfoGoal: state => state.gameState.goal.router.lfo,
+      envelope2Goal: state => state.gameState.goal.router.envelope2,
+      lfoArray: state => state.gameState.possibleValues.router.lfo,
+      envelope2Array: state => state.gameState.possibleValues.router.envelope2,
+      knobsAvailable: state => state.gameState.knobsAvailable.router,
+      createModeIsActive: state => state.gameState.createModeIsActive
+    })
+  }
+}
+</script>
+
+<!-- Add "scoped" attribute to limit CSS to this component only -->
+<style scoped lang="scss">
+
+.knobs {
+  justify-content: center;
+  flex-direction: column;
+}
+
+.switch {
+  border: 1px solid #ff8574;
+}
+
+button.button {
+  border: 1px solid white;
+}
+
+svg.display {
+    fill: #fff;
+}
+
+ul {
+  list-style-type: none;
+  padding: 0;
+}
+li {
+  display: inline-block;
+  margin: 0 10px;
+}
+a {
+  color: #fff;
+}
+</style>

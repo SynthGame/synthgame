@@ -1,15 +1,15 @@
 export default {
   envelope: {
     attack: val => val / 100 + 0.01,
-    decay: val => Math.pow(val, (val / 300)) - 0.95,
+    decay: val => Math.pow(val, (val / 100)) - 0.95,
     sustain: val => val / 100,
-    release: val => val / 100
+    release: val => val / 10
   },
   envelope2: {
-    attack: val => val / 50 + 0.01,
-    decay: val => Math.pow(val, (val / 300)) - 0.95,
-    sustain: val => val / 100,
-    release: val => val / 100
+    attack: val => val / 10 + 0.01,
+    decay: val => Math.pow(val, (val / 50)) - 0.95,
+    sustain: val => val / 20,
+    release: val => val / 10
   },
   filter: {
     cutOffFreq: val => Math.pow((val * 200), (val / 100)) + 20,
@@ -33,5 +33,9 @@ export default {
     typeOsc: val => val,
     // detune: val => (val * 2) - 120,
     volume: val => (val/1.5) - 75
-  }
+  },
+  router: {
+    envelope2: val => val,
+    lfo: val => val,
+  },
 }

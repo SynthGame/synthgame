@@ -2,6 +2,10 @@
     <button class="button" :style="isPressed ? pickedColor :''">
 
     <!-- changing the stroke color when label ==value -->
+    <p v-if="shape === 'osc1 frq'">Osc1 Frq</p>
+    <p v-if="shape === 'osc2 vol'">Osc2 Vol</p>
+    <p v-if="shape === 'fil frq'">Fil Frq</p>
+    <p v-if="shape === 'lfo frq'">Lfo Frq</p>
     <!-- SINE -->
     <svg version="1.1"
       v-if="shape === 'sine'"

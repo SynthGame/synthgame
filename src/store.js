@@ -52,6 +52,10 @@ export default new Vuex.Store({
         frequency: 10,
         type: 'sine',
         amount: 0
+      },
+      router: {
+        lfo: 'osc1Detune',
+        envelope2: 'osc2Detune'
       }
     },
     gameState: {
@@ -73,7 +77,8 @@ export default new Vuex.Store({
         filter: {},
         envelope: {},
         envelope2: {},
-        lfo: {}
+        lfo: {},
+        router: {}
       },
       score: 0,
       highScore: 0,
@@ -114,6 +119,10 @@ export default new Vuex.Store({
           frequency: 10,
           type: 'sine',
           amount: 0
+        },
+        router: {
+          lfo: 'osc1Detune',
+          envelope2: 'osc2Detune'
         }
       },
       possibleValues: {
@@ -134,6 +143,10 @@ export default new Vuex.Store({
         oscillator2: {
           frequency: ['65', '131', '262', '523'],
           typeOsc: ['sine', 'square', 'sawtooth', 'triangle']
+        },
+        router: {
+          lfo: ['osc1Detune','osc2Detune','filterCutoff'],
+          envelope2: ['osc1Detune','osc2Detune','filterCutoff','lfoFrequency'],
         }
       },
       defaultParams: {
@@ -170,6 +183,10 @@ export default new Vuex.Store({
           frequency: 10,
           type: 'sine',
           amount: 0
+        },
+        router: {
+          lfo: 'osc1Detune',
+          envelope2: 'osc2Detune'
         }
       }
     }

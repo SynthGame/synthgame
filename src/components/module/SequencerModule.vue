@@ -8,24 +8,22 @@
       <div class="button-wrapper function">
         <button color="#6e01d1" @click="sequencerEditStateChange(0)">Steps</button>
         <button color="#6e01d1" @click="sequencerEditStateChange(1)">Pitch</button>
-        <p>Synth</p>
+        <!-- <p>Synth</p> -->
         <!-- <button color="#6e01d1" @click="sequencerEditStateChange(2)">Accent</button>
         <button color="#6e01d1" @click="sequencerEditStateChange(3)">Note Length</button> -->
-        <button color="#6e01d1" @click="sequencerEditStateChange(4)">Kick</button>
-        <button color="#6e01d1" @click="sequencerEditStateChange(5)">Hat</button>
-        <button color="#6e01d1" @click="sequencerEditStateChange(6)">Clap 1</button>
-        <button color="#6e01d1" @click="sequencerEditStateChange(7)">Clap 2</button>
-        <button color="#6e01d1" @click="sequencerEditStateChange(8)">Cymbal</button>
-        <button color="#6e01d1" @click="sequencerEditStateChange(9)">Labmyc</button>
-        <button color="#6e01d1" @click="sequencerEditStateChange(10)">Noise</button>
-        <button color="#6e01d1" @click="sequencerEditStateChange(11)">Snare</button>
-        <p>Drums</p>
+        <button class="button-drums" @click="sequencerEditStateChange(4)">Kick</button>
+        <button class="button-drums" @click="sequencerEditStateChange(5)">Hat</button>
+        <button class="button-drums" @click="sequencerEditStateChange(6)">Clap 1</button>
+        <button class="button-drums" @click="sequencerEditStateChange(7)">Clap 2</button>
+        <button class="button-drums" @click="sequencerEditStateChange(8)">Cymbal</button>
+        <button class="button-drums" @click="sequencerEditStateChange(9)">Labmyc</button>
+        <button class="button-drums" @click="sequencerEditStateChange(10)">Noise</button>
+        <button class="button-drums" @click="sequencerEditStateChange(11)">Snare</button>
+        <button @click="playPauseSynth" class="sequencer-stop-button button-drums">▶</button>
+        <!-- <p>Drums</p> -->
       </div>
       <div height="200px">
       <div class="play-random">
-        <button @click="playPauseSynth" class="sequencer-stop-button">
-▶ ️
-        </button>
         <!-- <button @click="randomizeSelectedParam" class="sequencer-random-button">
           random
         </button> -->
@@ -37,9 +35,9 @@
           v-model="bpmKnob"
           :min="80"
           :max="140"
-          knobColor="#5bd484"
+          knobColor="#F40056"
           name="TEMPO"
-          module="lfo"
+          module="sequencer"
         ></module-knob>
       </div>
       </div>
@@ -188,7 +186,8 @@ export default {
         // };
         if (this.noteArray[note].selected) {
           audio.playNote(this.noteArray[note].pitch, {
-            noteLength: ['16t', '8n', '4n', '2n', '1n'][this.noteArray[note].noteLength],
+            // noteLength: ['16t', '8n', '4n', '2n', '1n'][this.noteArray[note].noteLength],
+            noteLength: '1n',
             volume: this.noteArray[note].volume
           })
         }
@@ -417,12 +416,26 @@ button.sequencer-button {
   &.function {
     height: fit-content;
     width: 100%;
+    margin: 0;
+    justify-content: flex-start;
     button {
-      width: 40%;
+      width: 45%;
       border: 1px solid $main-seq-color;
       margin: 0.3rem;
       background-color: black;
-      color: white
+      color: white;
+      border-radius: 1px;
+      min-height: 3.2em;
+      &.button-drums {
+        background: #313131;
+        width: unset;
+        border: unset;
+        min-height: 1px !important;
+        min-width: 26px;
+        &.sequencer-stop-button {
+            padding-left: 8px;
+        }
+      }
     }
   }
 }
@@ -437,5 +450,7 @@ button.sequencer-button {
 
 .sequencer__controls {
   margin-top: 3.4rem;
+  width: 30%;
+  margin-right: 5%;
 }
 </style>

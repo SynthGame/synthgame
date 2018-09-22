@@ -145,7 +145,7 @@ export default {
         subdivision: '8n'
       }, (time, i) => { // i here is just a note from the note array define above
         if (!this.customLevelIsActive) {
-          audio.playNote(randomLoop[i], {})
+          audio.playNote(randomLoop[i], {noteLength: '1n'})
         } else {
           if (this.customLevelSequence[i].selected) {
             audio.playNote(this.customLevelSequence[i].pitch, {

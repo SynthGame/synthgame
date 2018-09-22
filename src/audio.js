@@ -125,6 +125,43 @@ export default {
     // disconnect outputs?
     return channel.toMaster()
   },
+  connectLfo (destination) {
+    log(`Connecting lfo to ${destination}`)
+    // disconnect outputs?
+    console.log('destination in connectlfo audio.js', destination);
+    if (destination === 'osc1Detune') {
+      this.lfo.state.device.disconnect()
+      this.lfo.state.device.connect(this.oscillator1.state.device.detune)
+    } else if (destination === 'osc2Detune') {
+      this.lfo.state.device.disconnect()
+      this.lfo.state.device.connect(this.oscillator2.state.device.detune)
+    } else if (destination === 'filterCutoff') {
+      this.lfo.state.device.disconnect()
+      this.lfo.state.device.connect(this.filter.state.device.frequency)
+      this.lfo.state.device.max = 20000
+    }
+  },
+  connectEnvelope2 (destination) {
+    log(`Connecting Envelope2 to ${destination}`)
+    // disconnect outputs?
+    console.log('destination in connectenvelope2 audio.js', destination);
+    if (destination === 'osc1Detune') {
+      this.envelope2.state.device.disconnect()
+      this.envelope2.state.device.connect(this.oscillator1.state.device.detune)
+    } else if (destination === 'osc2Volume') {
+      this.envelope2.state.device.disconnect()
+      this.envelope2.state.device.connect(this.oscillator2.state.device.volume)
+    } else if (destination === 'filterCutoff') {
+      this.envelope2.state.device.disconnect()
+      this.envelope2.state.device.connect(this.filter.state.device.frequency)
+      this.envelope2.state.device.max = 20000
+    } else if (destination === 'lfoFrequency') {
+      this.envelope2.state.device.disconnect()
+      this.envelope2.state.device.connect(this.lfo.state.device.frequency)
+      this.envelope2.state.device.max = 10
+      // this.envelope2.state.device.max = 100
+    }
+  },
   playNote (shift, {noteLength, volume}) {
     log(`Playing shifted note: ${shift}`)
     if (Number.isInteger(shift)) {

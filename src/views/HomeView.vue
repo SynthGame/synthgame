@@ -30,6 +30,10 @@
         v-if="createModeIsActive"
         class="module sequencer"
       />
+      <router-module
+        v-if="moduleIsUseable('router')"
+        :class="[(activeModule == 6 ? 'active' : '')]"
+      />
     </div>
     <div class="tabs">
       <div @click="showOsc1" v-if="moduleIsUseable('oscillator1')" class="tabs__tab tabs__osc"><span>Osc 1</span><span
@@ -113,6 +117,7 @@ import EnvelopeModuleTwo from '@/components/module/EnvelopeModuleTwo.vue'
 import FilterModule from '@/components/module/FilterModule.vue'
 import LfoModule from '@/components/module/LfoModule.vue'
 import SequencerModule from '@/components/module/SequencerModule.vue'
+import RouterModule from '@/components/module/RouterModule.vue'
 
 export default {
   name: 'home',
@@ -132,6 +137,7 @@ export default {
     GameNavBar,
     OscillatorModuleOne,
     OscillatorModuleTwo,
+    RouterModule,
     EnvelopeModule,
     EnvelopeModuleTwo,
     FilterModule,
