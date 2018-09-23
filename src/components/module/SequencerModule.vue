@@ -56,6 +56,8 @@
           @input="setPitchValue(j, $event)"
           :min="0"
           :max="12"
+          :button-active="j === activeButton"
+          :button-selected="noteArray[j] && noteArray[j].selected"
         />
         <!-- <SequencerSlider
           v-else-if="sequencerEditState === 2"
@@ -173,7 +175,15 @@ export default {
   },
   methods: {
     sequencerEditStateChange (val) {
-      this.sequencerEditState = val
+      this.sequencerEditState = val;
+      val === 4 ? audio.playKick(): '';
+      val === 5 ? audio.playHat(): '';
+      val === 6 ? audio.playClap(): '';
+      val === 7 ? audio.playClap2(): '';
+      val === 8 ? audio.playCymbal(): '';
+      val === 9 ? audio.playLabmyc(): '';
+      val === 10 ? audio.playNoise(): '';
+      val === 11 ? audio.playSnare(): '';
     },
     initSynth () {
       this.toneLoop = audio.setMainLoop({
@@ -226,6 +236,7 @@ export default {
       this.toneLoop.stop()
     },
     setStep (i) {
+      // document.getElementsByClassName("example")
       if (i) return (this.activeButton = i, this.activeButton)
       if (this.activeButton === 15) this.activeButton = 0
       this.activeButton++
@@ -329,7 +340,7 @@ $main-seq-color: #F40056;
    height: 50%;
    display: flex;
    justify-content: space-between;
-   padding: 2em;
+   padding: 1% 1.6%;
 
    & .stepnumber {
      margin-top: .5em;
@@ -354,7 +365,7 @@ $main-seq-color: #F40056;
 
 .module__name {
   position: absolute;
-  padding: 0.833% 1.67%
+  padding: 0
 }
 
 button.sequencer-button {

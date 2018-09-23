@@ -112,7 +112,7 @@ export default {
   },
   created () {
     self = this
-    this.oscillator1 = audio.oscillator1.state.device
+    this.oscillator1 = audio.oscillator1.state.device 
   },
   methods: {
     incrementOctave () {

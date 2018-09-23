@@ -1,6 +1,10 @@
 <template>
-  <span class="sequencer-slider">
-    <input v-bind:value="value" v-on:input="$emit('input', $event.target.value)" type="range" :min="min" :max="max" orient="vertical">
+  <span :class="{
+    'sequencer-slider': true,
+    'sequencer-slider--active': buttonActive,
+    'sequencer-slider--selected': buttonSelected
+  }">
+    <input v-bind:value="value" v-on:input="$emit('input', $event.target.value)" type="range" :min="min" :max="max" orient="vertical" >
   </span>
 </template>
 
@@ -52,6 +56,18 @@ span.sequencer-slider {
 }
 
 .sequencer-slider {
+    &--selected {
+      [type='range']::-webkit-slider-thumb {
+        background: #F40056 !important;
+        box-shadow: 0px 0px 16px #F40056 !important;
+      }
+    }
+    &--active{
+      [type='range']::-webkit-slider-thumb {
+        background: white !important;
+        box-shadow: 0px 0px 16px white !important;
+      }
+    }
   // transform-origin: 0 0;
   // transform: rotate(90deg);
   // input {
