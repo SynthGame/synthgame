@@ -53,6 +53,8 @@ span.sequencer-slider {
     align-items: center;
     // background: rebeccapurple;
     position: relative;
+    margin-bottom: -1em;
+    margin-top: -.6em;
 }
 
 .sequencer-slider {
@@ -95,7 +97,7 @@ $thumb-shadow-color: rgba(0, 0, 0, .2) !default;
 $thumb-border-width: 1px !default;
 $thumb-border-color: #fff !default;
 
-$track-width: 10em !default;
+$track-width: 9em !default;
 $track-height: 1px !default;
 $track-shadow-size: 1px !default;
 $track-shadow-blur: 1px !default;
@@ -136,7 +138,7 @@ $ie-bottom-track-color: darken($track-color, $contrast) !default;
 [type='range'] {
   -webkit-appearance: none;
   background: transparent;
-  margin: 0 0 0 -41px;
+  margin: 0 0 0 -31px;
   width: $track-width;
   transform: rotate(-90deg);
   position: absolute;

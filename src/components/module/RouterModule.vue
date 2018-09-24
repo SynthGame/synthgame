@@ -70,16 +70,17 @@
       <div class="button-wrapper"
         v-if="knobsAvailable.lfo || createModeIsActive"
       >
+        <module-button color="#ff8574" shape="frq" :isPressed="lfo==='oscsDetune'" @click.native="lfo='oscsDetune'"/>
         <module-button color="#ff8574" shape="osc1 frq" :isPressed="lfo==='osc1Detune'" @click.native="lfo='osc1Detune'"/>
-        <module-button color="#ff8574" shape="osc2 vol" :isPressed="lfo==='osc2Volume'" @click.native="lfo='osc2Volume'"/>
         <module-button color="#ff8574" shape="fil frq" :isPressed="lfo==='filterCutoff'" @click.native="lfo='filterCutoff'"/>
+        <module-button color="#ff8574" shape="fil frq" :isPressed="lfo==='env1decay'" @click.native="lfo='env1decay'"/>
         <p>LFO</p>
       </div>
       <div class="button-wrapper"
         v-if="knobsAvailable.envelope2 || createModeIsActive"
       >
+      <module-button color="#ff8574" shape="frq" :isPressed="envelope2==='oscsDetune'" @click.native="envelope2='oscsDetune'"/>
       <module-button color="#ff8574" shape="osc1 frq" :isPressed="envelope2==='osc1Detune'" @click.native="envelope2='osc1Detune'"/>
-      <module-button color="#ff8574" shape="osc2 vol" :isPressed="envelope2==='osc2Volume'" @click.native="envelope2='osc2Volume'"/>
       <module-button color="#ff8574" shape="fil frq" :isPressed="envelope2==='filterCutoff'" @click.native="envelope2='filterCutoff'"/>
       <module-button color="#ff8574" shape="lfo frq" :isPressed="envelope2==='lfoFrequency'" @click.native="envelope2='lfoFrequency'"/>
         <p>Envelope 2</p>

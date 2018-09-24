@@ -3,7 +3,7 @@
 
     <!-- changing the stroke color when label ==value -->
     <p v-if="shape === 'osc1 frq'">Osc1 Frq</p>
-    <p v-if="shape === 'osc2 vol'">Osc2 Vol</p>
+    <p v-if="shape === 'frq'">Frq</p>
     <p v-if="shape === 'fil frq'">Fil Frq</p>
     <p v-if="shape === 'lfo frq'">Lfo Frq</p>
     <!-- SINE -->

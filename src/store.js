@@ -54,8 +54,8 @@ export default new Vuex.Store({
         amount: 0
       },
       router: {
-        lfo: 'osc1Detune',
-        envelope2: 'osc2Detune'
+        lfo: 'oscsDetune',
+        envelope2: 'filterCutoff'
       }
     },
     gameState: {
@@ -121,8 +121,8 @@ export default new Vuex.Store({
           amount: 0
         },
         router: {
-          lfo: 'osc1Detune',
-          envelope2: 'osc2Detune'
+          lfo: 'oscsDetune',
+          envelope2: 'filterCutoff'
         }
       },
       possibleValues: {
@@ -145,8 +145,8 @@ export default new Vuex.Store({
           typeOsc: ['sine', 'square', 'sawtooth', 'triangle']
         },
         router: {
-          lfo: ['osc1Detune','osc2Detune','filterCutoff'],
-          envelope2: ['osc1Detune','osc2Detune','filterCutoff','lfoFrequency'],
+          lfo: ['oscsDetune','osc1Detune','filterCutoff', 'env1decay'],
+          envelope2: ['oscsDetune','osc1Detune','filterCutoff','lfoFrequency'],
         }
       },
       defaultParams: {
@@ -185,8 +185,8 @@ export default new Vuex.Store({
           amount: 0
         },
         router: {
-          lfo: 'osc1Detune',
-          envelope2: 'osc2Detune'
+          lfo: 'oscsDetune',
+          envelope2: 'filterCutoff'
         }
       }
     }

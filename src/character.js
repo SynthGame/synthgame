@@ -3,13 +3,13 @@ export default {
     attack: val => val / 100 + 0.01,
     decay: val => Math.pow(val, (val / 100)) - 0.95,
     sustain: val => val / 100,
-    release: val => val / 10
+    release: val => val
   },
   envelope2: {
-    attack: val => val / 10 + 0.01,
-    decay: val => Math.pow(val, (val / 50)) - 0.95,
-    sustain: val => val / 20,
-    release: val => val / 10
+    attack: val => val / 100 + 0.01,
+    decay: val => Math.pow(val, (val / 100)) - 0.95,
+    sustain: val => val / 100,
+    release: val => val
   },
   filter: {
     cutOffFreq: val => Math.pow((val * 200), (val / 100)) + 20,

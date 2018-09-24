@@ -18,13 +18,13 @@
         v-if="moduleIsUseable('envelope')"
         :class="[(activeModule == 3 ? 'active' : '')]"
       />
-      <envelope-module-two
-        v-if="moduleIsUseable('envelope2')"
-        :class="[(activeModule == 5 ? 'active' : '')]"
-      />
       <lfo-module
         v-if="moduleIsUseable('lfo')"
         :class="[(activeModule == 4 ? 'active' : '')]"
+      />
+      <envelope-module-two
+        v-if="moduleIsUseable('envelope2')"
+        :class="[(activeModule == 5 ? 'active' : '')]"
       />
       <sequencer-module
         v-if="createModeIsActive"

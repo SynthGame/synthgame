@@ -13,13 +13,13 @@
         <button color="#6e01d1" @click="sequencerEditStateChange(3)">Note Length</button> -->
         <button class="button-drums" @click="sequencerEditStateChange(4)">Kick</button>
         <button class="button-drums" @click="sequencerEditStateChange(5)">Hat</button>
+        <button class="button-drums" @click="sequencerEditStateChange(11)">Snare</button>
+        <button class="button-drums" @click="sequencerEditStateChange(8)">Cymbal</button>
         <button class="button-drums" @click="sequencerEditStateChange(6)">Clap 1</button>
         <button class="button-drums" @click="sequencerEditStateChange(7)">Clap 2</button>
-        <button class="button-drums" @click="sequencerEditStateChange(8)">Cymbal</button>
         <button class="button-drums" @click="sequencerEditStateChange(9)">Labmyc</button>
         <button class="button-drums" @click="sequencerEditStateChange(10)">Noise</button>
-        <button class="button-drums" @click="sequencerEditStateChange(11)">Snare</button>
-        <button @click="playPauseSynth" class="sequencer-stop-button button-drums">▶</button>
+        <button @click="playPauseSynth" class="sequencer-stop-button button-drums"><span>▶</span></button>
         <!-- <p>Drums</p> -->
       </div>
       <div height="200px">
@@ -34,11 +34,12 @@
         style="width:4rem"
           v-model="bpmKnob"
           :min="80"
-          :max="140"
+          :max="160"
           knobColor="#F40056"
           name="TEMPO"
           module="sequencer"
         ></module-knob>
+        <span class="timer">{{bpmKnob}}</span>
       </div>
       </div>
     </div>
@@ -190,17 +191,25 @@ export default {
         noteArray: range(0, 16),
         subdivision: '8n'
       }, (time, note) => {
-        this.setStep(note)
-        // if (note%2==0) {
-        //   audio.playKick()
-        // };
-        if (this.noteArray[note].selected) {
-          audio.playNote(this.noteArray[note].pitch, {
-            // noteLength: ['16t', '8n', '4n', '2n', '1n'][this.noteArray[note].noteLength],
-            noteLength: '1n',
-            volume: this.noteArray[note].volume
-          })
+        if (note === 0) {
+          for (var i = 0; i < 16; i++) {
+            audio.playNote(this.noteArray[i].pitch, {
+              // noteLength: ['16t', '8n', '4n', '2n', '1n'][this.noteArray[note].noteLength],
+              noteLength: '2n',
+              volume: this.noteArray[i].volume,
+              time: i
+            })
+          }
         }
+        this.setStep(note)
+        // if (this.noteArray[note].selected) {
+        //   audio.playNote(this.noteArray[note].pitch, {
+        //     // noteLength: ['16t', '8n', '4n', '2n', '1n'][this.noteArray[note].noteLength],
+        //     noteLength: '2n',
+        //     volume: this.noteArray[note].volume,
+        //     time: note
+        //   })
+        // }
         if (this.noteArray[note].kick) {
           audio.playKick()
         }
@@ -238,7 +247,7 @@ export default {
     setStep (i) {
       // document.getElementsByClassName("example")
       if (i) return (this.activeButton = i, this.activeButton)
-      if (this.activeButton === 15) this.activeButton = 0
+      if (this.activeButton === 15) this.activeButton = -1
       this.activeButton++
     },
     setNoteOnOff (i, val) {
@@ -322,7 +331,7 @@ export default {
   },
   watch: {
     bpmKnob (val) {
-      return audio.setBpm(val)
+      return audio.setBpm(val*2)
     },
     noteArray (val) {
       this.$store.commit('setActiveSequence', val)
@@ -369,7 +378,7 @@ $main-seq-color: #F40056;
 }
 
 button.sequencer-button {
-    min-height: 8em;
+    min-height: 10em;
     justify-content: flex-start;
     display: flex;
     margin: 0;
@@ -397,7 +406,10 @@ button.sequencer-button {
   background-color: unset;
   color: #ffffff;
   align-items: center;
-  align-content: center
+  align-content: center;
+  span {
+    animation: .5s flash infinite alternate;
+  }
 }
 
 .sequencer-random-button {
@@ -428,7 +440,7 @@ button.sequencer-button {
     height: fit-content;
     width: 100%;
     margin: 0;
-    justify-content: flex-start;
+    justify-content: space-between;
     button {
       width: 45%;
       border: 1px solid $main-seq-color;
@@ -437,12 +449,22 @@ button.sequencer-button {
       color: white;
       border-radius: 1px;
       min-height: 3.2em;
+      transition: all.2s;
+      &:hover {
+        border-width: 2px;
+      }
       &.button-drums {
         background: #313131;
         width: unset;
         border: unset;
         min-height: 1px !important;
+        padding: 0 .7em;
         min-width: 26px;
+        position: relative;
+        z-index:999;
+        &:hover {
+          opacity: .8;
+        }
         &.sequencer-stop-button {
             padding-left: 8px;
         }
@@ -462,6 +484,17 @@ button.sequencer-button {
 .sequencer__controls {
   margin-top: 3.4rem;
   width: 30%;
-  margin-right: 5%;
+  margin-right: 3%;
+}
+
+.timer {
+    display: flex;
+    font-size: 2em;
+    font-family: ledscreen;
+    margin-top:1.1em;
+}
+
+@keyframes flash {
+    from {opacity: 0}
 }
 </style>

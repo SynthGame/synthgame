@@ -61,7 +61,7 @@ $main-seq-color: #F40056;
 
   &__content {
     width: 100%;
-    margin-top: -3em;
+    margin-top: -3.6em;
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
