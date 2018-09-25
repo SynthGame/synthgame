@@ -26,7 +26,7 @@ export default new Vuex.Store({
         frequency: '131',
         typeOsc: 'sawtooth',
         // detune: 50,
-        volume: 0,
+        volume: 50,
         // phase: 0
       },
       filter: {
@@ -36,15 +36,15 @@ export default new Vuex.Store({
         // gain: 50
       },
       envelope: {
-        attack: 50,
+        attack: 0,
         decay: 25,
-        sustain: 10,
+        sustain: 100,
         release: 90
       },
       envelope2: {
-        attack: 50,
+        attack: 0,
         decay: 25,
-        sustain: 10,
+        sustain: 100,
         release: 90,
         assign: 'filtercutoff'
       },
@@ -54,7 +54,7 @@ export default new Vuex.Store({
         amount: 0
       },
       router: {
-        lfo: 'oscsDetune',
+        lfo: 'osc1Detune',
         envelope2: 'filterCutoff'
       }
     },
@@ -93,7 +93,7 @@ export default new Vuex.Store({
           frequency: '131',
           typeOsc: 'sawtooth',
           // detune: 50,
-          volume: 0,
+          volume: 50,
           // phase: 0
         },
         filter: {
@@ -105,15 +105,15 @@ export default new Vuex.Store({
         envelope: {
           attack: 0,
           decay: 0,
-          sustain: 90,
+          sustain: 100,
           release: 0
         },
         envelope2: {
-          attack: 50,
+          attack: 0,
           decay: 25,
-          sustain: 10,
+          sustain: 100,
           release: 90,
-          assign: 'filtercutoff'
+          assign: 'filterCutoff'
         },
         lfo: {
           frequency: 10,
@@ -159,23 +159,23 @@ export default new Vuex.Store({
           frequency: '131',
           typeOsc: 'sawtooth',
           // detune: 50,
-          volume: 0,
+          volume: 50,
         },
         filter: {
-          cutOffFreq: 70,
+          cutOffFreq: 40,
           type: 'lowpass',
           setQ: 0
         },
         envelope: {
-          attack: 50,
+          attack: 0,
           decay: 25,
-          sustain: 10,
+          sustain: 100,
           release: 90
         },
         envelope2: {
-          attack: 50,
+          attack: 0,
           decay: 25,
-          sustain: 10,
+          sustain: 100,
           release: 90,
           assign: 'filtercutoff'
         },

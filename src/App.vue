@@ -145,7 +145,12 @@ export default {
         subdivision: '8n'
       }, (time, i) => { // i here is just a note from the note array define above
         if (!this.customLevelIsActive) {
-          audio.playNote(randomLoop[i], {noteLength: '1n'})
+          i === 1 ?
+          audio.playNote(randomLoop[i], {noteLength: '0.5n'})
+          // audio.playNote(0, {noteLength: '4n'})
+          : '';
+          this.allParametersMatchGoal && (i === 0 || i === 4 || i === 8 || i === 12 || i === 2 || i === 6 || i === 10 || i === 14) ?
+          audio.playKick() : '';
         } else {
           if (this.customLevelSequence[i].selected) {
             audio.playNote(this.customLevelSequence[i].pitch, {

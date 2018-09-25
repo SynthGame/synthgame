@@ -8,7 +8,7 @@ export default {
   state: {
     Tone: Tone,
     loop: undefined,
-    toneLength: '8n'
+    toneLength: '2n'
   },
   init () {
     log('initializing all submodules before using')
@@ -79,10 +79,10 @@ export default {
     player.volume.value = 0
     sweepPlayer.volume.value = 3
     gameOverPlayer.volume.value = 0
-    oscillator1.volume.value = -12
-    oscillator2.volume.value = -12
+    oscillator1.volume.value = -24
+    oscillator2.volume.value = -24
     lfo.connect(oscillator1.detune).start()
-    envelope2.connect(filter.frequency)
+    this.connectEnvelope2('filterCutoff')
     log(`Chaining oscillator1 => pitch shift => envelope => filter => delay => reverb`)
     oscillator1.chain(pitchShift, filter, envelope, compressor, volume, output)
     oscillator2.connect(pitchShift)
@@ -133,28 +133,28 @@ export default {
       this.lfo.state.device.disconnect()
       this.lfo.state.device.connect(this.oscillator1.state.device.detune)
       this.lfo.state.device.connect(this.oscillator2.state.device.detune)
-        this.lfo.state.device.max = 1000
-      this.lfo.state.device.min = 0
+      //   this.lfo.state.device.max = 1000
+      // this.lfo.state.device.min = 0
     } else if (destination === 'osc1Detune') {
       this.lfo.state.device.disconnect()
       this.lfo.state.device.connect(this.oscillator1.state.device.detune)
-        this.lfo.state.device.max = 1000
-      this.lfo.state.device.min = 0
+      //   this.lfo.state.device.max = 1000
+      // this.lfo.state.device.min = 0
     } else if (destination === 'filterCutoff') {
       this.lfo.state.device.disconnect()
       this.lfo.state.device.connect(this.filter.state.device.frequency)
-      this.lfo.state.device.max = 20000
+      // this.lfo.state.device.max = 20000
       this.filter.state.device.disconnect();
       this.filter.state.device.connect(this.envelope.state.device);
-      this.lfo.state.device.min = 0
+      // this.lfo.state.device.min = 0
     } else if (destination === 'env1decay') {
       this.lfo.state.device.disconnect()
       console.log(this.filter.state.device.frequency);
       var decay = new Tone.Signal(this.envelope.state.device.decay, 'time');
       console.log(decay);
       this.lfo.state.device.connect(decay);
-      this.lfo.state.device.max = 1000
-      this.lfo.state.device.min = 0
+      // this.lfo.state.device.max = 1000
+      // this.lfo.state.device.min = 0
     }
   },
   connectEnvelope2 (destination) {
@@ -168,14 +168,16 @@ export default {
       this.envelope2.state.device.max = 1000
     } else if (destination === 'osc1Detune') {
       this.envelope2.state.device.disconnect()
-      this.envelope2.state.device.connect(this.oscillator2.state.device.volume)
-      this.envelope2.state.device.max = 0.1
+      this.envelope2.state.device.connect(this.oscillator1.state.device.detune)
+      this.envelope2.state.device.max = 1000
     } else if (destination === 'filterCutoff') {
+      console.log('destination === filterCutoff for envelope2');
       this.envelope2.state.device.disconnect()
       this.envelope2.state.device.connect(this.filter.state.device.frequency)
-      this.envelope2.state.device.max = 20000
-      this.envelope2.state.device.exponent = 2
-      this.filter.state.device.connect(this.envelope.state.device);
+      this.envelope2.state.device.max = 1000
+      // this.envelope2.state.device.max = 20000
+      // this.envelope2.state.device.exponent = 2
+      // this.filter.state.device.connect(this.envelope.state.device);
     } else if (destination === 'lfoFrequency') {
       this.envelope2.state.device.disconnect()
       this.envelope2.state.device.connect(this.lfo.state.device.frequency)
@@ -183,10 +185,7 @@ export default {
       // this.envelope2.state.device.max = 100
     }
   },
-  playNote (shift, {noteLength, volume, time}) {
-    console.log('note ', time, noteLength, volume);
-    Tone.Transport.schedule(function(time, noteLength, volume, shift){
-  	//do something with the time
+  playNote (shift, {noteLength, volume}) {
     log(`Playing shifted note: ${shift}`)
     if (Number.isInteger(shift)) {
       this.oscillator1.state.pitchShift.pitch = shift
@@ -196,7 +195,6 @@ export default {
     // this.envelope.state.device.triggerRelease();
     this.envelope2.state.device.triggerAttackRelease(noteLength || this.state.toneLength)
     return this.envelope.state.device.triggerAttackRelease(noteLength || this.state.toneLength) // TODO: Error: timeConstant must be greater than 0
-}, "${time}:0:0");
   },
   playKick () {
     log(`Playing kick`);
@@ -444,16 +442,16 @@ export default {
     init (options) {
       log(`Initializing LFO with options: ${options}`)
       this.state.device = new Tone.LFO(
-      //   {
-      //   type: 'sine',
-      //   min: 0.1,
-      //   max: 10,
-      //   phase: 0,
-      //   frequency: 1,
-      //   amplitude: 1,
-      //   ...options
-      // }
-        '4n', 0, 8000
+        {
+        // type: 'sine',
+        min: 0,
+        max: 0,
+        // phase: 0,
+        // frequency: 1,
+        // amplitude: 0,
+        ...options
+      }
+        // '4n', 0, 8000
       )
     }
   },

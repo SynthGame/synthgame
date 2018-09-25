@@ -11,33 +11,22 @@ export default [
     envelope: {},
     envelope2: {},
     lfo: {},
+    router: {},
     levelData: {
       text: 'Listen to the sound playing. Once you hit Ready, you have 30 seconds to recreate it.'
-    }
-  },
-  // level 2
-  {
-    oscillator1: {
-      typeOsc: true
-    },
-    oscillator2: {
-    },
-    filter: {},
-    envelope: {},
-    lfo: {},
-    levelData: {
-      text: 'Tip: the white guidelines show you the way.'
     }
   },
   // level 3
   {
     oscillator1: {
-      detune: true
+      detune: true,
+      typeOsc: true
     },
     oscillator2: {},
     filter: {},
     envelope: {},
     lfo: {},
+    router: {},
     levelData: {
       text: 'The oscillator is the source of electronic sound. You’ll use the knobs and dials to shape the outputted signal. '
     }
@@ -45,6 +34,7 @@ export default [
   // level 4
   {
     oscillator1: {
+      typeOsc: true,
       frequency: true,
       detune: true
     },
@@ -52,171 +42,9 @@ export default [
     filter: {},
     envelope: {},
     lfo: {},
+    router: {},
     levelData: {
       text: 'Both detune and octave control the pitch.'
-    }
-  },
-  // level 5
-  {
-    oscillator1: {
-      frequency: true,
-      detune: true
-    },
-    oscillator2: {},
-    filter: {},
-    envelope: {},
-    lfo: {},
-    levelData: {
-      text: 'Octave changes the pitch 12 notes a time.'
-    }
-  },
-  // level 6
-  {
-    oscillator1: {
-      frequency: true,
-      detune: true
-    },
-    oscillator2: {},
-    filter: {},
-    envelope: {},
-    lfo: {},
-    levelData: {
-      text: 'Detune changes the pitch by cents. An octave contains 1200 cents.'
-    }
-  },
-  // level 7
-  {
-    oscillator1: {
-      typeOsc: true,
-      frequency: true,
-      detune: true
-    },
-    oscillator2: {},
-    filter: {},
-    envelope: {},
-    lfo: {},
-    levelData: {
-      text: 'A waveform is the shape of the outputted signal.'
-    }
-  },
-  // level 8
-  {
-    oscillator1: {
-      typeOsc: true,
-      frequency: true,
-      detune: true
-    },
-    oscillator2: {},
-    filter: {},
-    envelope: {},
-    lfo: {},
-    levelData: {
-      text: 'A sine results in a smooth, plain sound, while a sawtooth results in a harmonically rich buzz.'
-    }
-  },
-  // level 9
-  {
-    oscillator1: {
-      typeOsc: true,
-      frequency: true,
-      detune: true
-    },
-    oscillator2: {},
-    filter: {},
-    envelope: {},
-    lfo: {},
-    levelData: {
-      text: 'The waveform is the most fundamental building block in synthesis.'
-    }
-  },
-  // level 10
-  {
-    oscillator1: {
-      typeOsc: true,
-      frequency: true,
-      detune: true
-    },
-    oscillator2: {},
-    filter: {},
-    envelope: {},
-    lfo: {},
-    levelData: {
-      text: 'The octave and detune determine the amount the waveform is repeated in a second: hertz.'
-    }
-  },
-  // level 11
-  {
-    oscillator1: {
-      typeOsc: true,
-      frequency: true,
-      detune: true
-    },
-    oscillator2: {},
-    filter: {},
-    envelope: {},
-    lfo: {},
-    levelData: {
-      text: 'The more waveform iterations in a second, the higher the pitch.'
-    }
-  },
-  // level 12
-  {
-    oscillator1: {
-      typeOsc: true,
-      detune: true,
-      frequency: true
-    },
-    oscillator2: {},
-    filter: {},
-    envelope: {},
-    lfo: {},
-    levelData: {
-      text: 'Play around with all 3 controls to hear the sound change. Watch the timer though!'
-    }
-  },
-  // level 13
-  {
-    oscillator1: {
-      detune: true,
-      frequency: true,
-      typeOsc: true
-    },
-    oscillator2: {},
-    filter: {},
-    envelope: {},
-    lfo: {},
-    levelData: {
-      text: "Now that you understand the basics, let's step it up a notch."
-    }
-  },
-  // level 14
-  {
-    oscillator1: {
-      detune: true,
-      frequency: true,
-      typeOsc: true
-    },
-    oscillator2: {},
-    filter: {},
-    envelope: {},
-    lfo: {},
-    levelData: {
-      text: 'Enjoy this easy level, it will get trickier soon.'
-    }
-  },
-  // level 15
-  {
-    oscillator1: {
-      detune: true,
-      frequency: true,
-      typeOsc: true
-    },
-    oscillator2: {},
-    filter: {},
-    envelope: {},
-    lfo: {},
-    levelData: {
-      text: 'Wonder why the sound is thin, compared to what you hear in most music?'
     }
   },
   // level 16 OSC 2
@@ -227,11 +55,12 @@ export default [
       detune: true
     },
     oscillator2: {
-      volume: true
+      typeOsc: true
     },
     filter: {},
     envelope: {},
     lfo: {},
+    router: {},
     levelData: {
       text: 'You unlocked the second oscillator!'
     }
@@ -240,14 +69,17 @@ export default [
   {
     oscillator1: {
       detune: true,
-      frequency: true
+      frequency: true,
+      typeOsc: true
     },
     oscillator2: {
-      volume: true
+      typeOsc: true,
+      frequency: true
     },
     filter: {},
     envelope: {},
     lfo: {},
+    router: {},
     levelData: {
       text: 'Two oscillators result in a fatter sound.'
     }
@@ -256,192 +88,63 @@ export default [
   {
     oscillator1: {
       detune: true,
-      frequency: true
+      frequency: true,
+      typeOsc: true
     },
     oscillator2: {
+      typeOsc: true,
+      frequency: true,
       detune: true
     },
     filter: {},
     envelope: {},
     lfo: {},
+    router: {},
     levelData: {
       text: 'The sound gets even fatter when you tune the oscs differently.'
-    }
-  },
-  // level 19
-  {
-    oscillator1: {
-      detune: true,
-      frequency: true
-    },
-    oscillator2: {
-      detune: true
-    },
-    filter: {},
-    envelope: {},
-    lfo: {},
-    levelData: {
-      text: 'Try setting the oscillators to different octaves.'
-    }
-  },
-  // level 20
-  {
-    oscillator1: {
-      detune: true,
-      frequency: true
-    },
-    oscillator2: {
-      detune: true
-    },
-    filter: {},
-    envelope: {},
-    lfo: {},
-    levelData: {
-      text: 'And yes, we too can do this all day.'
-    }
-  },
-  // level 21
-  {
-    oscillator1: {
-      typeOsc: true
-    },
-    oscillator2: {
-      typeOsc: true
-    },
-    filter: {},
-    envelope: {},
-    lfo: {},
-    levelData: {
-      text: 'Back by popular demand: waveforms.'
-    }
-  },
-  // level 22
-  {
-    oscillator1: {
-      typeOsc: true
-    },
-    oscillator2: {
-      typeOsc: true
-    },
-    filter: {},
-    envelope: {},
-    lfo: {},
-    levelData: {
-      text: 'Try combining waveforms and hear what that sounds like.'
-    }
-  },
-  // level 23
-  {
-    oscillator1: {
-      typeOsc: true
-    },
-    oscillator2: {
-      typeOsc: true
-    },
-    filter: {},
-    envelope: {},
-    lfo: {},
-    levelData: {
-      text: 'One more chance to play around with only waveforms.'
-    }
-  },
-  // level 24
-  {
-    oscillator1: {
-      typeOsc: true,
-      detune: true
-    },
-    oscillator2: {
-      detune: true
-    },
-    filter: {},
-    envelope: {},
-    lfo: {},
-    levelData: {
-      text: 'But what if we have different waveforms and slightly detune the oscs?'
-    }
-  },
-  // level 25
-  {
-    oscillator1: {
-      typeOsc: true,
-      detune: true
-    },
-    oscillator2: {
-      detune: true,
-      frequency: true
-    },
-    filter: {},
-    envelope: {},
-    lfo: {},
-    levelData: {
-      text: 'Or if we combine waveform, detune, and octave controls?'
     }
   },
   // level 26 Filter
   {
     oscillator1: {
+      detune: true,
+      frequency: true,
       typeOsc: true
     },
     oscillator2: {
-      typeOsc: true
+      typeOsc: true,
+      frequency: true,
+      detune: true
     },
     filter: {
       type: true
     },
     envelope: {},
     lfo: {},
+    router: {},
     levelData: {
       text: 'You unlocked the filter!'
-    }
-  },
-  // level 27
-  {
-    oscillator1: {
-      typeOsc: true
-    },
-    oscillator2: {
-      typeOsc: true
-    },
-    filter: {
-      type: true
-    },
-    envelope: {},
-    lfo: {},
-    levelData: {
-      text: 'There are different types of filters. Try them!'
-    }
-  },
-  // level 28
-  {
-    oscillator1: {
-      typeOsc: true
-    },
-    oscillator2: {
-      typeOsc: true
-    },
-    filter: {
-      type: true
-    },
-    envelope: {},
-    lfo: {},
-    levelData: {
-      text: 'A filter passes signals with a frequency lower or higher than the selected cutoff, or both.'
     }
   },
   // level 29
   {
     oscillator1: {
+      detune: true,
+      frequency: true,
       typeOsc: true
     },
     oscillator2: {
-      typeOsc: true
+      typeOsc: true,
+      frequency: true,
+      detune: true
     },
     filter: {
+      type: true,
       cutOffFreq: true
     },
     envelope: {},
     lfo: {},
+    router: {},
     levelData: {
       text: 'Introducing the control we love most: cutoff frequency.'
     }
@@ -459,6 +162,7 @@ export default [
     },
     envelope: {},
     lfo: {},
+    router: {},
     levelData: {
       text: 'Use the cutoff frequency to take out unwanted parts of the sound.'
     }
@@ -476,6 +180,7 @@ export default [
     },
     envelope: {},
     lfo: {},
+    router: {},
     levelData: {
       text: 'The filter is the essence of subtractive synthesis.'
     }
@@ -493,6 +198,7 @@ export default [
     },
     envelope: {},
     lfo: {},
+    router: {},
     levelData: {
       text: 'Resonance controls how sharp the cutoff is.'
     }
@@ -510,6 +216,7 @@ export default [
     },
     envelope: {},
     lfo: {},
+    router: {},
     levelData: {
       text: 'Set the resonance low, and gradually cut off unwanted parts.'
     }
@@ -527,6 +234,7 @@ export default [
     },
     envelope: {},
     lfo: {},
+    router: {},
     levelData: {
       text: 'Set the resonance to high, and cut off the unwanted parts more precisely.'
     }
@@ -545,6 +253,7 @@ export default [
     },
     envelope: {},
     lfo: {},
+    router: {},
     levelData: {
       text: 'Play around with both resonance and cutoff.'
     }
@@ -563,6 +272,7 @@ export default [
     },
     envelope: {},
     lfo: {},
+    router: {},
     levelData: {
       text: 'Fun fact: equalizers are filters too.'
     }
@@ -581,6 +291,7 @@ export default [
     },
     envelope: {},
     lfo: {},
+    router: {},
     levelData: {
       text: 'Yes, you have been filtering all along.'
     }
@@ -599,6 +310,7 @@ export default [
     },
     envelope: {},
     lfo: {},
+    router: {},
     levelData: {
       text: 'Use this knowledge when you adjust the eq of your car radio, and impress your friends.'
     }
@@ -618,6 +330,7 @@ export default [
     },
     envelope: {},
     lfo: {},
+    router: {},
     levelData: {
       text: 'But first clear a few more levels.'
     }
@@ -637,6 +350,7 @@ export default [
     },
     envelope: {},
     lfo: {},
+    router: {},
     levelData: {
       text: "You came this far, don't give up now."
     }
@@ -656,6 +370,7 @@ export default [
     },
     envelope: {},
     lfo: {},
+    router: {},
     levelData: {
       text: 'Last level before we move on to the next module.'
     }
@@ -669,6 +384,7 @@ export default [
       attack: true
     },
     lfo: {},
+    router: {},
     levelData: {
       text: 'You unlocked Envelope!'
     }
@@ -682,6 +398,7 @@ export default [
       attack: true
     },
     lfo: {},
+    router: {},
     levelData: {
       text: 'With attack, you can control how long it takes the sound to reach its peak volume.'
     }
@@ -695,6 +412,7 @@ export default [
       decay: true
     },
     lfo: {},
+    router: {},
     levelData: {
       text: 'With decay, control how long it takes for the sound to drop from its peak to the sustain level.'
     }
@@ -708,6 +426,7 @@ export default [
       decay: true
     },
     lfo: {},
+    router: {},
     levelData: {
       text: 'A low decay level results in a plucky sound.'
     }
@@ -721,6 +440,7 @@ export default [
       sustain: true
     },
     lfo: {},
+    router: {},
     levelData: {
       text: 'Sustain sets the volume at which the sound remains, for as long the note is held.'
     }
@@ -734,6 +454,7 @@ export default [
       sustain: true
     },
     lfo: {},
+    router: {},
     levelData: {
       text: 'With a short attack and decay, sustain essentially sets the volume of the note.'
     }
@@ -747,6 +468,7 @@ export default [
       release: true
     },
     lfo: {},
+    router: {},
     levelData: {
       text: 'Release controls the time it takes for the sound to return to zero, after sustain.'
     }
@@ -760,6 +482,7 @@ export default [
       release: true
     },
     lfo: {},
+    router: {},
     levelData: {
       text: 'A short release results in snappy sounds. Try it!'
     }
@@ -774,6 +497,7 @@ export default [
       decay: true
     },
     lfo: {},
+    router: {},
     levelData: {
       text: 'Time to start mixing the controls of the envelope.'
     }
@@ -788,6 +512,7 @@ export default [
       sustain: true
     },
     lfo: {},
+    router: {},
     levelData: {
       text: "You're close to fully equiped now."
     }
@@ -802,6 +527,7 @@ export default [
       release: true
     },
     lfo: {},
+    router: {},
     levelData: {
       text: 'After this, we have one more module to cover.'
     }
@@ -816,6 +542,7 @@ export default [
       release: true
     },
     lfo: {},
+    router: {},
     levelData: {
       text: 'You should reconsider your career by now.'
     }
@@ -831,6 +558,7 @@ export default [
       attack: true
     },
     lfo: {},
+    router: {},
     levelData: {
       text: 'It takes some serious decication to get to this level.'
     }
@@ -846,6 +574,7 @@ export default [
       attack: true
     },
     lfo: {},
+    router: {},
     levelData: {
       text: "We're impresed."
     }
@@ -862,6 +591,7 @@ export default [
       release: true
     },
     lfo: {},
+    router: {},
     levelData: {
       text: 'You might just be the next star producer.'
     }
@@ -875,6 +605,7 @@ export default [
     lfo: {
       amount: true
     },
+    router: {},
     levelData: {
       text: 'You unlocked the LFO!'
     }
@@ -888,6 +619,7 @@ export default [
     lfo: {
       amount: true
     },
+    router: {},
     levelData: {
       text: 'Same as the oscillator, LFO produces a signal, but at a low frequency.'
     }
@@ -901,6 +633,7 @@ export default [
     lfo: {
       amount: true
     },
+    router: {},
     levelData: {
       text: "It's connected to the first oscillator's frequency, making it go up and down."
     }
@@ -915,6 +648,7 @@ export default [
       amount: true,
       frequency: true
     },
+    router: {},
     levelData: {
       text: 'Tip: the height is determined by amount, the speed by frequency.'
     }
@@ -929,6 +663,7 @@ export default [
       amount: true,
       frequency: true
     },
+    router: {},
     levelData: {
       text: 'Right now, we use a sinewave, which eases the effect LFO has on the pitch.'
     }
@@ -943,6 +678,7 @@ export default [
       amount: true,
       frequency: true
     },
+    router: {},
     levelData: {
       text: 'But we can use other waveforms, too, just like regular oscillators.'
     }
@@ -957,6 +693,7 @@ export default [
       amount: true,
       type: true
     },
+    router: {},
     levelData: {
       text: 'Notice the difference in the animation, when you switch waveforms.'
     }
@@ -971,6 +708,7 @@ export default [
       amount: true,
       type: true
     },
+    router: {},
     levelData: {
       text: 'Use square to get that glitch sound.'
     }
@@ -986,6 +724,7 @@ export default [
       frequency: true,
       type: true
     },
+    router: {},
     levelData: {
       text: 'Now, play around with all the LFO controls.'
     }
@@ -1004,6 +743,7 @@ export default [
     envelope: {},
     lfo: {
     },
+    router: {},
     levelData: {
       text: 'You did it! You mastered the basics of subtractive synthesis.'
     }
@@ -1024,6 +764,7 @@ export default [
     envelope: {},
     lfo: {
     },
+    router: {},
     levelData: {
       text: 'Now the real fun starts.'
     }
@@ -1045,6 +786,7 @@ export default [
     envelope: {},
     lfo: {
     },
+    router: {},
     levelData: {
       text: 'At this point, you might be wondering if there is even an end to this game.'
     }
@@ -1071,6 +813,7 @@ export default [
       amount: true,
       type: true
     },
+    router: {},
     levelData: {
       text: 'But just like subtractive synthesis, there is no end to this game.'
     }
@@ -1098,6 +841,7 @@ export default [
       amount: true,
       type: true
     },
+    router: {},
     levelData: {
       text: "Thank you for playing. You're on your own now."
     }
@@ -1123,6 +867,7 @@ export default [
     lfo: {
       amount: true
     },
+    router: {},
     levelData: {
       text: 'Is there even anyone that will ever read this?'
     }
@@ -1149,6 +894,7 @@ export default [
     },
     lfo: {
     },
+    router: {},
     levelData: {
       text: 'This is unreal. You must be a famous producer.'
     }
@@ -1179,6 +925,7 @@ export default [
     lfo: {
       amount: true
     },
+    router: {},
     levelData: {
       text: "Well, if so, why don't you teach us?"
     }
@@ -1208,6 +955,7 @@ export default [
       frequency: true,
       amount: true
     },
+    router: {},
     levelData: {
       text: 'Shoot an email to bart@okbye.io'
     }
@@ -1237,6 +985,7 @@ export default [
       amount: true,
       type: true
     },
+    router: {},
     levelData: {
       text: 'We need people like you.'
     }
@@ -1269,6 +1018,7 @@ export default [
       amount: true,
       type: true
     },
+    router: {},
     levelData: {
       text: 'Ok Bye'
     }

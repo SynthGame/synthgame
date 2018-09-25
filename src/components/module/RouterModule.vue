@@ -73,7 +73,7 @@
         <module-button color="#ff8574" shape="frq" :isPressed="lfo==='oscsDetune'" @click.native="lfo='oscsDetune'"/>
         <module-button color="#ff8574" shape="osc1 frq" :isPressed="lfo==='osc1Detune'" @click.native="lfo='osc1Detune'"/>
         <module-button color="#ff8574" shape="fil frq" :isPressed="lfo==='filterCutoff'" @click.native="lfo='filterCutoff'"/>
-        <module-button color="#ff8574" shape="fil frq" :isPressed="lfo==='env1decay'" @click.native="lfo='env1decay'"/>
+        <!-- <module-button color="#ff8574" shape="fil frq" :isPressed="lfo==='env1decay'" @click.native="lfo='env1decay'"/> -->
         <p>LFO</p>
       </div>
       <div class="button-wrapper"
@@ -121,7 +121,8 @@ export default {
   },
   created () {
     self = this
-    this.lfo = audio.lfo.state.device
+    this.realEnvelope2 = audio.envelope2.state.device
+    // this.lfo = audio.lfo.state.device
   },
   methods: {
   },
@@ -139,18 +140,30 @@ export default {
     //   self.oscillator1.frequency.value = character.oscillator1.frequency(val)
     // }),
     ...vuexSyncGen('router', 'lfo', val => {
-      // if (self.router.lfo === character.router.lfo(val)) return TODO check if this statement needs to be there?
-      audio.connectLfo(val)
+      audio.connectLfo(val);
+      if (val === 'filterCutoff' && self.envelope2 === 'filterCutoff') {
+        self.envelope2 = 'oscsDetune'
+      }
+      // val === 'filterCutoff' ?
+      // audio.lfo.state.device.max = audio.filter.state.device.cutOffFreq
+      // : '';
       // self.router.lfo = character.router.lfo(val)
-      // self.router.stop()
-      // self.router.start()
+      // audio.lfo.state.device.stop()
+      // audio.lfo.state.device.start()
     }),
     ...vuexSyncGen('router', 'envelope2', val => {
+      console.log('self.$store.state.audioParameters.router.envelope2 = ',self.$store.state.audioParameters.router.envelope2);
       // if (self.router.lfo === character.router.lfo(val)) return TODO check if this statement needs to be there?
       audio.connectEnvelope2(val)
-      // self.router.lfo = character.router.lfo(val)
-      // self.router.stop()
-      // self.router.start()
+      if (val ==='filterCutoff') {
+        self.realEnvelope2.max = character.filter.cutOffFreq(self.$store.state.audioParameters.filter.cutOffFreq)
+        console.log('self.realEnvelope2.max',self.realEnvelope2.max);
+        console.log('self.$store.state.audioParameters.filter.cutOffFreq',self.$store.state.audioParameters.filter.cutOffFreq);
+
+      }
+      if (val === 'filterCutoff' && self.lfo === 'filterCutoff') {
+        self.lfo = 'oscsDetune'
+      }
     }),
     // ...vuexSyncGen('oscillator1', 'detune', val => {
     //   self.oscillator1.detune.value = character.oscillator1.detune(val)
@@ -161,7 +174,8 @@ export default {
       lfoArray: state => state.gameState.possibleValues.router.lfo,
       envelope2Array: state => state.gameState.possibleValues.router.envelope2,
       knobsAvailable: state => state.gameState.knobsAvailable.router,
-      createModeIsActive: state => state.gameState.createModeIsActive
+      createModeIsActive: state => state.gameState.createModeIsActive,
+      cutOffFreq: state => state.gameState.filter.cutOffFreq
     })
   }
 }
