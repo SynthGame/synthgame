@@ -395,7 +395,7 @@ export default new Vuex.Store({
     },
     exportPreset ({state}) {
       return addPreset({
-        name: 'test',
+        name: 'flume',
         parameterValues: state.audioParameters,
         sequenceArray: state.activeSequence
       })
