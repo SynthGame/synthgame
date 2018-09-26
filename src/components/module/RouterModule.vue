@@ -7,10 +7,10 @@
     </module-title>
     <module-display
       class="display"
-      module="oscillator"
-      fill="#ff8574"
-      :knobs="[{name: 'Lfo', min: 0, max: 100, value: 0},
-              {name: 'Detune', min: -120, max: 120, value: 0},
+      module="router"
+      fill="#000"
+      :knobs="[{name: 'Lfo', min: 0, max: 100, value: lfo},
+              {name: 'Envelope2', min: 0, max: 100, value: envelope2},
               {name: 'Volume', min: 0, max: 1, value: 0},
               {name: 'Waveform', min: 0, max:3, value: 0},
               {name: 'OctaveGoal', min: 0, max: 100, value: 0},
@@ -68,22 +68,22 @@
         name="Phase"
       ></module-knob> -->
       <div class="button-wrapper"
-        v-if="knobsAvailable.lfo || createModeIsActive"
-      >
-        <module-button color="#ff8574" shape="frq" :isPressed="lfo==='oscsDetune'" @click.native="lfo='oscsDetune'"/>
-        <module-button color="#ff8574" shape="osc1 frq" :isPressed="lfo==='osc1Detune'" @click.native="lfo='osc1Detune'"/>
-        <module-button color="#ff8574" shape="fil frq" :isPressed="lfo==='filterCutoff'" @click.native="lfo='filterCutoff'"/>
-        <!-- <module-button color="#ff8574" shape="fil frq" :isPressed="lfo==='env1decay'" @click.native="lfo='env1decay'"/> -->
-        <p>LFO</p>
-      </div>
-      <div class="button-wrapper"
         v-if="knobsAvailable.envelope2 || createModeIsActive"
       >
-      <module-button color="#ff8574" shape="frq" :isPressed="envelope2==='oscsDetune'" @click.native="envelope2='oscsDetune'"/>
-      <module-button color="#ff8574" shape="osc1 frq" :isPressed="envelope2==='osc1Detune'" @click.native="envelope2='osc1Detune'"/>
-      <module-button color="#ff8574" shape="fil frq" :isPressed="envelope2==='filterCutoff'" @click.native="envelope2='filterCutoff'"/>
-      <module-button color="#ff8574" shape="lfo frq" :isPressed="envelope2==='lfoFrequency'" @click.native="envelope2='lfoFrequency'"/>
-        <p>Envelope 2</p>
+      <module-button :color="moduleColor" shape="frq" :isPressed="envelope2==='oscsDetune'" @click.native="envelope2='oscsDetune'"/>
+      <module-button :color="moduleColor" shape="osc1 frq" :isPressed="envelope2==='osc1Detune'" @click.native="envelope2='osc1Detune'"/>
+      <module-button :color="moduleColor" shape="fil frq" :isPressed="envelope2==='filterCutoff'" @click.native="envelope2='filterCutoff'"/>
+      <module-button :color="moduleColor" shape="lfo frq" :isPressed="envelope2==='lfoFrequency'" @click.native="envelope2='lfoFrequency'"/>
+        <p>mod Env</p>
+      </div>
+      <div class="button-wrapper"
+        v-if="knobsAvailable.lfo || createModeIsActive"
+      >
+        <module-button :color="moduleColor" shape="frq" :isPressed="lfo==='oscsDetune'" @click.native="lfo='oscsDetune'"/>
+        <module-button :color="moduleColor" shape="osc1 frq" :isPressed="lfo==='osc1Detune'" @click.native="lfo='osc1Detune'"/>
+        <module-button :color="moduleColor" shape="fil frq" :isPressed="lfo==='filterCutoff'" @click.native="lfo='filterCutoff'"/>
+        <!-- <module-button color="#ff8574" shape="fil frq" :isPressed="lfo==='env1decay'" @click.native="lfo='env1decay'"/> -->
+        <p>Mod LFO</p>
       </div>
 
     </div>
@@ -93,7 +93,7 @@
 <script>
 import { mapState } from 'vuex'
 import { vuexSyncGen, mapValueToRange } from '@/utils'
-import { MODULE_OSCILLATORONE_COLOR } from '@/constants'
+import { MODULE_ROUTER_COLOR } from '@/constants'
 
 import audio from '@/audio'
 import character from '@/character'
@@ -110,7 +110,7 @@ export default {
     return {
       name: 'router',
       oscillator1: {},
-      moduleColor: MODULE_OSCILLATORONE_COLOR
+      moduleColor: MODULE_ROUTER_COLOR
     }
   },
   components: {
@@ -122,6 +122,7 @@ export default {
   created () {
     self = this
     this.realEnvelope2 = audio.envelope2.state.device
+    this.filter = audio.filter.state.device
     // this.lfo = audio.lfo.state.device
   },
   methods: {
@@ -141,6 +142,7 @@ export default {
     // }),
     ...vuexSyncGen('router', 'lfo', val => {
       audio.connectLfo(val);
+      self.filter.frequency.value = character.filter.cutOffFreq(self.$store.state.audioParameters.filter.cutOffFreq);
       if (val === 'filterCutoff' && self.envelope2 === 'filterCutoff') {
         self.envelope2 = 'oscsDetune'
       }
@@ -160,6 +162,9 @@ export default {
         console.log('self.realEnvelope2.max',self.realEnvelope2.max);
         console.log('self.$store.state.audioParameters.filter.cutOffFreq',self.$store.state.audioParameters.filter.cutOffFreq);
 
+      } else {
+        self.filter.frequency.value = character.filter.cutOffFreq(self.$store.state.audioParameters.filter.cutOffFreq);
+        // console.log('self.filter.cutOffFreq',self.filter.cutOffFreq);
       }
       if (val === 'filterCutoff' && self.lfo === 'filterCutoff') {
         self.lfo = 'oscsDetune'
