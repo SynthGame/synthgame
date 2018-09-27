@@ -14,6 +14,10 @@
         <button class="button-next" @click="$emit('create')">Make music</button>
       </div>
     </div>
+    <div class="rbmg">
+        <iframe width="250" height="150" src="https://www.youtube.com/embed/3u-IZgPJaDg?rel=0" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+        <img class="rbmg-img" src="../../src/assets/rbmg.png" alt="Powered by Red Bull Mind Gamers">
+    </div>
   </div>
 </template>
 
@@ -43,5 +47,18 @@ export default {
 </script>
 
 <style scoped lang="scss">
+.rbmg {
+  position: absolute;
+  bottom: 2em;
+  left: 2em;
+  // height: 11vh;
+  width: auto;
+  &-img {
+    position: absolute;
+    margin-left:-44px;
+    margin-top: -21px;
+    height:100px;
+  }
+}
 
 </style>
