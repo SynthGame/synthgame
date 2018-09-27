@@ -1,10 +1,10 @@
 <template>
   <div class="overlay">
     <div class="overlay-content-wrapper">
-        <h1 v-if="!customLevelIsActive">Make Music</h1>
+        <h1 v-if="!customLevelIsActive">Make music</h1>
         <h1 v-if="customLevelIsActive">Tats<span v-if="customAuthor !== null"> ft. {{customAuthor}}</span></h1>
-        <h2 v-if="!customLevelIsActive">Write the music for this game. On nov 17, Tatsuya Takahashi picks 1 lucky winner, who wins a trip to the MESS foundation!</h2>
-        <h2 v-if="customLevelIsActive">Create and share presets. The best and most shared presets get integrated in the official Tats game.</h2>
+        <!-- <h2 v-if="!customLevelIsActive">Write the music for this game. On nov 17, Tatsuya Takahashi picks 1 lucky winner, who wins a trip to the MESS foundation!</h2> -->
+        <h2>Create and share presets. The most played presets get integrated in the official Tats game.</h2>
       <div>
         <button class="button-next" @click="$emit('showCreate')">Ready</button>
       </div>
