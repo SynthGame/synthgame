@@ -15,14 +15,17 @@ exports.createUser = functions.firestore
       const newData = snap.data();
       const name = newData.name;
       if(!name) return null
-      return fetch(`soundcloud.com/${name}/`)
+      console.log(`Getting soundcloud avatar URL for user: ${name}`)
+      return fetch(`https://soundcloud.com/${name}/`)
         .then(r => r.text())
         .then(html => {
           const $ = cheerio.load(html, {xmlMode: true})
           const avatarUrl = $('article > header > img[itemprop="image"]').attr('src')
+          console.log(`Received the following url: ${avatarUrl} for user: ${name}`)
           return snap.ref.update(Object.assign(newData, { avatarUrl: avatarUrl }))
         })
         .catch(e => {
+          console.error(e)
           return null
         })
     })
