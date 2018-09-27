@@ -94,13 +94,11 @@ export default {
   created () {
     this.init()
     if (this.$route.query.preset) {
+      this.customLevelIsActive = true
+      this.displayStartOverlay = false
+      this.showCreatePreview = true
       getPresetById(this.$route.query.preset)
         .then(data => {
-          this.customLevelIsActive = true
-          this.displayStartOverlay = false
-          this.showCreatePreview = true
-          // this.customLevelSequence = data.sequenceArray
-          // this.startPreset(data.parameterValues, data.bpm)
           this.customLevelCreator = data.name
         })
     }

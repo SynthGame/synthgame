@@ -167,8 +167,8 @@ export default {
       noteArray: fill(range(0, 16), {
         selected: false,
         pitch: 0,
-        volume: 0,
-        noteLength: '4n'
+        // volume: 0,
+        // noteLength: '4n'
       }),
       bpmKnob: 110
     }
@@ -180,7 +180,6 @@ export default {
           console.log('preset for saving purposes',data);
           // this.customLevelIsActive = true
           this.noteArray = data.sequenceArray
-          this.bpm = data.bpm
           this.$store.commit('setAudioParameterToPreset', {
             preset: data.parameterValues
           })
