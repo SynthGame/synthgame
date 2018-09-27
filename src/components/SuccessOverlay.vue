@@ -70,11 +70,16 @@
         <span>High score</span>
         <span class="data">{{paddedHighScoreString}}</span>
       </div>
-
-    <button class="button-next"
-            @click="$emit('next')"
-            ref="button"
-            >NEXT LEVEL</button>
+      <div>
+        <button class="button-next"
+                @click="$emit('closesuccessoverlay')"
+                ref="button"
+                >KEEP TWEAKING</button>
+        <button class="button-next"
+                @click="$emit('next')"
+                ref="button"
+                >NEXT LEVEL</button>
+      </div>
     </div>
   </div>
 </template>

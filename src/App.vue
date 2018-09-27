@@ -30,6 +30,7 @@
       <success-overlay
         v-if="displaySuccessOverlay"
         @next="startNextLevel"
+        @closesuccessoverlay="closeSuccessOverlay"
       />
     </transition>
 
@@ -185,6 +186,9 @@ export default {
       })
       this.toneLoop.start()
     },
+    closeSuccessOverlay () {
+      this.displaySuccessOverlay = false;
+    },
     init () {
       // Retrieve highscore from local storage
       this.$store.commit('updateHighScore', localStorage.getItem('highscore'))
@@ -263,17 +267,25 @@ export default {
       // randomly pick preset
       this.pickedPreset = Math.round(Math.random() * (presets.length - 1) );
       console.log('pickedPreset =', this.pickedPreset);
-      // load the preset on synth // how are levels loaded?
+
+      // load the preset on synth
       this.$store.commit('setAudioParameterToPreset', {
         preset: presets[this.pickedPreset].parameterValues
       })
       console.log('preset audioParameters loaded: ', presets[this.pickedPreset].parameterValues );
+
       // Set back Envs to standard audioParameters
 
       // Set LFO amount to 0 TODO only when level is under lfo level check which level that is
 
       // Set bpm from preset
       audio.setBpm(presets[this.pickedPreset].bpm*2)
+
+      // clear noteArray
+      this.noteArray = fill(range(0, 16), {
+        selected: false,
+        pitch: 0,
+      });
 
       //Just play 1 note with standard envs
       this.noteArray[0].selected = true;
