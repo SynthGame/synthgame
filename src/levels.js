@@ -25,6 +25,7 @@ export default [
     oscillator2: {},
     filter: {},
     envelope: {},
+    envelope2: {},
     lfo: {},
     router: {},
     levelData: {
@@ -41,6 +42,7 @@ export default [
     oscillator2: {},
     filter: {},
     envelope: {},
+    envelope2: {},
     lfo: {},
     router: {},
     levelData: {
@@ -59,6 +61,7 @@ export default [
     },
     filter: {},
     envelope: {},
+    envelope2: {},
     lfo: {},
     router: {},
     levelData: {
@@ -78,6 +81,7 @@ export default [
     },
     filter: {},
     envelope: {},
+    envelope2: {},
     lfo: {},
     router: {},
     levelData: {
@@ -98,6 +102,7 @@ export default [
     },
     filter: {},
     envelope: {},
+    envelope2: {},
     lfo: {},
     router: {},
     levelData: {
@@ -120,6 +125,7 @@ export default [
       type: true
     },
     envelope: {},
+    envelope2: {},
     lfo: {},
     router: {},
     levelData: {
@@ -143,6 +149,7 @@ export default [
       cutOffFreq: true
     },
     envelope: {},
+    envelope2: {},
     lfo: {},
     router: {},
     levelData: {
@@ -161,6 +168,7 @@ export default [
       cutOffFreq: true
     },
     envelope: {},
+    envelope2: {},
     lfo: {},
     router: {},
     levelData: {
@@ -179,6 +187,7 @@ export default [
       cutOffFreq: true
     },
     envelope: {},
+    envelope2: {},
     lfo: {},
     router: {},
     levelData: {
@@ -197,6 +206,7 @@ export default [
       setQ: true
     },
     envelope: {},
+    envelope2: {},
     lfo: {},
     router: {},
     levelData: {
@@ -215,6 +225,7 @@ export default [
       setQ: true
     },
     envelope: {},
+    envelope2: {},
     lfo: {},
     router: {},
     levelData: {
@@ -233,6 +244,7 @@ export default [
       setQ: true
     },
     envelope: {},
+    envelope2: {},
     lfo: {},
     router: {},
     levelData: {
@@ -252,6 +264,7 @@ export default [
       setQ: true
     },
     envelope: {},
+    envelope2: {},
     lfo: {},
     router: {},
     levelData: {
@@ -271,6 +284,7 @@ export default [
       cutOffFreq: true
     },
     envelope: {},
+    envelope2: {},
     lfo: {},
     router: {},
     levelData: {
@@ -290,6 +304,7 @@ export default [
       type: true
     },
     envelope: {},
+    envelope2: {},
     lfo: {},
     router: {},
     levelData: {
@@ -309,6 +324,7 @@ export default [
       setQ: true
     },
     envelope: {},
+    envelope2: {},
     lfo: {},
     router: {},
     levelData: {
@@ -329,6 +345,7 @@ export default [
       cutOffFreq: true
     },
     envelope: {},
+    envelope2: {},
     lfo: {},
     router: {},
     levelData: {
@@ -349,6 +366,7 @@ export default [
       cutOffFreq: true
     },
     envelope: {},
+    envelope2: {},
     lfo: {},
     router: {},
     levelData: {
@@ -369,6 +387,7 @@ export default [
       cutOffFreq: true
     },
     envelope: {},
+    envelope2: {},
     lfo: {},
     router: {},
     levelData: {
@@ -397,6 +416,7 @@ export default [
     envelope: {
       attack: true
     },
+    envelope2: {},
     lfo: {},
     router: {},
     levelData: {
@@ -411,6 +431,7 @@ export default [
     envelope: {
       decay: true
     },
+    envelope2: {},
     lfo: {},
     router: {},
     levelData: {
@@ -425,6 +446,7 @@ export default [
     envelope: {
       decay: true
     },
+    envelope2: {},
     lfo: {},
     router: {},
     levelData: {
@@ -439,6 +461,7 @@ export default [
     envelope: {
       sustain: true
     },
+    envelope2: {},
     lfo: {},
     router: {},
     levelData: {
@@ -453,6 +476,7 @@ export default [
     envelope: {
       sustain: true
     },
+    envelope2: {},
     lfo: {},
     router: {},
     levelData: {
@@ -467,6 +491,7 @@ export default [
     envelope: {
       release: true
     },
+    envelope2: {},
     lfo: {},
     router: {},
     levelData: {
@@ -481,6 +506,7 @@ export default [
     envelope: {
       release: true
     },
+    envelope2: {},
     lfo: {},
     router: {},
     levelData: {
@@ -496,6 +522,7 @@ export default [
       attack: true,
       decay: true
     },
+    envelope2: {},
     lfo: {},
     router: {},
     levelData: {
@@ -511,6 +538,7 @@ export default [
       attack: true,
       sustain: true
     },
+    envelope2: {},
     lfo: {},
     router: {},
     levelData: {
@@ -526,6 +554,7 @@ export default [
       decay: true,
       release: true
     },
+    envelope2: {},
     lfo: {},
     router: {},
     levelData: {
@@ -541,6 +570,7 @@ export default [
       decay: true,
       release: true
     },
+    envelope2: {},
     lfo: {},
     router: {},
     levelData: {
@@ -557,6 +587,7 @@ export default [
       release: true,
       attack: true
     },
+    envelope2: {},
     lfo: {},
     router: {},
     levelData: {
@@ -573,6 +604,7 @@ export default [
       sustain: true,
       attack: true
     },
+    envelope2: {},
     lfo: {},
     router: {},
     levelData: {
@@ -590,6 +622,7 @@ export default [
       attack: true,
       release: true
     },
+    envelope2: {},
     lfo: {},
     router: {},
     levelData: {
@@ -602,6 +635,7 @@ export default [
     oscillator2: {},
     filter: {},
     envelope: {},
+    envelope2: {},
     lfo: {
       amount: true
     },
@@ -616,6 +650,7 @@ export default [
     oscillator2: {},
     filter: {},
     envelope: {},
+    envelope2: {},
     lfo: {
       amount: true
     },
@@ -630,6 +665,7 @@ export default [
     oscillator2: {},
     filter: {},
     envelope: {},
+    envelope2: {},
     lfo: {
       amount: true
     },
@@ -644,6 +680,7 @@ export default [
     oscillator2: {},
     filter: {},
     envelope: {},
+    envelope2: {},
     lfo: {
       amount: true,
       frequency: true
@@ -659,6 +696,7 @@ export default [
     oscillator2: {},
     filter: {},
     envelope: {},
+    envelope2: {},
     lfo: {
       amount: true,
       frequency: true
@@ -674,6 +712,7 @@ export default [
     oscillator2: {},
     filter: {},
     envelope: {},
+    envelope2: {},
     lfo: {
       amount: true,
       frequency: true
@@ -689,6 +728,7 @@ export default [
     oscillator2: {},
     filter: {},
     envelope: {},
+    envelope2: {},
     lfo: {
       amount: true,
       type: true
@@ -704,6 +744,7 @@ export default [
     oscillator2: {},
     filter: {},
     envelope: {},
+    envelope2: {},
     lfo: {
       amount: true,
       type: true
@@ -719,6 +760,7 @@ export default [
     oscillator2: {},
     filter: {},
     envelope: {},
+    envelope2: {},
     lfo: {
       amount: true,
       frequency: true,
@@ -741,6 +783,7 @@ export default [
       cutOffFreq: true
     },
     envelope: {},
+    envelope2: {},
     lfo: {
     },
     router: {},
@@ -762,6 +805,7 @@ export default [
       type: true
     },
     envelope: {},
+    envelope2: {},
     lfo: {
     },
     router: {},
@@ -784,6 +828,7 @@ export default [
       type: true
     },
     envelope: {},
+    envelope2: {},
     lfo: {
     },
     router: {},
@@ -809,6 +854,7 @@ export default [
       attack: true,
       release: true
     },
+    envelope2: {},
     lfo: {
       amount: true,
       type: true
@@ -837,6 +883,7 @@ export default [
       attack: true,
       release: true
     },
+    envelope2: {},
     lfo: {
       amount: true,
       type: true
@@ -864,6 +911,7 @@ export default [
     envelope: {
       decay: true
     },
+    envelope2: {},
     lfo: {
       amount: true
     },
@@ -892,6 +940,7 @@ export default [
       attack: true,
       release: true
     },
+    envelope2: {},
     lfo: {
     },
     router: {},
@@ -922,6 +971,7 @@ export default [
       sustain: true,
       release: true
     },
+    envelope2: {},
     lfo: {
       amount: true
     },
@@ -951,6 +1001,7 @@ export default [
       sustain: true,
       release: true
     },
+    envelope2: {},
     lfo: {
       frequency: true,
       amount: true
@@ -981,6 +1032,7 @@ export default [
       decay: true,
       release: true
     },
+    envelope2: {},
     lfo: {
       amount: true,
       type: true
@@ -1013,6 +1065,7 @@ export default [
       sustain: true,
       release: true
     },
+    envelope2: {},
     lfo: {
       frequency: true,
       amount: true,

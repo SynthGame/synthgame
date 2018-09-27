@@ -255,13 +255,13 @@ export default {
     startLevel (level) {
 
       // this.beginSuccessSvoosh()
-      setTimeout(() => {
+      this.$nextTick(() => {
         // disable all overlays when svoosh is done
         this.displaySuccessOverlay = false
         this.displayFailureOverlay = false
         this.displayStartOverlay = false
         this.displayPreviewOverlay = true
-      }, 0)
+      })
       audio.playSweep()
 
       // randomly pick preset
@@ -291,11 +291,6 @@ export default {
       this.noteArray[0].selected = true;
       this.noteArray[0].pitch = 0;
 
-      // Set goal to pickedpreset
-      this.$store.commit('setGoalToPreset', {
-        preset: presets[this.pickedPreset].parameterValues
-      })
-
       // import level config
       const availableParameters = levels[level] || levels[levels.length - 1]
 
@@ -303,7 +298,7 @@ export default {
         knobsAvailable: availableParameters,
         levelNumber: level || 0
       })
-      this.$store.dispatch('randomizGoalParameters') // first randomize the goal
+      this.$store.commit('setGoalToPreset', { preset: Object.assign(presets[this.pickedPreset].parameterValues, {}) })
       this.$store.dispatch('randomizeAudioParameters', availableParameters) // and the audio params
       this.$store.dispatch('setSynthToGoal', audio) // then let the user hear it
 
