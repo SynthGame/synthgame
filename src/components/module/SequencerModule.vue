@@ -167,8 +167,6 @@ export default {
       noteArray: fill(range(0, 16), {
         selected: false,
         pitch: 0,
-        // volume: 0,
-        // noteLength: '4n'
       }),
       bpmKnob: 110
     }
@@ -208,25 +206,7 @@ export default {
         noteArray: range(0, 16),
         subdivision: '8n'
       }, (time, note) => {
-        if (note === 0) {
-          // for (var i = 0; i < 16; i++) {
-          //   audio.playNote(this.noteArray[i].pitch, {
-          //     // noteLength: ['16t', '8n', '4n', '2n', '1n'][this.noteArray[note].noteLength],
-          //     noteLength: '2n',
-          //     volume: this.noteArray[i].volume,
-          //     time: i
-          //   })
-          // }
-        }
         this.setStep(note)
-        // if (this.noteArray[note].selected) {
-        //   audio.playNote(this.noteArray[note].pitch, {
-        //     // noteLength: ['16t', '8n', '4n', '2n', '1n'][this.noteArray[note].noteLength],
-        //     noteLength: '2n',
-        //     volume: this.noteArray[note].volume,
-        //     time: note
-        //   })
-        // }
         if (this.noteArray[note].selected) {
           audio.playNote(this.noteArray[note].pitch, {
             // noteLength: ['16t', '8n', '4n', '2n', '1n'][this.noteArray[note].noteLength],

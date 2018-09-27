@@ -26,12 +26,12 @@
       @midway="displaySuccessOverlay=true"
       @bye="endSuccessSvoosh"
     />
-    <!-- <transition name="slideout">
+    <transition name="slideout">
       <success-overlay
         v-if="displaySuccessOverlay"
         @next="startNextLevel"
       />
-    </transition> -->
+    </transition>
 
     <failure-overlay
       v-if="isGameOver"
@@ -62,12 +62,16 @@ import PreviewScreen from '@/components/PreviewScreen'
 import Svoosh from '@/components/Svoosh'
 import { SYNTH_BPM } from '@/constants'
 import levels from '@/levels'
+import presets from '@/presets'
+import range from 'lodash/range'
+import fill from 'lodash/fill'
 
 export default {
   name: 'App',
   data () {
     return {
       kickTime: 0,
+      pickedPreset: 0,
       displaySuccessOverlay: false,
       displayFailureOverlay: false,
       displayStartOverlay: true,
@@ -81,6 +85,10 @@ export default {
       customLevelSequence: [],
       showCreatePreview: false,
       customLevelCreator: 'Anonymous',
+      noteArray: fill(range(0, 16), {
+        selected: false,
+        pitch: 0,
+      }),
     }
   },
   components: {
@@ -93,14 +101,15 @@ export default {
   },
   created () {
     this.init()
+    this.initSynth()
     if (this.$route.query.preset) {
       this.customLevelIsActive = true
       this.displayStartOverlay = false
       this.showCreatePreview = true
-      getPresetById(this.$route.query.preset)
-        .then(data => {
-          this.customLevelCreator = data.name
-        })
+      // getPresetById(this.$route.query.preset)
+      //   .then(data => {
+      //     this.customLevelCreator = data.name
+      //   })
     }
 
     window.letsPlay = () => this.initM()
@@ -135,37 +144,57 @@ export default {
     // }
   },
   methods: {
+    initSynth () {
+      this.toneLoop = audio.setMainLoop({
+        noteArray: range(0, 16),
+        subdivision: '8n'
+      }, (time, note) => {
+        // this.setStep(note)
+        if (this.noteArray[note].selected) {
+          audio.playNote(this.noteArray[note].pitch, {
+            // noteLength: ['16t', '8n', '4n', '2n', '1n'][this.noteArray[note].noteLength],
+            noteLength: '2n',
+            volume: this.noteArray[note].volume,
+            time: note
+          })
+        }
+        if (this.noteArray[note].kick) {
+          audio.playKick()
+        }
+        if (this.noteArray[note].hat) {
+          audio.playHat()
+        }
+        if (this.noteArray[note].clap) {
+          audio.playClap()
+        }
+        if (this.noteArray[note].clap2) {
+          audio.playClap2()
+        }
+        if (this.noteArray[note].cymbal) {
+          audio.playCymbal()
+        }
+        if (this.noteArray[note].labmyc) {
+          audio.playLabmyc()
+        }
+        if (this.noteArray[note].noise) {
+          audio.playNoise()
+        }
+        if (this.noteArray[note].snare) {
+          audio.playSnare()
+        }
+      })
+      this.toneLoop.start()
+    },
     init () {
       // Retrieve highscore from local storage
       this.$store.commit('updateHighScore', localStorage.getItem('highscore'))
       // initialize the synth
       audio.init().toMaster()
-      // create loop wich sequences 4 notes
-      const randomLoop = times(16).map(i => random(-12, 12))
-      this.loop = audio.setMainLoop({
-        noteArray: times(16),
-        subdivision: '8n'
-      }, (time, i) => { // i here is just a note from the note array define above
-        if (!this.customLevelIsActive) {
-          // i === 1 ?
-          // audio.playNote(randomLoop[i], {noteLength: '0.5n'})
-          // // audio.playNote(0, {noteLength: '4n'})
-          // : '';
-          // this.allParametersMatchGoal && (i === 0 || i === 4 || i === 8 || i === 12 || i === 2 || i === 6 || i === 10 || i === 14) ?
-          // audio.playKick() : '';
-        } else {
-          if (this.customLevelSequence[i].selected) {
-            audio.playNote(this.customLevelSequence[i].pitch, {
-              noteLength: ['16t', '8n', '4n', '2n', '1n'][this.customLevelSequence[i].noteLength],
-              volume: this.customLevelSequence[i].volume
-            })
-          }
-        }
 
-        // if (i === 15) this.$store.commit('increaseSequencesPassedInCurrentLevel')
-      })
       // set BPM
       audio.setBpm(SYNTH_BPM)
+      // TODO: update drum animation in success overlay time animation
+
       // start tone general
       audio.start()
       // start loop
@@ -221,15 +250,40 @@ export default {
     },
     startLevel (level) {
 
-      this.beginSuccessSvoosh()
+      // this.beginSuccessSvoosh()
       setTimeout(() => {
         // disable all overlays when svoosh is done
         this.displaySuccessOverlay = false
         this.displayFailureOverlay = false
         this.displayStartOverlay = false
         this.displayPreviewOverlay = true
-      }, 1400)
+      }, 0)
       audio.playSweep()
+
+      // randomly pick preset
+      this.pickedPreset = Math.round(Math.random() * (presets.length - 1) );
+      console.log('pickedPreset =', this.pickedPreset);
+      // load the preset on synth // how are levels loaded?
+      this.$store.commit('setAudioParameterToPreset', {
+        preset: presets[this.pickedPreset].parameterValues
+      })
+      console.log('preset audioParameters loaded: ', presets[this.pickedPreset].parameterValues );
+      // Set back Envs to standard audioParameters
+
+      // Set LFO amount to 0 TODO only when level is under lfo level check which level that is
+
+      // Set bpm from preset
+      audio.setBpm(presets[this.pickedPreset].bpm*2)
+
+      //Just play 1 note with standard envs
+      this.noteArray[0].selected = true;
+      this.noteArray[0].pitch = 0;
+
+      // Set goal to pickedpreset
+      this.$store.commit('setGoalToPreset', {
+        preset: presets[this.pickedPreset].parameterValues
+      })
+
       // import level config
       const availableParameters = levels[level] || levels[levels.length - 1]
 
@@ -241,7 +295,7 @@ export default {
       this.$store.dispatch('randomizeAudioParameters', availableParameters) // and the audio params
       this.$store.dispatch('setSynthToGoal', audio) // then let the user hear it
 
-      this.loop.start()
+      // this.loop.start()
       // rest will be done by watcher of sequencesPassedInCurrentLevel
     },
     startPreset (parameters, bpm) {
@@ -291,7 +345,9 @@ export default {
       setTimeout(() => {
         this.isThereSuccessSvooshComponent = false
         this.successSvooshIt = false
-      }, 500)
+        // Update note array with pickedpreset sequence
+        this.noteArray = presets[this.pickedPreset].sequenceArray
+      }, 100)
     },
     endPreview () {
       this.$store.commit('startTimerIsRunning')
@@ -312,8 +368,17 @@ export default {
   watch: {
     allParametersMatchGoal (val) {
       if (val === true && this.timerIsRunning) {
-        // this.beginSuccessSvoosh()
+        this.beginSuccessSvoosh()
+        audio.playSweep()
+        setTimeout(() => {
+          // Update note array with pickedpreset sequence
+          this.noteArray = presets[this.pickedPreset].sequenceArray
+        }, 500)
         this.$store.dispatch('levelDone') // would be nice to pass timeleft here but it is being passed by timer on gamestop
+        // // Update note array with pickedpreset sequence
+        // this.noteArray = presets[this.pickedPreset].sequenceArray
+        // Re-set the audioParameters with pickedpreset to undo envs and lfo modifications on startlevel
+        // TODO:
       }
     },
     nextLevelClickedInNavBar (val) {
