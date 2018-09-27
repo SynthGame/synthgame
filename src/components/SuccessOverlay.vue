@@ -61,14 +61,19 @@
         </g>
 
       </svg>
-
-      <div class="score">
-        <span>score</span>
-        <span class="data">{{paddedScoreString}}</span>
+      <div class="scores">
+        <div class="score">
+          <span>score</span>
+          <span class="data">{{paddedScoreString}}</span>
+        </div>
+        <div class="highscore">
+          <span>High score</span>
+          <span class="data">{{paddedHighScoreString}}</span>
+        </div>
       </div>
-      <div class="highscore">
-        <span>High score</span>
-        <span class="data">{{paddedHighScoreString}}</span>
+      <div class="scores">
+        <img class="custom-user-avatar" :src="avatarUrl"/>
+        <span class="data artist">Preset by <a target="_blank" :href="'https://soundcloud.com/' + nameArtist">{{nameArtist}}</a></span>
       </div>
       <div>
         <button class="button-next"
@@ -218,6 +223,12 @@ export default {
     // },
   },
   computed: {
+    nameArtist () {
+      return this.$store.state.name
+    },
+    avatarUrl () {
+      return this.$store.state.avatarUrl
+    },
     gameScore () {
       return this.$store.state.gameState.score
     },
@@ -252,7 +263,29 @@ export default {
   margin: -75px 0 -75px 0;
 }
 
+.custom-user-avatar {
+  height: 50px;
+  width: 50px;
+  border-radius: 100%;
+  border:2px solid white;
+}
+
 .success {
+  .scores {
+    width: 20em;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    .artist {
+      font-size: 1em;
+      font-weight: 200;
+      text-transform: uppercase;
+      margin-left: 1em;
+      a {
+        color: white;
+      }
+    }
+  }
   & .score {
     display: flex;
     font-size: 2em;

@@ -16,6 +16,8 @@ Vue.use(Vuex)
 export default new Vuex.Store({
   state: {
     bpm: 110,
+    name: 'Anonymous',
+    avatarUrl: null,
     audioParameters: {
       oscillator1: {
         frequency: '131',
@@ -195,6 +197,10 @@ export default new Vuex.Store({
   mutations: {
     setAudioParameter (state, {device, parameter, value}) {
       state.audioParameters[device][parameter] = value
+    },
+    setFeaturedArtist (state, {artistName, avatarUrl}) {
+      state.name = artistName
+      state.avatarUrl = avatarUrl
     },
     setBpm (state, {parameter, value}) {
       state[parameter] = value

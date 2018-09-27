@@ -107,10 +107,13 @@ export default {
       this.customLevelIsActive = true
       this.displayStartOverlay = false
       this.showCreatePreview = true
-      // getPresetById(this.$route.query.preset)
-      //   .then(data => {
-      //     this.customLevelCreator = data.name
-      //   })
+      getPresetById(this.$route.query.preset)
+        .then(data => {
+          this.$store.commit('setFeaturedArtist', {
+            artistName: data.name,
+            avatarUrl: data.avatarUrl
+          })
+        })
     }
 
     window.letsPlay = () => this.initM()
@@ -272,6 +275,10 @@ export default {
       this.$store.commit('setAudioParameterToPreset', {
         preset: presets[this.pickedPreset].parameterValues
       })
+      this.$store.commit('setFeaturedArtist', {
+        artistName: presets[this.pickedPreset].name,
+        avatarUrl: presets[this.pickedPreset].avatarUrl
+      })
       console.log('preset audioParameters loaded: ', presets[this.pickedPreset].parameterValues );
 
       // Set back Envs to standard audioParameters
@@ -385,6 +392,7 @@ export default {
         // // Update note array with pickedpreset sequence
         // this.noteArray = presets[this.pickedPreset].sequenceArray
         // Re-set the audioParameters with pickedpreset to undo envs and lfo modifications on startlevel
+
         // TODO:
       }
     },

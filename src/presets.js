@@ -2,6 +2,7 @@ export default [
   {
   "bpm": 131,
   "name": "bart-proost",
+  "avatarUrl": "https://i1.sndcdn.com/avatars-000459014022-r4tcc2-t500x500.jpg",
   "parameterValues": {
     "envelope": {
       "attack": 0,
@@ -105,6 +106,7 @@ export default [
 {
   "bpm": 113,
   "name": "bart-proost",
+  "avatarUrl": "https://i1.sndcdn.com/avatars-000459014022-r4tcc2-t500x500.jpg",
   "parameterValues": {
     "envelope": {
       "attack": 0,

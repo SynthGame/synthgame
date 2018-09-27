@@ -1,11 +1,13 @@
 <template>
   <div class="overlay">
     <div class="overlay-content-wrapper">
-        <h1 v-if="!customLevelIsActive">Make music</h1>
-        <h1 v-if="customLevelIsActive">Tats<span v-if="customAuthor !== null"> ft. {{customAuthor}}</span></h1>
-        <img class="custom-user-avatar" :src="customAuthorAvatar"/>
+        <h1>Tats ft.</h1>
+        <div class="scores" v-if="customLevelIsActive && nameArtist !== 'Anonymous' ">
+          <img class="custom-user-avatar" :src="avatarUrl"/>
+          <span class="data artist">Preset by <a target="_blank" :href="'https://soundcloud.com/' + nameArtist">{{nameArtist}}</a></span>
+        </div>
         <!-- <h2 v-if="!customLevelIsActive">Write the music for this game. On nov 17, Tatsuya Takahashi picks 1 lucky winner, who wins a trip to the MESS foundation!</h2> -->
-        <h2>Create and share presets. The most played presets get integrated in the official Tats game.</h2>
+        <h2>Create and share synthesizer presets. Get featured in game!</h2>
       <div>
         <button class="button-next" @click="$emit('showCreate')">Ready</button>
       </div>
@@ -39,14 +41,15 @@ export default {
     //   console.log('results:', results);
     // });
     if (this.$route.query.preset) {
-      getPresetById(this.$route.query.preset)
-        .then(data => {
-          this.customLevelIsActive = true
-          this.customAuthor = data.name
-          this.customAuthorAvatar = data.avatarUrl
-          // this.startPreset(data.parameterValues)
-          // this.customLevelCreator = data.name
-        })
+      this.customLevelIsActive = true
+      // getPresetById(this.$route.query.preset)
+      //   .then(data => {
+      //     this.customLevelIsActive = true
+      //     this.customAuthor = data.name
+      //     this.customAuthorAvatar = data.avatarUrl
+      //     // this.startPreset(data.parameterValues)
+      //     // this.customLevelCreator = data.name
+      //   })
     }
   },
   mounted () {
@@ -63,15 +66,39 @@ export default {
     }
   },
   computed: {
+    nameArtist () {
+      return this.$store.state.name
+    },
+    avatarUrl () {
+      return this.$store.state.avatarUrl
+    },
   }
 }
 </script>
 
 <style scoped lang="scss">
 .custom-user-avatar {
-  height: 200px;
-  width: 200px;
-  border-radius: 100px;
+  height: 50px;
+  width: 50px;
+  border-radius: 100%;
+  border:2px solid white;
+  background: white;
+}
+
+.scores {
+  width: 20em;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  .artist {
+    font-size: 1em;
+    font-weight: 200;
+    text-transform: uppercase;
+    margin-left: 1em;
+    a {
+      color: white;
+    }
+  }
 }
 
 </style>
