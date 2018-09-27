@@ -1,7 +1,7 @@
 <template>
   <div class="overlay">
     <div class="overlay-content-wrapper">
-        <h2>Go to the Red Bull Mind Gamers website, paste this link and win a trip to Musikmesse 2019!</h2>
+        <h2>Go to the Red Bull Mind Gamers website, paste this link and win a trip to Mess foundation!</h2>
         <span class="link">{{link}}</span>
       <div>
         <button class="button-next" @click="copy">{{copyButtonText}}</button>

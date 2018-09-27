@@ -195,11 +195,11 @@ export default {
 }
 
 .switch {
-  border: 1px solid #ff8574;
+  border: 1px solid #313131;
 }
 
 button.button {
-  border: 1px solid white;
+  border: 1px solid #313131;
 }
 
 svg.display {

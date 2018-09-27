@@ -198,6 +198,7 @@ export default {
       return some(this.knobsAvailable[moduleName]) // some are truthy
     },
     exitGame () {
+      this.$router.push('/')
       location.reload()
     },
     exitAfterCreate () {

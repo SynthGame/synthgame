@@ -177,6 +177,7 @@ export default {
     if (this.$route.query.preset) {
       getPresetById(this.$route.query.preset)
         .then(data => {
+          console.log('preset for saving purposes',data);
           // this.customLevelIsActive = true
           this.noteArray = data.sequenceArray
           this.bpm = data.bpm
