@@ -123,6 +123,7 @@ export default {
     self = this
     this.realEnvelope2 = audio.envelope2.state.device
     this.filter = audio.filter.state.device
+
     // this.lfo = audio.lfo.state.device
   },
   methods: {
@@ -146,21 +147,15 @@ export default {
       if (val === 'filterCutoff' && self.envelope2 === 'filterCutoff') {
         self.envelope2 = 'oscsDetune'
       }
-      // val === 'filterCutoff' ?
-      // audio.lfo.state.device.max = audio.filter.state.device.cutOffFreq
-      // : '';
-      // self.router.lfo = character.router.lfo(val)
-      // audio.lfo.state.device.stop()
-      // audio.lfo.state.device.start()
     }),
     ...vuexSyncGen('router', 'envelope2', val => {
-      console.log('self.$store.state.audioParameters.router.envelope2 = ',self.$store.state.audioParameters.router.envelope2);
+      // console.log('self.$store.state.audioParameters.router.envelope2 = ',self.$store.state.audioParameters.router.envelope2);
       // if (self.router.lfo === character.router.lfo(val)) return TODO check if this statement needs to be there?
       audio.connectEnvelope2(val)
       if (val ==='filterCutoff') {
         self.realEnvelope2.max = character.filter.cutOffFreq(self.$store.state.audioParameters.filter.cutOffFreq)
-        console.log('self.realEnvelope2.max',self.realEnvelope2.max);
-        console.log('self.$store.state.audioParameters.filter.cutOffFreq',self.$store.state.audioParameters.filter.cutOffFreq);
+        // console.log('self.realEnvelope2.max',self.realEnvelope2.max);
+        // console.log('self.$store.state.audioParameters.filter.cutOffFreq',self.$store.state.audioParameters.filter.cutOffFreq);
 
       } else {
         self.filter.frequency.value = character.filter.cutOffFreq(self.$store.state.audioParameters.filter.cutOffFreq);
