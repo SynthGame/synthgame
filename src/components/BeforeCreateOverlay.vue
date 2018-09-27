@@ -3,6 +3,7 @@
     <div class="overlay-content-wrapper">
         <h1 v-if="!customLevelIsActive">Make music</h1>
         <h1 v-if="customLevelIsActive">Tats<span v-if="customAuthor !== null"> ft. {{customAuthor}}</span></h1>
+        <img class="custom-user-avatar" :src="customAuthorAvatar"/>
         <!-- <h2 v-if="!customLevelIsActive">Write the music for this game. On nov 17, Tatsuya Takahashi picks 1 lucky winner, who wins a trip to the MESS foundation!</h2> -->
         <h2>Create and share presets. The most played presets get integrated in the official Tats game.</h2>
       <div>
@@ -20,7 +21,8 @@ export default {
   data () {
     return {
       customLevelIsActive: false,
-      customAuthor: null
+      customAuthor: null,
+      customAuthorAvatar: null
     }
   },
   props: {
@@ -41,6 +43,7 @@ export default {
         .then(data => {
           this.customLevelIsActive = true
           this.customAuthor = data.name
+          this.customAuthorAvatar = data.avatarUrl
           // this.startPreset(data.parameterValues)
           // this.customLevelCreator = data.name
         })
@@ -65,5 +68,10 @@ export default {
 </script>
 
 <style scoped lang="scss">
+.custom-user-avatar {
+  height: 200px;
+  width: 200px;
+  border-radius: 100px;
+}
 
 </style>
