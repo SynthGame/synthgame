@@ -269,7 +269,7 @@ export default {
 
       // randomly pick preset
       this.pickedPreset = Math.round(Math.random() * (presets.length - 1) );
-      console.log('pickedPreset =', this.pickedPreset);
+      // console.log('pickedPreset =', this.pickedPreset);
 
       // load the preset on synth
       this.$store.commit('setAudioParameterToPreset', {
@@ -279,7 +279,7 @@ export default {
         artistName: presets[this.pickedPreset].name,
         avatarUrl: presets[this.pickedPreset].avatarUrl
       })
-      console.log('preset audioParameters loaded: ', presets[this.pickedPreset].parameterValues );
+      // console.log('preset audioParameters loaded: ', presets[this.pickedPreset].parameterValues );
 
       // Set back Envs to standard audioParameters
 
@@ -287,11 +287,22 @@ export default {
 
       // Set bpm from preset
       audio.setBpm(presets[this.pickedPreset].bpm*2)
+      // Set bpm in store
+      this.$store.commit('setPresetBpm', presets[this.pickedPreset].bpm)
 
-      // clear noteArray
+      // Set noteArray to sequence preset
+      this.noteArray = presets[this.pickedPreset].sequenceArray
+
+      // clear drums
       this.noteArray = fill(range(0, 16), {
-        selected: false,
-        pitch: 0,
+        kick: false,
+        hat: false,
+        snare: false,
+        cymbal: false,
+        clap1: false,
+        clap2: false,
+        labmyc: false,
+        noise: false,
       });
 
       //Just play 1 note with standard envs
@@ -388,6 +399,11 @@ export default {
           // Update note array with pickedpreset sequence
           this.noteArray = presets[this.pickedPreset].sequenceArray
         }, 500)
+        // load the preset makers preset
+        this.$store.commit('setAudioParameterToPreset', {
+          preset: presets[this.pickedPreset].parameterValues
+        })
+        // this.$store.dispatch('setSynthToDefaultParameters', audio) // then let the user hear it
         this.$store.dispatch('levelDone') // would be nice to pass timeleft here but it is being passed by timer on gamestop
         // // Update note array with pickedpreset sequence
         // this.noteArray = presets[this.pickedPreset].sequenceArray

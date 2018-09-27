@@ -205,6 +205,9 @@ export default new Vuex.Store({
     setBpm (state, {parameter, value}) {
       state[parameter] = value
     },
+    setPresetBpm (state, bpm) {
+      state.bpm = bpm
+    },
     setAudioParameterToPreset (state, {preset}) {
       // overwrite parameters from audiostate, this will not fill in nested objects
       state.audioParameters = {

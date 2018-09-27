@@ -52,9 +52,9 @@
         <span>High score</span>
         <span class="data">{{paddedHighScoreString}}</span>
       </div>
-      <div class="makemusic">
+      <!-- <div class="makemusic">
         <span>Make the music for this game and win a trip to Mess foundation!</span>
-      </div>
+      </div> -->
       <div class="">
         <button class="button-next"
                 @click="startLastLevel"

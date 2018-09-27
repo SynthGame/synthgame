@@ -173,7 +173,7 @@ export default {
           { stick1: 0, stick2: 20, time: 1}
         ],
         loop: Infinity,
-        duration: this.duration * 2,
+        duration: this.bpm * 9.90909090909, // 1090 = 110
         // easings: easing.cubicBezier(.29,.06,1,-0.24)
         easings: easing.easeIn
       }
@@ -223,6 +223,9 @@ export default {
     // },
   },
   computed: {
+    bpm () {
+      return this.$store.state.bpm
+    },
     nameArtist () {
       return this.$store.state.name
     },
