@@ -14,9 +14,17 @@
         <button class="button-next" @click="$emit('create')">Make music</button>
       </div>
     </div>
-    <div class="rbmg">
+    <div :style="{'margin-left': marginLeftRbmg}" class="rbmg">
         <iframe width="250" height="150" src="https://www.youtube.com/embed/3u-IZgPJaDg?rel=0" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
         <img class="rbmg-img" src="../../src/assets/rbmg.png" alt="Powered by Red Bull Mind Gamers">
+        <svg @click="hideVideo" class="hidevideo" width="18px" height="17px" viewBox="0 0 18 17" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+            <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                <g id="exit_icon" fill="#7D00DA" fill-rule="nonzero" stroke="#FFFFFF" stroke-width="1.785">
+                    <path d="M16.6,0.6 L0.9,16.3" id="Shape"></path>
+                    <path d="M16.6,16.3 L0.9,0.6" id="Shape"></path>
+                </g>
+            </g>
+        </svg>
     </div>
   </div>
 </template>
@@ -27,7 +35,12 @@ export default {
   props: {
     level: {
       type: Number,
-      default: 1
+      default: 1,
+    }
+  },
+  data (){
+    return {
+      marginLeftRbmg: 0,
     }
   },
   mounted () {
@@ -41,6 +54,9 @@ export default {
       if (event.keyCode === 13) {
         this.$emit('startPreview')
       }
+    },
+    hideVideo () {
+      this.marginLeftRbmg = '-100vw';
     }
   }
 }
@@ -50,14 +66,23 @@ export default {
 .rbmg {
   position: absolute;
   bottom: 2em;
-  left: 2em;
-  // height: 11vh;
+  left: 3em;
   width: auto;
+  transition: all 1s;
   &-img {
     position: absolute;
-    margin-left:-44px;
-    margin-top: -21px;
-    height:100px;
+    margin-left:-285px;
+    margin-top: 87px;
+    height:80px;
+  }
+  .hidevideo {
+    position: absolute;
+    margin: -4px 0 0 -9px;
+    cursor: pointer;
+    transition: all .3s;
+    &:hover {
+      transform: rotate(90deg)
+    }
   }
 }
 
