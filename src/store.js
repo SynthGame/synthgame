@@ -15,6 +15,7 @@ Vue.use(Vuex)
 
 export default new Vuex.Store({
   state: {
+    bpm: 110,
     audioParameters: {
       oscillator1: {
         frequency: '131',
@@ -194,6 +195,9 @@ export default new Vuex.Store({
   mutations: {
     setAudioParameter (state, {device, parameter, value}) {
       state.audioParameters[device][parameter] = value
+    },
+    setBpm (state, {parameter, value}) {
+      state[parameter] = value
     },
     setAudioParameterToPreset (state, {preset}) {
       // overwrite parameters from audiostate, this will not fill in nested objects
@@ -393,9 +397,10 @@ export default new Vuex.Store({
       // synth.oscillator2.state.device.detune.value = character.oscillator2.detune(state.gameState.defaultParams.oscillator2.detune)
       synth.oscillator2.state.device.volume.value = character.oscillator2.volume(state.gameState.defaultParams.oscillator2.volume)
     },
-    exportPreset ({state}) {
+    exportPreset ({state}, data) {
       return addPreset({
-        name: 'test',
+        name: data.name,
+        bpm: state.bpm,
         parameterValues: state.audioParameters,
         sequenceArray: state.activeSequence
       })

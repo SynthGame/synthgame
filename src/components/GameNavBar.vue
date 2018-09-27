@@ -86,9 +86,9 @@
       </template>
       <template v-else>
         <input class="name-input" placeholder="Enter your Soundcloud username" v-model="exportPresetName"/>
-        <button @click="submitPreset">submit</button>
+        <button @click="submitPreset(exportPresetName)">submit</button>
       </template>
-      <after-create-overlay v-if="showAfterCreateOverlay" :link="exportPresetLink" @closeCreate="exitGame"/>
+      <after-create-overlay v-if="showAfterCreateOverlay" :link="exportPresetLink" @closeCreate="exitAfterCreate"/>
       <svg @click="exitGame" class="exit" width="18px" height="17px" viewBox="0 0 18 17" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
           <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
               <g id="exit_icon" fill="#7D00DA" fill-rule="nonzero" stroke="#FFFFFF" stroke-width="1.785">
@@ -200,12 +200,16 @@ export default {
     exitGame () {
       location.reload()
     },
-    submitPreset () {
+    exitAfterCreate () {
+      this.showAfterCreateOverlay = false;
+    },
+    submitPreset (val) {
       this.showAfterCreateOverlay = true
-      this.$store.dispatch('exportPreset', {name: this.exportPresetName})
+      this.$store.dispatch('exportPreset', {name: val})
         .then(presetId => {
-          alert(`${window.location.origin}/?preset=${presetId}`)
-          this.exportPresetLink = `${window.location.origin}/?preset=${presetId}`
+          // alert(`${window.location.origin}/?preset=${presetId}`)
+          this.exportPresetLink = `${window.location.origin}/?preset=${presetId}`;
+          this.$router.push('?preset=' + presetId)
         })
     },
     requestNextLevel () {

@@ -59,10 +59,11 @@ export const getHighscoresByName = (name) => {
  *  @param  {Object} obj.sequenceArray - Array with 16 objects that define the steps in the sequence
  *  @return {Promise} Returns the uid of the newly created preset
  */
-export const addPreset = ({name, parameterValues, sequenceArray}) => {
+export const addPreset = ({name, bpm, parameterValues, sequenceArray}) => {
   return presetRef
     .add({
       name,
+      bpm,
       parameterValues,
       sequenceArray
     })

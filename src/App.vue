@@ -79,7 +79,8 @@ export default {
       successSvooshIt: false,
       customLevelIsActive: false,
       customLevelSequence: [],
-      showCreatePreview: false
+      showCreatePreview: false,
+      customLevelCreator: 'Anonymous',
     }
   },
   components: {
@@ -96,8 +97,11 @@ export default {
       getPresetById(this.$route.query.preset)
         .then(data => {
           this.customLevelIsActive = true
-          this.customLevelSequence = data.sequenceArray
-          this.startPreset(data.parameterValues)
+          this.displayStartOverlay = false
+          this.showCreatePreview = true
+          // this.customLevelSequence = data.sequenceArray
+          // this.startPreset(data.parameterValues, data.bpm)
+          this.customLevelCreator = data.name
         })
     }
 
@@ -145,12 +149,12 @@ export default {
         subdivision: '8n'
       }, (time, i) => { // i here is just a note from the note array define above
         if (!this.customLevelIsActive) {
-          i === 1 ?
-          audio.playNote(randomLoop[i], {noteLength: '0.5n'})
-          // audio.playNote(0, {noteLength: '4n'})
-          : '';
-          this.allParametersMatchGoal && (i === 0 || i === 4 || i === 8 || i === 12 || i === 2 || i === 6 || i === 10 || i === 14) ?
-          audio.playKick() : '';
+          // i === 1 ?
+          // audio.playNote(randomLoop[i], {noteLength: '0.5n'})
+          // // audio.playNote(0, {noteLength: '4n'})
+          // : '';
+          // this.allParametersMatchGoal && (i === 0 || i === 4 || i === 8 || i === 12 || i === 2 || i === 6 || i === 10 || i === 14) ?
+          // audio.playKick() : '';
         } else {
           if (this.customLevelSequence[i].selected) {
             audio.playNote(this.customLevelSequence[i].pitch, {
@@ -242,7 +246,7 @@ export default {
       this.loop.start()
       // rest will be done by watcher of sequencesPassedInCurrentLevel
     },
-    startPreset (parameters) {
+    startPreset (parameters, bpm) {
       const usedParameters = mapValues(parameters,
         audioModule => mapValues(audioModule,
           parameter => !!parameter))
@@ -251,7 +255,8 @@ export default {
       this.displaySuccessOverlay = false
       this.displayFailureOverlay = false
       this.displayStartOverlay = false
-      this.displayPreviewOverlay = true
+      this.displayPreviewOverlay = false
+      this.showCreatePreview=true
 
       this.$store.dispatch('startNewLevel', {
         knobsAvailable: usedParameters,
@@ -260,7 +265,7 @@ export default {
       this.$store.commit('setGoalToPreset', {
         preset: parameters
       })
-      this.$store.dispatch('randomizeAudioParameters', usedParameters) // and the audio params
+      // this.$store.dispatch('randomizeAudioParameters', usedParameters) // and the audio params
       this.$store.dispatch('setSynthToGoal', audio) // then let the user hear it
 
       this.loop.start()

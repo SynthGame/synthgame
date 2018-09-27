@@ -32,14 +32,14 @@
         </button> -->
         <module-knob
         style="width:4rem"
-          v-model="bpmKnob"
+          v-model="bpm"
           :min="80"
           :max="160"
           knobColor="#F40056"
           name="TEMPO"
           module="sequencer"
         ></module-knob>
-        <span class="timer">{{bpmKnob}}</span>
+        <span class="timer">{{bpm}}</span>
       </div>
       </div>
     </div>
@@ -135,6 +135,8 @@
 </template>
 
 <script>
+import { mapState } from 'vuex'
+import { vuexSyncGenBpm } from '@/utils'
 import audio from '@/audio'
 import ModuleKnob from '@/components/ModuleKnob.vue'
 import ModuleTitle from './ModuleComponents/ModuleTitle.vue'
@@ -142,6 +144,7 @@ import SequencerButton from './SequencerModule/SequencerButton.vue'
 import SequencerSlider from './SequencerModule/SequencerSlider.vue'
 import { setInterval } from 'timers'
 import range from 'lodash/range'
+import { getPresetById } from '@/db'
 import fill from 'lodash/fill'
 import sample from 'lodash/sample'
 import random from 'lodash/random'
@@ -171,6 +174,20 @@ export default {
     }
   },
   created () {
+    if (this.$route.query.preset) {
+      getPresetById(this.$route.query.preset)
+        .then(data => {
+          // this.customLevelIsActive = true
+          this.noteArray = data.sequenceArray
+          this.bpm = data.bpm
+          this.$store.commit('setAudioParameterToPreset', {
+            preset: data.parameterValues
+          })
+          this.bpm = data.bpm
+          // this.startPreset(data.parameterValues)
+          // this.customLevelCreator = data.name
+        })
+    }
     this.initSynth()
     this.$store.commit('setActiveSequence', this.noteArray)
   },
@@ -337,10 +354,15 @@ export default {
       return range(startArray, startArray + 4)
     }
   },
+  computed: {
+    ...vuexSyncGenBpm('bpm', val => {
+      audio.setBpm(val*2)
+    }),
+  },
   watch: {
-    bpmKnob (val) {
-      return audio.setBpm(val*2)
-    },
+    // bpmKnob (val) {
+    //   return audio.setBpm(val*2)
+    // },
     noteArray (val) {
       this.$store.commit('setActiveSequence', val)
     }
