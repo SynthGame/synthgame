@@ -1,5 +1,4 @@
 export default [
-  // level 1 - 3 typeOsc
   // level 1
   {
     oscillator1: {
@@ -16,7 +15,7 @@ export default [
       text: "Use the white guidelines to recreate this sound in 30 seconds."
     }
   },
-  // level 3
+  // level 2
   {
     oscillator1: {
       detune: true,
@@ -29,10 +28,10 @@ export default [
     lfo: {},
     router: {},
     levelData: {
-      text: 'The oscillator is the source of electronic sound. You’ll use the knobs and dials to shape the outputted signal. '
+      text: 'The oscillator is the source of electronic sound. Use the knobs and dials to shape the outputted signal. '
     }
   },
-  // level 4
+  // level 3
   {
     oscillator1: {
       typeOsc: true,
@@ -49,7 +48,7 @@ export default [
       text: 'Both detune and octave control the pitch.'
     }
   },
-  // level 16 OSC 2
+  // level 4
   {
     oscillator1: {
       typeOsc: true,
@@ -68,7 +67,7 @@ export default [
       text: 'You unlocked the second oscillator!'
     }
   },
-  // level 17
+  // level 5
   {
     oscillator1: {
       detune: true,
@@ -85,10 +84,10 @@ export default [
     lfo: {},
     router: {},
     levelData: {
-      text: 'Two oscillators result in a fatter sound.'
+      text: 'Use detune on Osc 1 to detune the oscillators, resulting in a fatter sound.'
     }
   },
-  // level 18
+  // level 6
   {
     oscillator1: {
       detune: true,
@@ -106,10 +105,10 @@ export default [
     lfo: {},
     router: {},
     levelData: {
-      text: 'The sound gets even fatter when you tune the oscs differently.'
+      text: 'Use volume on Osc 2 to alter the mix between the oscillators.'
     }
   },
-  // level 26 Filter
+  // level 7
   {
     oscillator1: {
       detune: true,
@@ -132,7 +131,7 @@ export default [
       text: 'You unlocked the filter!'
     }
   },
-  // level 29
+  // level 8
   {
     oscillator1: {
       detune: true,
@@ -153,10 +152,10 @@ export default [
     lfo: {},
     router: {},
     levelData: {
-      text: 'Introducing the control we love most: cutoff frequency.'
+      text: 'The cutoff frequency control sets the range of the sound passed.'
     }
   },
-  // level 30
+  // level 9
   {
     oscillator1: {
       detune: true,
@@ -179,10 +178,10 @@ export default [
     lfo: {},
     router: {},
     levelData: {
-      text: 'Use the cutoff frequency to take out unwanted parts of the sound.'
+      text: 'You unlocked the Amplifier Envelope!'
     }
   },
-  // level 31
+  // level 10
   {
     oscillator1: {
       detune: true,
@@ -206,10 +205,10 @@ export default [
     lfo: {},
     router: {},
     levelData: {
-      text: 'The filter is the essence of subtractive synthesis.'
+      text: 'Every time a note is played, the envelope is triggered.'
     }
   },
-  // level 32
+  // level 11
   {
     oscillator1: {
       detune: true,
@@ -234,10 +233,10 @@ export default [
     lfo: {},
     router: {},
     levelData: {
-      text: 'Resonance controls how sharp the cutoff is.'
+      text: 'Use attack, decay, sustain and release to decide on the volume of the note over time.'
     }
   },
-  // level 33
+  // level 12
   {
     oscillator1: {
       detune: true,
@@ -260,7 +259,7 @@ export default [
       release: true
     },
   },
-  // level 34
+  // level 13
   {
     oscillator1: {
       detune: true,
@@ -288,10 +287,10 @@ export default [
     },
     router: {},
     levelData: {
-      text: 'Set the resonance to high, and cut off the unwanted parts more precisely.'
+      text: 'You unlocked the LFO!'
     }
   },
-  // level 35
+  // level 14
   {
     oscillator1: {
       detune: true,
@@ -320,10 +319,10 @@ export default [
     },
     router: {},
     levelData: {
-      text: 'Play around with both resonance and cutoff.'
+      text: 'LFO stands for low frequency oscillator. It produces an output signal which can modulate other controls.'
     }
   },
-  // level 36
+  // level 15
   {
     oscillator1: {
       detune: true,
@@ -353,10 +352,10 @@ export default [
     },
     router: {},
     levelData: {
-      text: 'Fun fact: equalizers are filters too.'
+      text: "Low frequency oscillators can bring life to otherwise static sounds."
     }
   },
-  // level 37
+  // level 16
   {
     oscillator1: {
       detune: true,
@@ -388,10 +387,10 @@ export default [
     },
     router: {},
     levelData: {
-      text: 'Yes, you have been filtering all along.'
+      text: 'You unlocked the Modulation Envelope!'
     }
   },
-  // level 38
+  // level 17
   {
     oscillator1: {
       detune: true,
@@ -424,10 +423,10 @@ export default [
     },
     router: {},
     levelData: {
-      text: 'Use this knowledge when you adjust the eq of your car radio, and impress your friends.'
+      text: 'Like LFO, we use this module to modulate a different synth control.'
     }
   },
-  // level 39
+  // level 18
   {
     oscillator1: {
       detune: true,
@@ -461,10 +460,10 @@ export default [
     },
     router: {},
     levelData: {
-      text: 'But first clear a few more levels.'
+      text: 'With both an lfo and an mod envelope the world is your oyster.'
     }
   },
-  // level 40
+  // level 19
   {
     oscillator1: {
       detune: true,
@@ -499,10 +498,10 @@ export default [
     },
     router: {},
     levelData: {
-      text: "You came this far, don't give up now."
+      text: "We're impressed. We never reached this level ourselves."
     }
   },
-  // level 41
+  // level 20
   {
     oscillator1: {
       detune: true,
@@ -539,10 +538,10 @@ export default [
       lfo: true
     },
     levelData: {
-      text: 'Last level before we move on to the next module.'
+      text: 'You must be a famous producer already.'
     }
   },
-  // level 42 Envelope
+  // level 21
   {
     oscillator1: {
       detune: true,
@@ -580,7 +579,7 @@ export default [
       envelope2: true
     },
     levelData: {
-      text: 'You unlocked Envelope!'
+      text: 'Created by okbye.io, together with Tatsuya Takahashi.'
     }
   }
 ]

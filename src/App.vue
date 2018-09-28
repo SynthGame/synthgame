@@ -489,8 +489,7 @@ export default {
   margin-right: -.5px;
   display: block;
   float: left;
-  // position: relative;
-  position: absolute; // because we want to shuffle them in game mode
+  position: relative;
   border: 1px solid #b7b7b7;
   &.empty {
     background: none;

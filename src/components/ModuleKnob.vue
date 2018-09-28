@@ -367,21 +367,21 @@ export default {
 
     /*
      */
-    animateSlider (startAngle, endAngle) {
-      // const direction = startAngle < endAngle ? 1 : -1
-      // const curveAngleMovementUnit = direction * this.circleSliderState.angleUnit * 2
-      //
-      // const animate = () => {
-      //   if (Math.abs(endAngle - startAngle) < Math.abs(2 * curveAngleMovementUnit)) {
-      //     this.updateAngle(endAngle)
-      //   } else {
-      //     const newAngle = startAngle + curveAngleMovementUnit
-      //     this.updateAngle(newAngle)
-      //     this.animateSlider(newAngle, endAngle)
-      //   }
-      // }
-      //
-      // window.requestAnimationFrame(animate)
+    animateSlider (startAngle, endAngle) { // this used to be commented out, why?
+      const direction = startAngle < endAngle ? 1 : -1
+      const curveAngleMovementUnit = direction * this.circleSliderState.angleUnit * 2
+
+      const animate = () => {
+        if (Math.abs(endAngle - startAngle) < Math.abs(2 * curveAngleMovementUnit)) {
+          this.updateAngle(endAngle)
+        } else {
+          const newAngle = startAngle + curveAngleMovementUnit
+          this.updateAngle(newAngle)
+          this.animateSlider(newAngle, endAngle)
+        }
+      }
+
+      window.requestAnimationFrame(animate)
     }
   },
   watch: {
