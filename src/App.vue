@@ -267,6 +267,9 @@ export default {
       })
       audio.playSweep()
 
+      // Shuffle rack slot array
+      let array = this.$store.dispatch('shuffleRackSlotArray')
+
       // randomly pick preset
       this.pickedPreset = Math.round(Math.random() * (presets.length - 1) );
       // console.log('pickedPreset =', this.pickedPreset);
@@ -486,7 +489,8 @@ export default {
   margin-right: -.5px;
   display: block;
   float: left;
-  position: relative;
+  // position: relative;
+  position: absolute; // because we want to shuffle them in game mode
   border: 1px solid #b7b7b7;
   &.empty {
     background: none;
