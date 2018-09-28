@@ -79,7 +79,7 @@
               <feDropShadow dx="0" dy="0" stdDeviation="35" flood-color="#3C32FF" flood-opacity="1" />
             </filter>
           </defs>
-          <circle class="touchpoint" style="filter:url(#dropshadow);cursor:grab;" :fill="knobColor" r="50" :cx="(cpPathX - 10)" :cy="(cpPathY + 10)" stroke="white" stroke-width="6"></circle>
+          <circle class="touchpoint" style="filter:url(#dropshadow);cursor:grab;" :fill="knobColor" r="30" :cx="(cpPathX - 10)" :cy="(cpPathY + 10)" stroke="white" stroke-width="6"></circle>
         </g>
       </g>
     </svg>
@@ -222,11 +222,11 @@ export default {
     }
   },
   computed: {
-    // cpStartAngleOffset () {
-    //   if (!this.minStepLimit) {
-    //     return 0
-    //   }
-    // },
+    cpStartAngleOffset () {
+      if (!this.minStepLimit) {
+        return 0
+      }
+    },
     cpCenter () {
       return 550 / 2
     },
@@ -280,10 +280,10 @@ export default {
      */
     handleClick (e) {
       this.touchPosition.setNewPosition(e)
-      if (this.touchPosition.isTouchWithinSliderRange) {
+      // if (this.touchPosition.isTouchWithinSliderRange) {
         const newAngle = this.touchPosition.sliderAngle
         this.animateSlider(this.angle, newAngle)
-      }
+      // }
     },
 
     /*
@@ -327,7 +327,9 @@ export default {
         return true
       }
 
-      const lastTouch = e.targetTouches.item(e.targetTouches.length - 1)
+      // const lastTouch = e.targetTouches.item(e.targetTouches.length - 1)
+      // this.touchPosition.setNewPosition(lastTouch)
+      const lastTouch = e.touches.item(e.touches.length - 1)
       this.touchPosition.setNewPosition(lastTouch)
 
       if (this.touchPosition.isTouchWithinSliderRange) {
@@ -395,7 +397,7 @@ export default {
 <style scoped lang="scss">
 
 .knob {
-  pointer-events: none;
+  // pointer-events: none;
   width:35%;
   margin: 0 .4em 0 .4em;
   color: white;
@@ -414,7 +416,8 @@ export default {
 }
 
 .touchpoint {
-  pointer-events: all !important;
+  // pointer-events: all !important;
+  // touch-action: all !important;
 }
 
 @media only screen and (max-width: 1000px) {
