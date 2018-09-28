@@ -347,6 +347,15 @@ button {
 }
 
 @media only screen and (max-width: 1000px) {
+  .name-input {
+    min-width: 14em;
+  }
+  .main__level {
+      display: none;
+  }
+  .game_title {
+      display: none;
+  }
   .module__name__status-indicator {
     display: none;
   }

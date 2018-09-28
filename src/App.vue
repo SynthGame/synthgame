@@ -452,6 +452,10 @@ export default {
     width: 20%;
     border: .5px solid white;
     cursor: pointer;
+    background: black;
+    position: relative;
+    z-index: 2;
+
     &:hover {
       background: white;
       color: black;
@@ -464,7 +468,7 @@ export default {
   position: relative;
   background: #101010;
   background-image: url(./assets/bg.svg);
-  background-size: cover;
+  background-size: auto 100%;
   width:100vw;
   height: 92vh;
 }
@@ -588,6 +592,7 @@ export default {
     height: 6em;
     width: 80%;
     margin-left: 10%;
+    overflow: hidden;
     & path {
       transition: .1s all ease-out;
     }
@@ -779,6 +784,12 @@ body {
 }
 
 @media only screen and (max-width: 1000px) {
+
+  .module .octave-wrapper {
+      height: 7.4em;
+      transform: scale(1.7);
+  }
+
   #app {
     font-size: .8em;
   }

@@ -9,7 +9,7 @@
           'position': !createModeIsActive ? 'absolute' : 'relative',
           'top':
           !createModeIsActive &&
-          rackSlotArray[0] < 6 ? '24.5em' : 0,
+          rackSlotArray[0] < 6 ? '46vh' : 0,
           'left':
           !createModeIsActive &&
           rackSlotArray[0] < 6 ?
@@ -26,7 +26,7 @@
           'position': !createModeIsActive ? 'absolute' : 'relative',
           'top':
           !createModeIsActive &&
-          rackSlotArray[1] < 6 ? '24.5em' : 0,
+          rackSlotArray[1] < 6 ? '46vh' : 0,
           'left':
           !createModeIsActive &&
           rackSlotArray[1] < 6 ?
@@ -43,7 +43,7 @@
           'position': !createModeIsActive ? 'absolute' : 'relative',
           'top':
           !createModeIsActive &&
-          rackSlotArray[2] < 6 ? '24.5em' : 0,
+          rackSlotArray[2] < 6 ? '46vh' : 0,
           'left':
           !createModeIsActive &&
           rackSlotArray[2] < 6 ?
@@ -60,7 +60,7 @@
           'position': !createModeIsActive ? 'absolute' : 'relative',
           'top':
           !createModeIsActive &&
-          rackSlotArray[3] < 6 ? '24.5em' : 0,
+          rackSlotArray[3] < 6 ? '46vh' : 0,
           'left':
           !createModeIsActive &&
           rackSlotArray[3] < 6 ?
@@ -77,7 +77,7 @@
           'position': !createModeIsActive ? 'absolute' : 'relative',
           'top':
           !createModeIsActive &&
-          rackSlotArray[4] < 6 ? '24.5em' : 0,
+          rackSlotArray[4] < 6 ? '46vh' : 0,
           'left':
           !createModeIsActive &&
           rackSlotArray[4] < 6 ?
@@ -94,7 +94,7 @@
           'position': !createModeIsActive ? 'absolute' : 'relative',
           'top':
           !createModeIsActive &&
-          rackSlotArray[5] < 6 ? '24.5em' : 0,
+          rackSlotArray[5] < 6 ? '46vh' : 0,
           'left':
           !createModeIsActive &&
           rackSlotArray[5] < 6 ?
@@ -115,7 +115,7 @@
           'position': !createModeIsActive ? 'absolute' : 'relative',
           'top':
           !createModeIsActive &&
-          rackSlotArray[6] < 6 ? '24.5em' : 0,
+          rackSlotArray[6] < 6 ? '46vh' : 0,
           'left':
           !createModeIsActive &&
           rackSlotArray[6] < 6 ?
@@ -144,8 +144,8 @@
                     'module__name__status-indicator--active': oscillator2Complete
                   }"
           :style="{
-                    'background-color': oscillator1Complete ? oscillatorColor : '',
-                    'box-shadow': oscillator1Complete ? `0px 0px 16px ${oscillatorTwoColor}` : '',
+                    'background-color': oscillator2Complete ? oscillatorTwoColor : '',
+                    'box-shadow': oscillator2Complete ? `0px 0px 16px ${oscillatorTwoColor}` : '',
                   }"
         ></span></div>
       <div @click="showFil" v-if="moduleIsUseable('filter')" class="tabs__tab tabs__filter"><span>Filter</span><span

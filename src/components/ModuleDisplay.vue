@@ -2,6 +2,7 @@
 
     <div class="display" ref="displayWrapper">
       <svg width="100%" height="100%">
+      <!-- <svg> -->
         <rect :fill="fill" width="100%" height="100%" />
         <!-- <rect fill="black" width="100%" height="100%" /> -->
 
