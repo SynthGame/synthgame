@@ -464,7 +464,7 @@ export default {
   position: relative;
   background: #101010;
   background-image: url(./assets/bg.svg);
-  background-size: stretch;
+  background-size: cover;
   width:100vw;
   height: 92vh;
 }
@@ -594,7 +594,7 @@ export default {
   }
   & .knobs {
     width: 100%;
-    min-height: 15em;
+    min-height: 14.5em;
     margin: auto;
     display: flex;
     align-items: center;

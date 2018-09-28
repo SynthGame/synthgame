@@ -86,4 +86,21 @@ export default {
   }
 }
 
+@media only screen and (max-width: 1000px) {
+  .rbmg {
+    position: absolute;
+    bottom: unset;
+    top:-3em;
+    left: 3em;
+    width: auto;
+    transition: all 1s;
+    transform: scale(.5)translate(-110px,50px);
+    &-img {
+      position: absolute;
+      margin-left:-285px;
+      margin-top: 87px;
+      height: 80px;
+    }
+  }
+}
 </style>
