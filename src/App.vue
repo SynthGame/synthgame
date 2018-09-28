@@ -630,6 +630,10 @@ body {
   background: black;
   margin: 0;
   user-select: none;
+  touch-action: none !important;
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
 }
 
 #app {
@@ -794,6 +798,8 @@ body {
     width: 100vw;
     height: 90vh;
     position: absolute;
+    left:0 !important;
+    top:0 !important;
     opacity: 0;
   }
   .module .knobs {

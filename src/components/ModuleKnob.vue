@@ -79,7 +79,7 @@
               <feDropShadow dx="0" dy="0" stdDeviation="35" flood-color="#3C32FF" flood-opacity="1" />
             </filter>
           </defs>
-          <circle style="filter:url(#dropshadow);cursor:grab;" :fill="knobColor" r="30" :cx="(cpPathX - 10)" :cy="(cpPathY + 10)" stroke="white" stroke-width="6"></circle>
+          <circle class="touchpoint" style="filter:url(#dropshadow);cursor:grab;" :fill="knobColor" r="50" :cx="(cpPathX - 10)" :cy="(cpPathY + 10)" stroke="white" stroke-width="6"></circle>
         </g>
       </g>
     </svg>
@@ -89,6 +89,7 @@
 <script>
 import TouchPosition from '../modules/touch_position.js'
 import CircleSliderState from '../modules/circle_slider_state.js'
+
 export default {
   name: 'CircleSlider',
   created () {
@@ -394,6 +395,7 @@ export default {
 <style scoped lang="scss">
 
 .knob {
+  pointer-events: none;
   width:35%;
   margin: 0 .4em 0 .4em;
   color: white;
@@ -409,6 +411,10 @@ export default {
      z-index:9;
      position: relative;
   }
+}
+
+.touchpoint {
+  pointer-events: all !important;
 }
 
 @media only screen and (max-width: 1000px) {
