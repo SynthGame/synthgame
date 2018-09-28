@@ -194,7 +194,7 @@ export default {
 }
 
 button.button {
-  border: 1px solid #313131;
+  border: 1px solid #fff;
 }
 
 svg.display {

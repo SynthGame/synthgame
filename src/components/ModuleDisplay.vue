@@ -64,7 +64,7 @@
             </g>
         </svg>
         <!-- Router -->
-        <g v-if="this.module === 'router'" style="transform: scale(0.81)translateY(2px); transition: all 0s;">
+        <g v-if="this.module === 'router'" class="routerscreen" style="transform: scale(0.81)translateY(2px); transition: all 0s;">
           <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
               <g id="SYNTHGAME_MODROUTER-01" transform="translate(-32.000000, -61.000000)">
                   <g id="SCREEN" transform="translate(32.000000, 61.000000)">
@@ -787,4 +787,10 @@ export default {
     font: bold 20px sans-serif;
     fill: red;
   }
+
+@media only screen and (max-width: 1000px) {
+  .routerscreen {
+    transform: scale(1.35) translateY(2px) !important
+  }
+}
 </style>

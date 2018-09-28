@@ -106,6 +106,7 @@
       />
       <sequencer-module
         v-if="createModeIsActive"
+        :class="[(activeModule == 7 ? 'active' : '')]"
         class="module sequencer"
       />
       <router-module
@@ -192,12 +193,34 @@
                   'box-shadow': lfoComplete ? `0px 0px 16px ${lfoColor}` : '',
                 }"
       ></span></div>
+      <div @click="showRouter" v-if="moduleIsUseable('router')" class="tabs__tab tabs__router"><span>Rout</span><span
+        v-if="moduleIsUseable('router')"
+        :class="{
+                  'module__name__status-indicator indicator__router': true,
+                  'module__name__status-indicator--active indicator__router': routerComplete
+                }"
+        :style="{
+                  'background-color': routerComplete ? routerColor : '',
+                  'box-shadow': routerComplete ? `0px 0px 16px ${routerColor}` : '',
+                }"
+      ></span></div>
+      <div @click="showSequencer" v-if="createModeIsActive" class="tabs__tab tabs__sequencer"><span>Seq</span><span
+        v-if="createModeIsActive"
+        :class="{
+                  'module__name__status-indicator indicator__sequencer': true,
+                  'module__name__status-indicator--active indicator__sequencer': true
+                }"
+        :style="{
+                  'background-color': sequencerColor ,
+                  'box-shadow': `0px 0px 16px ${sequencerColor}`,
+                }"
+      ></span></div>
     </div>
   </div>
 </template>
 
 <script>
-import { MODULE_OSCILLATOR_COLOR, MODULE_OSCILLATORTWO_COLOR, MODULE_ENVELOPE_COLOR, MODULE_FILTER_COLOR, MODULE_DELAY_COLOR, MODULE_REVERB_COLOR, MODULE_LFO_COLOR} from '@/constants'
+import { MODULE_SEQUENCER_COLOR, MODULE_ROUTER_COLOR, MODULE_OSCILLATOR_COLOR, MODULE_OSCILLATORTWO_COLOR, MODULE_ENVELOPE_COLOR, MODULE_FILTER_COLOR, MODULE_DELAY_COLOR, MODULE_REVERB_COLOR, MODULE_LFO_COLOR} from '@/constants'
 import some from 'lodash/some'
 // @ is an alias to /src
 import GameNavBar from '@/components/GameNavBar.vue'
@@ -221,7 +244,9 @@ export default {
       oscillatorTwoColor: MODULE_OSCILLATORTWO_COLOR,
       envelopeColor: MODULE_ENVELOPE_COLOR,
       filterColor: MODULE_FILTER_COLOR,
-      lfoColor: MODULE_LFO_COLOR
+      lfoColor: MODULE_LFO_COLOR,
+      routerColor: MODULE_ROUTER_COLOR,
+      sequencerColor: MODULE_SEQUENCER_COLOR
     }
   },
   components: {
@@ -258,6 +283,12 @@ export default {
     showLfo () {
       this.activeModule = 4
     },
+    showRouter () {
+      this.activeModule = 6
+    },
+    showSequencer () {
+      this.activeModule = 7
+    },
     moduleIsUseable (moduleName) {
       if (this.createModeIsActive) return true
       return some(this.knobsAvailable[moduleName]) // some are truthy
@@ -293,7 +324,10 @@ export default {
     },
     lfoComplete () {
       return Object.values(this.$store.getters.audioParametersMatchGoalWithMargin['lfo']).every(param => param)
-    }
+    },
+    routerComplete () {
+      return Object.values(this.$store.getters.audioParametersMatchGoalWithMargin['router']).every(param => param)
+    },
   }
 }
 </script>

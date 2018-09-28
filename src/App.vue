@@ -687,8 +687,9 @@ body {
 }
 
 .overlay-content-wrapper {
-  padding: 1rem;
+  // padding: 1rem;
   height: 80%;
+  width: 100%;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -785,6 +786,63 @@ body {
 
 @media only screen and (max-width: 1000px) {
 
+  .stepnumber {
+    display: none;
+  }
+
+  .sequencer-slider [type='range'][data-v-08d8bd4d] {
+    margin: -25px 0 0 16px !important;
+    width: 4em !important;
+  }
+
+  .sequencer.module.sequencer.active {
+    .module__name {
+      padding: 5% 0% !important;
+    }
+    padding: 0 10%;
+  }
+
+  .module__name {
+    padding: 5% 10% !important;
+  }
+
+  .sequencer-button__content {
+    margin-top: 0 !important;
+  }
+
+  button.sequencer-button {
+    min-height: 1em !important;
+    height: 4em !important;
+    margin-top: 0 !important;
+  }
+
+  .sequencer.module.sequencer.active {
+    flex-direction: column;
+  }
+
+  .button-section {
+    width: 100% !important;
+    margin-top: 0em !important;
+    border-top: none !important;
+  }
+
+  .sequencer__controls {
+    width: 100% !important;
+  }
+
+  button.button-drums {
+    min-width: 4.7em !important;
+  }
+
+  button.sequencer-stop-button.button-drums {
+    padding-left: 1.9em !important;
+  }
+
+  .sequencer.module.sequencer.active {
+    width: 100%;
+    height: 82vh;
+  }
+
   .module .octave-wrapper {
       height: 7.4em;
       transform: scale(1.7);
@@ -807,11 +865,12 @@ body {
   }
   .module {
     width: 100vw;
-    height: 90vh;
-    position: absolute;
+    height: 82vh;
+    position: absolute !important;
     left:0 !important;
     top:0 !important;
     opacity: 0;
+    padding-bottom: 2em !important;
   }
   .module .knobs {
     padding-top: 5vh;
