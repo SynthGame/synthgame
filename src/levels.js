@@ -18,7 +18,7 @@ export default [
   // level 2
   {
     oscillator1: {
-      detune: true,
+      frequency: true,
       typeOsc: true
     },
     oscillator2: {},
@@ -258,6 +258,12 @@ export default [
       sustain: true,
       release: true
     },
+    envelope2: {},
+    lfo: {},
+    router: {},
+    levelData: {
+      text: 'Hint: set attack and decay to low levels for snappy sounds.'
+    }
   },
   // level 13
   {

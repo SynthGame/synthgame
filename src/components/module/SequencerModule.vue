@@ -149,6 +149,7 @@ import fill from 'lodash/fill'
 import sample from 'lodash/sample'
 import random from 'lodash/random'
 import { MODULE_SEQUENCER_COLOR } from '@/constants'
+import Tone from 'tone'
 
 export default {
   name: 'SequencerModule',
@@ -206,7 +207,14 @@ export default {
         noteArray: range(0, 16),
         subdivision: '8n'
       }, (time, note) => {
+        // experiment
+        // Tone.Transport.schedule(function(time){
+        // 	//do something with the time
+        //   audio.playKick()
+        // }, "16:0:0");
+
         this.setStep(note)
+
         if (this.noteArray[note].selected) {
           audio.playNote(this.noteArray[note].pitch, {
             // noteLength: ['16t', '8n', '4n', '2n', '1n'][this.noteArray[note].noteLength],
