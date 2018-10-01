@@ -1,5 +1,20 @@
 <template>
-  <button @mousedown="$emit('click', $event)" @mouseover="toggleOnOff($event)" class="sequencer-button">
+  <!-- button with mouseover listener -->
+  <!-- <button
+  @mousedown="$emit('click', $event)"
+  @mouseover="toggleOnOff($event)"
+  class="sequencer-button">
+    <div class="sequencer-button__content">
+      <div :class="{
+        'sequencer-button__indicator': true,
+        'sequencer-button__indicator--active': buttonActive,
+        'sequencer-button__indicator--selected': buttonSelected
+      }"></div>
+    </div>
+  </button> -->
+  <button
+  @mousedown="$emit('click', $event)" 
+  class="sequencer-button">
     <div class="sequencer-button__content">
       <div :class="{
         'sequencer-button__indicator': true,

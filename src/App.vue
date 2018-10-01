@@ -528,6 +528,10 @@ export default {
       background: unset;
       border: none;
       cursor: pointer;
+      transition: all .2s;
+      &:hover {
+        background: rgba(255,255,255,0.1);
+      }
     }
     svg{
       width: 1em;

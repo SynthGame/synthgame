@@ -176,7 +176,7 @@ export default {
     if (this.$route.query.preset) {
       getPresetById(this.$route.query.preset)
         .then(data => {
-          console.log('preset for saving purposes',data);
+          console.log('custom preset JSON',data);
           // this.customLevelIsActive = true
           this.noteArray = data.sequenceArray
           this.$store.commit('setAudioParameterToPreset', {
@@ -401,6 +401,9 @@ button.sequencer-button {
     display: flex;
     margin: 0;
     margin-top: 1em;
+    &:hover {
+      background: rgba(255,255,255,0.1);
+    }
 }
 
 .module__name__title {

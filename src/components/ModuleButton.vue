@@ -147,10 +147,12 @@ button, input[type="submit"], input[type="reset"] {
   min-height: 1.8em;
   cursor: pointer;
   margin: 0.1rem;
+  transition: all .2s;
     &:hover {
-      border: 3.4px #ff8574 solid;
+      background: rgba(255,255,255,0.1);
+      // border: 3.4px #ff8574 solid;
       & .st0 {
-        stroke-width: 2;
+        // stroke-width: 2;
       }
   }
 }
