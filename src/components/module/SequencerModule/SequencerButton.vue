@@ -13,7 +13,7 @@
     </div>
   </button> -->
   <button
-  @mousedown="$emit('click', $event)" 
+  @mousedown="$emit('click', $event)"
   class="sequencer-button">
     <div class="sequencer-button__content">
       <div :class="{
@@ -26,13 +26,13 @@
 </template>
 
 <script>
-let mouseIsDown = 0;
-document.body.onmousedown = function() {
-  mouseIsDown = mouseIsDown + 1;
-}
-document.body.onmouseup = function() {
-  mouseIsDown = mouseIsDown - 1;
-}
+// let mouseIsDown = 0;
+// document.body.onmousedown = function() {
+//   mouseIsDown = mouseIsDown + 1;
+// }
+// document.body.onmouseup = function() {
+//   mouseIsDown = mouseIsDown - 1;
+// }
 
 export default {
   name: 'SequencerButton',
