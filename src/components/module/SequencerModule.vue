@@ -526,4 +526,11 @@ button.sequencer-button {
 @keyframes flash {
     from {opacity: 0}
 }
+
+@media only screen and (max-width: 1000px) {
+  .sequencer {
+     width: 100% !important;
+     max-width: 100% !important;
+   }
+}
 </style>

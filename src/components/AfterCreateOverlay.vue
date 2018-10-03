@@ -2,7 +2,7 @@
   <div class="overlay">
     <div class="overlay-content-wrapper">
         <h1>Thank you</h1>
-        <h2>We'll notify you when we use your preset in game via Soundcloud DM. We'll reach out via email to the winner of the Mess foundation prize, on November 19, 2018.<br><br>Share this link on social media to show others what you've made, or to create presets together.</h2>
+        <h2>We'll notify you when we use your preset in game via Soundcloud DM. We'll reach out via email to the winner of the Superbooth prize, on November 19, 2018.<br><br>Share this link on social media to show others what you've made, or to create presets together.</h2>
         <span class="link">{{link}}</span>
       <div>
         <button class="button-next" @click="copy">{{copyButtonText}}</button>

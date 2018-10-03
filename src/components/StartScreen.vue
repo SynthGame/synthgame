@@ -14,7 +14,7 @@
         <button class="button-next" @click="$emit('create')">Make music</button>
       </div>
     </div>
-    <div :style="{'margin-left': marginLeftRbmg}" class="rbmg">
+    <!-- <div :style="{'margin-left': marginLeftRbmg}" class="rbmg">
         <iframe width="250" height="150" src="https://www.youtube.com/embed/nkeLxvVvMdg?rel=0" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
         <img class="rbmg-img" src="../../src/assets/rbmg.png" alt="Powered by Red Bull Mind Gamers">
         <svg @click="hideVideo" class="hidevideo" width="18px" height="17px" viewBox="0 0 18 17" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
@@ -25,7 +25,7 @@
                 </g>
             </g>
         </svg>
-    </div>
+    </div> -->
   </div>
 </template>
 

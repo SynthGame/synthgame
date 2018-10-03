@@ -362,13 +362,13 @@ export default {
       const y = e.targetTouches[0].pageY
 
       const xDiff = x - this.touchEvent.center.x
-      const yDiff = this.touchEvent.center.y - y 
+      const yDiff = this.touchEvent.center.y - y
 
       const fullAngle = Math.atan2(yDiff, xDiff) < 0 ? Math.atan2(yDiff, xDiff) + 2*Math.PI : Math.atan2(yDiff, xDiff)
       const inverseFullAngle = 2*Math.PI-fullAngle
       const inverseFullAngleCorrectedForStart = (inverseFullAngle - 0.5*Math.PI) < 0 ? inverseFullAngle + 1.5*Math.PI : inverseFullAngle - 0.5*Math.PI
       this.updateAngle(inverseFullAngleCorrectedForStart)
-      
+
       // // const lastTouch = e.targetTouches.item(e.targetTouches.length - 1)
       // // this.touchPosition.setNewPosition(lastTouch)
       // const lastTouch = e.touches.item(e.touches.length - 1)
@@ -441,6 +441,7 @@ export default {
 .knob {
   // pointer-events: none;
   width:35%;
+  max-width:16vh;
   margin: 0 .4em 0 .4em;
   color: white;
   &__bg {
@@ -465,6 +466,9 @@ export default {
 @media only screen and (max-width: 1000px) {
   .knob p {
       font-size: 1.2em;
+  }
+  .knob {
+    margin: 0 2vh 0 2vh !important; 
   }
 }
 </style>

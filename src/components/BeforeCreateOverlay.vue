@@ -7,7 +7,7 @@
           <span class="data artist">Preset by <a target="_blank" :href="'https://soundcloud.com/' + nameArtist">{{nameArtist}}</a></span>
         </div>
         <!-- <h2 v-if="!customLevelIsActive">Write the music for this game. On nov 17, Tatsuya Takahashi picks 1 lucky winner, who wins a trip to the MESS foundation!</h2> -->
-        <h2>Create and share synthesizer presets. Get featured in game!</h2>
+        <h2>After you learned the basics playing the game, you can create and share synthesizer presets here. Get featured in game and win the Superbooth prize!</h2>
       <div>
         <button class="button-next" @click="$emit('showCreate')">Ready</button>
       </div>

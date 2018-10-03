@@ -687,8 +687,8 @@ body {
   }
   & h2 {
     font-weight: 300;
-    font-size: 3em;
-    max-width: 12em;
+    font-size: 2.5em;
+    max-width: 18em;
     margin: 0;
     & span {
       font-size: .6em;
