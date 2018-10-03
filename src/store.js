@@ -341,7 +341,7 @@ export default new Vuex.Store({
           const parameterValDef = state.gameState.possibleValues[moduleName][parameterName]
           return Array.isArray(parameterValDef)
             ? parameterValDef[random(0, parameterValDef.length - 1)]
-            : random(0, 100)
+            : random(0, 95)
         })
       })
 
@@ -374,7 +374,7 @@ export default new Vuex.Store({
             const parameterValDef = state.gameState.possibleValues[moduleName][parameterName]
             return Array.isArray(parameterValDef)
               ? parameterValDef[random(0, parameterValDef.length - 1)]
-              : random(0, 100)
+              : random(0, 95)
           }
           return state.gameState.defaultParams[moduleName][parameterName]
         })

@@ -179,6 +179,7 @@ export default {
       getPresetById(this.$route.query.preset)
         .then(data => {
           console.log('custom preset JSON',data);
+          // window.postMessage(this.$route.query.preset, '*')
           // this.customLevelIsActive = true
           this.noteArray = data.sequenceArray
           this.$store.commit('setAudioParameterToPreset', {
