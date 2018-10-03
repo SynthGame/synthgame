@@ -443,7 +443,7 @@ export default {
   display: none;
   justify-content: flex-start;
   position: absolute;
-  bottom: 0;
+  top: 90vh;
   width: 100vw;
   height: 10vh;
   align-items: center;
@@ -660,6 +660,7 @@ body {
   font-weight: 300;
   font-size: 1.8vh;
   -webkit-font-smoothing: antialiased;
+  touch-action: none !important;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: white;
@@ -845,11 +846,11 @@ body {
   }
 
   button.button-drums {
-    min-width: 4.7em !important;
+    min-width: 3em !important;
   }
 
   button.sequencer-stop-button.button-drums {
-    padding-left: 1.9em !important;
+    padding-left: 1.6em !important;
   }
 
   .sequencer.module.sequencer.active {
