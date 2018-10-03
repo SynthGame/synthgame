@@ -211,6 +211,8 @@ export default {
           // alert(`${window.location.origin}/?preset=${presetId}`)
           this.exportPresetLink = `${window.location.origin}/?preset=${presetId}`;
           this.$router.push('?preset=' + presetId)
+          window.postMessage(presetId, '*');
+          console.log('id',presetId);
         })
     },
     requestNextLevel () {
