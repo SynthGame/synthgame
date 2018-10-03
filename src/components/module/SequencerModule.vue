@@ -150,6 +150,7 @@ import sample from 'lodash/sample'
 import random from 'lodash/random'
 import { MODULE_SEQUENCER_COLOR } from '@/constants'
 import Tone from 'tone'
+import character from '@/character'
 
 export default {
   name: 'SequencerModule',
@@ -184,8 +185,9 @@ export default {
             preset: data.parameterValues
           })
           this.bpm = data.bpm
-          // this.startPreset(data.parameterValues)
-          // this.customLevelCreator = data.name
+          audio.connectLfo(this.$store.state.audioParameters.router.lfo);
+          audio.connectEnvelope2(this.$store.state.audioParameters.router.envelope2)
+          audio.filter.state.device.frequency.value = character.filter.cutOffFreq(this.$store.state.audioParameters.filter.cutOffFreq)
         })
     }
     this.initSynth()

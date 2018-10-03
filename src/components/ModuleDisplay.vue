@@ -397,7 +397,7 @@ export default {
     }
   },
   mounted () {
-    console.log('display: mounted!', this.module)
+    // console.log('display: mounted!', this.module)
     // update dimentions:
     this.updateDimensions()
     window.addEventListener('resize', this.updateDimensions())
