@@ -1,24 +1,24 @@
 <template>
   <div class="sequencer">
     <module-title :module-color="moduleColor">
-      <h2 slot="title">Tats</h2>
+      <!-- <h2 slot="title">Tats</h2> -->
       <h3 slot="subtitle">Sequencer</h3>
     </module-title>
     <div class="sequencer__controls">
       <div class="button-wrapper function">
-        <button color="#6e01d1" @click="sequencerEditStateChange(0)">Steps</button>
-        <button color="#6e01d1" @click="sequencerEditStateChange(1)">Pitch</button>
+        <button :style="sequencerEditState === 0 ? 'background: #F40056 !important' : ''" color="#6e01d1" @click="sequencerEditStateChange(0)">Steps</button>
+        <button :style="sequencerEditState === 1 ? 'background: #F40056 !important' : ''" color="#6e01d1" @click="sequencerEditStateChange(1)">Pitch</button>
         <!-- <p>Synth</p> -->
         <!-- <button color="#6e01d1" @click="sequencerEditStateChange(2)">Accent</button>
         <button color="#6e01d1" @click="sequencerEditStateChange(3)">Note Length</button> -->
-        <button class="button-drums" @click="sequencerEditStateChange(4)">Kick</button>
-        <button class="button-drums" @click="sequencerEditStateChange(5)">Hat</button>
-        <button class="button-drums" @click="sequencerEditStateChange(11)">Snare</button>
-        <button class="button-drums" @click="sequencerEditStateChange(8)">Cymbal</button>
-        <button class="button-drums" @click="sequencerEditStateChange(6)">Clap 1</button>
-        <button class="button-drums" @click="sequencerEditStateChange(7)">Clap 2</button>
-        <button class="button-drums" @click="sequencerEditStateChange(9)">Labmyc</button>
-        <button class="button-drums" @click="sequencerEditStateChange(10)">Noise</button>
+        <button :style="sequencerEditState === 4 ? 'background: #F40056 !important' : ''" class="button-drums" @click="sequencerEditStateChange(4)">Kick</button>
+        <button :style="sequencerEditState === 5 ? 'background: #F40056 !important' : ''" class="button-drums" @click="sequencerEditStateChange(5)">Hat</button>
+        <button :style="sequencerEditState === 11 ? 'background: #F40056 !important' : ''" class="button-drums" @click="sequencerEditStateChange(11)">Snare</button>
+        <button :style="sequencerEditState === 8 ? 'background: #F40056 !important' : ''" class="button-drums" @click="sequencerEditStateChange(8)">Cymbal</button>
+        <button :style="sequencerEditState === 6 ? 'background: #F40056 !important' : ''" class="button-drums" @click="sequencerEditStateChange(6)">Clap 1</button>
+        <button :style="sequencerEditState === 7 ? 'background: #F40056 !important' : ''" class="button-drums" @click="sequencerEditStateChange(7)">Clap 2</button>
+        <button :style="sequencerEditState === 9 ? 'background: #F40056 !important' : ''" class="button-drums" @click="sequencerEditStateChange(9)">Labmyc</button>
+        <button :style="sequencerEditState === 10 ? 'background: #F40056 !important' : ''" class="button-drums" @click="sequencerEditStateChange(10)">Noise</button>
         <button @click="playPauseSynth" class="sequencer-stop-button button-drums"><span>▶</span></button>
         <!-- <p>Drums</p> -->
       </div>
@@ -33,8 +33,8 @@
         <module-knob
         style="width:4rem"
           v-model="bpm"
-          :min="80"
-          :max="160"
+          :min="60"
+          :max="300"
           knobColor="#F40056"
           name="TEMPO"
           module="sequencer"
@@ -161,6 +161,7 @@ export default {
   },
   data: function () {
     return {
+      isActive: false,
       toneLoop: null,
       sequencerEditState: 0,
       moduleColor: MODULE_SEQUENCER_COLOR,
@@ -218,7 +219,7 @@ export default {
         if (this.noteArray[note].selected) {
           audio.playNote(this.noteArray[note].pitch, {
             // noteLength: ['16t', '8n', '4n', '2n', '1n'][this.noteArray[note].noteLength],
-            noteLength: '2n',
+            noteLength: '4n',
             volume: this.noteArray[note].volume,
             time: note
           })
@@ -473,6 +474,9 @@ button.sequencer-button {
       transition: all.2s;
       &:hover {
         border-width: 2px;
+      }
+      &.active {
+        background: $main-seq-color !important;
       }
       &.button-drums {
         background: #313131;

@@ -1,7 +1,7 @@
 <template>
   <div class="module">
     <module-title :indicator-active="dialsAreWithinMargin" :module-color="moduleColor">
-      <h2 slot="title">Tats</h2>
+      <!-- <h2 slot="title">Tats</h2> -->
       <h3 v-if="dialsAreWithinMargin" slot="subtitle">Done!</h3>
       <h3 v-else slot="subtitle">Oscillator 1</h3>
     </module-title>
@@ -112,7 +112,7 @@ export default {
   },
   created () {
     self = this
-    this.oscillator1 = audio.oscillator1.state.device 
+    this.oscillator1 = audio.oscillator1.state.device
   },
   methods: {
     incrementOctave () {

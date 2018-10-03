@@ -504,7 +504,7 @@ export default [
     },
     router: {},
     levelData: {
-      text: "We're impressed. We never reached this level ourselves."
+      text: "We're impressed."
     }
   },
   // level 20

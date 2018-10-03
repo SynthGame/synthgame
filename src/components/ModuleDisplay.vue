@@ -103,11 +103,35 @@
                               <tspan x="10.9811645" y="33.3967">CUTOFF</tspan>
                           </text>
                           <rect id="Rectangle-path" stroke="#FFFFFF" stroke-width="0.3708" x="0.2" y="21.1" width="46.2" height="19.9"></rect>
-                          <path d="M3.9,1 L3.9,21.1" id="Shape" stroke="#FFFFFF" stroke-width="0.3708"></path>
+                          <path d="M3.9,1 L3.9,21.1" id="Shape" stroke="#ff8574" stroke-width="1"></path>
                           <polygon id="Shape" fill="#FFFFFF" fill-rule="nonzero" points="2.4 2.2 2.7 2.4 3.9 1.1 5.2 2.4 5.4 2.2 3.9 0.6"></polygon>
-                          <path d="M23.5,41 L50.8328522,59.7219014" id="Shape" stroke="#FFFFFF" stroke-width="0.3708"></path>
+                          <path d="M23.5,41 L50.8328522,59.7219014" id="Shape" stroke="#ff8574" stroke-width="1"></path>
+                      </g>
+                      <g v-if="knobs[2].value === 'filterCutoff'" id="modlfo-cutoff-filter" transform="translate(129.000000, 32.000000)">
+                          <text id="CUTOFF" fill="#FFFFFF" font-family="Helvetica" font-size="6.1028" font-weight="normal">
+                              <tspan x="10.9811645" y="33.3967">CUTOFF</tspan>
+                          </text>
+                          <rect id="Rectangle-path" stroke="#FFFFFF" stroke-width="0.3708" x="0.2" y="21.1" width="46.2" height="19.9"></rect>
+                          <path d="M3.9,1 L3.9,21.1" id="Shape" stroke="#FFFFFF" stroke-width="1"></path>
+                          <polygon id="Shape" fill="#FFFFFF" fill-rule="nonzero" points="2.4 2.2 2.7 2.4 3.9 1.1 5.2 2.4 5.4 2.2 3.9 0.6"></polygon>
+                          <path d="M23.5,41 L50.8328522,59.7219014" id="Shape" stroke="#FFFFFF" stroke-width="1"></path>
                       </g>
                       <g v-if="knobs[0].value === 'oscsDetune'" id="modlfo-pitch-oscs" transform="translate(78.000000, 18.000000)">
+                          <text id="PITCH" fill="#FFFFFF" font-family="Helvetica" font-size="6.1028" font-weight="normal">
+                              <tspan x="65.1458" y="47.3967">PITCH</tspan>
+                          </text>
+                          <rect id="Rectangle-path" stroke="#FFFFFF" stroke-width="0.3708" x="51.2" y="35.1" width="46.2" height="19.9"></rect>
+                          <g id="Group-3" transform="translate(34.307613, 18.423492) rotate(-52.000000) translate(-34.307613, -18.423492) translate(32.307613, -8.576508)">
+                              <path d="M1.9,1 L1.9,54" id="Shape" stroke="#ff8574" stroke-width="1"></path>
+                              <polygon id="Shape" fill="#FFFFFF" fill-rule="nonzero" points="0.4 2.2 0.7 2.4 1.9 1.1 3.2 2.4 3.4 2.2 1.9 0.6"></polygon>
+                          </g>
+                          <g id="Group-3" transform="translate(28.482251, 26.263606) rotate(-72.000000) translate(-28.482251, -26.263606) translate(26.482251, -2.736394)">
+                              <path d="M1.9,1 L1.9,57.3092186" id="Shape" stroke="#ff8574" stroke-width="1"></path>
+                              <polygon id="Shape" fill="#FFFFFF" fill-rule="nonzero" points="0.4 2.2 0.7 2.4 1.9 1.1 3.2 2.4 3.4 2.2 1.9 0.6"></polygon>
+                          </g>
+                          <path d="M74.5,55 L101.832852,73.7219014" id="Shape" stroke="#ff8574" stroke-width="1"></path>
+                      </g>
+                      <g v-if="knobs[2].value === 'oscsDetune'" id="modlfo-pitch-oscs" transform="translate(78.000000, 18.000000)">
                           <text id="PITCH" fill="#FFFFFF" font-family="Helvetica" font-size="6.1028" font-weight="normal">
                               <tspan x="65.1458" y="47.3967">PITCH</tspan>
                           </text>
@@ -117,10 +141,10 @@
                               <polygon id="Shape" fill="#FFFFFF" fill-rule="nonzero" points="0.4 2.2 0.7 2.4 1.9 1.1 3.2 2.4 3.4 2.2 1.9 0.6"></polygon>
                           </g>
                           <g id="Group-3" transform="translate(28.482251, 26.263606) rotate(-72.000000) translate(-28.482251, -26.263606) translate(26.482251, -2.736394)">
-                              <path d="M1.9,1 L1.9,57.3092186" id="Shape" stroke="#FFFFFF" stroke-width="0.3708"></path>
+                              <path d="M1.9,1 L1.9,57.3092186" id="Shape" stroke="#FFFFFF" stroke-width="1"></path>
                               <polygon id="Shape" fill="#FFFFFF" fill-rule="nonzero" points="0.4 2.2 0.7 2.4 1.9 1.1 3.2 2.4 3.4 2.2 1.9 0.6"></polygon>
                           </g>
-                          <path d="M74.5,55 L101.832852,73.7219014" id="Shape" stroke="#FFFFFF" stroke-width="0.3708"></path>
+                          <path d="M74.5,55 L101.832852,73.7219014" id="Shape" stroke="#FFFFFF" stroke-width="1"></path>
                       </g>
                       <g v-if="knobs[0].value === 'osc1Detune'" id="modlfo-pitch-oscs" transform="translate(89.000000, 18.000000)">
                           <text id="PITCH" fill="#FFFFFF" font-family="Helvetica" font-size="6.1028" font-weight="normal">
@@ -128,19 +152,41 @@
                           </text>
                           <rect id="Rectangle-path" stroke="#FFFFFF" stroke-width="0.3708" x="40.2" y="35.1" width="46.2" height="19.9"></rect>
                           <g id="Group-3" transform="translate(23.307613, 18.423492) rotate(-52.000000) translate(-23.307613, -18.423492) translate(21.307613, -8.576508)">
-                              <path d="M1.9,1 L1.9,54" id="Shape" stroke="#FFFFFF" stroke-width="0.3708"></path>
+                              <path d="M1.9,1 L1.9,54" id="Shape" stroke="#ff8574" stroke-width="1"></path>
                               <polygon id="Shape" fill="#FFFFFF" fill-rule="nonzero" points="0.4 2.2 0.7 2.4 1.9 1.1 3.2 2.4 3.4 2.2 1.9 0.6"></polygon>
                           </g>
-                          <path d="M63.5,55 L90.8328522,73.7219014" id="Shape" stroke="#FFFFFF" stroke-width="0.3708"></path>
+                          <path d="M63.5,55 L90.8328522,73.7219014" id="Shape" stroke="#ff8574" stroke-width="1"></path>
+                      </g>
+                      <g v-if="knobs[2].value === 'osc1Detune'" id="modlfo-pitch-oscs" transform="translate(89.000000, 18.000000)">
+                          <text id="PITCH" fill="#FFFFFF" font-family="Helvetica" font-size="6.1028" font-weight="normal">
+                              <tspan x="54.1458" y="47.3967">PITCH</tspan>
+                          </text>
+                          <rect id="Rectangle-path" stroke="#FFFFFF" stroke-width="0.3708" x="40.2" y="35.1" width="46.2" height="19.9"></rect>
+                          <g id="Group-3" transform="translate(23.307613, 18.423492) rotate(-52.000000) translate(-23.307613, -18.423492) translate(21.307613, -8.576508)">
+                              <path d="M1.9,1 L1.9,54" id="Shape" stroke="#FFFFFF" stroke-width="1"></path>
+                              <polygon id="Shape" fill="#FFFFFF" fill-rule="nonzero" points="0.4 2.2 0.7 2.4 1.9 1.1 3.2 2.4 3.4 2.2 1.9 0.6"></polygon>
+                          </g>
+                          <path d="M63.5,55 L90.8328522,73.7219014" id="Shape" stroke="#FFFFFF" stroke-width="1"></path>
                       </g>
                       <g v-if="knobs[1].value === 'lfoFrequency'" id="modlfo-frequency-lfo" transform="translate(72.000000, 82.000000)">
                           <text id="FREQUENCY" fill="#FFFFFF" font-family="Helvetica" font-size="6.1028" font-weight="normal">
                               <tspan x="26.1423334" y="12.3967">FREQUENCY</tspan>
                           </text>
-                          <path d="M68.5,9.5 L107.5,9.5" id="Shape" stroke="#FFFFFF" stroke-width="0.3708"></path>
+                          <path d="M68.5,9.5 L107.5,9.5" id="Shape" stroke="#ff8574" stroke-width="1"></path>
                           <rect id="Rectangle-path" stroke="#FFFFFF" stroke-width="0.3708" x="22.2" y="0.1" width="46.2" height="19.5"></rect>
                           <g id="Group-3" transform="translate(11.210000, 9.423492) rotate(-90.000000) translate(-11.210000, -9.423492) translate(9.210000, -1.576508)">
-                              <path d="M1.9,1 L1.9,21.89" id="Shape" stroke="#FFFFFF" stroke-width="0.3708"></path>
+                              <path d="M1.9,1 L1.9,21.89" id="Shape" stroke="#ff8574" stroke-width="1"></path>
+                              <polygon id="Shape" fill="#FFFFFF" fill-rule="nonzero" points="0.4 2.2 0.7 2.4 1.9 1.1 3.2 2.4 3.4 2.2 1.9 0.6"></polygon>
+                          </g>
+                      </g>
+                      <g v-if="knobs[3].value === 'lfoFrequency'" id="modlfo-frequency-lfo" transform="translate(72.000000, 82.000000)">
+                          <text id="FREQUENCY" fill="#FFFFFF" font-family="Helvetica" font-size="6.1028" font-weight="normal">
+                              <tspan x="26.1423334" y="12.3967">FREQUENCY</tspan>
+                          </text>
+                          <path d="M68.5,9.5 L107.5,9.5" id="Shape" stroke="#FFFFFF" stroke-width="1"></path>
+                          <rect id="Rectangle-path" stroke="#FFFFFF" stroke-width="0.3708" x="22.2" y="0.1" width="46.2" height="19.5"></rect>
+                          <g id="Group-3" transform="translate(11.210000, 9.423492) rotate(-90.000000) translate(-11.210000, -9.423492) translate(9.210000, -1.576508)">
+                              <path d="M1.9,1 L1.9,21.89" id="Shape" stroke="#FFFFFF" stroke-width="1"></path>
                               <polygon id="Shape" fill="#FFFFFF" fill-rule="nonzero" points="0.4 2.2 0.7 2.4 1.9 1.1 3.2 2.4 3.4 2.2 1.9 0.6"></polygon>
                           </g>
                       </g>
@@ -149,20 +195,40 @@
                             <tspan x="26.7656" y="45.3967">PITCH</tspan>
                         </text>
                         <rect id="Rectangle-path" stroke="#FFFFFF" stroke-width="0.3708" x="13" y="33.1" width="46.2" height="19.9"></rect>
-                        <path d="M13.4,25.7 L36.1,33.1" id="Shape" stroke="#FFFFFF" stroke-width="0.3708"></path>
+                        <path d="M13.4,25.7 L36.1,33.1" id="Shape" stroke="#ff8574" stroke-width="1"></path>
                         <polygon id="Shape" fill="#FFFFFF" fill-rule="nonzero" points="14.1 27.5 14.4 27.3 13.6 25.7 15.2 25 15.1 24.6 13 25.6"></polygon>
-                        <path d="M36.1,0.6 L36.1,33.1" id="Shape" stroke="#FFFFFF" stroke-width="0.3708"></path>
+                        <path d="M36.1,0.6 L36.1,33.1" id="Shape" stroke="#ff8574" stroke-width="1"></path>
                         <polygon id="Shape" fill="#FFFFFF" fill-rule="nonzero" points="34.6 1.8 34.9 2.1 36.1 0.8 37.4 2.1 37.7 1.8 36.1 0.2"></polygon>
-                        <path d="M36.1,53.1 L0.7,62.9" id="Shape" stroke="#FFFFFF" stroke-width="0.3708"></path>
+                        <path d="M36.1,53.1 L0.7,62.9" id="Shape" stroke="1" stroke-width="1"></path>
+                      </g>
+                      <g v-if="knobs[3].value === 'oscsDetune'" id="modenv-pitch-oscs" transform="translate(61.000000, 20.000000)">
+                        <text id="PITCH" fill="#FFFFFF" font-family="Helvetica" font-size="6.1028" font-weight="normal">
+                            <tspan x="26.7656" y="45.3967">PITCH</tspan>
+                        </text>
+                        <rect id="Rectangle-path" stroke="#FFFFFF" stroke-width="0.3708" x="13" y="33.1" width="46.2" height="19.9"></rect>
+                        <path d="M13.4,25.7 L36.1,33.1" id="Shape" stroke="#FFFFFF" stroke-width="1"></path>
+                        <polygon id="Shape" fill="#FFFFFF" fill-rule="nonzero" points="14.1 27.5 14.4 27.3 13.6 25.7 15.2 25 15.1 24.6 13 25.6"></polygon>
+                        <path d="M36.1,0.6 L36.1,33.1" id="Shape" stroke="#FFFFFF" stroke-width="1"></path>
+                        <polygon id="Shape" fill="#FFFFFF" fill-rule="nonzero" points="34.6 1.8 34.9 2.1 36.1 0.8 37.4 2.1 37.7 1.8 36.1 0.2"></polygon>
+                        <path d="M36.1,53.1 L0.7,62.9" id="Shape" stroke="#FFFFFF" stroke-width="1"></path>
                       </g>
                       <g v-if="knobs[1].value === 'osc1Detune'" id="modenv-pitch-osc1" transform="translate(61.000000, 20.000000)">
                         <text id="PITCH" fill="#FFFFFF" font-family="Helvetica" font-size="6.1028" font-weight="normal">
                             <tspan x="26.7656" y="45.3967">PITCH</tspan>
                         </text>
                         <rect id="Rectangle-path" stroke="#FFFFFF" stroke-width="0.3708" x="13" y="33.1" width="46.2" height="19.9"></rect>
-                        <path d="M36.1,0.6 L36.1,33.1" id="Shape" stroke="#FFFFFF" stroke-width="0.3708"></path>
+                        <path d="M36.1,0.6 L36.1,33.1" id="Shape" stroke="#ff8574" stroke-width="1"></path>
                         <polygon id="Shape" fill="#FFFFFF" fill-rule="nonzero" points="34.6 1.8 34.9 2.1 36.1 0.8 37.4 2.1 37.7 1.8 36.1 0.2"></polygon>
-                        <path d="M36.1,53.1 L0.7,62.9" id="Shape" stroke="#FFFFFF" stroke-width="0.3708"></path>
+                        <path d="M36.1,53.1 L0.7,62.9" id="Shape" stroke="#ff8574" stroke-width="1"></path>
+                      </g>
+                      <g v-if="knobs[3].value === 'osc1Detune'" id="modenv-pitch-osc1" transform="translate(61.000000, 20.000000)">
+                        <text id="PITCH" fill="#FFFFFF" font-family="Helvetica" font-size="6.1028" font-weight="normal">
+                            <tspan x="26.7656" y="45.3967">PITCH</tspan>
+                        </text>
+                        <rect id="Rectangle-path" stroke="#FFFFFF" stroke-width="0.3708" x="13" y="33.1" width="46.2" height="19.9"></rect>
+                        <path d="M36.1,0.6 L36.1,33.1" id="Shape" stroke="#FFFFFF" stroke-width="1"></path>
+                        <polygon id="Shape" fill="#FFFFFF" fill-rule="nonzero" points="34.6 1.8 34.9 2.1 36.1 0.8 37.4 2.1 37.7 1.8 36.1 0.2"></polygon>
+                        <path d="M36.1,53.1 L0.7,62.9" id="Shape" stroke="#FFFFFF" stroke-width="1"></path>
                       </g>
                       <g v-if="knobs[1].value === 'filterCutoff'" id="modenv-cutoff-filter" transform="translate(61.000000, 30.000000)">
                         <text id="CUTOFF" fill="#FFFFFF" font-family="Helvetica" font-size="6.1028" font-weight="normal">
@@ -170,10 +236,21 @@
                         </text>
                         <rect id="Rectangle-path" stroke="#FFFFFF" stroke-width="0.3708" x="13" y="23.1" width="46.2" height="19.9"></rect>
                         <g id="Group-2" transform="translate(60.575375, 13.695024) rotate(65.000000) translate(-60.575375, -13.695024) translate(58.575375, -13.304976)">
-                            <path d="M1.95845838,1.238453 L0.173919146,53.207823" id="Shape" stroke="#FFFFFF" stroke-width="0.3708"></path>
+                            <path d="M1.95845838,1.238453 L0.173919146,53.207823" id="Shape" stroke="#ff8574" stroke-width="1"></path>
                             <polygon id="Shape" fill="#FFFFFF" fill-rule="nonzero" points="0.458458377 2.438453 0.758458377 2.738453 1.95845838 1.438453 3.25845838 2.738453 3.55845838 2.438453 1.95845838 0.838453002"></polygon>
                         </g>
-                        <path d="M36.1,43.1 L0.7,52.9" id="Shape" stroke="#FFFFFF" stroke-width="0.3708"></path>
+                        <path d="M36.1,43.1 L0.7,52.9" id="Shape" stroke="#ff8574" stroke-width="1"></path>
+                      </g>
+                      <g v-if="knobs[3].value === 'filterCutoff'" id="modenv-cutoff-filter" transform="translate(61.000000, 30.000000)">
+                        <text id="CUTOFF" fill="#FFFFFF" font-family="Helvetica" font-size="6.1028" font-weight="normal">
+                            <tspan x="23.6009645" y="35.3967">CUTOFF</tspan>
+                        </text>
+                        <rect id="Rectangle-path" stroke="#FFFFFF" stroke-width="0.3708" x="13" y="23.1" width="46.2" height="19.9"></rect>
+                        <g id="Group-2" transform="translate(60.575375, 13.695024) rotate(65.000000) translate(-60.575375, -13.695024) translate(58.575375, -13.304976)">
+                            <path d="M1.95845838,1.238453 L0.173919146,53.207823" id="Shape" stroke="#fff" stroke-width="1"></path>
+                            <polygon id="Shape" fill="#FFFFFF" fill-rule="nonzero" points="0.458458377 2.438453 0.758458377 2.738453 1.95845838 1.438453 3.25845838 2.738453 3.55845838 2.438453 1.95845838 0.838453002"></polygon>
+                        </g>
+                        <path d="M36.1,43.1 L0.7,52.9" id="Shape" stroke="#fff" stroke-width="1"></path>
                       </g>
                       <!-- <path d="M85.1,73.1 L49.7,82.9" id="Shape" stroke="#FFFFFF" stroke-width="0.3708"></path> -->
                       <g id="Group" transform="translate(62.000000, 44.000000)"></g>
@@ -460,9 +537,9 @@ export default {
         const hv = (yAxisMiddle / 2) * (volume.value / (volume.max - volume.min))
 
         const octaveRatio = (octave.value / (octave.max - octave.min))
-        const detuneRatio = ((detune.value / detune.max) * 1000) / (octave.max - octave.min)
+        const detuneRatio = (detune.value - 50) /20
 
-        const iteration = 5.5 * h - h * (4.5 * octaveRatio) + (h * 0.3 * (1 - detuneRatio)) + 4.5
+        const iteration = 475 / Math.round(octave.value / 523 * 40) + (detuneRatio)
 
         let wave
         // square:
@@ -715,9 +792,9 @@ export default {
         const hv = (yAxisMiddle / 2) * (volume.value / (volume.max - volume.min))
 
         const octaveRatio = (octave.value / (octave.max - octave.min))
-        const detuneRatio = ((detune.value / detune.max) * 1000) / (octave.max - octave.min)
+        const detuneRatio = (detune.value - 50) /20
 
-        const iteration = 5.5 * h - h * (4.5 * octaveRatio) + (h * 0.3 * (1 - detuneRatio)) + 4.5
+        const iteration = 475 / Math.round(octave.value / 523 * 40) + (detuneRatio)
 
         let wave
         // square:

@@ -1,7 +1,7 @@
 export default {
   envelope: {
-    attack: val => val / 100 + 0.01,
-    decay: val => Math.pow(val, (val / 100)) - 0.95,
+    attack: val => val / 100 + 0.001,
+    decay: val => Math.pow(val, (val / 100)) - 0.999,
     sustain: val => val / 100,
     release: val => val
   },
@@ -25,7 +25,7 @@ export default {
   oscillator1: {
     frequency: val => val,
     typeOsc: val => val,
-    detune: val => (val * 2) - 120,
+    detune: val => (val * 8) - 400,
     // phase: val => val
   },
   oscillator2: {

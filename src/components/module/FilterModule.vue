@@ -1,7 +1,7 @@
 <template>
   <div class="module">
     <module-title :indicator-active="dialsAreWithinMargin" :module-color="moduleColor">
-      <h2 slot="title">Tats</h2>
+      <!-- <h2 slot="title">Tats</h2> -->
       <h3 v-if="dialsAreWithinMargin" slot="subtitle">Done!</h3>
       <h3 v-else slot="subtitle">Filter</h3>
     </module-title>
@@ -105,17 +105,11 @@ export default {
         .every(param => param)
     },
     ...vuexSyncGen('filter', 'cutOffFreq', val => {
-      // console.log('self.$store.state.audioParameters.router.lfo',self.$store.state.audioParameters.router.lfo); //working
       if (self.$store.state.audioParameters.router.envelope2 === 'filterCutoff') {
-        // console.log('self.$store.state.audioParameters.router.envelope2 === filterCutoff triggered in filtermodule.vue');
         audio.envelope2.state.device.max = character.filter.cutOffFreq(val)
       } else if (self.$store.state.audioParameters.router.lfo === 'filterCutoff') {
-        // console.log('self.$store.state.audioParameters.router.lfo === filterCutoff in filtermodule cutoff change');
-        // console.log('self.$store.state.audioParameters.router.envelope2 === filterCutoff triggered in filtermodule.vue');
         audio.lfo.state.device.max = character.filter.cutOffFreq(val) * (1 + self.$store.state.audioParameters.lfo.amount/100);
         audio.lfo.state.device.min = character.filter.cutOffFreq(val) - (character.filter.cutOffFreq(val) * self.$store.state.audioParameters.lfo.amount/100) ;
-        // console.log('audio.lfo.state.device.max',audio.lfo.state.device.max);
-        // console.log('audio.lfo.state.device.min',audio.lfo.state.device.min);
       } else {
         self.filter.frequency.value = character.filter.cutOffFreq(val);
       }

@@ -111,7 +111,7 @@ export default {
   name: 'gameNavBar',
   data: function () {
     return {
-      timeLeftSeconds: 30,
+      timeLeftSeconds: 45,
       timer: null,
       indicatorActive: true,
       exportPresetName: '',
@@ -173,7 +173,7 @@ export default {
   },
   methods: {
     startTimer () {
-      this.timeLeftSeconds = 30
+      this.timeLeftSeconds = 59
       this.timer = this.timer || window.setInterval(() => {
         if (this.timeLeftSeconds === 0) return this.timeIsUp()
         this.timeLeftSeconds--

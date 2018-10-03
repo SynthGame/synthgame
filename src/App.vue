@@ -356,6 +356,7 @@ export default {
       this.$nextTick(() => this.svooshIt = true)
       this.displayPreviewOverlay = false
       audio.playSweep()
+      this.endPreview()
     },
     endSvoosh () {
       setTimeout(() => {
@@ -363,7 +364,7 @@ export default {
         this.svooshIt = false
         this.$store.commit('armSweep')
       }, 300)
-      this.endPreview()
+      // this.endPreview()
     },
     beginSuccessSvoosh () {
       this.isThereSuccessSvooshComponent = true
@@ -380,6 +381,7 @@ export default {
     endPreview () {
       this.$store.commit('startTimerIsRunning')
       this.$store.dispatch('setSynthToDefaultParameters', audio)
+      audio.playKick()
     },
     startNextLevel (level) {
       this.$store.commit('increaseLevelValue', 1)

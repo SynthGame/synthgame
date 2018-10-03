@@ -1,7 +1,7 @@
 <template>
   <div class="module">
     <module-title :indicator-active="dialsAreWithinMargin" :module-color="moduleColor">
-      <h2 slot="title">Tats</h2>
+      <!-- <h2 slot="title">Tats</h2> -->
       <h3 v-if="dialsAreWithinMargin" slot="subtitle">Done!</h3>
       <h3 v-else slot="subtitle">Mod Router</h3>
     </module-title>
@@ -11,8 +11,8 @@
       fill="#000"
       :knobs="[{name: 'Lfo', min: 0, max: 100, value: lfo},
               {name: 'Envelope2', min: 0, max: 100, value: envelope2},
-              {name: 'Volume', min: 0, max: 1, value: 0},
-              {name: 'Waveform', min: 0, max:3, value: 0},
+              {name: 'LfoGoal', min: 0, max: 100, value: lfoGoal},
+              {name: 'Envelope2Goal', min: 0, max:100, value: envelope2Goal},
               {name: 'OctaveGoal', min: 0, max: 100, value: 0},
               {name: 'DetuneGoal', min: -120, max: 120, value: 0},
               {name: 'VolumeGoal', min: 0, max: 1, value: 0},
