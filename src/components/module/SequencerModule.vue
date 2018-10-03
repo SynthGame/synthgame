@@ -364,7 +364,8 @@ export default {
 $main-seq-color: #F40056;
 
 .sequencer {
-   width: 83.33%;
+   width: 83.36%;
+   max-width: 83.36%;
    height: 50%;
    display: flex;
    justify-content: space-between;

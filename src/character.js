@@ -9,7 +9,8 @@ export default {
     attack: val => val / 100 + 0.01,
     decay: val => Math.pow(val, (val / 100)) - 0.95,
     sustain: val => val / 100,
-    release: val => val
+    release: val => val,
+    amount: val => Math.pow((val * 200), (val / 100)) + 20,
   },
   filter: {
     cutOffFreq: val => Math.pow((val * 200), (val / 100)) + 20,

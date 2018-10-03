@@ -13,9 +13,10 @@ export default [
     "envelope2": {
       "assign": "filtercutoff",
       "attack": 0,
-      "decay": 100,
+      // "decay": 100,
       "release": 10,
-      "sustain": 37
+      "amount": 100,
+      // "sustain": 37
     },
     "filter": {
       "cutOffFreq": 86,
@@ -117,9 +118,10 @@ export default [
     "envelope2": {
       "assign": "filtercutoff",
       "attack": 0,
-      "decay": 15,
+      // "decay": 15,
       "release": 10,
-      "sustain": 37
+      "amount": 100,
+      // "sustain": 37
     },
     "filter": {
       "cutOffFreq": 82,
@@ -216,128 +218,129 @@ export default [
     "selected": false
   }]
 },
-{
-  "avatarUrl": "https://i1.sndcdn.com/avatars-000086505759-0hpuas-t500x500.jpg",
-  "bpm": 107,
-  "name": "holbachmusic",
-  "parameterValues": {
-    "envelope": {
-      "attack": 0,
-      "decay": 25,
-      "release": 90,
-      "sustain": 100
-    },
-    "envelope2": {
-      "assign": "filtercutoff",
-      "attack": 0,
-      "decay": 83,
-      "release": 90,
-      "sustain": 100
-    },
-    "filter": {
-      "cutOffFreq": 76,
-      "setQ": 0,
-      "type": "lowpass"
-    },
-    "lfo": {
-      "amount": 37,
-      "frequency": 15,
-      "type": "sawtooth"
-    },
-    "oscillator1": {
-      "detune": 50,
-      "frequency": "131",
-      "typeOsc": "sawtooth"
-    },
-    "oscillator2": {
-      "frequency": "65",
-      "typeOsc": "square",
-      "volume": 65
-    },
-    "router": {
-      "envelope2": "oscsDetune",
-      "lfo": "filterCutoff"
-    }
-  },
-  "sequenceArray": [{
-    "clap2": true,
-    "kick": false,
-    "pitch": 0,
-    "selected": true
-  }, {
-    "clap2": false,
-    "kick": true,
-    "pitch": 0,
-    "selected": false
-  }, {
-    "hat": false,
-    "kick": false,
-    "pitch": 2,
-    "selected": true
-  }, {
-    "hat": true,
-    "pitch": 0,
-    "selected": false
-  }, {
-    "clap2": false,
-    "hat": false,
-    "kick": false,
-    "pitch": 5,
-    "selected": true
-  }, {
-    "clap2": false,
-    "kick": true,
-    "pitch": 0,
-    "selected": false
-  }, {
-    "clap2": false,
-    "kick": false,
-    "pitch": 9,
-    "selected": true
-  }, {
-    "clap2": true,
-    "hat": true,
-    "pitch": 0,
-    "selected": false
-  }, {
-    "hat": false,
-    "pitch": 0,
-    "selected": false
-  }, {
-    "clap2": false,
-    "hat": false,
-    "kick": true,
-    "pitch": 0,
-    "selected": false
-  }, {
-    "pitch": 0,
-    "selected": false
-  }, {
-    "hat": true,
-    "labmyc": false,
-    "pitch": 0,
-    "selected": false
-  }, {
-    "labmyc": true,
-    "pitch": 2,
-    "selected": true
-  }, {
-    "clap2": false,
-    "pitch": 0,
-    "selected": false
-  }, {
-    "clap2": false,
-    "hat": true,
-    "labmyc": false,
-    "pitch": 0,
-    "selected": false
-  }, {
-    "hat": true,
-    "noise": true,
-    "pitch": 0,
-    "selected": false
-  }]
-},
+// {
+//   "avatarUrl": "https://i1.sndcdn.com/avatars-000086505759-0hpuas-t500x500.jpg",
+//   "bpm": 107,
+//   "name": "holbachmusic",
+//   "parameterValues": {
+//     "envelope": {
+//       "attack": 0,
+//       "decay": 25,
+//       "release": 90,
+//       "sustain": 100
+//     },
+//     "envelope2": {
+//       "assign": "filtercutoff",
+//       "attack": 0,
+//       // "decay": 83,
+//       "release": 90,
+//       "amount": 100,
+//       // "sustain": 100
+//     },
+//     "filter": {
+//       "cutOffFreq": 76,
+//       "setQ": 0,
+//       "type": "lowpass"
+//     },
+//     "lfo": {
+//       "amount": 37,
+//       "frequency": 15,
+//       "type": "sawtooth"
+//     },
+//     "oscillator1": {
+//       "detune": 50,
+//       "frequency": "131",
+//       "typeOsc": "sawtooth"
+//     },
+//     "oscillator2": {
+//       "frequency": "65",
+//       "typeOsc": "square",
+//       "volume": 65
+//     },
+//     "router": {
+//       "envelope2": "oscsDetune",
+//       "lfo": "filterCutoff"
+//     }
+//   },
+//   "sequenceArray": [{
+//     "clap2": true,
+//     "kick": false,
+//     "pitch": 0,
+//     "selected": true
+//   }, {
+//     "clap2": false,
+//     "kick": true,
+//     "pitch": 0,
+//     "selected": false
+//   }, {
+//     "hat": false,
+//     "kick": false,
+//     "pitch": 2,
+//     "selected": true
+//   }, {
+//     "hat": true,
+//     "pitch": 0,
+//     "selected": false
+//   }, {
+//     "clap2": false,
+//     "hat": false,
+//     "kick": false,
+//     "pitch": 5,
+//     "selected": true
+//   }, {
+//     "clap2": false,
+//     "kick": true,
+//     "pitch": 0,
+//     "selected": false
+//   }, {
+//     "clap2": false,
+//     "kick": false,
+//     "pitch": 9,
+//     "selected": true
+//   }, {
+//     "clap2": true,
+//     "hat": true,
+//     "pitch": 0,
+//     "selected": false
+//   }, {
+//     "hat": false,
+//     "pitch": 0,
+//     "selected": false
+//   }, {
+//     "clap2": false,
+//     "hat": false,
+//     "kick": true,
+//     "pitch": 0,
+//     "selected": false
+//   }, {
+//     "pitch": 0,
+//     "selected": false
+//   }, {
+//     "hat": true,
+//     "labmyc": false,
+//     "pitch": 0,
+//     "selected": false
+//   }, {
+//     "labmyc": true,
+//     "pitch": 2,
+//     "selected": true
+//   }, {
+//     "clap2": false,
+//     "pitch": 0,
+//     "selected": false
+//   }, {
+//     "clap2": false,
+//     "hat": true,
+//     "labmyc": false,
+//     "pitch": 0,
+//     "selected": false
+//   }, {
+//     "hat": true,
+//     "noise": true,
+//     "pitch": 0,
+//     "selected": false
+//   }]
+// },
 {
   "bpm": 125,
   "name": "hathor-libra",
@@ -352,9 +355,10 @@ export default [
     "envelope2": {
       "assign": "filtercutoff",
       "attack": 15,
-      "decay": 100,
+      // "decay": 100,
       "release": 90,
-      "sustain": 100
+      "amount": 100,
+      // "sustain": 100
     },
     "filter": {
       "cutOffFreq": 59,
@@ -363,7 +367,7 @@ export default [
     },
     "lfo": {
       "amount": 0,
-      "frequency": 1,
+      "frequency": 5,
       "type": "sine"
     },
     "oscillator1": {
@@ -470,9 +474,10 @@ export default [
     "envelope2": {
       "assign": "filtercutoff",
       "attack": 38,
-      "decay": 25,
+      // "decay": 25,
       "release": 90,
-      "sustain": 33
+      "amount": 100,
+      // "sustain": 33
     },
     "filter": {
       "cutOffFreq": 82,
@@ -481,7 +486,7 @@ export default [
     },
     "lfo": {
       "amount": 3,
-      "frequency": 1,
+      "frequency": 5,
       "type": "triangle"
     },
     "oscillator1": {
@@ -566,111 +571,112 @@ export default [
     "selected": false
   }]
 },
-{
-  "avatarUrl": "https://i1.sndcdn.com/avatars-000272676277-fslgk8-t500x500.jpg",
-  "bpm": 80,
-  "name": "eery",
-  "parameterValues": {
-    "envelope": {
-      "attack": 11,
-      "decay": 25,
-      "release": 90,
-      "sustain": 51
-    },
-    "envelope2": {
-      "assign": "filtercutoff",
-      "attack": 43,
-      "decay": 100,
-      "release": 90,
-      "sustain": 100
-    },
-    "filter": {
-      "cutOffFreq": 45,
-      "setQ": 0,
-      "type": "lowpass"
-    },
-    "lfo": {
-      "amount": 95,
-      "frequency": 31,
-      "type": "sine"
-    },
-    "oscillator1": {
-      "detune": 49,
-      "frequency": "262",
-      "typeOsc": "sawtooth"
-    },
-    "oscillator2": {
-      "frequency": "131",
-      "typeOsc": "sawtooth",
-      "volume": 68
-    },
-    "router": {
-      "envelope2": "osc1Detune",
-      "lfo": "filterCutoff"
-    }
-  },
-  "sequenceArray": [{
-    "cymbal": false,
-    "kick": true,
-    "pitch": 0,
-    "selected": true
-  }, {
-    "pitch": 0,
-    "selected": false
-  }, {
-    "pitch": 0,
-    "selected": false
-  }, {
-    "hat": true,
-    "pitch": 0,
-    "selected": false
-  }, {
-    "pitch": 0,
-    "selected": false,
-    "snare": true
-  }, {
-    "pitch": 0,
-    "selected": false
-  }, {
-    "cymbal": true,
-    "kick": true,
-    "pitch": 0,
-    "selected": true
-  }, {
-    "hat": true,
-    "pitch": 0,
-    "selected": false
-  }, {
-    "labmyc": false,
-    "pitch": 4,
-    "selected": false
-  }, {
-    "pitch": 0,
-    "selected": false
-  }, {
-    "pitch": 0,
-    "selected": false
-  }, {
-    "hat": true,
-    "kick": true,
-    "pitch": 0,
-    "selected": false
-  }, {
-    "labmyc": true,
-    "pitch": 0,
-    "selected": false,
-    "snare": true
-  }, {
-    "pitch": 0,
-    "selected": false
-  }, {
-    "noise": true,
-    "pitch": 10,
-    "selected": true
-  }, {
-    "hat": true,
-    "pitch": 0,
-    "selected": false
-  }]
-}
+// {
+//   "avatarUrl": "https://i1.sndcdn.com/avatars-000272676277-fslgk8-t500x500.jpg",
+//   "bpm": 80,
+//   "name": "eery",
+//   "parameterValues": {
+//     "envelope": {
+//       "attack": 11,
+//       // "decay": 25,
+//       "release": 90,
+//       // "sustain": 51
+//     },
+//     "envelope2": {
+//       "assign": "filtercutoff",
+//       "attack": 43,
+//       // "decay": 100,
+//       "release": 90,
+//       // "sustain": 100
+//       "amount": 100,
+//     },
+//     "filter": {
+//       "cutOffFreq": 45,
+//       "setQ": 0,
+//       "type": "lowpass"
+//     },
+//     "lfo": {
+//       "amount": 95,
+//       "frequency": 31,
+//       "type": "sine"
+//     },
+//     "oscillator1": {
+//       "detune": 49,
+//       "frequency": "262",
+//       "typeOsc": "sawtooth"
+//     },
+//     "oscillator2": {
+//       "frequency": "131",
+//       "typeOsc": "sawtooth",
+//       "volume": 68
+//     },
+//     "router": {
+//       "envelope2": "osc1Detune",
+//       "lfo": "filterCutoff"
+//     }
+//   },
+//   "sequenceArray": [{
+//     "cymbal": false,
+//     "kick": true,
+//     "pitch": 0,
+//     "selected": true
+//   }, {
+//     "pitch": 0,
+//     "selected": false
+//   }, {
+//     "pitch": 0,
+//     "selected": false
+//   }, {
+//     "hat": true,
+//     "pitch": 0,
+//     "selected": false
+//   }, {
+//     "pitch": 0,
+//     "selected": false,
+//     "snare": true
+//   }, {
+//     "pitch": 0,
+//     "selected": false
+//   }, {
+//     "cymbal": true,
+//     "kick": true,
+//     "pitch": 0,
+//     "selected": true
+//   }, {
+//     "hat": true,
+//     "pitch": 0,
+//     "selected": false
+//   }, {
+//     "labmyc": false,
+//     "pitch": 4,
+//     "selected": false
+//   }, {
+//     "pitch": 0,
+//     "selected": false
+//   }, {
+//     "pitch": 0,
+//     "selected": false
+//   }, {
+//     "hat": true,
+//     "kick": true,
+//     "pitch": 0,
+//     "selected": false
+//   }, {
+//     "labmyc": true,
+//     "pitch": 0,
+//     "selected": false,
+//     "snare": true
+//   }, {
+//     "pitch": 0,
+//     "selected": false
+//   }, {
+//     "noise": true,
+//     "pitch": 10,
+//     "selected": true
+//   }, {
+//     "hat": true,
+//     "pitch": 0,
+//     "selected": false
+//   }]
+// }
 ]

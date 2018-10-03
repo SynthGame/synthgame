@@ -15,7 +15,9 @@
                 {name: 'attackGoal', min: 1, max: 100, value: this.attackGoal},
                 {name: 'decayGoal', min: 1, max: 100, value: this.decayGoal},
                 {name: 'sustainGoal', min: 1, max: 100, value: this.sustainGoal},
-                {name: 'releasevGoal', min: 1, max: 100, value: this.releaseGoal}
+                {name: 'releasevGoal', min: 1, max: 100, value: this.releaseGoal},
+                {name: 'amount', min: 1, max: 100, value: 100},
+                {name: 'amountGoal', min: 1, max: 100, value: 100},
                 ]"/>
     <div class="knobs">
       <module-knob

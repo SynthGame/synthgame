@@ -458,14 +458,15 @@ export default {
         const decay = this.knobs[1]
         const sustain = this.knobs[2]
         const release = this.knobs[3]
+        const amount = this.knobs[8]
 
         const attackXPosition = (attack.value / attack.max) * fourthOfWidth
-        const attackYPosition = this.displayHeight * 0.75
+        const attackYPosition = this.displayHeight * 0.75 * (amount.value/100)
         const decayXPosition = (decay.value / decay.max) * fourthOfWidth
 
         // the vertical decay position shall include a fix stopping it
         // from going all the way down (5% height) to perserve release indication:
-        const decayYPosition = (1 - (sustain.value / sustain.max)) * (attackYPosition) - (1 - (sustain.value / sustain.max)) * (attackYPosition) * 0.05
+        const decayYPosition = (1 - (sustain.value / sustain.max)) * (attackYPosition * (amount.value/100)) - (1 - ((sustain.value / sustain.max))) * (attackYPosition * (amount.value/100)) * 0.05
         // no sustain, as it basically a horizontal line
         // release is known and shall be market with absolute position
 

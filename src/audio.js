@@ -128,7 +128,7 @@ export default {
   connectLfo (destination) {
     log(`Connecting lfo to ${destination}`);
     // disconnect outputs?
-    console.log('destination in connectlfo audio.js', destination);
+    // console.log('destination in connectlfo audio.js', destination);
     if (destination === 'oscsDetune') {
       this.lfo.state.device.disconnect()
       this.lfo.state.device.connect(this.oscillator1.state.device.detune)
@@ -149,9 +149,9 @@ export default {
       // this.lfo.state.device.min = 0
     } else if (destination === 'env1decay') {
       this.lfo.state.device.disconnect()
-      console.log(this.filter.state.device.frequency);
+      // console.log(this.filter.state.device.frequency);
       var decay = new Tone.Signal(this.envelope.state.device.decay, 'time');
-      console.log(decay);
+      // console.log(decay);
       this.lfo.state.device.connect(decay);
       // this.lfo.state.device.max = 1000
       // this.lfo.state.device.min = 0
@@ -160,28 +160,28 @@ export default {
   connectEnvelope2 (destination) {
     log(`Connecting Envelope2 to ${destination}`)
     // disconnect outputs?
-    console.log('destination in connectenvelope2 audio.js', destination);
+    // console.log('destination in connectenvelope2 audio.js', destination);
     if (destination === 'oscsDetune') {
       this.envelope2.state.device.disconnect()
       this.envelope2.state.device.connect(this.oscillator1.state.device.detune)
       this.envelope2.state.device.connect(this.oscillator2.state.device.detune)
-      this.envelope2.state.device.max = 1000
+      // this.envelope2.state.device.max = 1000
     } else if (destination === 'osc1Detune') {
       this.envelope2.state.device.disconnect()
       this.envelope2.state.device.connect(this.oscillator1.state.device.detune)
-      this.envelope2.state.device.max = 1000
+      // this.envelope2.state.device.max = 1000
     } else if (destination === 'filterCutoff') {
-      console.log('destination === filterCutoff for envelope2');
+      // console.log('destination === filterCutoff for envelope2');
       this.envelope2.state.device.disconnect()
       this.envelope2.state.device.connect(this.filter.state.device.frequency)
-      this.envelope2.state.device.max = 1000
+      // this.envelope2.state.device.max = 1000
       // this.envelope2.state.device.max = 20000
       // this.envelope2.state.device.exponent = 2
       // this.filter.state.device.connect(this.envelope.state.device);
     } else if (destination === 'lfoFrequency') {
       this.envelope2.state.device.disconnect()
       this.envelope2.state.device.connect(this.lfo.state.device.frequency)
-      this.envelope2.state.device.max = 10
+      // this.envelope2.state.device.max = 10
       // this.envelope2.state.device.max = 100
     }
   },

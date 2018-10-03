@@ -149,25 +149,16 @@ export default {
       }
     }),
     ...vuexSyncGen('router', 'envelope2', val => {
-      // console.log('self.$store.state.audioParameters.router.envelope2 = ',self.$store.state.audioParameters.router.envelope2);
-      // if (self.router.lfo === character.router.lfo(val)) return TODO check if this statement needs to be there?
       audio.connectEnvelope2(val)
-      if (val ==='filterCutoff') {
-        self.realEnvelope2.max = character.filter.cutOffFreq(self.$store.state.audioParameters.filter.cutOffFreq)
-        // console.log('self.realEnvelope2.max',self.realEnvelope2.max);
-        // console.log('self.$store.state.audioParameters.filter.cutOffFreq',self.$store.state.audioParameters.filter.cutOffFreq);
-
-      } else {
+      // if (val ==='filterCutoff') {
+      //   self.realEnvelope2.max = character.filter.cutOffFreq(self.$store.state.audioParameters.filter.cutOffFreq)
+      // } else {
         self.filter.frequency.value = character.filter.cutOffFreq(self.$store.state.audioParameters.filter.cutOffFreq);
-        // console.log('self.filter.cutOffFreq',self.filter.cutOffFreq);
-      }
+      // }
       if (val === 'filterCutoff' && self.lfo === 'filterCutoff') {
         self.lfo = 'oscsDetune'
       }
     }),
-    // ...vuexSyncGen('oscillator1', 'detune', val => {
-    //   self.oscillator1.detune.value = character.oscillator1.detune(val)
-    // }),
     ...mapState({
       lfoGoal: state => state.gameState.goal.router.lfo,
       envelope2Goal: state => state.gameState.goal.router.envelope2,

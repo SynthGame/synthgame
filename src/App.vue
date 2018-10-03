@@ -489,7 +489,9 @@ export default {
 
 .module {
   background: black;
-  width: 16.67em;
+  // width: 16.7vw;
+  width: 31.4vh;
+  max-width: 16.7vw;
   height: 50%;
   margin: 0;
   margin-right: -.5px;
@@ -524,8 +526,10 @@ export default {
       margin: auto;
     }
     button {
-      width: 3em;
-      height: 3em;
+      // width: 3em;
+      // height: 3em;
+      width: 4vh;
+      height: 4vh;
       margin: auto;
       background: unset;
       border: none;
@@ -555,8 +559,10 @@ export default {
       flex-wrap: wrap;
       justify-content: center;
       button {
-        width:2.5em;
-        height: 2.5em;
+        // width:2.5em;
+        // height: 2.5em;
+        width: 4vh;
+        height: 4vh;
       }
       svg{
         width: 1em;
@@ -650,7 +656,7 @@ body {
 #app {
   font-family: 'Montserrat', sans-serif;
   font-weight: 300;
-  font-size: 1vw;
+  font-size: 1.8vh;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
@@ -871,6 +877,7 @@ body {
   }
   .module {
     width: 100vw;
+    max-width: 100vw;
     height: 82vh;
     position: absolute !important;
     left:0 !important;

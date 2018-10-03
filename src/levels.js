@@ -396,79 +396,79 @@ export default [
       text: 'You unlocked the Modulation Envelope!'
     }
   },
-  // level 17
-  {
-    oscillator1: {
-      detune: true,
-      frequency: true,
-      typeOsc: true
-    },
-    oscillator2: {
-      typeOsc: true,
-      frequency: true,
-      volume: true
-    },
-    filter: {
-      type: true,
-      cutOffFreq: true
-    },
-    envelope: {
-      attack: true,
-      decay: true,
-      sustain: true,
-      release: true
-    },
-    envelope2: {
-      attack: true,
-      decay: true,
-    },
-    lfo: {
-      amount: true,
-      frequency: true,
-      type: true
-    },
-    router: {},
-    levelData: {
-      text: 'Like LFO, we use this module to modulate a different synth control.'
-    }
-  },
-  // level 18
-  {
-    oscillator1: {
-      detune: true,
-      frequency: true,
-      typeOsc: true
-    },
-    oscillator2: {
-      typeOsc: true,
-      frequency: true,
-      volume: true
-    },
-    filter: {
-      type: true,
-      cutOffFreq: true
-    },
-    envelope: {
-      attack: true,
-      decay: true,
-      sustain: true,
-      release: true
-    },
-    envelope2: {
-      attack: true,
-      decay: true,
-      sustain: true
-    },
-    lfo: {
-      amount: true,
-      frequency: true,
-      type: true
-    },
-    router: {},
-    levelData: {
-      text: 'With both an lfo and an mod envelope the world is your oyster.'
-    }
-  },
+  // // level 17
+  // {
+  //   oscillator1: {
+  //     detune: true,
+  //     frequency: true,
+  //     typeOsc: true
+  //   },
+  //   oscillator2: {
+  //     typeOsc: true,
+  //     frequency: true,
+  //     volume: true
+  //   },
+  //   filter: {
+  //     type: true,
+  //     cutOffFreq: true
+  //   },
+  //   envelope: {
+  //     attack: true,
+  //     decay: true,
+  //     sustain: true,
+  //     release: true
+  //   },
+  //   envelope2: {
+  //     attack: true,
+  //     decay: true,
+  //   },
+  //   lfo: {
+  //     amount: true,
+  //     frequency: true,
+  //     type: true
+  //   },
+  //   router: {},
+  //   levelData: {
+  //     text: 'Like LFO, we use this module to modulate a different synth control.'
+  //   }
+  // },
+  // // level 18
+  // {
+  //   oscillator1: {
+  //     detune: true,
+  //     frequency: true,
+  //     typeOsc: true
+  //   },
+  //   oscillator2: {
+  //     typeOsc: true,
+  //     frequency: true,
+  //     volume: true
+  //   },
+  //   filter: {
+  //     type: true,
+  //     cutOffFreq: true
+  //   },
+  //   envelope: {
+  //     attack: true,
+  //     decay: true,
+  //     sustain: true,
+  //     release: true
+  //   },
+  //   envelope2: {
+  //     attack: true,
+  //     decay: true,
+  //     sustain: true
+  //   },
+  //   lfo: {
+  //     amount: true,
+  //     frequency: true,
+  //     type: true
+  //   },
+  //   router: {},
+  //   levelData: {
+  //     text: 'With both an lfo and an mod envelope the world is your oyster.'
+  //   }
+  // },
   // level 19
   {
     oscillator1: {
@@ -493,8 +493,6 @@ export default [
     },
     envelope2: {
       attack: true,
-      decay: true,
-      sustain: true,
       release: true
     },
     lfo: {
@@ -531,8 +529,6 @@ export default [
     },
     envelope2: {
       attack: true,
-      decay: true,
-      sustain: true,
       release: true
     },
     lfo: {
@@ -571,8 +567,6 @@ export default [
     },
     envelope2: {
       attack: true,
-      decay: true,
-      sustain: true,
       release: true
     },
     lfo: {

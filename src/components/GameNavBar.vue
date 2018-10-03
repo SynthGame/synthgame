@@ -66,7 +66,7 @@
       'animation': timeLeftSeconds < 11 ? '.5s infinite blink' : '',
       'color': timeLeftSeconds < 5 ? oscillatorColor : '',
     }" v-if="timerIsRunning === true && createModeIsActive === false" class="timer">{{paddedTimeLeftString}}</span>
-    <span v-if="createModeIsActive === false && timerIsRunning === false && timeLeftSeconds < 30">
+    <span v-if="createModeIsActive === false && timerIsRunning === false && timeLeftSeconds < 60">
       <button class="button-next"
               @click="requestNextLevel"
               ref="button"

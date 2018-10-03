@@ -46,10 +46,11 @@ export default new Vuex.Store({
       },
       envelope2: {
         attack: 0,
-        decay: 25,
-        sustain: 100,
+        // decay: 25,
+        // sustain: 100,
         release: 90,
-        assign: 'filtercutoff'
+        assign: 'filtercutoff',
+        amount: 100
       },
       lfo: {
         frequency: 10,
@@ -114,10 +115,11 @@ export default new Vuex.Store({
         },
         envelope2: {
           attack: 0,
-          decay: 25,
-          sustain: 100,
+          // decay: 25,
+          // sustain: 100,
           release: 90,
-          assign: 'filterCutoff'
+          assign: 'filterCutoff',
+          amount: 100
         },
         lfo: {
           frequency: 10,
@@ -178,10 +180,11 @@ export default new Vuex.Store({
         },
         envelope2: {
           attack: 0,
-          decay: 25,
-          sustain: 100,
+          // decay: 25,
+          // sustain: 100,
           release: 90,
-          assign: 'filtercutoff'
+          assign: 'filtercutoff',
+          amount: 100
         },
         lfo: {
           frequency: 10,
@@ -400,8 +403,9 @@ export default new Vuex.Store({
       synth.oscillator1.state.device.detune.value = character.oscillator1.detune(state.gameState.goal.oscillator1.detune)
       synth.oscillator2.state.device.frequency.value = character.oscillator2.frequency(state.gameState.goal.oscillator2.frequency)
       synth.oscillator2.state.device.type = character.oscillator2.typeOsc(state.gameState.goal.oscillator2.typeOsc)
-      // synth.oscillator2.state.device.detune.value = character.oscillator2.detune(state.gameState.goal.oscillator2.detune)
       synth.oscillator2.state.device.volume.value = character.oscillator2.volume(state.gameState.goal.oscillator2.volume)
+      synth.connectLfo(state.gameState.goal.router.lfo)
+      synth.connectEnvelope2(state.gameState.goal.envelope2)
     },
     setSynthToDefaultParameters ({state}, synth) {
       synth.envelope.state.device.attack = character.envelope.attack(state.audioParameters.envelope.attack)
@@ -423,8 +427,9 @@ export default new Vuex.Store({
       synth.oscillator1.state.device.detune.value = character.oscillator1.detune(state.audioParameters.oscillator1.detune)
       synth.oscillator2.state.device.frequency.value = character.oscillator2.frequency(state.audioParameters.oscillator2.frequency)
       synth.oscillator2.state.device.type = character.oscillator2.typeOsc(state.audioParameters.oscillator2.typeOsc)
-      // synth.oscillator2.state.device.detune.value = character.oscillator2.detune(state.audioParameters.oscillator2.detune)
       synth.oscillator2.state.device.volume.value = character.oscillator2.volume(state.audioParameters.oscillator2.volume)
+      synth.connectLfo(state.audioParameters.router.lfo)
+      synth.connectEnvelope2(state.audioParameters.router.envelope2)
     },
     exportPreset ({state}, data) {
       return addPreset({

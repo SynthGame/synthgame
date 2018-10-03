@@ -9,13 +9,15 @@
       fill="#4b1bff"
       module="envelope"
       :knobs="[{name: 'attack', min: 1, max: 100, value: this.attack},
-                {name: 'decay', min: 1, max: 100, value: this.decay},
-                {name: 'sustain', min: 1, max: 100, value: this.sustain},
+                {name: 'decay', min: 1, max: 100, value: 100},
+                {name: 'sustain', min: 1, max: 100, value: 100},
                 {name: 'release', min: 1, max: 100, value: this.release},
                 {name: 'attackGoal', min: 1, max: 100, value: this.attackGoal},
-                {name: 'decayGoal', min: 1, max: 100, value: this.decayGoal},
-                {name: 'sustainGoal', min: 1, max: 100, value: this.sustainGoal},
-                {name: 'releasevGoal', min: 1, max: 100, value: this.releaseGoal}
+                {name: 'decayGoal', min: 1, max: 100, value: 100},
+                {name: 'sustainGoal', min: 1, max: 100, value: 100},
+                {name: 'releasevGoal', min: 1, max: 100, value: this.releaseGoal},
+                {name: 'amount', min: 1, max: 100, value: this.amount},
+                {name: 'amountGoal', min: 1, max: 100, value: this.amountGoal},
                 ]"/>
     <div class="knobs">
       <module-knob
@@ -27,7 +29,7 @@
         name="Attack"
         module="envelope"
       ></module-knob>
-      <module-knob
+      <!-- <module-knob
         v-model="decay"
         v-if="knobsAvailable.decay || createModeIsActive"
         :min="0"
@@ -44,7 +46,7 @@
         knobColor="#4b1bff"
         name="Sustain"
         module="envelope"
-      ></module-knob>
+      ></module-knob> -->
       <module-knob
         v-model="release"
         v-if="knobsAvailable.release || createModeIsActive"
@@ -52,6 +54,15 @@
         :max="100"
         knobColor="#4b1bff"
         name="Release"
+        module="envelope"
+      ></module-knob>
+      <module-knob
+        v-model="amount"
+        v-if="knobsAvailable.amount || createModeIsActive"
+        :min="0"
+        :max="100"
+        knobColor="#4b1bff"
+        name="Amount"
         module="envelope"
       ></module-knob>
     </div>
@@ -130,6 +141,9 @@ export default {
     ...vuexSyncGen('envelope2', 'release', val => {
       self.envelope2.release = character.envelope2.release(val || 1)
     }),
+    ...vuexSyncGen('envelope2', 'amount', val => {
+      self.envelope2.max = character.envelope2.amount(val || 1)
+    }),
     // ...vuexSyncGen('envelope2', 'max', val => {
     //   // when filter updates, update env2 to TODO: only when connected to filter
     //   self.envelope2.max = this.$store.filter.cutOffFreq;
@@ -137,9 +151,10 @@ export default {
     // }),
     ...mapState({
       attackGoal: state => state.gameState.goal.envelope2.attack,
-      decayGoal: state => state.gameState.goal.envelope2.decay,
-      sustainGoal: state => state.gameState.goal.envelope2.sustain,
+      // decayGoal: state => state.gameState.goal.envelope2.decay,
+      // sustainGoal: state => state.gameState.goal.envelope2.sustain,
       releaseGoal: state => state.gameState.goal.envelope2.release,
+      amountGoal: state => state.gameState.goal.envelope2.amount,
       knobsAvailable: state => state.gameState.knobsAvailable.envelope2,
       createModeIsActive: state => state.gameState.createModeIsActive
     })
