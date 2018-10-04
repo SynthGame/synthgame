@@ -378,7 +378,7 @@ export default {
         this.successSvooshIt = false
         // Update note array with pickedpreset sequence
         this.noteArray = presets[this.pickedPreset].sequenceArray
-      }, 100)
+      }, 300)
     },
     endPreview () {
       this.$store.commit('startTimerIsRunning')

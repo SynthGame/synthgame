@@ -13,9 +13,9 @@
           'left':
           !createModeIsActive &&
           rackSlotArray[0] < 6 ?
-          rackSlotArray[0] * 16.67 + 'em'
+          rackSlotArray[0] * 16.67 + 'vw'
           : ( !createModeIsActive &&
-          rackSlotArray[0] > 5 ? rackSlotArray[0] * 16.67 - (6 * 16.67) + 'em': '')
+          rackSlotArray[0] > 5 ? rackSlotArray[0] * 16.67 - (6 * 16.67) + 'vw': '')
           ,
           }"
       />
@@ -30,9 +30,9 @@
           'left':
           !createModeIsActive &&
           rackSlotArray[1] < 6 ?
-          rackSlotArray[1] * 16.67 + 'em'
+          rackSlotArray[1] * 16.67 + 'vw'
           : ( !createModeIsActive &&
-          rackSlotArray[1] > 5 ? rackSlotArray[1] * 16.67 - (6 * 16.67) + 'em': '')
+          rackSlotArray[1] > 5 ? rackSlotArray[1] * 16.67 - (6 * 16.67) + 'vw': '')
           ,
           }"
       />
@@ -47,9 +47,9 @@
           'left':
           !createModeIsActive &&
           rackSlotArray[2] < 6 ?
-          rackSlotArray[2] * 16.67 + 'em'
+          rackSlotArray[2] * 16.67 + 'vw'
           : ( !createModeIsActive &&
-          rackSlotArray[2] > 5 ? rackSlotArray[2] * 16.67 - (6 * 16.67) + 'em': '')
+          rackSlotArray[2] > 5 ? rackSlotArray[2] * 16.67 - (6 * 16.67) + 'vw': '')
           ,
           }"
       />
@@ -64,9 +64,9 @@
           'left':
           !createModeIsActive &&
           rackSlotArray[3] < 6 ?
-          rackSlotArray[3] * 16.67 + 'em'
+          rackSlotArray[3] * 16.67 + 'vw'
           : ( !createModeIsActive &&
-          rackSlotArray[3] > 5 ? rackSlotArray[3] * 16.67 - (6 * 16.67) + 'em': '')
+          rackSlotArray[3] > 5 ? rackSlotArray[3] * 16.67 - (6 * 16.67) + 'vw': '')
           ,
           }"
       />
@@ -81,9 +81,9 @@
           'left':
           !createModeIsActive &&
           rackSlotArray[4] < 6 ?
-          rackSlotArray[4] * 16.67 + 'em'
+          rackSlotArray[4] * 16.67 + 'vw'
           : ( !createModeIsActive &&
-          rackSlotArray[4] > 5 ? rackSlotArray[4] * 16.67 - (6 * 16.67) + 'em': '')
+          rackSlotArray[4] > 5 ? rackSlotArray[4] * 16.67 - (6 * 16.67) + 'vw': '')
           ,
           }"
       />
@@ -98,9 +98,9 @@
           'left':
           !createModeIsActive &&
           rackSlotArray[5] < 6 ?
-          rackSlotArray[5] * 16.67 + 'em'
+          rackSlotArray[5] * 16.67 + 'vw'
           : ( !createModeIsActive &&
-          rackSlotArray[5] > 5 ? rackSlotArray[5] * 16.67 - (6 * 16.67) + 'em': '')
+          rackSlotArray[5] > 5 ? rackSlotArray[5] * 16.67 - (6 * 16.67) + 'vw': '')
           ,
           }"
       />
@@ -120,9 +120,9 @@
           'left':
           !createModeIsActive &&
           rackSlotArray[6] < 6 ?
-          rackSlotArray[6] * 16.67 + 'em'
+          rackSlotArray[6] * 16.67 + 'vw'
           : ( !createModeIsActive &&
-          rackSlotArray[6] > 5 ? rackSlotArray[6] * 16.67 - (6 * 16.67) + 'em': '')
+          rackSlotArray[6] > 5 ? rackSlotArray[6] * 16.67 - (6 * 16.67) + 'vw': '')
           ,
           }"
       />
