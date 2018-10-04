@@ -460,10 +460,10 @@ export default {
     position: relative;
     z-index: 2;
 
-    &:hover {
-      background: white;
-      color: black;
-    }
+    // &:hover {
+    //   background: white;
+    //   color: black;
+    // }
   }
 }
 
