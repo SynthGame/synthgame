@@ -12,7 +12,7 @@ export default [
     lfo: {},
     router: {},
     levelData: {
-      text: "Use the white guidelines to recreate this sound in 30 seconds."
+      text: "Use the white guidelines to recreate this sound in 60 seconds."
     }
   },
   // level 2

@@ -10,12 +10,12 @@
       module="envelope"
       :knobs="[{name: 'attack', min: 1, max: 100, value: this.attack},
                 {name: 'decay', min: 1, max: 100, value: this.decay},
-                {name: 'sustain', min: 1, max: 100, value: 0},
-                {name: 'release', min: 1, max: 100, value: 0},
+                {name: 'sustain', min: 1, max: 100, value: 1},
+                {name: 'release', min: 1, max: 100, value: 1},
                 {name: 'attackGoal', min: 1, max: 100, value: this.attackGoal},
                 {name: 'decayGoal', min: 1, max: 100, value: this.decayGoal},
-                {name: 'sustainGoal', min: 1, max: 100, value: 0},
-                {name: 'releasevGoal', min: 1, max: 100, value: 0},
+                {name: 'sustainGoal', min: 1, max: 100, value: 1},
+                {name: 'releasevGoal', min: 1, max: 100, value: 1},
                 {name: 'amount', min: 1, max: 100, value: this.amount},
                 {name: 'amountGoal', min: 1, max: 100, value: this.amountGoal},
                 ]"/>

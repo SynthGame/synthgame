@@ -682,6 +682,7 @@ export default [
 {
   "bpm": 116,
   "name": "summertryouts",
+  "avatarUrl": "https://i1.sndcdn.com/avatars-000500444838-gtohaq-t500x500.jpg",
   "parameterValues": {
     "envelope": {
       "attack": 59,
@@ -825,6 +826,7 @@ export default [
 {
   "bpm": 110,
   "name": "intricate-at-the-lab",
+  "avatarUrl": "https://i1.sndcdn.com/avatars-000001589241-eiigg3-t500x500.jpg",
   "parameterValues": {
     "envelope": {
       "attack": 14,
@@ -933,6 +935,136 @@ export default [
     "pitch": 0,
     "selected": false,
     "snare": true
+  }]
+},
+{
+  "bpm": 104,
+  "name": "user-347766802",
+  "avatarUrl": "https://i1.sndcdn.com/avatars-000197576750-fzoibs-t500x500.jpg",
+  "parameterValues": {
+    "envelope": {
+      "attack": 2,
+      "decay": 3,
+      "release": 0,
+      "sustain": 46
+    },
+    "envelope2": {
+      "assign": "filtercutoff",
+      "attack": 0,
+      "decay": 90,
+      "release": 90,
+      "sustain": 0,
+      "amount": 0
+    },
+    "filter": {
+      "cutOffFreq": 79,
+      "setQ": 0,
+      "type": "bandpass"
+    },
+    "lfo": {
+      "amount": 5,
+      "frequency": 100,
+      "type": "sawtooth"
+    },
+    "oscillator1": {
+      "detune": 49,
+      "frequency": "523",
+      "typeOsc": "sawtooth"
+    },
+    "oscillator2": {
+      "frequency": "523",
+      "typeOsc": "triangle",
+      "volume": 50
+    },
+    "router": {
+      "envelope2": "filterCutoff",
+      "lfo": "oscsDetune"
+    }
+  },
+  "sequenceArray": [{
+    "cymbal": true,
+    "hat": true,
+    "kick": true,
+    "noise": false,
+    "pitch": 2,
+    "selected": true,
+    "snare": false
+  }, {
+    "hat": true,
+    "pitch": 0,
+    "selected": false
+  }, {
+    "clap": true,
+    "hat": false,
+    "pitch": 4,
+    "selected": true,
+    "snare": true
+  }, {
+    "hat": true,
+    "pitch": 0,
+    "selected": false,
+    "snare": false
+  }, {
+    "hat": true,
+    "kick": true,
+    "pitch": 5,
+    "selected": true,
+    "snare": false
+  }, {
+    "hat": false,
+    "pitch": 0,
+    "selected": false,
+    "snare": true
+  }, {
+    "hat": true,
+    "pitch": 0,
+    "selected": false
+  }, {
+    "hat": true,
+    "pitch": 0,
+    "selected": false
+  }, {
+    "clap": true,
+    "hat": false,
+    "kick": true,
+    "noise": true,
+    "pitch": 5,
+    "selected": true,
+    "snare": true
+  }, {
+    "hat": true,
+    "pitch": 0,
+    "selected": false
+  }, {
+    "hat": true,
+    "pitch": 0,
+    "selected": false
+  }, {
+    "hat": true,
+    "pitch": 0,
+    "selected": false
+  }, {
+    "hat": true,
+    "kick": true,
+    "labmyc": true,
+    "noise": false,
+    "pitch": 7,
+    "selected": true,
+    "snare": false
+  }, {
+    "hat": false,
+    "pitch": 0,
+    "selected": false
+  }, {
+    "hat": false,
+    "kick": true,
+    "pitch": 0,
+    "selected": false
+  }, {
+    "hat": false,
+    "labmyc": false,
+    "pitch": 0,
+    "selected": false
   }]
 }
 ]
