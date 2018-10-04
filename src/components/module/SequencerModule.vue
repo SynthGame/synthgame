@@ -222,7 +222,7 @@ export default {
         if (this.noteArray[note].selected) {
           audio.playNote(this.noteArray[note].pitch, {
             // noteLength: ['16t', '8n', '4n', '2n', '1n'][this.noteArray[note].noteLength],
-            noteLength: '4n',
+            noteLength: '8n',
             volume: this.noteArray[note].volume,
             time: note
           })

@@ -46,9 +46,9 @@ export default new Vuex.Store({
       },
       envelope2: {
         attack: 0,
-        // decay: 25,
-        // sustain: 100,
-        release: 90,
+        decay: 90,
+        sustain: 0,
+        release: 0,
         assign: 'filtercutoff',
         amount: 100
       },
@@ -115,9 +115,9 @@ export default new Vuex.Store({
         },
         envelope2: {
           attack: 0,
-          // decay: 25,
-          // sustain: 100,
-          release: 90,
+          decay: 90,
+          sustain: 0,
+          release: 0,
           assign: 'filterCutoff',
           amount: 100
         },
@@ -180,9 +180,9 @@ export default new Vuex.Store({
         },
         envelope2: {
           attack: 0,
-          // decay: 25,
-          // sustain: 100,
-          release: 90,
+          decay: 90,
+          sustain: 0,
+          release: 0,
           assign: 'filtercutoff',
           amount: 100
         },

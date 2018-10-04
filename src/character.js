@@ -3,13 +3,13 @@ export default {
     attack: val => val / 100 + 0.001,
     decay: val => Math.pow(val, (val / 100)) - 0.999,
     sustain: val => val / 100,
-    release: val => val
+    release: val => Math.pow(val, (val / 100)) - 0.999,
   },
   envelope2: {
-    attack: val => val / 100 + 0.01,
-    decay: val => Math.pow(val, (val / 100)) - 0.95,
+    attack: val => val / 100 + 0.001,
+    decay: val => Math.pow(val, (val / 100)) - 0.999,
     sustain: val => val / 100,
-    release: val => val,
+    release: val => Math.pow(val, (val / 100)) - 0.999,
     amount: val => Math.pow((val * 200), (val / 100)) + 20,
   },
   filter: {
@@ -26,7 +26,7 @@ export default {
   oscillator1: {
     frequency: val => val,
     typeOsc: val => val,
-    detune: val => (val * 8) - 400,
+    detune: val => (val * 24) - 1200,
     // phase: val => val
   },
   oscillator2: {

@@ -13,10 +13,10 @@ export default [
     "envelope2": {
       "assign": "filtercutoff",
       "attack": 0,
-      // "decay": 100,
+      "decay": 10,
       "release": 10,
       "amount": 100,
-      // "sustain": 37
+      "sustain": 0
     },
     "filter": {
       "cutOffFreq": 86,
@@ -118,10 +118,10 @@ export default [
     "envelope2": {
       "assign": "filtercutoff",
       "attack": 0,
-      // "decay": 15,
+      "decay": 10,
       "release": 10,
       "amount": 100,
-      // "sustain": 37
+      "sustain": 0
     },
     "filter": {
       "cutOffFreq": 82,
@@ -355,10 +355,10 @@ export default [
     "envelope2": {
       "assign": "filtercutoff",
       "attack": 15,
-      // "decay": 100,
-      "release": 90,
+      "decay": 90,
+      "release": 0,
       "amount": 100,
-      // "sustain": 100
+      "sustain": 0
     },
     "filter": {
       "cutOffFreq": 59,
@@ -474,10 +474,10 @@ export default [
     "envelope2": {
       "assign": "filtercutoff",
       "attack": 38,
-      // "decay": 25,
-      "release": 90,
+      "decay": 90,
+      "release": 0,
       "amount": 100,
-      // "sustain": 33
+      "sustain": 0
     },
     "filter": {
       "cutOffFreq": 82,
@@ -678,5 +678,261 @@ export default [
 //     "pitch": 0,
 //     "selected": false
 //   }]
-// }
+// },
+{
+  "bpm": 116,
+  "name": "summertryouts",
+  "parameterValues": {
+    "envelope": {
+      "attack": 59,
+      "decay": 28,
+      "release": 9,
+      "sustain": 54
+    },
+    "envelope2": {
+      "assign": "filtercutoff",
+      "attack": 100,
+      "decay": 60,
+      "release": 60,
+      "sustain": 0,
+      "amount": 0
+    },
+    "filter": {
+      "cutOffFreq": 51,
+      "setQ": 0,
+      "type": "lowpass"
+    },
+    "lfo": {
+      "amount": 5,
+      "frequency": 81,
+      "type": "square"
+    },
+    "oscillator1": {
+      "detune": 0,
+      "frequency": "65",
+      "typeOsc": "sine"
+    },
+    "oscillator2": {
+      "frequency": "131",
+      "typeOsc": "sine",
+      "volume": 31
+    },
+    "router": {
+      "envelope2": "lfoFrequency",
+      "lfo": "oscsDetune"
+    }
+  },
+  "sequenceArray": [{
+    "clap": false,
+    "hat": true,
+    "kick": false,
+    "pitch": 7,
+    "selected": false
+  }, {
+    "clap": false,
+    "hat": false,
+    "kick": false,
+    "pitch": 0,
+    "selected": true
+  }, {
+    "clap": false,
+    "cymbal": false,
+    "hat": true,
+    "kick": true,
+    "noise": false,
+    "pitch": 0,
+    "selected": false
+  }, {
+    "hat": true,
+    "labmyc": false,
+    "pitch": 0,
+    "selected": false
+  }, {
+    "hat": false,
+    "labmyc": false,
+    "pitch": 0,
+    "selected": true
+  }, {
+    "cymbal": false,
+    "hat": true,
+    "kick": false,
+    "pitch": 0,
+    "selected": false
+  }, {
+    "clap": true,
+    "clap2": false,
+    "hat": false,
+    "pitch": 0,
+    "selected": false
+  }, {
+    "clap": false,
+    "clap2": false,
+    "hat": true,
+    "kick": false,
+    "pitch": 12,
+    "selected": false
+  }, {
+    "cymbal": false,
+    "hat": true,
+    "kick": true,
+    "pitch": 0,
+    "selected": true
+  }, {
+    "kick": true,
+    "noise": false,
+    "pitch": 0,
+    "selected": false
+  }, {
+    "clap2": false,
+    "hat": true,
+    "kick": false,
+    "pitch": 0,
+    "selected": true
+  }, {
+    "clap": false,
+    "noise": false,
+    "pitch": 0,
+    "selected": false
+  }, {
+    "clap": false,
+    "clap2": true,
+    "hat": true,
+    "kick": true,
+    "noise": false,
+    "pitch": 0,
+    "selected": false
+  }, {
+    "clap2": false,
+    "hat": true,
+    "noise": false,
+    "pitch": 0,
+    "selected": true
+  }, {
+    "clap2": false,
+    "hat": true,
+    "kick": false,
+    "pitch": 0,
+    "selected": false
+  }, {
+    "clap2": false,
+    "hat": true,
+    "kick": false,
+    "noise": false,
+    "pitch": 0,
+    "selected": false
+  }]
+},
+{
+  "bpm": 110,
+  "name": "intricate-at-the-lab",
+  "parameterValues": {
+    "envelope": {
+      "attack": 14,
+      "decay": 0,
+      "release": 21,
+      "sustain": 14
+    },
+    "envelope2": {
+      "assign": "filtercutoff",
+      "attack": 0,
+      "decay": 90,
+      "release": 90,
+      "sustain": 0,
+      "amount": 0
+    },
+    "filter": {
+      "cutOffFreq": 69,
+      "setQ": 0,
+      "type": "lowpass"
+    },
+    "lfo": {
+      "amount": 21,
+      "frequency": 36,
+      "type": "sine"
+    },
+    "oscillator1": {
+      "detune": 1,
+      "frequency": "131",
+      "typeOsc": "sawtooth"
+    },
+    "oscillator2": {
+      "frequency": "65",
+      "typeOsc": "triangle",
+      "volume": 78
+    },
+    "router": {
+      "envelope2": "lfoFrequency",
+      "lfo": "filterCutoff"
+    }
+  },
+  "sequenceArray": [{
+    "kick": true,
+    "pitch": 0,
+    "selected": true
+  }, {
+    "clap": true,
+    "noise": true,
+    "pitch": 0,
+    "selected": false
+  }, {
+    "hat": true,
+    "pitch": 0,
+    "selected": false
+  }, {
+    "kick": true,
+    "pitch": 0,
+    "selected": true
+  }, {
+    "pitch": 0,
+    "selected": false,
+    "snare": true
+  }, {
+    "pitch": 0,
+    "selected": false
+  }, {
+    "hat": true,
+    "pitch": 0,
+    "selected": false
+  }, {
+    "kick": true,
+    "pitch": 0,
+    "selected": false
+  }, {
+    "pitch": 0,
+    "selected": true
+  }, {
+    "pitch": 0,
+    "selected": false
+  }, {
+    "hat": true,
+    "kick": true,
+    "labmyc": false,
+    "noise": true,
+    "pitch": 0,
+    "selected": false
+  }, {
+    "labmyc": false,
+    "pitch": 3,
+    "selected": true
+  }, {
+    "labmyc": false,
+    "pitch": 0,
+    "selected": false,
+    "snare": true
+  }, {
+    "cymbal": true,
+    "pitch": 4,
+    "selected": false
+  }, {
+    "clap": true,
+    "cymbal": false,
+    "hat": true,
+    "pitch": 3,
+    "selected": true
+  }, {
+    "pitch": 0,
+    "selected": false,
+    "snare": true
+  }]
+}
 ]

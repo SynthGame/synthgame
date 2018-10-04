@@ -9,13 +9,13 @@
       fill="#4b1bff"
       module="envelope"
       :knobs="[{name: 'attack', min: 1, max: 100, value: this.attack},
-                {name: 'decay', min: 1, max: 100, value: 100},
-                {name: 'sustain', min: 1, max: 100, value: 100},
-                {name: 'release', min: 1, max: 100, value: this.release},
+                {name: 'decay', min: 1, max: 100, value: this.decay},
+                {name: 'sustain', min: 1, max: 100, value: 0},
+                {name: 'release', min: 1, max: 100, value: 0},
                 {name: 'attackGoal', min: 1, max: 100, value: this.attackGoal},
-                {name: 'decayGoal', min: 1, max: 100, value: 100},
-                {name: 'sustainGoal', min: 1, max: 100, value: 100},
-                {name: 'releasevGoal', min: 1, max: 100, value: this.releaseGoal},
+                {name: 'decayGoal', min: 1, max: 100, value: this.decayGoal},
+                {name: 'sustainGoal', min: 1, max: 100, value: 0},
+                {name: 'releasevGoal', min: 1, max: 100, value: 0},
                 {name: 'amount', min: 1, max: 100, value: this.amount},
                 {name: 'amountGoal', min: 1, max: 100, value: this.amountGoal},
                 ]"/>
@@ -29,7 +29,7 @@
         name="Attack"
         module="envelope"
       ></module-knob>
-      <!-- <module-knob
+      <module-knob
         v-model="decay"
         v-if="knobsAvailable.decay || createModeIsActive"
         :min="0"
@@ -38,7 +38,7 @@
         name="Decay"
         module="envelope"
       ></module-knob>
-      <module-knob
+      <!-- <module-knob
         v-model="sustain"
         v-if="knobsAvailable.sustain || createModeIsActive"
         :min="0"
@@ -47,7 +47,7 @@
         name="Sustain"
         module="envelope"
       ></module-knob> -->
-      <module-knob
+      <!-- <module-knob
         v-model="release"
         v-if="knobsAvailable.release || createModeIsActive"
         :min="0"
@@ -55,7 +55,7 @@
         knobColor="#4b1bff"
         name="Release"
         module="envelope"
-      ></module-knob>
+      ></module-knob> -->
       <module-knob
         v-model="amount"
         v-if="knobsAvailable.amount || createModeIsActive"
@@ -151,9 +151,9 @@ export default {
     // }),
     ...mapState({
       attackGoal: state => state.gameState.goal.envelope2.attack,
-      // decayGoal: state => state.gameState.goal.envelope2.decay,
+      decayGoal: state => state.gameState.goal.envelope2.decay,
       // sustainGoal: state => state.gameState.goal.envelope2.sustain,
-      releaseGoal: state => state.gameState.goal.envelope2.release,
+      // releaseGoal: state => state.gameState.goal.envelope2.release,
       amountGoal: state => state.gameState.goal.envelope2.amount,
       knobsAvailable: state => state.gameState.knobsAvailable.envelope2,
       createModeIsActive: state => state.gameState.createModeIsActive

@@ -396,42 +396,42 @@ export default [
       text: 'You unlocked the Modulation Envelope!'
     }
   },
-  // // level 17
-  // {
-  //   oscillator1: {
-  //     detune: true,
-  //     frequency: true,
-  //     typeOsc: true
-  //   },
-  //   oscillator2: {
-  //     typeOsc: true,
-  //     frequency: true,
-  //     volume: true
-  //   },
-  //   filter: {
-  //     type: true,
-  //     cutOffFreq: true
-  //   },
-  //   envelope: {
-  //     attack: true,
-  //     decay: true,
-  //     sustain: true,
-  //     release: true
-  //   },
-  //   envelope2: {
-  //     attack: true,
-  //     decay: true,
-  //   },
-  //   lfo: {
-  //     amount: true,
-  //     frequency: true,
-  //     type: true
-  //   },
-  //   router: {},
-  //   levelData: {
-  //     text: 'Like LFO, we use this module to modulate a different synth control.'
-  //   }
-  // },
+  // level 17
+  {
+    oscillator1: {
+      detune: true,
+      frequency: true,
+      typeOsc: true
+    },
+    oscillator2: {
+      typeOsc: true,
+      frequency: true,
+      volume: true
+    },
+    filter: {
+      type: true,
+      cutOffFreq: true
+    },
+    envelope: {
+      attack: true,
+      decay: true,
+      sustain: true,
+      release: true
+    },
+    envelope2: {
+      attack: true,
+      decay: true,
+    },
+    lfo: {
+      amount: true,
+      frequency: true,
+      type: true
+    },
+    router: {},
+    levelData: {
+      text: 'Like LFO, we use this module to modulate a different synth control.'
+    }
+  },
   // // level 18
   // {
   //   oscillator1: {
@@ -470,41 +470,41 @@ export default [
   //   }
   // },
   // level 19
-  {
-    oscillator1: {
-      detune: true,
-      frequency: true,
-      typeOsc: true
-    },
-    oscillator2: {
-      typeOsc: true,
-      frequency: true,
-      volume: true
-    },
-    filter: {
-      type: true,
-      cutOffFreq: true
-    },
-    envelope: {
-      attack: true,
-      decay: true,
-      sustain: true,
-      release: true
-    },
-    envelope2: {
-      attack: true,
-      release: true
-    },
-    lfo: {
-      amount: true,
-      frequency: true,
-      type: true
-    },
-    router: {},
-    levelData: {
-      text: "We're impressed."
-    }
-  },
+  // {
+  //   oscillator1: {
+  //     detune: true,
+  //     frequency: true,
+  //     typeOsc: true
+  //   },
+  //   oscillator2: {
+  //     typeOsc: true,
+  //     frequency: true,
+  //     volume: true
+  //   },
+  //   filter: {
+  //     type: true,
+  //     cutOffFreq: true
+  //   },
+  //   envelope: {
+  //     attack: true,
+  //     decay: true,
+  //     sustain: true,
+  //     release: true
+  //   },
+  //   envelope2: {
+  //     attack: true,
+  //     release: true
+  //   },
+  //   lfo: {
+  //     amount: true,
+  //     frequency: true,
+  //     type: true
+  //   },
+  //   router: {},
+  //   levelData: {
+  //     text: "We're impressed."
+  //   }
+  // },
   // level 20
   {
     oscillator1: {
@@ -529,7 +529,7 @@ export default [
     },
     envelope2: {
       attack: true,
-      release: true
+      decay: true
     },
     lfo: {
       amount: true,
@@ -567,7 +567,7 @@ export default [
     },
     envelope2: {
       attack: true,
-      release: true
+      decay: true
     },
     lfo: {
       amount: true,
