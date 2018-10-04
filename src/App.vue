@@ -104,7 +104,7 @@ export default {
     this.init()
     this.initSynth()
     if (this.$route.query.preset) {
-      window.postMessage(this.$route.query.preset, '*');
+      window.parent.postMessage(this.$route.query.preset, '*');
       console.log('id',this.$route.query.preset);
       this.customLevelIsActive = true
       this.displayStartOverlay = false
