@@ -2,12 +2,12 @@
   <div class="overlay">
     <div class="overlay-content-wrapper">
         <h1>Thank you</h1>
-        <h2>We'll notify you when we use your preset in game via Soundcloud DM. We'll reach out via email to the winner of the Superbooth prize, on November 19, 2018.<br><br>Share this link on social media to show others what you've made, or to create presets together.</h2>
+        <h2>Confirm your submission in the next step for a chance to win! Or keep trying until you are ready to submit.<br><br>Share this link on social media to show others what you've made, or to create presets together.</h2>
         <span class="link">{{link}}</span>
       <div>
         <button class="button-next" @click="copy">{{copyButtonText}}</button>
 
-        <button class="button-next" @click="$emit('closeCreate')">Exit</button>
+        <button class="button-next" @click="$emit('closeCreate')">Try again</button>
       </div>
     </div>
   </div>
