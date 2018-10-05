@@ -481,7 +481,13 @@ export default {
 
         // the vertical decay position shall include a fix stopping it
         // from going all the way down (5% height) to perserve release indication:
-        const decayYPosition = (1 - (sustain.value / sustain.max)) * (attackYPosition * (amount.value/100)) - (1 - ((sustain.value / sustain.max))) * (attackYPosition * (amount.value/100)) * 0.05
+        const decayYPosition = (1 - (sustain.value / sustain.max)) * (attackYPosition
+          //  * (amount.value/100)
+         ) - (1 - ((sustain.value / sustain.max)))
+         * (attackYPosition
+          //  * (amount.value/100)
+        )
+           * 0.05
         // no sustain, as it basically a horizontal line
         // release is known and shall be market with absolute position
 
@@ -746,7 +752,13 @@ export default {
 
         // the vertical decay position shall include a fix stopping it
         // from going all the way down (5% height) to perserve release indication:
-        const decayYPosition = (1 - (sustain.value / sustain.max)) * (attackYPosition * (amount.value/100)) - (1 - ((sustain.value / sustain.max))) * (attackYPosition * (amount.value/100)) * 0.05
+        const decayYPosition = (1 - (sustain.value / sustain.max)) * (attackYPosition
+          //  * (amount.value/100)
+         ) - (1 - ((sustain.value / sustain.max)))
+         * (attackYPosition
+          //  * (amount.value/100)
+        )
+           * 0.05
         // no sustain, as it basically a horizontal line
         // release is known and shall be market with absolute position
 

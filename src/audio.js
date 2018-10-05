@@ -378,7 +378,14 @@ export default {
         ...options
       })
       log(`Initializing pitch shift effect on oscillator1`)
-      this.state.pitchShift = new Tone.PitchShift()
+      this.state.pitchShift = new Tone.PitchShift(
+        {
+          pitch  : 0 ,
+          windowSize  : 0.03 ,
+          delayTime  : 0 ,
+          feedback  : 0
+          }
+      )
     }
   },
   oscillator2: {
@@ -396,7 +403,14 @@ export default {
         ...options
       })
       log(`Initializing pitch shift effect on oscillator2`)
-      this.state.pitchShift = new Tone.PitchShift()
+      this.state.pitchShift = new Tone.PitchShift(
+        {
+        pitch  : 0 ,
+        windowSize  : 0.03 ,
+        delayTime  : 0 ,
+        feedback  : 0
+        }
+      )
     }
   },
   envelope: {
