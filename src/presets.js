@@ -24,7 +24,7 @@ export default [
       "type": "lowpass"
     },
     "lfo": {
-      "amount": 12,
+      "amount": 50,
       "frequency": 10,
       "type": "sine"
     },
@@ -366,7 +366,7 @@ export default [
       "type": "lowpass"
     },
     "lfo": {
-      "amount": 0,
+      "amount": 50,
       "frequency": 5,
       "type": "sine"
     },
@@ -485,7 +485,7 @@ export default [
       "type": "lowpass"
     },
     "lfo": {
-      "amount": 3,
+      "amount": 50,
       "frequency": 5,
       "type": "triangle"
     },
@@ -704,7 +704,7 @@ export default [
       "type": "lowpass"
     },
     "lfo": {
-      "amount": 5,
+      "amount": 50,
       "frequency": 81,
       "type": "square"
     },
@@ -848,7 +848,7 @@ export default [
       "type": "lowpass"
     },
     "lfo": {
-      "amount": 21,
+      "amount": 50,
       "frequency": 36,
       "type": "sine"
     },
@@ -962,7 +962,7 @@ export default [
       "type": "bandpass"
     },
     "lfo": {
-      "amount": 5,
+      "amount": 50,
       "frequency": 100,
       "type": "sawtooth"
     },

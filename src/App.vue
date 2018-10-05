@@ -882,6 +882,9 @@ body {
 
   #app {
     font-size: .7em;
+    width: 100vw;
+    height: 100vh;
+    overflow: hidden;
   }
   .level {
     height: 82vh !important;
