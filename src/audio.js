@@ -185,13 +185,22 @@ export default {
       // this.envelope2.state.device.max = 100
     }
   },
-  playNote (shift, {noteLength, volume}) {
+  playNote (shift, {noteLength, volume, time, glide, octaveOsc1, octaveOsc2}) {
     log(`Playing shifted note: ${shift}`)
     if (Number.isInteger(shift)) {
-      this.oscillator1.state.pitchShift.pitch = shift
-      this.oscillator2.state.pitchShift.pitch = shift
+        let scale = ['c','c#','d','d#','e','f','f#','g','g#','a','a#','c','c#']
+        let freqArray = ['65', '131', '262', '523']
+        let startTime = this.oscillator1.state.device.now();
+        let currentOctaveOsc1 = freqArray.findIndex(el => el == octaveOsc1);
+        let currentOctaveOsc2 = freqArray.findIndex(el => el == octaveOsc2);
+        this.oscillator1.state.device.frequency.setRampPoint(startTime)
+        this.oscillator1.state.device.frequency.exponentialRampToValueAtTime(scale[shift] + (currentOctaveOsc1 + 2) , startTime + glide/10)
+        this.oscillator2.state.device.frequency.exponentialRampToValueAtTime(scale[shift] + (currentOctaveOsc2 + 2), startTime + glide/10)
+        if (volume !== undefined) this.volume.state.device.volume.setValueAtTime(volume, startTime + 0.03) // TODO: should only set volume for this note
+      // this.oscillator1.state.pitchShift.pitch = shift
+      // this.oscillator2.state.pitchShift.pitch = shift
     }
-    if (volume !== undefined) this.volume.state.device.volume.value = volume; // TODO: should only set volume for this note
+
     // this.envelope.state.device.triggerRelease();
     this.envelope2.state.device.triggerAttackRelease(noteLength || this.state.toneLength)
     return this.envelope.state.device.triggerAttackRelease(noteLength || this.state.toneLength) // TODO: Error: timeConstant must be greater than 0

@@ -89,6 +89,8 @@ export default {
       noteArray: fill(range(0, 16), {
         selected: false,
         pitch: 0,
+        volume: 0,
+        glide: 0
       }),
     }
   },
@@ -151,18 +153,33 @@ export default {
   },
   methods: {
     initSynth () {
+      var self = this;
       this.toneLoop = audio.setMainLoop({
         noteArray: range(0, 16),
         subdivision: '8n'
       }, (time, note) => {
         // this.setStep(note)
         if (this.noteArray[note].selected) {
-          audio.playNote(this.noteArray[note].pitch, {
-            // noteLength: ['16t', '8n', '4n', '2n', '1n'][this.noteArray[note].noteLength],
-            noteLength: '8n',
-            volume: this.noteArray[note].volume,
-            time: note
-          })
+          // if preview, use octave(frequency) from goal in store
+          if (this.displayPreviewOverlay) {
+            audio.playNote(this.noteArray[note].pitch, {
+              noteLength: '8n',
+              volume: this.noteArray[note].volume ? this.noteArray[note].volume : 0,
+              time: note,
+              glide: this.noteArray[note].glide ? this.noteArray[note].glide : 0,
+              octaveOsc1: self.$store.state.gameState.goal.oscillator1.frequency,
+              octaveOsc2: self.$store.state.gameState.goal.oscillator2.frequency
+            })
+          } else {
+            audio.playNote(this.noteArray[note].pitch, {
+              noteLength: '8n',
+              volume: this.noteArray[note].volume ? this.noteArray[note].volume : 0,
+              time: note,
+              glide: this.noteArray[note].glide ? this.noteArray[note].glide : 0,
+              octaveOsc1: self.$store.state.audioParameters.oscillator1.frequency,
+              octaveOsc2: self.$store.state.audioParameters.oscillator2.frequency
+            })
+          }
         }
         if (this.noteArray[note].kick) {
           audio.playKick()

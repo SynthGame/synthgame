@@ -147,7 +147,7 @@ export default {
     //   }
     // },
     ...vuexSyncGen('oscillator1', 'frequency', val => {
-      self.oscillator1.frequency.value = character.oscillator1.frequency(val)
+      // self.oscillator1.frequency.value = character.oscillator1.frequency(val)
     }),
     ...vuexSyncGen('oscillator1', 'typeOsc', val => {
       if (self.oscillator1.type === character.oscillator1.typeOsc(val)) return

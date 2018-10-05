@@ -8,15 +8,14 @@
       <div class="button-wrapper function">
         <button :style="sequencerEditState === 0 ? 'background: #F40056 !important' : ''" color="#6e01d1" @click="sequencerEditStateChange(0)">Steps</button>
         <button :style="sequencerEditState === 1 ? 'background: #F40056 !important' : ''" color="#6e01d1" @click="sequencerEditStateChange(1)">Pitch</button>
-        <!-- <p>Synth</p> -->
-        <!-- <button color="#6e01d1" @click="sequencerEditStateChange(2)">Accent</button>
-        <button color="#6e01d1" @click="sequencerEditStateChange(3)">Note Length</button> -->
+        <button :style="sequencerEditState === 2 ? 'background: #F40056 !important' : ''" color="#6e01d1" @click="sequencerEditStateChange(2)">Accent</button>
+        <button :style="sequencerEditState === 3 ? 'background: #F40056 !important' : ''" color="#6e01d1" @click="sequencerEditStateChange(3)">Glide</button>
         <button :style="sequencerEditState === 4 ? 'background: #F40056 !important' : ''" class="button-drums" @click="sequencerEditStateChange(4)">Kick</button>
         <button :style="sequencerEditState === 5 ? 'background: #F40056 !important' : ''" class="button-drums" @click="sequencerEditStateChange(5)">Hat</button>
         <button :style="sequencerEditState === 11 ? 'background: #F40056 !important' : ''" class="button-drums" @click="sequencerEditStateChange(11)">Snare</button>
-        <button :style="sequencerEditState === 8 ? 'background: #F40056 !important' : ''" class="button-drums" @click="sequencerEditStateChange(8)">Cymbal</button>
         <button :style="sequencerEditState === 6 ? 'background: #F40056 !important' : ''" class="button-drums" @click="sequencerEditStateChange(6)">Clap 1</button>
         <button :style="sequencerEditState === 7 ? 'background: #F40056 !important' : ''" class="button-drums" @click="sequencerEditStateChange(7)">Clap 2</button>
+        <button :style="sequencerEditState === 8 ? 'background: #F40056 !important' : ''" class="button-drums" @click="sequencerEditStateChange(8)">Cymbal</button>
         <button :style="sequencerEditState === 9 ? 'background: #F40056 !important' : ''" class="button-drums" @click="sequencerEditStateChange(9)">Labmyc</button>
         <button :style="sequencerEditState === 10 ? 'background: #F40056 !important' : ''" class="button-drums" @click="sequencerEditStateChange(10)">Noise</button>
         <button @click="playPauseSynth" class="sequencer-stop-button button-drums"><span>▶</span></button>
@@ -56,7 +55,25 @@
           :value="noteArray[j] && noteArray[j].pitch"
           @input="setPitchValue(j, $event)"
           :min="0"
-          :max="12"
+          :max="10"
+          :button-active="j === activeButton"
+          :button-selected="noteArray[j] && noteArray[j].selected"
+        />
+        <SequencerSlider
+          v-else-if="sequencerEditState === 2"
+          :value="noteArray[j] && noteArray[j].volume"
+          @input="setVolumeValue(j, $event)"
+          :min="0"
+          :max="3"
+          :button-active="j === activeButton"
+          :button-selected="noteArray[j] && noteArray[j].selected"
+        />
+        <SequencerSlider
+          v-else-if="sequencerEditState === 3"
+          :value="noteArray[j] && noteArray[j].glide"
+          @input="setGlideValue(j, $event)"
+          :min="0"
+          :max="10"
           :button-active="j === activeButton"
           :button-selected="noteArray[j] && noteArray[j].selected"
         />
@@ -66,6 +83,13 @@
           @input="setVolumeValue(j, $event)"
           :min="0"
           :max="6"
+        />
+        <SequencerSlider
+          v-else-if="sequencerEditState === 3"
+          :value="noteArray[j] && noteArray[j].glide"
+          @input="setGlideValue(j, $event)"
+          :min="0"
+          :max="12"
         /> -->
         <sequencer-button
           v-if="sequencerEditState === 4"
@@ -115,7 +139,7 @@
           :button-active="j === activeButton"
           :button-selected="noteArray[j] && noteArray[j].snare"
         />
-        <sequencer-button
+        <!-- <sequencer-button
           v-if="sequencerEditState === 2"
           @click="setVolumeValue(j)"
           :button-active="j === activeButton"
@@ -127,7 +151,7 @@
           @input="setNoteLengthValue(j, $event)"
           :min="0"
           :max="4"
-        />
+        /> -->
         <div class="stepnumber">{{j + 1}}</div>
       </span>
     </div>
@@ -170,6 +194,8 @@ export default {
       noteArray: fill(range(0, 16), {
         selected: false,
         pitch: 0,
+        volume: 0,
+        glide: 0
       }),
       bpmKnob: 110
     }
@@ -207,6 +233,7 @@ export default {
       val === 11 ? audio.playSnare(): '';
     },
     initSynth () {
+      var self = this;
       this.toneLoop = audio.setMainLoop({
         noteArray: range(0, 16),
         subdivision: '8n'
@@ -221,10 +248,12 @@ export default {
 
         if (this.noteArray[note].selected) {
           audio.playNote(this.noteArray[note].pitch, {
-            // noteLength: ['16t', '8n', '4n', '2n', '1n'][this.noteArray[note].noteLength],
             noteLength: '8n',
             volume: this.noteArray[note].volume,
-            time: note
+            time: note,
+            glide: this.noteArray[note].glide,
+            octaveOsc1: self.$store.state.audioParameters.oscillator1.frequency,
+            octaveOsc2: self.$store.state.audioParameters.oscillator2.frequency
           })
         }
         if (this.noteArray[note].kick) {
@@ -300,9 +329,12 @@ export default {
     setPitchValue (i, val) {
       this.noteArray = this.noteArray.map((el, j) => i === j ? {...el, pitch: Number(val)} : el)
     },
+    setGlideValue (i, val) {
+      this.noteArray = this.noteArray.map((el, j) => i === j ? {...el, glide: Number(val)} : el)
+    },
     setVolumeValue (i, val) {
-      // this.noteArray = this.noteArray.map((el, j) => i === j ? {...el, volume: Number(val)} : el)
-      this.noteArray = this.noteArray.map((el, j) => i === j ? {...el, volume: 3} : el)
+      this.noteArray = this.noteArray.map((el, j) => i === j ? {...el, volume: Number(val)} : el)
+      // this.noteArray = this.noteArray.map((el, j) => i === j ? {...el, volume: 3} : el)
     },
     setNoteLengthValue (i, val) {
       this.noteArray = this.noteArray.map((el, j) => i === j ? {...el, noteLength: val} : el)
@@ -487,7 +519,7 @@ button.sequencer-button {
         width: unset;
         border: unset;
         min-height: 1px !important;
-        padding: 0 .7em;
+        padding: 0 0.4em;
         min-width: 26px;
         position: relative;
         z-index:999;
