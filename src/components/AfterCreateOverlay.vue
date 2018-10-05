@@ -71,4 +71,14 @@ h2 {
   font-size: 2rem;
   padding: 0.5rem;
 }
+
+@media only screen and (max-width: 1000px) {
+  h2 {
+    font-size: 1em;
+  }
+  .link {
+    font-size: 1rem;
+  }
+
+}
 </style>
