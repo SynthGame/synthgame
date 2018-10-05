@@ -769,8 +769,9 @@ export default {
               // a horizontal line representing sustain level including a fix regarding adding the release:
               ' h ' + (this.displayWidth - attackXPosition - decayXPosition - (((release.value / release.max)) * fourthOfWidth)) +
               // release end position:
-              ' L ' + this.displayWidth + ', ' + (this.displayHeight + 1) + ' ' +
-              ' Z'
+              ' L ' + this.displayWidth + ', ' + (this.displayHeight + 1) + ' '
+              // +
+              // ' Z'
       }
 
       if (this.module === 'filter') {

@@ -881,7 +881,7 @@ body {
   }
 
   #app {
-    font-size: .8em;
+    font-size: .7em;
   }
   .level {
     height: 82vh !important;

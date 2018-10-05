@@ -64,7 +64,7 @@
           :value="noteArray[j] && noteArray[j].volume"
           @input="setVolumeValue(j, $event)"
           :min="0"
-          :max="3"
+          :max="5"
           :button-active="j === activeButton"
           :button-selected="noteArray[j] && noteArray[j].selected"
         />
@@ -77,20 +77,6 @@
           :button-active="j === activeButton"
           :button-selected="noteArray[j] && noteArray[j].selected"
         />
-        <!-- <SequencerSlider
-          v-else-if="sequencerEditState === 2"
-          :value="noteArray[j] && noteArray[j].volume"
-          @input="setVolumeValue(j, $event)"
-          :min="0"
-          :max="6"
-        />
-        <SequencerSlider
-          v-else-if="sequencerEditState === 3"
-          :value="noteArray[j] && noteArray[j].glide"
-          @input="setGlideValue(j, $event)"
-          :min="0"
-          :max="12"
-        /> -->
         <sequencer-button
           v-if="sequencerEditState === 4"
           @click="toggleKickOnOff(j)"
@@ -139,19 +125,6 @@
           :button-active="j === activeButton"
           :button-selected="noteArray[j] && noteArray[j].snare"
         />
-        <!-- <sequencer-button
-          v-if="sequencerEditState === 2"
-          @click="setVolumeValue(j)"
-          :button-active="j === activeButton"
-          :button-selected="noteArray[j] && noteArray[j].volume"
-        />
-        <SequencerSlider
-          v-else-if="sequencerEditState === 3"
-          :value="noteArray[j] && noteArray[j].noteLength"
-          @input="setNoteLengthValue(j, $event)"
-          :min="0"
-          :max="4"
-        /> -->
         <div class="stepnumber">{{j + 1}}</div>
       </span>
     </div>
