@@ -76,7 +76,7 @@ export default {
     log(`Connecting gameOverPlayer to compressor`)
     gameOverPlayer.connect(compressor)
     log(`Adjusting volume to make an ok mix`)
-    player.volume.value = 0
+    player.volume.value = 12
     sweepPlayer.volume.value = 3
     gameOverPlayer.volume.value = 0
     oscillator1.volume.value = -24
