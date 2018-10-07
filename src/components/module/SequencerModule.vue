@@ -59,7 +59,7 @@
           :button-active="j === activeButton"
           :button-selected="noteArray[j] && noteArray[j].selected"
         />
-        <SequencerSlider
+        <!-- <SequencerSlider
           v-else-if="sequencerEditState === 2"
           :value="noteArray[j] && noteArray[j].volume"
           @input="setVolumeValue(j, $event)"
@@ -67,6 +67,12 @@
           :max="5"
           :button-active="j === activeButton"
           :button-selected="noteArray[j] && noteArray[j].selected"
+        /> -->
+        <sequencer-button
+          v-if="sequencerEditState === 2"
+          @click="toggleAccentOnOff(j)"
+          :button-active="j === activeButton"
+          :button-selected="noteArray[j] && noteArray[j].volume"
         />
         <sequencer-button
           v-if="sequencerEditState === 3"
@@ -173,8 +179,8 @@ export default {
       noteArray: fill(range(0, 16), {
         selected: false,
         pitch: 0,
-        volume: 0,
-        glide: 0
+        volume: false,
+        glide: false
       }),
       bpmKnob: 110
     }
@@ -228,14 +234,7 @@ export default {
         noteArray: range(0, 16),
         subdivision: '8n'
       }, (time, note) => {
-        // experiment
-        // Tone.Transport.schedule(function(time){
-        // 	//do something with the time
-        //   audio.playKick()
-        // }, "16:0:0");
-
         this.setStep(note)
-
         if (this.noteArray[note].selected) {
           audio.playNote(this.noteArray[note].pitch, {
             noteLength: '16n',
@@ -323,7 +322,10 @@ export default {
       this.noteArray = this.noteArray.map((el, j) => i === j ? {...el, glide: Number(val)} : el)
     },
     toggleGlideOnOff (i) { // use setNoteOnOff
-      this.noteArray = this.noteArray.map((el, j) => i === j ? {...el, glide: !el.selected} : el)
+      this.noteArray = this.noteArray.map((el, j) => i === j ? {...el, glide: !el.glide} : el)
+    },
+    toggleAccentOnOff (i) { // use setNoteOnOff
+      this.noteArray = this.noteArray.map((el, j) => i === j ? {...el, volume: !el.volume} : el)
     },
     setVolumeValue (i, val) {
       this.noteArray = this.noteArray.map((el, j) => i === j ? {...el, volume: Number(val)} : el)

@@ -102,7 +102,9 @@ export default {
     try {
       this.state.loop.cancel()
       this.state.loop.dispose()
-    } catch (e) {}
+    } catch (e) {
+      // console.log('setmainloop failed', e);
+    }
     this.state.loop = new Tone.Sequence(callback, noteArray, subdivision)
     return this.state.loop
   },
@@ -194,9 +196,10 @@ export default {
         let currentOctaveOsc1 = freqArray.findIndex(el => el == octaveOsc1);
         let currentOctaveOsc2 = freqArray.findIndex(el => el == octaveOsc2);
         this.oscillator1.state.device.frequency.setRampPoint(startTime)
-        this.oscillator1.state.device.frequency.exponentialRampToValueAtTime(scale[shift] + (currentOctaveOsc1 + 2) , startTime + glide/10)
-        this.oscillator2.state.device.frequency.exponentialRampToValueAtTime(scale[shift] + (currentOctaveOsc2 + 2), startTime + glide/10)
-        if (volume !== undefined) this.volume.state.device.volume.setValueAtTime(volume, startTime + 0.03) // TODO: should only set volume for this note
+        this.oscillator1.state.device.frequency.exponentialRampToValueAtTime(scale[shift] + (currentOctaveOsc1 + 2) , startTime + (glide ? 0.2 : 0))
+        this.oscillator2.state.device.frequency.exponentialRampToValueAtTime(scale[shift] + (currentOctaveOsc2 + 2), startTime + (glide ? 0.2 : 0))
+        // if (volume !== undefined) this.volume.state.device.volume.setValueAtTime((volume ? 5 : 0), startTime + 0.03) // TODO: should only set volume for this note
+        if (volume !== undefined) this.volume.state.device.volume.exponentialRampToValueAtTime((volume ? 5 : 0), startTime + 0.02) // TODO: should only set volume for this note
       // this.oscillator1.state.pitchShift.pitch = shift
       // this.oscillator2.state.pitchShift.pitch = shift
     }

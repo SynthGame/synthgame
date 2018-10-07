@@ -89,8 +89,8 @@ export default {
       noteArray: fill(range(0, 16), {
         selected: false,
         pitch: 0,
-        volume: 0,
-        glide: 0
+        volume: false,
+        glide: false
       }),
     }
   },
