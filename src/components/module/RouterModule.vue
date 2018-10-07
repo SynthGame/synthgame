@@ -3,7 +3,7 @@
     <module-title :indicator-active="dialsAreWithinMargin" :module-color="moduleColor">
       <!-- <h2 slot="title">Tats</h2> -->
       <h3 v-if="dialsAreWithinMargin" slot="subtitle">Done!</h3>
-      <h3 v-else slot="subtitle">Mod Router</h3>
+      <h3 v-else slot="subtitle">Modulation</h3>
     </module-title>
     <module-display
       class="display"
@@ -73,7 +73,7 @@
       <module-button :color="moduleColor" shape="frq" :isPressed="envelope2==='oscsDetune'" @click.native="envelope2='oscsDetune'"/>
       <module-button :color="moduleColor" shape="osc1 frq" :isPressed="envelope2==='osc1Detune'" @click.native="envelope2='osc1Detune'"/>
       <module-button :color="moduleColor" shape="fil frq" :isPressed="envelope2==='filterCutoff'" @click.native="envelope2='filterCutoff'"/>
-      <module-button :color="moduleColor" shape="lfo frq" :isPressed="envelope2==='lfoFrequency'" @click.native="envelope2='lfoFrequency'"/>
+      <!-- <module-button :color="moduleColor" shape="lfo frq" :isPressed="envelope2==='lfoFrequency'" @click.native="envelope2='lfoFrequency'"/> -->
         <p>mod Env</p>
       </div>
       <div class="button-wrapper"

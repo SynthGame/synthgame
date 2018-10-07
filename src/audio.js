@@ -203,7 +203,7 @@ export default {
 
     // this.envelope.state.device.triggerRelease();
     this.envelope2.state.device.triggerAttackRelease(noteLength || this.state.toneLength)
-    return this.envelope.state.device.triggerAttackRelease(noteLength || this.state.toneLength) // TODO: Error: timeConstant must be greater than 0
+    this.envelope.state.device.triggerAttackRelease(noteLength || this.state.toneLength) // TODO: Error: timeConstant must be greater than 0
   },
   playKick () {
     log(`Playing kick`);

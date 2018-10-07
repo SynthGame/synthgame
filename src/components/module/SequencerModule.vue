@@ -8,8 +8,8 @@
       <div class="button-wrapper function">
         <button :style="sequencerEditState === 0 ? 'background: #F40056 !important' : ''" color="#6e01d1" @click="sequencerEditStateChange(0)">Steps</button>
         <button :style="sequencerEditState === 1 ? 'background: #F40056 !important' : ''" color="#6e01d1" @click="sequencerEditStateChange(1)">Pitch</button>
-        <button :style="sequencerEditState === 2 ? 'background: #F40056 !important' : ''" color="#6e01d1" @click="sequencerEditStateChange(2)">Accent</button>
         <button :style="sequencerEditState === 3 ? 'background: #F40056 !important' : ''" color="#6e01d1" @click="sequencerEditStateChange(3)">Glide</button>
+        <button :style="sequencerEditState === 2 ? 'background: #F40056 !important' : ''" color="#6e01d1" @click="sequencerEditStateChange(2)">Accent</button>
         <button :style="sequencerEditState === 4 ? 'background: #F40056 !important' : ''" class="button-drums" @click="sequencerEditStateChange(4)">Kick</button>
         <button :style="sequencerEditState === 5 ? 'background: #F40056 !important' : ''" class="button-drums" @click="sequencerEditStateChange(5)">Hat</button>
         <button :style="sequencerEditState === 11 ? 'background: #F40056 !important' : ''" class="button-drums" @click="sequencerEditStateChange(11)">Snare</button>
@@ -68,7 +68,13 @@
           :button-active="j === activeButton"
           :button-selected="noteArray[j] && noteArray[j].selected"
         />
-        <SequencerSlider
+        <sequencer-button
+          v-if="sequencerEditState === 3"
+          @click="toggleGlideOnOff(j)"
+          :button-active="j === activeButton"
+          :button-selected="noteArray[j] && noteArray[j].glide"
+        />
+        <!-- <SequencerSlider
           v-else-if="sequencerEditState === 3"
           :value="noteArray[j] && noteArray[j].glide"
           @input="setGlideValue(j, $event)"
@@ -76,7 +82,7 @@
           :max="10"
           :button-active="j === activeButton"
           :button-selected="noteArray[j] && noteArray[j].selected"
-        />
+        /> -->
         <sequencer-button
           v-if="sequencerEditState === 4"
           @click="toggleKickOnOff(j)"
@@ -173,6 +179,12 @@ export default {
       bpmKnob: 110
     }
   },
+  mounted () {
+    window.addEventListener('keydown', this.emitOnKey)
+  },
+  beforeDestroy () {
+    window.removeEventListener('keydown', this.emitOnKey)
+  },
   created () {
     if (this.$route.query.preset) {
       getPresetById(this.$route.query.preset)
@@ -194,6 +206,11 @@ export default {
     this.$store.commit('setActiveSequence', this.noteArray)
   },
   methods: {
+    emitOnKey () {
+      if (event.keyCode === 32) {
+        this.playPauseSynth()
+      }
+    },
     sequencerEditStateChange (val) {
       this.sequencerEditState = val;
       val === 4 ? audio.playKick(): '';
@@ -221,7 +238,7 @@ export default {
 
         if (this.noteArray[note].selected) {
           audio.playNote(this.noteArray[note].pitch, {
-            noteLength: '8n',
+            noteLength: '16n',
             volume: this.noteArray[note].volume,
             time: note,
             glide: this.noteArray[note].glide,
@@ -304,6 +321,9 @@ export default {
     },
     setGlideValue (i, val) {
       this.noteArray = this.noteArray.map((el, j) => i === j ? {...el, glide: Number(val)} : el)
+    },
+    toggleGlideOnOff (i) { // use setNoteOnOff
+      this.noteArray = this.noteArray.map((el, j) => i === j ? {...el, glide: !el.selected} : el)
     },
     setVolumeValue (i, val) {
       this.noteArray = this.noteArray.map((el, j) => i === j ? {...el, volume: Number(val)} : el)

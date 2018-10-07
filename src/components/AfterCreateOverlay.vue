@@ -74,10 +74,10 @@ h2 {
 
 @media only screen and (max-width: 1000px) {
   h2 {
-    font-size: 1em;
+    font-size: 1em !important;
   }
   .link {
-    font-size: 1rem;
+    font-size: 1rem !important;
   }
 
 }

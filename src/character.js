@@ -1,15 +1,15 @@
 export default {
   envelope: {
     attack: val => val / 100 + 0.001,
-    decay: val => Math.pow(val, (val / 100)) - 0.999,
+    decay: val => Math.pow(val, (val / 100)) - 0.9,
     sustain: val => val / 100,
-    release: val => Math.pow(val, (val / 100)) - 0.999,
+    release: val => Math.pow(val, (val / 100)) - 0.7,
   },
   envelope2: {
     attack: val => val / 100 + 0.001,
-    decay: val => Math.pow(val, (val / 100)) - 0.999,
+    decay: val => Math.pow(val, (val / 100)) - 0.9,
     sustain: val => val / 100,
-    release: val => Math.pow(val, (val / 100)) - 0.999,
+    release: val => Math.pow(val, (val / 100)) - 0.7,
     amount: val => Math.pow((val * 200), (val / 100)) + 20,
   },
   filter: {

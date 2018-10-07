@@ -151,8 +151,8 @@ export default new Vuex.Store({
           typeOsc: ['sine', 'square', 'sawtooth', 'triangle']
         },
         router: {
-          lfo: ['oscsDetune','osc1Detune','filterCutoff', 'env1decay'],
-          envelope2: ['oscsDetune','osc1Detune','filterCutoff','lfoFrequency'],
+          lfo: ['oscsDetune','osc1Detune','filterCutoff'],
+          envelope2: ['oscsDetune','osc1Detune','filterCutoff'],
         }
       },
       defaultParams: {

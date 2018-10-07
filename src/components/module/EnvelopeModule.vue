@@ -121,7 +121,7 @@ export default {
       self.envelope.decay = character.envelope.decay(val || 1)
     }),
     ...vuexSyncGen('envelope', 'sustain', val => {
-      self.envelope.sustain = character.envelope.sustain(val)
+      self.envelope.sustain = character.envelope.sustain(val || 0)
     }),
     ...vuexSyncGen('envelope', 'release', val => {
       self.envelope.release = character.envelope.release(val || 1)

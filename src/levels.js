@@ -265,102 +265,102 @@ export default [
       text: 'Hint: set attack and decay to low levels for snappy sounds.'
     }
   },
-  // level 13
-  {
-    oscillator1: {
-      detune: true,
-      frequency: true,
-      typeOsc: true
-    },
-    oscillator2: {
-      typeOsc: true,
-      frequency: true,
-      volume: true
-    },
-    filter: {
-      type: true,
-      cutOffFreq: true
-    },
-    envelope: {
-      attack: true,
-      decay: true,
-      sustain: true,
-      release: true
-    },
-    envelope2: {},
-    lfo: {
-      amount: true
-    },
-    router: {},
-    levelData: {
-      text: 'You unlocked the LFO!'
-    }
-  },
-  // level 14
-  {
-    oscillator1: {
-      detune: true,
-      frequency: true,
-      typeOsc: true
-    },
-    oscillator2: {
-      typeOsc: true,
-      frequency: true,
-      volume: true
-    },
-    filter: {
-      type: true,
-      cutOffFreq: true
-    },
-    envelope: {
-      attack: true,
-      decay: true,
-      sustain: true,
-      release: true
-    },
-    envelope2: {},
-    lfo: {
-      amount: true,
-      frequency: true
-    },
-    router: {},
-    levelData: {
-      text: 'LFO stands for low frequency oscillator. It produces an output signal which can modulate other controls.'
-    }
-  },
-  // level 15
-  {
-    oscillator1: {
-      detune: true,
-      frequency: true,
-      typeOsc: true
-    },
-    oscillator2: {
-      typeOsc: true,
-      frequency: true,
-      volume: true
-    },
-    filter: {
-      type: true,
-      cutOffFreq: true
-    },
-    envelope: {
-      attack: true,
-      decay: true,
-      sustain: true,
-      release: true
-    },
-    envelope2: {},
-    lfo: {
-      amount: true,
-      frequency: true,
-      type: true
-    },
-    router: {},
-    levelData: {
-      text: "Low frequency oscillators can bring life to otherwise static sounds."
-    }
-  },
+  // // level 13
+  // {
+  //   oscillator1: {
+  //     detune: true,
+  //     frequency: true,
+  //     typeOsc: true
+  //   },
+  //   oscillator2: {
+  //     typeOsc: true,
+  //     frequency: true,
+  //     volume: true
+  //   },
+  //   filter: {
+  //     type: true,
+  //     cutOffFreq: true
+  //   },
+  //   envelope: {
+  //     attack: true,
+  //     decay: true,
+  //     sustain: true,
+  //     release: true
+  //   },
+  //   envelope2: {},
+  //   lfo: {
+  //     amount: true
+  //   },
+  //   router: {},
+  //   levelData: {
+  //     text: 'You unlocked the LFO!'
+  //   }
+  // },
+  // // level 14
+  // {
+  //   oscillator1: {
+  //     detune: true,
+  //     frequency: true,
+  //     typeOsc: true
+  //   },
+  //   oscillator2: {
+  //     typeOsc: true,
+  //     frequency: true,
+  //     volume: true
+  //   },
+  //   filter: {
+  //     type: true,
+  //     cutOffFreq: true
+  //   },
+  //   envelope: {
+  //     attack: true,
+  //     decay: true,
+  //     sustain: true,
+  //     release: true
+  //   },
+  //   envelope2: {},
+  //   lfo: {
+  //     amount: true,
+  //     frequency: true
+  //   },
+  //   router: {},
+  //   levelData: {
+  //     text: 'LFO stands for low frequency oscillator. It produces an output signal which can modulate other controls.'
+  //   }
+  // },
+  // // level 15
+  // {
+  //   oscillator1: {
+  //     detune: true,
+  //     frequency: true,
+  //     typeOsc: true
+  //   },
+  //   oscillator2: {
+  //     typeOsc: true,
+  //     frequency: true,
+  //     volume: true
+  //   },
+  //   filter: {
+  //     type: true,
+  //     cutOffFreq: true
+  //   },
+  //   envelope: {
+  //     attack: true,
+  //     decay: true,
+  //     sustain: true,
+  //     release: true
+  //   },
+  //   envelope2: {},
+  //   lfo: {
+  //     amount: true,
+  //     frequency: true,
+  //     type: true
+  //   },
+  //   router: {},
+  //   levelData: {
+  //     text: "Low frequency oscillators can bring life to otherwise static sounds."
+  //   }
+  // },
   // level 16
   {
     oscillator1: {
@@ -387,9 +387,9 @@ export default [
       attack: true
     },
     lfo: {
-      amount: true,
-      frequency: true,
-      type: true
+      // amount: true,
+      // frequency: true,
+      // type: true
     },
     router: {},
     levelData: {
@@ -423,13 +423,13 @@ export default [
       decay: true,
     },
     lfo: {
-      amount: true,
-      frequency: true,
-      type: true
+      // amount: true,
+      // frequency: true,
+      // type: true
     },
     router: {},
     levelData: {
-      text: 'Like LFO, we use this module to modulate a different synth control.'
+      text: 'We use this module to modulate a different synth control.'
     }
   },
   // // level 18
@@ -532,15 +532,132 @@ export default [
       decay: true
     },
     lfo: {
-      amount: true,
-      frequency: true,
-      type: true
+      // amount: true,
+      // frequency: true,
+      // type: true
     },
     router: {
       lfo: true
     },
     levelData: {
       text: 'You must be a famous producer already.'
+    }
+  },
+  // level 21
+  {
+    oscillator1: {
+      detune: true,
+      frequency: true,
+      typeOsc: true
+    },
+    oscillator2: {
+      typeOsc: true,
+      frequency: true,
+      volume: true
+    },
+    filter: {
+      type: true,
+      cutOffFreq: true
+    },
+    envelope: {
+      attack: true,
+      decay: true,
+      sustain: true,
+      release: true
+    },
+    envelope2: {
+      attack: true,
+      decay: true
+    },
+    lfo: {
+      // amount: true,
+      // frequency: true,
+      // type: true
+    },
+    router: {
+      lfo: true,
+      envelope2: true
+    },
+    levelData: {
+      text: 'Make your own preset in Make Music, and get featured in game.'
+    }
+  },
+  // level 21
+  {
+    oscillator1: {
+      detune: true,
+      frequency: true,
+      typeOsc: true
+    },
+    oscillator2: {
+      typeOsc: true,
+      frequency: true,
+      volume: true
+    },
+    filter: {
+      type: true,
+      cutOffFreq: true
+    },
+    envelope: {
+      attack: true,
+      decay: true,
+      sustain: true,
+      release: true
+    },
+    envelope2: {
+      attack: true,
+      decay: true
+    },
+    lfo: {
+      amount: true,
+      // frequency: true,
+      // type: true
+    },
+    router: {
+      lfo: true,
+      envelope2: true
+    },
+    levelData: {
+       text: 'You unlocked the LFO!'
+    }
+  },
+  // level 21
+  {
+    oscillator1: {
+      detune: true,
+      frequency: true,
+      typeOsc: true
+    },
+    oscillator2: {
+      typeOsc: true,
+      frequency: true,
+      volume: true
+    },
+    filter: {
+      type: true,
+      cutOffFreq: true
+    },
+    envelope: {
+      attack: true,
+      decay: true,
+      sustain: true,
+      release: true
+    },
+    envelope2: {
+      attack: true,
+      decay: true
+    },
+    lfo: {
+      amount: true,
+      frequency: true,
+      // type: true
+    },
+    router: {
+      lfo: true,
+      envelope2: true
+    },
+    levelData: {
+      text: 'LFO stands for low frequency oscillator. It produces an output signal which can modulate other controls.'
     }
   },
   // level 21
@@ -579,7 +696,7 @@ export default [
       envelope2: true
     },
     levelData: {
-      text: 'Created by okbye.io, together with Tatsuya Takahashi.'
+      text: 'Created by www.okbye.io, together with Tatsuya Takahashi.'
     }
   }
 ]
