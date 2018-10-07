@@ -485,7 +485,7 @@ export default {
     init (options) {
       log(`Initializing Compressor with options: ${options}`)
       this.state.device = new Tone.Compressor({
-        ratio: 10,
+        ratio: 5,
         threshold: -18,
         release: 0.11,
         attack: 0.003,

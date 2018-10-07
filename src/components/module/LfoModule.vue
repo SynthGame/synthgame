@@ -25,7 +25,7 @@
             :min="1"
             :max="100"
             knobColor="#5bd484"
-            name="Rate"
+            name="Speed"
             module="lfo"
           ></module-knob>
           <module-knob
@@ -34,7 +34,7 @@
             :min="0"
             :max="100"
             knobColor="#5bd484"
-            name="Amount"
+            name="Height"
             module="lfo"
           ></module-knob>
       <div class="button-wrapper"
@@ -44,7 +44,7 @@
         <module-button color="#5bd484" shape="square" :isPressed="type==='square'" @click.native="type='square'"/>
         <module-button color="#5bd484" shape="sawtooth" :isPressed="type==='sawtooth'" @click.native="type='sawtooth'"/>
         <module-button color="#5bd484" shape="triangle" :isPressed="type==='triangle'" @click.native="type='triangle'"/>
-        <p>WAVEFORM</p>
+        <p>MOVEMENT</p>
       </div>
         </div>
     </div>

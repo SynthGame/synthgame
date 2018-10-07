@@ -64,8 +64,72 @@
             </g>
         </svg>
         <!-- Router -->
-        <g v-if="this.module === 'router'" class="routerscreen" style="transform: scale(0.81)translateY(2px); transition: all 0s;">
-          <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g v-if="this.module === 'router'" class="routerscreen" style="transform: scale(0.71)translateY(0px)translateX(8px); transition: all 0s;">
+
+
+<!-- <svg width="248px" height="118px" viewBox="0 0 248 118" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"> -->
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="SYNTHGAME_MODROUTER-01" transform="translate(-26.000000, -55.000000)">
+            <g id="SCREEN" transform="translate(26.000000, 55.000000)">
+                <g id="lines" transform="translate(28.000000, 27.000000)" stroke="#FFFFFF" stroke-width="1">
+                    <path v-if="knobs[1].value === 'oscsDetune'" d="M2.5,0.5 L2.5,63.5" id="Shape"></path>
+                    <path v-if="knobs[0].value === 'oscsDetune'" d="M1.5,1.5 L189.5,62.5" id="Shape"></path>
+                    <path v-if="knobs[1].value === 'osc1Detune'" d="M96.5,1.5 L2.7,61.9" id="Shape"></path>
+                    <path v-if="knobs[1].value === 'filterCutoff'" d="M191.5,1.5 L0,62.8" id="Shape"></path>
+                    <path v-if="knobs[0].value === 'osc1Detune'" d="M96.5,1.5 L190.332852,62.7219014" id="Shape"></path>
+                    <path v-if="knobs[0].value === 'filterCutoff'" d="M190.332852,1.5 L190.332852,62.5" id="Shape"></path>
+                </g>
+                <rect id="Rectangle-path" fill="#ff8574" fill-rule="nonzero" x="94.6" y="0" width="60" height="29"></rect>
+                <rect id="Rectangle-path" fill="#FF8575" fill-rule="nonzero" x="0.5" y="0" width="60" height="29"></rect>
+                <rect id="Rectangle-path" fill="#6E00D1" fill-rule="nonzero" x="187.5" y="0" width="60" height="29"></rect>
+                <text id="PITCH-OSC-2" fill="#FFFFFF" font-family="Helvetica" font-size="8" font-weight="normal" letter-spacing="0.5">
+                    <tspan x="111.75" y="12">PITCH</tspan>
+                    <tspan x="111.996094" y="22">OSC </tspan>
+                    <tspan x="133.554688" y="22">1</tspan>
+                </text>
+                <rect id="Rectangle-path" fill="#71D5FF" fill-rule="nonzero" x="30.6" y="0" width="30" height="29"></rect>
+                <text id="FILTER-CUTOFF" fill="#FFFFFF" font-family="Helvetica" font-size="8" font-weight="normal" letter-spacing="0.5">
+                    <tspan x="203.015625" y="12">FILTER</tspan>
+                    <tspan x="200.601562" y="22">CUTOF</tspan>
+                    <tspan x="230.511719" y="22">F</tspan>
+                </text>
+                <text id="PITCH" fill="#FFFFFF" font-family="Helvetica" font-size="8" font-weight="normal" letter-spacing="0.5">
+                    <tspan x="17.8" y="17">PITC</tspan>
+                    <tspan x="38.0226563" y="17">H</tspan>
+                </text>
+                <g id="Group" transform="translate(137.000000, 38.000000)"></g>
+                <g id="modlfo-cutoff-filter" transform="translate(28.000000, 27.000000)"></g>
+                <g id="modlfo-pitch-oscs" transform="translate(124.000000, 28.000000)"></g>
+                <g id="modlfo-pitch-oscs" transform="translate(217.000000, 28.000000)"></g>
+                <g id="modenv-pitch-oscs" transform="translate(67.000000, 59.000000)"></g>
+                <g id="modenv-pitch-osc1" transform="translate(67.000000, 59.000000)"></g>
+                <g id="modenv-cutoff-filter" transform="translate(67.000000, 36.000000)"></g>
+                <g id="Group" transform="translate(68.000000, 50.000000)"></g>
+                <g id="Group" transform="translate(89.000000, 26.000000)"></g>
+                <g id="Group" transform="translate(156.000000, 27.000000)"></g>
+                <g id="Group" transform="translate(198.000000, 27.000000)"></g>
+                <rect id="Rectangle-path" fill="#5D00FF" fill-rule="nonzero" x="0.6" y="88.9" width="60" height="29"></rect>
+                <rect id="Rectangle-path" fill="#5BD483" fill-rule="nonzero" x="187.6" y="88.9" width="60" height="29"></rect>
+                <g id="Group" transform="translate(0.573500, 90.356000)" fill="#FFFFFF" font-family="Helvetica" font-size="8" font-weight="normal" letter-spacing="0.5">
+                    <text id="MOD-ENV">
+                        <tspan x="19.9179688" y="10">MOD</tspan>
+                        <tspan x="21.2753906" y="20">EN</tspan>
+                        <tspan x="33.3886719" y="20">V</tspan>
+                    </text>
+                </g>
+                <g id="Group" transform="translate(187.907000, 90.356000)" fill="#FFFFFF" font-family="Helvetica" font-size="8" font-weight="normal" letter-spacing="0.5">
+                    <text id="MOD-LFO">
+                        <tspan x="19.9179688" y="10">MOD</tspan>
+                        <tspan x="21.7207031" y="20">LF</tspan>
+                        <tspan x="32.0566406" y="20">O</tspan>
+                    </text>
+                </g>
+            </g>
+        </g>
+    </g>
+  </g>
+
+          <!-- <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
               <g id="SYNTHGAME_MODROUTER-01" transform="translate(-32.000000, -61.000000)">
                   <g id="SCREEN" transform="translate(32.000000, 61.000000)">
                       <rect id="Rectangle-path" fill="#FFFFFF" fill-rule="nonzero" x="200.3" y="12.7" width="35" height="19.9"></rect>
@@ -267,7 +331,6 @@
                         </g>
                         <path d="M36.1,43.1 L0.7,52.9" id="Shape" stroke="#fff" stroke-width="1"></path>
                       </g>
-                      <!-- <path d="M85.1,73.1 L49.7,82.9" id="Shape" stroke="#FFFFFF" stroke-width="1"></path> -->
                       <g id="Group" transform="translate(62.000000, 44.000000)"></g>
                       <g id="Group" transform="translate(83.000000, 20.000000)"></g>
                       <g id="Group" transform="translate(35.000000, 28.000000)">
@@ -315,7 +378,7 @@
                   </g>
               </g>
           </g>
-        </g>
+        </g> -->
 
         <g v-if="debug" class="debug-text">
           <text x="0" y="0">
