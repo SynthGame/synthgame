@@ -76,7 +76,7 @@ export default {
     log(`Connecting gameOverPlayer to compressor`)
     gameOverPlayer.connect(compressor)
     log(`Adjusting volume to make an ok mix`)
-    player.volume.value = 12
+    player.volume.value = 0
     sweepPlayer.volume.value = 3
     gameOverPlayer.volume.value = 0
     oscillator1.volume.value = -24
@@ -488,7 +488,12 @@ export default {
     init (options) {
       log(`Initializing Compressor with options: ${options}`)
       this.state.device = new Tone.Compressor({
-        ratio: 5,
+        // ratio: 5,
+        // threshold: -18,
+        // release: 0.11,
+        // attack: 0.003,
+        // knee: 0
+        ratio: 1.5,
         threshold: -18,
         release: 0.11,
         attack: 0.003,
