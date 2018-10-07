@@ -72,12 +72,18 @@
         <g id="SYNTHGAME_MODROUTER-01" transform="translate(-26.000000, -55.000000)">
             <g id="SCREEN" transform="translate(26.000000, 55.000000)">
                 <g id="lines" transform="translate(28.000000, 27.000000)" stroke="#FFFFFF" stroke-width="1">
-                    <path v-if="knobs[1].value === 'oscsDetune'" d="M2.5,0.5 L2.5,63.5" id="Shape"></path>
-                    <path v-if="knobs[0].value === 'oscsDetune'" d="M1.5,1.5 L189.5,62.5" id="Shape"></path>
-                    <path v-if="knobs[1].value === 'osc1Detune'" d="M96.5,1.5 L2.7,61.9" id="Shape"></path>
-                    <path v-if="knobs[1].value === 'filterCutoff'" d="M191.5,1.5 L0,62.8" id="Shape"></path>
-                    <path v-if="knobs[0].value === 'osc1Detune'" d="M96.5,1.5 L190.332852,62.7219014" id="Shape"></path>
-                    <path v-if="knobs[0].value === 'filterCutoff'" d="M190.332852,1.5 L190.332852,62.5" id="Shape"></path>
+                    <path stroke="#ff8574" v-if="knobs[1].value === 'oscsDetune'" d="M2.5,0.5 L2.5,63.5" id="Shape"></path>
+                    <path stroke="#ff8574" v-if="knobs[0].value === 'oscsDetune'" d="M1.5,1.5 L189.5,62.5" id="Shape"></path>
+                    <path stroke="#ff8574" v-if="knobs[1].value === 'osc1Detune'" d="M96.5,1.5 L2.7,61.9" id="Shape"></path>
+                    <path stroke="#ff8574" v-if="knobs[1].value === 'filterCutoff'" d="M191.5,1.5 L0,62.8" id="Shape"></path>
+                    <path stroke="#ff8574" v-if="knobs[0].value === 'osc1Detune'" d="M96.5,1.5 L190.332852,62.7219014" id="Shape"></path>
+                    <path stroke="#ff8574" v-if="knobs[0].value === 'filterCutoff'" d="M190.332852,1.5 L190.332852,62.5" id="Shape"></path>
+                    <path v-if="knobs[3].value === 'oscsDetune'" d="M2.5,0.5 L2.5,63.5" id="Shape"></path>
+                    <path v-if="knobs[2].value === 'oscsDetune'" d="M1.5,1.5 L189.5,62.5" id="Shape"></path>
+                    <path v-if="knobs[3].value === 'osc1Detune'" d="M96.5,1.5 L2.7,61.9" id="Shape"></path>
+                    <path v-if="knobs[3].value === 'filterCutoff'" d="M191.5,1.5 L0,62.8" id="Shape"></path>
+                    <path v-if="knobs[2].value === 'osc1Detune'" d="M96.5,1.5 L190.332852,62.7219014" id="Shape"></path>
+                    <path v-if="knobs[2].value === 'filterCutoff'" d="M190.332852,1.5 L190.332852,62.5" id="Shape"></path>
                 </g>
                 <rect id="Rectangle-path" fill="#ff8574" fill-rule="nonzero" x="94.6" y="0" width="60" height="29"></rect>
                 <rect id="Rectangle-path" fill="#FF8575" fill-rule="nonzero" x="0.5" y="0" width="60" height="29"></rect>
@@ -557,9 +563,67 @@ export default {
         // svg path:
         line = 'M 0, ' + (this.displayHeight + 1) +
               ' l ' + attackXPosition + ', ' + (-attackYPosition) + ' ' +
+              ' h ' + -1 +
+              ' v ' + 1 + //try to make decay point obvious
+              // ' v ' + -2 +
+              ' v ' + -1 +
+              ' h ' + 1 +
+              ' v ' + 2 +
+              ' v ' + -2 +
+              // ' v ' + 2 +
+              ' h ' + 1 +
+              ' v ' + 3 +
+              ' v ' + -3 +
+              // ' v ' + 3 +
+              ' h ' + 1 +
+              ' v ' + 2 +
+              ' v ' + -2 +
+              // ' v ' + 2 +
+              ' h ' + 1 +
+              ' v ' + 1 +
+              ' v ' + -1 +
+              // ' v ' + 1 +
               ' l ' + decayXPosition + ', ' + decayYPosition + ' ' +
+              ' h ' + -1 +
+              ' v ' + 1 + //try to make decay point obvious
+              // ' v ' + -2 +
+              ' v ' + -1 +
+              ' h ' + 1 +
+              ' v ' + 2 +
+              ' v ' + -2 +
+              // ' v ' + 2 +
+              ' h ' + 1 +
+              ' v ' + 3 +
+              ' v ' + -3 +
+              // ' v ' + 3 +
+              ' h ' + 1 +
+              ' v ' + 2 +
+              ' v ' + -2 +
+              // ' v ' + 2 +
+              ' h ' + 1 +
+              ' v ' + 1 +
+              ' v ' + -1 +
               // a horizontal line representing sustain level including a fix regarding adding the release:
               ' h ' + (this.displayWidth - attackXPosition - decayXPosition - (((release.value / release.max)) * fourthOfWidth)) +
+              ' h ' + -1 +
+              ' v ' + 1 + //try to make decay point obvious
+              // ' v ' + -2 +
+              ' v ' + -1 +
+              ' h ' + 1 +
+              ' v ' + 2 +
+              ' v ' + -2 +
+              // ' v ' + 2 +
+              ' h ' + 1 +
+              ' v ' + 3 +
+              ' v ' + -3 +
+              // ' v ' + 3 +
+              ' h ' + 1 +
+              ' v ' + 2 +
+              ' v ' + -2 +
+              // ' v ' + 2 +
+              ' h ' + 1 +
+              ' v ' + 1 +
+              ' v ' + -1 +
               // release end position:
               ' L ' + this.displayWidth + ', ' + (this.displayHeight + 1) + ' ' +
               ' Z'
@@ -828,9 +892,71 @@ export default {
         // svg path:
         line = 'M 0, ' + (this.displayHeight + 1) +
               ' l ' + attackXPosition + ', ' + (-attackYPosition) + ' ' +
+              ' h ' + -1 +
+              ' v ' + 1 + //try to make decay point obvious
+              ' v ' + -2 +
+              ' v ' + 1 +
+              ' h ' + 1 +
+              ' v ' + 2 +
+              ' v ' + -4 +
+              ' v ' + 2 +
+              ' h ' + 1 +
+              ' v ' + 3 +
+              ' v ' + -6 +
+              ' v ' + 3 +
+              ' h ' + 1 +
+              ' v ' + 2 +
+              ' v ' + -4 +
+              ' v ' + 2 +
+              ' h ' + 1 +
+              ' v ' + 1 +
+              ' v ' + -2 +
+              ' v ' + 1 +
+
+
               ' l ' + decayXPosition + ', ' + decayYPosition + ' ' +
+              ' h ' + -1 +
+              ' v ' + 1 + //try to make decay point obvious
+              ' v ' + -2 +
+              ' v ' + 1 +
+              ' h ' + 1 +
+              ' v ' + 2 +
+              ' v ' + -4 +
+              ' v ' + 2 +
+              ' h ' + 1 +
+              ' v ' + 3 +
+              ' v ' + -6 +
+              ' v ' + 3 +
+              ' h ' + 1 +
+              ' v ' + 2 +
+              ' v ' + -4 +
+              ' v ' + 2 +
+              ' h ' + 1 +
+              ' v ' + 1 +
+              ' v ' + -2 +
+              ' v ' + 1 +
               // a horizontal line representing sustain level including a fix regarding adding the release:
               ' h ' + (this.displayWidth - attackXPosition - decayXPosition - (((release.value / release.max)) * fourthOfWidth)) +
+              ' h ' + -1 +
+              ' v ' + 1 + //try to make decay point obvious
+              ' v ' + -2 +
+              ' v ' + 1 +
+              ' h ' + 1 +
+              ' v ' + 2 +
+              ' v ' + -4 +
+              ' v ' + 2 +
+              ' h ' + 1 +
+              ' v ' + 3 +
+              ' v ' + -6 +
+              ' v ' + 3 +
+              ' h ' + 1 +
+              ' v ' + 2 +
+              ' v ' + -4 +
+              ' v ' + 2 +
+              ' h ' + 1 +
+              ' v ' + 1 +
+              ' v ' + -2 +
+              ' v ' + 1 +
               // release end position:
               ' L ' + this.displayWidth + ', ' + (this.displayHeight + 1) + ' '
               // +
