@@ -72,18 +72,18 @@
         <g id="SYNTHGAME_MODROUTER-01" transform="translate(-26.000000, -55.000000)">
             <g id="SCREEN" transform="translate(26.000000, 55.000000)">
                 <g id="lines" transform="translate(28.000000, 27.000000)" stroke="#FFFFFF" stroke-width="1">
-                    <path stroke="#ff8574" v-if="knobs[1].value === 'oscsDetune'" d="M2.5,0.5 L2.5,63.5" id="Shape"></path>
-                    <path stroke="#ff8574" v-if="knobs[0].value === 'oscsDetune'" d="M1.5,1.5 L189.5,62.5" id="Shape"></path>
-                    <path stroke="#ff8574" v-if="knobs[1].value === 'osc1Detune'" d="M96.5,1.5 L2.7,61.9" id="Shape"></path>
-                    <path stroke="#ff8574" v-if="knobs[1].value === 'filterCutoff'" d="M191.5,1.5 L0,62.8" id="Shape"></path>
-                    <path stroke="#ff8574" v-if="knobs[0].value === 'osc1Detune'" d="M96.5,1.5 L190.332852,62.7219014" id="Shape"></path>
-                    <path stroke="#ff8574" v-if="knobs[0].value === 'filterCutoff'" d="M190.332852,1.5 L190.332852,62.5" id="Shape"></path>
-                    <path v-if="knobs[3].value === 'oscsDetune'" d="M2.5,0.5 L2.5,63.5" id="Shape"></path>
-                    <path v-if="knobs[2].value === 'oscsDetune'" d="M1.5,1.5 L189.5,62.5" id="Shape"></path>
-                    <path v-if="knobs[3].value === 'osc1Detune'" d="M96.5,1.5 L2.7,61.9" id="Shape"></path>
-                    <path v-if="knobs[3].value === 'filterCutoff'" d="M191.5,1.5 L0,62.8" id="Shape"></path>
-                    <path v-if="knobs[2].value === 'osc1Detune'" d="M96.5,1.5 L190.332852,62.7219014" id="Shape"></path>
-                    <path v-if="knobs[2].value === 'filterCutoff'" d="M190.332852,1.5 L190.332852,62.5" id="Shape"></path>
+                  <path v-show="!createModeIsActive" v-if="knobs[3].value === 'oscsDetune'" d="M2.5,0.5 L2.5,63.5" id="Shape"></path>
+                  <path v-show="!createModeIsActive" v-if="knobs[2].value === 'oscsDetune'" d="M1.5,1.5 L189.5,62.5" id="Shape"></path>
+                  <path v-show="!createModeIsActive" v-if="knobs[3].value === 'osc1Detune'" d="M96.5,1.5 L2.7,61.9" id="Shape"></path>
+                  <path v-show="!createModeIsActive" v-if="knobs[3].value === 'filterCutoff'" d="M191.5,1.5 L0,62.8" id="Shape"></path>
+                  <path v-show="!createModeIsActive" v-if="knobs[2].value === 'osc1Detune'" d="M96.5,1.5 L190.332852,62.7219014" id="Shape"></path>
+                  <path v-show="!createModeIsActive" v-if="knobs[2].value === 'filterCutoff'" d="M190.332852,1.5 L190.332852,62.5" id="Shape"></path>
+                    <path stroke="#4b1bff" v-if="knobs[1].value === 'oscsDetune'" d="M2.5,0.5 L2.5,63.5" id="Shape"></path>
+                    <path stroke="#5bd484" v-if="knobs[0].value === 'oscsDetune'" d="M1.5,1.5 L189.5,62.5" id="Shape"></path>
+                    <path stroke="#4b1bff" v-if="knobs[1].value === 'osc1Detune'" d="M96.5,1.5 L2.7,61.9" id="Shape"></path>
+                    <path stroke="#4b1bff" v-if="knobs[1].value === 'filterCutoff'" d="M191.5,1.5 L0,62.8" id="Shape"></path>
+                    <path stroke="#5bd484" v-if="knobs[0].value === 'osc1Detune'" d="M96.5,1.5 L190.332852,62.7219014" id="Shape"></path>
+                    <path stroke="#5bd484" v-if="knobs[0].value === 'filterCutoff'" d="M190.332852,1.5 L190.332852,62.5" id="Shape"></path>
                 </g>
                 <rect id="Rectangle-path" fill="#ff8574" fill-rule="nonzero" x="94.6" y="0" width="60" height="29"></rect>
                 <rect id="Rectangle-path" fill="#FF8575" fill-rule="nonzero" x="0.5" y="0" width="60" height="29"></rect>
