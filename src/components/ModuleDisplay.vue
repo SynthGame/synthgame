@@ -563,67 +563,18 @@ export default {
         // svg path:
         line = 'M 0, ' + (this.displayHeight + 1) +
               ' l ' + attackXPosition + ', ' + (-attackYPosition) + ' ' +
-              ' h ' + -1 +
-              ' v ' + 1 + //try to make decay point obvious
-              // ' v ' + -2 +
-              ' v ' + -1 +
-              ' h ' + 1 +
-              ' v ' + 2 +
-              ' v ' + -2 +
-              // ' v ' + 2 +
-              ' h ' + 1 +
-              ' v ' + 3 +
-              ' v ' + -3 +
-              // ' v ' + 3 +
-              ' h ' + 1 +
-              ' v ' + 2 +
-              ' v ' + -2 +
-              // ' v ' + 2 +
-              ' h ' + 1 +
+              ' v ' + -1 + //try to make decay point obvious
+              ' h ' + 2 +
               ' v ' + 1 +
-              ' v ' + -1 +
-              // ' v ' + 1 +
               ' l ' + decayXPosition + ', ' + decayYPosition + ' ' +
-              ' h ' + -1 +
-              ' v ' + 1 + //try to make decay point obvious
-              // ' v ' + -2 +
-              ' v ' + -1 +
-              ' h ' + 1 +
-              ' v ' + 2 +
-              ' v ' + -2 +
-              // ' v ' + 2 +
-              ' h ' + 1 +
-              ' v ' + 3 +
-              ' v ' + -3 +
-              // ' v ' + 3 +
-              ' h ' + 1 +
-              ' v ' + 2 +
-              ' v ' + -2 +
-              // ' v ' + 2 +
-              ' h ' + 1 +
+              ' v ' + -1 + //try to make decay point obvious
+              ' h ' + 2 +
               ' v ' + 1 +
-              ' v ' + -1 +
               // a horizontal line representing sustain level including a fix regarding adding the release:
               ' h ' + (this.displayWidth - attackXPosition - decayXPosition - (((release.value / release.max)) * fourthOfWidth)) +
-              ' h ' + -1 +
-              ' v ' + 1 + //try to make decay point obvious
-              // ' v ' + -2 +
-              ' v ' + -1 +
-              ' h ' + 1 +
-              ' v ' + 2 +
-              ' v ' + -2 +
-              // ' v ' + 2 +
-              ' h ' + 1 +
-              ' v ' + 3 +
-              ' v ' + -3 +
-              // ' v ' + 3 +
-              ' h ' + 1 +
-              ' v ' + 2 +
-              ' v ' + -2 +
-              // ' v ' + 2 +
-              ' h ' + 1 +
+              ' v ' + -1 + //try to make decay point obvious
+              ' h ' + 2 +
               ' v ' + 1 +
-              ' v ' + -1 +
               // release end position:
               ' L ' + this.displayWidth + ', ' + (this.displayHeight + 1) + ' ' +
               ' Z'
