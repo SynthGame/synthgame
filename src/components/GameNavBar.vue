@@ -84,10 +84,10 @@
         <span class="data">{{paddedHighScoreString}}</span>
       </div>
       </template>
-      <template v-else>
+      <!-- <template v-else>
         <input class="name-input" placeholder="Enter your Soundcloud username" v-model="exportPresetName"/>
         <button @click="submitPreset(exportPresetName)">submit</button>
-      </template>
+      </template> -->
       <after-create-overlay v-if="showAfterCreateOverlay" :link="exportPresetLink" @closeCreate="exitAfterCreate"/>
       <svg @click="exitGame" class="exit" width="18px" height="17px" viewBox="0 0 18 17" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
           <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">

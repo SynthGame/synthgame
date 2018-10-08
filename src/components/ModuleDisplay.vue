@@ -64,7 +64,8 @@
             </g>
         </svg>
         <!-- Router -->
-        <g v-if="this.module === 'router'" class="routerscreen" style="transform: scale(0.71)translateY(0px)translateX(8px); transition: all 0s;">
+        <g v-if="this.module === 'router'" class="routerscreen" style="transform: scale(0.61) translateY(-3px) translateX(8px); transition: all 0s;">
+
 
 
 <!-- <svg width="248px" height="118px" viewBox="0 0 248 118" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"> -->

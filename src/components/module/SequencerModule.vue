@@ -192,6 +192,8 @@ export default {
     window.removeEventListener('keydown', this.emitOnKey)
   },
   created () {
+    this.initSynth()
+    this.$store.commit('setActiveSequence', this.noteArray)
     if (this.$route.query.preset) {
       getPresetById(this.$route.query.preset)
         .then(data => {
@@ -205,13 +207,25 @@ export default {
           this.bpm = data.bpm
           audio.connectLfo(this.$store.state.audioParameters.router.lfo);
           audio.connectEnvelope2(this.$store.state.audioParameters.router.envelope2)
-          audio.filter.state.device.frequency.value = character.filter.cutOffFreq(this.$store.state.audioParameters.filter.cutOffFreq)
+          audio.filter.state.device.frequency.value = character.filter.cutOffFreq(this.$store.state.audioParameters.filter.cutOffFreq);
+          // this.submitPreset() // also submit preset so new id is requested and sent
         })
+    } else {
+      // this.submitPreset()
     }
-    this.initSynth()
-    this.$store.commit('setActiveSequence', this.noteArray)
   },
   methods: {
+    submitPreset (val) {
+      // this.showAfterCreateOverlay = true
+      this.$store.dispatch('exportPreset', {name: val})
+        .then(presetId => {
+          // alert(`${window.location.origin}/?preset=${presetId}`)
+          this.exportPresetLink = `${window.location.origin}/?preset=${presetId}`;
+          this.$router.push('?preset=' + presetId)
+          window.parent.postMessage(presetId, '*');
+          console.log('id',presetId);
+        })
+    },
     emitOnKey () {
       if (event.keyCode === 32) {
         this.playPauseSynth()

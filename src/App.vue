@@ -106,8 +106,8 @@ export default {
     this.init()
     this.initSynth()
     if (this.$route.query.preset) {
-      window.parent.postMessage(this.$route.query.preset, '*');
-      console.log('id',this.$route.query.preset);
+      // window.parent.postMessage(this.$route.query.preset, '*'); uncommented because confusing if we're sending old id too
+      // console.log('id',this.$route.query.preset);
       this.customLevelIsActive = true
       this.displayStartOverlay = false
       this.showCreatePreview = true
