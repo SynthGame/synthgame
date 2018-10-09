@@ -1,5 +1,6 @@
 import Vue from 'vue'
 import App from './App.vue'
+import VueAnalytics from 'vue-analytics'
 
 import router from './router'
 import store from './store'
@@ -12,6 +13,11 @@ Vue.config.productionTip = false
 require('tone')
 
 Vue.use(ModuleKnob)
+
+Vue.use(VueAnalytics, {
+  id: 'UA-126660114-1',
+  router
+})
 
 var vm = new Vue({
   el: '#app', // needed?

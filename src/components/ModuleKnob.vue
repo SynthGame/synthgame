@@ -468,7 +468,11 @@ export default {
       font-size: 1.2em;
   }
   .knob {
-    margin: 0 2vh 0 2vh !important; 
+    margin: 0 5% !important;
+  }
+  .knob {
+    // pointer-events: none;
+    width:25%;
   }
 }
 </style>

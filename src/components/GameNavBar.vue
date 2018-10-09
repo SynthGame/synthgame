@@ -84,10 +84,11 @@
         <span class="data">{{paddedHighScoreString}}</span>
       </div>
       </template>
-      <!-- <template v-else>
-        <input class="name-input" placeholder="Enter your Soundcloud username" v-model="exportPresetName"/>
-        <button @click="submitPreset(exportPresetName)">submit</button>
-      </template> -->
+      <template v-else>
+        <!-- <input class="name-input" placeholder="Enter your Soundcloud username" v-model="exportPresetName"/> -->
+        <!-- <button @click="submitPreset(exportPresetName)">submit</button> -->
+        <!-- <button @click="submitPreset()">submit</button> -->
+      </template>
       <after-create-overlay v-if="showAfterCreateOverlay" :link="exportPresetLink" @closeCreate="exitAfterCreate"/>
       <svg @click="exitGame" class="exit" width="18px" height="17px" viewBox="0 0 18 17" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
           <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
@@ -171,7 +172,17 @@ export default {
       return `${padStart(this.highScore, 5, '0')}`
     }
   },
+  mounted () {
+    window.addEventListener("message", this.receiveMessage, false);
+  },
+  beforeDestroy () {
+    window.removeEventListener('message', this.receiveMessage, false);
+  },
   methods: {
+    receiveMessage(event) {
+      if (event.data !== "clicked-next") {return
+      } else {this.submitPreset()}
+    },
     startTimer () {
       this.timeLeftSeconds = 59
       this.timer = this.timer || window.setInterval(() => {
@@ -205,8 +216,8 @@ export default {
       this.showAfterCreateOverlay = false;
     },
     submitPreset (val) {
-      this.showAfterCreateOverlay = true
-      this.$store.dispatch('exportPreset', {name: val})
+      // this.showAfterCreateOverlay = true
+      this.$store.dispatch('exportPreset', {name: ''})
         .then(presetId => {
           // alert(`${window.location.origin}/?preset=${presetId}`)
           this.exportPresetLink = `${window.location.origin}/?preset=${presetId}`;
@@ -355,9 +366,9 @@ button {
   .main__level {
       display: none;
   }
-  .game_title {
-      display: none;
-  }
+  // .game_title {
+  //     display: none;
+  // }
   .module__name__status-indicator {
     display: none;
   }

@@ -187,9 +187,11 @@ export default {
   },
   mounted () {
     window.addEventListener('keydown', this.emitOnKey)
+    // window.addEventListener("message", this.receiveMessage, false);
   },
   beforeDestroy () {
     window.removeEventListener('keydown', this.emitOnKey)
+    // window.removeEventListener('message', this.receiveMessage, false);
   },
   created () {
     this.initSynth()
@@ -215,17 +217,24 @@ export default {
     }
   },
   methods: {
-    submitPreset (val) {
-      // this.showAfterCreateOverlay = true
-      this.$store.dispatch('exportPreset', {name: val})
-        .then(presetId => {
-          // alert(`${window.location.origin}/?preset=${presetId}`)
-          this.exportPresetLink = `${window.location.origin}/?preset=${presetId}`;
-          this.$router.push('?preset=' + presetId)
-          window.parent.postMessage(presetId, '*');
-          console.log('id',presetId);
-        })
-    },
+    // receiveMessage(event) {
+    //   this.submitPreset()
+    //   // if (event.origin !== "http://example.org:8080")
+    //   //   return;
+    //   //
+    //   // // ...
+    // },
+    // submitPreset (val) {
+    //   // this.showAfterCreateOverlay = true
+    //   this.$store.dispatch('exportPreset', {name: val})
+    //     .then(presetId => {
+    //       // alert(`${window.location.origin}/?preset=${presetId}`)
+    //       this.exportPresetLink = `${window.location.origin}/?preset=${presetId}`;
+    //       this.$router.push('?preset=' + presetId)
+    //       window.parent.postMessage(presetId, '*');
+    //       console.log('id',presetId);
+    //     })
+    // },
     emitOnKey () {
       if (event.keyCode === 32) {
         this.playPauseSynth()

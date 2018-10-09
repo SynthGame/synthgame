@@ -273,6 +273,7 @@ export default {
       this.displayStartOverlay = false
       this.displayFailureOverlay = false
       this.$store.commit('setCreateMode', true)
+      this.$router.push('?artist')
     },
     startLevel (level) {
 
@@ -285,6 +286,8 @@ export default {
         this.displayPreviewOverlay = true
       })
       audio.playSweep()
+      this.$router.push('?level=' + (level+1))
+      window.parent.postMessage('play-game-activated', '*');
 
       // Shuffle rack slot array
       let array = this.$store.dispatch('shuffleRackSlotArray')
@@ -411,7 +414,9 @@ export default {
     },
     showCreate () {
       this.showCreatePreview = false
+      audio.playKick()
       this.startCreateMode()
+      window.parent.postMessage('make-music-activated', '*');
     }
   },
   watch: {
@@ -460,9 +465,9 @@ export default {
   display: none;
   justify-content: flex-start;
   position: absolute;
-  top: 90vh;
+  bottom: 0;
   width: 100vw;
-  height: 10vh;
+  height: 10%;
   align-items: center;
   text-transform: uppercase;
   &__tab {
@@ -547,7 +552,7 @@ export default {
     button {
       // width: 3em;
       // height: 3em;
-      width: 4vh;
+      // width: 4vh;
       height: 4vh;
       margin: auto;
       background: unset;
@@ -822,7 +827,7 @@ body {
     display: none;
   }
 
-  .sequencer-slider [type='range'][data-v-08d8bd4d] {
+  .sequencer-slider [type='range'] {
     margin: -25px 0 0 16px !important;
     width: 4em !important;
   }
@@ -864,6 +869,7 @@ body {
 
   button.button-drums {
     min-width: 3em !important;
+    height: 1.5em !important
   }
 
   button.sequencer-stop-button.button-drums {
@@ -875,6 +881,11 @@ body {
     height: 82vh;
   }
 
+  .button-wrapper.function button {
+    width: 20% !important;
+    height: 15% !important;
+}
+
   .module .octave-wrapper {
       height: 7.4em;
       transform: scale(1.7);
@@ -883,11 +894,29 @@ body {
   #app {
     font-size: .7em;
     width: 100vw;
-    height: 100vh;
+    height: 100% !important;
     overflow: hidden;
   }
+
+  body {
+    height: 100% !important;
+    overflow: hidden !important;
+    position: absolute;
+  }
+
+  .game {
+    height: 100% !important
+  }
+
+  .overlay {
+    height: 100% !important;
+  }
+
   .level {
-    height: 82vh !important;
+    height: 82% !important;
+  }
+  .sequencer.module.sequencer {
+    left: 0 !important
   }
   .tabs {
     display: flex;
@@ -901,7 +930,7 @@ body {
   .module {
     width: 100vw;
     max-width: 100vw;
-    height: 82vh;
+    height: 100% !important;
     position: absolute !important;
     left:0 !important;
     top:0 !important;
@@ -909,8 +938,8 @@ body {
     padding-bottom: 2em !important;
   }
   .module .knobs {
-    padding-top: 5vh;
-    min-height: 55vh;
+    padding-top: 5%;
+    min-height: 60%;
 }
 .module .button-wrapper button {
     width: 4.5em;

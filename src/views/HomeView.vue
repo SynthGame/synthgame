@@ -260,6 +260,9 @@ export default {
     LfoModule,
     SequencerModule
   },
+  mounted () {
+      this.showSequencer()
+  },
   methods: {
     moduleIsUseable (moduleName) {
       if (this.createModeIsActive) return true
