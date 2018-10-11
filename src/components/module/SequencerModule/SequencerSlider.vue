@@ -47,7 +47,7 @@ export default {
 $main-synth-color: #F40056;
 
 span.sequencer-slider {
-    min-height: 10em;
+    min-height: 12em;
     display: flex;
     width: 100%;
     align-items: center;

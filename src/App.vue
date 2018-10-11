@@ -273,7 +273,6 @@ export default {
       this.displayStartOverlay = false
       this.displayFailureOverlay = false
       this.$store.commit('setCreateMode', true)
-      this.$router.push('?artist')
     },
     startLevel (level) {
 
@@ -955,7 +954,7 @@ body {
     height: 82vh;
   }
   .module .display {
-    height: 20vh;
+    height: 11em;
   }
 }
 </style>

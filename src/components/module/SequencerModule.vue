@@ -213,7 +213,7 @@ export default {
           // this.submitPreset() // also submit preset so new id is requested and sent
         })
     } else {
-      // this.submitPreset()
+      this.$router.push('?artist')
     }
   },
   methods: {
@@ -503,7 +503,7 @@ button.sequencer-button {
   // align-items: center;
   width: 23%;
   margin-right: 1vw;
-  margin-top: 11vh;
+  margin-top: 6em;
   max-height: 10rem;
   justify-content: space-between;
 }
