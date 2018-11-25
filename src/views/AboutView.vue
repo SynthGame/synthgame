@@ -1,11 +1,16 @@
 <template>
   <div class="casestudy">
+
+    <!-- Navbar -->
     <div class="navbar-casestudy">
       <a href="https://okbye.io" target="_blank"><span>Ok Bye</span></a>
       <button type="button" name="button" @click="loadPreset">Hire</button>
     </div>
-    <h1>case Study</h1>
-    <h2>How we turned music production into a game</h2>
+
+    <!-- Title section -->
+    <h3>Case Study</h3>
+    <h1>TATS</h1>
+    <h2>How we gamified electronic music production</h2>
 
     <div class="rack">
       <oscillator-module-one />
@@ -13,10 +18,28 @@
       <lfo-module />
     </div>
 
-    <h1>Develop faster, for less</h1>
-    <h2>We house the best, in return for agency work</h2>
+    <!-- First CTA -->
+    <h4>Develop faster, for less</h4>
+    <button class="filled" type="button" name="button" @click="loadPreset">Pick a team</button>
+    <h5>We house the best, in return for agency work</h5>
 
-    <h3>Case study: Tats</h3>
+    <!-- Social proof -->
+    <div class="client-bar">
+    <div class="client">
+    Red Bull
+    </div>
+    <div class="involved-departments">
+    Red Bull Mind Gamers
+    Red Bull Music Academy
+    </div>
+    <div class="used-technology">
+    Vue.js
+    Tone.js
+    Firebase Firebase
+    </div>
+
+    </div>
+
     <div class="part left dial">
       <div class="text">
         <h4>The mighty dial</h4>
@@ -60,9 +83,21 @@
           <router-module />
       </div>
     </div>
-    <div class="player">
-      <img class="custom-user-avatar" :src="avatarUrl"/>
-      <span class="data artist">{{nameArtist}}</span>
+    <div class="player__wrapper">
+      <div class="player">
+        <div class="user">
+          <img class="custom-user-avatar" :src="avatarUrl"/>
+          <span class="data artist">{{nameArtist}}</span>
+        </div>
+        <div class="controls">
+          <span class="skip-back" @click="loadPreset(-1)"></span>
+          <span :class="[(isPlaying ? 'pause' : 'play')]" @click="playPauseSynth"></span>
+          <span class="skip-forward" @click="loadPreset(1)"></span>
+        </div>
+        <div class="volume">
+
+        </div>
+      </div>
     </div>
   </div>
 </template>
@@ -105,6 +140,8 @@ export default {
   },
   data() {
     return {
+      isPlaying: false,
+      pickedPreset: 0,
       noteArray: fill(range(0, 16), {
         selected: false,
         pitch: 0,
@@ -181,7 +218,7 @@ export default {
           }
         }
       );
-      this.toneLoop.start();
+      // this.toneLoop.start();
       this.loadPreset();
     },
     emitOnKey() {
@@ -190,12 +227,26 @@ export default {
       }
     },
     playPauseSynth() {
-      if (this.toneLoop.state === "stopped") return this.toneLoop.start();
+      if (this.toneLoop.state === "stopped") {
+        this.isPlaying = true;
+        return this.toneLoop.start();
+      }
+      this.isPlaying = false;
       this.toneLoop.stop();
     },
-    loadPreset() {
-      // randomly pick preset
-      this.pickedPreset = Math.round(Math.random() * (presets.length - 1));
+    loadPreset(mutation) {
+      if (mutation) {
+        this.pickedPreset = this.pickedPreset + mutation;
+        if (this.pickedPreset > presets.length - 1) {
+          this.pickedPreset = 0;
+        } else if (this.pickedPreset < 0) {
+          this.pickedPreset = presets.length - 1;
+        }
+        console.log("this.pickedPreset", this.pickedPreset);
+      } else {
+        // randomly pick preset
+        this.pickedPreset = Math.round(Math.random() * (presets.length - 1));
+      }
 
       // load the preset on synth
       this.$store.commit("setAudioParameterToPreset", {
@@ -281,19 +332,35 @@ h3 {
 
 h1 {
   font-weight: 900;
-  font-size: 3em;
+  font-size: 4em;
+  line-height: 1em;
+  margin-bottom: 1em;
+  margin-top: 0;
+}
+
+h2 {
+  margin-bottom: 2em;
+  text-transform: none;
+}
+
+h3 {
+  margin-bottom: 0.5em;
+  margin-top: 4em;
 }
 
 .navbar-casestudy {
   display: flex;
   justify-content: space-between;
-  font-weight: 900;
-  height: 4em;
+  font-weight: 600;
+  height: 5em;
   align-items: center;
+  // max-width: 1050px;
   padding: 0 2em;
+  margin: auto;
+  color: white;
   a {
-    color: white;
     text-decoration: none;
+    color: white;
   }
 }
 
@@ -302,7 +369,6 @@ button {
   font-size: 1em;
   padding: 0;
   cursor: pointer;
-  color: inherit;
   text-transform: uppercase;
   padding: 0.8rem 1.4rem;
   margin: 5px;
@@ -310,8 +376,17 @@ button {
   border: 1px solid #ff8574;
   -webkit-transition: all 0.2s;
   transition: all 0.2s;
+  color: white;
   &:hover {
     background: #ff8574;
+  }
+  &.filled {
+    background: #ff8574;
+    color: #000;
+    &:hover {
+      background: #000;
+      color: white;
+    }
   }
 }
 
@@ -356,20 +431,72 @@ button {
   max-width: 60em;
   margin: auto;
   justify-content: center;
+  margin-bottom: 10em;
 }
 
 .player {
   display: flex;
-  position: fixed;
   z-index: 1000;
-  width: 100%;
+  // max-width: 1050px;
   bottom: -1px;
-  height: 4em;
-  width: 100%;
-  justify-content: flex-start;
+  height: 5em;
+  margin: auto;
+  justify-content: space-between;
   align-items: center;
-  background: black;
-  padding: 0 2em;
+  .controls {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    span {
+      transition: all 0.2s;
+      cursor: pointer;
+      background-size: contain;
+      display: block;
+      width: 5em;
+      height: 5em;
+      &:hover {
+        transform: scale(1.1);
+      }
+    }
+    .play {
+      background-image: url("../assets/play.svg");
+    }
+    .pause {
+      background-image: url("../assets/pause.svg");
+    }
+    .skip-forward {
+      background-image: url("../assets/skip-forward.svg");
+      width: 2.5em;
+      height: 2.5em;
+    }
+    .skip-back {
+      background-image: url("../assets/skip-back.svg");
+      width: 2.5em;
+      height: 2.5em;
+    }
+  }
+  .user {
+    display: flex;
+    width: 30%;
+    justify-content: flex-start;
+    align-items: center;
+  }
+  .volume {
+    display: flex;
+    width: 30%;
+    justify-content: space-between;
+    align-items: center;
+  }
+  &__wrapper {
+    width: 100%;
+    position: fixed;
+    justify-content: center;
+    margin: auto;
+    background: black;
+    bottom: -1px;
+    height: 5em;
+    padding: 0 2em;
+  }
   & .custom-user-avatar {
     height: 50px;
     width: 50px;

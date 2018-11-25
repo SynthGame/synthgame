@@ -4,8 +4,7 @@ export default [
     oscillator1: {
       typeOsc: true
     },
-    oscillator2: {
-    },
+    oscillator2: {},
     filter: {},
     envelope: {},
     envelope2: {},
@@ -28,7 +27,8 @@ export default [
     lfo: {},
     router: {},
     levelData: {
-      text: 'The oscillator is the source of electronic sound. Use the knobs and dials to shape the outputted signal. '
+      text:
+        "The oscillator is the source of electronic sound. Use the knobs and dials to shape the outputted signal. "
     }
   },
   // level 3
@@ -45,7 +45,7 @@ export default [
     lfo: {},
     router: {},
     levelData: {
-      text: 'Both detune and octave control the pitch.'
+      text: "Both detune and octave control the pitch."
     }
   },
   // level 4
@@ -64,7 +64,7 @@ export default [
     lfo: {},
     router: {},
     levelData: {
-      text: 'You unlocked the second oscillator!'
+      text: "You unlocked the second oscillator!"
     }
   },
   // level 5
@@ -84,7 +84,8 @@ export default [
     lfo: {},
     router: {},
     levelData: {
-      text: 'Use detune on Osc 1 to detune the oscillators, resulting in a fatter sound.'
+      text:
+        "Use detune on Osc 1 to detune the oscillators, resulting in a fatter sound."
     }
   },
   // level 6
@@ -105,7 +106,7 @@ export default [
     lfo: {},
     router: {},
     levelData: {
-      text: 'Use volume on Osc 2 to alter the mix between the oscillators.'
+      text: "Use volume on Osc 2 to alter the mix between the oscillators."
     }
   },
   // level 7
@@ -128,7 +129,7 @@ export default [
     lfo: {},
     router: {},
     levelData: {
-      text: 'You unlocked the filter!'
+      text: "You unlocked the filter!"
     }
   },
   // level 8
@@ -152,7 +153,8 @@ export default [
     lfo: {},
     router: {},
     levelData: {
-      text: 'The cutoff frequency control sets the range of the sound passed.'
+      text:
+        "The cutoff frequency control sets the range of the sound passed through the filter."
     }
   },
   // level 9
@@ -178,7 +180,7 @@ export default [
     lfo: {},
     router: {},
     levelData: {
-      text: 'You unlocked the Amplifier Envelope!'
+      text: "You unlocked the Amplifier Envelope!"
     }
   },
   // level 10
@@ -205,7 +207,7 @@ export default [
     lfo: {},
     router: {},
     levelData: {
-      text: 'Every time a note is played, the envelope is triggered.'
+      text: "Every time a note is played, the envelope is triggered."
     }
   },
   // level 11
@@ -233,7 +235,8 @@ export default [
     lfo: {},
     router: {},
     levelData: {
-      text: 'Use attack, decay, sustain and release to decide on the volume of the note over time.'
+      text:
+        "Use attack, decay, sustain and release to decide on the volume of the note over time."
     }
   },
   // level 12
@@ -262,7 +265,7 @@ export default [
     lfo: {},
     router: {},
     levelData: {
-      text: 'Hint: set attack and decay to low levels for snappy sounds.'
+      text: "Hint: set attack and decay to low levels for snappy sounds."
     }
   },
   // // level 13
@@ -393,7 +396,7 @@ export default [
     },
     router: {},
     levelData: {
-      text: 'You unlocked the Modulation Envelope!'
+      text: "You unlocked the Modulation Envelope!"
     }
   },
   // level 17
@@ -420,7 +423,7 @@ export default [
     },
     envelope2: {
       attack: true,
-      decay: true,
+      decay: true
     },
     lfo: {
       // amount: true,
@@ -429,7 +432,7 @@ export default [
     },
     router: {},
     levelData: {
-      text: 'We use modulation envelope to modulate another synth control.'
+      text: "We use modulation envelope to modulate another synth control."
     }
   },
   // // level 18
@@ -540,7 +543,7 @@ export default [
       lfo: true
     },
     levelData: {
-      text: 'You must be a famous producer already.'
+      text: "You must be a famous producer already."
     }
   },
   // level 21
@@ -579,7 +582,46 @@ export default [
       envelope2: true
     },
     levelData: {
-      text: 'Make your own preset in Make Music, share your link on twitter and get featured in game.'
+      text: "The router routes the LFO and MOD ENV to different controls."
+    }
+  },
+  // level 21
+  {
+    oscillator1: {
+      detune: true,
+      frequency: true,
+      typeOsc: true
+    },
+    oscillator2: {
+      typeOsc: true,
+      frequency: true,
+      volume: true
+    },
+    filter: {
+      type: true,
+      cutOffFreq: true
+    },
+    envelope: {
+      attack: true,
+      decay: true,
+      sustain: true,
+      release: true
+    },
+    envelope2: {
+      attack: true,
+      decay: true
+    },
+    lfo: {
+      amount: true
+      // frequency: true,
+      // type: true
+    },
+    router: {
+      lfo: true,
+      envelope2: true
+    },
+    levelData: {
+      text: "You unlocked the LFO!"
     }
   },
   // level 21
@@ -611,53 +653,15 @@ export default [
     lfo: {
       amount: true,
       // frequency: true,
-      // type: true
+      type: true
     },
     router: {
       lfo: true,
       envelope2: true
     },
     levelData: {
-       text: 'You unlocked the LFO!'
-    }
-  },
-  // level 21
-  {
-    oscillator1: {
-      detune: true,
-      frequency: true,
-      typeOsc: true
-    },
-    oscillator2: {
-      typeOsc: true,
-      frequency: true,
-      volume: true
-    },
-    filter: {
-      type: true,
-      cutOffFreq: true
-    },
-    envelope: {
-      attack: true,
-      decay: true,
-      sustain: true,
-      release: true
-    },
-    envelope2: {
-      attack: true,
-      decay: true
-    },
-    lfo: {
-      amount: true,
-      frequency: true,
-      // type: true
-    },
-    router: {
-      lfo: true,
-      envelope2: true
-    },
-    levelData: {
-      text: 'LFO stands for low frequency oscillator. It produces an output signal which can modulate other controls.'
+      text:
+        "LFO stands for low frequency oscillator. It produces an output signal which can modulate other controls."
     }
   },
   // level 21
@@ -696,7 +700,8 @@ export default [
       envelope2: true
     },
     levelData: {
-      text: 'Created by www.okbye.io, together with Tatsuya Takahashi.'
+      text:
+        "Congratulations! You're an electronic music producer. Make the music for one of the levels, or keep playing the game and break the highscore: level 135."
     }
   }
-]
+];

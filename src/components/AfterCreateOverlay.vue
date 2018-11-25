@@ -2,7 +2,7 @@
   <div class="overlay">
     <div class="overlay-content-wrapper">
         <h1>Thank you</h1>
-        <h2>Confirm your submission in the next step for a chance to win! Or keep trying until you are ready to submit.<br><br>Share this link on social media to show others what you've made, or to create presets together.</h2>
+        <h2>Share this link and let others build on top of your work. <br><br>Feel you got what it takes to be featured in game? Email the link to bart@okbye.io.</h2>
         <span class="link">{{link}}</span>
       <div>
         <button class="button-next" @click="copy">{{copyButtonText}}</button>

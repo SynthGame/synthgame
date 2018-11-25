@@ -11,48 +11,49 @@
         <source src="../../src/assets/intro.mp4" type="video/mp4">
       </video> -->
       <div>
-        <button class="button-next" @click="$emit('startLevel')">Ready</button>
+        <button class="button-next" @click="$emit('startLevel')">Play Level</button>
+        <button v-if="gameLevel > 7" class="button-next" @click="$emit('create')">Make music</button>
       </div>
     </div>
   </div>
 </template>
 
 <script>
-import levels from '@/levels'
+import levels from "@/levels";
 
 export default {
-  name: 'startscreen',
+  name: "startscreen",
   props: {
     level: {
       type: Number,
       default: 1
     }
   },
-  mounted () {
-    window.addEventListener('keydown', this.emitOnKey)
+  mounted() {
+    window.addEventListener("keydown", this.emitOnKey);
   },
-  beforeDestroy () {
-    window.removeEventListener('keydown', this.emitOnKey)
+  beforeDestroy() {
+    window.removeEventListener("keydown", this.emitOnKey);
   },
   methods: {
-    emitOnKey () {
+    emitOnKey() {
       if (event.keyCode === 13) {
-        this.$emit('startLevel')
+        this.$emit("startLevel");
       }
     }
   },
   computed: {
-    gameLevel () {
-      return this.$store.getters.displayedLevel
+    gameLevel() {
+      return this.$store.getters.displayedLevel;
     },
-    gameLevelText () {
-      if (this.$store.state.gameState.level >= levels.length) return levels[levels.length - 1].levelData.text || ''
-      return levels[this.$store.state.gameState.level].levelData.text || ''
+    gameLevelText() {
+      if (this.$store.state.gameState.level >= levels.length)
+        return levels[levels.length - 1].levelData.text || "";
+      return levels[this.$store.state.gameState.level].levelData.text || "";
     }
   }
-}
+};
 </script>
 
 <style scoped lang="scss">
-
 </style>

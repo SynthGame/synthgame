@@ -7,8 +7,9 @@
           <span class="data artist">Preset by <a target="_blank" :href="'https://soundcloud.com/' + nameArtist">{{nameArtist}}</a></span>
         </div> -->
         <!-- <h2 v-if="!customLevelIsActive">Write the music for this game. On nov 17, Tatsuya Takahashi picks 1 lucky winner, who wins a trip to the MESS foundation!</h2> -->
-        <h2>You can create and share your own sounds here. Start with sequencer steps and modulate the sound. Submit and you can win the Superbooth prize!</h2>
+        <h2>You can create and share your own loops here. Start with sequencer steps and tweak the knobs you learned about. Submit and get featured in game!</h2>
       <div>
+        <button class="button-next" @click="$emit('back')">Back</button>
         <button class="button-next" @click="$emit('showCreate')">Ready</button>
       </div>
     </div>
@@ -16,16 +17,16 @@
 </template>
 
 <script>
-import { getPresetById } from '@/db'
+import { getPresetById } from "@/db";
 
 export default {
-  name: 'beforeCreate',
-  data () {
+  name: "beforeCreate",
+  data() {
     return {
       customLevelIsActive: false,
       customAuthor: null,
       customAuthorAvatar: null
-    }
+    };
   },
   props: {
     level: {
@@ -33,7 +34,7 @@ export default {
       default: 1
     }
   },
-  created () {
+  created() {
     // var ogs = require('open-graph-scraper');
     // var options = {'url': 'https://soundcloud.com/bart-proost'};
     // ogs(options, function (error, results) {
@@ -41,7 +42,7 @@ export default {
     //   console.log('results:', results);
     // });
     if (this.$route.query.preset) {
-      this.customLevelIsActive = true
+      this.customLevelIsActive = true;
       // getPresetById(this.$route.query.preset)
       //   .then(data => {
       //     this.customLevelIsActive = true
@@ -52,28 +53,28 @@ export default {
       //   })
     }
   },
-  mounted () {
-    window.addEventListener('keydown', this.emitOnKey)
+  mounted() {
+    window.addEventListener("keydown", this.emitOnKey);
   },
-  beforeDestroy () {
-    window.removeEventListener('keydown', this.emitOnKey)
+  beforeDestroy() {
+    window.removeEventListener("keydown", this.emitOnKey);
   },
   methods: {
-    emitOnKey () {
+    emitOnKey() {
       if (event.keyCode === 13) {
-        this.$emit('showCreate')
+        this.$emit("showCreate");
       }
     }
   },
   computed: {
-    nameArtist () {
-      return this.$store.state.name
+    nameArtist() {
+      return this.$store.state.name;
     },
-    avatarUrl () {
-      return this.$store.state.avatarUrl
-    },
+    avatarUrl() {
+      return this.$store.state.avatarUrl;
+    }
   }
-}
+};
 </script>
 
 <style scoped lang="scss">
@@ -81,7 +82,7 @@ export default {
   height: 50px;
   width: 50px;
   border-radius: 100%;
-  border:2px solid white;
+  border: 2px solid white;
   background: white;
 }
 
@@ -100,5 +101,4 @@ export default {
     }
   }
 }
-
 </style>

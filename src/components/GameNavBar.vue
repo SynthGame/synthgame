@@ -85,8 +85,8 @@
       </div>
       </template>
       <template v-else>
-        <!-- <input class="name-input" placeholder="Enter your Soundcloud username" v-model="exportPresetName"/> -->
-        <!-- <button @click="submitPreset(exportPresetName)">submit</button> -->
+        <input class="name-input" placeholder="Enter your Soundcloud username" v-model="exportPresetName"/>
+        <button @click="submitPreset(exportPresetName)">submit</button>
         <!-- <button @click="submitPreset()">submit</button> -->
       </template>
       <after-create-overlay v-if="showAfterCreateOverlay" :link="exportPresetLink" @closeCreate="exitAfterCreate"/>
@@ -103,200 +103,229 @@
 </template>
 
 <script>
-import { MODULE_OSCILLATOR_COLOR, MODULE_OSCILLATORTWO_COLOR, MODULE_ENVELOPE_COLOR, MODULE_FILTER_COLOR, MODULE_DELAY_COLOR, MODULE_REVERB_COLOR, MODULE_LFO_COLOR} from '@/constants'
-import padStart from 'lodash/padStart'
-import some from 'lodash/some'
-import AfterCreateOverlay from '@/components/AfterCreateOverlay'
+import {
+  MODULE_OSCILLATOR_COLOR,
+  MODULE_OSCILLATORTWO_COLOR,
+  MODULE_ENVELOPE_COLOR,
+  MODULE_FILTER_COLOR,
+  MODULE_DELAY_COLOR,
+  MODULE_REVERB_COLOR,
+  MODULE_LFO_COLOR
+} from "@/constants";
+import padStart from "lodash/padStart";
+import some from "lodash/some";
+import AfterCreateOverlay from "@/components/AfterCreateOverlay";
 
 export default {
-  name: 'gameNavBar',
-  data: function () {
+  name: "gameNavBar",
+  data: function() {
     return {
       timeLeftSeconds: 45,
       timer: null,
       indicatorActive: true,
-      exportPresetName: '',
-      exportPresetLink: '',
+      exportPresetName: "",
+      exportPresetLink: "",
       oscillatorColor: MODULE_OSCILLATOR_COLOR,
       oscillatorTwoColor: MODULE_OSCILLATORTWO_COLOR,
       envelopeColor: MODULE_ENVELOPE_COLOR,
       filterColor: MODULE_FILTER_COLOR,
       lfoColor: MODULE_LFO_COLOR,
       showAfterCreateOverlay: false
-    }
+    };
   },
   components: {
     AfterCreateOverlay
   },
   computed: {
-    timerIsRunning () {
-      return this.$store.state.gameState.timerIsRunning
+    timerIsRunning() {
+      return this.$store.state.gameState.timerIsRunning;
     },
-    score () {
-      return this.$store.state.gameState.score
+    score() {
+      return this.$store.state.gameState.score;
     },
-    highScore () {
-      return this.$store.state.gameState.highScore
+    highScore() {
+      return this.$store.state.gameState.highScore;
     },
-    createModeIsActive () {
-      return this.$store.state.gameState.createModeIsActive
+    createModeIsActive() {
+      return this.$store.state.gameState.createModeIsActive;
     },
-    knobsAvailable () {
-      return this.$store.state.gameState.knobsAvailable
+    knobsAvailable() {
+      return this.$store.state.gameState.knobsAvailable;
     },
-    oscillator1Complete () {
-      return Object.values(this.$store.getters.audioParametersMatchGoalWithMargin['oscillator1']).every(param => param)
+    oscillator1Complete() {
+      return Object.values(
+        this.$store.getters.audioParametersMatchGoalWithMargin["oscillator1"]
+      ).every(param => param);
     },
-    oscillator2Complete () {
-      return Object.values(this.$store.getters.audioParametersMatchGoalWithMargin['oscillator2']).every(param => param)
+    oscillator2Complete() {
+      return Object.values(
+        this.$store.getters.audioParametersMatchGoalWithMargin["oscillator2"]
+      ).every(param => param);
     },
-    filterComplete () {
-      return Object.values(this.$store.getters.audioParametersMatchGoalWithMargin['filter']).every(param => param)
+    filterComplete() {
+      return Object.values(
+        this.$store.getters.audioParametersMatchGoalWithMargin["filter"]
+      ).every(param => param);
     },
-    envelopeComplete () {
-      return Object.values(this.$store.getters.audioParametersMatchGoalWithMargin['envelope']).every(param => param)
+    envelopeComplete() {
+      return Object.values(
+        this.$store.getters.audioParametersMatchGoalWithMargin["envelope"]
+      ).every(param => param);
     },
-    lfoComplete () {
-      return Object.values(this.$store.getters.audioParametersMatchGoalWithMargin['lfo']).every(param => param)
+    lfoComplete() {
+      return Object.values(
+        this.$store.getters.audioParametersMatchGoalWithMargin["lfo"]
+      ).every(param => param);
     },
-    gameLevel () {
-      return this.$store.getters.displayedLevel
+    gameLevel() {
+      return this.$store.getters.displayedLevel;
     },
-    paddedTimeLeftString () {
-      return `00:${padStart(this.timeLeftSeconds, 2, '0')}`
+    paddedTimeLeftString() {
+      return `00:${padStart(this.timeLeftSeconds, 2, "0")}`;
     },
-    paddedScoreString () {
-      return `${padStart(this.score, 5, '0')}`
+    paddedScoreString() {
+      return `${padStart(this.score, 5, "0")}`;
     },
-    paddedHighScoreString () {
-      return `${padStart(this.highScore, 5, '0')}`
+    paddedHighScoreString() {
+      return `${padStart(this.highScore, 5, "0")}`;
     }
   },
-  mounted () {
+  mounted() {
     window.addEventListener("message", this.receiveMessage, false);
   },
-  beforeDestroy () {
-    window.removeEventListener('message', this.receiveMessage, false);
+  beforeDestroy() {
+    window.removeEventListener("message", this.receiveMessage, false);
   },
   methods: {
     receiveMessage(event) {
-      if (event.data !== "clicked-next") {return
-      } else {this.submitPreset()}
-    },
-    startTimer () {
-      this.timeLeftSeconds = 59
-      this.timer = this.timer || window.setInterval(() => {
-        if (this.timeLeftSeconds === 0) return this.timeIsUp()
-        this.timeLeftSeconds--
-      }, 1000)
-    },
-    stopTimer () {
-      window.clearInterval(this.timer)
-      this.timer = null
-      this.$store.commit('addValueToScore', this.timeLeftSeconds)
-      if (this.$store.state.gameState.score > this.$store.state.gameState.highScore) {
-        this.$store.commit('updateHighScore', this.$store.state.gameState.score)
+      if (event.data !== "clicked-next") {
+        return;
+      } else {
+        this.submitPreset();
       }
     },
-    timeIsUp () {
+    startTimer() {
+      this.timeLeftSeconds = 59;
+      this.timer =
+        this.timer ||
+        window.setInterval(() => {
+          if (this.timeLeftSeconds === 0) return this.timeIsUp();
+          this.timeLeftSeconds--;
+        }, 1000);
+    },
+    stopTimer() {
+      window.clearInterval(this.timer);
+      this.timer = null;
+      this.$store.commit("addValueToScore", this.timeLeftSeconds);
+      if (
+        this.$store.state.gameState.score >
+        this.$store.state.gameState.highScore
+      ) {
+        this.$store.commit(
+          "updateHighScore",
+          this.$store.state.gameState.score
+        );
+      }
+    },
+    timeIsUp() {
       // alert('game\'s over')
-      this.stopTimer()
-      this.$store.dispatch('gameOver')
+      this.stopTimer();
+      this.$store.dispatch("gameOver");
       // this.startTimer()
     },
-    moduleIsUseable (moduleName) {
-      if (this.createModeIsActive) return true
-      return some(this.knobsAvailable[moduleName]) // some are truthy
+    moduleIsUseable(moduleName) {
+      if (this.createModeIsActive) return true;
+      return some(this.knobsAvailable[moduleName]); // some are truthy
     },
-    exitGame () {
-      this.$router.push('/')
-      location.reload()
+    exitGame() {
+      this.$router.push("/");
+      location.reload();
     },
-    exitAfterCreate () {
+    exitAfterCreate() {
       this.showAfterCreateOverlay = false;
     },
-    submitPreset (val) {
+    submitPreset(val) {
       // this.showAfterCreateOverlay = true
-      this.$store.dispatch('exportPreset', {name: ''})
-        .then(presetId => {
-          // alert(`${window.location.origin}/?preset=${presetId}`)
-          this.exportPresetLink = `${window.location.origin}/?preset=${presetId}`;
-          this.$router.push('?preset=' + presetId)
-          window.parent.postMessage(presetId, '*');
-          console.log('id',presetId);
-        })
+      this.$store.dispatch("exportPreset", { name: "" }).then(presetId => {
+        // alert(`${window.location.origin}/?preset=${presetId}`)
+        this.exportPresetLink = `${window.location.origin}/?preset=${presetId}`;
+        this.$router.push("?preset=" + presetId);
+        window.parent.postMessage(presetId, "*");
+        this.showAfterCreateOverlay = true;
+        console.log("id", presetId);
+      });
     },
-    requestNextLevel () {
-      console.log('requestNextLevel fired in gamenavbar');
-      this.$store.dispatch('nextLevel')
+    requestNextLevel() {
+      console.log("requestNextLevel fired in gamenavbar");
+      this.$store.dispatch("nextLevel");
     }
   },
   watch: {
-    timerIsRunning (val) {
-      if (val) return this.startTimer()
-      this.stopTimer()
+    timerIsRunning(val) {
+      if (val) return this.startTimer();
+      this.stopTimer();
     }
   }
-}
+};
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style lang="scss" scoped>
 .main {
- width: 100%;
- text-transform: uppercase;
- padding: 0 1.5%;
- height: 8vh;
- font-size: 1rem;
- display: flex;
-justify-content: space-between;
-align-items: center;
-background: black;
-// border: 1px solid white;
- align-items: center;
- justify-content: space-between;
- & .score {
-   display: flex;
-   flex-direction: column;
-   width: 8em;
- }
- & .highscore {
-   border-left: 1px solid white;
-   display: flex;
-   flex-direction: column;
-   width: 8em;
- }
- & .exit {
-   transform:scale(.8);
-   transition: all .5s;
-   cursor: pointer;
-   &:hover {
-     transform: rotate(90deg)
-   }
- }
- & .left {
-   width:40%;
-   display: flex;
-   justify-content: flex-start;
-   align-items: center;
- }
- & .right {
-   & span {
-     font-size: .7em;
-   }
-   & .data {
-     font-weight: 600;
-     font-size: 1em;
-   }
-   width:40%;
-   display: flex;
-   justify-content: flex-end;
-   align-items: center;
- }
- &__level {
-   font-weight: 300;
-   margin-left: 1em;
- }
+  width: 100%;
+  text-transform: uppercase;
+  padding: 0 1.5%;
+  height: 8vh;
+  font-size: 1rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: black;
+  // border: 1px solid white;
+  align-items: center;
+  justify-content: space-between;
+  & .score {
+    display: flex;
+    flex-direction: column;
+    width: 8em;
+  }
+  & .highscore {
+    border-left: 1px solid white;
+    display: flex;
+    flex-direction: column;
+    width: 8em;
+  }
+  & .exit {
+    transform: scale(0.8);
+    transition: all 0.5s;
+    cursor: pointer;
+    &:hover {
+      transform: rotate(90deg);
+    }
+  }
+  & .left {
+    width: 40%;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+  }
+  & .right {
+    & span {
+      font-size: 0.7em;
+    }
+    & .data {
+      font-weight: 600;
+      font-size: 1em;
+    }
+    width: 40%;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+  }
+  &__level {
+    font-weight: 300;
+    margin-left: 1em;
+  }
 }
 .game_title {
   text-transform: uppercase;
@@ -311,18 +340,17 @@ background: black;
 
 .module__name__status-indicator {
   display: inline-block;
-  margin-left: .8em;
+  margin-left: 0.8em;
   width: 11px;
   height: 11px;
   border-radius: 100%;
   transition: 0.5s;
- border: 1px solid white;
+  border: 1px solid white;
 
   &--active {
     border: none;
     transition: 0.5s;
- border: 1px solid white;
-
+    border: 1px solid white;
   }
 }
 
@@ -344,19 +372,21 @@ button {
   color: white;
   text-transform: uppercase;
   margin-right: 2em;
-  padding: .5em 1em;
+  padding: 0.5em 1em;
   font-family: montserrat;
   font-weight: 600;
   outline: 0;
   cursor: pointer;
-  transition: all .2s;
+  transition: all 0.2s;
   &:hover {
     background: rgb(255, 133, 116);
   }
 }
 
 @keyframes blink {
-    from {opacity: 0;}
+  from {
+    opacity: 0;
+  }
 }
 
 @media only screen and (max-width: 1000px) {
@@ -364,7 +394,7 @@ button {
     min-width: 14em;
   }
   .main__level {
-      display: none;
+    display: none;
   }
   // .game_title {
   //     display: none;

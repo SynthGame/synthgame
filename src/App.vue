@@ -7,13 +7,14 @@
         @create="showCreatePreview=true"
       />
     </transition>
-    <before-create-overlay v-if="showCreatePreview" @showCreate="showCreate"/>
     <transition name="slide-up-slide-down">
       <preview-screen
         v-if="displayPreviewOverlay"
         @startLevel="beginSvoosh"
+        @create="switchToCreate"
       />
     </transition>
+    <before-create-overlay v-if="showCreatePreview" @showCreate="showCreate" @back="showCreatePreview = false"/>
     <svoosh
       v-if="isThereSvooshComponent"
       :isFired="svooshIt"
@@ -160,6 +161,10 @@ export default {
     // }
   },
   methods: {
+    switchToCreate() {
+      this.showCreatePreview = true;
+      this.displayPreviewOverlay = false;
+    },
     initSynth() {
       var self = this;
       this.toneLoop = audio.setMainLoop(

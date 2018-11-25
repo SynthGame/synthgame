@@ -86,7 +86,7 @@
                 >NEXT LEVEL</button>
       </div>
       <div class="credits">
-        Game created by <a href="https://okbye.io" target="_blank"><span>Ok Bye</span></a> for <a href="https://mindgamers.redbull.com" target="_blank"><span>RBMG</span></a>.
+        Game created by <a href="https://okbye.io" target="_blank"><span>Ok Bye</span></a>. Read the <a href="https://okbye.io/work/tats" target="_blank"><span>Case Study</span></a>.
       </div>
     </div>
   </div>
