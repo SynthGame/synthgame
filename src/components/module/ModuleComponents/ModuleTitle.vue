@@ -18,7 +18,7 @@
 
 <script>
 export default {
-  name: 'ModuleTitle',
+  name: "ModuleTitle",
   props: {
     indicatorActive: {
       type: Boolean,
@@ -26,64 +26,63 @@ export default {
     },
     moduleColor: {
       type: String,
-      default: '#FFFFFF'
+      default: "#FFFFFF"
     }
   },
-  data: function () {
-    return {
-    }
+  data: function() {
+    return {};
   }
-}
+};
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style lang="scss" scoped>
-  .module__name {
-    font-size: .9em;
-    padding: 5% 10%;
-    margin: 0;
-    display: flex;
-    position: relative;
-    justify-content: flex-start;
-    align-items: baseline;
-    text-transform: uppercase;
-    letter-spacing: 2px;
-    &__title {
-      h2 {
-        margin: 0;
-        font-size: .8rem;
-      }
-    }
-
-    &__subtitle {
-      h3 {
-        font-size: 1rem;
-        margin: 0 0 0 .5em;
-        font-weight: 300;
-      }
-    }
-
-    &__status-indicator {
-      display: inline-block;
-      margin-left: .2em;
-      height: 9px;
-      width: 9px;
-      border: 1px solid white;
-      border-radius: 100%;
-
-      &--active {
-        // border: none;
-        background:black;
-      }
+.module__name {
+  font-size: 0.9em;
+  padding: 5% 10%;
+  margin: 0;
+  display: flex;
+  position: relative;
+  justify-content: flex-start;
+  align-items: baseline;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  &__title {
+    h2 {
+      margin: 0;
+      font-size: 0.8rem;
     }
   }
 
-  h2 {
+  &__subtitle {
+    h3 {
+      font-size: 1rem;
+      margin: 0 0 0 0.5em;
+      font-weight: 300;
+    }
   }
 
-  h3 {
-    font-size: 1em;
-    margin: 0 0 0 .5em;
-    font-weight: 300;
+  &__status-indicator {
+    display: inline-block;
+    margin-left: 0.2em;
+    height: 9px;
+    width: 9px;
+    border: 1px solid white;
+    border-radius: 100%;
+
+    &--active {
+      // border: none;
+      background: black;
+    }
   }
+}
+
+h2 {
+}
+
+h3 {
+  font-size: 1em;
+  margin: 0 0 0 0.5em;
+  font-weight: 300;
+}
 </style>

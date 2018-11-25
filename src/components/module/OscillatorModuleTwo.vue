@@ -82,27 +82,27 @@
 </template>
 
 <script>
-import { mapState } from 'vuex'
-import { vuexSyncGen, mapValueToRange } from '@/utils'
-import { MODULE_OSCILLATORTWO_COLOR } from '@/constants'
+import { mapState } from "vuex";
+import { vuexSyncGen, mapValueToRange } from "@/utils";
+import { MODULE_OSCILLATORTWO_COLOR } from "@/constants";
 
-import audio from '@/audio'
-import character from '@/character'
-import ModuleKnob from '@/components/ModuleKnob.vue'
-import ModuleDisplay from '@/components/ModuleDisplay.vue'
-import ModuleTitle from './ModuleComponents/ModuleTitle.vue'
-import ModuleButton from '@/components/ModuleButton'
+import audio from "@/audio";
+import character from "@/character";
+import ModuleKnob from "@/components/ModuleKnob.vue";
+import ModuleDisplay from "@/components/ModuleDisplay.vue";
+import ModuleTitle from "./ModuleComponents/ModuleTitle.vue";
+import ModuleButton from "@/components/ModuleButton";
 
-var self
+var self;
 
 export default {
-  name: 'OscillatorModule',
-  data () {
+  name: "OscillatorModule",
+  data() {
     return {
-      name: 'oscillator2',
+      name: "oscillator2",
       oscillator2: {},
       moduleColor: MODULE_OSCILLATORTWO_COLOR
-    }
+    };
   },
   components: {
     ModuleKnob,
@@ -110,39 +110,40 @@ export default {
     ModuleTitle,
     ModuleButton
   },
-  created () {
-    self = this
-    this.oscillator2 = audio.oscillator2.state.device
+  created() {
+    self = this;
+    this.oscillator2 = audio.oscillator2.state.device;
     // start the second oscillator
-    this.oscillator2.start()
+    this.oscillator2.start();
   },
-  beforeDestroy () {
+  beforeDestroy() {
     // stop the second oscillator
-    this.oscillator2.stop()
+    this.oscillator2.stop();
   },
   methods: {
-    incrementOctave () {
+    incrementOctave() {
       let currentOctave = this.freqArray.findIndex(el => el == this.frequency);
       if (currentOctave < 3) {
-        this.frequency = this.freqArray[currentOctave+1]
-      };
+        this.frequency = this.freqArray[currentOctave + 1];
+      }
     },
-    decrementOctave () {
+    decrementOctave() {
       let currentOctave = this.freqArray.findIndex(el => el == this.frequency);
       if (currentOctave > 0) {
-        this.frequency = this.freqArray[currentOctave-1]
-      };
-    },
+        this.frequency = this.freqArray[currentOctave - 1];
+      }
+    }
   },
   computed: {
-    timerIsRunning () {
-      return this.$store.state.gameState.timerIsRunning
+    timerIsRunning() {
+      return this.$store.state.gameState.timerIsRunning;
     },
-    dialsAreWithinMargin () {
-      if (this.createModeIsActive) return false // quick hack
-      this.title = 'Done!'
-      return Object.values(this.$store.getters.audioParametersMatchGoalWithMargin[this.name])
-        .every(param => param)
+    dialsAreWithinMargin() {
+      if (this.createModeIsActive) return false; // quick hack
+      this.title = "Done!";
+      return Object.values(
+        this.$store.getters.audioParametersMatchGoalWithMargin[this.name]
+      ).every(param => param);
     },
     // freqDial: {
     //   get () {
@@ -152,14 +153,14 @@ export default {
     //     this.frequency = this.freqArray[val]
     //   }
     // },
-    ...vuexSyncGen('oscillator2', 'frequency', val => {
+    ...vuexSyncGen("oscillator2", "frequency", val => {
       // self.oscillator2.frequency.value = character.oscillator2.frequency(val)
     }),
-    ...vuexSyncGen('oscillator2', 'typeOsc', val => {
-      if (self.oscillator2.type === character.oscillator2.typeOsc(val)) return
-      self.oscillator2.type = character.oscillator2.typeOsc(val)
-      self.oscillator2.stop()
-      self.oscillator2.start()
+    ...vuexSyncGen("oscillator2", "typeOsc", val => {
+      if (self.oscillator2.type === character.oscillator2.typeOsc(val)) return;
+      self.oscillator2.type = character.oscillator2.typeOsc(val);
+      self.oscillator2.stop();
+      self.oscillator2.start();
     }),
     // ...vuexSyncGen('oscillator2', 'phase', val => {
     //   self.oscillator2.phase = character.oscillator2.phase(val) // phase in degrees
@@ -167,8 +168,8 @@ export default {
     // ...vuexSyncGen('oscillator2', 'detune', val => {
     //   self.oscillator2.detune.value = character.oscillator2.detune(val)
     // }),
-    ...vuexSyncGen('oscillator2', 'volume', val => {
-      self.oscillator2.volume.value = character.oscillator2.volume(val)
+    ...vuexSyncGen("oscillator2", "volume", val => {
+      self.oscillator2.volume.value = character.oscillator2.volume(val);
     }),
     ...mapState({
       frequencyGoal: state => state.gameState.goal.oscillator2.frequency,
@@ -182,22 +183,21 @@ export default {
       createModeIsActive: state => state.gameState.createModeIsActive
     })
   }
-}
+};
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped lang="scss">
-
 .switch {
   border: 1px solid #43bede;
 }
 
 .module .button-wrapper button {
-    border: 1px solid #43bede;
+  border: 1px solid #43bede;
 }
 
 svg.display {
-    fill: #43bede;
+  fill: #43bede;
 }
 
 ul {

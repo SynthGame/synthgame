@@ -14,49 +14,46 @@
 </template>
 
 <script>
-
 export default {
-  name: 'beforeCreate',
+  name: "beforeCreate",
   props: {
     link: {
       type: String,
-      default: 'a link'
+      default: "a link"
     }
   },
-  data () {
+  data() {
     return {
-      copyButtonText: 'copy'
-    }
+      copyButtonText: "copy"
+    };
   },
-  mounted () {
-    window.addEventListener('keydown', this.emitOnKey)
+  mounted() {
+    window.addEventListener("keydown", this.emitOnKey);
   },
-  beforeDestroy () {
-    window.removeEventListener('keydown', this.emitOnKey)
+  beforeDestroy() {
+    window.removeEventListener("keydown", this.emitOnKey);
   },
   methods: {
-    emitOnKey () {
+    emitOnKey() {
       if (event.keyCode === 13) {
-        this.$emit('closeCreate')
+        this.$emit("closeCreate");
       }
     },
-    copy () {
-      const el = document.createElement('textarea')
-      el.value = this.link
-      document.body.appendChild(el)
-      el.select()
-      document.execCommand('copy')
-      document.body.removeChild(el)
-      this.copyButtonText = 'copied!'
+    copy() {
+      const el = document.createElement("textarea");
+      el.value = this.link;
+      document.body.appendChild(el);
+      el.select();
+      document.execCommand("copy");
+      document.body.removeChild(el);
+      this.copyButtonText = "copied!";
     }
   },
-  computed: {
-  }
-}
+  computed: {}
+};
 </script>
 
 <style scoped lang="scss">
-
 h2 {
   font-size: 2em;
   max-width: 30em;
@@ -66,7 +63,7 @@ h2 {
 .link {
   user-select: text;
   text-transform: none;
-  background-color:  #fff;
+  background-color: #fff;
   color: #000;
   font-size: 2rem;
   padding: 0.5rem;
@@ -79,6 +76,5 @@ h2 {
   .link {
     font-size: 1rem !important;
   }
-
 }
 </style>

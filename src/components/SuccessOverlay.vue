@@ -73,7 +73,7 @@
       </div>
       <div class="scores">
         <img class="custom-user-avatar" :src="avatarUrl"/>
-        <span class="data artist">Preset by <a target="_blank" :href="'https://soundcloud.com/' + nameArtist">{{nameArtist}}</a></span>
+        <span class="data artist">Preset by {{nameArtist}}</span>
       </div>
       <div>
         <button class="button-next"
@@ -85,18 +85,28 @@
                 ref="button"
                 >NEXT LEVEL</button>
       </div>
+      <div class="credits">
+        Game created by <a href="https://okbye.io" target="_blank"><span>Ok Bye</span></a> for <a href="https://mindgamers.redbull.com" target="_blank"><span>RBMG</span></a>.
+      </div>
     </div>
   </div>
 </template>
 
 <script>
-import { keyframes, easing } from 'popmotion'
-import { MODULE_OSCILLATOR_COLOR, MODULE_ENVELOPE_COLOR, MODULE_FILTER_COLOR, MODULE_LFO_COLOR, MODULE_DELAY_COLOR, MODULE_REVERB_COLOR } from '@/constants'
-import { color } from 'style-value-types'
-import padStart from 'lodash/padStart'
+import { keyframes, easing } from "popmotion";
+import {
+  MODULE_OSCILLATOR_COLOR,
+  MODULE_ENVELOPE_COLOR,
+  MODULE_FILTER_COLOR,
+  MODULE_LFO_COLOR,
+  MODULE_DELAY_COLOR,
+  MODULE_REVERB_COLOR
+} from "@/constants";
+import { color } from "style-value-types";
+import padStart from "lodash/padStart";
 
 export default {
-  name: 'Overlay',
+  name: "Overlay",
   props: {
     level: {
       type: Number,
@@ -107,7 +117,7 @@ export default {
       default: 545
     }
   },
-  data () {
+  data() {
     return {
       currentAnim: null,
       anim: {
@@ -122,99 +132,114 @@ export default {
         }
       },
       colorArray: [],
-      currentColor: '',
-      currentColor1: '',
+      currentColor: "",
+      currentColor1: "",
       litUpButton: false
-    }
+    };
   },
-  created () {
+  created() {
     // randomize animation:
-    const currentAnimationNumber = Math.floor(Math.random() * Object.keys(this.anim).length)
-    this.currentAnim = 'drum'
+    const currentAnimationNumber = Math.floor(
+      Math.random() * Object.keys(this.anim).length
+    );
+    this.currentAnim = "drum";
 
-    window.addEventListener('keydown', this.emitOnKey)
-    this.colorArray.push(MODULE_OSCILLATOR_COLOR, MODULE_ENVELOPE_COLOR, MODULE_FILTER_COLOR, MODULE_LFO_COLOR, MODULE_DELAY_COLOR, MODULE_REVERB_COLOR)
-    this.currentColor = this.changeColor(this.currentColor)
-    this.currentColor1 = this.changeColor(this.currentColor1)
+    window.addEventListener("keydown", this.emitOnKey);
+    this.colorArray.push(
+      MODULE_OSCILLATOR_COLOR,
+      MODULE_ENVELOPE_COLOR,
+      MODULE_FILTER_COLOR,
+      MODULE_LFO_COLOR,
+      MODULE_DELAY_COLOR,
+      MODULE_REVERB_COLOR
+    );
+    this.currentColor = this.changeColor(this.currentColor);
+    this.currentColor1 = this.changeColor(this.currentColor1);
   },
 
-  mounted () {
-    let conf
-    let callback
+  mounted() {
+    let conf;
+    let callback;
 
-    if (this.currentAnim == 'ping') {
+    if (this.currentAnim == "ping") {
       conf = {
         values: [
-          { ballY: 0, racketRotate: 0, racketYOffset: 0, stick1: 0},
-          { ballY: -200, racketRotate: 12, racketYOffset: 15, stick1: 20},
-          { ballY: 0, racketRotate: 0, racketYOffset: 0, stick1: 0}
+          { ballY: 0, racketRotate: 0, racketYOffset: 0, stick1: 0 },
+          { ballY: -200, racketRotate: 12, racketYOffset: 15, stick1: 20 },
+          { ballY: 0, racketRotate: 0, racketYOffset: 0, stick1: 0 }
         ],
         loop: Infinity,
         duration: this.duration,
         easings: [easing.easeOut, easing.easeIn, easing.lineair]
-      }
+      };
       callback = {
         update: v => {
-          this.anim.ping.ballHeight = v.ballY
-          this.anim.ping.racketTurn = v.racketRotate
-          this.anim.ping.racketYOffset = v.racketYOffset
+          this.anim.ping.ballHeight = v.ballY;
+          this.anim.ping.racketTurn = v.racketRotate;
+          this.anim.ping.racketYOffset = v.racketYOffset;
           // this.anim.drum.stick1 = v.stick1
           if (v.ballY == 0) {
-            this.currentColor = this.changeColor()
+            this.currentColor = this.changeColor();
           }
         },
-        complete: () => { console.log('lalala') }
-      }
-    } else if (this.currentAnim == 'drum') {
+        complete: () => {
+          console.log("lalala");
+        }
+      };
+    } else if (this.currentAnim == "drum") {
       conf = {
         values: [
-          { stick1: 0, stick2: 20, time: 0},
-          { stick1: -20, stick2: 0, time: 1},
-          { stick1: 0, stick2: 20, time: 1}
+          { stick1: 0, stick2: 20, time: 0 },
+          { stick1: -20, stick2: 0, time: 1 },
+          { stick1: 0, stick2: 20, time: 1 }
         ],
         loop: Infinity,
         duration: this.bpm * 9.90909090909, // 1090 = 110
         // easings: easing.cubicBezier(.29,.06,1,-0.24)
         easings: easing.easeIn
-      }
+      };
 
       callback = {
         update: v => {
-          this.anim.drum.stick1 = v.stick1
-          this.anim.drum.stick2 = v.stick2
+          this.anim.drum.stick1 = v.stick1;
+          this.anim.drum.stick2 = v.stick2;
           if (v.stick1 === 0) {
-            this.currentColor = this.changeColor(this.currentColor)
+            this.currentColor = this.changeColor(this.currentColor);
           }
           if (v.stick2 < 0.01) {
-            this.currentColor1 = this.changeColor(this.currentColor1)
+            this.currentColor1 = this.changeColor(this.currentColor1);
             // console.log(v.stick2)
           }
         },
         complete: () => {}
-      }
+      };
     }
-    keyframes(conf).start(callback)
-    this.$refs.button.focus()
+    keyframes(conf).start(callback);
+    this.$refs.button.focus();
   },
-  beforeDestroy () {
-    window.removeEventListener('keydown', this.emitOnKey)
+  beforeDestroy() {
+    window.removeEventListener("keydown", this.emitOnKey);
   },
   methods: {
-    emitOnKey () {
+    emitOnKey() {
       if (event.keyCode === 13) {
-        this.$emit('next')
+        this.$emit("next");
       }
     }
   },
   methods: {
-    changeColor (current) {
-      let randomColor = this.colorArray[Math.floor(Math.random() * this.colorArray.length)]
+    changeColor(current) {
+      let randomColor = this.colorArray[
+        Math.floor(Math.random() * this.colorArray.length)
+      ];
       // does that even work?
       if (randomColor === current) {
-        randomColor = this.colorArray[Math.floor(Math.random() * this.colorArray.length)]
+        randomColor = this.colorArray[
+          Math.floor(Math.random() * this.colorArray.length)
+        ];
         // console.log('repeat!')
       }
-      return randomColor
+      return randomColor;
     }
     // buttonLeave() {
     //   this.litUpButton = false;
@@ -223,42 +248,44 @@ export default {
     // },
   },
   computed: {
-    bpm () {
-      return this.$store.state.bpm
+    bpm() {
+      return this.$store.state.bpm;
     },
-    nameArtist () {
-      return this.$store.state.name
+    nameArtist() {
+      return this.$store.state.name;
     },
-    avatarUrl () {
-      return this.$store.state.avatarUrl
+    avatarUrl() {
+      return this.$store.state.avatarUrl;
     },
-    gameScore () {
-      return this.$store.state.gameState.score
+    gameScore() {
+      return this.$store.state.gameState.score;
     },
-    gameHighScore () {
-      return this.$store.state.gameState.highScore
+    gameHighScore() {
+      return this.$store.state.gameState.highScore;
     },
-    paddedScoreString () {
-      return `${padStart(this.gameScore, 5, '0')}`
+    paddedScoreString() {
+      return `${padStart(this.gameScore, 5, "0")}`;
     },
-    paddedHighScoreString () {
-      return `${padStart(this.gameHighScore, 5, '0')}`
+    paddedHighScoreString() {
+      return `${padStart(this.gameHighScore, 5, "0")}`;
     },
-    gameLevel () {
-      return this.$store.getters.displayedLevel
+    gameLevel() {
+      return this.$store.getters.displayedLevel;
     },
-    computedRackedStyles () {
-      return {'animation-name': 'racket-movement',
-        'animation-duration': '1s',
-        'animation-iteration-count': '10',
-        'animation-direction': 'alternate', /* or: normal */
-        'animation-timing-function': 'ease-out', /* or: ease, ease-in, ease-in-out, linear, cubic-bezier(x1, y1, x2, y2) */
-        'animation-fill-mode': 'forwards', /* or: backwards, both, none */
-        'animation-delay': '2s' /* or: Xms */}
+    computedRackedStyles() {
+      return {
+        "animation-name": "racket-movement",
+        "animation-duration": "1s",
+        "animation-iteration-count": "10",
+        "animation-direction": "alternate" /* or: normal */,
+        "animation-timing-function":
+          "ease-out" /* or: ease, ease-in, ease-in-out, linear, cubic-bezier(x1, y1, x2, y2) */,
+        "animation-fill-mode": "forwards" /* or: backwards, both, none */,
+        "animation-delay": "2s" /* or: Xms */
+      };
     }
-
   }
-}
+};
 </script>
 
 <style scoped lang="scss">
@@ -270,7 +297,7 @@ export default {
   height: 50px;
   width: 50px;
   border-radius: 100%;
-  border:2px solid white;
+  border: 2px solid white;
 }
 
 .success {
@@ -302,7 +329,7 @@ export default {
     width: 8em;
   }
   & span {
-    font-size: .7em;
+    font-size: 0.7em;
   }
   & .data {
     font-weight: 600;
@@ -312,12 +339,31 @@ export default {
 
 .score {
   & h2 {
-  margin: 0.5rem;
-}
+    margin: 0.5rem;
+  }
   & p {
     font-size: 2rem;
     margin: 0.5rem;
   }
 }
 
+.credits {
+  font-size: 1em;
+  font-weight: 200;
+  & a {
+    text-decoration: none;
+    color: white;
+    text-transform: uppercase;
+    transition: 0.6s all;
+    &:hover {
+      border-bottom: 1px solid white;
+    }
+    & span {
+      color: #ff8574;
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 1em;
+    }
+  }
+}
 </style>

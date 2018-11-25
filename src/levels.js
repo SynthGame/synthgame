@@ -429,7 +429,7 @@ export default [
     },
     router: {},
     levelData: {
-      text: 'We use this module to modulate a different synth control.'
+      text: 'We use modulation envelope to modulate another synth control.'
     }
   },
   // // level 18
@@ -579,7 +579,7 @@ export default [
       envelope2: true
     },
     levelData: {
-      text: 'Make your own preset in Make Music, and get featured in game.'
+      text: 'Make your own preset in Make Music, share your link on twitter and get featured in game.'
     }
   },
   // level 21

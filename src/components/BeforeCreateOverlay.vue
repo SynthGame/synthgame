@@ -2,10 +2,10 @@
   <div class="overlay">
     <div class="overlay-content-wrapper">
         <h1>Tats ft.</h1>
-        <div class="scores" v-if="customLevelIsActive && nameArtist !== 'Anonymous' ">
+        <!-- <div class="scores" v-if="customLevelIsActive && nameArtist !== 'Anonymous' ">
           <img class="custom-user-avatar" :src="avatarUrl"/>
           <span class="data artist">Preset by <a target="_blank" :href="'https://soundcloud.com/' + nameArtist">{{nameArtist}}</a></span>
-        </div>
+        </div> -->
         <!-- <h2 v-if="!customLevelIsActive">Write the music for this game. On nov 17, Tatsuya Takahashi picks 1 lucky winner, who wins a trip to the MESS foundation!</h2> -->
         <h2>You can create and share your own sounds here. Start with sequencer steps and modulate the sound. Submit and you can win the Superbooth prize!</h2>
       <div>
