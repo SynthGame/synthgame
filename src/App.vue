@@ -610,14 +610,17 @@ export default {
       display: flex;
       flex-direction: column;
       justify-content: space-between;
-      width: fit-content;
+      width: 2em;
       margin: auto;
+      button {
+        svg {
+          padding: 0;
+        }
+      }
     }
     button {
-      // width: 3em;
-      // height: 3em;
-      // width: 4vh;
       height: 4vh;
+      padding: 0;
       margin: auto;
       background: unset;
       border: none;
@@ -737,7 +740,7 @@ body {
   user-select: none;
   touch-action: none !important;
   width: 100vw;
-  height: 100vh;
+  // height: 100vh;
   overflow: hidden;
 }
 
@@ -968,8 +971,8 @@ body {
   }
 
   body {
-    height: 100% !important;
-    overflow: hidden !important;
+    // height: 100% !important;
+    // overflow: hidden !important;
     position: absolute;
   }
 

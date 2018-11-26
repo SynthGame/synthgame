@@ -62,7 +62,7 @@
       <div class="visuals">
         <div class="photo">
           <img src="../assets/villa.jpg" alt="The Ok Bye house">
-          <p>No salaries, but a perk-filled villa in paradise.</p>
+          <p>No salary, but a spot in a perk-filled villa in paradise.</p>
         </div>
 
       </div>
@@ -130,13 +130,13 @@
     </div>
 
     <!-- First CTA -->
-    <h3>Hire us</h3>
+    <!-- <h3>Hire us</h3> -->
 
     <!-- Typeform embed -->
     <!-- <a class="typeform-share button main" href="https://newindie.typeform.com/to/paL3er" data-mode="popup" style="display:block;width:fit-content;text-decoration:none;background-color:#FF8574;color:white;cursor:pointer;color:black;font-family:Montserrat,Arial,sans-serif;font-size:2em;line-height:50px;text-align:center;margin:0 auto;letter-spacing: 1px;padding: 0.8rem 1.4rem;border-radius:0px;max-width:100%;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;font-weight:700;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;" target="_blank">PICK A TEAM</a> -->
 
     <!-- typeform native embed -->
-    <div class="typeform-widget" data-url="https://newindie.typeform.com/to/paL3er" data-hide-headers=true data-hide-footer=true style="width: 100%; height: 350px;"></div>  <div style="font-family: Sans-Serif;font-size: 12px;color: #999;opacity: 0.5; padding-top: 5px;"> powered by <a href="https://admin.typeform.com/signup?utm_campaign=paL3er&utm_source=typeform.com-11685689-Pro&utm_medium=typeform&utm_content=typeform-embedded-poweredbytypeform&utm_term=EN" style="color: #999" target="_blank">Typeform</a> </div>
+    <div class="typeform-widget" data-url="https://newindie.typeform.com/to/paL3er" data-hide-headers=true data-hide-footer=true style="max-width: 800px;margin: 0 auto; height: 350px;"></div>  <div style="font-family: Sans-Serif;font-size: 12px;color: #999;opacity: 0.5; padding-top: 5px;"> powered by <a href="https://admin.typeform.com/signup?utm_campaign=paL3er&utm_source=typeform.com-11685689-Pro&utm_medium=typeform&utm_content=typeform-embedded-poweredbytypeform&utm_term=EN" style="color: #999" target="_blank">Typeform</a> </div>
     <div class="remove-typeform-branding"></div>
 
 
@@ -862,6 +862,37 @@ button {
 @keyframes wave {
   50% {
     transform: rotate(10deg);
+  }
+}
+
+@media only screen and (max-width: 1100px) {
+  .client-bar {
+    background-size: 2000px;
+    font-size: 0.5em;
+  }
+  .part {
+    flex-wrap: wrap;
+    .text {
+      width: 100%;
+      margin: 4em auto;
+    }
+    .visuals {
+      width: 100%;
+      .video {
+        margin: auto;
+      }
+      .photo {
+        display: flex;
+        justify-content: center;
+        flex-wrap: wrap;
+        img {
+          max-width: 100%;
+          width: auto;
+          height: auto;
+          max-height: 550px;
+        }
+      }
+    }
   }
 }
 </style>
