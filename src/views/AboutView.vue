@@ -4,7 +4,8 @@
     <!-- Navbar -->
     <div class="navbar-casestudy">
       <a href="https://okbye.io" target="_blank"><span class="logo"></span><span class="bye">Ok Bye</span></a>
-      <button type="button" name="button" @click="">Hire</button>
+      <router-link to="#hire"><button type="button" name="button" @click="">Hire</button></router-link>
+
     </div>
 
     <!-- Title section -->
@@ -85,7 +86,7 @@
 
 <iframe width="560" height="315" class="video" src="https://www.youtube.com/embed/9qeWKH1gVGc?rel=0" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
-          <p>Far Features filmed a behind the scenes.</p>
+          <p><a href="https://farfeatures.com" target="_blank">Far Features</a> filmed a behind the scenes.</p>
         </div>
 
       </div>
@@ -103,7 +104,7 @@
       </div>
     </div>
 
-    <!-- solution -->
+    <!-- Dream -->
     <div class="part">
       <div class="visuals">
         <div class="photo">
@@ -136,7 +137,7 @@
     <!-- <a class="typeform-share button main" href="https://newindie.typeform.com/to/paL3er" data-mode="popup" style="display:block;width:fit-content;text-decoration:none;background-color:#FF8574;color:white;cursor:pointer;color:black;font-family:Montserrat,Arial,sans-serif;font-size:2em;line-height:50px;text-align:center;margin:0 auto;letter-spacing: 1px;padding: 0.8rem 1.4rem;border-radius:0px;max-width:100%;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;font-weight:700;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;" target="_blank">PICK A TEAM</a> -->
 
     <!-- typeform native embed -->
-    <div class="typeform-widget" data-url="https://newindie.typeform.com/to/paL3er" data-hide-headers=true data-hide-footer=true style="max-width: 800px;margin: 0 auto; height: 350px;"></div>  <div style="font-family: Sans-Serif;font-size: 12px;color: #999;opacity: 0.5; padding-top: 5px;"> powered by <a href="https://admin.typeform.com/signup?utm_campaign=paL3er&utm_source=typeform.com-11685689-Pro&utm_medium=typeform&utm_content=typeform-embedded-poweredbytypeform&utm_term=EN" style="color: #999" target="_blank">Typeform</a> </div>
+    <div id="hire" class="typeform-widget" data-url="https://newindie.typeform.com/to/paL3er" data-hide-headers=true data-hide-footer=true style="max-width: 800px;margin: 0 auto; height: 350px;"></div>  <div style="font-family: Sans-Serif;font-size: 12px;color: #999;opacity: 0.5; padding-top: 5px;"> powered by <a href="https://admin.typeform.com/signup?utm_campaign=paL3er&utm_source=typeform.com-11685689-Pro&utm_medium=typeform&utm_content=typeform-embedded-poweredbytypeform&utm_term=EN" style="color: #999" target="_blank">Typeform</a> </div>
     <div class="remove-typeform-branding"></div>
 
 
@@ -447,6 +448,7 @@ body {
   color: white;
   text-transform: uppercase;
   overflow: auto;
+  height: unset;
 }
 
 h1,
@@ -614,6 +616,19 @@ button {
       font-size: 1.2em;
       margin: 0.2em 0 0 0;
       text-align: center;
+      a {
+        text-decoration: none;
+        color: white;
+        &:hover {
+          border-bottom: 1px solid white;
+        }
+        & span {
+          color: #ff8574;
+          text-decoration: none;
+          font-weight: 600;
+          font-size: 1em;
+        }
+      }
     }
   }
   h3 {

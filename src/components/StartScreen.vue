@@ -13,6 +13,9 @@
         <button class="button-next" @click="$emit('startPreview')">Play game</button>
         <button class="button-next" @click="$emit('create')">Make music</button>
       </div>
+      <div class="credits">
+        Game created by <a href="https://okbye.io" target="_blank"><span>Ok Bye</span></a>. Read the <a href="https://casestudy.okbye.io/tats/" target="_blank"><span>Case Study</span></a>.
+      </div>
     </div>
     <!-- <div :style="{'margin-left': marginLeftRbmg}" class="rbmg">
         <iframe width="250" height="150" src="https://www.youtube.com/embed/nkeLxvVvMdg?rel=0" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
@@ -31,35 +34,35 @@
 
 <script>
 export default {
-  name: 'startscreen',
+  name: "startscreen",
   props: {
     level: {
       type: Number,
-      default: 1,
+      default: 1
     }
   },
-  data (){
+  data() {
     return {
-      marginLeftRbmg: 0,
-    }
+      marginLeftRbmg: 0
+    };
   },
-  mounted () {
-    window.addEventListener('keydown', this.emitOnKey)
+  mounted() {
+    window.addEventListener("keydown", this.emitOnKey);
   },
-  beforeDestroy () {
-    window.removeEventListener('keydown', this.emitOnKey)
+  beforeDestroy() {
+    window.removeEventListener("keydown", this.emitOnKey);
   },
   methods: {
-    emitOnKey () {
+    emitOnKey() {
       if (event.keyCode === 13) {
-        this.$emit('startPreview')
+        this.$emit("startPreview");
       }
     },
-    hideVideo () {
-      this.marginLeftRbmg = '-100vw';
+    hideVideo() {
+      this.marginLeftRbmg = "-100vw";
     }
   }
-}
+};
 </script>
 
 <style scoped lang="scss">
@@ -71,17 +74,17 @@ export default {
   transition: all 1s;
   &-img {
     position: absolute;
-    margin-left:-285px;
+    margin-left: -285px;
     margin-top: 87px;
-    height:80px;
+    height: 80px;
   }
   .hidevideo {
     position: absolute;
     margin: -4px 0 0 -9px;
     cursor: pointer;
-    transition: all .3s;
+    transition: all 0.3s;
     &:hover {
-      transform: rotate(90deg)
+      transform: rotate(90deg);
     }
   }
 }
@@ -90,16 +93,36 @@ export default {
   .rbmg {
     position: absolute;
     bottom: unset;
-    top:-3em;
+    top: -3em;
     left: 3em;
     width: auto;
     transition: all 1s;
-    transform: scale(.5)translate(-110px,50px);
+    transform: scale(0.5) translate(-110px, 50px);
     &-img {
       position: absolute;
-      margin-left:-285px;
+      margin-left: -285px;
       margin-top: 87px;
       height: 80px;
+    }
+  }
+}
+
+.credits {
+  font-size: 1em;
+  font-weight: 200;
+  & a {
+    text-decoration: none;
+    color: white;
+    text-transform: uppercase;
+    // transition: 0.6s all;
+    &:hover {
+      border-bottom: 1px solid white;
+    }
+    & span {
+      color: #ff8574;
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 1em;
     }
   }
 }

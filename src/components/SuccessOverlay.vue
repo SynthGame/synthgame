@@ -354,7 +354,7 @@ export default {
     text-decoration: none;
     color: white;
     text-transform: uppercase;
-    transition: 0.6s all;
+    // transition: 0.6s all;
     &:hover {
       border-bottom: 1px solid white;
     }

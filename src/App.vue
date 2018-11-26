@@ -744,7 +744,7 @@ body {
   user-select: none;
   touch-action: none !important;
   width: 100vw;
-  // height: 100vh;
+  height: 100vh;
   overflow: hidden;
 }
 
