@@ -3,8 +3,8 @@
 
     <!-- Navbar -->
     <div class="navbar-casestudy">
-      <a href="https://okbye.io" target="_blank"><span>Ok Bye</span></a>
-      <button type="button" name="button" @click="loadPreset">Hire</button>
+      <a href="https://okbye.io" target="_blank"><span class="logo"></span><span class="bye">Ok Bye</span></a>
+      <button type="button" name="button" @click="">Hire</button>
     </div>
 
     <!-- Title section -->
@@ -18,26 +18,124 @@
       <lfo-module />
     </div>
 
-    <!-- First CTA -->
-    <h4>Develop faster, for less</h4>
-    <button class="filled" type="button" name="button" @click="loadPreset">Pick a team</button>
-    <h5>We house the best, in return for agency work</h5>
-
     <!-- Social proof -->
     <div class="client-bar">
-    <div class="client">
-    Red Bull
-    </div>
-    <div class="involved-departments">
-    Red Bull Mind Gamers
-    Red Bull Music Academy
-    </div>
-    <div class="used-technology">
-    Vue.js
-    Tone.js
-    Firebase Firebase
+      <div class="client">
+        <span>Client</span>
+        <div class="logos">
+          <img src="../assets/red-bull-brand-logo.png" alt="Red Bull">
+        </div>
+      </div>
+      <div class="used-technology">
+        <span>Technology</span>
+        <div class="logos">
+          <img src="../assets/vue-js-brand-logo.png" alt="Vue.js">
+          <img src="../assets/tone-js-brand-logo.png" alt="Tone.js">
+          <img src="../assets/firebase-brand-logo.png" alt="Firebase">
+        </div>
+      </div>
+      <div class="time-frame">
+        <span>Time frame</span>
+        <p>1 month</p>
+      </div>
     </div>
 
+    <!-- Briefing -->
+    <div class="part">
+      <div class="text">
+        <h3 class="left">Tatsuya's brief</h3>
+        <h4>A <span>playful</span> mix between <span>modular synthesizers</span>, and <span>what’s possible</span> with the web.</h4>
+      </div>
+      <div class="visuals">
+        <div class="photo">
+
+<iframe width="560" height="315" class="video" src="https://www.youtube.com/embed/Pb66lIcYaPI?rel=0" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+
+          <p>Tatsuya Takahashi recently joined Red Bull Music Academy.</p>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- Why Ok Bye -->
+    <div class="part">
+      <div class="visuals">
+        <div class="photo">
+          <img src="../assets/villa.jpg" alt="The Ok Bye house">
+          <p>No salaries, but a perk-filled villa in paradise.</p>
+        </div>
+
+      </div>
+      <div class="text">
+        <h3 class="right">Why Ok Bye?</h3>
+        <h4>At Ok Bye <span>talent</span> lives and works together in return for <span>agency work</span>.</h4>
+        <h4>Members join to be part of a <span>location independent</span> team.</h4>
+        <h4>That's how we <span>develop faster</span>, for <span>less</span>.</h4>
+      </div>
+    </div>
+
+    <!-- solution -->
+    <div class="part">
+      <div class="text">
+        <h3 class="left">What we built</h3>
+        <h4>An <span>online game</span>: new users are challenged to <span>recreate sounds</span> made by players who <span>mastered</span> the game, in 1 minute.</h4>
+      </div>
+      <div class="visuals">
+        <div class="photo">
+
+<iframe width="560" height="315" class="video" src="https://www.youtube.com/embed/9qeWKH1gVGc?rel=0" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+
+          <p>Far Features filmed a behind the scenes.</p>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- Numbers -->
+    <div class="part">
+      <div class="text numbers">
+        <h3 class="middle">After 1 month</h3>
+        <div class="part">
+          <h4><span>54k</span> levels played</h4>
+          <h4><span>7.5k</span> sounds made</h4>
+          <h4>Highscore: Level <span>135</span></h4>
+        </div>
+      </div>
+    </div>
+
+    <!-- solution -->
+    <div class="part">
+      <div class="visuals">
+        <div class="photo">
+
+<iframe width="560" height="315" class="video" src="https://www.youtube.com/embed/kK_UjBmHqQw?rel=0" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+
+          <p>Elora is designing and building the new Ok Bye house.</p>
+        </div>
+
+      </div>
+      <div class="text">
+        <h3 class="left">What's next</h3>
+        <h4>Ok Bye will become a <span>social enterprise</span>: for every hour of work we'll work another hour on <span>solving world problems</span>.</h4>
+        <h4>We're building a <span>bamboo house</span>, to house a <span>bigger community</span>.</h4>
+      </div>
+    </div>
+
+    <!-- First CTA -->
+    <div style="margin-top:80em">
+
+    </div>
+    <h4>Develop faster, for less</h4>
+    <button class="filled" type="button" name="button" @click="loadPreset">Pick a team</button>
+    <!-- <h5>We house the best, in return for agency work</h5> -->
+
+    <!-- Play game -->
+    <h1>Tats</h1>
+    <h2>A synthesizer game.</h2>
+
+    <div>
+      <button class="button-next" @click="$emit('startPreview')">Play game</button>
+      <button class="button-next" @click="$emit('create')">Make music</button>
     </div>
 
     <div class="part left dial">
@@ -68,11 +166,6 @@
         <filter-module />
       </div>
     </div>
-    <!-- <div class="part left">
-      <div class="rack">
-        <lfo-module />
-      </div>
-    </div> -->
     <div class="part right">
       <div class="rack">
         <envelope-module-two />
@@ -83,19 +176,26 @@
           <router-module />
       </div>
     </div>
+
     <div class="player__wrapper">
       <div class="player">
         <div class="user">
           <img class="custom-user-avatar" :src="avatarUrl"/>
-          <span class="data artist">{{nameArtist}}</span>
+          <div class="track-progress__wrapper">
+            <span class="data artist">{{nameArtist}}</span>
+            <div class="track-progress" :style="{width: trackProgress + '%'}"></div>
+          </div>
         </div>
-        <div class="controls">
-          <span class="skip-back" @click="loadPreset(-1)"></span>
-          <span :class="[(isPlaying ? 'pause' : 'play')]" @click="playPauseSynth"></span>
-          <span class="skip-forward" @click="loadPreset(1)"></span>
+        <div class="mid-console">
+          <div class="controls">
+            <span class="skip-back" @click="loadPreset(-1)"></span>
+            <span :class="[(isPlaying ? 'pause' : 'play')]" @click="playPauseSynth"></span>
+            <span class="skip-forward" @click="loadPreset(1)"></span>
+          </div>
         </div>
         <div class="volume">
-
+          <span v-if="!looping" class="loop" @click="looping = true"></span>
+          <span v-else class="single" @click="looping = false"></span>
         </div>
       </div>
     </div>
@@ -142,6 +242,9 @@ export default {
     return {
       isPlaying: false,
       pickedPreset: 0,
+      loopIteration: 0,
+      trackProgress: 0,
+      looping: false,
       noteArray: fill(range(0, 16), {
         selected: false,
         pitch: 0,
@@ -180,6 +283,17 @@ export default {
           subdivision: "8n"
         },
         (time, note) => {
+          this.trackProgress = (note / 15) * 25 + this.loopIteration * 25;
+          if (note == 15) {
+            this.loopIteration++;
+            if (this.loopIteration >= 4) {
+              if (!this.looping) {
+                this.loadPreset(1);
+              }
+              this.loopIteration = 0;
+              this.trackProgress = 0;
+            }
+          }
           if (this.noteArray[note].selected) {
             audio.playNote(this.noteArray[note].pitch, {
               noteLength: "16n",
@@ -223,6 +337,7 @@ export default {
     },
     emitOnKey() {
       if (event.keyCode === 32) {
+        event.preventDefault();
         this.playPauseSynth();
       }
     },
@@ -242,7 +357,6 @@ export default {
         } else if (this.pickedPreset < 0) {
           this.pickedPreset = presets.length - 1;
         }
-        console.log("this.pickedPreset", this.pickedPreset);
       } else {
         // randomly pick preset
         this.pickedPreset = Math.round(Math.random() * (presets.length - 1));
@@ -354,13 +468,36 @@ h3 {
   font-weight: 600;
   height: 5em;
   align-items: center;
-  // max-width: 1050px;
   padding: 0 2em;
   margin: auto;
   color: white;
   a {
     text-decoration: none;
+    font-weight: 600;
     color: white;
+    margin-left: 2em;
+    transition: all 0.2s;
+    &:hover {
+      transform: scale(1.1);
+    }
+    &:hover > .logo {
+      animation: 0.6s wave linear;
+    }
+  }
+  .logo {
+    display: block;
+    transform-origin: 50% 120%;
+    position: absolute;
+    z-index: -1;
+    margin-top: -1.5em;
+    transform: rotate(-30deg);
+    transition: all 0.2s;
+    cursor: pointer;
+    background-size: contain;
+    background-repeat: no-repeat;
+    width: 3em;
+    height: 5em;
+    background-image: url("../assets/hand.svg");
   }
 }
 
@@ -379,6 +516,7 @@ button {
   color: white;
   &:hover {
     background: #ff8574;
+    transform: scale(1.1);
   }
   &.filled {
     background: #ff8574;
@@ -397,8 +535,71 @@ button {
 .part {
   display: flex;
   align-items: center;
-  width: 100%;
-  padding: 15em;
+  width: 90%;
+  text-align: left;
+  text-transform: none;
+  justify-content: space-around;
+  margin: 8em auto;
+  .text {
+    width: 40%;
+  }
+  .numbers {
+    width: 100%;
+    .part {
+      margin: 0 auto;
+    }
+  }
+  .visuals {
+    width: 40%;
+    .video {
+      max-width: 100%;
+    }
+    img {
+      max-width: 100%;
+    }
+    p {
+      font-size: 1.2em;
+      margin: 1em 0;
+      text-align: center;
+    }
+  }
+  h3 {
+    text-transform: uppercase;
+    &.middle {
+      text-align: center;
+    }
+  }
+  h4 {
+    margin: 0;
+    font-weight: 900;
+    font-size: 2.5em;
+    line-height: 1.5em;
+    &:nth-of-type(2) {
+      margin: 2em 0;
+      span {
+        &:nth-of-type(1) {
+          color: #00d87b;
+        }
+        &:nth-of-type(2) {
+          color: #ff8574;
+        }
+        &:nth-of-type(3) {
+          color: #7d00d9;
+        }
+      }
+    }
+    span {
+      &:nth-of-type(1) {
+        color: #ff8574;
+      }
+      &:nth-of-type(2) {
+        color: #7d00d9;
+      }
+      &:nth-of-type(3) {
+        color: #00d87b;
+      }
+    }
+  }
   &.left {
     justify-content: flex-end;
   }
@@ -439,52 +640,95 @@ button {
   z-index: 1000;
   // max-width: 1050px;
   bottom: -1px;
-  height: 5em;
+  height: 6em;
   margin: auto;
   justify-content: space-between;
   align-items: center;
-  .controls {
+  span {
+    transition: all 0.2s;
+    cursor: pointer;
+    background-size: contain;
+    width: 5em;
+    height: 5em;
+    &:hover {
+      transform: scale(1.1);
+    }
+  }
+  .play {
+    background-image: url("../assets/play.svg");
+  }
+  .pause {
+    background-image: url("../assets/pause.svg");
+  }
+  .skip-forward {
+    background-image: url("../assets/skip-forward.svg");
+    width: 2.5em;
+    height: 2.5em;
+  }
+  .skip-back {
+    background-image: url("../assets/skip-back.svg");
+    width: 2.5em;
+    height: 2.5em;
+  }
+  .loop {
+    background-image: url("../assets/loop.svg");
+    width: 2.5em;
+    height: 2.5em;
+    transform: rotate(-135deg);
+  }
+  .single {
+    background-image: url("../assets/single.svg");
+    width: 2.5em;
+    height: 2.5em;
+  }
+  .mid-console {
+    height: 6em;
     display: flex;
-    justify-content: space-between;
-    align-items: center;
-    span {
-      transition: all 0.2s;
-      cursor: pointer;
-      background-size: contain;
-      display: block;
-      width: 5em;
-      height: 5em;
-      &:hover {
-        transform: scale(1.1);
-      }
-    }
-    .play {
-      background-image: url("../assets/play.svg");
-    }
-    .pause {
-      background-image: url("../assets/pause.svg");
-    }
-    .skip-forward {
-      background-image: url("../assets/skip-forward.svg");
-      width: 2.5em;
-      height: 2.5em;
-    }
-    .skip-back {
-      background-image: url("../assets/skip-back.svg");
-      width: 2.5em;
-      height: 2.5em;
+    flex-direction: column;
+    justify-content: space-around;
+    .controls {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
     }
   }
   .user {
     display: flex;
-    width: 30%;
+    width: 40%;
     justify-content: flex-start;
     align-items: center;
+    text-align: center;
+    .custom-user-avatar {
+      height: 50px;
+      width: 50px;
+      border-radius: 100%;
+      // border: 2px solid white;
+    }
+    .artist {
+      font-size: 1em;
+      font-weight: 200;
+      text-transform: uppercase;
+      height: fit-content;
+      width: 100%;
+    }
+    .track-progress__wrapper {
+      margin-left: 1em;
+      margin-right: 1em;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-around;
+      .track-progress {
+        width: 100%;
+        height: 2px;
+        background: #ff8574;
+        transition: all 0.1s;
+      }
+    }
   }
   .volume {
     display: flex;
-    width: 30%;
-    justify-content: space-between;
+    width: 40%;
+    justify-content: flex-end;
     align-items: center;
   }
   &__wrapper {
@@ -494,21 +738,64 @@ button {
     margin: auto;
     background: black;
     bottom: -1px;
-    height: 5em;
+    height: fit-content;
     padding: 0 2em;
   }
-  & .custom-user-avatar {
-    height: 50px;
-    width: 50px;
-    border-radius: 100%;
-    border: 1px solid white;
+}
+
+.client-bar {
+  background-color: white;
+  background-image: url("../assets/pattern.svg");
+  background-size: cover;
+  background-position: 20% 20%;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  height: 10em;
+  width: 100%;
+  padding: 0 1.5em;
+  margin: 5em 0;
+  text-align: left;
+  line-height: 2.5em;
+  span {
+    color: black;
+    font-size: 1.17em;
   }
-  & .artist {
-    font-size: 1em;
-    font-weight: 200;
-    text-transform: uppercase;
-    margin-left: 1em;
-    height: fit-content;
+  div {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    p {
+      margin: 0;
+      padding: 0;
+      color: black;
+      font-weight: 900;
+      font-size: 2em;
+      max-height: 2.5em;
+    }
+    .logos {
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+      img {
+        padding: 0 1em;
+      }
+      img:first-of-type {
+        padding-left: 0;
+      }
+    }
+  }
+  img {
+    display: block;
+    max-height: 2.5em;
+    height: auto;
+    width: auto;
+  }
+}
+
+@keyframes wave {
+  50% {
+    transform: rotate(10deg);
   }
 }
 </style>
