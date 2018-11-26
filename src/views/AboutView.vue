@@ -147,8 +147,13 @@
     <!-- Play game -->
 
     <div class="part cosy">
-      <button class="button-next" @click="$emit('startPreview')">Play game</button>
-      <button class="button-next" @click="$emit('create')">Make music</button>
+      <div class="text">
+        <h3 class="left">Ok, now you can</h3>
+        <button class="button-next" @click="playGame">Play the game</button>
+
+        <!-- <button class="button-next" @click="$emit('create')">Make music</button> -->
+      </div>
+
     </div>
 
     <div class="rack" v-show="" >
@@ -202,27 +207,6 @@ import { vuexSyncGen, mapValueToRange } from "@/utils";
 import ModuleKnob from "@/components/ModuleKnob.vue";
 
 var casestudyScope;
-
-// // Typefrom needed JS
-// (function() {
-//   var qs,
-//     js,
-//     q,
-//     s,
-//     d = document,
-//     gi = d.getElementById,
-//     ce = d.createElement,
-//     gt = d.getElementsByTagName,
-//     id = "typef_orm_share",
-//     b = "https://embed.typeform.com/";
-//   if (!gi.call(d, id)) {
-//     js = ce.call(d, "script");
-//     js.id = id;
-//     js.src = b + "embed.js";
-//     q = gt.call(d, "script")[0];
-//     q.parentNode.insertBefore(js, q);
-//   }
-// })();
 
 // Typeform native embed js
 (function() {
@@ -371,6 +355,11 @@ export default {
       }
       this.isPlaying = false;
       this.toneLoop.stop();
+    },
+    playGame() {
+      // this.$router.push("/");
+      window.history.pushState(null, null, "/");
+      location.reload();
     },
     loadPreset(mutation) {
       if (mutation) {
@@ -584,6 +573,15 @@ button {
   }
   &.cosy {
     justify-content: center;
+    margin-bottom: 20em;
+    .text {
+      text-align: center;
+    }
+    button {
+      color: white;
+      max-width: fit-content;
+      margin: 1em auto;
+    }
   }
   .text {
     width: 40%;

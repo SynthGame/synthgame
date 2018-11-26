@@ -14,7 +14,7 @@
         @create="switchToCreate"
       />
     </transition>
-    <before-create-overlay v-if="showCreatePreview" @showCreate="showCreate" @back="showCreatePreview = false"/>
+    <before-create-overlay v-if="showCreatePreview" @showCreate="showCreate" @back="back"/>
     <svoosh
       v-if="isThereSvooshComponent"
       :isFired="svooshIt"
@@ -238,6 +238,10 @@ export default {
     },
     closeSuccessOverlay() {
       this.displaySuccessOverlay = false;
+    },
+    back() {
+      this.showCreatePreview = false;
+      this.displaySuccessOverlay = true;
     },
     init() {
       // Retrieve highscore from local storage
