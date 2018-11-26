@@ -51,7 +51,7 @@
 
 <iframe width="560" height="315" class="video" src="https://www.youtube.com/embed/Pb66lIcYaPI?rel=0" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
-          <p>Tatsuya Takahashi recently joined Red Bull Music Academy.</p>
+          <p>Tatsuya Takahashi was looking for web audio experts.</p>
         </div>
 
       </div>
@@ -70,7 +70,7 @@
         <h3 class="right">Why Ok Bye?</h3>
         <h4>At Ok Bye <span>talent</span> lives and works together in return for <span>agency work</span>.</h4>
         <h4>Members join to be part of a <span>location independent</span> team.</h4>
-        <h4>That's how we <span>develop faster</span>, for <span>less</span>.</h4>
+        <h4>That's why we <span>develop faster</span>, for <span>less</span>.</h4>
       </div>
     </div>
 
@@ -94,11 +94,11 @@
     <!-- Numbers -->
     <div class="part">
       <div class="text numbers">
-        <h3 class="middle">After 1 month</h3>
+        <!-- <h3 class="middle">By the numbers</h3> -->
         <div class="part">
-          <h4><span>54k</span> levels played</h4>
-          <h4><span>7.5k</span> sounds made</h4>
-          <h4>Highscore: Level <span>135</span></h4>
+          <h4><span>40k</span> levels played</h4>
+          <h4><span>7.6k</span> sounds made</h4>
+          <h4><span>135</span>level reached</h4>
         </div>
       </div>
     </div>
@@ -116,65 +116,46 @@
       </div>
       <div class="text">
         <h3 class="left">What's next</h3>
-        <h4>Ok Bye will become a <span>social enterprise</span>: for every hour of work we'll work another hour on <span>solving world problems</span>.</h4>
-        <h4>We're building a <span>bamboo house</span>, to house a <span>bigger community</span>.</h4>
+        <h4>Ok Bye will become a <span>social enterprise</span>: for every hour of work we'll focus another hour on <span>solving world problems</span>.</h4>
+        <h4>We're building a <span>bamboo house</span>, to grow a <span>bigger community</span>.</h4>
+      </div>
+    </div>
+
+    <!-- call -->
+    <div class="part call">
+      <div class="text">
+        <h3 class="left">We're available</h3>
+        <h4>To realize our <span>dream</span> we need your help. <span>Hire us</span>. We do <span>small and large</span> projects.</h4>
       </div>
     </div>
 
     <!-- First CTA -->
-    <div style="margin-top:80em">
+    <h3>Hire us</h3>
 
-    </div>
-    <h4>Develop faster, for less</h4>
-    <button class="filled" type="button" name="button" @click="loadPreset">Pick a team</button>
+    <!-- Typeform embed -->
+    <!-- <a class="typeform-share button main" href="https://newindie.typeform.com/to/paL3er" data-mode="popup" style="display:block;width:fit-content;text-decoration:none;background-color:#FF8574;color:white;cursor:pointer;color:black;font-family:Montserrat,Arial,sans-serif;font-size:2em;line-height:50px;text-align:center;margin:0 auto;letter-spacing: 1px;padding: 0.8rem 1.4rem;border-radius:0px;max-width:100%;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;font-weight:700;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;" target="_blank">PICK A TEAM</a> -->
+
+    <!-- typeform native embed -->
+    <div class="typeform-widget" data-url="https://newindie.typeform.com/to/paL3er" data-hide-headers=true data-hide-footer=true style="width: 100%; height: 350px;"></div>  <div style="font-family: Sans-Serif;font-size: 12px;color: #999;opacity: 0.5; padding-top: 5px;"> powered by <a href="https://admin.typeform.com/signup?utm_campaign=paL3er&utm_source=typeform.com-11685689-Pro&utm_medium=typeform&utm_content=typeform-embedded-poweredbytypeform&utm_term=EN" style="color: #999" target="_blank">Typeform</a> </div>
+    <div class="remove-typeform-branding"></div>
+
+
+    <!-- <button class="main" type="button" name="button" @click="loadPreset">Pick a team</button> -->
+
     <!-- <h5>We house the best, in return for agency work</h5> -->
 
     <!-- Play game -->
-    <h1>Tats</h1>
-    <h2>A synthesizer game.</h2>
 
-    <div>
+    <div class="part cosy">
       <button class="button-next" @click="$emit('startPreview')">Play game</button>
       <button class="button-next" @click="$emit('create')">Make music</button>
     </div>
 
-    <div class="part left dial">
-      <div class="text">
-        <h4>The mighty dial</h4>
-        <p>We love dials dialing dials everywhere.</p>
-      </div>
-      <module-knob
-        v-model="detune"
-        :min="0"
-        :max="100"
-        knobColor="#ff8574"
-        name="Pitch"
-      ></module-knob>
-    </div>
-    <div class="part right">
-      <div class="rack">
-        <oscillator-module-two />
-      </div>
-    </div>
-    <div class="part left">
-      <div class="rack">
-        <envelope-module />
-      </div>
-    </div>
-    <div class="part right">
-      <div class="rack">
-        <filter-module />
-      </div>
-    </div>
-    <div class="part right">
-      <div class="rack">
-        <envelope-module-two />
-      </div>
-    </div>
-    <div class="part left">
-      <div class="rack">
-          <router-module />
-      </div>
+    <div class="rack" v-show="" >
+      <oscillator-module-two />
+      <envelope-module />
+      <envelope-module-two />
+      <router-module />
     </div>
 
     <div class="player__wrapper">
@@ -221,6 +202,48 @@ import { vuexSyncGen, mapValueToRange } from "@/utils";
 import ModuleKnob from "@/components/ModuleKnob.vue";
 
 var casestudyScope;
+
+// // Typefrom needed JS
+// (function() {
+//   var qs,
+//     js,
+//     q,
+//     s,
+//     d = document,
+//     gi = d.getElementById,
+//     ce = d.createElement,
+//     gt = d.getElementsByTagName,
+//     id = "typef_orm_share",
+//     b = "https://embed.typeform.com/";
+//   if (!gi.call(d, id)) {
+//     js = ce.call(d, "script");
+//     js.id = id;
+//     js.src = b + "embed.js";
+//     q = gt.call(d, "script")[0];
+//     q.parentNode.insertBefore(js, q);
+//   }
+// })();
+
+// Typeform native embed js
+(function() {
+  var qs,
+    js,
+    q,
+    s,
+    d = document,
+    gi = d.getElementById,
+    ce = d.createElement,
+    gt = d.getElementsByTagName,
+    id = "typef_orm",
+    b = "https://embed.typeform.com/";
+  if (!gi.call(d, id)) {
+    js = ce.call(d, "script");
+    js.id = id;
+    js.src = b + "embed.js";
+    q = gt.call(d, "script")[0];
+    q.parentNode.insertBefore(js, q);
+  }
+})();
 
 export default {
   components: {
@@ -518,9 +541,12 @@ button {
     background: #ff8574;
     transform: scale(1.1);
   }
-  &.filled {
+  &.main {
+    // border: 1px solid #00d87b;
     background: #ff8574;
-    color: #000;
+    color: black;
+    font-size: 2em;
+    font-weight: 900;
     &:hover {
       background: #000;
       color: white;
@@ -540,11 +566,40 @@ button {
   text-transform: none;
   justify-content: space-around;
   margin: 8em auto;
+  &.call {
+    text-align: center;
+    h4 {
+      span {
+        &:nth-of-type(1) {
+          color: #00d87b;
+        }
+        &:nth-of-type(2) {
+          color: #ff8574;
+        }
+        &:nth-of-type(3) {
+          color: #7d00d9;
+        }
+      }
+    }
+  }
+  &.cosy {
+    justify-content: center;
+  }
   .text {
     width: 40%;
   }
   .numbers {
     width: 100%;
+    h4 {
+      text-align: center;
+      font-size: 2em;
+      font-weight: 400;
+      span {
+        font-size: 2em;
+        display: block;
+        font-weight: 600;
+      }
+    }
     .part {
       margin: 0 auto;
     }
@@ -559,12 +614,13 @@ button {
     }
     p {
       font-size: 1.2em;
-      margin: 1em 0;
+      margin: 0.2em 0 0 0;
       text-align: center;
     }
   }
   h3 {
     text-transform: uppercase;
+    margin-top: 0;
     &.middle {
       text-align: center;
     }
@@ -791,6 +847,16 @@ button {
     height: auto;
     width: auto;
   }
+}
+
+.remove-typeform-branding {
+  display: block;
+  width: 100%;
+  height: 6em;
+  background: black;
+  position: relative;
+  z-index: 1;
+  margin-top: -4.4em;
 }
 
 @keyframes wave {
