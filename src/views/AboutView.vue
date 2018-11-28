@@ -45,7 +45,7 @@
     <div class="part">
       <div class="text">
         <h3 class="left">Tatsuya's brief</h3>
-        <h4>A <span>playful</span> mix between <span>modular synthesizers</span>, and <span>what’s possible</span> with the web.</h4>
+        <h4>A <span>playful</span> mix between <span>modular synthesizers</span> and <span>what’s possible</span> with the web.</h4>
       </div>
       <div class="visuals">
         <div class="photo">
@@ -69,9 +69,9 @@
       </div>
       <div class="text">
         <h3 class="right">Why Ok Bye?</h3>
-        <h4>At Ok Bye <span>talent</span> lives and works together in return for <span>agency work</span>.</h4>
+        <h4>At Ok Bye, our <span>talent</span> lives and works together from a <span>perk-filled villa</span>.</h4>
         <h4>Members join to be part of a <span>location independent</span> team.</h4>
-        <h4>That's why we <span>develop faster</span>, for <span>less</span>.</h4>
+        <h4>That's why we deliver <span>agency work</span> faster and for <span>less</span>.</h4>
       </div>
     </div>
 
@@ -79,7 +79,7 @@
     <div class="part">
       <div class="text">
         <h3 class="left">What we built</h3>
-        <h4>An <span>online game</span>: new users are challenged to <span>recreate sounds</span> made by players who <span>mastered</span> the game, in 1 minute.</h4>
+        <h4>An <span>online game</span> challenging new players to <span>recreate sounds</span> made by <span>experienced</span> players, in 1 minute.</h4>
       </div>
       <div class="visuals">
         <div class="photo">
@@ -97,8 +97,8 @@
       <div class="text numbers">
         <!-- <h3 class="middle">By the numbers</h3> -->
         <div class="part">
-          <h4><span>40k</span> levels played</h4>
-          <h4><span>7.6k</span> sounds made</h4>
+          <h4><span>40k</span>levels played</h4>
+          <h4><span>7.6k</span>sounds made</h4>
           <h4><span>135</span>level reached</h4>
         </div>
       </div>
@@ -111,14 +111,14 @@
 
 <iframe width="560" height="315" class="video" src="https://www.youtube.com/embed/kK_UjBmHqQw?rel=0" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
-          <p>Elora is designing and building the new Ok Bye house.</p>
+          <p>We're talking with Elora to build the new Ok Bye house.</p>
         </div>
 
       </div>
       <div class="text">
         <h3 class="left">What's next</h3>
-        <h4>Ok Bye will become a <span>social enterprise</span>: for every hour of work we'll focus another hour on <span>solving world problems</span>.</h4>
-        <h4>We're building a <span>bamboo house</span>, to grow a <span>bigger community</span>.</h4>
+        <!-- <h4>Ok Bye will become a <span>social enterprise</span>: for every hour of work we'll focus another hour on <span>solving world problems</span>.</h4> -->
+        <h4>We're building a <span style="color:#00d87b">bamboo house</span>, to grow a <span style="color:#ff8574">bigger community</span>.</h4>
       </div>
     </div>
 
@@ -128,29 +128,33 @@
         <h3 class="left">We're available</h3>
         <h4>To realize our <span>dream</span> we need your help. <span>Hire us</span>. We do <span>small and large</span> projects.</h4>
       </div>
+
+
+      <!-- First CTA -->
+      <!-- <h3>Hire us</h3> -->
+
+      <!-- Typeform embed -->
+      <!-- <a class="typeform-share button main" href="https://newindie.typeform.com/to/paL3er" data-mode="popup" style="display:block;width:fit-content;text-decoration:none;background-color:#FF8574;color:white;cursor:pointer;color:black;font-family:Montserrat,Arial,sans-serif;font-size:2em;line-height:50px;text-align:center;margin:0 auto;letter-spacing: 1px;padding: 0.8rem 1.4rem;border-radius:0px;max-width:100%;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;font-weight:700;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;" target="_blank">PICK A TEAM</a> -->
+
+      <!-- typeform native embed -->
+      <!-- <iframe id="hire" src="https://newindie.typeform.com/to/paL3er" width="800px" height="580px" style="border: none;overflow:none"></iframe> -->
+      <!-- <div id="hire" class="typeform-widget" data-url="https://newindie.typeform.com/to/paL3er" data-hide-headers=true data-hide-footer=true style="max-width: 800px;overflow: hidden;margin: 0 auto; height: 350px;"></div>  <div style="overflow: hidden;font-family: Sans-Serif;font-size: 12px;color: #999;opacity: 0.5; padding-top: 5px;"> powered by <a href="https://admin.typeform.com/signup?utm_campaign=paL3er&utm_source=typeform.com-11685689-Pro&utm_medium=typeform&utm_content=typeform-embedded-poweredbytypeform&utm_term=EN" style="color: #999" target="_blank">Typeform</a> </div> -->
+      <button><a class="typeform-share button" href="https://newindie.typeform.com/to/paL3er" data-mode="popup" style="display:inline-block;" data-submit-close-delay="5" target="_blank">PICK A TEAM</a></button>
+      <!-- <div class="remove-typeform-branding"></div> -->
+
+
+      <!-- <button class="main" type="button" name="button" @click="loadPreset">Pick a team</button> -->
+
+      <!-- <h5>We house the best, in return for agency work</h5> -->
+
     </div>
-
-    <!-- First CTA -->
-    <!-- <h3>Hire us</h3> -->
-
-    <!-- Typeform embed -->
-    <!-- <a class="typeform-share button main" href="https://newindie.typeform.com/to/paL3er" data-mode="popup" style="display:block;width:fit-content;text-decoration:none;background-color:#FF8574;color:white;cursor:pointer;color:black;font-family:Montserrat,Arial,sans-serif;font-size:2em;line-height:50px;text-align:center;margin:0 auto;letter-spacing: 1px;padding: 0.8rem 1.4rem;border-radius:0px;max-width:100%;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;font-weight:700;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;" target="_blank">PICK A TEAM</a> -->
-
-    <!-- typeform native embed -->
-    <div id="hire" class="typeform-widget" data-url="https://newindie.typeform.com/to/paL3er" data-hide-headers=true data-hide-footer=true style="max-width: 800px;margin: 0 auto; height: 350px;"></div>  <div style="font-family: Sans-Serif;font-size: 12px;color: #999;opacity: 0.5; padding-top: 5px;"> powered by <a href="https://admin.typeform.com/signup?utm_campaign=paL3er&utm_source=typeform.com-11685689-Pro&utm_medium=typeform&utm_content=typeform-embedded-poweredbytypeform&utm_term=EN" style="color: #999" target="_blank">Typeform</a> </div>
-    <div class="remove-typeform-branding"></div>
-
-
-    <!-- <button class="main" type="button" name="button" @click="loadPreset">Pick a team</button> -->
-
-    <!-- <h5>We house the best, in return for agency work</h5> -->
 
     <!-- Play game -->
 
     <div class="part cosy">
       <div class="text">
-        <h3 class="left">Ok, now you can</h3>
-        <button class="button-next" @click="playGame">Play the game</button>
+        <!-- <h3 class="left">Ok Bye day job</h3> -->
+        <button class="button-next" @click="playGame">To the game</button>
 
         <!-- <button class="button-next" @click="$emit('create')">Make music</button> -->
       </div>
@@ -210,6 +214,27 @@ import ModuleKnob from "@/components/ModuleKnob.vue";
 var casestudyScope;
 
 // Typeform native embed js
+// (function() {
+//   var qs,
+//     js,
+//     q,
+//     s,
+//     d = document,
+//     gi = d.getElementById,
+//     ce = d.createElement,
+//     gt = d.getElementsByTagName,
+//     id = "typef_orm",
+//     b = "https://embed.typeform.com/";
+//   if (!gi.call(d, id)) {
+//     js = ce.call(d, "script");
+//     js.id = id;
+//     js.src = b + "embed.js";
+//     q = gt.call(d, "script")[0];
+//     q.parentNode.insertBefore(js, q);
+//   }
+// })();
+
+// Typeform button popup embed
 (function() {
   var qs,
     js,
@@ -219,7 +244,7 @@ var casestudyScope;
     gi = d.getElementById,
     ce = d.createElement,
     gt = d.getElementsByTagName,
-    id = "typef_orm",
+    id = "typef_orm_share",
     b = "https://embed.typeform.com/";
   if (!gi.call(d, id)) {
     js = ce.call(d, "script");
@@ -342,6 +367,9 @@ export default {
       );
       // this.toneLoop.start();
       this.loadPreset();
+      setTimeout(function() {
+        self.loadPreset();
+      }, 4000);
     },
     emitOnKey() {
       if (event.keyCode === 32) {
@@ -485,6 +513,39 @@ h3 {
   padding: 0 2em;
   margin: auto;
   color: white;
+  button {
+    letter-spacing: 1px;
+    font-size: 1em;
+    padding: 0;
+    cursor: pointer;
+    text-transform: uppercase;
+    padding: 0.8rem 1.4rem;
+    margin: 5px;
+    background: none;
+    border: 1px solid #ff8574;
+    -webkit-transition: all 0.2s;
+    transition: all 0.2s;
+    color: white;
+    a {
+      color: white;
+      text-decoration: none;
+    }
+    &:hover {
+      background: #ff8574;
+      // transform: scale(1.1);
+    }
+    &.main {
+      // border: 1px solid #00d87b;
+      background: #ff8574;
+      color: black;
+      font-size: 2em;
+      font-weight: 900;
+      &:hover {
+        background: #000;
+        color: white;
+      }
+    }
+  }
   a {
     text-decoration: none;
     font-weight: 600;
@@ -492,7 +553,7 @@ h3 {
     margin-left: 2em;
     transition: all 0.2s;
     &:hover {
-      transform: scale(1.1);
+      // transform: scale(1.1);
     }
     &:hover > .logo {
       animation: 0.6s wave linear;
@@ -515,36 +576,6 @@ h3 {
   }
 }
 
-button {
-  letter-spacing: 1px;
-  font-size: 1em;
-  padding: 0;
-  cursor: pointer;
-  text-transform: uppercase;
-  padding: 0.8rem 1.4rem;
-  margin: 5px;
-  background: none;
-  border: 1px solid #ff8574;
-  -webkit-transition: all 0.2s;
-  transition: all 0.2s;
-  color: white;
-  &:hover {
-    background: #ff8574;
-    transform: scale(1.1);
-  }
-  &.main {
-    // border: 1px solid #00d87b;
-    background: #ff8574;
-    color: black;
-    font-size: 2em;
-    font-weight: 900;
-    &:hover {
-      background: #000;
-      color: white;
-    }
-  }
-}
-
 .module {
   max-width: 16em;
 }
@@ -559,6 +590,7 @@ button {
   margin: 8em auto;
   &.call {
     text-align: center;
+    margin-bottom: 0;
     h4 {
       span {
         &:nth-of-type(1) {
@@ -573,6 +605,39 @@ button {
       }
     }
   }
+  button {
+    letter-spacing: 1px;
+    font-size: 1em;
+    padding: 0;
+    cursor: pointer;
+    text-transform: uppercase;
+    padding: 0.8rem 1.4rem;
+    margin: 5px;
+    background: none;
+    border: 1px solid #ff8574;
+    -webkit-transition: all 0.2s;
+    transition: all 0.2s;
+    color: white;
+    a {
+      color: white;
+      text-decoration: none;
+    }
+    &:hover {
+      background: #ff8574;
+      // transform: scale(1.1);
+    }
+    &.main {
+      // border: 1px solid #00d87b;
+      background: #ff8574;
+      color: black;
+      font-size: 2em;
+      font-weight: 900;
+      &:hover {
+        background: #000;
+        color: white;
+      }
+    }
+  }
   &.cosy {
     justify-content: center;
     margin-bottom: 20em;
@@ -583,6 +648,16 @@ button {
       color: white;
       max-width: fit-content;
       margin: 1em auto;
+      font-size: 2em;
+      background: #ff8574;
+      font-weight: 900;
+      color: black;
+      &:hover {
+        // transform: scale(1.05);
+        font-size: 2.1em;
+        color: white;
+        background: black;
+      }
     }
   }
   .text {
@@ -654,6 +729,20 @@ button {
         }
         &:nth-of-type(3) {
           color: #7d00d9;
+        }
+      }
+    }
+    &:nth-of-type(3) {
+      margin: 0;
+      span {
+        &:nth-of-type(1) {
+          color: #7d00d9;
+        }
+        &:nth-of-type(2) {
+          color: #ff8574;
+        }
+        &:nth-of-type(3) {
+          color: #00d87b;
         }
       }
     }
@@ -809,6 +898,7 @@ button {
     bottom: -1px;
     height: fit-content;
     padding: 0 2em;
+    z-index: 11;
   }
 }
 
@@ -869,7 +959,11 @@ button {
   background: black;
   position: relative;
   z-index: 1;
-  margin-top: -4.4em;
+  margin-top: -4.5em;
+}
+
+iframe {
+  overflow: hidden;
 }
 
 @keyframes wave {

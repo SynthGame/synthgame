@@ -86,7 +86,7 @@
                 >NEXT LEVEL</button>
       </div>
       <div class="credits">
-        Game created by <a href="https://okbye.io" target="_blank"><span>Ok Bye</span></a>. Read the <a href="https://casestudy.okbye.io/tats/" target="_blank"><span>Case Study</span></a>.
+        Game created by <a href="https://okbye.io" target="_blank"><span>Ok Bye</span></a>. Read the <a href="https://casestudies.okbye.io/tats/" target="_blank"><span>Case Study</span></a>.
       </div>
     </div>
   </div>
@@ -290,7 +290,8 @@ export default {
 
 <style scoped lang="scss">
 .drum {
-  margin: -75px 0 -75px 0;
+  height: 60%;
+  margin: -4% 0;
 }
 
 .custom-user-avatar {

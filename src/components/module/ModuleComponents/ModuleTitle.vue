@@ -44,7 +44,7 @@ export default {
   display: flex;
   position: relative;
   justify-content: flex-start;
-  align-items: baseline;
+  align-items: center;
   text-transform: uppercase;
   letter-spacing: 2px;
   &__title {
@@ -59,14 +59,15 @@ export default {
       font-size: 1rem;
       margin: 0 0 0 0.5em;
       font-weight: 300;
+      line-height: 0.9em;
     }
   }
 
   &__status-indicator {
     display: inline-block;
     margin-left: 0.2em;
-    height: 9px;
-    width: 9px;
+    height: 10px;
+    width: 10px;
     border: 1px solid white;
     border-radius: 100%;
 

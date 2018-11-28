@@ -241,7 +241,9 @@ export default {
     },
     back() {
       this.showCreatePreview = false;
-      this.displaySuccessOverlay = true;
+      if (this.level < 6) {
+        this.displaySuccessOverlay = true;
+      }
     },
     init() {
       // Retrieve highscore from local storage
@@ -411,7 +413,7 @@ export default {
         preset: Object.assign(presets[this.pickedPreset].parameterValues, {})
       });
       this.$store.dispatch("randomizeAudioParameters", availableParameters); // and the audio params
-      this.$store.dispatch("setSynthToGoal", audio); // then let the user hear it
+      this.$nextTick(() => this.$store.dispatch("setSynthToGoal", audio)); //then let the user hear it
 
       // this.loop.start()
       // rest will be done by watcher of sequencesPassedInCurrentLevel
@@ -609,21 +611,27 @@ export default {
     justify-content: space-between;
     width: 40%;
     height: 6.9em;
-    margin-top: 0.5em;
+    // margin-top: 0.5em;
     .switch {
       display: flex;
       flex-direction: column;
       justify-content: space-between;
       width: 2em;
-      margin: auto;
+      height: 5.4em;
+      box-sizing: content-box;
+      margin: 0 auto;
       button {
+        font-size: 1em;
         svg {
           padding: 0;
         }
       }
     }
     button {
-      height: 4vh;
+      min-height: 4vh;
+      height: 100%;
+      width: 100%;
+      box-sizing: content-box;
       padding: 0;
       margin: auto;
       background: unset;
@@ -639,7 +647,7 @@ export default {
       stroke: white;
     }
     & p {
-      margin: 0.5em 0 0 0;
+      margin: 0;
       font-size: 0.7em;
       width: 100%;
       text-transform: uppercase;
@@ -649,10 +657,11 @@ export default {
   .button-wrapper {
     display: flex;
     padding: 0em;
-    width: 85%;
-    margin: 0 0 1em 0;
+    width: 80%;
+    margin: 0;
     flex-wrap: wrap;
-    justify-content: center;
+    justify-content: space-around;
+    min-height: 4em;
     button {
       // width:2.5em;
       // height: 2.5em;
@@ -663,7 +672,7 @@ export default {
       width: 1em;
     }
     & p {
-      margin: 0.5em 0 0 0;
+      margin: 0;
       font-size: 0.7em;
       width: 100%;
       text-transform: uppercase;
@@ -705,13 +714,13 @@ export default {
     }
   }
   & .knobs {
-    width: 100%;
+    width: 80%;
     min-height: 14.5em;
     margin: auto;
     display: flex;
     align-items: center;
     flex-wrap: wrap;
-    justify-content: center;
+    justify-content: space-around;
     align-items: center;
     &:before {
       content: "";

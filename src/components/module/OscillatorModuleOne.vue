@@ -153,7 +153,7 @@ export default {
     ...vuexSyncGen("oscillator1", "typeOsc", val => {
       // if (self.oscillator1.type === character.oscillator1.typeOsc(val)) return;
       self.oscillator1.type = character.oscillator1.typeOsc(val);
-      console.log("self.oscillator1.type", self.oscillator1.type);
+      // console.log("self.oscillator1.type", self.oscillator1.type);
       self.oscillator1.stop();
       self.oscillator1.start();
     }),

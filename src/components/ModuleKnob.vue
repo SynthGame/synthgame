@@ -1,7 +1,7 @@
 <template>
   <div class="knob">
     <div class="div-wrapper">
-      <svg width="100%" style="overflow:visible;" viewBox="0 0 550 550" ref="_svg"
+      <svg width="100%" style="overflow:visible;height: 5.4em;" viewBox="0 0 550 550" ref="_svg"
         @touchmove="handleTouchMove"
         @click="handleClick"
         @mousedown="handleMouseDown"
@@ -91,27 +91,41 @@
   </div>
 </template>
 <script>
-import TouchPosition from '../modules/touch_position.js'
-import CircleSliderState from '../modules/circle_slider_state.js'
+import TouchPosition from "../modules/touch_position.js";
+import CircleSliderState from "../modules/circle_slider_state.js";
 
 export default {
-  name: 'CircleSlider',
-  created () {
-    this.stepsCount = 1 + (this.max - this.min) / this.stepSize
-    this.steps = Array.from({
-      length: this.stepsCount
-    }, (_, i) => this.min + i * this.stepSize)
+  name: "CircleSlider",
+  created() {
+    this.stepsCount = 1 + (this.max - this.min) / this.stepSize;
+    this.steps = Array.from(
+      {
+        length: this.stepsCount
+      },
+      (_, i) => this.min + i * this.stepSize
+    );
 
-    this.circleSliderState = new CircleSliderState(this.steps, this.rangeOffset, this.value)
-    this.angle = this.circleSliderState.angleValue
-    this.currentStepValue = this.circleSliderState.currentStep
+    this.circleSliderState = new CircleSliderState(
+      this.steps,
+      this.rangeOffset,
+      this.value
+    );
+    this.angle = this.circleSliderState.angleValue;
+    this.currentStepValue = this.circleSliderState.currentStep;
 
-    let maxCurveWidth = Math.max(this.cpMainCircleStrokeWidth, this.cpPathStrokeWidth)
-    this.radius = (550 / 2) - Math.max(maxCurveWidth, this.cpKnobRadius * 2) / 2
-    this.updateFromPropValue(this.value)
+    let maxCurveWidth = Math.max(
+      this.cpMainCircleStrokeWidth,
+      this.cpPathStrokeWidth
+    );
+    this.radius = 550 / 2 - Math.max(maxCurveWidth, this.cpKnobRadius * 2) / 2;
+    this.updateFromPropValue(this.value);
   },
-  mounted () {
-    this.touchPosition = new TouchPosition(this.$refs._svg, this.radius, this.radius / 2)
+  mounted() {
+    this.touchPosition = new TouchPosition(
+      this.$refs._svg,
+      this.radius,
+      this.radius / 2
+    );
   },
   props: {
     // startAngleOffset: {
@@ -124,7 +138,7 @@ export default {
     // },
     module: {
       type: String,
-      default: 'oscillator'
+      default: "oscillator"
     },
     value: {
       type: Number,
@@ -154,22 +168,22 @@ export default {
     circleColor: {
       type: String,
       required: false,
-      default: '#334860'
+      default: "#334860"
     },
     progressColor: {
       type: String,
       required: false,
-      default: '#00be7e'
+      default: "#00be7e"
     },
     knobColor: {
       type: String,
       required: false,
-      default: '#00be7e'
+      default: "#00be7e"
     },
     name: {
       type: String,
       required: false,
-      default: 'Extra Tats'
+      default: "Extra Tats"
     },
     knobRadius: {
       type: Number,
@@ -212,7 +226,7 @@ export default {
     //   default: null
     // }
   },
-  data () {
+  data() {
     return {
       steps: null,
       stepsCount: null,
@@ -230,144 +244,159 @@ export default {
           y: null
         }
       }
-    }
+    };
   },
   computed: {
-    cpStartAngleOffset () {
+    cpStartAngleOffset() {
       if (!this.minStepLimit) {
-        return 0
+        return 0;
       }
     },
-    cpCenter () {
-      return 550 / 2
+    cpCenter() {
+      return 550 / 2;
     },
-    cpAngle () {
-      return this.angle + Math.PI / 2
+    cpAngle() {
+      return this.angle + Math.PI / 2;
     },
-    degAngle () {
-      return (this.angle) / (2 * Math.PI) * 360
+    degAngle() {
+      return (this.angle / (2 * Math.PI)) * 360;
     },
-    cpMainCircleStrokeWidth () {
-      return this.circleWidth || (550 / 2) / this.circleWidthRel
+    cpMainCircleStrokeWidth() {
+      return this.circleWidth || 550 / 2 / this.circleWidthRel;
     },
-    cpPathDirection () {
-      return (this.cpAngle < 3 / 2 * Math.PI) ? 0 : 1
+    cpPathDirection() {
+      return this.cpAngle < (3 / 2) * Math.PI ? 0 : 1;
     },
-    cpPathX () {
-      return this.cpCenter + this.radius * Math.cos(this.cpAngle)
+    cpPathX() {
+      return this.cpCenter + this.radius * Math.cos(this.cpAngle);
     },
-    cpPathY () {
-      return this.cpCenter + this.radius * Math.sin(this.cpAngle)
+    cpPathY() {
+      return this.cpCenter + this.radius * Math.sin(this.cpAngle);
     },
-    cpPathStrokeWidth () {
-      return this.progressWidth || (550 / 2) / this.progressWidthRel
+    cpPathStrokeWidth() {
+      return this.progressWidth || 550 / 2 / this.progressWidthRel;
     },
-    cpKnobRadius () {
-      return this.knobRadius || (550 / 2) / this.knobRadiusRel
+    cpKnobRadius() {
+      return this.knobRadius || 550 / 2 / this.knobRadiusRel;
     },
-    cpPathD () {
-      let parts = []
-      parts.push('M' + this.cpCenter)
-      parts.push(this.cpCenter + this.radius)
-      parts.push('A')
-      parts.push(this.radius)
-      parts.push(this.radius)
-      parts.push(0)
-      parts.push(this.cpPathDirection)
-      parts.push(1)
-      parts.push(this.cpPathX)
-      parts.push(this.cpPathY)
-      return parts.join(' ')
+    cpPathD() {
+      let parts = [];
+      parts.push("M" + this.cpCenter);
+      parts.push(this.cpCenter + this.radius);
+      parts.push("A");
+      parts.push(this.radius);
+      parts.push(this.radius);
+      parts.push(0);
+      parts.push(this.cpPathDirection);
+      parts.push(1);
+      parts.push(this.cpPathX);
+      parts.push(this.cpPathY);
+      return parts.join(" ");
     }
   },
   methods: {
     /*
      */
-    fitToStep (val) {
-      return Math.round(val / this.stepSize) * this.stepSize
+    fitToStep(val) {
+      return Math.round(val / this.stepSize) * this.stepSize;
     },
 
     /*
      */
-    handleClick (e) {
-      this.touchPosition.setNewPosition(e)
+    handleClick(e) {
+      this.touchPosition.setNewPosition(e);
       // if (this.touchPosition.isTouchWithinSliderRange) {
-        const newAngle = this.touchPosition.sliderAngle
-        this.animateSlider(this.angle, newAngle)
+      const newAngle = this.touchPosition.sliderAngle;
+      this.animateSlider(this.angle, newAngle);
       // }
     },
 
     /*
      */
-    handleMouseDown (e) {
-      e.preventDefault()
-      this.mousePressed = true
-      window.addEventListener('mousemove', this.handleWindowMouseMove)
-      window.addEventListener('mouseup', this.handleMouseUp)
+    handleMouseDown(e) {
+      e.preventDefault();
+      this.mousePressed = true;
+      window.addEventListener("mousemove", this.handleWindowMouseMove);
+      window.addEventListener("mouseup", this.handleMouseUp);
     },
 
     /*
      */
-    handleMouseUp (e) {
-      e.preventDefault()
-      this.mousePressed = false
-      window.removeEventListener('mousemove', this.handleWindowMouseMove)
-      window.removeEventListener('mouseup', this.handleMouseUp)
-      this.mousemoveTicks = 0
+    handleMouseUp(e) {
+      e.preventDefault();
+      this.mousePressed = false;
+      window.removeEventListener("mousemove", this.handleWindowMouseMove);
+      window.removeEventListener("mouseup", this.handleMouseUp);
+      this.mousemoveTicks = 0;
     },
 
-    handleTouchStart (e) {
+    handleTouchStart(e) {
       const getDivWrapper = el => {
-        if(el.parentElement.className === 'div-wrapper') return el.parentElement
-        return getDivWrapper(el.parentElement)
-      }
-      this.touchEvent.active = true
+        if (el.parentElement.className === "div-wrapper")
+          return el.parentElement;
+        return getDivWrapper(el.parentElement);
+      };
+      this.touchEvent.active = true;
 
-      const x = e.targetTouches[0].pageX
-      const y = e.targetTouches[0].pageX
-      console.log(e.srcElement)
-      const divWrapper = getDivWrapper(e.srcElement)
+      const x = e.targetTouches[0].pageX;
+      const y = e.targetTouches[0].pageX;
+      console.log(e.srcElement);
+      const divWrapper = getDivWrapper(e.srcElement);
 
-      this.touchEvent.center.x = divWrapper.offsetLeft + 0.5 * divWrapper.offsetWidth
-      this.touchEvent.center.y = divWrapper.offsetParent.offsetParent.offsetTop + divWrapper.offsetTop + 0.5 * divWrapper.offsetHeight
+      this.touchEvent.center.x =
+        divWrapper.offsetLeft + 0.5 * divWrapper.offsetWidth;
+      this.touchEvent.center.y =
+        divWrapper.offsetParent.offsetParent.offsetTop +
+        divWrapper.offsetTop +
+        0.5 * divWrapper.offsetHeight;
     },
 
-    handleTouchEnd () {
-      this.touchEvent.active = false
+    handleTouchEnd() {
+      this.touchEvent.active = false;
     },
 
     /*
      */
-    handleWindowMouseMove (e) {
-      e.preventDefault()
+    handleWindowMouseMove(e) {
+      e.preventDefault();
       if (this.mousemoveTicks < 5) {
-        this.mousemoveTicks++
-        return
+        this.mousemoveTicks++;
+        return;
       }
 
-      this.touchPosition.setNewPosition(e)
-      this.updateSlider()
+      this.touchPosition.setNewPosition(e);
+      this.updateSlider();
     },
 
     /*
      */
-    handleTouchMove (e) {
+    handleTouchMove(e) {
       // this.$emit('touchmove')
       // Do nothing if two or more fingers used
-      if (!this.touchEvent.active) return
-      if (e.targetTouches.length > 1 || e.changedTouches.length > 1 || e.touches.length > 1) {
-        return true
+      if (!this.touchEvent.active) return;
+      if (
+        e.targetTouches.length > 1 ||
+        e.changedTouches.length > 1 ||
+        e.touches.length > 1
+      ) {
+        return true;
       }
-      const x = e.targetTouches[0].pageX
-      const y = e.targetTouches[0].pageY
+      const x = e.targetTouches[0].pageX;
+      const y = e.targetTouches[0].pageY;
 
-      const xDiff = x - this.touchEvent.center.x
-      const yDiff = this.touchEvent.center.y - y
+      const xDiff = x - this.touchEvent.center.x;
+      const yDiff = this.touchEvent.center.y - y;
 
-      const fullAngle = Math.atan2(yDiff, xDiff) < 0 ? Math.atan2(yDiff, xDiff) + 2*Math.PI : Math.atan2(yDiff, xDiff)
-      const inverseFullAngle = 2*Math.PI-fullAngle
-      const inverseFullAngleCorrectedForStart = (inverseFullAngle - 0.5*Math.PI) < 0 ? inverseFullAngle + 1.5*Math.PI : inverseFullAngle - 0.5*Math.PI
-      this.updateAngle(inverseFullAngleCorrectedForStart)
+      const fullAngle =
+        Math.atan2(yDiff, xDiff) < 0
+          ? Math.atan2(yDiff, xDiff) + 2 * Math.PI
+          : Math.atan2(yDiff, xDiff);
+      const inverseFullAngle = 2 * Math.PI - fullAngle;
+      const inverseFullAngleCorrectedForStart =
+        inverseFullAngle - 0.5 * Math.PI < 0
+          ? inverseFullAngle + 1.5 * Math.PI
+          : inverseFullAngle - 0.5 * Math.PI;
+      this.updateAngle(inverseFullAngleCorrectedForStart);
 
       // // const lastTouch = e.targetTouches.item(e.targetTouches.length - 1)
       // // this.touchPosition.setNewPosition(lastTouch)
@@ -382,80 +411,87 @@ export default {
 
     /*
      */
-    updateAngle (angle) {
-      this.circleSliderState.updateCurrentStepFromAngle(angle)
-      this.angle = this.circleSliderState.angleValue
-      this.currentStepValue = this.circleSliderState.currentStep
+    updateAngle(angle) {
+      this.circleSliderState.updateCurrentStepFromAngle(angle);
+      this.angle = this.circleSliderState.angleValue;
+      this.currentStepValue = this.circleSliderState.currentStep;
 
-      this.$emit('input', this.currentStepValue)
+      this.$emit("input", this.currentStepValue);
     },
 
     /*
      */
-    updateFromPropValue (value) {
-      let stepValue = this.fitToStep(value)
-      this.circleSliderState.updateCurrentStepFromValue(stepValue)
+    updateFromPropValue(value) {
+      let stepValue = this.fitToStep(value);
+      this.circleSliderState.updateCurrentStepFromValue(stepValue);
 
-      this.angle = this.circleSliderState.angleValue
-      this.currentStepValue = stepValue
-      this.$emit('input', this.currentStepValue)
+      this.angle = this.circleSliderState.angleValue;
+      this.currentStepValue = stepValue;
+      this.$emit("input", this.currentStepValue);
     },
 
     /*
      */
-    updateSlider () {
-      const angle = this.touchPosition.sliderAngle
+    updateSlider() {
+      const angle = this.touchPosition.sliderAngle;
       if (Math.abs(angle - this.angle) < Math.PI) {
-        this.updateAngle(angle)
+        this.updateAngle(angle);
       }
     },
 
     /*
      */
-    animateSlider (startAngle, endAngle) { // this used to be commented out, why?
-      const direction = startAngle < endAngle ? 1 : -1
-      const curveAngleMovementUnit = direction * this.circleSliderState.angleUnit * 2
+    animateSlider(startAngle, endAngle) {
+      // this used to be commented out, why?
+      const direction = startAngle < endAngle ? 1 : -1;
+      const curveAngleMovementUnit =
+        direction * this.circleSliderState.angleUnit * 2;
 
       const animate = () => {
-        if (Math.abs(endAngle - startAngle) < Math.abs(2 * curveAngleMovementUnit)) {
-          this.updateAngle(endAngle)
+        if (
+          Math.abs(endAngle - startAngle) < Math.abs(2 * curveAngleMovementUnit)
+        ) {
+          this.updateAngle(endAngle);
         } else {
-          const newAngle = startAngle + curveAngleMovementUnit
-          this.updateAngle(newAngle)
-          this.animateSlider(newAngle, endAngle)
+          const newAngle = startAngle + curveAngleMovementUnit;
+          this.updateAngle(newAngle);
+          this.animateSlider(newAngle, endAngle);
         }
-      }
+      };
 
-      window.requestAnimationFrame(animate)
+      window.requestAnimationFrame(animate);
     }
   },
   watch: {
-    value (val) {
-      this.updateFromPropValue(val)
+    value(val) {
+      this.updateFromPropValue(val);
     }
   }
-}
+};
 </script>
 <style scoped lang="scss">
-
 .knob {
-  // pointer-events: none;
-  width:35%;
-  max-width:16vh;
-  margin: 0 .4em 0 .4em;
-  color: white;
+  max-width: 5.4em;
+  height: 6.9em;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
   &__bg {
     margin-bottom: -150px;
     overflow: visible;
   }
   p {
-     margin: .5em 0 0 0;
-     font-size: .7em;
-     text-transform: uppercase;
-     letter-spacing: 1px;
-     z-index:9;
-     position: relative;
+    margin: 0;
+    font-size: 0.7em;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    z-index: 9;
+    position: relative;
   }
+}
+
+.div-wrapper {
+  max-height: 4em;
 }
 
 .touchpoint {
@@ -465,14 +501,14 @@ export default {
 
 @media only screen and (max-width: 1000px) {
   .knob p {
-      font-size: 1.2em;
+    font-size: 1.2em;
   }
   .knob {
     margin: 0 5% !important;
   }
   .knob {
     // pointer-events: none;
-    width:25%;
+    width: 25%;
   }
 }
 </style>

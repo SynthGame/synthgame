@@ -2,8 +2,6 @@
   <nav class="main">
     <div class="left">
       <h2 class="game_title">Tats
-      <span v-if="!createModeIsActive" class="main__level">Level {{gameLevel}}</span>
-      <span v-if="createModeIsActive" class="main__level">Artist</span>
       <span
         v-if="moduleIsUseable('oscillator1') && !createModeIsActive"
         :class="{
@@ -59,6 +57,8 @@
                   'box-shadow': lfoComplete ? `0px 0px 16px ${lfoColor}` : '',
                 }"
       ></span>
+      <span v-if="!createModeIsActive" class="main__level">Level {{gameLevel}}</span>
+      <span v-if="createModeIsActive" class="main__level">Artist</span>
       </h2>
     </div>
 
@@ -361,7 +361,7 @@ export default {
   border: unset;
   border-bottom: 1px solid white;
   margin-right: 1em;
-  font-size: 1.2em;
+  font-size: 1em;
   font-family: montserrat;
   outline: 0;
 }
