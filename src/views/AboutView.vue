@@ -123,7 +123,7 @@
     </div>
 
     <!-- call -->
-    <div class="part call">
+    <div class="part call" id="hire">
       <div class="text">
         <h3 class="left">We're available</h3>
         <h4>To realize our <span>dream</span> we need your help. <span>Hire us</span>. We do <span>small and large</span> projects.</h4>

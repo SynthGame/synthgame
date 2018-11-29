@@ -3,14 +3,13 @@
     <div class="left">
       <h2 class="game_title">Tats
       <span
-        v-if="moduleIsUseable('oscillator1') && !createModeIsActive"
         :class="{
                   'module__name__status-indicator': true,
-                  'module__name__status-indicator--active': oscillator1Complete
+                  'module__name__status-indicator--active': oscillator1Complete && !createModeIsActive
                 }"
         :style="{
-                  'background-color': oscillator1Complete ? oscillatorColor : '',
-                  'box-shadow': oscillator1Complete ? `0px 0px 16px ${oscillatorColor}` : '',
+                  'background-color': oscillator1Complete && !createModeIsActive ? oscillatorColor : '',
+                  'box-shadow': oscillator1Complete && !createModeIsActive ? `0px 0px 16px ${oscillatorColor}` : '',
                 }"
       ></span>
       <span
@@ -276,7 +275,7 @@ export default {
   text-transform: uppercase;
   padding: 0 1.5%;
   height: 8vh;
-  font-size: 1rem;
+  // font-size: 1rem;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -346,6 +345,10 @@ export default {
   border-radius: 100%;
   transition: 0.5s;
   border: 1px solid white;
+
+  &:first-of-type {
+    margin-left: 0;
+  }
 
   &--active {
     border: none;

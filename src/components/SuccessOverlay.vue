@@ -72,7 +72,7 @@
         </div>
       </div>
       <div class="scores">
-        <img class="custom-user-avatar" :src="avatarUrl"/>
+        <img width="50" eight="50" class="custom-user-avatar" :src="avatarUrl"/>
         <span class="data artist">Preset by {{nameArtist}}</span>
       </div>
       <div>
