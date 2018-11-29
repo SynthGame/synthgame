@@ -14,8 +14,8 @@ export default new Router({
       component: Home
     },
     {
-      path: "/casestudy",
-      name: "casestudy",
+      path: "/tats",
+      name: "tats",
       // route level code-splitting
       // this generates a separate chunk (about.[hash].js) for this route
       // which is lazy-loaded when the route is visited.
@@ -23,13 +23,13 @@ export default new Router({
         import(/* webpackChunkName: "about" */ "./views/AboutView.vue")
     },
     {
-      path: "/tats",
-      name: "casestudy",
+      path: "/jobboard",
+      name: "jobboard",
       // route level code-splitting
       // this generates a separate chunk (about.[hash].js) for this route
       // which is lazy-loaded when the route is visited.
       component: () =>
-        import(/* webpackChunkName: "about" */ "./views/AboutView.vue")
+        import(/* webpackChunkName: "about" */ "./views/JobBoard.vue")
     }
   ],
   scrollBehavior(to, from, savedPosition) {

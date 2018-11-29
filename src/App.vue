@@ -121,7 +121,7 @@ export default {
       });
     } else if (
       window.location.href.indexOf("tats") != -1 ||
-      window.location.href.indexOf("casestudy") != -1
+      window.location.href.indexOf("jobboard") != -1
     ) {
       this.customLevelIsActive = true;
       this.displayStartOverlay = false;

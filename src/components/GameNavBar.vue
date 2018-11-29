@@ -323,11 +323,14 @@ export default {
   }
   &__level {
     font-weight: 300;
-    margin-left: 1em;
+    margin-left: 0.6em;
   }
 }
 .game_title {
   text-transform: uppercase;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
   letter-spacing: 2px;
   font-size: 1em;
 }
@@ -339,16 +342,12 @@ export default {
 
 .module__name__status-indicator {
   display: inline-block;
-  margin-left: 0.8em;
-  width: 11px;
-  height: 11px;
+  margin-left: 0.6em;
+  width: 10px;
+  height: 10px;
   border-radius: 100%;
   transition: 0.5s;
   border: 1px solid white;
-
-  &:first-of-type {
-    margin-left: 0;
-  }
 
   &--active {
     border: none;
@@ -364,7 +363,7 @@ export default {
   border: unset;
   border-bottom: 1px solid white;
   margin-right: 1em;
-  font-size: 1em;
+  font-size: 1.1em;
   font-family: montserrat;
   outline: 0;
 }
