@@ -63,23 +63,23 @@
       </svg>
       <div class="scores">
         <div class="score">
-          <span>score</span>
+          <span class="label">score</span>
           <span class="data">{{paddedScoreString}}</span>
         </div>
         <div class="highscore">
-          <span>High score</span>
+          <span class="label">High score</span>
           <span class="data">{{paddedHighScoreString}}</span>
         </div>
       </div>
-      <div class="scores">
+      <div class="player">
         <img width="50" eight="50" class="custom-user-avatar" :src="avatarUrl"/>
-        <span class="data artist">Preset by {{nameArtist}}</span>
+        <span class="artist">Preset by {{nameArtist}}</span>
       </div>
       <div>
-        <button class="button-next"
+        <!-- <button class="button-next"
                 @click="$emit('closesuccessoverlay')"
                 ref="button"
-                >KEEP TWEAKING</button>
+                >KEEP TWEAKING</button> -->
         <button class="button-next"
                 @click="$emit('next')"
                 ref="button"
@@ -294,43 +294,30 @@ export default {
   margin: -4% 0;
 }
 
-.custom-user-avatar {
-  height: 50px;
-  width: 50px;
-  border-radius: 100%;
-  border: 2px solid white;
-}
-
 .success {
   .scores {
     width: 20em;
     display: flex;
     justify-content: center;
     align-items: center;
-    .artist {
-      font-size: 1em;
-      font-weight: 200;
-      text-transform: uppercase;
-      margin-left: 1em;
-      a {
-        color: white;
-      }
-    }
   }
   & .score {
     display: flex;
     font-size: 2em;
     flex-direction: column;
     width: 8em;
+    & .label {
+      font-size: 0.7em;
+    }
   }
   & .highscore {
     display: flex;
     font-size: 2em;
     flex-direction: column;
     width: 8em;
-  }
-  & span {
-    font-size: 0.7em;
+    & .label {
+      font-size: 0.7em;
+    }
   }
   & .data {
     font-weight: 600;

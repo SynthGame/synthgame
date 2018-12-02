@@ -99,7 +99,7 @@
         <div class="part">
           <h4><span>40k</span>levels played</h4>
           <h4><span>7.6k</span>sounds made</h4>
-          <h4><span>135</span>level reached</h4>
+          <h4><span>135</span>top level reached</h4>
         </div>
       </div>
     </div>
@@ -168,8 +168,8 @@
       <router-module />
     </div>
 
-    <div class="player__wrapper">
-      <div class="player">
+    <div class="case-player__wrapper">
+      <div class="case-player">
         <div class="user">
           <img class="custom-user-avatar" :src="avatarUrl"/>
           <div class="track-progress__wrapper">
@@ -793,7 +793,7 @@ h3 {
   margin-bottom: 10em;
 }
 
-.player {
+.case-player {
   display: flex;
   z-index: 1000;
   // max-width: 1050px;

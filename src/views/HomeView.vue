@@ -9,13 +9,13 @@
           'position': !createModeIsActive ? 'absolute' : 'relative',
           'top':
           !createModeIsActive &&
-          rackSlotArray[0] < 6 ? '46vh' : 0,
+          rackSlotArray[0] < 3 ? '46vh' : 0,
           'left':
           !createModeIsActive &&
-          rackSlotArray[0] < 6 ?
-          rackSlotArray[0] * 16.67 + 'vw'
+          rackSlotArray[0] < 3 ?
+          rackSlotArray[0] * 16.66 + 'vw'
           : ( !createModeIsActive &&
-          rackSlotArray[0] > 5 ? rackSlotArray[0] * 16.67 - (6 * 16.67) + 'vw': '')
+          rackSlotArray[0] > 2 ? rackSlotArray[0] * 16.66 - (3 * 16.66) + 'vw': '')
           ,
           }"
       />
@@ -26,13 +26,13 @@
           'position': !createModeIsActive ? 'absolute' : 'relative',
           'top':
           !createModeIsActive &&
-          rackSlotArray[1] < 6 ? '46vh' : 0,
+          rackSlotArray[1] < 3 ? '46vh' : 0,
           'left':
           !createModeIsActive &&
-          rackSlotArray[1] < 6 ?
-          rackSlotArray[1] * 16.67 + 'vw'
+          rackSlotArray[1] < 3 ?
+          rackSlotArray[1] * 16.66 + 'vw'
           : ( !createModeIsActive &&
-          rackSlotArray[1] > 5 ? rackSlotArray[1] * 16.67 - (6 * 16.67) + 'vw': '')
+          rackSlotArray[1] > 2 ? rackSlotArray[1] * 16.66 - (3 * 16.66) + 'vw': '')
           ,
           }"
       />
@@ -43,13 +43,13 @@
           'position': !createModeIsActive ? 'absolute' : 'relative',
           'top':
           !createModeIsActive &&
-          rackSlotArray[2] < 6 ? '46vh' : 0,
+          rackSlotArray[2] < 3 ? '46vh' : 0,
           'left':
           !createModeIsActive &&
-          rackSlotArray[2] < 6 ?
-          rackSlotArray[2] * 16.67 + 'vw'
+          rackSlotArray[2] < 3 ?
+          rackSlotArray[2] * 16.66 + 'vw'
           : ( !createModeIsActive &&
-          rackSlotArray[2] > 5 ? rackSlotArray[2] * 16.67 - (6 * 16.67) + 'vw': '')
+          rackSlotArray[2] > 2 ? rackSlotArray[2] * 16.66 - (3 * 16.66) + 'vw': '')
           ,
           }"
       />
@@ -60,13 +60,13 @@
           'position': !createModeIsActive ? 'absolute' : 'relative',
           'top':
           !createModeIsActive &&
-          rackSlotArray[3] < 6 ? '46vh' : 0,
+          rackSlotArray[3] < 3 ? '46vh' : 0,
           'left':
           !createModeIsActive &&
-          rackSlotArray[3] < 6 ?
-          rackSlotArray[3] * 16.67 + 'vw'
+          rackSlotArray[3] < 3 ?
+          rackSlotArray[3] * 16.66 + 'vw'
           : ( !createModeIsActive &&
-          rackSlotArray[3] > 5 ? rackSlotArray[3] * 16.67 - (6 * 16.67) + 'vw': '')
+          rackSlotArray[3] > 2 ? rackSlotArray[3] * 16.66 - (3 * 16.66) + 'vw': '')
           ,
           }"
       />
@@ -77,13 +77,13 @@
           'position': !createModeIsActive ? 'absolute' : 'relative',
           'top':
           !createModeIsActive &&
-          rackSlotArray[4] < 6 ? '46vh' : 0,
+          rackSlotArray[4] < 3 ? '46vh' : 0,
           'left':
           !createModeIsActive &&
-          rackSlotArray[4] < 6 ?
-          rackSlotArray[4] * 16.67 + 'vw'
+          rackSlotArray[4] < 3 ?
+          rackSlotArray[4] * 16.66 + 'vw'
           : ( !createModeIsActive &&
-          rackSlotArray[4] > 5 ? rackSlotArray[4] * 16.67 - (6 * 16.67) + 'vw': '')
+          rackSlotArray[4] > 2 ? rackSlotArray[4] * 16.66 - (3 * 16.66) + 'vw': '')
           ,
           }"
       />
@@ -94,16 +94,124 @@
           'position': !createModeIsActive ? 'absolute' : 'relative',
           'top':
           !createModeIsActive &&
-          rackSlotArray[5] < 6 ? '46vh' : 0,
+          rackSlotArray[5] < 3 ? '46vh' : 0,
           'left':
           !createModeIsActive &&
-          rackSlotArray[5] < 6 ?
-          rackSlotArray[5] * 16.67 + 'vw'
+          rackSlotArray[5] < 3 ?
+          rackSlotArray[5] * 16.66 + 'vw'
           : ( !createModeIsActive &&
-          rackSlotArray[5] > 5 ? rackSlotArray[5] * 16.67 - (6 * 16.67) + 'vw': '')
+          rackSlotArray[5] > 2 ? rackSlotArray[5] * 16.66 - (3 * 16.66) + 'vw': '')
           ,
           }"
       />
+
+      <!-- Start opponent modules -->
+
+      <oscillator-module-one
+        v-if="moduleIsUseable('oscillator1')"
+        :class="[(activeModule == 0 ? 'active' : '')]"
+        :style="{
+          'position': !createModeIsActive ? 'absolute' : 'relative',
+          'top':
+          !createModeIsActive &&
+          rackSlotArray[2] < 3 ? '46vh' : 0,
+          'left':
+          !createModeIsActive &&
+          rackSlotArray[2] < 3 ?
+          50 + rackSlotArray[2] * 16.66 + 'vw'
+          : ( !createModeIsActive &&
+          rackSlotArray[2] > 2 ? 50 + rackSlotArray[2] * 16.66 - (3 * 16.66) + 'vw': '')
+          ,
+          }"
+      />
+      <oscillator-module-two
+        v-if="moduleIsUseable('oscillator2')"
+        :class="[(activeModule == 1 ? 'active' : '')]"
+        :style="{
+          'position': !createModeIsActive ? 'absolute' : 'relative',
+          'top':
+          !createModeIsActive &&
+          rackSlotArray[5] < 3 ? '46vh' : 0,
+          'left':
+          !createModeIsActive &&
+          rackSlotArray[5] < 3 ?
+          50 + rackSlotArray[5] * 16.66 + 'vw'
+          : ( !createModeIsActive &&
+          rackSlotArray[5] > 2 ? 50 + rackSlotArray[5] * 16.66 - (3 * 16.66) + 'vw': '')
+          ,
+          }"
+      />
+      <filter-module
+        v-if="moduleIsUseable('filter')"
+        :class="[(activeModule == 2 ? 'active' : '')]"
+        :style="{
+          'position': !createModeIsActive ? 'absolute' : 'relative',
+          'top':
+          !createModeIsActive &&
+          rackSlotArray[1] < 3 ? '46vh' : 0,
+          'left':
+          !createModeIsActive &&
+          rackSlotArray[1] < 3 ?
+          50 + rackSlotArray[1] * 16.66 + 'vw'
+          : ( !createModeIsActive &&
+          rackSlotArray[1] > 2 ? 50 + rackSlotArray[1] * 16.66 - (3 * 16.66) + 'vw': '')
+          ,
+          }"
+      />
+      <envelope-module
+        v-if="moduleIsUseable('envelope')"
+        :class="[(activeModule == 3 ? 'active' : '')]"
+        :style="{
+          'position': !createModeIsActive ? 'absolute' : 'relative',
+          'top':
+          !createModeIsActive &&
+          rackSlotArray[4] < 3 ? '46vh' : 0,
+          'left':
+          !createModeIsActive &&
+          rackSlotArray[4] < 3 ?
+          50 + rackSlotArray[4] * 16.66 + 'vw'
+          : ( !createModeIsActive &&
+          rackSlotArray[4] > 2 ? 50 + rackSlotArray[4] * 16.66 - (3 * 16.66) + 'vw': '')
+          ,
+          }"
+      />
+      <lfo-module
+        v-if="moduleIsUseable('lfo')"
+        :class="[(activeModule == 4 ? 'active' : '')]"
+        :style="{
+          'position': !createModeIsActive ? 'absolute' : 'relative',
+          'top':
+          !createModeIsActive &&
+          rackSlotArray[0] < 3 ? '46vh' : 0,
+          'left':
+          !createModeIsActive &&
+          rackSlotArray[0] < 3 ?
+          50 + rackSlotArray[0] * 16.66 + 'vw'
+          : ( !createModeIsActive &&
+          rackSlotArray[0] > 2 ? 50 + rackSlotArray[0] * 16.66 - (3 * 16.66) + 'vw': '')
+          ,
+          }"
+      />
+      <envelope-module-two
+        v-if="moduleIsUseable('envelope2')"
+        :class="[(activeModule == 5 ? 'active' : '')]"
+        :style="{
+          'position': !createModeIsActive ? 'absolute' : 'relative',
+          'top':
+          !createModeIsActive &&
+          rackSlotArray[3] < 3 ? '46vh' : 0,
+          'left':
+          !createModeIsActive &&
+          rackSlotArray[3] < 3 ?
+          50 + rackSlotArray[3] * 16.66 + 'vw'
+          : ( !createModeIsActive &&
+          rackSlotArray[3] > 2 ? 50 + rackSlotArray[3] * 16.66 - (3 * 16.66) + 'vw': '')
+          ,
+          }"
+      />
+
+      <!-- end opponent modules -->
+
       <sequencer-module
         v-if="createModeIsActive"
         :class="[(activeModule == 7 ? 'active' : '')]"
@@ -116,13 +224,13 @@
           'position': !createModeIsActive ? 'absolute' : 'relative',
           'top':
           !createModeIsActive &&
-          rackSlotArray[6] < 6 ? '46vh' : 0,
+          rackSlotArray[6] < 3 ? '46vh' : 0,
           'left':
           !createModeIsActive &&
-          rackSlotArray[6] < 6 ?
-          rackSlotArray[6] * 16.67 + 'vw'
+          rackSlotArray[6] < 3 ?
+          50 + rackSlotArray[6] * 16.66 + 'vw'
           : ( !createModeIsActive &&
-          rackSlotArray[6] > 5 ? rackSlotArray[6] * 16.67 - (6 * 16.67) + 'vw': '')
+          rackSlotArray[6] > 2 ? 50 + rackSlotArray[6] * 16.66 - (3 * 16.66) + 'vw': '')
           ,
           }"
       />
@@ -220,22 +328,32 @@
 </template>
 
 <script>
-import { MODULE_SEQUENCER_COLOR, MODULE_ROUTER_COLOR, MODULE_OSCILLATOR_COLOR, MODULE_OSCILLATORTWO_COLOR, MODULE_ENVELOPE_COLOR, MODULE_FILTER_COLOR, MODULE_DELAY_COLOR, MODULE_REVERB_COLOR, MODULE_LFO_COLOR} from '@/constants'
-import some from 'lodash/some'
+import {
+  MODULE_SEQUENCER_COLOR,
+  MODULE_ROUTER_COLOR,
+  MODULE_OSCILLATOR_COLOR,
+  MODULE_OSCILLATORTWO_COLOR,
+  MODULE_ENVELOPE_COLOR,
+  MODULE_FILTER_COLOR,
+  MODULE_DELAY_COLOR,
+  MODULE_REVERB_COLOR,
+  MODULE_LFO_COLOR
+} from "@/constants";
+import some from "lodash/some";
 // @ is an alias to /src
-import GameNavBar from '@/components/GameNavBar.vue'
-import OscillatorModuleOne from '@/components/module/OscillatorModuleOne.vue'
-import OscillatorModuleTwo from '@/components/module/OscillatorModuleTwo.vue'
-import EnvelopeModule from '@/components/module/EnvelopeModule.vue'
-import EnvelopeModuleTwo from '@/components/module/EnvelopeModuleTwo.vue'
-import FilterModule from '@/components/module/FilterModule.vue'
-import LfoModule from '@/components/module/LfoModule.vue'
-import SequencerModule from '@/components/module/SequencerModule.vue'
-import RouterModule from '@/components/module/RouterModule.vue'
+import GameNavBar from "@/components/GameNavBar.vue";
+import OscillatorModuleOne from "@/components/module/OscillatorModuleOne.vue";
+import OscillatorModuleTwo from "@/components/module/OscillatorModuleTwo.vue";
+import EnvelopeModule from "@/components/module/EnvelopeModule.vue";
+import EnvelopeModuleTwo from "@/components/module/EnvelopeModuleTwo.vue";
+import FilterModule from "@/components/module/FilterModule.vue";
+import LfoModule from "@/components/module/LfoModule.vue";
+import SequencerModule from "@/components/module/SequencerModule.vue";
+import RouterModule from "@/components/module/RouterModule.vue";
 
 export default {
-  name: 'home',
-  data () {
+  name: "home",
+  data() {
     return {
       activeModule: 0,
       marginArray: [0, 0.2, 0.4, 0.6],
@@ -247,7 +365,7 @@ export default {
       lfoColor: MODULE_LFO_COLOR,
       routerColor: MODULE_ROUTER_COLOR,
       sequencerColor: MODULE_SEQUENCER_COLOR
-    }
+    };
   },
   components: {
     GameNavBar,
@@ -260,108 +378,117 @@ export default {
     LfoModule,
     SequencerModule
   },
-  mounted () {
-      this.showSequencer()
+  mounted() {
+    this.showSequencer();
   },
   methods: {
-    moduleIsUseable (moduleName) {
-      if (this.createModeIsActive) return true
-      return some(this.knobsAvailable[moduleName]) // some are truthy
+    moduleIsUseable(moduleName) {
+      if (this.createModeIsActive) return true;
+      return some(this.knobsAvailable[moduleName]); // some are truthy
     },
-    showOsc1 () {
-      this.activeModule = 0
+    showOsc1() {
+      this.activeModule = 0;
     },
-    showOsc2 () {
-      this.activeModule = 1
+    showOsc2() {
+      this.activeModule = 1;
     },
-    showFil () {
-      this.activeModule = 2
+    showFil() {
+      this.activeModule = 2;
     },
-    showEnv () {
-      this.activeModule = 3
+    showEnv() {
+      this.activeModule = 3;
     },
-    showEnv2 () {
-      this.activeModule = 5
+    showEnv2() {
+      this.activeModule = 5;
     },
-    showLfo () {
-      this.activeModule = 4
+    showLfo() {
+      this.activeModule = 4;
     },
-    showRouter () {
-      this.activeModule = 6
+    showRouter() {
+      this.activeModule = 6;
     },
-    showSequencer () {
-      this.activeModule = 7
+    showSequencer() {
+      this.activeModule = 7;
     },
-    moduleIsUseable (moduleName) {
-      if (this.createModeIsActive) return true
-      return some(this.knobsAvailable[moduleName]) // some are truthy
+    moduleIsUseable(moduleName) {
+      if (this.createModeIsActive) return true;
+      return some(this.knobsAvailable[moduleName]); // some are truthy
     }
   },
   computed: {
-    rackSlotArray () {
-      return this.$store.state.gameState.rackSlotArray
+    rackSlotArray() {
+      return this.$store.state.gameState.rackSlotArray;
     },
-    createModeIsActive () {
-      return this.$store.state.gameState.createModeIsActive
+    createModeIsActive() {
+      return this.$store.state.gameState.createModeIsActive;
     },
-    knobsAvailable () {
-      return this.$store.state.gameState.knobsAvailable
+    knobsAvailable() {
+      return this.$store.state.gameState.knobsAvailable;
     },
-    knobsAvailable () {
-      return this.$store.state.gameState.knobsAvailable
+    knobsAvailable() {
+      return this.$store.state.gameState.knobsAvailable;
     },
-    oscillator1Complete () {
-      return Object.values(this.$store.getters.audioParametersMatchGoalWithMargin['oscillator1']).every(param => param)
+    oscillator1Complete() {
+      return Object.values(
+        this.$store.getters.audioParametersMatchGoalWithMargin["oscillator1"]
+      ).every(param => param);
     },
-    oscillator2Complete () {
-      return Object.values(this.$store.getters.audioParametersMatchGoalWithMargin['oscillator2']).every(param => param)
+    oscillator2Complete() {
+      return Object.values(
+        this.$store.getters.audioParametersMatchGoalWithMargin["oscillator2"]
+      ).every(param => param);
     },
-    filterComplete () {
-      return Object.values(this.$store.getters.audioParametersMatchGoalWithMargin['filter']).every(param => param)
+    filterComplete() {
+      return Object.values(
+        this.$store.getters.audioParametersMatchGoalWithMargin["filter"]
+      ).every(param => param);
     },
-    envelopeComplete () {
-      return Object.values(this.$store.getters.audioParametersMatchGoalWithMargin['envelope']).every(param => param)
+    envelopeComplete() {
+      return Object.values(
+        this.$store.getters.audioParametersMatchGoalWithMargin["envelope"]
+      ).every(param => param);
     },
-    envelope2Complete () {
-      return Object.values(this.$store.getters.audioParametersMatchGoalWithMargin['envelope2']).every(param => param)
+    envelope2Complete() {
+      return Object.values(
+        this.$store.getters.audioParametersMatchGoalWithMargin["envelope2"]
+      ).every(param => param);
     },
-    lfoComplete () {
-      return Object.values(this.$store.getters.audioParametersMatchGoalWithMargin['lfo']).every(param => param)
+    lfoComplete() {
+      return Object.values(
+        this.$store.getters.audioParametersMatchGoalWithMargin["lfo"]
+      ).every(param => param);
     },
-    routerComplete () {
-      return Object.values(this.$store.getters.audioParametersMatchGoalWithMargin['router']).every(param => param)
-    },
+    routerComplete() {
+      return Object.values(
+        this.$store.getters.audioParametersMatchGoalWithMargin["router"]
+      ).every(param => param);
+    }
   }
-}
+};
 </script>
 
 <style scoped lang="scss">
-
 .module__name__status-indicator {
   display: inline-block;
   width: 11px;
   height: 11px;
   border-radius: 100%;
   transition: 0.5s;
- border: 1px solid white;
+  border: 1px solid white;
 
   &--active {
     border: none;
     transition: 0.5s;
- border: 1px solid white;
-
+    border: 1px solid white;
   }
 }
 
 .active {
-    left: 0;
+  left: 0;
 }
-
-
 
 .twelve {
-  left: calc(5*16.67em);
+  left: calc(5 * 16.66em);
   top: 24.5em;
 }
-
 </style>

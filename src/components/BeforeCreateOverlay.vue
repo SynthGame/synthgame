@@ -9,7 +9,7 @@
         <!-- <h2 v-if="!customLevelIsActive">Write the music for this game. On nov 17, Tatsuya Takahashi picks 1 lucky winner, who wins a trip to the MESS foundation!</h2> -->
         <h2>You can create and share your own loops here. Start with sequencer steps and tweak the knobs you learned about. Submit and get featured in game!</h2>
       <div>
-        <button class="button-next" @click="$emit('back')">Back</button>
+        <!-- <button class="button-next" @click="$emit('back')">Back</button> -->
         <button class="button-next" @click="$emit('showCreate')">Ready</button>
       </div>
     </div>

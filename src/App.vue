@@ -5,6 +5,7 @@
         v-if="displayStartOverlay"
         @startPreview="startPlayMode"
         @create="showCreatePreview=true"
+        @toCaseStudy="toCaseStudy"
       />
     </transition>
     <transition name="slide-up-slide-down">
@@ -165,6 +166,11 @@ export default {
       this.showCreatePreview = true;
       this.displayPreviewOverlay = false;
     },
+    toCaseStudy() {
+      this.customLevelIsActive = true;
+      this.displayStartOverlay = false;
+      this.$store.commit("setCreateMode", true);
+    },
     initSynth() {
       var self = this;
       this.toneLoop = audio.setMainLoop(
@@ -317,6 +323,9 @@ export default {
       this.$store.commit("setCreateMode", true);
     },
     startLevel(level) {
+      //picking a random randomLevel
+      var randomLevel = Math.round(Math.random() * 10);
+
       // this.beginSuccessSvoosh()
       this.$nextTick(() => {
         // disable all overlays when svoosh is done
@@ -326,7 +335,7 @@ export default {
         this.displayPreviewOverlay = true;
       });
       audio.playSweep();
-      this.$router.push("?level=" + (level + 1));
+      this.$router.push("?level=" + (randomLevel + 1));
       window.parent.postMessage("play-game-activated", "*");
 
       // Shuffle rack slot array
@@ -386,28 +395,12 @@ export default {
       // Set noteArray to sequence preset locally
       this.noteArray = presets[this.pickedPreset].sequenceArray;
 
-      // clear drums
-      // this.noteArray = fill(range(0, 16), {
-      //   kick: false,
-      //   hat: false,
-      //   snare: false,
-      //   cymbal: false,
-      //   clap1: false,
-      //   clap2: false,
-      //   labmyc: false,
-      //   noise: false
-      // });
-
-      // //Just play 1 note with standard envs
-      // this.noteArray[0].selected = true;
-      // this.noteArray[0].pitch = 0;
-
-      // import level config
-      const availableParameters = levels[level] || levels[levels.length - 1];
+      const availableParameters =
+        levels[randomLevel] || levels[levels.length - 1];
 
       this.$store.dispatch("startNewLevel", {
         knobsAvailable: availableParameters,
-        levelNumber: level || 0
+        levelNumber: randomLevel || 0
       });
       this.$store.commit("setGoalToPreset", {
         preset: Object.assign(presets[this.pickedPreset].parameterValues, {})
@@ -745,6 +738,30 @@ export default {
       right: 0.55em;
     }
   }
+}
+
+.custom-user-avatar {
+  height: 50px;
+  width: 50px;
+  border-radius: 100%;
+  border: 2px solid white;
+}
+
+.artist {
+  font-size: 1em;
+  font-weight: 200;
+  text-transform: uppercase;
+  margin-left: 1em;
+  a {
+    color: white;
+  }
+}
+
+.player {
+  width: 20em;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 body {

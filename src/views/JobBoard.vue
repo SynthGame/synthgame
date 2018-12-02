@@ -13,13 +13,13 @@
             <div class="perk">
               <img src="../assets/villa.jpg" alt="Ok Bye house">
               <span>Night in Ok Bye Bali</span>
-              <span>-1</span>
+              <span>- 1</span>
               <button type="button" name="button">Redeem</button>
             </div>
             <div class="perk">
               <img src="../assets/hand.svg" alt="Ok Bye house">
-              <span>NI Maschine 3</span>
-              <span>-5</span>
+              <span>NYC Penthouse</span>
+              <span>- 5</span>
               <button type="button" name="button">Redeem</button>
             </div>
         </div>
@@ -40,7 +40,7 @@
         <span>Client</span>
         <span>Spots</span>
         <span>Joined</span>
-        <span>Following</span>
+        <span>Perks earned</span>
       </div>
 
       <div class="job">
@@ -48,15 +48,15 @@
         <span>Red Bull</span>
         <span>2</span>
         <span>oo</span>
-        <span>ooo + 15</span>
+        <span>15</span>
       </div>
 
       <div class="job">
         <span><h3>VR online profile scanner</h3></span>
         <span><button type="button" name="button">Apply</button></span>
-        <span>9</span>
-        <span>ooo</span>
-        <span>ooo</span>
+        <span>6</span>
+        <span>oooo</span>
+        <span>45</span>
       </div>
 
       <div class="job">
@@ -64,15 +64,15 @@
         <span>Red Bull</span>
         <span>6</span>
         <span>oooooo</span>
-        <span>ooo + 31</span>
+        <span>31</span>
       </div>
 
       <div class="job">
-        <span><h3><button type="button" name="button">Submit</button></h3></span>
+        <span><h3><button type="button" name="button">I have an idea</button></h3></span>
         <span>Native Instruments</span>
-        <span>9</span>
-        <span>ooo</span>
-        <span>ooo</span>
+        <span>4</span>
+        <span>o</span>
+        <span>31</span>
       </div>
 
     </div>
@@ -119,7 +119,7 @@
           </div>
           <div class="rate">
             <span>Rate</span>
-            <p>$20</p>
+            <p>$40</p>
           </div>
           <div class="time-frame">
             <span>Projects take</span>
@@ -132,15 +132,15 @@
       <div class="visuals">
         <div class="photo">
           <img src="../assets/team.jpg" alt="The Ok Bye house">
-          <p>We work remotely or from the Ok Bye house, on jobs we pick ourselves.</p>
+          <p>We work remotely on jobs we pick ourselves.</p>
         </div>
 
       </div>
       <div class="text">
-        <h3 class="right">Wait, $20 an hour?</h3>
-        <h4>At Ok Bye, <span>makers</span> work on <span>their own terms</span>.</h4>
-        <h4>We <span>love to collaborate</span> and clients make sure our work is <span>used by millions</span>.</h4>
-        <h4>If the idea is right, you get <span>the best</span> for <span>little to nothing</span>.</h4>
+        <h3 class="right">Wait, $40 an hour?</h3>
+        <h4>At Ok Bye, <span>makers</span> work on <span>their own terms</span> and get <span>no salary</span>.</h4>
+        <h4>Instead, they get access to <span>shared luxury</span>.</h4>
+        <h4><span>We pick</span> what we work on. If the idea is right, we're <span>all yours</span>.</h4>
       </div>
     </div>
 
@@ -166,7 +166,7 @@
     <div class="part cosy">
       <div class="text">
         <!-- <h3 class="left">Ok Bye day job</h3> -->
-        <button class="button-next" @click="playGame">Our latest work</button>
+        <router-link :to="{ name: 'tats', params: {} }"><button class="button-next" >Our latest work</button></router-link>
 
         <!-- <button class="button-next" @click="$emit('create')">Make music</button> -->
       </div>
@@ -180,7 +180,8 @@
       <router-module />
     </div>
 
-    <div class="player__wrapper">
+    <!-- player -->
+    <!-- <div class="player__wrapper">
       <div class="player">
         <div class="user">
           <img class="custom-user-avatar" :src="avatarUrl"/>
@@ -201,7 +202,8 @@
           <span v-else class="single" @click="looping = false"></span>
         </div>
       </div>
-    </div>
+    </div> -->
+
   </div>
 </template>
 
@@ -799,20 +801,20 @@ button {
         }
       }
     }
-    &:nth-of-type(3) {
-      margin: 0;
-      span {
-        &:nth-of-type(1) {
-          color: #7d00d9;
-        }
-        &:nth-of-type(2) {
-          color: #ff8574;
-        }
-        &:nth-of-type(3) {
-          color: #00d87b;
-        }
-      }
-    }
+    // &:nth-of-type(3) {
+    //   margin: 0;
+    //   span {
+    //     &:nth-of-type(1) {
+    //       color: #7d00d9;
+    //     }
+    //     &:nth-of-type(2) {
+    //       color: #ff8574;
+    //     }
+    //     &:nth-of-type(3) {
+    //       color: #00d87b;
+    //     }
+    //   }
+    // }
     span {
       &:nth-of-type(1) {
         color: #ff8574;
@@ -861,9 +863,11 @@ button {
     padding: 0 1.5em;
     margin-bottom: 1.5em;
     cursor: pointer;
-    transition: all 0.3s;
+    transition: all 0.5s;
     &:hover {
       transform: scale(1.01);
+      //            scaleX(), skewY(),skewX(),scaleY(),translateX(),translateY()
+      transform: matrix(1, 0.01, 0.2, 1, -5, 0);
     }
     button {
       margin: 0;

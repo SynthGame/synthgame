@@ -11,8 +11,8 @@
         <source src="../../src/assets/intro.mp4" type="video/mp4">
       </video> -->
       <div>
-        <button class="button-next" @click="$emit('startLevel')">Play Level</button>
-        <button v-if="gameLevel > 7" class="button-next" @click="$emit('create')">Make music</button>
+        <button class="button-next" @click="$emit('startLevel')">Ready</button>
+        <!-- <button v-if="gameLevel > 7" class="button-next" @click="$emit('create')">Make music</button> -->
       </div>
     </div>
   </div>

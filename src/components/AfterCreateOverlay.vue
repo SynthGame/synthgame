@@ -7,7 +7,7 @@
       <div>
         <button class="button-next" @click="copy">{{copyButtonText}}</button>
 
-        <button class="button-next" @click="$emit('closeCreate')">Try again</button>
+        <button class="button-next" @click="$emit('closeCreate')">Back to your work</button>
       </div>
     </div>
   </div>

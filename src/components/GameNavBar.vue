@@ -3,6 +3,7 @@
     <div class="left">
       <h2 class="game_title">Tats
       <span
+        v-if="moduleIsUseable('oscillator1') && !createModeIsActive || createModeIsActive"
         :class="{
                   'module__name__status-indicator': true,
                   'module__name__status-indicator--active': oscillator1Complete && !createModeIsActive
@@ -61,10 +62,6 @@
       </h2>
     </div>
 
-    <span :style="{
-      'animation': timeLeftSeconds < 11 ? '.5s infinite blink' : '',
-      'color': timeLeftSeconds < 5 ? oscillatorColor : '',
-    }" v-if="timerIsRunning === true && createModeIsActive === false" class="timer">{{paddedTimeLeftString}}</span>
     <span v-if="createModeIsActive === false && timerIsRunning === false && timeLeftSeconds < 60">
       <button class="button-next"
               @click="requestNextLevel"
@@ -73,17 +70,8 @@
     </span>
 
     <div class="right">
-      <template v-if="createModeIsActive === false">
-      <div class="score">
-        <span>score</span>
-        <span class="data">{{paddedScoreString}}</span>
-      </div>
-      <div class="highscore">
-        <span>highscore</span>
-        <span class="data">{{paddedHighScoreString}}</span>
-      </div>
-      </template>
-      <template v-else>
+
+      <template v-if="createModeIsActive">
         <input class="name-input" placeholder="Enter your Soundcloud username" v-model="exportPresetName"/>
         <button @click="submitPreset(exportPresetName)">submit</button>
         <!-- <button @click="submitPreset()">submit</button> -->
@@ -205,12 +193,13 @@ export default {
     },
     startTimer() {
       this.timeLeftSeconds = 59;
-      this.timer =
-        this.timer ||
-        window.setInterval(() => {
-          if (this.timeLeftSeconds === 0) return this.timeIsUp();
-          this.timeLeftSeconds--;
-        }, 1000);
+      // TEMP: switched off to create multiplayer mode
+      // this.timer =
+      //   this.timer ||
+      //   window.setInterval(() => {
+      //     if (this.timeLeftSeconds === 0) return this.timeIsUp();
+      //     this.timeLeftSeconds--;
+      //   }, 1000);
     },
     stopTimer() {
       window.clearInterval(this.timer);
