@@ -2,72 +2,159 @@
   <nav class="main">
     <div class="left">
       <h2 class="game_title">Tats
-      <span
-        v-if="moduleIsUseable('oscillator1') && !createModeIsActive || createModeIsActive"
-        :class="{
-                  'module__name__status-indicator': true,
-                  'module__name__status-indicator--active': oscillator1Complete && !createModeIsActive
-                }"
-        :style="{
-                  'background-color': oscillator1Complete && !createModeIsActive ? oscillatorColor : '',
-                  'box-shadow': oscillator1Complete && !createModeIsActive ? `0px 0px 16px ${oscillatorColor}` : '',
-                }"
-      ></span>
-      <span
-        v-if="moduleIsUseable('oscillator2') && !createModeIsActive"
-        :class="{
-                  'module__name__status-indicator': true,
-                  'module__name__status-indicator--active': oscillator2Complete
-                }"
-        :style="{
-                  'background-color': oscillator2Complete ? oscillatorTwoColor : '',
-                  'box-shadow': oscillator2Complete ? `0px 0px 16px ${oscillatorTwoColor}` : '',
-                }"
-      ></span>
-      <span
-        v-if="moduleIsUseable('filter') && !createModeIsActive"
-        :class="{
-                  'module__name__status-indicator indicator__osctwo': true,
-                  'module__name__status-indicator--active indicator__osctwo': filterComplete
-                }"
-            :style="{
-                  'background-color': filterComplete ? filterColor : '',
-                  'box-shadow': filterComplete ? `0px 0px 16px ${filterColor}` : '',
-                }"
-      ></span>
-      <span
-        v-if="moduleIsUseable('envelope') && !createModeIsActive"
-        :class="{
-                  'module__name__status-indicator indicator__envelope': true,
-                  'module__name__status-indicator--active indicator__envelope': envelopeComplete
-                }"
-        :style="{
-                  'background-color': envelopeComplete ? envelopeColor : '',
-                  'box-shadow': envelopeComplete ? `0px 0px 16px ${envelopeColor}` : '',
-                }"
-      ></span>
-      <span
-        v-if="moduleIsUseable('lfo') && !createModeIsActive"
-        :class="{
-                  'module__name__status-indicator': true,
-                  'module__name__status-indicator--active': lfoComplete
-                }"
-        :style="{
-                  'background-color': lfoComplete ? lfoColor : '',
-                  'box-shadow': lfoComplete ? `0px 0px 16px ${lfoColor}` : '',
-                }"
-      ></span>
-      <span v-if="!createModeIsActive" class="main__level">Level {{gameLevel}}</span>
-      <span v-if="createModeIsActive" class="main__level">Artist</span>
+
       </h2>
     </div>
+    <div class="player-name">
+      Bart Proost
+    </div>
 
-    <span v-if="createModeIsActive === false && timerIsRunning === false && timeLeftSeconds < 60">
-      <button class="button-next"
+    <span v-if="!createModeIsActive" class="game-score">
+      <!-- <button class="button-next"
               @click="requestNextLevel"
               ref="button"
-              >NEXT LEVEL</button>
+              >NEXT LEVEL</button> -->
+              <span
+                v-if="moduleIsUseable('oscillator1') && !createModeIsActive || createModeIsActive"
+                :class="{
+                          'module__name__status-indicator': true,
+                          'module__name__status-indicator--active': oscillator1Complete && !createModeIsActive
+                        }"
+                :style="{
+                          'background-color': oscillator1Complete && !createModeIsActive ? oscillatorColor : '',
+                          'box-shadow': oscillator1Complete && !createModeIsActive ? `0px 0px 16px ${oscillatorColor}` : '',
+                        }"
+              ></span>
+              <span
+                v-if="moduleIsUseable('oscillator2') && !createModeIsActive"
+                :class="{
+                          'module__name__status-indicator': true,
+                          'module__name__status-indicator--active': oscillator2Complete
+                        }"
+                :style="{
+                          'background-color': oscillator2Complete ? oscillatorTwoColor : '',
+                          'box-shadow': oscillator2Complete ? `0px 0px 16px ${oscillatorTwoColor}` : '',
+                        }"
+              ></span>
+              <span
+                v-if="moduleIsUseable('filter') && !createModeIsActive"
+                :class="{
+                          'module__name__status-indicator indicator__osctwo': true,
+                          'module__name__status-indicator--active indicator__osctwo': filterComplete
+                        }"
+                    :style="{
+                          'background-color': filterComplete ? filterColor : '',
+                          'box-shadow': filterComplete ? `0px 0px 16px ${filterColor}` : '',
+                        }"
+              ></span>
+              <span
+                v-if="moduleIsUseable('envelope') && !createModeIsActive"
+                :class="{
+                          'module__name__status-indicator indicator__envelope': true,
+                          'module__name__status-indicator--active indicator__envelope': envelopeComplete
+                        }"
+                :style="{
+                          'background-color': envelopeComplete ? envelopeColor : '',
+                          'box-shadow': envelopeComplete ? `0px 0px 16px ${envelopeColor}` : '',
+                        }"
+              ></span>
+              <span
+                v-if="moduleIsUseable('envelope2') && !createModeIsActive"
+                :class="{
+                          'module__name__status-indicator indicator__envelope': true,
+                          'module__name__status-indicator--active indicator__envelope': envelopeTwoComplete
+                        }"
+                :style="{
+                          'background-color': envelopeTwoComplete ? envelopeTwoColor : '',
+                          'box-shadow': envelopeTwoComplete ? `0px 0px 16px ${envelopeTwoColor}` : '',
+                        }"
+              ></span>
+              <span
+                v-if="moduleIsUseable('lfo') && !createModeIsActive"
+                :class="{
+                          'module__name__status-indicator': true,
+                          'module__name__status-indicator--active': lfoComplete
+                        }"
+                :style="{
+                          'background-color': lfoComplete ? lfoColor : '',
+                          'box-shadow': lfoComplete ? `0px 0px 16px ${lfoColor}` : '',
+                        }"
+              ></span>
+              <span v-if="!createModeIsActive" class="main__level">Level {{gameLevel}}</span>
+              <span v-if="createModeIsActive" class="main__level">Artist</span>
+
+              <!-- Start opponent indicators -->
+              <span
+                v-if="moduleIsUseable('oscillator1') && !createModeIsActive || createModeIsActive"
+                :class="{
+                          'module__name__status-indicator': true,
+                          'module__name__status-indicator--active': oscillator1OpponentComplete && !createModeIsActive
+                        }"
+                :style="{
+                          'background-color': oscillator1OpponentComplete && !createModeIsActive ? oscillatorColor : '',
+                          'box-shadow': oscillator1OpponentComplete && !createModeIsActive ? `0px 0px 16px ${oscillatorColor}` : '',
+                        }"
+              ></span>
+              <span
+                v-if="moduleIsUseable('oscillator2') && !createModeIsActive"
+                :class="{
+                          'module__name__status-indicator': true,
+                          'module__name__status-indicator--active': oscillator2OpponentComplete
+                        }"
+                :style="{
+                          'background-color': oscillator2OpponentComplete ? oscillatorTwoColor : '',
+                          'box-shadow': oscillator2OpponentComplete ? `0px 0px 16px ${oscillatorTwoColor}` : '',
+                        }"
+              ></span>
+              <span
+                v-if="moduleIsUseable('filter') && !createModeIsActive"
+                :class="{
+                          'module__name__status-indicator indicator__osctwo': true,
+                          'module__name__status-indicator--active indicator__osctwo': filterOpponentComplete
+                        }"
+                    :style="{
+                          'background-color': filterOpponentComplete ? filterColor : '',
+                          'box-shadow': filterOpponentComplete ? `0px 0px 16px ${filterColor}` : '',
+                        }"
+              ></span>
+              <span
+                v-if="moduleIsUseable('envelope') && !createModeIsActive"
+                :class="{
+                          'module__name__status-indicator indicator__envelope': true,
+                          'module__name__status-indicator--active indicator__envelope': envelopeOpponentComplete
+                        }"
+                :style="{
+                          'background-color': envelopeOpponentComplete ? envelopeColor : '',
+                          'box-shadow': envelopeOpponentComplete ? `0px 0px 16px ${envelopeColor}` : '',
+                        }"
+              ></span>
+              <span
+                v-if="moduleIsUseable('envelope2') && !createModeIsActive"
+                :class="{
+                          'module__name__status-indicator indicator__envelope': true,
+                          'module__name__status-indicator--active indicator__envelope': envelope2OpponentComplete
+                        }"
+                :style="{
+                          'background-color': envelope2OpponentComplete ? envelopeTwoColor : '',
+                          'box-shadow': envelope2OpponentComplete ? `0px 0px 16px ${envelopeTwoColor}` : '',
+                        }"
+              ></span>
+              <span
+                v-if="moduleIsUseable('lfo') && !createModeIsActive"
+                :class="{
+                          'module__name__status-indicator': true,
+                          'module__name__status-indicator--active': lfoOpponentComplete
+                        }"
+                :style="{
+                          'background-color': lfoOpponentComplete ? lfoColor : '',
+                          'box-shadow': lfoOpponentComplete ? `0px 0px 16px ${lfoColor}` : '',
+                        }"
+              ></span>
     </span>
+
+    <div class="player-name">
+      Lauren Stern
+    </div>
 
     <div class="right">
 
@@ -94,6 +181,7 @@ import {
   MODULE_OSCILLATOR_COLOR,
   MODULE_OSCILLATORTWO_COLOR,
   MODULE_ENVELOPE_COLOR,
+  MODULE_ENVELOPETWO_COLOR,
   MODULE_FILTER_COLOR,
   MODULE_DELAY_COLOR,
   MODULE_REVERB_COLOR,
@@ -115,6 +203,7 @@ export default {
       oscillatorColor: MODULE_OSCILLATOR_COLOR,
       oscillatorTwoColor: MODULE_OSCILLATORTWO_COLOR,
       envelopeColor: MODULE_ENVELOPE_COLOR,
+      envelopeTwoColor: MODULE_ENVELOPETWO_COLOR,
       filterColor: MODULE_FILTER_COLOR,
       lfoColor: MODULE_LFO_COLOR,
       showAfterCreateOverlay: false
@@ -159,9 +248,44 @@ export default {
         this.$store.getters.audioParametersMatchGoalWithMargin["envelope"]
       ).every(param => param);
     },
+    envelopeTwoComplete() {
+      return Object.values(
+        this.$store.getters.audioParametersMatchGoalWithMargin["envelope2"]
+      ).every(param => param);
+    },
     lfoComplete() {
       return Object.values(
         this.$store.getters.audioParametersMatchGoalWithMargin["lfo"]
+      ).every(param => param);
+    },
+    oscillator1OpponentComplete() {
+      return Object.values(
+        this.$store.getters.opponentParametersMatchGoalWithMargin["oscillator1"]
+      ).every(param => param);
+    },
+    oscillator2OpponentComplete() {
+      return Object.values(
+        this.$store.getters.opponentParametersMatchGoalWithMargin["oscillator2"]
+      ).every(param => param);
+    },
+    filterOpponentComplete() {
+      return Object.values(
+        this.$store.getters.opponentParametersMatchGoalWithMargin["filter"]
+      ).every(param => param);
+    },
+    envelopeOpponentComplete() {
+      return Object.values(
+        this.$store.getters.opponentParametersMatchGoalWithMargin["envelope"]
+      ).every(param => param);
+    },
+    envelope2OpponentComplete() {
+      return Object.values(
+        this.$store.getters.opponentParametersMatchGoalWithMargin["envelope2"]
+      ).every(param => param);
+    },
+    lfoOpponentComplete() {
+      return Object.values(
+        this.$store.getters.opponentParametersMatchGoalWithMargin["lfo"]
       ).every(param => param);
     },
     gameLevel() {
@@ -272,6 +396,12 @@ export default {
   // border: 1px solid white;
   align-items: center;
   justify-content: space-between;
+  .game-score {
+    width: 20%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
   & .score {
     display: flex;
     flex-direction: column;
@@ -292,7 +422,7 @@ export default {
     }
   }
   & .left {
-    width: 40%;
+    width: 10%;
     display: flex;
     justify-content: flex-start;
     align-items: center;
@@ -305,7 +435,7 @@ export default {
       font-weight: 600;
       font-size: 1em;
     }
-    width: 40%;
+    width: 10%;
     display: flex;
     justify-content: flex-end;
     align-items: center;

@@ -10,12 +10,13 @@ export default [
     },
     envelope: {},
     envelope2: {
-      attac: true
+      attack: true
     },
     lfo: {},
     router: {},
     levelData: {
-      text: "Use the white guidelines to recreate this sound in 60 seconds."
+      text: "Use the white guidelines to recreate this sound in 60 seconds.",
+      numberControlsAvailable: 3
     }
   },
   // level 2
@@ -32,7 +33,8 @@ export default [
     router: {},
     levelData: {
       text:
-        "The oscillator is the source of electronic sound. Use the knobs and dials to shape the outputted signal. "
+        "The oscillator is the source of electronic sound. Use the knobs and dials to shape the outputted signal.",
+      numberControlsAvailable: 2
     }
   },
   // level 3

@@ -107,7 +107,7 @@
 
       <!-- Start opponent modules -->
 
-      <oscillator-module-one
+      <oscillator-module-one-opponent
         v-if="moduleIsUseable('oscillator1')"
         :class="[(activeModule == 0 ? 'active' : '')]"
         :style="{
@@ -124,7 +124,7 @@
           ,
           }"
       />
-      <oscillator-module-two
+      <oscillator-module-two-opponent
         v-if="moduleIsUseable('oscillator2')"
         :class="[(activeModule == 1 ? 'active' : '')]"
         :style="{
@@ -141,7 +141,7 @@
           ,
           }"
       />
-      <filter-module
+      <filter-module-opponent
         v-if="moduleIsUseable('filter')"
         :class="[(activeModule == 2 ? 'active' : '')]"
         :style="{
@@ -158,7 +158,7 @@
           ,
           }"
       />
-      <envelope-module
+      <envelope-module-opponent
         v-if="moduleIsUseable('envelope')"
         :class="[(activeModule == 3 ? 'active' : '')]"
         :style="{
@@ -175,7 +175,7 @@
           ,
           }"
       />
-      <lfo-module
+      <lfo-module-opponent
         v-if="moduleIsUseable('lfo')"
         :class="[(activeModule == 4 ? 'active' : '')]"
         :style="{
@@ -192,7 +192,7 @@
           ,
           }"
       />
-      <envelope-module-two
+      <envelope-module-two-opponent
         v-if="moduleIsUseable('envelope2')"
         :class="[(activeModule == 5 ? 'active' : '')]"
         :style="{
@@ -350,6 +350,12 @@ import FilterModule from "@/components/module/FilterModule.vue";
 import LfoModule from "@/components/module/LfoModule.vue";
 import SequencerModule from "@/components/module/SequencerModule.vue";
 import RouterModule from "@/components/module/RouterModule.vue";
+import OscillatorModuleOneOpponent from "@/components/module/OscillatorModuleOneOpponent.vue";
+import OscillatorModuleTwoOpponent from "@/components/module/OscillatorModuleTwoOpponent.vue";
+import EnvelopeModuleOpponent from "@/components/module/EnvelopeModuleOpponent.vue";
+import EnvelopeModuleTwoOpponent from "@/components/module/EnvelopeModuleTwoOpponent.vue";
+import FilterModuleOpponent from "@/components/module/FilterModuleOpponent.vue";
+import LfoModuleOpponent from "@/components/module/LfoModuleOpponent.vue";
 
 export default {
   name: "home",
@@ -376,7 +382,13 @@ export default {
     EnvelopeModuleTwo,
     FilterModule,
     LfoModule,
-    SequencerModule
+    SequencerModule,
+    OscillatorModuleOneOpponent,
+    OscillatorModuleTwoOpponent,
+    EnvelopeModuleOpponent,
+    EnvelopeModuleTwoOpponent,
+    FilterModuleOpponent,
+    LfoModuleOpponent
   },
   mounted() {
     this.showSequencer();

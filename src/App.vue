@@ -75,6 +75,7 @@ export default {
   data() {
     return {
       kickTime: 0,
+      clock: 0,
       pickedPreset: 0,
       displaySuccessOverlay: false,
       displayFailureOverlay: false,
@@ -87,6 +88,7 @@ export default {
       successSvooshIt: false,
       customLevelIsActive: false,
       customLevelSequence: [],
+      averageNotesNeededBeforeGoalIsMet: 5000,
       showCreatePreview: false,
       customLevelCreator: "Anonymous",
       noteArray: fill(range(0, 16), {
@@ -144,11 +146,13 @@ export default {
       sequencesPassedInCurrentLevel: state =>
         state.gameState.sequencesPassedInCurrentLevel,
       level: state => state.gameState.level,
-      timerIsRunning: state => state.gameState.timerIsRunning
-      // nextLevelRequested: state => state.gameState.nextLevelRequested
+      timerIsRunning: state => state.gameState.timerIsRunning,
+      opponent: state => state.gameState.opponent,
+      playerState: state => state.gameState.audioParameters
     }),
     ...mapGetters({
       allParametersMatchGoal: "allParametersMatchGoal",
+      allOpponentParametersMatchGoal: "allOpponentParametersMatchGoal",
       nextLevelClickedInNavBar: "nextLevelClickedInNavBar"
     }),
     isGameOver() {
@@ -179,6 +183,31 @@ export default {
           subdivision: "8n"
         },
         (time, note) => {
+          // increment clock to keep track of user activity in case no opponent next level
+          this.clock++;
+
+          // console.log(
+          //   "this.averageNotesNeededBeforeGoalIsMet",
+          //   this.averageNotesNeededBeforeGoalIsMet,
+          //   "this.numberControlsAvailable",
+          //   this.numberControlsAvailable,
+          //   "this.timerIsRunning",
+          //   this.timerIsRunning,
+          //   "this.clock",
+          //   this.clock
+          // );
+
+          if (
+            Math.round(this.averageNotesNeededBeforeGoalIsMet) %
+              this.numberControlsAvailable ===
+              note &&
+            this.timerIsRunning &&
+            this.clock > 15
+          ) {
+            // console.log("setNextAvailableParameterToGoal triggered");
+            this.$store.dispatch("setNextAvailableParameterToGoal");
+          }
+
           // this.setStep(note)
           if (this.noteArray[note].selected) {
             // if preview, use octave(frequency) from goal in store
@@ -324,7 +353,7 @@ export default {
     },
     startLevel(level) {
       //picking a random randomLevel
-      var randomLevel = Math.round(Math.random() * 10);
+      var randomLevel = Math.round(Math.random() * 1);
 
       // this.beginSuccessSvoosh()
       this.$nextTick(() => {
@@ -398,6 +427,9 @@ export default {
       const availableParameters =
         levels[randomLevel] || levels[levels.length - 1];
 
+      this.numberControlsAvailable =
+        levels[randomLevel].levelData.numberControlsAvailable;
+
       this.$store.dispatch("startNewLevel", {
         knobsAvailable: availableParameters,
         levelNumber: randomLevel || 0
@@ -405,7 +437,16 @@ export default {
       this.$store.commit("setGoalToPreset", {
         preset: Object.assign(presets[this.pickedPreset].parameterValues, {})
       });
-      this.$store.dispatch("randomizeAudioParameters", availableParameters); // and the audio params
+      let randomizedPreset = this.$store.dispatch(
+        "randomizeAudioParameters",
+        availableParameters
+      ); // and the audio params
+      // console.log("randomizedPreset", randomizedPreset);
+
+      this.$store.commit("setOpponentParameterToRandomizedPreset", {
+        preset: presets[this.pickedPreset].parameterValues
+      });
+
       this.$nextTick(() => this.$store.dispatch("setSynthToGoal", audio)); //then let the user hear it
 
       // this.loop.start()
@@ -454,6 +495,8 @@ export default {
     beginSuccessSvoosh() {
       this.isThereSuccessSvooshComponent = true;
       this.$nextTick(() => (this.successSvooshIt = true));
+      this.averageNotesNeededBeforeGoalIsMet =
+        (this.averageNotesNeededBeforeGoalIsMet + this.clock) / 2;
     },
     endSuccessSvoosh() {
       setTimeout(() => {
@@ -466,7 +509,11 @@ export default {
     endPreview() {
       this.$store.commit("startTimerIsRunning");
       this.$store.dispatch("setSynthToDefaultParameters", audio);
+      this.restartClock();
       audio.playKick();
+    },
+    restartClock() {
+      this.clock = 0;
     },
     startNextLevel(level) {
       this.$store.commit("increaseLevelValue", 1);
@@ -490,24 +537,35 @@ export default {
         setTimeout(() => {
           // Update note array with pickedpreset sequence
           this.noteArray = presets[this.pickedPreset].sequenceArray;
-        }, 500);
-        // load the preset makers preset
-        this.$store.commit("setAudioParameterToPreset", {
-          preset: presets[this.pickedPreset].parameterValues
-        });
-        // this.$store.dispatch('setSynthToDefaultParameters', audio) // then let the user hear it
-        this.$store.dispatch("levelDone"); // would be nice to pass timeleft here but it is being passed by timer on gamestop
-        // // Update note array with pickedpreset sequence
-        // this.noteArray = presets[this.pickedPreset].sequenceArray
-        // Re-set the audioParameters with pickedpreset to undo envs and lfo modifications on startlevel
+          // load the preset makers preset
+          this.$store.commit("setAudioParameterToPreset", {
+            preset: presets[this.pickedPreset].parameterValues
+          });
+        }, 1000);
 
-        // TODO:
+        this.$store.dispatch("levelDone"); // would be nice to pass timeleft here but it is being passed by timer on gamestop
+      }
+    },
+    allOpponentParametersMatchGoal(val) {
+      if (val === true && this.timerIsRunning) {
+        this.beginSuccessSvoosh();
+        audio.playSweep();
+        setTimeout(() => {
+          // Update note array with pickedpreset sequence
+          this.noteArray = presets[this.pickedPreset].sequenceArray;
+          // load the preset makers preset
+          this.$store.commit("setAudioParameterToPreset", {
+            preset: presets[this.pickedPreset].parameterValues
+          });
+        }, 1000);
+
+        this.$store.dispatch("levelDone"); // would be nice to pass timeleft here but it is being passed by timer on gamestop
       }
     },
     nextLevelClickedInNavBar(val) {
-      console.log("nextLevelClickedInNavBar", val);
+      // console.log("nextLevelClickedInNavBar", val);
       if (val === "true") {
-        console.log("nextLevelClickedInNavBar triggered in app.vue");
+        // console.log("nextLevelClickedInNavBar triggered in app.vue");
         this.$store.dispatch("notNextLevel");
         this.startNextLevel();
       }

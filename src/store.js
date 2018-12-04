@@ -23,20 +23,16 @@ export default new Vuex.Store({
         frequency: "131",
         typeOsc: "sawtooth",
         detune: 50
-        // phase: 0
       },
       oscillator2: {
         frequency: "131",
         typeOsc: "sawtooth",
-        // detune: 50,
         volume: 50
-        // phase: 0
       },
       filter: {
         cutOffFreq: 70,
         type: "lowpass",
         setQ: 0
-        // gain: 50
       },
       envelope: {
         attack: 0,
@@ -76,6 +72,7 @@ export default new Vuex.Store({
       nextLevelRequested: false,
       level: 0,
       sequencesPassedInCurrentLevel: 0,
+      time: 0,
       knobsAvailable: {
         oscillator1: {},
         oscillator2: {},
@@ -92,20 +89,56 @@ export default new Vuex.Store({
           frequency: "131",
           typeOsc: "sawtooth",
           detune: 50
-          // phase: 0
         },
         oscillator2: {
           frequency: "131",
           typeOsc: "sawtooth",
-          // detune: 50,
           volume: 50
-          // phase: 0
         },
         filter: {
           cutOffFreq: 70,
           type: "lowpass",
           setQ: 0
-          // gain: 50
+        },
+        envelope: {
+          attack: 0,
+          decay: 0,
+          sustain: 100,
+          release: 0
+        },
+        envelope2: {
+          attack: 0,
+          decay: 90,
+          sustain: 0,
+          release: 0,
+          assign: "filterCutoff",
+          amount: 100
+        },
+        lfo: {
+          frequency: 10,
+          type: "sine",
+          amount: 0
+        },
+        router: {
+          lfo: "oscsDetune",
+          envelope2: "filterCutoff"
+        }
+      },
+      opponent: {
+        oscillator1: {
+          frequency: "131",
+          typeOsc: "sawtooth",
+          detune: 50
+        },
+        oscillator2: {
+          frequency: "131",
+          typeOsc: "sawtooth",
+          volume: 50
+        },
+        filter: {
+          cutOffFreq: 70,
+          type: "lowpass",
+          setQ: 0
         },
         envelope: {
           attack: 0,
@@ -164,7 +197,6 @@ export default new Vuex.Store({
         oscillator2: {
           frequency: "131",
           typeOsc: "sawtooth",
-          // detune: 50,
           volume: 50
         },
         filter: {
@@ -212,6 +244,9 @@ export default new Vuex.Store({
     setPresetBpm(state, bpm) {
       state.bpm = bpm;
     },
+    setOpponentState(state, opponentState) {
+      state.gameState.opponent = opponentState;
+    },
     setAudioParameterToPreset(state, { preset }) {
       // overwrite parameters from audiostate, this will not fill in nested objects
       state.audioParameters = {
@@ -219,10 +254,24 @@ export default new Vuex.Store({
         ...preset
       };
     },
+    setOpponentParameterToRandomizedPreset(state, { preset }) {
+      // overwrite parameters from audiostate, this will not fill in nested objects
+      state.gameState.opponent = {
+        ...state.gameState.opponent,
+        ...state.audioParameters
+      };
+    },
     setGoalToPreset(state, { preset }) {
       // overwrite parameters from audiostate, this will not fill in nested objects
       state.gameState.goal = {
         ...state.gameState.goal,
+        ...preset
+      };
+    },
+    setOpponentToPreset(state, { preset }) {
+      // overwrite parameters from opponentstate, this will not fill in nested objects
+      state.gameState.opponent = {
+        ...state.gameState.opponent,
         ...preset
       };
     },
@@ -295,6 +344,11 @@ export default new Vuex.Store({
         values(val)
       ).every(val => val);
     },
+    allOpponentParametersMatchGoal: (state, getters) => {
+      return flatMap(getters.opponentParametersMatchGoalWithMargin, val =>
+        values(val)
+      ).every(val => val);
+    },
     nextLevelClickedInNavBar: state => {
       return state.gameState.nextLevelRequested ? "true" : "false";
     },
@@ -303,6 +357,23 @@ export default new Vuex.Store({
     },
     audioParametersMatchGoalWithMargin: state => {
       return mapValues(state.audioParameters, (val, moduleName) => {
+        return mapValues(val, (val, parameterName) => {
+          return isArray(
+            state.gameState.possibleValues[moduleName][parameterName]
+          )
+            ? val === state.gameState.goal[moduleName][parameterName]
+            : inRange(
+                val,
+                state.gameState.goal[moduleName][parameterName] -
+                  state.gameState.margin,
+                state.gameState.goal[moduleName][parameterName] +
+                  state.gameState.margin
+              );
+        });
+      });
+    },
+    opponentParametersMatchGoalWithMargin: state => {
+      return mapValues(state.gameState.opponent, (val, moduleName) => {
         return mapValues(val, (val, parameterName) => {
           return isArray(
             state.gameState.possibleValues[moduleName][parameterName]
@@ -412,6 +483,39 @@ export default new Vuex.Store({
         });
       return commit("setGoalToPreset", {
         preset: randomizeValues(state.audioParameters)
+      });
+    },
+    setNextAvailableParameterToGoal({ state, commit }) {
+      var stillLooking = true;
+      const randomizeValues = obj =>
+        mapValues(obj, (val, moduleName) => {
+          return mapValues(val, (val, parameterName) => {
+            // console.log("stillLooking", stillLooking);
+            if (
+              stillLooking &&
+              state.gameState.knobsAvailable &&
+              state.gameState.knobsAvailable[moduleName] &&
+              state.gameState.knobsAvailable[moduleName][parameterName] &&
+              state.gameState.opponent[moduleName][parameterName] !==
+                state.gameState.goal[moduleName][parameterName]
+            ) {
+              // console.log(
+              //   "changing ",
+              //   moduleName,
+              //   parameterName,
+              //   "from ",
+              //   state.gameState.opponent[moduleName][parameterName],
+              //   "to ",
+              //   state.gameState.goal[moduleName][parameterName]
+              // );
+              stillLooking = false;
+              return state.gameState.goal[moduleName][parameterName];
+            }
+            return state.gameState.opponent[moduleName][parameterName];
+          });
+        });
+      return commit("setOpponentToPreset", {
+        preset: randomizeValues(state.gameState.goal)
       });
     },
     setSynthToGoal({ state }, synth) {

@@ -29,10 +29,13 @@
     <!-- Title section -->
     <!-- <h3>Makers only</h3> -->
     <h1>Ok Bye</h1>
-    <h2>Makers collaborate for perks</h2>
+    <!-- <h2>Makers collaborate for perks</h2> -->
+    <!-- <h2>Perks for innovators</h2> -->
+    <!-- <h2>Perks of innovators</h2> -->
+    <h2>Perks for makers</h2>
 
-    <router-link to="#hire"><button type="button" name="button" @click="">Post a job</button></router-link>
-    <span style="display:block; margin-top: 0.5em;">#1 is on us</span>
+    <router-link to="#hire"><button type="button" name="button" @click="">Post an idea</button></router-link>
+    <!-- <span style="display:block; margin-top: 0.5em;">#1 is on us</span> -->
 
     <div class="board">
       <div class="job__legend">
@@ -56,7 +59,7 @@
         <span><button type="button" name="button">Apply</button></span>
         <span>6</span>
         <span>oooo</span>
-        <span>45</span>
+        <span>-</span>
       </div>
 
       <div class="job">
@@ -72,7 +75,7 @@
         <span>Native Instruments</span>
         <span>4</span>
         <span>o</span>
-        <span>31</span>
+        <span>20</span>
       </div>
 
     </div>
@@ -98,10 +101,10 @@
     <!-- call -->
     <div class="part" id="hire">
       <div class="text">
-        <h3 class="left">We're available</h3>
+        <h3 class="left">Apply as a client</h3>
         <h4>First one is <span>on us</span>. Not just the listing; <span>the actual job</span>.</h4>
       </div>
-      <button><a class="typeform-share button" href="https://newindie.typeform.com/to/paL3er" data-mode="popup" style="display:inline-block;" data-submit-close-delay="5" target="_blank">Post a job</a></button>
+      <button><a class="typeform-share button" href="https://newindie.typeform.com/to/paL3er" data-mode="popup" style="display:inline-block;" data-submit-close-delay="5" target="_blank">Post an idea</a></button>
     </div>
 
 
@@ -117,10 +120,10 @@
             <span>Members</span>
             <p>6</p>
           </div>
-          <div class="rate">
+          <!-- <div class="rate">
             <span>Rate</span>
             <p>$40</p>
-          </div>
+          </div> -->
           <div class="time-frame">
             <span>Projects take</span>
             <p>1 month</p>
@@ -137,7 +140,7 @@
 
       </div>
       <div class="text">
-        <h3 class="right">Wait, $40 an hour?</h3>
+        <h3 class="right">Wait, first one is free?</h3>
         <h4>At Ok Bye, <span>makers</span> work on <span>their own terms</span> and get <span>no salary</span>.</h4>
         <h4>Instead, they get access to <span>shared luxury</span>.</h4>
         <h4><span>We pick</span> what we work on. If the idea is right, we're <span>all yours</span>.</h4>
@@ -181,7 +184,7 @@
     </div>
 
     <!-- player -->
-    <!-- <div class="player__wrapper">
+    <div class="player__wrapper">
       <div class="player">
         <div class="user">
           <img class="custom-user-avatar" :src="avatarUrl"/>
@@ -191,18 +194,17 @@
           </div>
         </div>
         <div class="mid-console">
-          <div class="controls">
-            <span class="skip-back" @click="loadPreset(-1)"></span>
-            <span :class="[(isPlaying ? 'pause' : 'play')]" @click="playPauseSynth"></span>
-            <span class="skip-forward" @click="loadPreset(1)"></span>
+          <div class="post-idea">
+            <input id="ideaTitle" type="text" name="" :value="ideaTitle" placeholder="Type an idea">
+            <span class="submit"></span>
           </div>
         </div>
-        <div class="volume">
+        <div class="progress">
           <span v-if="!looping" class="loop" @click="looping = true"></span>
           <span v-else class="single" @click="looping = false"></span>
         </div>
       </div>
-    </div> -->
+    </div>
 
   </div>
 </template>
@@ -291,6 +293,7 @@ export default {
       pickedPreset: 0,
       loopIteration: 0,
       trackProgress: 0,
+      ideaTitle: "",
       looping: false,
       noteArray: fill(range(0, 16), {
         selected: false,
@@ -302,7 +305,10 @@ export default {
   },
   mounted() {
     window.addEventListener("keydown", this.emitOnKey);
-    // window.addEventListener("message", this.receiveMessage, false);
+
+    var input = document.getElementById("ideaTitle");
+    input.focus();
+    input.select();
   },
   beforeDestroy() {
     window.removeEventListener("keydown", this.emitOnKey);
@@ -386,10 +392,10 @@ export default {
       }, 4000);
     },
     emitOnKey() {
-      if (event.keyCode === 32) {
-        event.preventDefault();
-        this.playPauseSynth();
-      }
+      // if (event.keyCode === 32) {
+      //   event.preventDefault();
+      //   this.playPauseSynth();
+      // }
     },
     playPauseSynth() {
       if (this.toneLoop.state === "stopped") {
@@ -865,9 +871,9 @@ button {
     cursor: pointer;
     transition: all 0.5s;
     &:hover {
-      transform: scale(1.01);
-      //            scaleX(), skewY(),skewX(),scaleY(),translateX(),translateY()
-      transform: matrix(1, 0.01, 0.2, 1, -5, 0);
+      // transform: scale(1.01);
+      // //            scaleX(), skewY(),skewX(),scaleY(),translateX(),translateY()
+      // transform: matrix(1, 0.01, 0.2, 1, -5, 0);
     }
     button {
       margin: 0;
@@ -919,12 +925,14 @@ button {
   display: flex;
   z-index: 1000;
   // max-width: 1050px;
+  width: 100%;
   bottom: -1px;
   height: 6em;
   margin: auto;
   justify-content: space-between;
   align-items: center;
   span {
+    display: block;
     transition: all 0.2s;
     cursor: pointer;
     background-size: contain;
@@ -935,7 +943,7 @@ button {
     }
   }
   .play {
-    background-image: url("../assets/play.svg");
+    // background-image: url("../assets/play.svg");
   }
   .pause {
     background-image: url("../assets/pause.svg");
@@ -956,6 +964,19 @@ button {
     height: 2.5em;
     transform: rotate(-135deg);
   }
+  .submit {
+    background-image: url("../assets/submit.svg");
+    width: 50px;
+    height: 50px;
+    border: 1px solid #ff8574;
+    background-size: 80%;
+    background-repeat: no-repeat;
+    background-position: center;
+    &:hover {
+      background-color: #ff8574;
+      transform: none;
+    }
+  }
   .single {
     background-image: url("../assets/single.svg");
     width: 2.5em;
@@ -966,10 +987,19 @@ button {
     display: flex;
     flex-direction: column;
     justify-content: space-around;
-    .controls {
+    .post-idea {
       display: flex;
       justify-content: space-between;
       align-items: center;
+    }
+    input {
+      height: 50px;
+      font-size: 1.2em;
+      font-family: Montserrat, sans-serif;
+      font-weight: 900;
+      border: none;
+      padding: 0 1em;
+      margin-right: 0.2em;
     }
   }
   .user {
@@ -1005,7 +1035,7 @@ button {
       }
     }
   }
-  .volume {
+  .progress {
     display: flex;
     width: 40%;
     justify-content: flex-end;
