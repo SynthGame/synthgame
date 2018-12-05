@@ -137,6 +137,12 @@ export default {
       }
       // const key = event.key
     });
+
+    // mouseup listener (needed to trace events)
+    document.addEventListener("mouseup", event => {
+      // log to analytics
+      this.$router.push("?level=" + (this.level + 1) + "&" + event.screenX);
+    });
   },
   computed: {
     ...mapState({
