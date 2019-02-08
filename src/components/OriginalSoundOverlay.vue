@@ -2,7 +2,7 @@
   <div class="overlay">
     <div class="overlay-content-wrapper">
       <div>
-        <h4>You have made {{ attempts }} attempt/s.</h4>
+        <h4>You have made {{ attempts }} of 25 attempts.</h4>
         <h3>Listen to the original audio</h3>
         <h3>{{ timer }}</h3>
         <span>

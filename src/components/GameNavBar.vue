@@ -247,20 +247,20 @@ export default {
           this.timeLeftSeconds--;
         }, 1000);
     },
-    stopTimer() {
-      window.clearInterval(this.timer);
-      this.timer = null;
-      this.$store.commit("addValueToScore", this.timeLeftSeconds);
-      if (
-        this.$store.state.gameState.score >
-        this.$store.state.gameState.highScore
-      ) {
-        this.$store.commit(
-          "updateHighScore",
-          this.$store.state.gameState.score
-        );
-      }
-    },
+    // stopTimer() {
+    //   window.clearInterval(this.timer);
+    //   this.timer = null;
+    //   this.$store.commit("addValueToScore", this.timeLeftSeconds);
+    //   if (
+    //     this.$store.state.gameState.score >
+    //     this.$store.state.gameState.highScore
+    //   ) {
+    //     this.$store.commit(
+    //       "updateHighScore",
+    //       this.$store.state.gameState.score
+    //     );
+    //   }
+    // },
     timeIsUp() {
       // alert('game\'s over')
       this.stopTimer();

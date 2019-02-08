@@ -344,6 +344,9 @@ export default new Vuex.Store({
     },
     incrementAttempt(state) {
       state.gameState.attempts += 1;
+    },
+    resetAttempts(state){
+      state.gameState.attempts = 0;
     }
   },
   getters: {

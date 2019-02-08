@@ -540,13 +540,16 @@ export default {
     madeAttempt() {
       if (this.allParametersMatchGoal === true) {
         this.beginSuccessSvoosh();
-        this.$store.dispatch("levelDone");
+        const score = 25 - this.$store.state.gameState.attempts;
+        this.$store.commit("addValueToScore", score);
+        this.$store.dispatch("levelDone")
+        this.$store.commit('resetAttempts')
       } else {
         if (this.$store.state.gameState.attempts == 25) {
           // need to reset global attemps in gameOver action.....
-          this.$store.dispatch("gameOver");
+          this.$store.dispatch("gameOver")
         } else {
-          this.originalSoundPrompt();
+          this.originalSoundPrompt()
         }
       }
     },
