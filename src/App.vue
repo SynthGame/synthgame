@@ -141,7 +141,7 @@ export default {
         audio.state.Tone.context.resume();
       }
 
-      if (e.keyCode === 27 && this.displayOriginalOverlay) {
+      if (event.keyCode === 27 && this.displayOriginalOverlay) {
           this.killOrignalSoundPrompt();
         }
       // const key = event.key
@@ -536,7 +536,7 @@ export default {
         this.beginSuccessSvoosh();
         this.$store.dispatch("levelDone");
       } else {
-        if(this.$store.state.gameState.attempts == 3){
+        if(this.$store.state.gameState.attempts == 25){
           // need to reset global attemps in gameOver action.....
           this.$store.dispatch("gameOver");
         } else {
