@@ -544,27 +544,27 @@ export default {
         }
       }
     },
-    allParametersMatchGoal(val) {
-      if (val === true && this.timerIsRunning) {
-        this.beginSuccessSvoosh();
+    // allParametersMatchGoal(val) {
+    //   if (val === true && this.timerIsRunning) {
+    //     this.beginSuccessSvoosh();
 
-        audio.playSweep();
-        setTimeout(() => {
-          // Update note array with pickedpreset sequence
-          this.noteArray = presets[this.pickedPreset].sequenceArray;
-        }, 500);
-        // load the preset makers preset
-        this.$store.commit("setAudioParameterToPreset", {
-          preset: presets[this.pickedPreset].parameterValues
-        });
-        // this.$store.dispatch('setSynthToDefaultParameters', audio) // then let the user hear it
-        this.$store.dispatch("levelDone"); // would be nice to pass timeleft here but it is being passed by timer on gamestop
-        // // Update note array with pickedpreset sequence
-        // this.noteArray = presets[this.pickedPreset].sequenceArray
-        // Re-set the audioParameters with pickedpreset to undo envs and lfo modifications on startlevel
+    //     audio.playSweep();
+    //     setTimeout(() => {
+    //       // Update note array with pickedpreset sequence
+    //       this.noteArray = presets[this.pickedPreset].sequenceArray;
+    //     }, 500);
+    //     // load the preset makers preset
+    //     this.$store.commit("setAudioParameterToPreset", {
+    //       preset: presets[this.pickedPreset].parameterValues
+    //     });
+    //     // this.$store.dispatch('setSynthToDefaultParameters', audio) // then let the user hear it
+    //     this.$store.dispatch("levelDone"); // would be nice to pass timeleft here but it is being passed by timer on gamestop
+    //     // // Update note array with pickedpreset sequence
+    //     // this.noteArray = presets[this.pickedPreset].sequenceArray
+    //     // Re-set the audioParameters with pickedpreset to undo envs and lfo modifications on startlevel
 
-        // TODO:
-      }
+    //     // TODO:
+    //   }
     },
     nextLevelClickedInNavBar(val) {
       console.log("nextLevelClickedInNavBar", val);
