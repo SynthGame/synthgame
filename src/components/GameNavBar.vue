@@ -218,7 +218,10 @@ export default {
       return `${padStart(this.highScore, 5, "0")}`;
     },
     attempts() {
-      return this.$store.state.gameState.attemps;
+      return this.$store.state.gameState.attempts;
+    },
+    attemptMade() {
+      return this.$store.state.gameState.attemptMade;
     }
   },
   mounted() {
