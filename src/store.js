@@ -71,6 +71,11 @@ export default new Vuex.Store({
       marginLfo: 0,
       rackSlotArray: [0,1,2,3,4,5,6,7,8,9,10,11],
       margin: 10,
+      // GAME SCORING
+      attempts: 0,
+      attemptMade: false,
+      score: 0,
+      highScore: 0,
       timerIsRunning: false,
       isGameOver: false,
       nextLevelRequested: false,
@@ -85,8 +90,6 @@ export default new Vuex.Store({
         lfo: {},
         router: {}
       },
-      score: 0,
-      highScore: 0,
       goal: {
         oscillator1: {
           frequency: '131',
@@ -287,6 +290,12 @@ export default new Vuex.Store({
     },
     setActiveSequence (state, sequence) {
       state.activeSequence = sequence
+    },
+    toggleAttemptMade(state) {
+      state.gameState.attemptMade = !state.gameState.attemptMade;
+    },
+    incrementAttempt(state) {
+      state.gameState.attempts += 1;
     }
   },
   getters: {
@@ -314,6 +323,10 @@ export default new Vuex.Store({
     }
   },
   actions: {
+    tetx({state, commit}) {
+      state.commit('toggleAttemptMade')
+      state.commit('incrementAttempt')
+    },
     shuffleRackSlotArray({state, commit}) {
       var array = state.gameState.rackSlotArray
       var currentIndex = array.length, temporaryValue, randomIndex;
