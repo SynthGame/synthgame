@@ -140,6 +140,10 @@ export default {
       if (audio.state.Tone.context.state !== "running") {
         audio.state.Tone.context.resume();
       }
+
+      if (e.keyCode === 27 && this.displayOriginalOverlay) {
+          this.killOrignalSoundPrompt();
+        }
       // const key = event.key
     });
 
