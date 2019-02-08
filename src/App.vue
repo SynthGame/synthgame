@@ -97,7 +97,7 @@ export default {
         glide: false
       }),
       originalSoundTimer: 8,
-      timerInterval: 0,
+      timerInterval: 0
     };
   },
   components: {
@@ -142,8 +142,8 @@ export default {
       }
 
       if (event.keyCode === 27 && this.displayOriginalOverlay) {
-          this.killOrignalSoundPrompt();
-        }
+        this.killOrignalSoundPrompt();
+      }
       // const key = event.key
     });
 
@@ -377,22 +377,7 @@ export default {
 
       //and again to correct pitch
       // load the preset on synth
-      this.$store.commit("setAudioParameterToPreset", {
-        preset: presets[this.pickedPreset].parameterValues
-      });
-      //reset oscs for waveforms
-      audio.oscillator1.state.device.type =
-        presets[this.pickedPreset].parameterValues.oscillator1.typeOsc;
-      audio.oscillator2.state.device.type =
-        presets[this.pickedPreset].parameterValues.oscillator2.typeOsc;
-      audio.oscillator1.state.device.stop();
-      audio.oscillator1.state.device.start();
-      audio.oscillator2.state.device.stop();
-      audio.oscillator2.state.device.start();
-      audio.lfo.state.device.type =
-        presets[this.pickedPreset].parameterValues.lfo.type;
-      audio.filter.state.device.type =
-        presets[this.pickedPreset].parameterValues.filter.type;
+      this.setToSelectedPreset();
       // console.log('preset audioParameters loaded: ', presets[this.pickedPreset].parameterValues );
 
       // Set back Envs to standard audioParameters
@@ -434,10 +419,29 @@ export default {
         preset: Object.assign(presets[this.pickedPreset].parameterValues, {})
       });
       this.$store.dispatch("randomizeAudioParameters", availableParameters); // and the audio params
+      
       this.$nextTick(() => this.$store.dispatch("setSynthToGoal", audio)); //then let the user hear it
 
       // this.loop.start()
       // rest will be done by watcher of sequencesPassedInCurrentLevel
+    },
+    setToSelectedPreset() {
+      this.$store.commit("setAudioParameterToPreset", {
+        preset: presets[this.pickedPreset].parameterValues
+      });
+      //reset oscs for waveforms
+      audio.oscillator1.state.device.type =
+        presets[this.pickedPreset].parameterValues.oscillator1.typeOsc;
+      audio.oscillator2.state.device.type =
+        presets[this.pickedPreset].parameterValues.oscillator2.typeOsc;
+      audio.oscillator1.state.device.stop();
+      audio.oscillator1.state.device.start();
+      audio.oscillator2.state.device.stop();
+      audio.oscillator2.state.device.start();
+      audio.lfo.state.device.type =
+        presets[this.pickedPreset].parameterValues.lfo.type;
+      audio.filter.state.device.type =
+        presets[this.pickedPreset].parameterValues.filter.type;
     },
     startPreset(parameters, bpm) {
       const usedParameters = mapValues(parameters, audioModule =>
@@ -513,14 +517,15 @@ export default {
     retreat() {
       // advance to next level failing current level + 0 Points
     },
-    countdown(){
+    countdown() {
       this.originalSoundTimer -= 1;
       console.log(this.originalSoundTimer);
       if (this.originalSoundTimer === 0) {
         this.killOrignalSoundPrompt();
-        }
+      }
     },
     originalSoundPrompt() {
+      this.$store.dispatch('setSynthToGoal', audio);
       this.displayOriginalOverlay = true; // create this overlay.
       this.timerInterval = setInterval(this.countdown, 1000);
     },
@@ -528,15 +533,16 @@ export default {
       this.displayOriginalOverlay = false;
       clearInterval(this.timerInterval);
       this.originalSoundTimer = 8;
-    },
+      this.$store.dispatch('setSynthToUserAttempt', audio);
+    }
   },
   watch: {
     madeAttempt() {
-      if(this.allParametersMatchGoal === true) { 
+      if (this.allParametersMatchGoal === true) {
         this.beginSuccessSvoosh();
         this.$store.dispatch("levelDone");
       } else {
-        if(this.$store.state.gameState.attempts == 25){
+        if (this.$store.state.gameState.attempts == 25) {
           // need to reset global attemps in gameOver action.....
           this.$store.dispatch("gameOver");
         } else {
@@ -565,7 +571,7 @@ export default {
 
     //     // TODO:
     //   }
-    },
+    // },
     nextLevelClickedInNavBar(val) {
       console.log("nextLevelClickedInNavBar", val);
       if (val === "true") {

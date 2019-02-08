@@ -11,6 +11,11 @@ export const vuexSyncGen = (device, parameter, setCallback) => {
           parameter,
           value
         })
+        store.commit('setUserAttemptParameters', {
+          device,
+          parameter,
+          value
+        })
         return setCallback ? setCallback(value) : value
       }
     }

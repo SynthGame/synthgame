@@ -74,6 +74,50 @@ export default new Vuex.Store({
       // GAME SCORING //
       attempts: 0,
       madeAttempt: false,
+      userAttemptPreset: {
+        oscillator1: {
+          frequency: '131',
+          typeOsc: 'sawtooth',
+          detune: 50
+          // phase: 0
+        },
+        oscillator2: {
+          frequency: '131',
+          typeOsc: 'sawtooth',
+          // detune: 50,
+          volume: 50,
+          // phase: 0
+        },
+        filter: {
+          cutOffFreq: 70,
+          type: 'lowpass',
+          setQ: 0
+          // gain: 50
+        },
+        envelope: {
+          attack: 0,
+          decay: 0,
+          sustain: 100,
+          release: 0
+        },
+        envelope2: {
+          attack: 0,
+          decay: 90,
+          sustain: 0,
+          release: 0,
+          assign: 'filterCutoff',
+          amount: 100
+        },
+        lfo: {
+          frequency: 10,
+          type: 'sine',
+          amount: 0
+        },
+        router: {
+          lfo: 'oscsDetune',
+          envelope2: 'filterCutoff'
+        }
+      },
       // //
       score: 0,
       highScore: 0,
@@ -205,6 +249,9 @@ export default new Vuex.Store({
   mutations: {
     setAudioParameter (state, {device, parameter, value}) {
       state.audioParameters[device][parameter] = value
+    },
+    setUserAttemptParameters (state, {device, parameter, value}) {
+      state.gameState.userAttemptPreset[device][parameter] = value
     },
     setFeaturedArtist (state, {artistName, avatarUrl}) {
       state.name = artistName
@@ -421,6 +468,31 @@ export default new Vuex.Store({
       synth.oscillator2.state.device.volume.value = character.oscillator2.volume(state.gameState.goal.oscillator2.volume)
       synth.connectLfo(state.gameState.goal.router.lfo)
       synth.connectEnvelope2(state.gameState.goal.envelope2)
+    },
+    setSynthToUserAttempt ({state}, synth) {
+      synth.envelope.state.device.attack = character.envelope.attack(state.gameState.userAttemptPreset.envelope.attack)
+      synth.envelope.state.device.decay = character.envelope.decay(state.gameState.userAttemptPreset.envelope.decay)
+      synth.envelope.state.device.sustain = character.envelope.sustain(state.gameState.userAttemptPreset.envelope.sustain)
+      synth.envelope.state.device.release = character.envelope.release(state.gameState.userAttemptPreset.envelope.release)
+      synth.envelope2.state.device.attack = character.envelope2.attack(state.gameState.userAttemptPreset.envelope2.attack)
+      synth.envelope2.state.device.decay = character.envelope2.decay(state.gameState.userAttemptPreset.envelope2.decay)
+      synth.envelope2.state.device.sustain = character.envelope2.sustain(state.gameState.userAttemptPreset.envelope2.sustain)
+      synth.envelope2.state.device.release = character.envelope2.release(state.gameState.userAttemptPreset.envelope2.release)
+      synth.envelope2.state.device.max = character.envelope2.amount(state.gameState.userAttemptPreset.envelope2.amount)
+      synth.filter.state.device.frequency.value = character.filter.cutOffFreq(state.gameState.userAttemptPreset.filter.cutOffFreq)
+      synth.filter.state.device.type = character.filter.type(state.gameState.userAttemptPreset.filter.type)
+      synth.filter.state.device.Q.value = character.filter.setQ(state.gameState.userAttemptPreset.filter.setQ)
+      synth.lfo.state.device.frequency.value = character.lfo.frequency(state.gameState.userAttemptPreset.lfo.frequency)
+      synth.lfo.state.device.max = character.lfo.amount(state.gameState.userAttemptPreset.lfo.amount)
+      synth.lfo.state.device.type = character.lfo.type(state.gameState.userAttemptPreset.lfo.type)
+      // synth.oscillator1.state.device.frequency.value = character.oscillator1.frequency(state.gameState.userAttemptPreset.oscillator1.frequency)
+      synth.oscillator1.state.device.type = character.oscillator1.typeOsc(state.gameState.userAttemptPreset.oscillator1.typeOsc)
+      synth.oscillator1.state.device.detune.value = character.oscillator1.detune(state.gameState.userAttemptPreset.oscillator1.detune)
+      // synth.oscillator2.state.device.frequency.value = character.oscillator2.frequency(state.gameState.userAttemptPreset.oscillator2.frequency)
+      synth.oscillator2.state.device.type = character.oscillator2.typeOsc(state.gameState.userAttemptPreset.oscillator2.typeOsc)
+      synth.oscillator2.state.device.volume.value = character.oscillator2.volume(state.gameState.userAttemptPreset.oscillator2.volume)
+      synth.connectLfo(state.gameState.userAttemptPreset.router.lfo)
+      synth.connectEnvelope2(state.gameState.userAttemptPreset.envelope2)
     },
     setSynthToDefaultParameters ({state}, synth) {
       synth.envelope.state.device.attack = character.envelope.attack(state.audioParameters.envelope.attack)
