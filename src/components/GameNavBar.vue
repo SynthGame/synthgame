@@ -1,67 +1,68 @@
 <template>
   <nav class="main">
     <div class="left">
-      <h2 class="game_title">Tats
-      <span
-        :class="{
+      <h2 class="game_title">
+        Tats
+        <span
+          :class="{
                   'module__name__status-indicator': true,
                   'module__name__status-indicator--active': oscillator1Complete && !createModeIsActive
                 }"
-        :style="{
+          :style="{
                   'background-color': oscillator1Complete && !createModeIsActive ? oscillatorColor : '',
                   'box-shadow': oscillator1Complete && !createModeIsActive ? `0px 0px 16px ${oscillatorColor}` : '',
                 }"
-      ></span>
-      <span
-        v-if="moduleIsUseable('oscillator2') && !createModeIsActive"
-        :class="{
+        ></span>
+        <span
+          v-if="moduleIsUseable('oscillator2') && !createModeIsActive"
+          :class="{
                   'module__name__status-indicator': true,
                   'module__name__status-indicator--active': oscillator2Complete
                 }"
-        :style="{
+          :style="{
                   'background-color': oscillator2Complete ? oscillatorTwoColor : '',
                   'box-shadow': oscillator2Complete ? `0px 0px 16px ${oscillatorTwoColor}` : '',
                 }"
-      ></span>
-      <span
-        v-if="moduleIsUseable('filter') && !createModeIsActive"
-        :class="{
+        ></span>
+        <span
+          v-if="moduleIsUseable('filter') && !createModeIsActive"
+          :class="{
                   'module__name__status-indicator indicator__osctwo': true,
                   'module__name__status-indicator--active indicator__osctwo': filterComplete
                 }"
-            :style="{
+          :style="{
                   'background-color': filterComplete ? filterColor : '',
                   'box-shadow': filterComplete ? `0px 0px 16px ${filterColor}` : '',
                 }"
-      ></span>
-      <span
-        v-if="moduleIsUseable('envelope') && !createModeIsActive"
-        :class="{
+        ></span>
+        <span
+          v-if="moduleIsUseable('envelope') && !createModeIsActive"
+          :class="{
                   'module__name__status-indicator indicator__envelope': true,
                   'module__name__status-indicator--active indicator__envelope': envelopeComplete
                 }"
-        :style="{
+          :style="{
                   'background-color': envelopeComplete ? envelopeColor : '',
                   'box-shadow': envelopeComplete ? `0px 0px 16px ${envelopeColor}` : '',
                 }"
-      ></span>
-      <span
-        v-if="moduleIsUseable('lfo') && !createModeIsActive"
-        :class="{
+        ></span>
+        <span
+          v-if="moduleIsUseable('lfo') && !createModeIsActive"
+          :class="{
                   'module__name__status-indicator': true,
                   'module__name__status-indicator--active': lfoComplete
                 }"
-        :style="{
+          :style="{
                   'background-color': lfoComplete ? lfoColor : '',
                   'box-shadow': lfoComplete ? `0px 0px 16px ${lfoColor}` : '',
                 }"
-      ></span>
-      <span v-if="!createModeIsActive" class="main__level">Level {{gameLevel}}</span>
-      <span v-if="createModeIsActive" class="main__level">Artist</span>
+        ></span>
+        <span v-if="!createModeIsActive" class="main__level">Level {{gameLevel}}</span>
+        <span v-if="createModeIsActive" class="main__level">Artist</span>
       </h2>
     </div>
 
-    <span :style="{
+    <!-- <span :style="{
       'animation': timeLeftSeconds < 11 ? '.5s infinite blink' : '',
       'color': timeLeftSeconds < 5 ? oscillatorColor : '',
     }" v-if="timerIsRunning === true && createModeIsActive === false" class="timer">{{paddedTimeLeftString}}</span>
@@ -70,32 +71,60 @@
               @click="requestNextLevel"
               ref="button"
               >NEXT LEVEL</button>
-    </span>
+    </span>-->
+    <div>
+      <span>
+        <button @click="makeAttempt" class="">Attempt {{ attempts }}</button>
+      </span>
+    </div>
 
     <div class="right">
       <template v-if="createModeIsActive === false">
-      <div class="score">
-        <span>score</span>
-        <span class="data">{{paddedScoreString}}</span>
-      </div>
-      <div class="highscore">
-        <span>highscore</span>
-        <span class="data">{{paddedHighScoreString}}</span>
-      </div>
+        <div class="score">
+          <span>score</span>
+          <span class="data">{{paddedScoreString}}</span>
+        </div>
+        <div class="highscore">
+          <span>highscore</span>
+          <span class="data">{{paddedHighScoreString}}</span>
+        </div>
       </template>
       <template v-else>
-        <input class="name-input" placeholder="Enter your Soundcloud username" v-model="exportPresetName"/>
+        <input
+          class="name-input"
+          placeholder="Enter your Soundcloud username"
+          v-model="exportPresetName"
+        >
         <button @click="submitPreset(exportPresetName)">submit</button>
         <!-- <button @click="submitPreset()">submit</button> -->
       </template>
-      <after-create-overlay v-if="showAfterCreateOverlay" :link="exportPresetLink" @closeCreate="exitAfterCreate"/>
-      <svg @click="exitGame" class="exit" width="18px" height="17px" viewBox="0 0 18 17" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
-          <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-              <g id="exit_icon" fill="#7D00DA" fill-rule="nonzero" stroke="#FFFFFF" stroke-width="1.785">
-                  <path d="M16.6,0.6 L0.9,16.3" id="Shape"></path>
-                  <path d="M16.6,16.3 L0.9,0.6" id="Shape"></path>
-              </g>
+      <after-create-overlay
+        v-if="showAfterCreateOverlay"
+        :link="exportPresetLink"
+        @closeCreate="exitAfterCreate"
+      />
+      <svg
+        @click="exitGame"
+        class="exit"
+        width="18px"
+        height="17px"
+        viewBox="0 0 18 17"
+        version="1.1"
+        xmlns="http://www.w3.org/2000/svg"
+        xmlns:xlink="http://www.w3.org/1999/xlink"
+      >
+        <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+          <g
+            id="exit_icon"
+            fill="#7D00DA"
+            fill-rule="nonzero"
+            stroke="#FFFFFF"
+            stroke-width="1.785"
+          >
+            <path d="M16.6,0.6 L0.9,16.3" id="Shape"></path>
+            <path d="M16.6,16.3 L0.9,0.6" id="Shape"></path>
           </g>
+        </g>
       </svg>
     </div>
   </nav>
@@ -187,6 +216,12 @@ export default {
     },
     paddedHighScoreString() {
       return `${padStart(this.highScore, 5, "0")}`;
+    },
+    attempts() {
+      return this.$store.state.gameState.attempts;
+    },
+    madeAttempt() {
+      return this.$store.state.gameState.madeAttempt;
     }
   },
   mounted() {
@@ -212,20 +247,20 @@ export default {
           this.timeLeftSeconds--;
         }, 1000);
     },
-    stopTimer() {
-      window.clearInterval(this.timer);
-      this.timer = null;
-      this.$store.commit("addValueToScore", this.timeLeftSeconds);
-      if (
-        this.$store.state.gameState.score >
-        this.$store.state.gameState.highScore
-      ) {
-        this.$store.commit(
-          "updateHighScore",
-          this.$store.state.gameState.score
-        );
-      }
-    },
+    // stopTimer() {
+    //   window.clearInterval(this.timer);
+    //   this.timer = null;
+    //   this.$store.commit("addValueToScore", this.timeLeftSeconds);
+    //   if (
+    //     this.$store.state.gameState.score >
+    //     this.$store.state.gameState.highScore
+    //   ) {
+    //     this.$store.commit(
+    //       "updateHighScore",
+    //       this.$store.state.gameState.score
+    //     );
+    //   }
+    // },
     timeIsUp() {
       // alert('game\'s over')
       this.stopTimer();
@@ -257,13 +292,16 @@ export default {
     requestNextLevel() {
       console.log("requestNextLevel fired in gamenavbar");
       this.$store.dispatch("nextLevel");
+    },
+    makeAttempt() {
+      this.$store.dispatch('madeAttempt');
     }
   },
   watch: {
-    timerIsRunning(val) {
-      if (val) return this.startTimer();
-      this.stopTimer();
-    }
+    // timerIsRunning(val) {
+    //   if (val) return this.startTimer();
+    //   this.stopTimer();
+    // }
   }
 };
 </script>
