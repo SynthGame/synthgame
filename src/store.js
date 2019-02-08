@@ -74,6 +74,7 @@ export default new Vuex.Store({
       // GAME SCORING //
       attempts: 0,
       madeAttempt: false,
+      completedLevel: false,
       userAttemptPreset: {
         oscillator1: {
           frequency: '131',
@@ -347,6 +348,9 @@ export default new Vuex.Store({
     },
     resetAttempts(state){
       state.gameState.attempts = 0;
+    },
+    setCompletedLevel(state, payload) {
+      state.gameState.completedLevel = payload.value;
     }
   },
   getters: {

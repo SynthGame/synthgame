@@ -171,6 +171,9 @@ export default {
     },
     madeAttempt() {
       return this.$store.state.gameState.madeAttempt;
+    },
+    completedLevel() {
+      return this.$store.state.gameState.completedLevel;
     }
     // nextLevelRequested () {
     //   if (this.$store.state.gameState.nextLevelRequested) {
@@ -420,7 +423,7 @@ export default {
         preset: Object.assign(presets[this.pickedPreset].parameterValues, {})
       });
       this.$store.dispatch("randomizeAudioParameters", availableParameters); // and the audio params
-      
+
       this.$nextTick(() => this.$store.dispatch("setSynthToGoal", audio)); //then let the user hear it
 
       // this.loop.start()
@@ -504,6 +507,10 @@ export default {
     startNextLevel(level) {
       this.$store.commit("increaseLevelValue", 1);
       this.startLevel(this.level); // TODO: should be + 1
+      this.$store.commit({
+        type: "setCompletedLevel",
+        value: false
+      });
     },
     gameLevel() {
       return this.$store.state.gameState.level;
@@ -526,7 +533,7 @@ export default {
       }
     },
     originalSoundPrompt() {
-      this.$store.dispatch('setSynthToGoal', audio);
+      this.$store.dispatch("setSynthToGoal", audio);
       this.displayOriginalOverlay = true; // create this overlay.
       this.timerInterval = setInterval(this.countdown, 1000);
     },
@@ -534,7 +541,7 @@ export default {
       this.displayOriginalOverlay = false;
       clearInterval(this.timerInterval);
       this.originalSoundTimer = 8;
-      this.$store.dispatch('setSynthToUserAttempt', audio);
+      this.$store.dispatch("setSynthToUserAttempt", audio);
     },
     forfeit() {
       this.killOrignalSoundPrompt();
@@ -547,14 +554,18 @@ export default {
         this.beginSuccessSvoosh();
         const score = 25 - this.$store.state.gameState.attempts;
         this.$store.commit("addValueToScore", score);
-        this.$store.dispatch("levelDone")
-        this.$store.commit('resetAttempts')
+        this.$store.commit({
+          type: "setCompletedLevel",
+          value: true
+        });
+        this.$store.dispatch("levelDone");
+        this.$store.commit("resetAttempts");
       } else {
         if (this.$store.state.gameState.attempts == 25) {
           // need to reset global attemps in gameOver action.....
-          this.$store.dispatch("gameOver")
+          this.$store.dispatch("gameOver");
         } else {
-          this.originalSoundPrompt()
+          this.originalSoundPrompt();
         }
       }
     },
