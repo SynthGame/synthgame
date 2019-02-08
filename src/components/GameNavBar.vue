@@ -74,7 +74,7 @@
     </span>-->
     <div>
       <span>
-        <button @click="attemptMade" class="">Attempt {{ attempts }}</button>
+        <button @click="makeAttempt" class="">Attempt {{ attempts }}</button>
       </span>
     </div>
 
@@ -220,8 +220,8 @@ export default {
     attempts() {
       return this.$store.state.gameState.attempts;
     },
-    attemptMade() {
-      return this.$store.state.gameState.attemptMade;
+    madeAttempt() {
+      return this.$store.state.gameState.madeAttempt;
     }
   },
   mounted() {
@@ -293,8 +293,8 @@ export default {
       console.log("requestNextLevel fired in gamenavbar");
       this.$store.dispatch("nextLevel");
     },
-    attemptMade() {
-      this.$store.dispatch('attemptMade');
+    makeAttempt() {
+      this.$store.dispatch('madeAttempt');
     }
   },
   watch: {

@@ -73,7 +73,7 @@ export default new Vuex.Store({
       margin: 10,
       // GAME SCORING //
       attempts: 0,
-      attemptMade: false,
+      madeAttempt: false,
       // //
       score: 0,
       highScore: 0,
@@ -293,7 +293,7 @@ export default new Vuex.Store({
       state.activeSequence = sequence
     },
     toggleAttemptMade(state) {
-      state.gameState.attemptMade = !state.gameState.attemptMade;
+      state.gameState.madeAttempt = !state.gameState.madeAttempt;
     },
     incrementAttempt(state) {
       state.gameState.attempts += 1;
@@ -324,7 +324,7 @@ export default new Vuex.Store({
     }
   },
   actions: {
-    attemptMade({state, commit}) {
+    madeAttempt({state, commit}) {
       commit('toggleAttemptMade')
       commit('incrementAttempt')
     },

@@ -158,6 +158,9 @@ export default {
     }),
     isGameOver() {
       return this.$store.state.gameState.isGameOver;
+    },
+    madeAttempt() {
+      this.$store.state.gameState.madeAttempt;
     }
     // nextLevelRequested () {
     //   if (this.$store.state.gameState.nextLevelRequested) {
@@ -496,9 +499,15 @@ export default {
     }
   },
   watch: {
+    madeAttempt() {
+      this.displayAttemptOverlay();
+    },
     allParametersMatchGoal(val) {
+
       if (val === true && this.timerIsRunning) {
+
         this.beginSuccessSvoosh();
+
         audio.playSweep();
         setTimeout(() => {
           // Update note array with pickedpreset sequence
