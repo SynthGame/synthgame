@@ -536,7 +536,12 @@ export default {
         this.beginSuccessSvoosh();
         this.$store.dispatch("levelDone");
       } else {
-        this.originalSoundPrompt();
+        if(this.$store.state.gameState.attempts == 3){
+          // need to reset global attemps in gameOver action.....
+          this.$store.dispatch("gameOver");
+        } else {
+          this.originalSoundPrompt();
+        }
       }
     },
     allParametersMatchGoal(val) {
