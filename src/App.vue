@@ -34,7 +34,7 @@
       <original-sound-overlay
         v-if="displayOriginalOverlay"
         :retreat="retreat"
-        :closeoverlay="closeOriginalOverlay"
+        :closeoverlay="killOrignalSoundPrompt"
         :timer="originalSoundTimer"
       />
     </transition>
@@ -97,6 +97,7 @@ export default {
         glide: false
       }),
       originalSoundTimer: 8,
+      timerInterval: 0,
     };
   },
   components: {
@@ -251,9 +252,6 @@ export default {
     },
     closeSuccessOverlay() {
       this.displaySuccessOverlay = false;
-    },
-    closeOriginalOverlay() {
-      this.displayOriginalOverlay = false;
     },
     back() {
       this.showCreatePreview = false;
@@ -511,13 +509,31 @@ export default {
     retreat() {
       // advance to next level failing current level + 0 Points
     },
-    makeAttempt() {
-      this.displayOriginalOverlay = true;
-    }
+    countdown(){
+      this.originalSoundTimer -= 1;
+      console.log(this.originalSoundTimer);
+      if (this.originalSoundTimer === 0) {
+        this.killOrignalSoundPrompt();
+        }
+    },
+    originalSoundPrompt() {
+      this.displayOriginalOverlay = true; // create this overlay.
+      this.timerInterval = setInterval(this.countdown, 1000);
+    },
+    killOrignalSoundPrompt() {
+      this.displayOriginalOverlay = false;
+      clearInterval(this.timerInterval);
+      this.originalSoundTimer = 8;
+    },
   },
   watch: {
     madeAttempt() {
-      this.makeAttempt();
+      if(this.allParametersMatchGoal === true) { 
+        this.beginSuccessSvoosh();
+        this.$store.dispatch("levelDone");
+      } else {
+        this.originalSoundPrompt();
+      }
     },
     allParametersMatchGoal(val) {
       if (val === true && this.timerIsRunning) {
