@@ -15,12 +15,7 @@
       />
     </transition>
     <before-create-overlay v-if="showCreatePreview" @showCreate="showCreate" @back="back"/>
-    <svoosh
-      v-if="isThereSvooshComponent"
-      :isFired="svooshIt"
-      @bye="endSvoosh"
-      black
-    />
+    <svoosh v-if="isThereSvooshComponent" :isFired="svooshIt" @bye="endSvoosh" black/>
     <svoosh
       v-if="isThereSuccessSvooshComponent"
       :isFired="successSvooshIt"
@@ -35,16 +30,21 @@
       />
     </transition>
 
-    <failure-overlay
-      v-if="isGameOver"
-      @startagain="startAgain"
-      @startlastlevel="startLastLevel"
-    />
+    <transition name="slideout">
+      <original-sound-overlay
+        v-if="displayOriginalOverlay"
+        :retreat="retreat"
+        :closeoverlay="killOrignalSoundPrompt"
+        :timer="originalSoundTimer"
+      />
+    </transition>
+
+    <failure-overlay v-if="isGameOver" @startagain="startAgain" @startlastlevel="startLastLevel"/>
 
     <!-- <div id="nav">
       <router-link to="/">Home</router-link> |
       <router-link to="/about">About</router-link>
-    </div> -->
+    </div>-->
     <router-view/>
   </div>
 </template>
@@ -59,6 +59,7 @@ import { getPresetById } from "@/db";
 import SuccessOverlay from "@/components/SuccessOverlay";
 import FailureOverlay from "@/components/FailureOverlay";
 import BeforeCreateOverlay from "@/components/BeforeCreateOverlay";
+import OriginalSoundOverlay from "@/components/OriginalSoundOverlay";
 import StartScreen from "@/components/StartScreen";
 import PreviewScreen from "@/components/PreviewScreen";
 import Svoosh from "@/components/Svoosh";
@@ -79,6 +80,7 @@ export default {
       displayFailureOverlay: false,
       displayStartOverlay: true,
       displayPreviewOverlay: false,
+      displayOriginalOverlay: false,
       loop: null,
       isThereSvooshComponent: false,
       svooshIt: false,
@@ -93,7 +95,9 @@ export default {
         pitch: 0,
         volume: false,
         glide: false
-      })
+      }),
+      originalSoundTimer: 8,
+      timerInterval: 0
     };
   },
   components: {
@@ -102,7 +106,8 @@ export default {
     StartScreen,
     PreviewScreen,
     Svoosh,
-    BeforeCreateOverlay
+    BeforeCreateOverlay,
+    OriginalSoundOverlay
   },
   created() {
     this.init();
@@ -135,6 +140,10 @@ export default {
       if (audio.state.Tone.context.state !== "running") {
         audio.state.Tone.context.resume();
       }
+
+      if (event.keyCode === 27 && this.displayOriginalOverlay) {
+        this.killOrignalSoundPrompt();
+      }
       // const key = event.key
     });
 
@@ -158,6 +167,9 @@ export default {
     }),
     isGameOver() {
       return this.$store.state.gameState.isGameOver;
+    },
+    madeAttempt() {
+      return this.$store.state.gameState.madeAttempt;
     }
     // nextLevelRequested () {
     //   if (this.$store.state.gameState.nextLevelRequested) {
@@ -267,34 +279,37 @@ export default {
       //
     },
     initM() {
-      navigator.requestMIDIAccess().then(access => {
-        if (access.inputs.size > 0) {
-          const input = access.inputs.values().next().value; // get the first input
-          console.log(input.name);
-          input.onmidimessage = e => {
-            if (e.data.length !== 3) return;
-            const pS = e.data[1];
-            const value = e.data[2];
-            const device = Object.keys(this.$store.state.audioParameters)[
-              ("" + pS)[0] - 1
-            ];
-            const parameter = Object.keys(
-              this.$store.state.audioParameters[device]
-            )[("" + pS)[1]];
-            this.$store.commit("setAudioParameter", {
-              device,
-              parameter,
-              value: this.$store.state.gameState.possibleValues[device][
-                parameter
-              ]
-                ? this.$store.state.gameState.possibleValues[device][parameter][
-                    e.data[2]
-                  ]
-                : e.data[2]
-            });
-          };
-        }
-      }, error => console.log);
+      navigator.requestMIDIAccess().then(
+        access => {
+          if (access.inputs.size > 0) {
+            const input = access.inputs.values().next().value; // get the first input
+            console.log(input.name);
+            input.onmidimessage = e => {
+              if (e.data.length !== 3) return;
+              const pS = e.data[1];
+              const value = e.data[2];
+              const device = Object.keys(this.$store.state.audioParameters)[
+                ("" + pS)[0] - 1
+              ];
+              const parameter = Object.keys(
+                this.$store.state.audioParameters[device]
+              )[("" + pS)[1]];
+              this.$store.commit("setAudioParameter", {
+                device,
+                parameter,
+                value: this.$store.state.gameState.possibleValues[device][
+                  parameter
+                ]
+                  ? this.$store.state.gameState.possibleValues[device][
+                      parameter
+                    ][e.data[2]]
+                  : e.data[2]
+              });
+            };
+          }
+        },
+        error => console.log
+      );
     },
     displaySuccesMessage() {
       this.displaySuccessOverlay = true;
@@ -362,22 +377,7 @@ export default {
 
       //and again to correct pitch
       // load the preset on synth
-      this.$store.commit("setAudioParameterToPreset", {
-        preset: presets[this.pickedPreset].parameterValues
-      });
-      //reset oscs for waveforms
-      audio.oscillator1.state.device.type =
-        presets[this.pickedPreset].parameterValues.oscillator1.typeOsc;
-      audio.oscillator2.state.device.type =
-        presets[this.pickedPreset].parameterValues.oscillator2.typeOsc;
-      audio.oscillator1.state.device.stop();
-      audio.oscillator1.state.device.start();
-      audio.oscillator2.state.device.stop();
-      audio.oscillator2.state.device.start();
-      audio.lfo.state.device.type =
-        presets[this.pickedPreset].parameterValues.lfo.type;
-      audio.filter.state.device.type =
-        presets[this.pickedPreset].parameterValues.filter.type;
+      this.setToSelectedPreset();
       // console.log('preset audioParameters loaded: ', presets[this.pickedPreset].parameterValues );
 
       // Set back Envs to standard audioParameters
@@ -419,10 +419,29 @@ export default {
         preset: Object.assign(presets[this.pickedPreset].parameterValues, {})
       });
       this.$store.dispatch("randomizeAudioParameters", availableParameters); // and the audio params
+      
       this.$nextTick(() => this.$store.dispatch("setSynthToGoal", audio)); //then let the user hear it
 
       // this.loop.start()
       // rest will be done by watcher of sequencesPassedInCurrentLevel
+    },
+    setToSelectedPreset() {
+      this.$store.commit("setAudioParameterToPreset", {
+        preset: presets[this.pickedPreset].parameterValues
+      });
+      //reset oscs for waveforms
+      audio.oscillator1.state.device.type =
+        presets[this.pickedPreset].parameterValues.oscillator1.typeOsc;
+      audio.oscillator2.state.device.type =
+        presets[this.pickedPreset].parameterValues.oscillator2.typeOsc;
+      audio.oscillator1.state.device.stop();
+      audio.oscillator1.state.device.start();
+      audio.oscillator2.state.device.stop();
+      audio.oscillator2.state.device.start();
+      audio.lfo.state.device.type =
+        presets[this.pickedPreset].parameterValues.lfo.type;
+      audio.filter.state.device.type =
+        presets[this.pickedPreset].parameterValues.filter.type;
     },
     startPreset(parameters, bpm) {
       const usedParameters = mapValues(parameters, audioModule =>
@@ -493,30 +512,66 @@ export default {
       audio.playKick();
       this.startCreateMode();
       window.parent.postMessage("make-music-activated", "*");
+    },
+    // NEW METHODS
+    retreat() {
+      // advance to next level failing current level + 0 Points
+    },
+    countdown() {
+      this.originalSoundTimer -= 1;
+      console.log(this.originalSoundTimer);
+      if (this.originalSoundTimer === 0) {
+        this.killOrignalSoundPrompt();
+      }
+    },
+    originalSoundPrompt() {
+      this.$store.dispatch('setSynthToGoal', audio);
+      this.displayOriginalOverlay = true; // create this overlay.
+      this.timerInterval = setInterval(this.countdown, 1000);
+    },
+    killOrignalSoundPrompt() {
+      this.displayOriginalOverlay = false;
+      clearInterval(this.timerInterval);
+      this.originalSoundTimer = 8;
+      this.$store.dispatch('setSynthToUserAttempt', audio);
     }
   },
   watch: {
-    allParametersMatchGoal(val) {
-      if (val === true && this.timerIsRunning) {
+    madeAttempt() {
+      if (this.allParametersMatchGoal === true) {
         this.beginSuccessSvoosh();
-        audio.playSweep();
-        setTimeout(() => {
-          // Update note array with pickedpreset sequence
-          this.noteArray = presets[this.pickedPreset].sequenceArray;
-        }, 500);
-        // load the preset makers preset
-        this.$store.commit("setAudioParameterToPreset", {
-          preset: presets[this.pickedPreset].parameterValues
-        });
-        // this.$store.dispatch('setSynthToDefaultParameters', audio) // then let the user hear it
-        this.$store.dispatch("levelDone"); // would be nice to pass timeleft here but it is being passed by timer on gamestop
-        // // Update note array with pickedpreset sequence
-        // this.noteArray = presets[this.pickedPreset].sequenceArray
-        // Re-set the audioParameters with pickedpreset to undo envs and lfo modifications on startlevel
-
-        // TODO:
+        this.$store.dispatch("levelDone");
+      } else {
+        if (this.$store.state.gameState.attempts == 25) {
+          // need to reset global attemps in gameOver action.....
+          this.$store.dispatch("gameOver");
+        } else {
+          this.originalSoundPrompt();
+        }
       }
     },
+    // allParametersMatchGoal(val) {
+    //   if (val === true && this.timerIsRunning) {
+    //     this.beginSuccessSvoosh();
+
+    //     audio.playSweep();
+    //     setTimeout(() => {
+    //       // Update note array with pickedpreset sequence
+    //       this.noteArray = presets[this.pickedPreset].sequenceArray;
+    //     }, 500);
+    //     // load the preset makers preset
+    //     this.$store.commit("setAudioParameterToPreset", {
+    //       preset: presets[this.pickedPreset].parameterValues
+    //     });
+    //     // this.$store.dispatch('setSynthToDefaultParameters', audio) // then let the user hear it
+    //     this.$store.dispatch("levelDone"); // would be nice to pass timeleft here but it is being passed by timer on gamestop
+    //     // // Update note array with pickedpreset sequence
+    //     // this.noteArray = presets[this.pickedPreset].sequenceArray
+    //     // Re-set the audioParameters with pickedpreset to undo envs and lfo modifications on startlevel
+
+    //     // TODO:
+    //   }
+    // },
     nextLevelClickedInNavBar(val) {
       console.log("nextLevelClickedInNavBar", val);
       if (val === "true") {
