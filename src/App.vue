@@ -15,12 +15,7 @@
       />
     </transition>
     <before-create-overlay v-if="showCreatePreview" @showCreate="showCreate" @back="back"/>
-    <svoosh
-      v-if="isThereSvooshComponent"
-      :isFired="svooshIt"
-      @bye="endSvoosh"
-      black
-    />
+    <svoosh v-if="isThereSvooshComponent" :isFired="svooshIt" @bye="endSvoosh" black/>
     <svoosh
       v-if="isThereSuccessSvooshComponent"
       :isFired="successSvooshIt"
@@ -35,16 +30,21 @@
       />
     </transition>
 
-    <failure-overlay
-      v-if="isGameOver"
-      @startagain="startAgain"
-      @startlastlevel="startLastLevel"
-    />
+    <transition name="slideout">
+      <original-sound-overlay
+        v-if="displayOriginalOverlay"
+        :retreat="retreat"
+        :closeoverlay="closeOriginalOverlay"
+        :timer="originalSoundTimer"
+      />
+    </transition>
+
+    <failure-overlay v-if="isGameOver" @startagain="startAgain" @startlastlevel="startLastLevel"/>
 
     <!-- <div id="nav">
       <router-link to="/">Home</router-link> |
       <router-link to="/about">About</router-link>
-    </div> -->
+    </div>-->
     <router-view/>
   </div>
 </template>
@@ -59,6 +59,7 @@ import { getPresetById } from "@/db";
 import SuccessOverlay from "@/components/SuccessOverlay";
 import FailureOverlay from "@/components/FailureOverlay";
 import BeforeCreateOverlay from "@/components/BeforeCreateOverlay";
+import OriginalSoundOverlay from "@/components/OriginalSoundOverlay";
 import StartScreen from "@/components/StartScreen";
 import PreviewScreen from "@/components/PreviewScreen";
 import Svoosh from "@/components/Svoosh";
@@ -79,6 +80,7 @@ export default {
       displayFailureOverlay: false,
       displayStartOverlay: true,
       displayPreviewOverlay: false,
+      displayOriginalOverlay: false,
       loop: null,
       isThereSvooshComponent: false,
       svooshIt: false,
@@ -93,7 +95,8 @@ export default {
         pitch: 0,
         volume: false,
         glide: false
-      })
+      }),
+      originalSoundTimer: 8,
     };
   },
   components: {
@@ -102,7 +105,8 @@ export default {
     StartScreen,
     PreviewScreen,
     Svoosh,
-    BeforeCreateOverlay
+    BeforeCreateOverlay,
+    OriginalSoundOverlay
   },
   created() {
     this.init();
@@ -160,7 +164,7 @@ export default {
       return this.$store.state.gameState.isGameOver;
     },
     madeAttempt() {
-      this.$store.state.gameState.madeAttempt;
+      return this.$store.state.gameState.madeAttempt;
     }
     // nextLevelRequested () {
     //   if (this.$store.state.gameState.nextLevelRequested) {
@@ -248,6 +252,9 @@ export default {
     closeSuccessOverlay() {
       this.displaySuccessOverlay = false;
     },
+    closeOriginalOverlay() {
+      this.displayOriginalOverlay = false;
+    },
     back() {
       this.showCreatePreview = false;
       if (this.level < 6) {
@@ -270,34 +277,37 @@ export default {
       //
     },
     initM() {
-      navigator.requestMIDIAccess().then(access => {
-        if (access.inputs.size > 0) {
-          const input = access.inputs.values().next().value; // get the first input
-          console.log(input.name);
-          input.onmidimessage = e => {
-            if (e.data.length !== 3) return;
-            const pS = e.data[1];
-            const value = e.data[2];
-            const device = Object.keys(this.$store.state.audioParameters)[
-              ("" + pS)[0] - 1
-            ];
-            const parameter = Object.keys(
-              this.$store.state.audioParameters[device]
-            )[("" + pS)[1]];
-            this.$store.commit("setAudioParameter", {
-              device,
-              parameter,
-              value: this.$store.state.gameState.possibleValues[device][
-                parameter
-              ]
-                ? this.$store.state.gameState.possibleValues[device][parameter][
-                    e.data[2]
-                  ]
-                : e.data[2]
-            });
-          };
-        }
-      }, error => console.log);
+      navigator.requestMIDIAccess().then(
+        access => {
+          if (access.inputs.size > 0) {
+            const input = access.inputs.values().next().value; // get the first input
+            console.log(input.name);
+            input.onmidimessage = e => {
+              if (e.data.length !== 3) return;
+              const pS = e.data[1];
+              const value = e.data[2];
+              const device = Object.keys(this.$store.state.audioParameters)[
+                ("" + pS)[0] - 1
+              ];
+              const parameter = Object.keys(
+                this.$store.state.audioParameters[device]
+              )[("" + pS)[1]];
+              this.$store.commit("setAudioParameter", {
+                device,
+                parameter,
+                value: this.$store.state.gameState.possibleValues[device][
+                  parameter
+                ]
+                  ? this.$store.state.gameState.possibleValues[device][
+                      parameter
+                    ][e.data[2]]
+                  : e.data[2]
+              });
+            };
+          }
+        },
+        error => console.log
+      );
     },
     displaySuccesMessage() {
       this.displaySuccessOverlay = true;
@@ -496,16 +506,21 @@ export default {
       audio.playKick();
       this.startCreateMode();
       window.parent.postMessage("make-music-activated", "*");
+    },
+    // NEW METHODS
+    retreat() {
+      // advance to next level failing current level + 0 Points
+    },
+    makeAttempt() {
+      this.displayOriginalOverlay = true;
     }
   },
   watch: {
     madeAttempt() {
-      this.displayAttemptOverlay();
+      this.makeAttempt();
     },
     allParametersMatchGoal(val) {
-
       if (val === true && this.timerIsRunning) {
-
         this.beginSuccessSvoosh();
 
         audio.playSweep();

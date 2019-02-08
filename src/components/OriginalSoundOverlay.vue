@@ -2,10 +2,12 @@
   <div class="overlay">
     <div class="overlay-content-wrapper">
       <div>
+        <h4>You have made {{ attempts }} attempts.</h4>
         <h3>Listen to the original audio</h3>
-        <h4>You have {{ attempts }} attempts remaining...</h4>
-        <span class="timer-text">{{ timer }}</span>
-        <h1>Try again</h1>
+        <h3>{{ timer }}</h3>
+        <span>
+          <button class="button-next" @click="closeoverlay">Try again</button>
+        </span>
       </div>
       <svg viewBox="0 0 250 250" height="400px" width="400px">
         <g :transform="`rotate(${anim.ping.racketTurn}) translate(0, ${anim.ping.racketYOffset})`">
@@ -43,6 +45,8 @@ export default {
     //   type: Number,
     //   default: 1
     // }
+    closeoverlay: Function,
+    retreat: Function,
     timer: Number,
   },
   data () {
@@ -191,5 +195,6 @@ export default {
 
   .timer-text {
     font-size: 1.3em;
+    padding: 30px;
   }
 </style>
