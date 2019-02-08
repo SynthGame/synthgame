@@ -36,6 +36,7 @@
         :retreat="retreat"
         :closeoverlay="killOrignalSoundPrompt"
         :timer="originalSoundTimer"
+        :forfeit="forfeit"
       />
     </transition>
 
@@ -534,6 +535,10 @@ export default {
       clearInterval(this.timerInterval);
       this.originalSoundTimer = 8;
       this.$store.dispatch('setSynthToUserAttempt', audio);
+    },
+    forfeit() {
+      this.killOrignalSoundPrompt();
+      this.startNextLevel();
     }
   },
   watch: {

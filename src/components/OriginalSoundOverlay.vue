@@ -8,6 +8,9 @@
         <span>
           <button class="button-next" @click="closeoverlay">Try again</button>
         </span>
+        <span>
+          <button class="button-next" @click="forfeit">Forfeit Level</button>
+        </span>
       </div>
       <svg viewBox="0 0 250 250" height="400px" width="400px">
         <g :transform="`rotate(${anim.ping.racketTurn}) translate(0, ${anim.ping.racketYOffset})`">
@@ -47,6 +50,7 @@ export default {
     // }
     closeoverlay: Function,
     retreat: Function,
+    forfeit: Function,
     timer: Number,
   },
   data () {
