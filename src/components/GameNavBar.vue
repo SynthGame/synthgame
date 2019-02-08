@@ -73,8 +73,14 @@
               >NEXT LEVEL</button>
     </span>-->
     <div>
-      <span>
+      <span v-if="!completedLevel">
         <button @click="makeAttempt" class="">Attempt {{ attempts }}</button>
+      </span>
+      <span v-if="completedLevel">
+      <button class="button-next"
+              @click="requestNextLevel"
+              ref="button"
+              >NEXT LEVEL</button>
       </span>
     </div>
 
@@ -148,8 +154,6 @@ export default {
   name: "gameNavBar",
   data: function() {
     return {
-      timeLeftSeconds: 45,
-      timer: null,
       indicatorActive: true,
       exportPresetName: "",
       exportPresetLink: "",
@@ -222,6 +226,9 @@ export default {
     },
     madeAttempt() {
       return this.$store.state.gameState.madeAttempt;
+    },
+    completedLevel() {
+      return this.$store.state.gameState.completedLevel;
     }
   },
   mounted() {
