@@ -30,6 +30,7 @@
                       <span>{{ item.knobName }}</span>
                     </span>
                   </span>
+                  </span>
                 </button>
               </li>
             </ul>
@@ -87,7 +88,7 @@
           <!-- ATTEMPT -->
           <div class="attempt-navigation">
             <span v-if="!completedLevel">
-              <button @click="makeAttempt" class>Attempt {{ attempts }}</button>
+              <button @click="makeAttempt" class="button-next">Attempt {{ attempts }}</button>
             </span>
             <span v-if="completedLevel">
               <button class="button-next" @click="requestNextLevel" ref="button">NEXT LEVEL</button>
@@ -531,6 +532,7 @@ export default {
 </script>
 
 <style scoped lang="scss">
+
 .attempt-navigation {
   bottom: 12vh;
   position: relative;
