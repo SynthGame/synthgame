@@ -686,7 +686,8 @@ export default {
     Svoosh
   },
   mounted () {
-      this.showSequencer()
+    this.$store.commit("setCreateMode", true);
+    this.showSequencer()
   },
   methods: {
     beginSvoosh() {
@@ -702,8 +703,12 @@ export default {
       }, 300);
     },
     activeScreen(index, key) {
-      this.nav.active = this.nav.groups[index].items[key] 
       this.showModules = false
+      this.nav.active = this.nav.groups[index].items[key]
+      let module = this.nav.groups[index],
+          moduleName = module.title,
+          nobName = module.items[key]
+      this.commit('setKnobAvailable', moduleName, nobName)
     },
     moduleIsUseable (moduleName) {
       if (this.createModeIsActive) return true
