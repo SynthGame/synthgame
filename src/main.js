@@ -8,6 +8,8 @@ import db from './db'
 import './registerServiceWorker'
 import ModuleKnob from './components/ModuleKnob.vue'
 
+import './assets/assets/styles.scss'
+
 Vue.config.productionTip = false
 
 require('tone')

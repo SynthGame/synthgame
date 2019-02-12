@@ -1,0 +1,40 @@
+/****
+
+  Settings 
+
+****/
+
+@import 'settings/variables';
+@import 'settings/mixins';
+@import 'settings/ress';
+@import 'settings/layout';
+@import 'settings/buttons';
+@import 'settings/utilities';
+
+/****
+
+  Components 
+
+****/
+
+@import 'components/header';
+@import 'components/navigation';
+@import 'components/screen';
+
+a, button, [tabindex] {
+  &:focus {
+    outline: 2px dotted white!important;
+  }
+}
+
+@media screen and (max-width: 799px) {
+  .hide-mobile {
+    display: none;
+  }
+}
+
+@media screen and (min-width: 800px) {
+  .hide-desktop {
+    display: none;
+  }
+}

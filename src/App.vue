@@ -1,12 +1,10 @@
 <template>
   <div id="app">
 
-      <game-summary/>
-
     <transition name="slideout">
       <start-screen
         v-if="displayStartOverlay"
-        @startPreview="startPlayMode"
+        @startLevel="beginSvoosh"
         @create="showCreatePreview=true"
         @next="startNextLevel"
         @closeStartScreen="closeStartScreen"
@@ -16,12 +14,17 @@
     <transition name="slide-up-slide-down">
       <preview-screen
         v-if="displayPreviewOverlay"
+        @back="[displayPreviewOverlay = false, displayStartOverlay = true]"
         @startLevel="beginSvoosh"
         @create="switchToCreate"
       />
-    </transition>
+    </transition> -->
     <before-create-overlay v-if="showCreatePreview" @showCreate="showCreate" @back="back"/>
-    <svoosh v-if="isThereSvooshComponent" :isFired="svooshIt" @bye="endSvoosh" black/>
+    <svoosh
+      v-if="isThereSvooshComponent"
+      :isFired="svooshIt"
+      @bye="endSvoosh"
+    />
     <svoosh
       v-if="isThereSuccessSvooshComponent"
       :isFired="successSvooshIt"
@@ -485,6 +488,7 @@ export default {
       // rest will be done by watcher of sequencesPassedInCurrentLevel
     },
     beginSvoosh() {
+      this.displayStartOverlay = false;
       this.isThereSvooshComponent = true;
       this.$nextTick(() => (this.svooshIt = true));
       this.displayPreviewOverlay = false;
@@ -848,26 +852,26 @@ export default {
   }
 }
 
-body {
-  background: black;
-  margin: 0;
-  user-select: none;
-  touch-action: none !important;
-  width: 100vw;
-  height: 100vh;
-  overflow: hidden;
-}
+// body {
+//   background: black;
+//   margin: 0;
+//   user-select: none;
+//   touch-action: none !important;
+//   width: 100vw;
+//   height: 100vh;
+//   overflow: hidden;
+// }
 
-#app {
-  font-family: "Montserrat", sans-serif;
-  font-weight: 300;
-  font-size: 1.8vh;
-  -webkit-font-smoothing: antialiased;
-  touch-action: none !important;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: white;
-}
+// #app {
+//   font-family: "Montserrat", sans-serif;
+//   font-weight: 300;
+//   font-size: 1.8vh;
+//   -webkit-font-smoothing: antialiased;
+//   touch-action: none !important;
+//   -moz-osx-font-smoothing: grayscale;
+//   text-align: center;
+//   color: white;
+// }
 
 .overlay {
   position: fixed;
@@ -960,6 +964,14 @@ body {
 
 *:focus {
   outline: 0 !important;
+}
+
+
+.fade-enter-active, .fade-leave-active {
+  transition: opacity .5s;
+}
+.fade-enter, .fade-leave-to {
+  opacity: 0;
 }
 
 /* OVERLAYS TRANSITIONING

@@ -1,0 +1,53 @@
+
+/****
+
+  Colours 
+
+****/
+
+$colour_orange: #FF7E6E;
+$colour_blue_light: #43BEDE;
+$colour_purple: #6E01D1;
+$colour_green: #7CD08B;
+$colour_grey_dark: #151515;
+$colour_black: #000000;
+$colour_white: #ffffff;
+
+$colour_primary: $colour_orange;
+$colour_osc1: $colour_orange;
+$colour_osc2: $colour_blue_light;
+$colour_filter: $colour_purple;
+$colour_lfo: $colour_green;
+
+/****
+
+  Shadows
+
+****/
+
+$shadow_light: 0px 0px 4px rgba($colour_white, 0.5), inset 0px 1px 3px rgba($colour_black, 0.5);
+
+/****
+
+  Typography 
+
+****/
+
+$font-size: 18px;
+
+/****
+
+  Layout
+
+****/
+
+$width_column: 375px;
+$width_main-content: 5000px;
+$top_breakpoint: 1440px;
+$bottom_breakpoint: 320px;
+
+/****
+
+  Silent classes 
+
+****/

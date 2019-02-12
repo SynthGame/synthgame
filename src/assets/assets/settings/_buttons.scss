@@ -1,0 +1,165 @@
+.btn {
+  &_stroke {
+    background: $colour_black;
+    border: 2px solid $colour_primary;
+    font-style: normal;
+    font-weight: normal;
+    line-height: normal;
+    font-size: 18px;
+    text-align: center;
+    letter-spacing: 2.29846px;
+    text-transform: uppercase;
+    color: $colour_white;
+    height: 60px;
+    transition: color 0.35s ease 0.1s;
+    position: relative;
+    z-index: 100;
+    .btn--inner {
+      display: flex;
+      align-items: center;
+      @include fluid(padding-top, $bottom_breakpoint, $top_breakpoint, 8px, 11px);
+      @include fluid(padding-bottom, $bottom_breakpoint, $top_breakpoint, 7px, 10px);
+      @include fluid(padding-right padding-left, $bottom_breakpoint, $top_breakpoint, 10px, 27px);
+      position: relative;
+      height: 100%;
+      overflow: hidden;
+      &:before {
+        display: block;
+        content: '';
+        height: 100%;
+        width: 100%;
+        top: 0;
+        left: 0;
+        position: absolute;
+        transform: scaleX(0);
+        transition: transform 450ms cubic-bezier(0.455, 0.03, 0.515, 0.955);
+        transform-origin: 100% 50%;
+        z-index: 10;
+        will-change: transform, transform-origin;
+      }
+      &-text {
+        z-index: 20;
+        position: relative;
+        display: block;
+        width: 100%;
+      }
+    }
+    &:hover,
+    &:focus,
+    &.is-active {
+      .btn--inner {
+        &:before {
+          transform: scaleX(1);
+          transform-origin: 0 50%;
+        }
+      }
+    }
+  }
+  &_link {
+    text-transform: uppercase;
+    padding: 9px 0 3px;
+    .btn--inner {
+      position: relative;
+      display: inline-block;
+      overflow: hidden;
+      &-text {
+        position: relative;
+        overflow: hidden;
+        white-space: nowrap;
+        padding-bottom: 1px;
+        &:after {
+          display: block;
+          content: '';
+          transform: scaleX(0);
+          transition: transform 450ms cubic-bezier(0.455, 0.03, 0.515, 0.955);
+          transform-origin: 100% 50%;
+        }
+      }
+    }
+    &:not(.is-disabled) {
+      &:hover,
+      &:focus {
+        .btn--inner-text {
+          &:after {
+            transform: scaleX(1);
+            transform-origin: 0 50%;
+          }
+        }
+      }
+    }
+  }
+  &_icon {
+    width: 67px; height: 64px;
+    position: relative;
+    svg {
+      position: absolute;
+      width: 21px;
+      height: 21px;
+      transform: translate3d(-50%, -50%, 0.01px);
+      rect, path {
+        transition: stroke .22s ease;
+      }
+    }
+  }
+
+  // themes:
+  &_primary {
+    &.btn_stroke {
+      border: 1px solid $colour_primary;
+      color: $colour_white;
+      .btn--inner {
+        &:before {
+          background: $colour_primary;
+        }
+      }
+      &:hover,
+      &:focus,
+      &.is-active {
+        color: $colour_black;
+      }
+    }
+    &.btn_link {
+      color: $colour_primary;
+      .btn--inner-text {
+        &:after {
+          border-bottom: solid 2px $colour_primary;
+        }
+      }
+    }
+    &.btn_icon {
+      border: 1px solid $colour_primary;
+      rect, path {
+        stroke: $colour_white;
+      }
+      &:hover,
+      &:focus,
+      &.is-active {
+        rect, path {
+          stroke: $colour_primary;
+        }
+      }
+    }
+  }
+}
+
+@keyframes stroke-in {
+  0% {
+    transform: translateX(-101%);
+    opacity: 0.6;
+  }
+  100% {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+@keyframes stroke-out {
+  0% {
+    transform: translateX(0);
+    opacity: 1;
+  }
+  100% {
+    transform: translateX(101%);
+    opacity: 0.7;
+  }
+}

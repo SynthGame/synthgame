@@ -1,0 +1,55 @@
+body {
+  overflow: hidden;
+  background-color: $colour_black;
+  color: $colour_white;
+  font-size: $font_size;
+  font-family: "Roboto", sans-serif;
+  font-weight: 300;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+#app {
+  position: fixed;
+  top: 0; left: 0;
+  width: 100vw;
+  height: 100vh;
+  overflow-x: hidden;
+  overflow-y: auto;
+}
+
+.wrapper {
+  // display: flex;
+}
+
+.rightContainer {
+  flex-grow: 1;
+  height: 100vh;
+  overflow: hidden;
+  &--wrapper {
+    max-width: $width_main-content;
+    margin-right: auto;
+    width: 100%;
+  }
+}
+
+.main {
+  overflow-x: hidden;
+  overflow-y: auto;
+  &--inner {
+
+  }
+}
+
+.cols {
+  width: 100vw;
+  display: flex;
+  align-items: flex-start;
+  height: 100vh;
+  max-height: 100vh;
+}
+
+.header ~ .cols {
+  @media screen and (max-width: 799px) {
+    height: calc(100vh - 58px);
+  }
+}
