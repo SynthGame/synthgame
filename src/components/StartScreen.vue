@@ -262,15 +262,14 @@ const levels = [
 
 .level {
   margin-bottom: 20px;
-  width: 100%;
+  width: 320px;
   display: flex;
   justify-content: space-around;
-  height: 120px;
+  height: 130px;
   background: rgb(0, 0, 0);
   margin-left: 20px;
-  width: 30%;
   margin: auto;
-  padding: 12px;
+  padding: 16px;
 }
 
 .active {
@@ -288,7 +287,7 @@ const levels = [
   /* Opera */
   -o-transform: rotate(-90deg);
   position: relative;
-  left: -154px;
+  left: -190px;
   top: 224px;
   z-index: 20;
 }
