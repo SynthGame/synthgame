@@ -5,8 +5,7 @@
       <div class="screen--header-inner">
         <button @click="$emit('back')" class="btn btn_link btn_primary">
           <span class="btn--inner">
-            <span class="btn--inner-text">
-              < Back
+            <span class="btn--inner-text">Back
             </span>
           </span>
         </button>
