@@ -261,7 +261,7 @@ export default new Vuex.Store({
       }
 
       knobs[moduleName][knobName] = true;
-      
+
       state.gameState.knobsAvailable = knobs;
     },
     setAudioParameter(state, { device, parameter, value }) {
