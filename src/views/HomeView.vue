@@ -27,7 +27,7 @@
                   </svg>
                   <span class="navigation--item-text">
                     <span class="navigation--item-title">
-                      <span>{{ item.title }}</span>
+                      <span>{{ item.knobName }}</span>
                     </span>
                     <span class="navigation--item-author">{{ item.author || '-' }}</span>
                   </span>
@@ -428,15 +428,18 @@ export default {
             moduleName: 'oscillator1',
             items: [
               {
-                title: 'detune',
+                title: 'frequency',
+                knobName: 'octave',
                 author: 'Lawson'
               },
               {
-                title: 'frequency',
+                title: 'detune',
+                knobName: 'detune',
                 author: 'Lawson'
               },
               {
                 title: 'typeOsc',
+                knobName: 'shape',
                 author: 'Bart'
               }
             ]
@@ -446,16 +449,19 @@ export default {
             title: 'Osc 2',
             items: [
               {
-                title: 'typeOsc',
-                author: 'Daniel'
-              },
-              {
                 title: 'frequency',
+                knobName: 'octave',
                 author: ''
               },
               {
                 title: 'volume',
+                knobName: 'volume',
                 author: 'Lauren'
+              },
+              {
+                title: 'typeOsc',
+                knobName: 'shape',
+                author: 'Daniel'
               }
             ]
           },
@@ -464,13 +470,15 @@ export default {
             title: 'Filter',
             items: [
               {
-                title: 'type',
-                author: 'Basti'
+                title: 'cutOffFreq',
+                knobName: 'Frequency',
+                author: 'Momcilo'
               },
               {
-                title: 'cutOffFreq',
-                author: 'Momcilo'
-              }
+                title: 'type',
+                knobName: 'shape',
+                author: 'Basti'
+              },
             ]
           },
           {
@@ -479,18 +487,22 @@ export default {
             items: [
               {
                 title: 'attack',
+                knobName: 'attack',
                 author: ''
               },
               {
                 title: 'decay',
+                knobName: 'decay',
                 author: ''
               },
               {
                 title: 'sustain',
+                knobName: 'sustain',
                 author: ''
               },
               {
                 title: 'release',
+                knobName: 'release',
                 author: ''
               }
             ]
@@ -501,14 +513,17 @@ export default {
             items: [
               {
                 title: 'attack',
+                knobName: 'attack',
                 author: ''
               },
               {
                 title: 'decay',
+                knobName: 'decay',
                 author: ''
               },
               {
                 title: 'amount',
+                knobName: 'amount',
                 author: ''
               }
             ]
@@ -518,15 +533,18 @@ export default {
             title: 'LFO',
             items: [
               {
-                title: 'amount',
+                title: 'frequency',
+                knobName: 'frequency',
                 author: ''
               },
               {
-                title: 'frequency',
+                title: 'amount',
+                knobName: 'amount',
                 author: ''
               },
               {
                 title: 'type',
+                knobName: 'type',
                 author: ''
               }
             ]
@@ -537,10 +555,12 @@ export default {
             items: [
               {
                 title: 'lfo',
+                knobName: 'lfo',
                 author: ''
               },
               {
                 title: 'envelope2',
+                knobName: 'envelope2',
                 author: ''
               }
             ]
