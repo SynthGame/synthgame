@@ -69,7 +69,7 @@ export default new Vuex.Store({
       marginFil: 0,
       marginEnv: 0,
       marginLfo: 0,
-      rackSlotArray: [0,1,2,3,4,5,6,7,8,9,10,11],
+      rackSlotArray: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11],
       margin: 10,
       // GAME SCORING //
       attempts: 0,
@@ -200,8 +200,8 @@ export default new Vuex.Store({
           typeOsc: ['sine', 'square', 'sawtooth', 'triangle']
         },
         router: {
-          lfo: ['oscsDetune','osc1Detune','filterCutoff'],
-          envelope2: ['oscsDetune','osc1Detune','filterCutoff'],
+          lfo: ['oscsDetune', 'osc1Detune', 'filterCutoff'],
+          envelope2: ['oscsDetune', 'osc1Detune', 'filterCutoff'],
         }
       },
       defaultParams: {
@@ -248,96 +248,112 @@ export default new Vuex.Store({
     }
   },
   mutations: {
-    setAudioParameter (state, {device, parameter, value}) {
+    setKnobAvalible(state, payload) {
+      const { knobName, moduleName } = payload;
+      let knobs = {
+        oscillator1: {},
+        oscillator2: {},
+        filter: {},
+        envelope: {},
+        envelope2: {},
+        lfo: {},
+        router: {}
+      }
+
+      knobs[moduleName][knobName] = true;
+      
+      state.gameState.knobsAvailable = knobs;
+    },
+    setAudioParameter(state, { device, parameter, value }) {
       state.audioParameters[device][parameter] = value
     },
-    setUserAttemptParameters (state, {device, parameter, value}) {
+    setUserAttemptParameters(state, { device, parameter, value }) {
       state.gameState.userAttemptPreset[device][parameter] = value
     },
-    setFeaturedArtist (state, {artistName, avatarUrl}) {
+    setFeaturedArtist(state, { artistName, avatarUrl }) {
       state.name = artistName
       state.avatarUrl = avatarUrl
     },
-    setBpm (state, {parameter, value}) {
+    setBpm(state, { parameter, value }) {
       state[parameter] = value
     },
-    setPresetBpm (state, bpm) {
+    setPresetBpm(state, bpm) {
       state.bpm = bpm
     },
-    setAudioParameterToPreset (state, {preset}) {
+    setAudioParameterToPreset(state, { preset }) {
       // overwrite parameters from audiostate, this will not fill in nested objects
       state.audioParameters = {
         ...state.audioParameters,
         ...preset
       }
     },
-    setGoalToPreset (state, {preset}) {
+    setGoalToPreset(state, { preset }) {
       // overwrite parameters from audiostate, this will not fill in nested objects
       state.gameState.goal = {
         ...state.gameState.goal,
         ...preset
       }
     },
-    setMargin (state, {newMargin}) {
+    setMargin(state, { newMargin }) {
       // overwrite parameters from audiostate, this will not fill in nested objects
       state.gameState.margin = newMargin
     },
-    startTimerIsRunning (state) {
+    startTimerIsRunning(state) {
       // overwrite parameters from audiostate, this will not fill in nested objects
       state.gameState.timerIsRunning = true
     },
-    stopTimerIsRunning (state) {
+    stopTimerIsRunning(state) {
       // overwrite parameters from audiostate, this will not fill in nested objects
       state.gameState.timerIsRunning = false
     },
-    armSweep (state) {
+    armSweep(state) {
       // overwrite parameters from audiostate, this will not fill in nested objects
       state.gameState.sweepArmed = true
     },
-    disarmSweep (state) {
+    disarmSweep(state) {
       // overwrite parameters from audiostate, this will not fill in nested objects
       state.gameState.sweepArmed = false
     },
-    addValueToScore (state, val) {
+    addValueToScore(state, val) {
       state.gameState.score = add(state.gameState.score, val)
     },
-    increaseLevelValue (state, val) {
+    increaseLevelValue(state, val) {
       state.gameState.level = add(state.gameState.level, val)
     },
-    setLevelValue (state, level) {
+    setLevelValue(state, level) {
       state.gameState.level = level
     },
-    updateHighScore (state, val) {
+    updateHighScore(state, val) {
       state.gameState.highScore = val
       if (localStorage.getItem('highscore') < val) {
         localStorage.setItem('highscore', val)
       }
     },
-    setKnobsAvailable (state, obj) {
+    setKnobsAvailable(state, obj) {
       state.gameState.knobsAvailable = obj
     },
-    setCreateMode (state, isActive) {
+    setCreateMode(state, isActive) {
       state.gameState.createModeIsActive = isActive
     },
-    increaseSequencesPassedInCurrentLevel (state) {
+    increaseSequencesPassedInCurrentLevel(state) {
       state.gameState.sequencesPassedInCurrentLevel++
     },
-    resetSequencesPassedInCurrentLevel (state) {
+    resetSequencesPassedInCurrentLevel(state) {
       state.gameState.sequencesPassedInCurrentLevel = 0
     },
-    setTheGameToGameOver (state) {
+    setTheGameToGameOver(state) {
       state.gameState.isGameOver = true
     },
-    setRequestNextLevelToTrue (state) {
+    setRequestNextLevelToTrue(state) {
       state.gameState.nextLevelRequested = true
     },
-    setRequestNextLevelToFalse (state) {
+    setRequestNextLevelToFalse(state) {
       state.gameState.nextLevelRequested = false
     },
-    setTheGameFromGameOver (state) {
+    setTheGameFromGameOver(state) {
       state.gameState.isGameOver = false
     },
-    setActiveSequence (state, sequence) {
+    setActiveSequence(state, sequence) {
       state.activeSequence = sequence
     },
     toggleAttemptMade(state) {
@@ -346,7 +362,7 @@ export default new Vuex.Store({
     incrementAttempt(state) {
       state.gameState.attempts += 1;
     },
-    resetAttempts(state){
+    resetAttempts(state) {
       state.gameState.attempts = 0;
     },
     setCompletedLevel(state, payload) {
@@ -378,11 +394,11 @@ export default new Vuex.Store({
     }
   },
   actions: {
-    madeAttempt({state, commit}) {
+    madeAttempt({ state, commit }) {
       commit('toggleAttemptMade')
       commit('incrementAttempt')
     },
-    shuffleRackSlotArray({state, commit}) {
+    shuffleRackSlotArray({ state, commit }) {
       var array = state.gameState.rackSlotArray
       var currentIndex = array.length, temporaryValue, randomIndex;
 
@@ -401,7 +417,7 @@ export default new Vuex.Store({
       state.gameState.rackSlotArray = array
       return array;
     },
-    randomizeAudioParameters ({state, commit}, randomizeArray) {
+    randomizeAudioParameters({ state, commit }, randomizeArray) {
       const randomizeValues = (obj, selectObj) => mapValues(obj, (val, moduleName) => {
         return mapValues(val, (val, parameterName) => {
           // if selectObj is provided and the value is falsey return obj value
@@ -435,7 +451,7 @@ export default new Vuex.Store({
         preset: randomizeWithoutMatches(state.gameState.goal, randomizeArray)
       })
     },
-    randomizGoalParameters ({state, commit}) {
+    randomizGoalParameters({ state, commit }) {
       const randomizeValues = obj => mapValues(obj, (val, moduleName) => {
         return mapValues(val, (val, parameterName) => {
           if (state.gameState.knobsAvailable && state.gameState.knobsAvailable[moduleName] && state.gameState.knobsAvailable[moduleName][parameterName]) {
@@ -451,7 +467,7 @@ export default new Vuex.Store({
         preset: randomizeValues(state.audioParameters)
       })
     },
-    setSynthToGoal ({state}, synth) {
+    setSynthToGoal({ state }, synth) {
       synth.envelope.state.device.attack = character.envelope.attack(state.gameState.goal.envelope.attack)
       synth.envelope.state.device.decay = character.envelope.decay(state.gameState.goal.envelope.decay)
       synth.envelope.state.device.sustain = character.envelope.sustain(state.gameState.goal.envelope.sustain)
@@ -476,7 +492,7 @@ export default new Vuex.Store({
       synth.connectLfo(state.gameState.goal.router.lfo)
       synth.connectEnvelope2(state.gameState.goal.envelope2)
     },
-    setSynthToUserAttempt ({state}, synth) {
+    setSynthToUserAttempt({ state }, synth) {
       synth.envelope.state.device.attack = character.envelope.attack(state.gameState.userAttemptPreset.envelope.attack)
       synth.envelope.state.device.decay = character.envelope.decay(state.gameState.userAttemptPreset.envelope.decay)
       synth.envelope.state.device.sustain = character.envelope.sustain(state.gameState.userAttemptPreset.envelope.sustain)
@@ -501,7 +517,7 @@ export default new Vuex.Store({
       synth.connectLfo(state.gameState.userAttemptPreset.router.lfo)
       synth.connectEnvelope2(state.gameState.userAttemptPreset.envelope2)
     },
-    setSynthToDefaultParameters ({state}, synth) {
+    setSynthToDefaultParameters({ state }, synth) {
       synth.envelope.state.device.attack = character.envelope.attack(state.audioParameters.envelope.attack)
       synth.envelope.state.device.decay = character.envelope.decay(state.audioParameters.envelope.decay)
       synth.envelope.state.device.sustain = character.envelope.sustain(state.audioParameters.envelope.sustain)
@@ -526,7 +542,7 @@ export default new Vuex.Store({
       synth.connectLfo(state.audioParameters.router.lfo)
       synth.connectEnvelope2(state.audioParameters.router.envelope2)
     },
-    exportPreset ({state}, data) {
+    exportPreset({ state }, data) {
       return addPreset({
         name: data.name,
         bpm: state.bpm,
@@ -534,34 +550,34 @@ export default new Vuex.Store({
         sequenceArray: state.activeSequence
       })
     },
-    setLevel ({state, commit}, {knobsAvailable}) {
+    setLevel({ state, commit }, { knobsAvailable }) {
       commit('setKnobsAvailable', knobsAvailable)
     },
-    startNewLevel ({state, commit, dispatch}, {knobsAvailable, level}) {
+    startNewLevel({ state, commit, dispatch }, { knobsAvailable, level }) {
       commit('resetSequencesPassedInCurrentLevel')
       if (level) commit('setLevelValue', level)
       return dispatch('setLevel', {
         knobsAvailable
       })
     },
-    levelDone ({state, commit}) {
+    levelDone({ state, commit }) {
       commit('stopTimerIsRunning')
       // commit('addValueToScore', timeLeft)
     },
-    gameOver ({state, commit}) {
+    gameOver({ state, commit }) {
       commit('setTheGameToGameOver')
       // commit('stopTimerIsRunning')
       // console.log(`you failed at: ${state.gameState.level + 1}`)
       // commit('setLevelValue', state.gameState.level)
       // commit('startTimerIsRunning')
     },
-    nextLevel ({state, commit}) {
+    nextLevel({ state, commit }) {
       commit('setRequestNextLevelToTrue')
     },
-    notNextLevel ({state, commit}) {
+    notNextLevel({ state, commit }) {
       commit('setRequestNextLevelToFalse')
     },
-    startAgain ({state, commit}) {
+    startAgain({ state, commit }) {
       commit('setTheGameFromGameOver')
     }
   }
