@@ -19,7 +19,7 @@
         <div key="1" v-if="slide === 0" class="screen--inner">
           <div class="screen--title">Match <br>The <br>Sound</div>
           <button
-            class="btn btn_link btn_primary">
+            class="btn btn_link btn_primary hide-desktop">
             <span class="btn--inner">
               <span class="btn--inner-text">or Make a song</span>
             </span>
