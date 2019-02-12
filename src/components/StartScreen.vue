@@ -9,7 +9,7 @@
         <h1>{{ totalScore }}</h1>
       </div>
       <div class="level-container">
-        <div class="level" v-for="level in levels" :key="level.knobName">
+        <div class="level" v-for="level in levels" :key="level.knobName" @click="goToLevel(level.number - 1)">
           <module-knob
             v-model="attack"
             v-if="true"
@@ -45,21 +45,25 @@ export default {
   props: {
     level: {
       type: Number,
-      default: 1
-    }
+      default: 1,
+    },
+    goToLevel: Function,
   },
   data() {
     return {
       marginLeftRbmg: 0,
       levels: [
         {
-          knobName: "Frequency"
+          knobName: "Frequency",
+          number: 1,
         },
         {
-          knobName: "Shape"
+          knobName: "Shape",
+          number: 2,
         },
         {
-          knobName: "Rolloff"
+          knobName: "Rolloff",
+          number: 3,
         }
       ],
       challengers: [

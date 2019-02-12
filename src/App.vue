@@ -10,6 +10,7 @@
         @create="showCreatePreview=true"
         @next="startNextLevel"
         @closeStartScreen="closeStartScreen"
+        :goToLevel="goToLevel"
       />
     </transition>
     <transition name="slide-up-slide-down">
@@ -516,6 +517,15 @@ export default {
       this.$store.commit("startTimerIsRunning");
       this.$store.dispatch("setSynthToDefaultParameters", audio);
       audio.playKick();
+    },
+    goToLevel(level) {
+      // Add check for lvl avalible....
+      this.$store.commit("setLevelValue", level);
+      this.startLevel(level); // TODO: should be + 1
+      this.$store.commit({
+        type: "setCompletedLevel",
+        value: false
+      });
     },
     startNextLevel(level) {
       this.$store.commit("increaseLevelValue", 1);
