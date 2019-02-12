@@ -516,6 +516,7 @@ export default {
         groups: [
           {
             title: 'Osc 1',
+            moduleName: 'oscillator1',
             items: [
               {
                 title: 'detune',
@@ -532,6 +533,7 @@ export default {
             ]
           },
           {
+            moduleName: 'oscillator2',
             title: 'Osc 2',
             items: [
               {
@@ -549,6 +551,7 @@ export default {
             ]
           },
           {
+            moduleName: 'filter',
             title: 'Filter',
             items: [
               {
@@ -562,6 +565,7 @@ export default {
             ]
           },
           {
+            moduleName: 'envelope',
             title: 'Envelope',
             items: [
               {
@@ -583,6 +587,7 @@ export default {
             ]
           },
           {
+            moduleName: 'envelope2',
             title: 'Envelope 2',
             items: [
               {
@@ -600,6 +605,7 @@ export default {
             ]
           },
           {
+            moduleName: 'lfo',
             title: 'LFO',
             items: [
               {
@@ -617,6 +623,7 @@ export default {
             ]
           },
           {
+            moduleName: 'router',
             title: 'Router',
             items: [
               {
@@ -706,9 +713,15 @@ export default {
       this.showModules = false
       this.nav.active = this.nav.groups[index].items[key]
       let module = this.nav.groups[index],
-          moduleName = module.title,
-          nobName = module.items[key]
-      this.commit('setKnobAvailable', moduleName, nobName)
+          moduleName = module.moduleName,
+          knobName = module.items[key].title
+      
+      this.$store.commit({
+        type: 'setKnobAvalible',
+        knobName: knobName,
+        moduleName: moduleName
+      })
+
     },
     moduleIsUseable (moduleName) {
       if (this.createModeIsActive) return true
