@@ -8,30 +8,19 @@
         <h5>SCORE</h5>
         <h1>{{ totalScore }}</h1>
       </div>
-      <div class="module-container">
-        <div
-          class="level-container"
-          v-for="m in modules"
-          :key="m.name"
-        >
-        <h4 class="mod-text">{{ m.name }}</h4>
         <div
           class="level"
-          v-for="level in m.levels"
-          :key="level.control.name"
-          @click="goToLevel(level.number - 1)"
+          v-for="level in levels"
+          :key="level.number"
+          @click="goToLevel(level.number)"
           :class="{ active: currentLevel === level.number }"
         >
-          <module-knob
-            v-model="attack"
-            v-if="true"
-            :min="0"
-            :max="100"
-            knobColor="#e4e259"
-            module="envelope"
-          ></module-knob>
-          <h3>{{level.control.name}}</h3>
-        </div>
+        <div v-if="(level.number + 1) % 3 == 0" class="module-content">
+          <h4 class="mod-text">{{ level.parent }}</h4>
+          <!-- Placeholder -->
+          <p>[img]</p> 
+         </div>
+          <h3>{{level.name}}</h3>
         </div>
       </div>
 
@@ -50,6 +39,7 @@
 
 <script>
 import ModuleKnob from "@/components/ModuleKnob.vue";
+import Levels from '../levels.js';
 
 export default {
   name: "startscreen",
@@ -62,71 +52,6 @@ export default {
   },
   data() {
     return {
-      marginLeftRbmg: 0,
-      modules: [
-        {
-          name: "OSC 1",
-          levels: [
-            {
-              number: 1,
-
-              control: {
-                name: "waveform",
-                id: "waveform"
-              },
-              score: 0
-            },
-            {
-              number: 2,
-
-              control: {
-                name: "octave",
-                id: "octave"
-              },
-              score: 0
-            },
-            {
-              number: 3,
-
-              control: {
-                name: "detune",
-                id: "detune"
-              },
-              score: 0
-            }
-          ]
-        },
-        {
-          name: "OSC 2",
-          levels: [
-            {
-              number: 4,
-
-              control: {
-                name: "waveform",
-                id: "waveform"
-              },
-              score: 0
-            },
-            {
-              number: 5,
-              control: {
-                name: "octave",
-                id: "octave"
-              },
-              score: 0
-            },
-            {
-              number: 6,
-              control: {
-                name: "detune",
-                id: "detune"
-              },
-              score: 0
-            }
-          ]
-        }
-      ],
       challengers: [
         {
           name: "Lawson",
@@ -154,6 +79,9 @@ export default {
     },
     currentLevel: function() {
       return this.$store.state.gameState.level;
+    },
+    levels: function() {
+      return Levels.map((lvl) =>  lvl.levelData);
     }
   },
   methods: {
@@ -248,16 +176,13 @@ const levels = [
   padding: 12px;
 }
 
-.module-container {
+.level-container {
+  display: flex;
+  flex-direction: column;
   width: 100%;
   text-align: center;
   overflow-y: scroll;
   margin-top: 20px;
-}
-
-.level-container {
-  display: flex;
-  flex-direction: column;
 }
 
 .level {
@@ -277,6 +202,11 @@ const levels = [
   border-bottom: 1px solid;
 }
 
+.module-content {
+  position: absolute;
+  left: -80px;
+}
+
 .mod-text {
     /* Safari */
   -webkit-transform: rotate(-90deg);
@@ -287,8 +217,8 @@ const levels = [
   /* Opera */
   -o-transform: rotate(-90deg);
   position: relative;
-  left: -190px;
-  top: 224px;
+  // left: -190px;
+  // top: 224px;
   z-index: 20;
 }
 .overlay-content-wrapper {

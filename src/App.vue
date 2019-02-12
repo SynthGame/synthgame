@@ -70,7 +70,6 @@ import BeforeCreateOverlay from "@/components/BeforeCreateOverlay";
 import OriginalSoundOverlay from "@/components/OriginalSoundOverlay";
 import StartScreen from "@/components/StartScreen";
 import PreviewScreen from "@/components/PreviewScreen";
-import GameSummary from "@/components/GameSummary";
 import Svoosh from "@/components/Svoosh";
 import { SYNTH_BPM } from "@/constants";
 import levels from "@/levels";
@@ -118,7 +117,6 @@ export default {
     Svoosh,
     BeforeCreateOverlay,
     OriginalSoundOverlay,
-    GameSummary
   },
   created() {
     this.init();
