@@ -1,7 +1,7 @@
 <template>
   <div id="app">
 
-    <transition name="slideout">
+    <!-- <transition name="slideout">
       <start-screen
         v-if="displayStartOverlay"
         @startLevel="beginSvoosh"
@@ -10,8 +10,8 @@
         @closeStartScreen="closeStartScreen"
         :goToLevel="goToLevel"
       />
-    </transition>
-    <transition name="slide-up-slide-down">
+    </transition> -->
+    <!-- <transition name="slide-up-slide-down">
       <preview-screen
         v-if="displayPreviewOverlay"
         @back="[displayPreviewOverlay = false, displayStartOverlay = true]"
@@ -19,7 +19,7 @@
         @create="switchToCreate"
       />
     </transition> -->
-    <before-create-overlay v-if="showCreatePreview" @showCreate="showCreate" @back="back"/>
+    <!--<before-create-overlay v-if="showCreatePreview" @showCreate="showCreate" @back="back"/>
     <svoosh
       v-if="isThereSvooshComponent"
       :isFired="svooshIt"
@@ -30,7 +30,7 @@
       :isFired="successSvooshIt"
       @midway="displayStartOverlay=true"
       @bye="endSuccessSvoosh"
-    />
+    /> -->
     <transition name="slideout">
       <success-overlay
         v-if="displaySuccessOverlay"
