@@ -706,8 +706,11 @@ export default {
       this.showModules = false
     },
     moduleIsUseable (moduleName) {
-      if (this.createModeIsActive) return true
-      return some(this.knobsAvailable[moduleName]) // some are truthy
+      if (this.createModeIsActive)
+        { return true }
+      else {
+        return some(this.knobsAvailable[moduleName]) // some are truthy 
+      }
     },
     showOsc1 () {
       this.activeModule = 0
@@ -733,10 +736,6 @@ export default {
     showSequencer () {
       this.activeModule = 7
     },
-    moduleIsUseable (moduleName) {
-      if (this.createModeIsActive) return true
-      return some(this.knobsAvailable[moduleName]) // some are truthy
-    }
   },
   computed: {
     rackSlotArray () {
