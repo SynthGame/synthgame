@@ -575,7 +575,7 @@ export default {
     madeAttempt() {
       if (this.allParametersMatchGoal === true) {
         this.beginSuccessSvoosh();
-        const score = 25 - this.$store.state.gameState.attempts;
+        const score = 10 - this.$store.state.gameState.attempts;
         this.$store.commit("addValueToScore", score);
         this.$store.commit({
           type: "setCompletedLevel",
@@ -584,7 +584,7 @@ export default {
         this.$store.dispatch("levelDone");
         this.$store.commit("resetAttempts");
       } else {
-        if (this.$store.state.gameState.attempts == 25) {
+        if (this.$store.state.gameState.attempts == 10) {
           // need to reset global attemps in gameOver action.....
           this.$store.dispatch("gameOver");
         } else {
