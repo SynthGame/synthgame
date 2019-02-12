@@ -57,104 +57,26 @@
            <oscillator-module-one
             v-if="moduleIsUseable('oscillator1')"
             :class="[(activeModule == 0 ? 'active' : '')]"
-            :style="{
-              'position': !createModeIsActive ? 'absolute' : 'relative',
-              'top':
-              !createModeIsActive &&
-              rackSlotArray[0] < 6 ? '46vh' : 0,
-              'left':
-              !createModeIsActive &&
-              rackSlotArray[0] < 6 ?
-              rackSlotArray[0] * 16.67 + 'vw'
-              : ( !createModeIsActive &&
-              rackSlotArray[0] > 5 ? rackSlotArray[0] * 16.67 - (6 * 16.67) + 'vw': '')
-              ,
-              }"
           />
           <oscillator-module-two
             v-if="moduleIsUseable('oscillator2')"
             :class="[(activeModule == 1 ? 'active' : '')]"
-            :style="{
-              'position': !createModeIsActive ? 'absolute' : 'relative',
-              'top':
-              !createModeIsActive &&
-              rackSlotArray[1] < 6 ? '46vh' : 0,
-              'left':
-              !createModeIsActive &&
-              rackSlotArray[1] < 6 ?
-              rackSlotArray[1] * 16.67 + 'vw'
-              : ( !createModeIsActive &&
-              rackSlotArray[1] > 5 ? rackSlotArray[1] * 16.67 - (6 * 16.67) + 'vw': '')
-              ,
-              }"
           />
           <filter-module
             v-if="moduleIsUseable('filter')"
             :class="[(activeModule == 2 ? 'active' : '')]"
-            :style="{
-              'position': !createModeIsActive ? 'absolute' : 'relative',
-              'top':
-              !createModeIsActive &&
-              rackSlotArray[2] < 6 ? '46vh' : 0,
-              'left':
-              !createModeIsActive &&
-              rackSlotArray[2] < 6 ?
-              rackSlotArray[2] * 16.67 + 'vw'
-              : ( !createModeIsActive &&
-              rackSlotArray[2] > 5 ? rackSlotArray[2] * 16.67 - (6 * 16.67) + 'vw': '')
-              ,
-              }"
           />
           <envelope-module
             v-if="moduleIsUseable('envelope')"
             :class="[(activeModule == 3 ? 'active' : '')]"
-            :style="{
-              'position': !createModeIsActive ? 'absolute' : 'relative',
-              'top':
-              !createModeIsActive &&
-              rackSlotArray[3] < 6 ? '46vh' : 0,
-              'left':
-              !createModeIsActive &&
-              rackSlotArray[3] < 6 ?
-              rackSlotArray[3] * 16.67 + 'vw'
-              : ( !createModeIsActive &&
-              rackSlotArray[3] > 5 ? rackSlotArray[3] * 16.67 - (6 * 16.67) + 'vw': '')
-              ,
-              }"
           />
           <lfo-module
             v-if="moduleIsUseable('lfo')"
             :class="[(activeModule == 4 ? 'active' : '')]"
-            :style="{
-              'position': !createModeIsActive ? 'absolute' : 'relative',
-              'top':
-              !createModeIsActive &&
-              rackSlotArray[4] < 6 ? '46vh' : 0,
-              'left':
-              !createModeIsActive &&
-              rackSlotArray[4] < 6 ?
-              rackSlotArray[4] * 16.67 + 'vw'
-              : ( !createModeIsActive &&
-              rackSlotArray[4] > 5 ? rackSlotArray[4] * 16.67 - (6 * 16.67) + 'vw': '')
-              ,
-              }"
           />
           <envelope-module-two
             v-if="moduleIsUseable('envelope2')"
             :class="[(activeModule == 5 ? 'active' : '')]"
-            :style="{
-              'position': !createModeIsActive ? 'absolute' : 'relative',
-              'top':
-              !createModeIsActive &&
-              rackSlotArray[5] < 6 ? '46vh' : 0,
-              'left':
-              !createModeIsActive &&
-              rackSlotArray[5] < 6 ?
-              rackSlotArray[5] * 16.67 + 'vw'
-              : ( !createModeIsActive &&
-              rackSlotArray[5] > 5 ? rackSlotArray[5] * 16.67 - (6 * 16.67) + 'vw': '')
-              ,
-              }"
           />
           <sequencer-module
             v-if="createModeIsActive"
@@ -164,19 +86,6 @@
           <router-module
             v-if="moduleIsUseable('router')"
             :class="[(activeModule == 6 ? 'active' : '')]"
-            :style="{
-              'position': !createModeIsActive ? 'absolute' : 'relative',
-              'top':
-              !createModeIsActive &&
-              rackSlotArray[6] < 6 ? '46vh' : 0,
-              'left':
-              !createModeIsActive &&
-              rackSlotArray[6] < 6 ?
-              rackSlotArray[6] * 16.67 + 'vw'
-              : ( !createModeIsActive &&
-              rackSlotArray[6] > 5 ? rackSlotArray[6] * 16.67 - (6 * 16.67) + 'vw': '')
-              ,
-              }"
           />
         </div>
       </template>
@@ -693,8 +602,7 @@ export default {
     Svoosh
   },
   mounted () {
-    this.$store.commit("setCreateMode", true);
-    this.showSequencer()
+    this.activeScreen(0, 0)
   },
   methods: {
     beginSvoosh() {
