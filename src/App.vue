@@ -1,15 +1,15 @@
 <template>
   <div id="app">
 
-      <game-summary 
-        v-if="gameSummary"
-      />
+      <game-summary/>
 
     <transition name="slideout">
       <start-screen
         v-if="displayStartOverlay"
         @startPreview="startPlayMode"
         @create="showCreatePreview=true"
+        @next="startNextLevel"
+        @closeStartScreen="closeStartScreen"
       />
     </transition>
     <transition name="slide-up-slide-down">
@@ -24,7 +24,7 @@
     <svoosh
       v-if="isThereSuccessSvooshComponent"
       :isFired="successSvooshIt"
-      @midway="displaySuccessOverlay=true"
+      @midway="displayStartOverlay=true"
       @bye="endSuccessSvoosh"
     />
     <transition name="slideout">
@@ -239,28 +239,28 @@ export default {
               });
             }
           }
-          if (this.noteArray[note].kick && this.displaySuccessOverlay) {
+          if (this.noteArray[note].kick && this.displayStartOverlay) {
             audio.playKick();
           }
-          if (this.noteArray[note].hat && this.displaySuccessOverlay) {
+          if (this.noteArray[note].hat && this.displayStartOverlay) {
             audio.playHat();
           }
-          if (this.noteArray[note].clap && this.displaySuccessOverlay) {
+          if (this.noteArray[note].clap && this.displayStartOverlay) {
             audio.playClap();
           }
-          if (this.noteArray[note].clap2 && this.displaySuccessOverlay) {
+          if (this.noteArray[note].clap2 && this.displayStartOverlay) {
             audio.playClap2();
           }
-          if (this.noteArray[note].cymbal && this.displaySuccessOverlay) {
+          if (this.noteArray[note].cymbal && this.displayStartOverlay) {
             audio.playCymbal();
           }
-          if (this.noteArray[note].labmyc && this.displaySuccessOverlay) {
+          if (this.noteArray[note].labmyc && this.displayStartOverlay) {
             audio.playLabmyc();
           }
-          if (this.noteArray[note].noise && this.displaySuccessOverlay) {
+          if (this.noteArray[note].noise && this.displayStartOverlay) {
             audio.playNoise();
           }
-          if (this.noteArray[note].snare && this.displaySuccessOverlay) {
+          if (this.noteArray[note].snare && this.displayStartOverlay) {
             audio.playSnare();
           }
         }
@@ -269,6 +269,9 @@ export default {
     },
     closeSuccessOverlay() {
       this.displaySuccessOverlay = false;
+    },
+    closeStartScreen() {
+      this.displayStartOverlay = false;
     },
     back() {
       this.showCreatePreview = false;
@@ -325,7 +328,8 @@ export default {
       );
     },
     displaySuccesMessage() {
-      this.displaySuccessOverlay = true;
+      // this.displaySuccessOverlay = true;
+      this.displayStartOverlay = true;
     },
     // displayFailureMessage () {
     //   this.displaySuccessOverlay = true
@@ -354,7 +358,7 @@ export default {
       // this.beginSuccessSvoosh()
       this.$nextTick(() => {
         // disable all overlays when svoosh is done
-        this.displaySuccessOverlay = false;
+        // this.displaySuccessOverlay = false;
         this.displayFailureOverlay = false;
         this.displayStartOverlay = false;
         this.displayPreviewOverlay = true;
@@ -462,7 +466,7 @@ export default {
       );
 
       // disable all overlays
-      this.displaySuccessOverlay = false;
+      // this.displaySuccessOverlay = false;
       this.displayFailureOverlay = false;
       this.displayStartOverlay = false;
       this.displayPreviewOverlay = false;

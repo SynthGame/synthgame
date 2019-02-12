@@ -1,7 +1,7 @@
 <template>
   <div class="overlay">
     <div class="overlay-content-wrapper">
-     <header>GAME SUMMARY</header>
+     <h4>GAME SUMMARY</h4>
      <div class="score-container">
          <h5>SCORE</h5>
          <h1></h1>
@@ -27,9 +27,15 @@
        </div>
       </div>
      <div class="navigation-container">
-         <button class="continue-button">CONTINUE</button>
-         <button class="play-button">PLAY</button>
-         <button class="share-link"><span>[]</span></button>
+        <button class="button-next"
+                @click="$emit('closesuccessoverlay')"
+                ref="button"
+                >KEEP TWEAKING</button>
+        <button class="button-next"
+                @click="$emit('next')"
+                ref="button"
+                >NEXT LEVEL</button>
+      </div>
      </div>
     </div>
   </div>
