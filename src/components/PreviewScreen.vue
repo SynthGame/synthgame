@@ -1,21 +1,43 @@
 <template>
-  <div class="overlay">
-    <div class="overlay-content-wrapper">
-
-        <h1>Level {{gameLevel}}</h1>
-        <h2 v-html="gameLevelText"></h2>
-        <!-- <h2>Listen closely to the sound, hit randomize, and re-create the sound you're hearing now.</h2> -->
-
-      <!-- <iframe width="560" height="315" src="https://www.youtube.com/embed/O7x-AS6idOQ?rel=0?version=3&autoplay=1&controls=0&&showinfo=0&loop=1&playlist=O7x-AS6idOQ" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe> -->
-      <!-- <video width="480" autoplay loop muted>
-        <source src="../../src/assets/intro.mp4" type="video/mp4">
-      </video> -->
-      <div>
-        <button class="button-next" @click="$emit('startLevel')">Play Level</button>
-        <button v-if="gameLevel > 7" class="button-next" @click="$emit('create')">Make music</button>
+<div class="screen screen_preview">
+  <transition name="slideout">
+    <div v-if="slide === 0" class="screen--header">
+      <div class="screen--header-inner">
+        <button @click="$emit('back')" class="btn btn_link btn_primary">
+          <span class="btn--inner">
+            <span class="btn--inner-text">
+              < Back
+            </span>
+          </span>
+        </button>
+        <div class="screen--header-title">Osc 1 Pitch</div>
       </div>
     </div>
+  </transition>
+  <div class="screen--inner">
+    <transition name="slide-up-slide-down">
+      <div v-if="slide === 0" class="screen--preview">
+        Listen to the goal sound and match the pitch of oscillator 1
+      </div>
+    </transition>
+    <transition name="slide-up-slide-down">
+      <div v-if="slide === 1" class="screen--preview">
+        Listen to the goal sound and match the pitch of oscillator 1
+      </div>
+    </transition>
   </div>
+  <div class="screen--footer">
+    <div class="screen--footer-inner">
+      <button
+        @click="slide === 0 ? slide = 1 : $emit('startLevel')"
+        class="btn btn_stroke btn_primary">
+        <span class="btn--inner">
+          <span class="btn--inner-text">Start</span>
+        </span>
+      </button>
+    </div>
+  </div>
+</div>
 </template>
 
 <script>
@@ -27,6 +49,11 @@ export default {
     level: {
       type: Number,
       default: 1
+    }
+  },
+  data() {
+    return {
+      slide: 0
     }
   },
   mounted() {
