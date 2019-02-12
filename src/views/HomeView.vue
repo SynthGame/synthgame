@@ -125,19 +125,6 @@
           <lfo-module
             v-if="moduleIsUseable('lfo')"
             :class="[(activeModule == 4 ? 'active' : '')]"
-            :style="{
-              'position': !createModeIsActive ? 'absolute' : 'relative',
-              'top':
-              !createModeIsActive &&
-              rackSlotArray[4] < 6 ? '46vh' : 0,
-              'left':
-              !createModeIsActive &&
-              rackSlotArray[4] < 6 ?
-              rackSlotArray[4] * 16.67 + 'vw'
-              : ( !createModeIsActive &&
-              rackSlotArray[4] > 5 ? rackSlotArray[4] * 16.67 - (6 * 16.67) + 'vw': '')
-              ,
-              }"
           />
           <envelope-module-two
             v-if="moduleIsUseable('envelope2')"
@@ -693,7 +680,7 @@ export default {
     Svoosh
   },
   mounted () {
-    this.$store.commit("setCreateMode", true);
+    // this.$store.commit("setCreateMode", true);
     this.showSequencer()
   },
   methods: {
