@@ -1,5 +1,10 @@
 <template>
   <div id="app">
+
+      <game-summary 
+        v-if="gameSummary"
+      />
+
     <transition name="slideout">
       <start-screen
         v-if="displayStartOverlay"
@@ -40,6 +45,7 @@
       />
     </transition>
 
+
     <failure-overlay v-if="isGameOver" @startagain="startAgain" @startlastlevel="startLastLevel"/>
 
     <!-- <div id="nav">
@@ -63,6 +69,7 @@ import BeforeCreateOverlay from "@/components/BeforeCreateOverlay";
 import OriginalSoundOverlay from "@/components/OriginalSoundOverlay";
 import StartScreen from "@/components/StartScreen";
 import PreviewScreen from "@/components/PreviewScreen";
+import GameSummary from "@/components/GameSummary";
 import Svoosh from "@/components/Svoosh";
 import { SYNTH_BPM } from "@/constants";
 import levels from "@/levels";
@@ -79,9 +86,10 @@ export default {
       pickedPreset: 0,
       displaySuccessOverlay: false,
       displayFailureOverlay: false,
-      displayStartOverlay: true,
+      displayStartOverlay: true, // change
       displayPreviewOverlay: false,
       displayOriginalOverlay: false,
+      // gameSummary: true,
       loop: null,
       isThereSvooshComponent: false,
       svooshIt: false,
@@ -108,7 +116,8 @@ export default {
     PreviewScreen,
     Svoosh,
     BeforeCreateOverlay,
-    OriginalSoundOverlay
+    OriginalSoundOverlay,
+    GameSummary
   },
   created() {
     this.init();
