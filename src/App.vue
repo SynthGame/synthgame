@@ -520,7 +520,7 @@ export default {
     },
     goToLevel(level) {
       // Add check for lvl avalible....
-      this.$store.commit("setLevelValue", level);
+      this.$store.commit("setLevelValue", level)
       this.startLevel(level); // TODO: should be + 1
       this.$store.commit({
         type: "setCompletedLevel",
@@ -529,7 +529,7 @@ export default {
     },
     startNextLevel(level) {
       this.$store.commit("increaseLevelValue", 1);
-      this.startLevel(this.level); // TODO: should be + 1
+      this.startLevel(this.level) // TODO: should be + 1
       this.$store.commit({
         type: "setCompletedLevel",
         value: false

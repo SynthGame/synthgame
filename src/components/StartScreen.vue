@@ -2,14 +2,19 @@
   <div class="overlay">
     <div class="overlay-content-wrapper">
       <div class="header">
-        <h4>{{headerText}}</h4>
+        <h3>{{headerText}}</h3>
       </div>
       <div class="score-container">
         <h5>SCORE</h5>
         <h1>{{ totalScore }}</h1>
       </div>
       <div class="level-container">
-        <div class="level" v-for="level in levels" :key="level.knobName" @click="goToLevel(level.number - 1)">
+        <div
+          class="level"
+          v-for="level in levels"
+          :key="level.knobName"
+          @click="goToLevel(level.number - 1)"
+        >
           <module-knob
             v-model="attack"
             v-if="true"
@@ -32,7 +37,6 @@
         </button>
       </div>
     </div>
-
   </div>
 </template>
 
@@ -45,9 +49,9 @@ export default {
   props: {
     level: {
       type: Number,
-      default: 1,
+      default: 1
     },
-    goToLevel: Function,
+    goToLevel: Function
   },
   data() {
     return {
@@ -55,15 +59,15 @@ export default {
       levels: [
         {
           knobName: "Frequency",
-          number: 1,
+          number: 1
         },
         {
           knobName: "Shape",
-          number: 2,
+          number: 2
         },
         {
           knobName: "Rolloff",
-          number: 3,
+          number: 3
         }
       ],
       challengers: [
@@ -98,14 +102,9 @@ export default {
     // ModuleTitle,
     // ModuleButton
   },
-  mounted() {
-
-  },
-  beforeDestroy() {
-   
-  },
-  methods: {
-  }
+  mounted() {},
+  beforeDestroy() {},
+  methods: {}
 };
 </script>
 
@@ -113,13 +112,19 @@ export default {
 .header {
   top: 0px;
   position: absolute;
-  background-color: rgb(21, 21, 21);
+  background-color: #151515;
+  height: 58px;
+  width: 100%;
 }
 
-// .navigation {
-//   bottom: 20px;
-//   position: absolute;
-// }
+.navigation-container {
+  position: absolute;
+  bottom: 00px;
+  width: 100%;
+  background-color: rgb(21, 21, 21);
+  height: 132px;
+  padding: 12px;
+}
 
 .level-container {
   width: 100%;
