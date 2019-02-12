@@ -8,12 +8,19 @@
         <h5>SCORE</h5>
         <h1>{{ totalScore }}</h1>
       </div>
-      <div class="level-container">
+      <div class="module-container">
+        <div
+          class="level-container"
+          v-for="m in modules"
+          :key="m.name"
+        >
+        <h4 class="mod-text">{{ m.name }}</h4>
         <div
           class="level"
-          v-for="level in levels"
-          :key="level.knobName"
+          v-for="level in m.levels"
+          :key="level.control.name"
           @click="goToLevel(level.number - 1)"
+          :class="{ active: currentLevel === level.number }"
         >
           <module-knob
             v-model="attack"
@@ -21,10 +28,10 @@
             :min="0"
             :max="100"
             knobColor="#e4e259"
-            :name="level.knobName"
             module="envelope"
           ></module-knob>
-          <!-- <h4>{{ level.knobName }}</h4> -->
+          <h3>{{level.control.name}}</h3>
+        </div>
         </div>
       </div>
 
@@ -56,18 +63,68 @@ export default {
   data() {
     return {
       marginLeftRbmg: 0,
-      levels: [
+      modules: [
         {
-          knobName: "Frequency",
-          number: 1
+          name: "OSC 1",
+          levels: [
+            {
+              number: 1,
+
+              control: {
+                name: "waveform",
+                id: "waveform"
+              },
+              score: 0
+            },
+            {
+              number: 2,
+
+              control: {
+                name: "octave",
+                id: "octave"
+              },
+              score: 0
+            },
+            {
+              number: 3,
+
+              control: {
+                name: "detune",
+                id: "detune"
+              },
+              score: 0
+            }
+          ]
         },
         {
-          knobName: "Shape",
-          number: 2
-        },
-        {
-          knobName: "Rolloff",
-          number: 3
+          name: "OSC 2",
+          levels: [
+            {
+              number: 4,
+
+              control: {
+                name: "waveform",
+                id: "waveform"
+              },
+              score: 0
+            },
+            {
+              number: 5,
+              control: {
+                name: "octave",
+                id: "octave"
+              },
+              score: 0
+            },
+            {
+              number: 6,
+              control: {
+                name: "detune",
+                id: "detune"
+              },
+              score: 0
+            }
+          ]
         }
       ],
       challengers: [
@@ -94,7 +151,15 @@ export default {
     },
     shareLink: function() {
       return "https://bit.ly/IqT6zt";
+    },
+    currentLevel: function() {
+      return this.$store.state.gameState.level;
     }
+  },
+  methods: {
+    // isLevel(level) {
+    //   return this.$store.state.gameState.level === level;
+    // }
   },
   components: {
     ModuleKnob
@@ -106,6 +171,63 @@ export default {
   beforeDestroy() {},
   methods: {}
 };
+
+const levels = [
+  {
+    number: 1,
+
+    control: {
+      name: "waveform",
+      id: "waveform"
+    },
+    score: 0
+  },
+  {
+    number: 2,
+
+    control: {
+      name: "octave",
+      id: "octave"
+    },
+    score: 0
+  },
+  {
+    number: 3,
+
+    control: {
+      name: "detune",
+      id: "detune"
+    },
+    score: 0
+  },
+  {
+    number: 4,
+    parent: "OSC 2",
+    control: {
+      name: "waveform",
+      id: "waveform"
+    },
+    score: 0
+  },
+  {
+    number: 5,
+    parent: "OSC 2",
+    control: {
+      name: "octave",
+      id: "octave"
+    },
+    score: 0
+  },
+  {
+    number: 6,
+    parent: "OSC 2",
+    control: {
+      name: "detune",
+      id: "detune"
+    },
+    score: 0
+  }
+];
 </script>
 
 <style scoped lang="scss">
@@ -126,12 +248,15 @@ export default {
   padding: 12px;
 }
 
-.level-container {
+.module-container {
   width: 100%;
   text-align: center;
   overflow-y: scroll;
+  margin-top: 20px;
+}
+
+.level-container {
   display: flex;
-  justify-content: center;
   flex-direction: column;
 }
 
@@ -140,66 +265,39 @@ export default {
   width: 100%;
   display: flex;
   justify-content: space-around;
+  height: 120px;
+  background: rgb(0, 0, 0);
+  margin-left: 20px;
+  width: 30%;
+  margin: auto;
+  padding: 12px;
 }
 
-.rbmg {
-  position: absolute;
-  bottom: 2em;
-  left: 3em;
-  width: auto;
-  transition: all 1s;
-  &-img {
-    position: absolute;
-    margin-left: -285px;
-    margin-top: 87px;
-    height: 80px;
-  }
-  .hidevideo {
-    position: absolute;
-    margin: -4px 0 0 -9px;
-    cursor: pointer;
-    transition: all 0.3s;
-    &:hover {
-      transform: rotate(90deg);
-    }
-  }
+.active {
+  border-top: 1px solid;
+  border-bottom: 1px solid;
+}
+
+.mod-text {
+    /* Safari */
+  -webkit-transform: rotate(-90deg);
+  /* Firefox */
+  -moz-transform: rotate(-90deg);
+  /* IE */
+  -ms-transform: rotate(-90deg);
+  /* Opera */
+  -o-transform: rotate(-90deg);
+  position: relative;
+  left: -154px;
+  top: 224px;
+  z-index: 20;
+}
+.overlay-content-wrapper {
+  justify-content: start;
 }
 
 @media only screen and (max-width: 1000px) {
-  .rbmg {
-    position: absolute;
-    bottom: unset;
-    top: -3em;
-    left: 3em;
-    width: auto;
-    transition: all 1s;
-    transform: scale(0.5) translate(-110px, 50px);
-    &-img {
-      position: absolute;
-      margin-left: -285px;
-      margin-top: 87px;
-      height: 80px;
-    }
-  }
-}
-
-.credits {
-  font-size: 1em;
-  font-weight: 200;
-  & a {
-    text-decoration: none;
-    color: white;
-    text-transform: uppercase;
-    // transition: 0.6s all;
-    &:hover {
-      border-bottom: 1px solid white;
-    }
-    & span {
-      color: #ff8574;
-      text-decoration: none;
-      font-weight: 600;
-      font-size: 1em;
-    }
-  }
 }
 </style>
+
+
