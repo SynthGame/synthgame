@@ -84,8 +84,10 @@
   &--footer {
     width: 100%;
     @include fluid(padding, $bottom_breakpoint, $top_breakpoint, 15px, 30px);
-    background: $colour_grey_dark;
     margin-top: auto;
+    @media screen and (max-width: 799px) {
+      background: $colour_grey_dark;
+    }
     &-inner {
       max-width: 500px;
       margin: 0 auto;
