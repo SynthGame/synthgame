@@ -1,10 +1,14 @@
 <template>
   <div id="app">
-    <!-- <transition name="slideout">
+
+    <transition name="slideout">
       <start-screen
         v-if="displayStartOverlay"
         @startLevel="beginSvoosh"
         @create="showCreatePreview=true"
+        @next="startNextLevel"
+        @closeStartScreen="closeStartScreen"
+        :goToLevel="goToLevel"
       />
     </transition>
     <transition name="slide-up-slide-down">
@@ -24,7 +28,7 @@
     <svoosh
       v-if="isThereSuccessSvooshComponent"
       :isFired="successSvooshIt"
-      @midway="displaySuccessOverlay=true"
+      @midway="displayStartOverlay=true"
       @bye="endSuccessSvoosh"
     />
     <transition name="slideout">
@@ -35,11 +39,23 @@
       />
     </transition>
 
-    <failure-overlay
-      v-if="isGameOver"
-      @startagain="startAgain"
-      @startlastlevel="startLastLevel"
-    />
+    <transition name="slideout">
+      <original-sound-overlay
+        v-if="displayOriginalOverlay"
+        :retreat="retreat"
+        :closeoverlay="killOrignalSoundPrompt"
+        :timer="originalSoundTimer"
+        :forfeit="forfeit"
+      />
+    </transition>
+
+
+    <failure-overlay v-if="isGameOver" @startagain="startAgain" @startlastlevel="startLastLevel"/>
+
+    <!-- <div id="nav">
+      <router-link to="/">Home</router-link> |
+      <router-link to="/about">About</router-link>
+    </div>-->
     <router-view/>
   </div>
 </template>
@@ -73,9 +89,10 @@ export default {
       pickedPreset: 0,
       displaySuccessOverlay: false,
       displayFailureOverlay: false,
-      displayStartOverlay: true,
+      displayStartOverlay: true, // change
       displayPreviewOverlay: false,
       displayOriginalOverlay: false,
+      // gameSummary: true,
       loop: null,
       isThereSvooshComponent: false,
       svooshIt: false,
@@ -102,7 +119,7 @@ export default {
     PreviewScreen,
     Svoosh,
     BeforeCreateOverlay,
-    OriginalSoundOverlay
+    OriginalSoundOverlay,
   },
   created() {
     this.init();
@@ -224,28 +241,28 @@ export default {
               });
             }
           }
-          if (this.noteArray[note].kick && this.displaySuccessOverlay) {
+          if (this.noteArray[note].kick && this.displayStartOverlay) {
             audio.playKick();
           }
-          if (this.noteArray[note].hat && this.displaySuccessOverlay) {
+          if (this.noteArray[note].hat && this.displayStartOverlay) {
             audio.playHat();
           }
-          if (this.noteArray[note].clap && this.displaySuccessOverlay) {
+          if (this.noteArray[note].clap && this.displayStartOverlay) {
             audio.playClap();
           }
-          if (this.noteArray[note].clap2 && this.displaySuccessOverlay) {
+          if (this.noteArray[note].clap2 && this.displayStartOverlay) {
             audio.playClap2();
           }
-          if (this.noteArray[note].cymbal && this.displaySuccessOverlay) {
+          if (this.noteArray[note].cymbal && this.displayStartOverlay) {
             audio.playCymbal();
           }
-          if (this.noteArray[note].labmyc && this.displaySuccessOverlay) {
+          if (this.noteArray[note].labmyc && this.displayStartOverlay) {
             audio.playLabmyc();
           }
-          if (this.noteArray[note].noise && this.displaySuccessOverlay) {
+          if (this.noteArray[note].noise && this.displayStartOverlay) {
             audio.playNoise();
           }
-          if (this.noteArray[note].snare && this.displaySuccessOverlay) {
+          if (this.noteArray[note].snare && this.displayStartOverlay) {
             audio.playSnare();
           }
         }
@@ -254,6 +271,9 @@ export default {
     },
     closeSuccessOverlay() {
       this.displaySuccessOverlay = false;
+    },
+    closeStartScreen() {
+      this.displayStartOverlay = false;
     },
     back() {
       this.showCreatePreview = false;
@@ -310,7 +330,8 @@ export default {
       );
     },
     displaySuccesMessage() {
-      this.displaySuccessOverlay = true;
+      // this.displaySuccessOverlay = true;
+      this.displayStartOverlay = true;
     },
     // displayFailureMessage () {
     //   this.displaySuccessOverlay = true
@@ -339,7 +360,7 @@ export default {
       // this.beginSuccessSvoosh()
       this.$nextTick(() => {
         // disable all overlays when svoosh is done
-        this.displaySuccessOverlay = false;
+        // this.displaySuccessOverlay = false;
         this.displayFailureOverlay = false;
         this.displayStartOverlay = false;
         this.displayPreviewOverlay = true;
@@ -447,7 +468,7 @@ export default {
       );
 
       // disable all overlays
-      this.displaySuccessOverlay = false;
+      // this.displaySuccessOverlay = false;
       this.displayFailureOverlay = false;
       this.displayStartOverlay = false;
       this.displayPreviewOverlay = false;
@@ -499,9 +520,18 @@ export default {
       this.$store.dispatch("setSynthToDefaultParameters", audio);
       audio.playKick();
     },
+    goToLevel(level) {
+      // Add check for lvl avalible....
+      this.$store.commit("setLevelValue", level)
+      this.startLevel(level); // TODO: should be + 1
+      this.$store.commit({
+        type: "setCompletedLevel",
+        value: false
+      });
+    },
     startNextLevel(level) {
       this.$store.commit("increaseLevelValue", 1);
-      this.startLevel(this.level); // TODO: should be + 1
+      this.startLevel(this.level) // TODO: should be + 1
       this.$store.commit({
         type: "setCompletedLevel",
         value: false
@@ -547,7 +577,7 @@ export default {
     madeAttempt() {
       if (this.allParametersMatchGoal === true) {
         this.beginSuccessSvoosh();
-        const score = 25 - this.$store.state.gameState.attempts;
+        const score = 10 - this.$store.state.gameState.attempts;
         this.$store.commit("addValueToScore", score);
         this.$store.commit({
           type: "setCompletedLevel",
@@ -556,7 +586,7 @@ export default {
         this.$store.dispatch("levelDone");
         this.$store.commit("resetAttempts");
       } else {
-        if (this.$store.state.gameState.attempts == 25) {
+        if (this.$store.state.gameState.attempts == 10) {
           // need to reset global attemps in gameOver action.....
           this.$store.dispatch("gameOver");
         } else {

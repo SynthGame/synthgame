@@ -183,7 +183,7 @@ export default {
     name: {
       type: String,
       required: false,
-      default: "Extra Tats"
+      default: ""
     },
     knobRadius: {
       type: Number,
