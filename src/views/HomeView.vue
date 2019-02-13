@@ -38,7 +38,7 @@
         </div>
       </nav>
       <div class="screen">
-        <start-screen v-if="showStartScreen" @startLevel="beginSvoosh"/>
+        <start-screen v-if="showStartScreen" @startLevel="startLevel(0)"/>
         <template v-if="showGame">
           <div class="hide-desktop screen--header">
             <div class="screen--header-inner">
@@ -184,6 +184,10 @@ import FilterModule from "@/components/module/FilterModule.vue";
 import LfoModule from "@/components/module/LfoModule.vue";
 import SequencerModule from "@/components/module/SequencerModule.vue";
 import RouterModule from "@/components/module/RouterModule.vue";
+import audio from '../audio.js';
+import presets from "@/presets";
+import character from "@/character";
+import levels from "@/levels";
 
 export default {
   name: "home",
@@ -416,11 +420,128 @@ export default {
     makeAttempt() {
       this.$store.dispatch("madeAttempt");
     },
+    startLevel(level) {
+      this.beginSvoosh()
+      this.$nextTick(() => {
+        // disable all overlays when svoosh is done
+        // this.displaySuccessOverlay = false;
+        this.displayFailureOverlay = false;
+        this.displayStartOverlay = false;
+        this.displayPreviewOverlay = true;
+      });
+      audio.playSweep();
+      this.$router.push("?level=" + (level + 1));
+      window.parent.postMessage("play-game-activated", "*");
+
+      // Shuffle rack slot array
+      let array = this.$store.dispatch("shuffleRackSlotArray");
+
+      // randomly pick preset
+      this.pickedPreset = Math.round(Math.random() * (presets.length - 1));
+      // console.log('pickedPreset =', this.pickedPreset);
+
+      // load the preset on synth
+      this.$store.commit("setAudioParameterToPreset", {
+        preset: presets[this.pickedPreset].parameterValues
+      });
+      this.$store.commit("setFeaturedArtist", {
+        artistName: presets[this.pickedPreset].name,
+        avatarUrl: presets[this.pickedPreset].avatarUrl
+      });
+
+      // set correct routing
+      audio.connectLfo(this.$store.state.audioParameters.router.lfo);
+      audio.connectEnvelope2(
+        this.$store.state.audioParameters.router.envelope2
+      );
+      audio.filter.state.device.frequency.value = character.filter.cutOffFreq(
+        this.$store.state.audioParameters.filter.cutOffFreq
+      );
+
+      //and again to correct pitch
+      // load the preset on synth
+      this.setToSelectedPreset();
+      // console.log('preset audioParameters loaded: ', presets[this.pickedPreset].parameterValues );
+
+      // Set back Envs to standard audioParameters
+
+      // Set LFO amount to 0 TODO only when level is under lfo level check which level that is
+
+      // Set bpm from preset
+      audio.setBpm(presets[this.pickedPreset].bpm * 2);
+      // Set bpm in store
+      this.$store.commit("setPresetBpm", presets[this.pickedPreset].bpm);
+
+      // Set noteArray to sequence preset locally
+      this.noteArray = presets[this.pickedPreset].sequenceArray;
+
+
+      // import level config
+      const availableParameters = levels[level] || levels[levels.length - 1];
+
+      this.$store.dispatch("startNewLevel", {
+        knobsAvailable: availableParameters,
+        levelNumber: level || 0
+      });
+      this.$store.commit("setGoalToPreset", {
+        preset: Object.assign(presets[this.pickedPreset].parameterValues, {})
+      });
+      this.$store.dispatch("randomizeAudioParameters", availableParameters); // and the audio params
+
+      this.$nextTick(() => this.$store.dispatch("setSynthToGoal", audio)); //then let the user hear it
+
+      // this.loop.start()
+      // rest will be done by watcher of sequencesPassedInCurrentLevel
+    },
+        setToSelectedPreset() {
+      this.$store.commit("setAudioParameterToPreset", {
+        preset: presets[this.pickedPreset].parameterValues
+      });
+      //reset oscs for waveforms
+      audio.oscillator1.state.device.type =
+        presets[this.pickedPreset].parameterValues.oscillator1.typeOsc;
+      audio.oscillator2.state.device.type =
+        presets[this.pickedPreset].parameterValues.oscillator2.typeOsc;
+      audio.oscillator1.state.device.stop();
+      audio.oscillator1.state.device.start();
+      audio.oscillator2.state.device.stop();
+      audio.oscillator2.state.device.start();
+      audio.lfo.state.device.type =
+        presets[this.pickedPreset].parameterValues.lfo.type;
+      audio.filter.state.device.type =
+        presets[this.pickedPreset].parameterValues.filter.type;
+    },
+    startPreset(parameters, bpm) {
+      const usedParameters = mapValues(parameters, audioModule =>
+        mapValues(audioModule, parameter => !!parameter)
+      );
+
+      // disable all overlays
+      // this.displaySuccessOverlay = false;
+      this.displayFailureOverlay = false;
+      this.displayStartOverlay = false;
+      this.displayPreviewOverlay = false;
+      this.showCreatePreview = true;
+
+      this.$store.dispatch("startNewLevel", {
+        knobsAvailable: usedParameters,
+        levelNumber: 0
+      });
+      this.$store.commit("setGoalToPreset", {
+        preset: parameters
+      });
+      // this.$store.dispatch('randomizeAudioParameters', usedParameters) // and the audio params
+      this.$store.dispatch("setSynthToGoal", audio); // then let the user hear it
+
+      this.loop.start();
+      // rest will be done by watcher of sequencesPassedInCurrentLevel
+    },
     beginSvoosh() {
       this.showStartScreen = false;
       this.isThereSvooshComponent = true;
       this.$nextTick(() => (this.svooshIt = true));
       // audio.playSweep();
+      // start platmode
     },
     endSvoosh() {
       setTimeout(() => {

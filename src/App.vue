@@ -360,6 +360,7 @@ export default {
       this.displayFailureOverlay = false;
       this.$store.commit("setCreateMode", true);
     },
+    // REMOVE THIS <<<>>>>
     startLevel(level) {
       // this.beginSuccessSvoosh()
       this.$nextTick(() => {
@@ -415,21 +416,6 @@ export default {
       // Set noteArray to sequence preset locally
       this.noteArray = presets[this.pickedPreset].sequenceArray;
 
-      // clear drums
-      // this.noteArray = fill(range(0, 16), {
-      //   kick: false,
-      //   hat: false,
-      //   snare: false,
-      //   cymbal: false,
-      //   clap1: false,
-      //   clap2: false,
-      //   labmyc: false,
-      //   noise: false
-      // });
-
-      // //Just play 1 note with standard envs
-      // this.noteArray[0].selected = true;
-      // this.noteArray[0].pitch = 0;
 
       // import level config
       const availableParameters = levels[level] || levels[levels.length - 1];
@@ -448,6 +434,7 @@ export default {
       // this.loop.start()
       // rest will be done by watcher of sequencesPassedInCurrentLevel
     },
+    // REMOVE <<<<>>>>>>>>>>
     setToSelectedPreset() {
       this.$store.commit("setAudioParameterToPreset", {
         preset: presets[this.pickedPreset].parameterValues
