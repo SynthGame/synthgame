@@ -292,6 +292,7 @@ export default {
       // TODO: update drum animation in success overlay time animation
 
       // start tone general
+      console.trace();
       audio.start();
       // start loop
       //
