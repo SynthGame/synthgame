@@ -124,6 +124,7 @@ export default {
   created() {
     this.init();
     this.initSynth();
+    console.log(this.$route);
     if (this.$route.query.preset) {
       // window.parent.postMessage(this.$route.query.preset, '*'); uncommented because confusing if we're sending old id too
       // console.log('id',this.$route.query.preset);
@@ -135,6 +136,8 @@ export default {
           artistName: data.name,
           avatarUrl: data.avatarUrl
         });
+        console.log(data.parameterValues);
+        this.startPreset(data.parameterValues);
       });
     } else if (
       window.location.href.indexOf("tats") != -1 ||
