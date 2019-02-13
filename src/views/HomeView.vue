@@ -67,7 +67,7 @@
         </div>
       </nav>
       <div class="screen">
-        <start-screen v-if="showStartScreen" @startLevel="startLevel(0)"/>
+        <start-screen v-if="showStartScreen" @startLevel="startLevel(0)"/> //
         <template v-if="showGame">
           <div class="hide-desktop screen--header">
             <div class="screen--header-inner">
@@ -324,7 +324,7 @@ export default {
       audio.start();
       // start loop
     },
-        initSynth() {
+    initSynth() {
       var self = this;
       this.toneLoop = audio.setMainLoop(
         {
@@ -403,6 +403,9 @@ export default {
         value: false
       });
     },
+    startLevel() {
+
+    },
     startLevel(level) {
       this.beginSvoosh()
       this.$nextTick(() => {
@@ -416,9 +419,6 @@ export default {
       this.$router.push("?level=" + (level + 1));
       window.parent.postMessage("play-game-activated", "*");
 
-      // Shuffle rack slot array
-      let array = this.$store.dispatch("shuffleRackSlotArray");
-
       // randomly pick preset
       this.pickedPreset = Math.round(Math.random() * (presets.length - 1));
       // console.log('pickedPreset =', this.pickedPreset);
@@ -427,6 +427,7 @@ export default {
       this.$store.commit("setAudioParameterToPreset", {
         preset: presets[this.pickedPreset].parameterValues
       });
+
       this.$store.commit("setFeaturedArtist", {
         artistName: presets[this.pickedPreset].name,
         avatarUrl: presets[this.pickedPreset].avatarUrl
@@ -469,9 +470,12 @@ export default {
       this.$store.commit("setGoalToPreset", {
         preset: Object.assign(presets[this.pickedPreset].parameterValues, {})
       });
+
+      console.log(availableParameters);
+      
       this.$store.dispatch("randomizeAudioParameters", availableParameters); // and the audio params
 
-      this.$nextTick(() => this.$store.dispatch("setSynthToGoal", audio)); //then let the user hear it
+      // this.$nextTick(() => this.$store.dispatch("setSynthToGoal", audio)); //then let the user hear it
 
       // this.loop.start()
       // rest will be done by watcher of sequencesPassedInCurrentLevel
