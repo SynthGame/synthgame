@@ -1,8 +1,10 @@
 export default {
   title: "Bart's song",
   active: {
-    title: "Detune",
-    author: "Lawson"
+    title: 'frequency',
+    knobName: 'octave',
+    author: 'Lawson',
+    score: 1
   },
   groups: [
     {
@@ -13,17 +15,20 @@ export default {
         {
           title: 'frequency',
           knobName: 'octave',
-          author: 'Lawson'
+          author: 'Lawson',
+          score: 1
         },
         {
           title: 'detune',
           knobName: 'detune',
-          author: 'Lawson'
+          author: 'Lawson',
+          score: 0
         },
         {
           title: 'typeOsc',
           knobName: 'shape',
-          author: 'Bart'
+          author: 'Bart',
+          score: 0
         }
       ]
     },
@@ -35,17 +40,20 @@ export default {
         {
           title: 'frequency',
           knobName: 'octave',
-          author: ''
+          author: '',
+          score: 0
         },
         {
           title: 'volume',
           knobName: 'volume',
-          author: 'Lauren'
+          author: 'Lauren',
+          score: 0
         },
         {
           title: 'typeOsc',
           knobName: 'shape',
-          author: 'Daniel'
+          author: 'Daniel',
+          score: 0
         }
       ]
     },
@@ -57,12 +65,14 @@ export default {
         {
           title: 'cutOffFreq',
           knobName: 'Frequency',
-          author: 'Momcilo'
+          author: 'Momcilo',
+          score: 0
         },
         {
           title: 'type',
           knobName: 'shape',
-          author: 'Basti'
+          author: 'Basti',
+          score: 0
         },
       ]
     },
@@ -74,22 +84,26 @@ export default {
         {
           title: 'attack',
           knobName: 'attack',
-          author: ''
+          author: '',
+          score: 0
         },
         {
           title: 'decay',
           knobName: 'decay',
-          author: ''
+          author: '',
+          score: 0
         },
         {
           title: 'sustain',
           knobName: 'sustain',
-          author: ''
+          author: '',
+          score: 0
         },
         {
           title: 'release',
           knobName: 'release',
-          author: ''
+          author: '',
+          score: 0
         }
       ]
     },
@@ -101,17 +115,20 @@ export default {
         {
           title: 'attack',
           knobName: 'attack',
-          author: ''
+          author: '',
+          score: 0
         },
         {
           title: 'decay',
           knobName: 'decay',
-          author: ''
+          author: '',
+          score: 0
         },
         {
           title: 'amount',
           knobName: 'amount',
-          author: ''
+          author: '',
+          score: 0
         }
       ]
     },
@@ -123,17 +140,20 @@ export default {
         {
           title: 'frequency',
           knobName: 'frequency',
-          author: ''
+          author: '',
+          score: 0
         },
         {
           title: 'amount',
           knobName: 'amount',
-          author: ''
+          author: '',
+          score: 0
         },
         {
           title: 'type',
           knobName: 'type',
-          author: ''
+          author: '',
+          score: 0
         }
       ]
     },
@@ -145,12 +165,14 @@ export default {
         {
           title: 'lfo',
           knobName: 'lfo',
-          author: ''
+          author: '',
+          score: 0
         },
         {
           title: 'envelope2',
           knobName: 'envelope2',
-          author: ''
+          author: '',
+          score: 0
         }
       ]
     }

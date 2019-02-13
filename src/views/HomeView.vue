@@ -5,9 +5,8 @@
       <div class="navigation--inner">
         <div 
           v-for="(group, index) in nav.groups" 
-          :key="index" 
-          class="navigation--group" 
-          :class="`navigation--group_${group.title.toLowerCase().replace(' ', '')}`"
+          :key="index"
+          :class="groupClasses(group, index)"
         >
           <div class="navigation--group-title">
             <span>
@@ -51,7 +50,7 @@
             </svg>
           </div>
           <ul class="navigation--list">
-            <li v-for="(item, key) in group.items" :key="key" class="navigation--item">
+            <li v-for="(item, key) in group.items" :key="key" class="navigation--item" :class="{'is-disabled' : item.score <= 0 }">
               <button class="navigation--item-btn" @click="activeScreen(index, key)">
                 <span class="navigation--item-inner">
                   <span class="navigation--item-text">
@@ -259,7 +258,7 @@ export default {
   mounted() {
     this.activeScreen(0, 0);
   },
-    created() {
+  created() {
     this.init();
     this.initSynth();
     console.log(this.$route);
@@ -309,6 +308,19 @@ export default {
   methods: {
     makeAttempt() {
       this.$store.dispatch("madeAttempt");
+    },
+    groupClasses(group, index) {
+      let isScoreZero = group.items.some(item => {
+            return item.score <= 0
+          })
+      console.log(index, isScoreZero)
+      return [
+        `navigation--group_${group.title.toLowerCase().replace(' ', '')}`,
+        'navigation--group',
+        {
+          'is-disabled': index === 0 ? false : isScoreZero
+        }
+      ]
     },
     init() {
       // Retrieve highscore from local storage

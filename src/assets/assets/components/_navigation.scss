@@ -9,8 +9,21 @@
   flex-shrink: 0;
   display: flex;
   flex-direction: column;
-  &.is-active {
-    transform: translate3d(0%, 56px, 0.01px);
+  &--group,
+  &--item {
+    &.is-disabled {
+      pointer-events: none;
+      opacity: .2;
+      .navigation--group-fill {
+        fill: white;
+      }
+      .navigation--item-title {
+        color: white;
+        span {
+          border-bottom-color: white;
+        }
+      }
+    }
   }
   &--group {
     display: flex;
@@ -158,6 +171,9 @@
     height: 100vh;
     background: $colour_black;
     transition: all .44s ease;
+    &.is-active {
+      transform: translate3d(0%, 56px, 0.01px);
+    }
   }
 }
 
