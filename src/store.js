@@ -418,6 +418,7 @@ export default new Vuex.Store({
       return array;
     },
     randomizeAudioParameters({ state, commit }, randomizeArray) {
+      
       const randomizeValues = (obj, selectObj) => mapValues(obj, (val, moduleName) => {
         return mapValues(val, (val, parameterName) => {
           // if selectObj is provided and the value is falsey return obj value

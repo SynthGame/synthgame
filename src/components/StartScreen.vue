@@ -88,9 +88,7 @@ export default {
         this.$emit("startPreview");
       }
     },
-    hideVideo() {
-      this.marginLeftRbmg = "-100vw";
-    }
+
   }
 };
 </script>
