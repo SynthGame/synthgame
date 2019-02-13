@@ -67,7 +67,7 @@
         </div>
       </nav>
       <div class="screen">
-        <start-screen v-if="showStartScreen" @startLevel="beginSvoosh"/>
+        <start-screen v-if="showStartScreen" @startLevel="startLevel(0)"/>
         <template v-if="showGame">
           <div class="hide-desktop screen--header">
             <div class="screen--header-inner">
@@ -120,7 +120,7 @@
               <button @click="makeAttempt" class="button-next">Attempt {{ attempts }}</button>
             </span>
             <span v-if="completedLevel">
-              <button class="button-next" @click="requestNextLevel" ref="button">NEXT LEVEL</button>
+              <button class="button-next" @click="startNextLevel" ref="button">NEXT LEVEL</button>
             </span>
           </div>
         </template>
@@ -213,6 +213,13 @@ import FilterModule from "@/components/module/FilterModule.vue";
 import LfoModule from "@/components/module/LfoModule.vue";
 import SequencerModule from "@/components/module/SequencerModule.vue";
 import RouterModule from "@/components/module/RouterModule.vue";
+import { SYNTH_BPM } from "@/constants";
+import audio from '../audio.js';
+import presets from "@/presets";
+import character from "@/character";
+import levels from "@/levels";
+import range from "lodash/range";
+import Nav from "@/nav";
 
 export default {
   name: "home",
@@ -233,203 +240,7 @@ export default {
       svooshIt: false,
       showGame: false,
       showModules: false,
-      nav: {
-        title: "Bart's song",
-        active: {
-          title: "Detune",
-          author: "Lawson"
-        },
-        groups: [
-          {
-            title: "Osc 1",
-            moduleName: "oscillator1",
-            icon: 'osc',
-            items: [
-              {
-                title: 'frequency',
-                knobName: 'octave',
-                author: 'Lawson'
-              },
-              {
-                title: 'detune',
-                knobName: 'detune',
-                author: 'Lawson'
-              },
-              {
-                title: 'typeOsc',
-                knobName: 'shape',
-                author: 'Bart'
-              }
-            ]
-          },
-          {
-            moduleName: "oscillator2",
-            title: "Osc 2",
-            icon: 'osc',
-            items: [
-              {
-                title: 'frequency',
-                knobName: 'octave',
-                author: ''
-              },
-              {
-                title: 'volume',
-                knobName: 'volume',
-                author: 'Lauren'
-              },
-              {
-                title: 'typeOsc',
-                knobName: 'shape',
-                author: 'Daniel'
-              }
-            ]
-          },
-          {
-            moduleName: "filter",
-            title: "Filter",
-            icon: 'filter',
-            items: [
-              {
-                title: 'cutOffFreq',
-                knobName: 'Frequency',
-                author: 'Momcilo'
-              },
-              {
-                title: 'type',
-                knobName: 'shape',
-                author: 'Basti'
-              },
-            ]
-          },
-          {
-            moduleName: "envelope",
-            title: "Envelope",
-            icon: "envelope",
-            items: [
-              {
-                title: 'attack',
-                knobName: 'attack',
-                author: ''
-              },
-              {
-                title: 'decay',
-                knobName: 'decay',
-                author: ''
-              },
-              {
-                title: 'sustain',
-                knobName: 'sustain',
-                author: ''
-              },
-              {
-                title: 'release',
-                knobName: 'release',
-                author: ''
-              }
-            ]
-          },
-          {
-            moduleName: "envelope2",
-            title: "Envelope 2",
-            icon: 'envelope2',
-            items: [
-              {
-                title: 'attack',
-                knobName: 'attack',
-                author: ''
-              },
-              {
-                title: 'decay',
-                knobName: 'decay',
-                author: ''
-              },
-              {
-                title: 'amount',
-                knobName: 'amount',
-                author: ''
-              }
-            ]
-          },
-          {
-            moduleName: "lfo",
-            title: "LFO",
-            icon: 'lfo',
-            items: [
-              {
-                title: 'frequency',
-                knobName: 'frequency',
-                author: ''
-              },
-              {
-                title: 'amount',
-                knobName: 'amount',
-                author: ''
-              },
-              {
-                title: 'type',
-                knobName: 'type',
-                author: ''
-              }
-            ]
-          },
-          {
-            moduleName: "router",
-            title: "Router",
-            icon: 'router',
-            items: [
-              {
-                title: 'lfo',
-                knobName: 'lfo',
-                author: ''
-              },
-              {
-                title: 'envelope2',
-                knobName: 'envelope2',
-                author: ''
-              }
-            ]
-          }
-        ],
-
-        oscillator1: {
-          detune: true,
-          frequency: true,
-          typeOsc: true
-        },
-        oscillator2: {
-          typeOsc: true,
-          frequency: true,
-          volume: true
-        },
-        filter: {
-          type: true,
-          cutOffFreq: true
-        },
-        envelope: {
-          attack: true,
-          decay: true,
-          sustain: true,
-          release: true
-        },
-        envelope2: {
-          attack: true,
-          decay: true,
-          amount: true
-        },
-        lfo: {
-          amount: true,
-          frequency: true,
-          type: true
-        },
-        router: {
-          lfo: true,
-          envelope2: true
-        },
-        levelData: {
-          text:
-            "Congratulations! You're an electronic music producer. Make the music for one of the levels, or keep playing the game and break the highscore: level 135."
-        }
-      }
+      nav: Nav,
     };
   },
   components: {
@@ -448,15 +259,272 @@ export default {
   mounted() {
     this.activeScreen(0, 0);
   },
+    created() {
+    this.init();
+    this.initSynth();
+    console.log(this.$route);
+    if (this.$route.query.preset) {
+      // window.parent.postMessage(this.$route.query.preset, '*'); uncommented because confusing if we're sending old id too
+      // console.log('id',this.$route.query.preset);
+      this.customLevelIsActive = true;
+      this.displayStartOverlay = false;
+      this.showCreatePreview = true;
+      getPresetById(this.$route.query.preset).then(data => {
+        this.$store.commit("setFeaturedArtist", {
+          artistName: data.name,
+          avatarUrl: data.avatarUrl
+        });
+        console.log(data.parameterValues);
+        this.startPreset(data.parameterValues);
+      });
+    } else if (
+      window.location.href.indexOf("tats") != -1 ||
+      window.location.href.indexOf("jobboard") != -1
+    ) {
+      this.customLevelIsActive = true;
+      this.displayStartOverlay = false;
+      this.$store.commit("setCreateMode", true);
+    }
+
+    window.letsPlay = () => this.initM();
+
+    // Pc keyboard listener (might be needed for mobile)
+    document.addEventListener("keypress", event => {
+      if (audio.state.Tone.context.state !== "running") {
+        audio.state.Tone.context.resume();
+      }
+
+      if (event.keyCode === 27 && this.displayOriginalOverlay) {
+        this.killOrignalSoundPrompt();
+      }
+      // const key = event.key
+    });
+
+    // mouseup listener (needed to trace events)
+    document.addEventListener("mouseup", event => {
+      // log to analytics
+      this.$router.push("?level=" + (this.level + 1) + "&" + event.screenX);
+    });
+  },
   methods: {
     makeAttempt() {
       this.$store.dispatch("madeAttempt");
+    },
+    init() {
+      // Retrieve highscore from local storage
+      this.$store.commit("updateHighScore", localStorage.getItem("highscore"));
+      // initialize the synth
+      audio.init().toMaster();
+
+      // set BPM
+      audio.setBpm(SYNTH_BPM);
+      // TODO: update drum animation in success overlay time animation
+
+      // start tone general
+      audio.start();
+      // start loop
+    },
+        initSynth() {
+      var self = this;
+      this.toneLoop = audio.setMainLoop(
+        {
+          noteArray: range(0, 16),
+          subdivision: "8n"
+        },
+        (time, note) => {
+          // this.setStep(note)
+          if (this.noteArray[note].selected) {
+            // if preview, use octave(frequency) from goal in store
+            if (this.displayPreviewOverlay) {
+              audio.playNote(this.noteArray[note].pitch, {
+                noteLength: "8n",
+                volume: this.noteArray[note].volume
+                  ? this.noteArray[note].volume
+                  : 0,
+                time: note,
+                glide: this.noteArray[note].glide
+                  ? this.noteArray[note].glide
+                  : 0,
+                octaveOsc1:
+                  self.$store.state.gameState.goal.oscillator1.frequency,
+                octaveOsc2:
+                  self.$store.state.gameState.goal.oscillator2.frequency
+              });
+            } else {
+              audio.playNote(this.noteArray[note].pitch, {
+                noteLength: "8n",
+                volume: this.noteArray[note].volume
+                  ? this.noteArray[note].volume
+                  : 0,
+                time: note,
+                glide: this.noteArray[note].glide
+                  ? this.noteArray[note].glide
+                  : 0,
+                octaveOsc1:
+                  self.$store.state.audioParameters.oscillator1.frequency,
+                octaveOsc2:
+                  self.$store.state.audioParameters.oscillator2.frequency
+              });
+            }
+          }
+          if (this.noteArray[note].kick && this.displayStartOverlay) {
+            audio.playKick();
+          }
+          if (this.noteArray[note].hat && this.displayStartOverlay) {
+            audio.playHat();
+          }
+          if (this.noteArray[note].clap && this.displayStartOverlay) {
+            audio.playClap();
+          }
+          if (this.noteArray[note].clap2 && this.displayStartOverlay) {
+            audio.playClap2();
+          }
+          if (this.noteArray[note].cymbal && this.displayStartOverlay) {
+            audio.playCymbal();
+          }
+          if (this.noteArray[note].labmyc && this.displayStartOverlay) {
+            audio.playLabmyc();
+          }
+          if (this.noteArray[note].noise && this.displayStartOverlay) {
+            audio.playNoise();
+          }
+          if (this.noteArray[note].snare && this.displayStartOverlay) {
+            audio.playSnare();
+          }
+        }
+      );
+      this.toneLoop.start();
+    },
+    startNextLevel() {
+      this.$store.commit("increaseLevelValue", 1);
+      this.startLevel(this.level) // TODO: should be + 1
+      this.$store.commit({
+        type: "setCompletedLevel",
+        value: false
+      });
+    },
+    startLevel(level) {
+      this.beginSvoosh()
+      this.$nextTick(() => {
+        // disable all overlays when svoosh is done
+        // this.displaySuccessOverlay = false;
+        this.displayFailureOverlay = false;
+        this.displayStartOverlay = false;
+        this.displayPreviewOverlay = true;
+      });
+      audio.playSweep();
+      this.$router.push("?level=" + (level + 1));
+      window.parent.postMessage("play-game-activated", "*");
+
+      // Shuffle rack slot array
+      let array = this.$store.dispatch("shuffleRackSlotArray");
+
+      // randomly pick preset
+      this.pickedPreset = Math.round(Math.random() * (presets.length - 1));
+      // console.log('pickedPreset =', this.pickedPreset);
+
+      // load the preset on synth
+      this.$store.commit("setAudioParameterToPreset", {
+        preset: presets[this.pickedPreset].parameterValues
+      });
+      this.$store.commit("setFeaturedArtist", {
+        artistName: presets[this.pickedPreset].name,
+        avatarUrl: presets[this.pickedPreset].avatarUrl
+      });
+
+      // set correct routing
+      audio.connectLfo(this.$store.state.audioParameters.router.lfo);
+      audio.connectEnvelope2(
+        this.$store.state.audioParameters.router.envelope2
+      );
+      audio.filter.state.device.frequency.value = character.filter.cutOffFreq(
+        this.$store.state.audioParameters.filter.cutOffFreq
+      );
+
+      //and again to correct pitch
+      // load the preset on synth
+      this.setToSelectedPreset();
+      // console.log('preset audioParameters loaded: ', presets[this.pickedPreset].parameterValues );
+
+      // Set back Envs to standard audioParameters
+
+      // Set LFO amount to 0 TODO only when level is under lfo level check which level that is
+
+      // Set bpm from preset
+      audio.setBpm(presets[this.pickedPreset].bpm * 2);
+      // Set bpm in store
+      this.$store.commit("setPresetBpm", presets[this.pickedPreset].bpm);
+
+      // Set noteArray to sequence preset locally
+      this.noteArray = presets[this.pickedPreset].sequenceArray;
+
+
+      // import level config
+      const availableParameters = levels[level] || levels[levels.length - 1];
+
+      this.$store.dispatch("startNewLevel", {
+        knobsAvailable: availableParameters,
+        levelNumber: level || 0
+      });
+      this.$store.commit("setGoalToPreset", {
+        preset: Object.assign(presets[this.pickedPreset].parameterValues, {})
+      });
+      this.$store.dispatch("randomizeAudioParameters", availableParameters); // and the audio params
+
+      this.$nextTick(() => this.$store.dispatch("setSynthToGoal", audio)); //then let the user hear it
+
+      // this.loop.start()
+      // rest will be done by watcher of sequencesPassedInCurrentLevel
+    },
+    setToSelectedPreset() {
+      this.$store.commit("setAudioParameterToPreset", {
+        preset: presets[this.pickedPreset].parameterValues
+      });
+      //reset oscs for waveforms
+      audio.oscillator1.state.device.type =
+        presets[this.pickedPreset].parameterValues.oscillator1.typeOsc;
+      audio.oscillator2.state.device.type =
+        presets[this.pickedPreset].parameterValues.oscillator2.typeOsc;
+      audio.oscillator1.state.device.stop();
+      audio.oscillator1.state.device.start();
+      audio.oscillator2.state.device.stop();
+      audio.oscillator2.state.device.start();
+      audio.lfo.state.device.type =
+        presets[this.pickedPreset].parameterValues.lfo.type;
+      audio.filter.state.device.type =
+        presets[this.pickedPreset].parameterValues.filter.type;
+    },
+    startPreset(parameters, bpm) {
+      const usedParameters = mapValues(parameters, audioModule =>
+        mapValues(audioModule, parameter => !!parameter)
+      );
+
+      // disable all overlays
+      // this.displaySuccessOverlay = false;
+      this.displayFailureOverlay = false;
+      this.displayStartOverlay = false;
+      this.displayPreviewOverlay = false;
+      this.showCreatePreview = true;
+
+      this.$store.dispatch("startNewLevel", {
+        knobsAvailable: usedParameters,
+        levelNumber: 0 //
+      });
+      this.$store.commit("setGoalToPreset", {
+        preset: parameters
+      });
+      // this.$store.dispatch('randomizeAudioParameters', usedParameters) // and the audio params
+      this.$store.dispatch("setSynthToGoal", audio); // then let the user hear it
+
+      this.loop.start();
+      // rest will be done by watcher of sequencesPassedInCurrentLevel
     },
     beginSvoosh() {
       this.showStartScreen = false;
       this.isThereSvooshComponent = true;
       this.$nextTick(() => (this.svooshIt = true));
-      // audio.playSweep();
+      audio.playSweep();
+      // start platmode
     },
     endSvoosh() {
       setTimeout(() => {
@@ -512,6 +580,9 @@ export default {
   computed: {
     attempts() {
       return this.$store.state.gameState.attempts;
+    },
+    level() {
+      return this.$store.state.gameState.level;
     },
     madeAttempt() {
       return this.$store.state.gameState.madeAttempt;
