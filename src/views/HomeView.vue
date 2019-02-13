@@ -190,7 +190,7 @@ import presets from "@/presets";
 import character from "@/character";
 import levels from "@/levels";
 import range from "lodash/range";
-import nav from "@/nav";
+import Nav from "@/nav";
 
 export default {
   name: "home",
@@ -211,6 +211,7 @@ export default {
       svooshIt: false,
       showGame: false,
       showModules: false,
+      nav: Nav,
     };
   },
   components: {

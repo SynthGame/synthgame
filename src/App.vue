@@ -1,36 +1,5 @@
 <template>
   <div id="app">
-
-    <!-- <transition name="slideout">
-      <start-screen
-        v-if="displayStartOverlay"
-        @startLevel="beginSvoosh"
-        @create="showCreatePreview=true"
-        @next="startNextLevel"
-        @closeStartScreen="closeStartScreen"
-        :goToLevel="goToLevel"
-      />
-    </transition> -->
-    <!-- <transition name="slide-up-slide-down">
-      <preview-screen
-        v-if="displayPreviewOverlay"
-        @back="[displayPreviewOverlay = false, displayStartOverlay = true]"
-        @startLevel="beginSvoosh"
-        @create="switchToCreate"
-      />
-    </transition> -->
-    <!--<before-create-overlay v-if="showCreatePreview" @showCreate="showCreate" @back="back"/>
-    <svoosh
-      v-if="isThereSvooshComponent"
-      :isFired="svooshIt"
-      @bye="endSvoosh"
-    />
-    <svoosh
-      v-if="isThereSuccessSvooshComponent"
-      :isFired="successSvooshIt"
-      @midway="displayStartOverlay=true"
-      @bye="endSuccessSvoosh"
-    /> -->
     <transition name="slideout">
       <success-overlay
         v-if="displaySuccessOverlay"
@@ -51,11 +20,6 @@
 
 
     <failure-overlay v-if="isGameOver" @startagain="startAgain" @startlastlevel="startLastLevel"/>
-
-    <!-- <div id="nav">
-      <router-link to="/">Home</router-link> |
-      <router-link to="/about">About</router-link>
-    </div>-->
     <router-view/>
   </div>
 </template>
@@ -157,61 +121,11 @@ export default {
     closeSuccessOverlay() {
       this.displaySuccessOverlay = false;
     },
-    closeStartScreen() {
-      this.displayStartOverlay = false;
-    },
     back() {
       this.showCreatePreview = false;
       if (this.level < 6) {
         this.displaySuccessOverlay = true;
       }
-    },
-    init() {
-      // Retrieve highscore from local storage
-      this.$store.commit("updateHighScore", localStorage.getItem("highscore"));
-      // initialize the synth
-      audio.init().toMaster();
-
-      // set BPM
-      audio.setBpm(SYNTH_BPM);
-      // TODO: update drum animation in success overlay time animation
-
-      // start tone general
-      audio.start();
-      // start loop
-    },
-    initM() {
-      navigator.requestMIDIAccess().then(
-        access => {
-          if (access.inputs.size > 0) {
-            const input = access.inputs.values().next().value; // get the first input
-            console.log(input.name);
-            input.onmidimessage = e => {
-              if (e.data.length !== 3) return;
-              const pS = e.data[1];
-              const value = e.data[2];
-              const device = Object.keys(this.$store.state.audioParameters)[
-                ("" + pS)[0] - 1
-              ];
-              const parameter = Object.keys(
-                this.$store.state.audioParameters[device]
-              )[("" + pS)[1]];
-              this.$store.commit("setAudioParameter", {
-                device,
-                parameter,
-                value: this.$store.state.gameState.possibleValues[device][
-                  parameter
-                ]
-                  ? this.$store.state.gameState.possibleValues[device][
-                      parameter
-                    ][e.data[2]]
-                  : e.data[2]
-              });
-            };
-          }
-        },
-        error => console.log
-      );
     },
     displaySuccesMessage() {
       // this.displaySuccessOverlay = true;
@@ -240,124 +154,6 @@ export default {
       this.displayFailureOverlay = false;
       this.$store.commit("setCreateMode", true);
     },
-    // REMOVE THIS <<<>>>>
-    startLevel(level) {
-      // this.beginSuccessSvoosh()
-      this.$nextTick(() => {
-        // disable all overlays when svoosh is done
-        // this.displaySuccessOverlay = false;
-        this.displayFailureOverlay = false;
-        this.displayStartOverlay = false;
-        this.displayPreviewOverlay = true;
-      });
-      audio.playSweep();
-      this.$router.push("?level=" + (level + 1));
-      window.parent.postMessage("play-game-activated", "*");
-
-      // Shuffle rack slot array
-      let array = this.$store.dispatch("shuffleRackSlotArray");
-
-      // randomly pick preset
-      this.pickedPreset = Math.round(Math.random() * (presets.length - 1));
-      // console.log('pickedPreset =', this.pickedPreset);
-
-      // load the preset on synth
-      this.$store.commit("setAudioParameterToPreset", {
-        preset: presets[this.pickedPreset].parameterValues
-      });
-      this.$store.commit("setFeaturedArtist", {
-        artistName: presets[this.pickedPreset].name,
-        avatarUrl: presets[this.pickedPreset].avatarUrl
-      });
-
-      // set correct routing
-      audio.connectLfo(this.$store.state.audioParameters.router.lfo);
-      audio.connectEnvelope2(
-        this.$store.state.audioParameters.router.envelope2
-      );
-      audio.filter.state.device.frequency.value = character.filter.cutOffFreq(
-        this.$store.state.audioParameters.filter.cutOffFreq
-      );
-
-      //and again to correct pitch
-      // load the preset on synth
-      this.setToSelectedPreset();
-      // console.log('preset audioParameters loaded: ', presets[this.pickedPreset].parameterValues );
-
-      // Set back Envs to standard audioParameters
-
-      // Set LFO amount to 0 TODO only when level is under lfo level check which level that is
-
-      // Set bpm from preset
-      audio.setBpm(presets[this.pickedPreset].bpm * 2);
-      // Set bpm in store
-      this.$store.commit("setPresetBpm", presets[this.pickedPreset].bpm);
-
-      // Set noteArray to sequence preset locally
-      this.noteArray = presets[this.pickedPreset].sequenceArray;
-
-
-      // import level config
-      const availableParameters = levels[level] || levels[levels.length - 1];
-
-      this.$store.dispatch("startNewLevel", {
-        knobsAvailable: availableParameters,
-        levelNumber: level || 0
-      });
-      this.$store.commit("setGoalToPreset", {
-        preset: Object.assign(presets[this.pickedPreset].parameterValues, {})
-      });
-      this.$store.dispatch("randomizeAudioParameters", availableParameters); // and the audio params
-
-      this.$nextTick(() => this.$store.dispatch("setSynthToGoal", audio)); //then let the user hear it
-
-      // this.loop.start()
-      // rest will be done by watcher of sequencesPassedInCurrentLevel
-    },
-    // REMOVE <<<<>>>>>>>>>>
-    setToSelectedPreset() {
-      this.$store.commit("setAudioParameterToPreset", {
-        preset: presets[this.pickedPreset].parameterValues
-      });
-      //reset oscs for waveforms
-      audio.oscillator1.state.device.type =
-        presets[this.pickedPreset].parameterValues.oscillator1.typeOsc;
-      audio.oscillator2.state.device.type =
-        presets[this.pickedPreset].parameterValues.oscillator2.typeOsc;
-      audio.oscillator1.state.device.stop();
-      audio.oscillator1.state.device.start();
-      audio.oscillator2.state.device.stop();
-      audio.oscillator2.state.device.start();
-      audio.lfo.state.device.type =
-        presets[this.pickedPreset].parameterValues.lfo.type;
-      audio.filter.state.device.type =
-        presets[this.pickedPreset].parameterValues.filter.type;
-    },
-    startPreset(parameters, bpm) {
-      const usedParameters = mapValues(parameters, audioModule =>
-        mapValues(audioModule, parameter => !!parameter)
-      );
-
-      // disable all overlays
-      // this.displaySuccessOverlay = false;
-      this.displayFailureOverlay = false;
-      this.displayStartOverlay = false;
-      this.displayPreviewOverlay = false;
-      this.showCreatePreview = true;
-
-      this.$store.dispatch("startNewLevel", {
-        knobsAvailable: usedParameters,
-        levelNumber: 0
-      });
-      this.$store.commit("setGoalToPreset", {
-        preset: parameters
-      });
-      // this.$store.dispatch('randomizeAudioParameters', usedParameters) // and the audio params
-      this.$store.dispatch("setSynthToGoal", audio); // then let the user hear it
-
-      this.loop.start();
-      // rest will be done by watcher of sequencesPassedInCurrentLevel
-    },
     beginSvoosh() {
       this.displayStartOverlay = false;
       this.isThereSvooshComponent = true;
@@ -370,9 +166,8 @@ export default {
       setTimeout(() => {
         this.isThereSvooshComponent = false;
         this.svooshIt = false;
-        this.$store.commit("armSweep");
+        this.$store.commit("armSweep")
       }, 300);
-      // this.endPreview()
     },
     beginSuccessSvoosh() {
       this.isThereSuccessSvooshComponent = true;
@@ -398,7 +193,7 @@ export default {
       this.$store.commit({
         type: "setCompletedLevel",
         value: false
-      });
+      })
     },
     startNextLevel() {
       this.$store.commit("increaseLevelValue", 1);
@@ -454,8 +249,8 @@ export default {
           type: "setCompletedLevel",
           value: true
         });
-        this.$store.dispatch("levelDone");
-        this.$store.commit("resetAttempts");
+        this.$store.dispatch("levelDone")
+        this.$store.commit("resetAttempts")
       } else {
         if (this.$store.state.gameState.attempts == 10) {
           // need to reset global attemps in gameOver action.....
@@ -465,28 +260,6 @@ export default {
         }
       }
     },
-    // allParametersMatchGoal(val) {
-    //   if (val === true && this.timerIsRunning) {
-    //     this.beginSuccessSvoosh();
-
-    //     audio.playSweep();
-    //     setTimeout(() => {
-    //       // Update note array with pickedpreset sequence
-    //       this.noteArray = presets[this.pickedPreset].sequenceArray;
-    //     }, 500);
-    //     // load the preset makers preset
-    //     this.$store.commit("setAudioParameterToPreset", {
-    //       preset: presets[this.pickedPreset].parameterValues
-    //     });
-    //     // this.$store.dispatch('setSynthToDefaultParameters', audio) // then let the user hear it
-    //     this.$store.dispatch("levelDone"); // would be nice to pass timeleft here but it is being passed by timer on gamestop
-    //     // // Update note array with pickedpreset sequence
-    //     // this.noteArray = presets[this.pickedPreset].sequenceArray
-    //     // Re-set the audioParameters with pickedpreset to undo envs and lfo modifications on startlevel
-
-    //     // TODO:
-    //   }
-    // },
     nextLevelClickedInNavBar(val) {
       console.log("nextLevelClickedInNavBar", val);
       if (val === "true") {
