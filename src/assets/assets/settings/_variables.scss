@@ -23,6 +23,18 @@ $colour_lfo: $colour_green;
 $colour_envelope: $colour_yellow;
 $colour_envelope2: $colour_blue;
 
+
+$themes: (
+  "primary": $colour_orange,
+  "osc1": $colour_orange,
+  "osc2": $colour_blue_light,
+  "filter": $colour_purple,
+  "lfo": $colour_green,
+  "envelope": $colour_yellow,
+  "envelope2": $colour_blue,
+  "router": $colour_white,
+);
+
 /****
 
   Shadows
