@@ -496,27 +496,6 @@ export default {
   }
 }
 
-// body {
-//   background: black;
-//   margin: 0;
-//   user-select: none;
-//   touch-action: none !important;
-//   width: 100vw;
-//   height: 100vh;
-//   overflow: hidden;
-// }
-
-// #app {
-//   font-family: "Montserrat", sans-serif;
-//   font-weight: 300;
-//   font-size: 1.8vh;
-//   -webkit-font-smoothing: antialiased;
-//   touch-action: none !important;
-//   -moz-osx-font-smoothing: grayscale;
-//   text-align: center;
-//   color: white;
-// }
-
 .overlay {
   position: fixed;
   display: flex;
