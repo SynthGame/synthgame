@@ -122,6 +122,7 @@ export default {
   },
   start() {
     log(`starting Tone.js Transport`);
+    console.trace();
     return this.state.Tone.Transport.start();
   },
   connectChanelToMaster(channel) {

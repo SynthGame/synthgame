@@ -121,53 +121,6 @@ export default {
     BeforeCreateOverlay,
     OriginalSoundOverlay,
   },
-  created() {
-    this.init();
-    this.initSynth();
-    console.log(this.$route);
-    if (this.$route.query.preset) {
-      // window.parent.postMessage(this.$route.query.preset, '*'); uncommented because confusing if we're sending old id too
-      // console.log('id',this.$route.query.preset);
-      this.customLevelIsActive = true;
-      this.displayStartOverlay = false;
-      this.showCreatePreview = true;
-      getPresetById(this.$route.query.preset).then(data => {
-        this.$store.commit("setFeaturedArtist", {
-          artistName: data.name,
-          avatarUrl: data.avatarUrl
-        });
-        console.log(data.parameterValues);
-        this.startPreset(data.parameterValues);
-      });
-    } else if (
-      window.location.href.indexOf("tats") != -1 ||
-      window.location.href.indexOf("jobboard") != -1
-    ) {
-      this.customLevelIsActive = true;
-      this.displayStartOverlay = false;
-      this.$store.commit("setCreateMode", true);
-    }
-
-    window.letsPlay = () => this.initM();
-
-    // Pc keyboard listener (might be needed for mobile)
-    document.addEventListener("keypress", event => {
-      if (audio.state.Tone.context.state !== "running") {
-        audio.state.Tone.context.resume();
-      }
-
-      if (event.keyCode === 27 && this.displayOriginalOverlay) {
-        this.killOrignalSoundPrompt();
-      }
-      // const key = event.key
-    });
-
-    // mouseup listener (needed to trace events)
-    document.addEventListener("mouseup", event => {
-      // log to analytics
-      this.$router.push("?level=" + (this.level + 1) + "&" + event.screenX);
-    });
-  },
   computed: {
     ...mapState({
       sequencesPassedInCurrentLevel: state =>
@@ -201,77 +154,6 @@ export default {
       this.showCreatePreview = true;
       this.displayPreviewOverlay = false;
     },
-    initSynth() {
-      var self = this;
-      this.toneLoop = audio.setMainLoop(
-        {
-          noteArray: range(0, 16),
-          subdivision: "8n"
-        },
-        (time, note) => {
-          // this.setStep(note)
-          if (this.noteArray[note].selected) {
-            // if preview, use octave(frequency) from goal in store
-            if (this.displayPreviewOverlay) {
-              audio.playNote(this.noteArray[note].pitch, {
-                noteLength: "8n",
-                volume: this.noteArray[note].volume
-                  ? this.noteArray[note].volume
-                  : 0,
-                time: note,
-                glide: this.noteArray[note].glide
-                  ? this.noteArray[note].glide
-                  : 0,
-                octaveOsc1:
-                  self.$store.state.gameState.goal.oscillator1.frequency,
-                octaveOsc2:
-                  self.$store.state.gameState.goal.oscillator2.frequency
-              });
-            } else {
-              audio.playNote(this.noteArray[note].pitch, {
-                noteLength: "8n",
-                volume: this.noteArray[note].volume
-                  ? this.noteArray[note].volume
-                  : 0,
-                time: note,
-                glide: this.noteArray[note].glide
-                  ? this.noteArray[note].glide
-                  : 0,
-                octaveOsc1:
-                  self.$store.state.audioParameters.oscillator1.frequency,
-                octaveOsc2:
-                  self.$store.state.audioParameters.oscillator2.frequency
-              });
-            }
-          }
-          if (this.noteArray[note].kick && this.displayStartOverlay) {
-            audio.playKick();
-          }
-          if (this.noteArray[note].hat && this.displayStartOverlay) {
-            audio.playHat();
-          }
-          if (this.noteArray[note].clap && this.displayStartOverlay) {
-            audio.playClap();
-          }
-          if (this.noteArray[note].clap2 && this.displayStartOverlay) {
-            audio.playClap2();
-          }
-          if (this.noteArray[note].cymbal && this.displayStartOverlay) {
-            audio.playCymbal();
-          }
-          if (this.noteArray[note].labmyc && this.displayStartOverlay) {
-            audio.playLabmyc();
-          }
-          if (this.noteArray[note].noise && this.displayStartOverlay) {
-            audio.playNoise();
-          }
-          if (this.noteArray[note].snare && this.displayStartOverlay) {
-            audio.playSnare();
-          }
-        }
-      );
-      this.toneLoop.start();
-    },
     closeSuccessOverlay() {
       this.displaySuccessOverlay = false;
     },
@@ -295,10 +177,8 @@ export default {
       // TODO: update drum animation in success overlay time animation
 
       // start tone general
-      console.trace();
       audio.start();
       // start loop
-      //
     },
     initM() {
       navigator.requestMIDIAccess().then(
@@ -520,7 +400,7 @@ export default {
         value: false
       });
     },
-    startNextLevel(level) {
+    startNextLevel() {
       this.$store.commit("increaseLevelValue", 1);
       this.startLevel(this.level) // TODO: should be + 1
       this.$store.commit({
