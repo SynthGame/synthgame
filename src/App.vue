@@ -331,17 +331,24 @@ export default {
 }
 
 .module {
+  width: auto;
   background: black;
-  // width: 16.7vw;
-  width: 31.4vh;
-  max-width: 16.7vw;
-  height: 50%;
-  margin: 0;
-  margin-right: -1px;
-  display: block;
-  float: left;
-  position: relative;
-  border: 1px solid #b7b7b7;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+
+
+  // // width: 16.7vw;
+  // width: 31.4vh;
+  // max-width: 16.7vw;
+  // height: 50%;
+  // margin: 0;
+  // margin-right: -1px;
+  // display: block;
+  // float: left;
+  // position: relative;
+  // border: 1px solid #b7b7b7;
   &.empty {
     background: none;
     &::after {

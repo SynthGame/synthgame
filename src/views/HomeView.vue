@@ -6,7 +6,13 @@
         <div 
           v-for="(group, index) in nav.groups" 
           :key="index"
-          :class="groupClasses(group, index)"
+          :class="[
+            `navigation--group_${group.title.toLowerCase().replace(' ', '')}`,
+            'navigation--group',
+            {
+              'is-disabled': isGroupActive(group, index)
+            }
+          ]"
         >
           <div class="navigation--group-title">
             <span>
@@ -57,6 +63,7 @@
                     <span class="navigation--item-title">
                       <span>{{ item.knobName }}</span>
                     </span>
+                    <span>{{ item.score }}</span>
                   </span>
                   </span>
                 </button>
@@ -112,15 +119,15 @@
               v-if="moduleIsUseable('router')"
               :class="[(activeModule == 6 ? 'active' : '')]"
             />
-          </div>
-          <!-- ATTEMPT -->
-          <div class="attempt-navigation">
-            <span v-if="!completedLevel">
-              <button @click="makeAttempt" class="button-next">Attempt {{ attempts }}</button>
-            </span>
-            <span v-if="completedLevel">
-              <button class="button-next" @click="startNextLevel" ref="button">NEXT LEVEL</button>
-            </span>
+            <!-- ATTEMPT -->
+            <div class="attempt-navigation">
+              <span v-if="!completedLevel">
+                <button @click="makeAttempt" class="button-next">Attempt {{ attempts }}</button>
+              </span>
+              <span v-if="completedLevel">
+                <button class="button-next" @click="startNextLevel" ref="button">NEXT LEVEL</button>
+              </span>
+            </div>
           </div>
         </template>
         <svoosh
@@ -261,7 +268,6 @@ export default {
   created() {
     this.init();
     this.initSynth();
-    console.log(this.$route);
     if (this.$route.query.preset) {
       // window.parent.postMessage(this.$route.query.preset, '*'); uncommented because confusing if we're sending old id too
       // console.log('id',this.$route.query.preset);
@@ -309,18 +315,11 @@ export default {
     makeAttempt() {
       this.$store.dispatch("madeAttempt");
     },
-    groupClasses(group, index) {
-      let isScoreZero = group.items.some(item => {
-            return item.score <= 0
-          })
-      console.log(index, isScoreZero)
-      return [
-        `navigation--group_${group.title.toLowerCase().replace(' ', '')}`,
-        'navigation--group',
-        {
-          'is-disabled': index === 0 ? false : isScoreZero
-        }
-      ]
+    isGroupActive(group, index) {
+      let isThereActiveItemInGroup = group.items.some(item => {
+        return item.score <= 0
+      })
+      return index === 0 ? false : !isThereActiveItemInGroup
     },
     init() {
       // Retrieve highscore from local storage
@@ -336,7 +335,7 @@ export default {
       audio.start();
       // start loop
     },
-        initSynth() {
+    initSynth() {
       var self = this;
       this.toneLoop = audio.setMainLoop(
         {
@@ -563,30 +562,6 @@ export default {
       } else {
         return some(this.knobsAvailable[moduleName]); // some are truthy
       }
-    },
-    showOsc1() {
-      this.activeModule = 0;
-    },
-    showOsc2() {
-      this.activeModule = 1;
-    },
-    showFil() {
-      this.activeModule = 2;
-    },
-    showEnv() {
-      this.activeModule = 3;
-    },
-    showEnv2() {
-      this.activeModule = 5;
-    },
-    showLfo() {
-      this.activeModule = 4;
-    },
-    showRouter() {
-      this.activeModule = 6;
-    },
-    showSequencer() {
-      this.activeModule = 7;
     }
   },
   computed: {
@@ -650,35 +625,5 @@ export default {
 };
 </script>
 
-<style scoped lang="scss">
-
-.attempt-navigation {
-  bottom: 12vh;
-  position: relative;
-  z-index: 20;
-}
-
-.module__name__status-indicator {
-  display: inline-block;
-  width: 11px;
-  height: 11px;
-  border-radius: 100%;
-  transition: 0.5s;
-  border: 1px solid white;
-
-  &--active {
-    border: none;
-    transition: 0.5s;
-    border: 1px solid white;
-  }
-}
-
-.active {
-  left: 0;
-}
-
-.twelve {
-  left: calc(5 * 16.67em);
-  top: 24.5em;
-}
+<style lang="scss">
 </style>
