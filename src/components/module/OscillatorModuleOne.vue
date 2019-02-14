@@ -1,10 +1,10 @@
 <template>
   <div class="module">
-    <module-title :indicator-active="dialsAreWithinMargin" :module-color="moduleColor">
+    <module-title class="drop" :indicator-active="dialsAreWithinMargin" :module-color="moduleColor">
       <h3 slot="subtitle">Oscillator 1</h3>
     </module-title>
     <module-display
-      class="display"
+      class="display drop"
       module="oscillator"
       fill="#ff8574"
       :knobs="[{name: 'Octave', min: freqArray[0], max: freqArray[freqArray.length -1], value: frequency},
@@ -30,7 +30,7 @@
         v-if="knobsAvailable.frequency || createModeIsActive"
       >
         <div class="switch">
-          <button color="#ff8574" @click="incrementOctave">
+          <button class="drop" color="#ff8574" @click="incrementOctave">
             <svg version="1.1"
               x="0px" y="0px" width="12.3px" height="12.6px" viewBox="0 0 12.3 6.6" style="enable-background:new 0 0 12.3 6.6;"
               xml:space="preserve">
@@ -39,7 +39,7 @@
               </g>
             </svg>
           </button>
-          <button color="#ff8574" @click="decrementOctave">  <svg version="1.1"
+          <button class="drop" color="#ff8574" @click="decrementOctave">  <svg version="1.1"
               x="0px" y="0px" width="12.3px" height="12.6px" viewBox="0 0 12.3 6.6" style="transform: rotate(180deg);enable-background:new 0 0 12.3 6.6;"
               xml:space="preserve">
               <g>
@@ -55,6 +55,7 @@
         v-if="knobsAvailable.detune || createModeIsActive"
         :min="0"
         :max="100"
+        class="drop"
         knobColor="#ff8574"
         name="Pitch"
       ></module-knob>
@@ -65,7 +66,7 @@
         knobColor="#ff8574"
         name="Phase"
       ></module-knob> -->
-      <div class="button-wrapper"
+      <div class="button-wrapper drop"
         v-if="knobsAvailable.typeOsc || createModeIsActive"
       >
         <module-button color="#ff8574" shape="sine" :isPressed="typeOsc==='sine'" @click.native="typeOsc='sine'"/>

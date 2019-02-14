@@ -755,20 +755,6 @@ export default {
       justify-content: space-around;
     }
   }
-  .module {
-    width: 100vw;
-    max-width: 100vw;
-    height: 100% !important;
-    position: absolute !important;
-    left: 0 !important;
-    top: 0 !important;
-    opacity: 0;
-    padding-bottom: 2em !important;
-  }
-  .module .knobs {
-    padding-top: 5%;
-    min-height: 60%;
-  }
   .module .button-wrapper button {
     width: 4.5em;
     height: 4.5em;
@@ -780,7 +766,6 @@ export default {
     left: 0;
     opacity: 1;
     z-index: 1;
-    height: 82vh;
   }
   .module .display {
     height: 11em;

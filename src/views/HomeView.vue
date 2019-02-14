@@ -75,7 +75,7 @@
       <div class="screen">
         <start-screen v-if="showStartScreen" @startLevel="startLevel(0)"/>
         <template v-if="showGame">
-          <div class=" screen--header">
+          <div class="hide-desktop screen--header">
             <div class="screen--header-inner">
               <button @click="showModules = !showModules" class="btn btn_link btn_primary">
                 <span class="btn--inner">
@@ -85,7 +85,7 @@
               <div class="screen--header-title">Osc 1 Pitch</div>
             </div>
           </div>
-          <div class="screen--inner">
+          <div class="screen--inner" id="debug">
             <oscillator-module-one
               v-if="moduleIsUseable('oscillator1')"
               :class="[(activeModule == 0 ? 'active' : '')]"
@@ -158,6 +158,22 @@
             <div class="screen--score-title">Bart</div>
             <div class="screen--score-value">0</div>
           </div>
+          <div class="pyro">
+            <div class="before"></div>
+            <div class="after"></div>
+          </div>
+          <div style="margin-top: 40px" class="screen--attempts">
+            <svg v-for="(i) in totalAttempts/2" :key="i" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48">
+              <defs>
+                <clipPath id="half">
+                  <rect x="0" y="0" width="24.5" height="48" />
+                </clipPath>
+              </defs>
+              <path v-if="i <= (totalAttempts - attempts) / 2" class="screen--attempts-fill" d="M23.993 15.872l1.016-.889a7.313 7.313 0 0 1 4.853-1.834c2.032 0 4.035.832 5.489 2.455a7.314 7.314 0 0 1-.339 10.06l-9.828 8.735a1.795 1.795 0 0 1-2.382 0l-9.814-8.735c-2.751-2.695-2.935-7.125-.339-10.06a7.337 7.337 0 0 1 5.489-2.455 7.34 7.34 0 0 1 4.853 1.834l1.002.889" />
+              <path v-if="i - 0.5 === (totalAttempts - attempts) / 2 " clip-path="url(#half)" class="screen--attempts-fill" d="M23.993 15.872l1.016-.889a7.313 7.313 0 0 1 4.853-1.834c2.032 0 4.035.832 5.489 2.455a7.314 7.314 0 0 1-.339 10.06l-9.828 8.735a1.795 1.795 0 0 1-2.382 0l-9.814-8.735c-2.751-2.695-2.935-7.125-.339-10.06a7.337 7.337 0 0 1 5.489-2.455 7.34 7.34 0 0 1 4.853 1.834l1.002.889" />
+              <path class="screen--attempts-stroke" d="M23.993 15.872l1.016-.889a7.313 7.313 0 0 1 4.853-1.834c2.032 0 4.035.832 5.489 2.455a7.314 7.314 0 0 1-.339 10.06l-9.828 8.735a1.795 1.795 0 0 1-2.382 0l-9.814-8.735c-2.751-2.695-2.935-7.125-.339-10.06a7.337 7.337 0 0 1 5.489-2.455 7.34 7.34 0 0 1 4.853 1.834l1.002.889" />
+            </svg>
+          </div>
         </div>
         <div class="screen--share">
           <p>Anyone with this link can join and beat your high score.</p>
@@ -226,12 +242,14 @@ import character from "@/character";
 import levels from "@/levels";
 import range from "lodash/range";
 import Nav from "@/nav";
+import Matter from 'matter-js'
 
 export default {
   name: "home",
   data() {
     return {
       activeModule: 0,
+      totalAttempts: 10,
       marginArray: [0, 0.2, 0.4, 0.6],
       indicatorActive: true,
       oscillatorColor: MODULE_OSCILLATOR_COLOR,
@@ -313,7 +331,8 @@ export default {
   },
   methods: {
     makeAttempt() {
-      this.$store.dispatch("madeAttempt");
+      // this.$store.dispatch("madeAttempt");
+      this.failedLevel()
     },
     isGroupActive(group, index) {
       let isThereActiveItemInGroup = group.items.some(item => {
@@ -566,7 +585,8 @@ export default {
       } else {
         return some(this.knobsAvailable[moduleName]); // some are truthy
       }
-    }
+    },
+    failedLevel() {}
   },
   computed: {
     attempts() {

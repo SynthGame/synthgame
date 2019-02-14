@@ -1,14 +1,15 @@
 .navigation {
   width: 100vw;
   flex-grow: 0;
-  max-height: 100vh;
-  height: 100vh;
+  max-height: calc(100vh - 80px);
+  height: calc(100vh - 80px);
   overflow: hidden;
   font-weight: 500;
   text-transform: uppercase;
   flex-shrink: 0;
   display: flex;
   flex-direction: column;
+  z-index: 999;
   &--group,
   &--item {
     &.is-disabled {

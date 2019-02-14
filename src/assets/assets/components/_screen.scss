@@ -35,6 +35,26 @@
     letter-spacing: 2.29846px;
     text-transform: uppercase;
   }
+  &--attempts {
+    display: flex;
+    @media screen and (min-width: 800px) {
+      width: 100% !important;
+    }
+    align-items: center;
+    justify-content: center;
+    svg {
+      width: 30px; height: auto;
+      margin: 0 5px;
+    }
+    &-fill {
+      fill: $colour_primary;
+    }
+    &-stroke {
+      fill: none;
+      stroke: $colour_primary;
+      stroke-width: 2px;
+    }
+  }
   &--score {
     text-transform: uppercase;
     &-title {
@@ -63,10 +83,10 @@
     }
   }
   &--header {
-    background-color: $colour_grey_dark;
     font-size: 18px;
     letter-spacing: 2.29846px;
     text-transform: uppercase;
+    margin-bottom: 20px;
     &_transparent {
       background-color: transparent;
     }
@@ -79,6 +99,12 @@
       & > * {
         width: 33.3%;
       }
+    }
+    .btn {
+      z-index: 90;
+    }
+    @media screen and (max-width: 799px) {
+      background-color: $colour_grey_dark;
     }
   }
   &--footer {
