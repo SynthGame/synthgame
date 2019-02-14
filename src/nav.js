@@ -1,3 +1,6 @@
+import store from './store';
+
+
 export default {
   title: "Bart's song",
   active: {
@@ -16,19 +19,19 @@ export default {
           title: 'frequency',
           knobName: 'octave',
           author: 'Lawson',
-          score: 1
+          score: 0
         },
         {
           title: 'detune',
           knobName: 'detune',
           author: 'Lawson',
-          score: 0
+          score: 1
         },
         {
           title: 'typeOsc',
           knobName: 'shape',
           author: 'Bart',
-          score: 0
+          score: 2
         }
       ]
     },
@@ -41,19 +44,19 @@ export default {
           title: 'frequency',
           knobName: 'octave',
           author: '',
-          score: 0
+          score: 3
         },
         {
           title: 'volume',
           knobName: 'volume',
           author: 'Lauren',
-          score: 0
+          score: 4
         },
         {
           title: 'typeOsc',
           knobName: 'shape',
           author: 'Daniel',
-          score: 0
+          score: 5,
         }
       ]
     },

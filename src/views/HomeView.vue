@@ -63,7 +63,7 @@
                     <span class="navigation--item-title">
                       <span>{{ item.knobName }}</span>
                     </span>
-                    <span>{{ item.score }}</span>
+                    <span>{{ lvlScore(item.score) }}</span>
                   </span>
                   </span>
                 </button>
@@ -246,7 +246,6 @@ export default {
       svooshIt: false,
       showGame: false,
       showModules: false,
-      nav: Nav,
     };
   },
   components: {
@@ -566,9 +565,15 @@ export default {
       } else {
         return some(this.knobsAvailable[moduleName]); // some are truthy
       }
+    },
+    lvlScore(lvl) {
+      return this.$store.state.gameState.levels[lvl].levelData.score;
     }
   },
   computed: {
+    nav() {
+      return Nav;
+    },
     attempts() {
       return this.$store.state.gameState.attempts;
     },

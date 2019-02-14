@@ -10,6 +10,7 @@ import add from 'lodash/add'
 import find from 'lodash/find'
 import character from '@/character'
 import { addPreset } from '@/db'
+import Levels from './levels';
 
 Vue.use(Vuex)
 
@@ -75,6 +76,7 @@ export default new Vuex.Store({
       attempts: 0,
       madeAttempt: false,
       completedLevel: false,
+      levels: Levels,
       userAttemptPreset: {
         oscillator1: {
           frequency: '131',
@@ -367,6 +369,12 @@ export default new Vuex.Store({
     },
     setCompletedLevel(state, payload) {
       state.gameState.completedLevel = payload.value;
+    },
+    setLevelScore(state, payload) {
+      const lvl = state.gameState.level;
+      console.log(payload);
+      console.log(`Level ${lvl}`)
+      state.gameState.levels[lvl].levelData.score = payload;
     }
   },
   getters: {

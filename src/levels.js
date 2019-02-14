@@ -2,7 +2,7 @@ const levels = [
   // level 1
   {
     oscillator1: {
-      typeOsc: true
+      frequency: true,
     },
     oscillator2: {},
     filter: {},
@@ -22,7 +22,7 @@ const levels = [
   // level 2
   {
     oscillator1: {
-      frequency: true,
+      detune: true
     },
     oscillator2: {},
     filter: {},
@@ -42,7 +42,7 @@ const levels = [
   // level 3
   {
     oscillator1: {
-      detune: true
+      typeOsc: true
     },
     oscillator2: {},
     filter: {},
