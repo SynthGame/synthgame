@@ -1,7 +1,6 @@
 <template>
   <div class="sequencer">
     <module-title :module-color="moduleColor">
-      <!-- <h2 slot="title">Tats</h2> -->
       <h3 slot="subtitle">Sequencer</h3>
     </module-title>
     <div class="sequencer__controls">

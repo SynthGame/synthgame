@@ -1,9 +1,7 @@
 <template>
   <div class="module">
     <module-title :indicator-active="dialsAreWithinMargin" :module-color="moduleColor">
-      <!-- <h2 slot="title">Tats</h2> -->
-      <h3 v-if="dialsAreWithinMargin" slot="subtitle">Done!</h3>
-      <h3 v-else slot="subtitle">Amp Env</h3>
+      <h3slot="subtitle">Amp Env</h3>
     </module-title>
     <module-display
       fill="#e4e259"
