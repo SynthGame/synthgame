@@ -245,10 +245,13 @@ export default {
         this.beginSuccessSvoosh();
         const score = 10 - this.$store.state.gameState.attempts;
         this.$store.commit("addValueToScore", score);
+        this.$store.commit("setLevelScore", score);
+        
         this.$store.commit({
           type: "setCompletedLevel",
           value: true
         });
+
         this.$store.dispatch("levelDone")
         this.$store.commit("resetAttempts")
       } else {
