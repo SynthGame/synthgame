@@ -73,9 +73,9 @@
         </div>
       </nav>
       <div class="screen">
-        <start-screen v-if="showStartScreen" @startLevel="startLevel(0)"/> //
+        <start-screen v-if="showStartScreen" @startLevel="startLevel(0)"/>
         <template v-if="showGame">
-          <div class="hide-desktop screen--header">
+          <div class=" screen--header">
             <div class="screen--header-inner">
               <button @click="showModules = !showModules" class="btn btn_link btn_primary">
                 <span class="btn--inner">
@@ -122,7 +122,7 @@
             <!-- ATTEMPT -->
             <div class="attempt-navigation">
               <span v-if="!completedLevel">
-                <button @click="makeAttempt" class="button-next">Attempt {{ attempts }}</button>
+                <button @click="makeAttempt" class="button-next">Submit</button>
               </span>
               <span v-if="completedLevel">
                 <button class="button-next" @click="startNextLevel" ref="button">NEXT LEVEL</button>
