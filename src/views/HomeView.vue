@@ -56,7 +56,7 @@
             </svg>
           </div>
           <ul class="navigation--list">
-            <li v-for="(item, key) in group.items" :key="key" class="navigation--item" :class="{'is-disabled' : item.score <= 0 }">
+            <li v-for="(item, key) in group.items" :key="key" class="navigation--item" :class="{'is-disabled' : lvlScore(item.score) <= 0 }">
               <button class="navigation--item-btn" @click="activeScreen(index, key)">
                 <span class="navigation--item-inner">
                   <span class="navigation--item-text">
@@ -316,7 +316,7 @@ export default {
     },
     isGroupActive(group, index) {
       let isThereActiveItemInGroup = group.items.some(item => {
-        return item.score <= 0
+        return this.lvlScore(item.score) > 0;
       })
       return index === 0 ? false : !isThereActiveItemInGroup
     },

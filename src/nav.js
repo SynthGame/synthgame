@@ -69,13 +69,13 @@ export default {
           title: 'cutOffFreq',
           knobName: 'Frequency',
           author: 'Momcilo',
-          score: 0
+          score: 6
         },
         {
           title: 'type',
           knobName: 'shape',
           author: 'Basti',
-          score: 0
+          score: 7
         },
       ]
     },
@@ -88,25 +88,25 @@ export default {
           title: 'attack',
           knobName: 'attack',
           author: '',
-          score: 0
+          score: 8
         },
         {
           title: 'decay',
           knobName: 'decay',
           author: '',
-          score: 0
+          score: 9
         },
         {
           title: 'sustain',
           knobName: 'sustain',
           author: '',
-          score: 0
+          score: 10
         },
         {
           title: 'release',
           knobName: 'release',
           author: '',
-          score: 0
+          score: 11
         }
       ]
     },
@@ -119,19 +119,19 @@ export default {
           title: 'attack',
           knobName: 'attack',
           author: '',
-          score: 0
+          score: 12
         },
         {
           title: 'decay',
           knobName: 'decay',
           author: '',
-          score: 0
+          score: 13
         },
         {
           title: 'amount',
           knobName: 'amount',
           author: '',
-          score: 0
+          score: 14
         }
       ]
     },
@@ -144,19 +144,19 @@ export default {
           title: 'frequency',
           knobName: 'frequency',
           author: '',
-          score: 0
+          score: 15
         },
         {
           title: 'amount',
           knobName: 'amount',
           author: '',
-          score: 0
+          score: 16
         },
         {
           title: 'type',
           knobName: 'type',
           author: '',
-          score: 0
+          score: 17
         }
       ]
     },
@@ -169,13 +169,13 @@ export default {
           title: 'lfo',
           knobName: 'lfo',
           author: '',
-          score: 0
+          score: 18
         },
         {
           title: 'envelope2',
           knobName: 'envelope2',
           author: '',
-          score: 0
+          score: 19
         }
       ]
     }
