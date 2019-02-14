@@ -6,11 +6,6 @@
                 'module__name__status-indicator': true,
                 'module__name__status-indicator--active': indicatorActive
               }"
-      :style="{
-                'background-color': indicatorActive ? moduleColor : '',
-                'box-shadow': indicatorActive ? `0px 0px 16px ${moduleColor}` : '',
-                'animation': indicatorActive ? '.5s blink alternate infinite' : '',
-              }"
     ></span>
     <span class="module__name__sub-title" :style="{'color': moduleColor}"><slot name="subtitle"></slot></span>
   </div>
