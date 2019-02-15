@@ -283,7 +283,7 @@ export default {
       lfoColor: MODULE_LFO_COLOR,
       routerColor: MODULE_ROUTER_COLOR,
       sequencerColor: MODULE_SEQUENCER_COLOR,
-      showStartScreen: true,
+      showStartScreen: false,
       isThereSvooshComponent: false,
       svooshIt: false,
       showGame: false,
@@ -305,7 +305,7 @@ export default {
     Svoosh
   },
   mounted() {
-
+      this.showStartScreen = true;
   },
   created() {
     this.init();
@@ -352,6 +352,14 @@ export default {
       // log to analytics
       this.$router.push("?level=" + (this.level + 1) + "&" + event.screenX);
     });
+  },
+  watch: {
+    showStartScreen(val) {
+      console.log(`SHowe Start ${val}`)
+      if(val) {
+        this.goToLevel(this.level + 1);
+      }
+    }
   },
   methods: {
     toggleNavigation() {
@@ -463,6 +471,7 @@ export default {
         value: false
       });
     },
+    // for entering lvl
     startLevel(level) {
       this.beginSvoosh()
     },
@@ -478,7 +487,6 @@ export default {
     },
     // // // //
     startLevelPreview(level) {
-      this.beginSvoosh();
      
       this.gotToPreview();
 
