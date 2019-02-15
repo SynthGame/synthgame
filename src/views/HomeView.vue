@@ -675,8 +675,9 @@ export default {
 
       this.goToLevel(lvl) // CHANGE to lvl
   
+      this.startLevelPreview(lvl);
 
-      this.startLevelPreview(lvl)
+      this.$store.commit("resetAttempts");
 
       //Trigger preview Screen + new sound.
     },
