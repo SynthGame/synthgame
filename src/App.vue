@@ -138,7 +138,7 @@ export default {
     },
     completedLevel() {
       return this.$store.state.gameState.completedLevel;
-    }
+    },
     // nextLevelRequested () {
     //   if (this.$store.state.gameState.nextLevelRequested) {
     //     console.log('hiiieeaaa working finally');
@@ -219,15 +219,6 @@ export default {
       this.$store.dispatch("setSynthToDefaultParameters", audio);
       audio.playKick();
     },
-    goToLevel(level) {
-      // Add check for lvl avalible....
-      this.$store.commit("setLevelValue", level)
-      this.startLevel(level); // TODO: should be + 1
-      this.$store.commit({
-        type: "setCompletedLevel",
-        value: false
-      })
-    },
     startNextLevel() {
       this.$store.commit("increaseLevelValue", 1);
       this.startLevel(this.level) // TODO: should be + 1
@@ -283,7 +274,6 @@ export default {
         const score = 10 - this.$store.state.gameState.attempts;
         this.$store.commit("addValueToScore", score);
         this.$store.commit("setLevelScore", score);
-        
         this.$store.commit({
           type: "setCompletedLevel",
           value: true

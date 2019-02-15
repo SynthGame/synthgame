@@ -85,12 +85,24 @@
             <svg v-for="(i) in totalAttempts/2" :key="i" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48">
               <defs>
                 <clipPath id="half">
-                  <rect x="0" y="0" width="24.5" height="48" />
+                  <rect x="0" y="0" width="24.5" height="48"></rect>
                 </clipPath>
               </defs>
-              <path v-if="i <= (totalAttempts - attempts) / 2" class="screen--attempts-fill" d="M23.993 15.872l1.016-.889a7.313 7.313 0 0 1 4.853-1.834c2.032 0 4.035.832 5.489 2.455a7.314 7.314 0 0 1-.339 10.06l-9.828 8.735a1.795 1.795 0 0 1-2.382 0l-9.814-8.735c-2.751-2.695-2.935-7.125-.339-10.06a7.337 7.337 0 0 1 5.489-2.455 7.34 7.34 0 0 1 4.853 1.834l1.002.889" />
-              <path v-if="i - 0.5 === (totalAttempts - attempts) / 2 " clip-path="url(#half)" class="screen--attempts-fill" d="M23.993 15.872l1.016-.889a7.313 7.313 0 0 1 4.853-1.834c2.032 0 4.035.832 5.489 2.455a7.314 7.314 0 0 1-.339 10.06l-9.828 8.735a1.795 1.795 0 0 1-2.382 0l-9.814-8.735c-2.751-2.695-2.935-7.125-.339-10.06a7.337 7.337 0 0 1 5.489-2.455 7.34 7.34 0 0 1 4.853 1.834l1.002.889" />
-              <path class="screen--attempts-stroke" d="M23.993 15.872l1.016-.889a7.313 7.313 0 0 1 4.853-1.834c2.032 0 4.035.832 5.489 2.455a7.314 7.314 0 0 1-.339 10.06l-9.828 8.735a1.795 1.795 0 0 1-2.382 0l-9.814-8.735c-2.751-2.695-2.935-7.125-.339-10.06a7.337 7.337 0 0 1 5.489-2.455 7.34 7.34 0 0 1 4.853 1.834l1.002.889" />
+              <path
+                v-if="i <= (totalAttempts - attempts) / 2"
+                class="screen--attempts-fill"
+                d="M23.993 15.872l1.016-.889a7.313 7.313 0 0 1 4.853-1.834c2.032 0 4.035.832 5.489 2.455a7.314 7.314 0 0 1-.339 10.06l-9.828 8.735a1.795 1.795 0 0 1-2.382 0l-9.814-8.735c-2.751-2.695-2.935-7.125-.339-10.06a7.337 7.337 0 0 1 5.489-2.455 7.34 7.34 0 0 1 4.853 1.834l1.002.889"
+              ></path>
+              <path
+                v-if="i - 0.5 === (totalAttempts - attempts) / 2 "
+                clip-path="url(#half)"
+                class="screen--attempts-fill"
+                d="M23.993 15.872l1.016-.889a7.313 7.313 0 0 1 4.853-1.834c2.032 0 4.035.832 5.489 2.455a7.314 7.314 0 0 1-.339 10.06l-9.828 8.735a1.795 1.795 0 0 1-2.382 0l-9.814-8.735c-2.751-2.695-2.935-7.125-.339-10.06a7.337 7.337 0 0 1 5.489-2.455 7.34 7.34 0 0 1 4.853 1.834l1.002.889"
+              ></path>
+              <path
+                class="screen--attempts-stroke"
+                d="M23.993 15.872l1.016-.889a7.313 7.313 0 0 1 4.853-1.834c2.032 0 4.035.832 5.489 2.455a7.314 7.314 0 0 1-.339 10.06l-9.828 8.735a1.795 1.795 0 0 1-2.382 0l-9.814-8.735c-2.751-2.695-2.935-7.125-.339-10.06a7.337 7.337 0 0 1 5.489-2.455 7.34 7.34 0 0 1 4.853 1.834l1.002.889"
+              ></path>
             </svg>
           </div>
         </div>
@@ -249,7 +261,7 @@ import LfoModule from "@/components/module/LfoModule.vue";
 import SequencerModule from "@/components/module/SequencerModule.vue";
 import RouterModule from "@/components/module/RouterModule.vue";
 import { SYNTH_BPM } from "@/constants";
-import audio from '../audio.js';
+import audio from "../audio.js";
 import presets from "@/presets";
 import character from "@/character";
 import levels from "@/levels";
@@ -276,6 +288,7 @@ export default {
       svooshIt: false,
       showGame: false,
       showModules: false,
+      pickedPreset: 0,
     };
   },
   components: {
@@ -292,7 +305,7 @@ export default {
     Svoosh
   },
   mounted() {
-    this.activeScreen(0, 0);
+
   },
   created() {
     this.init();
@@ -346,13 +359,16 @@ export default {
     },
     makeAttempt() {
       this.$store.dispatch("madeAttempt");
-      this.failedLevel()
+      // this.failedLevel()
+    },
+    startGame() {
+       this.activeScreen(0, 0);
     },
     isGroupActive(group, index) {
       let isThereActiveItemInGroup = group.items.some(item => {
         return this.lvlScore(item.score) > 0;
-      })
-      return index === 0 ? false : !isThereActiveItemInGroup
+      });
+      return index === 0 ? false : !isThereActiveItemInGroup;
     },
     init() {
       // Retrieve highscore from local storage
@@ -441,7 +457,7 @@ export default {
     },
     startNextLevel() {
       this.$store.commit("increaseLevelValue", 1);
-      this.startLevel(this.level) // TODO: should be + 1
+      this.startLevelPreview(this.level); // TODO: should be + 1
       this.$store.commit({
         type: "setCompletedLevel",
         value: false
@@ -449,6 +465,9 @@ export default {
     },
     startLevel(level) {
       this.beginSvoosh()
+    },
+    // LEVEL 
+    gotToPreview(level) {
       this.$nextTick(() => {
         // disable all overlays when svoosh is done
         // this.displaySuccessOverlay = false;
@@ -456,9 +475,17 @@ export default {
         this.displayStartOverlay = false;
         this.displayPreviewOverlay = true;
       });
+    },
+    // // // //
+    startLevelPreview(level) {
+      this.beginSvoosh();
+     
+      this.gotToPreview();
+
       audio.playSweep();
       this.$router.push("?level=" + (level + 1));
       window.parent.postMessage("play-game-activated", "*");
+
 
       // randomly pick preset
       this.pickedPreset = Math.round(Math.random() * (presets.length - 1));
@@ -500,9 +527,8 @@ export default {
       // Set noteArray to sequence preset locally
       this.noteArray = presets[this.pickedPreset].sequenceArray;
 
-
       // import level config
-      const availableParameters = levels[level] || levels[levels.length - 1];
+      const availableParameters = levels[level];
 
       this.$store.dispatch("startNewLevel", {
         knobsAvailable: availableParameters,
@@ -513,7 +539,7 @@ export default {
       });
 
       console.log(availableParameters);
-      
+
       this.$store.dispatch("randomizeAudioParameters", availableParameters); // and the audio params
 
       // this.$nextTick(() => this.$store.dispatch("setSynthToGoal", audio)); //then let the user hear it
@@ -589,6 +615,16 @@ export default {
         knobName: knobName,
         moduleName: moduleName
       });
+
+
+      const lvl = this.nav.groups[index].items[key].score
+
+      this.goToLevel(lvl) // CHANGE to lvl
+  
+
+      this.startLevelPreview(lvl)
+
+      //Trigger preview Screen + new sound.
     },
     moduleIsUseable(moduleName) {
       if (this.createModeIsActive) {
@@ -600,6 +636,15 @@ export default {
     failedLevel() {},
     lvlScore(lvl) {
       return this.$store.state.gameState.levels[lvl].levelData.score;
+    },
+    goToLevel(level) {
+      // Add check for lvl avalible....
+      this.$store.commit("setLevelValue", level);
+      this.startLevelPreview(level); // TODO: should be + 1
+      this.$store.commit({
+        type: "setCompletedLevel",
+        value: false
+      });
     }
   },
   computed: {

@@ -460,6 +460,8 @@ export default new Vuex.Store({
         preset: randomizeWithoutMatches(state.gameState.goal, randomizeArray)
       })
     },
+
+  ///
     randomizGoalParameters({ state, commit }) {
       const randomizeValues = obj => mapValues(obj, (val, moduleName) => {
         return mapValues(val, (val, parameterName) => {
