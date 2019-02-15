@@ -1,0 +1,26 @@
+.overlay {
+  position: fixed;
+  background-color: rgba(0, 0, 0, .95);
+  z-index: 9998;
+  width: 100%; height: 100%;
+  top: 0; left: 0;
+  padding: 5% 3%;
+  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  &--title {
+    font-size: 30px;
+    margin-bottom: 30px !important;
+    font-weight: bold;
+  }
+  &--description {
+    margin: 10px 0;
+  }
+  .btn {
+    margin-top: 30px;
+  }
+  canvas {
+    position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+  }
+}

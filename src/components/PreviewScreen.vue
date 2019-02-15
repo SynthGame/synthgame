@@ -9,7 +9,7 @@
             </span>
           </span>
         </button>
-        <div class="screen--header-title">Osc 1 Pitch</div>
+        <div class="screen--header-title"></div>
       </div>
     </div>
   </transition>

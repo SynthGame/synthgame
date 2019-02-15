@@ -1,8 +1,8 @@
 .navigation {
   width: 100vw;
   flex-grow: 0;
-  max-height: calc(100vh - 80px);
-  height: calc(100vh - 80px);
+  max-height: 100%;
+  height: 100%;
   overflow: hidden;
   font-weight: 500;
   text-transform: uppercase;
@@ -14,9 +14,11 @@
   &--item {
     &.is-disabled {
       pointer-events: none;
-      opacity: .2;
       .navigation--group-fill {
         fill: white;
+      }
+      .navigation--group-title {
+        opacity: 0.2;
       }
       .navigation--item-title {
         color: white;
@@ -24,6 +26,11 @@
           border-bottom-color: white;
         }
       }
+    }
+  }
+  &--item {
+    &.is-disabled {
+      opacity: 0.2;
     }
   }
   &--group {
@@ -69,6 +76,7 @@
   &--inner {
     overflow-y: auto;
     overflow-x: hidden;
+    -webkit-overflow-scrolling: touch;
 
 	  background:
 		/* Shadow covers */
@@ -85,6 +93,7 @@
     /* Opera doesn't support this in the shorthand */
     background-attachment: local, local, scroll, scroll;
 
+    height: 100%;
     max-height: 100%;
   }
   &--list {
@@ -165,15 +174,22 @@
     }
   }
   @media screen and (max-width: 799px) {
-    position: fixed;
+    position: fixed !important;
     top: 0; left: 0;
-    transform: translate3d(-100%, 56px, 0.01px);
+    transform: translate3d(-100%, 58px, 0.01px);
     width: 100vw;
-    height: 100vh;
     background: $colour_black;
     transition: all .44s ease;
+    &--inner {
+      max-height: calc(100% - 58px);
+      height: calc(100% - 58px);
+    }
     &.is-active {
-      transform: translate3d(0%, 56px, 0.01px);
+      transform: translate3d(0%, 58px, 0.01px);
+      & ~ .screen .screen--header {
+        position: fixed;
+        z-index: 20;
+      }
     }
   }
 }

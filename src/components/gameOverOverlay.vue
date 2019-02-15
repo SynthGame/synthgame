@@ -1,6 +1,6 @@
 <template>
   <div class="overlay">
-    <div class="overlay-content-wrapper">
+    <div class="overlay--inner">
       <div>
         <h1>Game Over!</h1>
         <h2>Your Score: {{gameScore}}</h2>
