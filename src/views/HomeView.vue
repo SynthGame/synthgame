@@ -72,7 +72,61 @@
     </div>
   </nav>
   <div class="screen">
-    <start-screen v-if="showStartScreen" @startLevel="startGame()"/>
+    <template v-if="showStartScreen">
+      <div class="screen screen_score screen_start">
+        <transition name="fade" mode="in-out" appear>
+          <div v-show="slide === 1" class="hide-desktop screen--header">
+            <div class="screen--header-inner">
+              <button @click="slide = 0" class="btn btn_link btn_primary">
+                <span class="btn--inner">
+                  <span class="btn--inner-text">
+                    < Back
+                  </span>
+                </span>
+              </button>
+              <div class="screen--header-title"></div>
+            </div>
+          </div>
+        </transition>
+        <transition name="fade" mode="out-in" appear>
+          <div key="1" v-if="slide === 0" class="screen--inner">
+            <div class="screen--title">Match <br>The <br>Sound</div>
+            <button
+              class="btn btn_link btn_primary hide-desktop">
+              <span class="btn--inner">
+                <span class="btn--inner-text">or Make a song</span>
+              </span>
+            </button>
+            <div class="screen--score">
+              <div class="screen--score-title">Score</div>
+              <div class="screen--score-value">0</div>
+            </div>
+          </div>
+          <!-- sound preview screen -->
+          <div key="2" v-else class="screen--inner">
+            <div class="screen--preview">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" width="64" height="64">
+                <path fill="#fff" d="M14 2c-.781 0-1.313.438-2 1.016L6 8H2c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h4l6 4.984c.688.579 1.219 1.016 2 1.016 1.219 0 2-.984 2-2V4c0-1.016-.781-2-2-2zm-2 21.784L7.445 20H4v-8h3.445L12 8.216v15.568zM20 6c-1.25 0-2 1.047-2 2 0 1.422 2 2.781 2 8s-2 6.578-2 8c0 .953.75 2 2 2 1.016 0 1.625-.547 2.281-2C23.51 21.279 24 18.672 24 16s-.49-5.279-1.719-8C21.625 6.547 21.016 6 20 6zm9.146-2c-.838-1.771-1.63-2-2.333-2-1.188 0-2 1-2 2C24.813 5.672 28 8.531 28 16s-3.188 10.328-3.188 12c0 1 .813 2 2 2 .703 0 1.495-.229 2.333-2C30.063 26.063 32 22.156 32 16S30.063 5.938 29.146 4z"/>
+              </svg>
+              <p>
+                Listen to the goal sound and match the pitch of oscillator 1
+              </p>
+            </div>
+          </div>
+        </transition>
+        <div class="screen--footer">
+          <div class="screen--footer-inner">
+            <button
+              @click="slide ? startGame() : slide = 1"
+              class="btn btn_stroke btn_primary">
+              <span class="btn--inner">
+                <span class="btn--inner-text">Continue</span>
+              </span>
+            </button>
+          </div>
+        </div>
+      </div>
+    </template>
     <template v-if="showGame">
       <div class="hide-desktop screen--header">
         <div class="screen--header-inner">
@@ -249,7 +303,6 @@ import {
 } from "@/constants";
 import some from "lodash/some";
 // @ is an alias to /src
-import StartScreen from "@/components/StartScreen";
 import Svoosh from "@/components/Svoosh";
 import GameNavBar from "@/components/GameNavBar.vue";
 import OscillatorModuleOne from "@/components/module/OscillatorModuleOne.vue";
@@ -274,6 +327,7 @@ export default {
     return {
       activeModule: 0,
       totalAttempts: 10,
+      slide: 0,
       marginArray: [0, 0.2, 0.4, 0.6],
       indicatorActive: true,
       oscillatorColor: MODULE_OSCILLATOR_COLOR,
