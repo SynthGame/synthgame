@@ -127,7 +127,7 @@ export default new Vuex.Store({
       timerIsRunning: false,
       isGameOver: false,
       nextLevelRequested: false,
-      level: 0,
+      level: -1,
       sequencesPassedInCurrentLevel: 0,
       knobsAvailable: {
         oscillator1: {},

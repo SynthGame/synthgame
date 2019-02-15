@@ -55,7 +55,7 @@
           </svg>
         </div>
         <ul class="navigation--list">
-          <li v-for="(item, key) in group.items" :key="key" class="navigation--item" :class="{'is-disabled' : lvlScore(item.score) <= 0 }">
+          <li v-for="(item, key) in group.items" :key="key" class="navigation--item" :class="{'is-disabled' : !(index == 0 && key == 0) && lvlScore(item.score) <= 0 }">
             <button class="navigation--item-btn" @click="activeScreen(index, key)">
               <span class="navigation--item-inner">
                 <span class="navigation--item-text">
@@ -116,7 +116,7 @@
       <div class="screen--footer">
         <div class="screen--footer-inner">
           <button
-            @click="slide === 0 ? slide = 1 : startGame()"
+            @click="slide === 0 ? startNextLevel() : enterLevel()"
             class="btn btn_stroke btn_primary">
             <span class="btn--inner">
               <span class="btn--inner-text">Continue</span>
@@ -125,7 +125,7 @@
         </div>
       </div>
     </div>
-    <template v-if="showGame">
+    <template v-else>
       <div class="hide-desktop screen--header">
         <div class="screen--header-inner">
           <button @click="toggleNavigation()" class="btn btn_link btn_primary">
@@ -203,6 +203,7 @@
               <span class="btn--inner-text">Submit</span>
             </span>
           </button>
+          <!-- DISPLAY PREVIEW -->
           <button
             v-else
             @click="startNextLevel"
@@ -405,12 +406,12 @@ export default {
     });
   },
   watch: {
-    showStartScreen(val) {
-      console.log(`SHowe Start ${val}`)
-      if(val) {
-        this.goToLevel(this.level + 1);
-      }
-    }
+    // showStartScreen(val) {
+    //   console.log(`SHowe Start ${val}`)
+    //   if(val) {
+    //     this.goToLevel(this.level + 1);
+    //   }
+    // }
   },
   methods: {
     toggleNavigation() {
@@ -421,7 +422,8 @@ export default {
       // this.failedLevel()
     },
     startGame() {
-       this.activeScreen(0, 0);
+      this.slide = 1;
+      this.goToLevel(0);
     },
     isGroupActive(group, index) {
       let isThereActiveItemInGroup = group.items.some(item => {
@@ -515,31 +517,37 @@ export default {
       this.toneLoop.start();
     },
     startNextLevel() {
-      this.$store.commit("increaseLevelValue", 1);
-      this.startLevelPreview(this.level); // TODO: should be + 1
+      const newLevel = this.level + 1;
+      this.goToLevel(newLevel);
       this.$store.commit({
         type: "setCompletedLevel",
         value: false
       });
     },
     // for entering lvl
-    startLevel(level) {
-      this.beginSvoosh()
+    enterLevel(level) {
+      // this.beginSvoosh()
+      // Set to RANDOMIZE PARAM in SOUND ENGINE.
+      this.setSoundToRandom();
+      this.slide = null;
+    },
+    setSoundToRandom() {
+
     },
     // LEVEL 
-    gotToPreview(level) {
+    // // // //
+    startLevelPreview(level) {
+
+      this.cheekySvoosh()
+
       this.$nextTick(() => {
         // disable all overlays when svoosh is done
         // this.displaySuccessOverlay = false;
         this.displayFailureOverlay = false;
-        this.displayStartOverlay = false;
+        // this.displayStartOverlay = false;
         this.displayPreviewOverlay = true;
+        this.slide = 1;
       });
-    },
-    // // // //
-    startLevelPreview(level) {
-     
-      this.gotToPreview();
 
       audio.playSweep();
       this.$router.push("?level=" + (level + 1));
@@ -649,6 +657,11 @@ export default {
       this.loop.start();
       // rest will be done by watcher of sequencesPassedInCurrentLevel
     },
+    cheekySvoosh(){
+      this.isThereSvooshComponent = true;
+      this.$nextTick(() => (this.svooshIt = true));
+      audio.playSweep();
+    },
     beginSvoosh() {
       this.slide = null;
       this.isThereSvooshComponent = true;
@@ -679,8 +692,6 @@ export default {
       const lvl = this.nav.groups[index].items[key].score
 
       this.goToLevel(lvl) // CHANGE to lvl
-  
-      this.startLevelPreview(lvl);
 
       this.$store.commit("resetAttempts");
 
