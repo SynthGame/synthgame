@@ -640,9 +640,7 @@ export default {
         moduleName: moduleName
       });
 
-
-
-      this.goToLevel(module.)
+      this.goToLevel(module.score) // CHANGE to lvl
 
       //Trigger preview Screen + new sound.
     },
