@@ -1,70 +1,118 @@
 <template>
-<div class="wrapper">
-  <div class="cols">
-    <nav :class="`screen navigation ${showModules ? 'is-active' : ''}`">
-      <div class="navigation--inner">
-        <div 
-          v-for="(group, index) in nav.groups" 
-          :key="index"
-          :class="[
+  <div class="wrapper">
+    <div class="cols">
+      <nav :class="`screen navigation ${showModules ? 'is-active' : ''}`">
+        <div class="navigation--inner">
+          <div
+            v-for="(group, index) in nav.groups"
+            :key="index"
+            :class="[
             `navigation--group_${group.title.toLowerCase().replace(' ', '')}`,
             'navigation--group',
             {
               'is-disabled': isGroupActive(group, index)
             }
           ]"
-        >
-          <div class="navigation--group-title">
-            <span>
-              {{ group.title }}
-            </span>
-            <svg v-if="group.icon === 'osc'" class="navigation--group-icon" viewBox="0 0 29 29" width="29" height="29" xmlns="http://www.w3.org/2000/svg">
-              <g fill="none" fill-rule="evenodd">
-                <path class="navigation--group-fill" d="M0 0h29v29H0z"/>
-                <path fill="#000" d="M.228 14.5h15.959v6.903L29 15.831V14.5H16.187V6.959z"/>
-              </g>
-            </svg>
-            <svg v-else-if="group.icon === 'filter'" class="navigation--group-icon" viewBox="0 0 29 29" width="29" height="29" xmlns="http://www.w3.org/2000/svg">
-              <g fill="none" fill-rule="evenodd">
-                <path fill="#000" d="M0 0h29v29H0z"/>
-                <path class="navigation--group-fill" d="M0 0h29v25.785C19.04 13.708 9.373 7.775 0 7.985-9.373 8.192-9.373 5.531 0 0z"/>
-              </g>
-            </svg>
-            <svg v-else-if="group.icon === 'lfo'" class="navigation--group-icon" viewBox="0 0 29 29" width="29" height="29" xmlns="http://www.w3.org/2000/svg">
-              <g fill="none" fill-rule="evenodd">
-                <path class="navigation--group-fill" d="M0 0h29v29H0z"/>
-                <path d="M14 8.07V0h1v8a7 7 0 1 1-1 .07z" fill="#000"/>
-              </g>
-            </svg>
-            <svg v-else-if="group.icon === 'envelope'" class="navigation--group-icon" viewBox="0 0 29 29" width="29" height="29" xmlns="http://www.w3.org/2000/svg">
-              <g fill="none" fill-rule="evenodd">
-                <path fill="#000" d="M0 0h29v29H0z"/>
-                <path class="navigation--group-fill" d="M0 0h29v24.211L18.04 10.065H0z"/>
-              </g>
-            </svg>
-            <svg v-else-if="group.icon === 'envelope2'" class="navigation--group-icon" viewBox="0 0 29 29" width="29" height="29" xmlns="http://www.w3.org/2000/svg">
-              <g fill="none" fill-rule="evenodd">
-                <path fill="#000" d="M0 0h29v29H0z"/>
-                <path class="navigation--group-fill" d="M0 0h29v29H11.42L0 7.774z"/>
-              </g>
-            </svg>
-            <svg v-else-if="group.icon === 'router'" class="navigation--group-icon" viewBox="0 0 29 29" width="29" height="29" xmlns="http://www.w3.org/2000/svg">
-              <g fill="none" fill-rule="evenodd">
-                <path class="navigation--group-fill" d="M0 0h29v29H0z"/>
-                <circle fill="#000" cx="15" cy="15" r="3"/>
-              </g>
-            </svg>
-          </div>
-          <ul class="navigation--list">
-            <li v-for="(item, key) in group.items" :key="key" class="navigation--item" :class="{'is-disabled' : lvlScore(item.score) <= 0 }">
-              <button class="navigation--item-btn" @click="activeScreen(index, key)">
-                <span class="navigation--item-inner">
-                  <span class="navigation--item-text">
-                    <span class="navigation--item-title">
-                      <span>{{ item.knobName }}</span>
+          >
+            <div class="navigation--group-title">
+              <span>{{ group.title }}</span>
+              <svg
+                v-if="group.icon === 'osc'"
+                class="navigation--group-icon"
+                viewBox="0 0 29 29"
+                width="29"
+                height="29"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <g fill="none" fill-rule="evenodd">
+                  <path class="navigation--group-fill" d="M0 0h29v29H0z"></path>
+                  <path fill="#000" d="M.228 14.5h15.959v6.903L29 15.831V14.5H16.187V6.959z"></path>
+                </g>
+              </svg>
+              <svg
+                v-else-if="group.icon === 'filter'"
+                class="navigation--group-icon"
+                viewBox="0 0 29 29"
+                width="29"
+                height="29"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <g fill="none" fill-rule="evenodd">
+                  <path fill="#000" d="M0 0h29v29H0z"></path>
+                  <path
+                    class="navigation--group-fill"
+                    d="M0 0h29v25.785C19.04 13.708 9.373 7.775 0 7.985-9.373 8.192-9.373 5.531 0 0z"
+                  ></path>
+                </g>
+              </svg>
+              <svg
+                v-else-if="group.icon === 'lfo'"
+                class="navigation--group-icon"
+                viewBox="0 0 29 29"
+                width="29"
+                height="29"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <g fill="none" fill-rule="evenodd">
+                  <path class="navigation--group-fill" d="M0 0h29v29H0z"></path>
+                  <path d="M14 8.07V0h1v8a7 7 0 1 1-1 .07z" fill="#000"></path>
+                </g>
+              </svg>
+              <svg
+                v-else-if="group.icon === 'envelope'"
+                class="navigation--group-icon"
+                viewBox="0 0 29 29"
+                width="29"
+                height="29"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <g fill="none" fill-rule="evenodd">
+                  <path fill="#000" d="M0 0h29v29H0z"></path>
+                  <path class="navigation--group-fill" d="M0 0h29v24.211L18.04 10.065H0z"></path>
+                </g>
+              </svg>
+              <svg
+                v-else-if="group.icon === 'envelope2'"
+                class="navigation--group-icon"
+                viewBox="0 0 29 29"
+                width="29"
+                height="29"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <g fill="none" fill-rule="evenodd">
+                  <path fill="#000" d="M0 0h29v29H0z"></path>
+                  <path class="navigation--group-fill" d="M0 0h29v29H11.42L0 7.774z"></path>
+                </g>
+              </svg>
+              <svg
+                v-else-if="group.icon === 'router'"
+                class="navigation--group-icon"
+                viewBox="0 0 29 29"
+                width="29"
+                height="29"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <g fill="none" fill-rule="evenodd">
+                  <path class="navigation--group-fill" d="M0 0h29v29H0z"></path>
+                  <circle fill="#000" cx="15" cy="15" r="3"></circle>
+                </g>
+              </svg>
+            </div>
+            <ul class="navigation--list">
+              <li
+                v-for="(item, key) in group.items"
+                :key="key"
+                class="navigation--item"
+                :class="{'is-disabled' : lvlScore(item.score) <= 0 }"
+              >
+                <button class="navigation--item-btn" @click="activeScreen(index, key)">
+                  <span class="navigation--item-inner">
+                    <span class="navigation--item-text">
+                      <span class="navigation--item-title">
+                        <span>{{ item.knobName }}</span>
+                      </span>
+                      <span>{{ lvlScore(item.score) }}</span>
                     </span>
-                    <span>{{ lvlScore(item.score) }}</span>
-                  </span>
                   </span>
                 </button>
               </li>
@@ -163,15 +211,32 @@
             <div class="after"></div>
           </div>
           <div style="margin-top: 40px" class="screen--attempts">
-            <svg v-for="(i) in totalAttempts/2" :key="i" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48">
+            <svg
+              v-for="(i) in totalAttempts/2"
+              :key="i"
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 48 48"
+            >
               <defs>
                 <clipPath id="half">
-                  <rect x="0" y="0" width="24.5" height="48" />
+                  <rect x="0" y="0" width="24.5" height="48"></rect>
                 </clipPath>
               </defs>
-              <path v-if="i <= (totalAttempts - attempts) / 2" class="screen--attempts-fill" d="M23.993 15.872l1.016-.889a7.313 7.313 0 0 1 4.853-1.834c2.032 0 4.035.832 5.489 2.455a7.314 7.314 0 0 1-.339 10.06l-9.828 8.735a1.795 1.795 0 0 1-2.382 0l-9.814-8.735c-2.751-2.695-2.935-7.125-.339-10.06a7.337 7.337 0 0 1 5.489-2.455 7.34 7.34 0 0 1 4.853 1.834l1.002.889" />
-              <path v-if="i - 0.5 === (totalAttempts - attempts) / 2 " clip-path="url(#half)" class="screen--attempts-fill" d="M23.993 15.872l1.016-.889a7.313 7.313 0 0 1 4.853-1.834c2.032 0 4.035.832 5.489 2.455a7.314 7.314 0 0 1-.339 10.06l-9.828 8.735a1.795 1.795 0 0 1-2.382 0l-9.814-8.735c-2.751-2.695-2.935-7.125-.339-10.06a7.337 7.337 0 0 1 5.489-2.455 7.34 7.34 0 0 1 4.853 1.834l1.002.889" />
-              <path class="screen--attempts-stroke" d="M23.993 15.872l1.016-.889a7.313 7.313 0 0 1 4.853-1.834c2.032 0 4.035.832 5.489 2.455a7.314 7.314 0 0 1-.339 10.06l-9.828 8.735a1.795 1.795 0 0 1-2.382 0l-9.814-8.735c-2.751-2.695-2.935-7.125-.339-10.06a7.337 7.337 0 0 1 5.489-2.455 7.34 7.34 0 0 1 4.853 1.834l1.002.889" />
+              <path
+                v-if="i <= (totalAttempts - attempts) / 2"
+                class="screen--attempts-fill"
+                d="M23.993 15.872l1.016-.889a7.313 7.313 0 0 1 4.853-1.834c2.032 0 4.035.832 5.489 2.455a7.314 7.314 0 0 1-.339 10.06l-9.828 8.735a1.795 1.795 0 0 1-2.382 0l-9.814-8.735c-2.751-2.695-2.935-7.125-.339-10.06a7.337 7.337 0 0 1 5.489-2.455 7.34 7.34 0 0 1 4.853 1.834l1.002.889"
+              ></path>
+              <path
+                v-if="i - 0.5 === (totalAttempts - attempts) / 2 "
+                clip-path="url(#half)"
+                class="screen--attempts-fill"
+                d="M23.993 15.872l1.016-.889a7.313 7.313 0 0 1 4.853-1.834c2.032 0 4.035.832 5.489 2.455a7.314 7.314 0 0 1-.339 10.06l-9.828 8.735a1.795 1.795 0 0 1-2.382 0l-9.814-8.735c-2.751-2.695-2.935-7.125-.339-10.06a7.337 7.337 0 0 1 5.489-2.455 7.34 7.34 0 0 1 4.853 1.834l1.002.889"
+              ></path>
+              <path
+                class="screen--attempts-stroke"
+                d="M23.993 15.872l1.016-.889a7.313 7.313 0 0 1 4.853-1.834c2.032 0 4.035.832 5.489 2.455a7.314 7.314 0 0 1-.339 10.06l-9.828 8.735a1.795 1.795 0 0 1-2.382 0l-9.814-8.735c-2.751-2.695-2.935-7.125-.339-10.06a7.337 7.337 0 0 1 5.489-2.455 7.34 7.34 0 0 1 4.853 1.834l1.002.889"
+              ></path>
             </svg>
           </div>
         </div>
@@ -236,13 +301,13 @@ import LfoModule from "@/components/module/LfoModule.vue";
 import SequencerModule from "@/components/module/SequencerModule.vue";
 import RouterModule from "@/components/module/RouterModule.vue";
 import { SYNTH_BPM } from "@/constants";
-import audio from '../audio.js';
+import audio from "../audio.js";
 import presets from "@/presets";
 import character from "@/character";
 import levels from "@/levels";
 import range from "lodash/range";
 import Nav from "@/nav";
-import Matter from 'matter-js'
+// import Matter from 'matter-js'
 
 export default {
   name: "home",
@@ -263,7 +328,7 @@ export default {
       isThereSvooshComponent: false,
       svooshIt: false,
       showGame: false,
-      showModules: false,
+      showModules: false
     };
   },
   components: {
@@ -330,14 +395,14 @@ export default {
   },
   methods: {
     makeAttempt() {
-      // this.$store.dispatch("madeAttempt");
-      this.failedLevel()
+      this.$store.dispatch("madeAttempt");
+      // this.failedLevel()
     },
     isGroupActive(group, index) {
       let isThereActiveItemInGroup = group.items.some(item => {
         return this.lvlScore(item.score) > 0;
-      })
-      return index === 0 ? false : !isThereActiveItemInGroup
+      });
+      return index === 0 ? false : !isThereActiveItemInGroup;
     },
     init() {
       // Retrieve highscore from local storage
@@ -426,17 +491,15 @@ export default {
     },
     startNextLevel() {
       this.$store.commit("increaseLevelValue", 1);
-      this.startLevel(this.level) // TODO: should be + 1
+      this.startLevel(this.level); // TODO: should be + 1
       this.$store.commit({
         type: "setCompletedLevel",
         value: false
       });
     },
-    startLevel() {
-
-    },
+    startLevel() {},
     startLevel(level) {
-      this.beginSvoosh()
+      this.beginSvoosh();
       this.$nextTick(() => {
         // disable all overlays when svoosh is done
         // this.displaySuccessOverlay = false;
@@ -488,7 +551,6 @@ export default {
       // Set noteArray to sequence preset locally
       this.noteArray = presets[this.pickedPreset].sequenceArray;
 
-
       // import level config
       const availableParameters = levels[level] || levels[levels.length - 1];
 
@@ -501,7 +563,7 @@ export default {
       });
 
       console.log(availableParameters);
-      
+
       this.$store.dispatch("randomizeAudioParameters", availableParameters); // and the audio params
 
       // this.$nextTick(() => this.$store.dispatch("setSynthToGoal", audio)); //then let the user hear it
@@ -577,6 +639,12 @@ export default {
         knobName: knobName,
         moduleName: moduleName
       });
+
+
+
+      this.goToLevel(module.)
+
+      //Trigger preview Screen + new sound.
     },
     moduleIsUseable(moduleName) {
       if (this.createModeIsActive) {
@@ -588,6 +656,15 @@ export default {
     failedLevel() {},
     lvlScore(lvl) {
       return this.$store.state.gameState.levels[lvl].levelData.score;
+    },
+    goToLevel(level) {
+      // Add check for lvl avalible....
+      this.$store.commit("setLevelValue", level);
+      this.startLevel(level); // TODO: should be + 1
+      this.$store.commit({
+        type: "setCompletedLevel",
+        value: false
+      });
     }
   },
   computed: {

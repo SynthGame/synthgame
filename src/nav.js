@@ -19,7 +19,7 @@ export default {
           title: 'frequency',
           knobName: 'octave',
           author: 'Lawson',
-          score: 0
+          score: 0,
         },
         {
           title: 'detune',
