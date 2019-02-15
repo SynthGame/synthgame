@@ -1,5 +1,21 @@
 <template>
   <div id="app">
+    <transition name="confetti">
+      <div v-show="showConfetti" class="overlay">
+        <canvas id="confetti"></canvas>
+        <div class="overlay--inner">
+          <div class="overlay--title">Yay! You made it!</div>
+          <div class="overlay--description">{{ 10 - attempts }} attempts left.</div>
+          <button
+            @click="showNextLevel()"
+            class="btn_full btn btn_stroke btn_primary">
+            <span class="btn--inner">
+              <span class="btn--inner-text">Next</span>
+            </span>
+          </button>
+        </div>
+      </div>
+    </transition>
     <transition name="slideout">
       <success-overlay
         v-if="displaySuccessOverlay"
@@ -8,7 +24,7 @@
       />
     </transition>
 
-    <transition name="slideout">
+    <transition name="fade">
       <original-sound-overlay
         v-if="displayOriginalOverlay"
         :retreat="retreat"
@@ -20,7 +36,7 @@
 
 
     <failure-overlay v-if="isGameOver" @startagain="startAgain" @startlastlevel="startLastLevel"/>
-    <router-view/>
+    <router-view />
   </div>
 </template>
 
@@ -44,6 +60,7 @@ import presets from "@/presets";
 import range from "lodash/range";
 import fill from "lodash/fill";
 import character from "@/character";
+import "confetti-js";
 
 export default {
   name: "App",
@@ -56,6 +73,8 @@ export default {
       displayStartOverlay: true, // change
       displayPreviewOverlay: false,
       displayOriginalOverlay: false,
+      showConfetti: false,
+      nextLevel: false,
       // gameSummary: true,
       loop: null,
       isThereSvooshComponent: false,
@@ -77,27 +96,15 @@ export default {
     };
   },
   mounted() {
-    // function debounce(func, wait, immediate) {
-    //   var timeout;
-    //   return function() {
-    //     var context = this, args = arguments;
-    //     var later = function() {
-    //       timeout = null;
-    //       if (!immediate) func.apply(context, args);
-    //     };
-    //     var callNow = immediate && !timeout;
-    //     clearTimeout(timeout);
-    //     timeout = setTimeout(later, wait);
-    //     if (callNow) func.apply(context, args);
-    //   };
-    // };
-    // var calcVH = debounce(function() {
-    //   var vH = Math.max(document.documentElement.clientHeight, window.innerHeight || 0);
-    //   document.body.setAttribute("style", "height:" + vH + "px;");
-    // }, 250);
-    // calcVH();
-    // window.addEventListener('onorientationchange', calcVH, true);
-    // window.addEventListener('resize', calcVH, true);
+    var confettiSettings = {
+      target: 'confetti',
+      size: 8,
+      max: 30,
+      clock: 50,
+      colors: [[255, 126, 110],[67, 190, 222],[110, 1, 209],[124, 208, 139], [228, 226, 89], [75, 27, 255], [255, 255, 255]]
+    };
+    var confetti = new ConfettiGenerator(confettiSettings);
+    confetti.render();
   },
   components: {
     SuccessOverlay,
@@ -120,6 +127,9 @@ export default {
       allParametersMatchGoal: "allParametersMatchGoal",
       nextLevelClickedInNavBar: "nextLevelClickedInNavBar"
     }),
+    attempts() {
+      return this.$store.state.gameState.attempts;
+    },
     isGameOver() {
       return this.$store.state.gameState.isGameOver;
     },
@@ -247,15 +257,9 @@ export default {
       }
     },
     originalSoundPrompt() {
-      this.$store.dispatch("setSynthToGoal", audio);
-      // this.displayOriginalOverlay = true; // create this overlay.
-      this.timerInterval = setInterval(this.countdown, 1000);
-      let area;
-      if (window.innerWidth >= 799) {
-        area = document.querySelector('.screen_score .screen--attempts')
-      } else {
-
-      }
+      let self = this
+      self.$store.dispatch("setSynthToGoal", audio);
+      this.displayOriginalOverlay = true; // create this overlay.
     },
     killOrignalSoundPrompt() {
       this.displayOriginalOverlay = false;
@@ -266,12 +270,16 @@ export default {
     forfeit() {
       this.killOrignalSoundPrompt();
       this.startNextLevel();
+    },
+    showNextLevel() {
+      document.querySelector('.btn_next').click()
+      this.showConfetti = false
     }
   },
   watch: {
     madeAttempt() {
       if (this.allParametersMatchGoal === true) {
-        this.beginSuccessSvoosh();
+        this.showConfetti = true
         const score = 10 - this.$store.state.gameState.attempts;
         this.$store.commit("addValueToScore", score);
         this.$store.commit("setLevelScore", score);
@@ -452,20 +460,27 @@ export default {
 // }
 
 
-// .fade-enter-active, .fade-leave-active {
-//   transition: opacity .5s;
-// }
-// .fade-enter, .fade-leave-to {
-//   opacity: 0;
-// }
+.fade-enter-active, .fade-leave-active {
+  transition: opacity .5s;
+}
+.fade-enter, .fade-leave-to {
+  opacity: 0;
+}
 
-// /* OVERLAYS TRANSITIONING
-// *
-// * the way the start screen goes away:
-// */
-// .slideout-leave-active {
-//   animation: slideout 1s;
-// }
+.confetti-enter-active, .confetti-leave-active {
+  transition: opacity .1s;
+}
+.confetti-enter, .confetti-leave-to {
+  opacity: 0;
+}
+
+/* OVERLAYS TRANSITIONING
+*
+* the way the start screen goes away:
+*/
+.slideout-leave-active {
+  animation: slideout 1s;
+}
 
 // /* ...and the preview screen enters: */
 // .slide-up-slide-down-enter-active {
@@ -477,15 +492,15 @@ export default {
 //   animation: slidedown 900ms ease-in 0.3s;
 // }
 
-// /* these animations, defined in keyframes: */
-// @keyframes slideout {
-//   0% {
-//     transform: translateY(0);
-//   }
-//   100% {
-//     transform: translateY(-100%);
-//   }
-// }
+/* these animations, defined in keyframes: */
+@keyframes slideout {
+  0% {
+    transform: translateY(0);
+  }
+  100% {
+    transform: translateY(-100%);
+  }
+}
 
 // @keyframes slidein {
 //   0% {

@@ -142,7 +142,7 @@
           <button
             v-else
             @click="startNextLevel"
-            class="btn_full btn btn_stroke btn_primary">
+            class="btn_full btn btn_stroke btn_primary btn_next">
             <span class="btn--inner">
               <span class="btn--inner-text">Next</span>
             </span>
@@ -255,7 +255,6 @@ import character from "@/character";
 import levels from "@/levels";
 import range from "lodash/range";
 import Nav from "@/nav";
-import Matter from 'matter-js'
 
 export default {
   name: "home",
@@ -447,9 +446,6 @@ export default {
         type: "setCompletedLevel",
         value: false
       });
-    },
-    startLevel() {
-
     },
     startLevel(level) {
       this.beginSvoosh()
@@ -666,7 +662,7 @@ export default {
         this.$store.getters.audioParametersMatchGoalWithMargin["router"]
       ).every(param => param);
     }
-  }
+  },
 };
 </script>
 
