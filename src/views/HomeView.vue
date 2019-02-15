@@ -121,7 +121,7 @@
         </div>
       </nav>
       <div class="screen">
-        <start-screen v-if="showStartScreen" @startLevel="startLevel(0)"/>
+        <start-screen v-if="showStartScreen" @startLevel="startGame()"/>
         <template v-if="showGame">
           <div class="hide-desktop screen--header">
             <div class="screen--header-inner">
@@ -328,7 +328,8 @@ export default {
       isThereSvooshComponent: false,
       svooshIt: false,
       showGame: false,
-      showModules: false
+      showModules: false,
+      pickedPreset: 0,
     };
   },
   components: {
@@ -345,7 +346,7 @@ export default {
     Svoosh
   },
   mounted() {
-    this.activeScreen(0, 0);
+
   },
   created() {
     this.init();
@@ -394,6 +395,9 @@ export default {
     });
   },
   methods: {
+    startGame() {
+       this.activeScreen(0, 0);
+    },
     makeAttempt() {
       this.$store.dispatch("madeAttempt");
       // this.failedLevel()
@@ -491,15 +495,14 @@ export default {
     },
     startNextLevel() {
       this.$store.commit("increaseLevelValue", 1);
-      this.startLevel(this.level); // TODO: should be + 1
+      this.startLevelPreview(this.level); // TODO: should be + 1
       this.$store.commit({
         type: "setCompletedLevel",
         value: false
       });
     },
-    startLevel() {},
-    startLevel(level) {
-      this.beginSvoosh();
+    // LEVEL 
+    gotToPreview(level) {
       this.$nextTick(() => {
         // disable all overlays when svoosh is done
         // this.displaySuccessOverlay = false;
@@ -507,9 +510,17 @@ export default {
         this.displayStartOverlay = false;
         this.displayPreviewOverlay = true;
       });
+    },
+    // // // //
+    startLevelPreview(level) {
+      this.beginSvoosh();
+     
+      this.gotToPreview();
+
       audio.playSweep();
       this.$router.push("?level=" + (level + 1));
       window.parent.postMessage("play-game-activated", "*");
+
 
       // randomly pick preset
       this.pickedPreset = Math.round(Math.random() * (presets.length - 1));
@@ -552,7 +563,7 @@ export default {
       this.noteArray = presets[this.pickedPreset].sequenceArray;
 
       // import level config
-      const availableParameters = levels[level] || levels[levels.length - 1];
+      const availableParameters = levels[level];
 
       this.$store.dispatch("startNewLevel", {
         knobsAvailable: availableParameters,
@@ -640,7 +651,13 @@ export default {
         moduleName: moduleName
       });
 
-      this.goToLevel(module.score) // CHANGE to lvl
+
+      const lvl = this.nav.groups[index].items[key].score
+
+      this.goToLevel(lvl) // CHANGE to lvl
+  
+
+      this.startLevelPreview(lvl)
 
       //Trigger preview Screen + new sound.
     },
@@ -658,7 +675,7 @@ export default {
     goToLevel(level) {
       // Add check for lvl avalible....
       this.$store.commit("setLevelValue", level);
-      this.startLevel(level); // TODO: should be + 1
+      this.startLevelPreview(level); // TODO: should be + 1
       this.$store.commit({
         type: "setCompletedLevel",
         value: false

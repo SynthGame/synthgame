@@ -105,7 +105,7 @@ export default {
     },
     completedLevel() {
       return this.$store.state.gameState.completedLevel;
-    }
+    },
     // nextLevelRequested () {
     //   if (this.$store.state.gameState.nextLevelRequested) {
     //     console.log('hiiieeaaa working finally');
@@ -237,7 +237,6 @@ export default {
         const score = 10 - this.$store.state.gameState.attempts;
         this.$store.commit("addValueToScore", score);
         this.$store.commit("setLevelScore", score);
-        watch
         this.$store.commit({
           type: "setCompletedLevel",
           value: true

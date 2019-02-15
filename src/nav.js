@@ -7,7 +7,7 @@ export default {
     title: 'frequency',
     knobName: 'octave',
     author: 'Lawson',
-    score: 1
+    score: 0,
   },
   groups: [
     {
