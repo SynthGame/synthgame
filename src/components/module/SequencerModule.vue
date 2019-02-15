@@ -543,9 +543,7 @@ button.sequencer-button {
 }
 
 .module__name__title {
-  h2 {
-    color: white;
-  }
+  color: white;
 }
 
 .main {

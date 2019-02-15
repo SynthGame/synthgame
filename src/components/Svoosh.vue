@@ -154,7 +154,7 @@ is-opened {
 }
 .shape-overlays {
   width: 100vw;
-  height: 100vh;
+  height: 100%;
   position: fixed;
   top: 0;
   left: 0;

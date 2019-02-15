@@ -1,12 +1,12 @@
 <template>
   <div class="module__name">
     <span class="module__name__title"><slot name="title"></slot></span>
-    <span
+    <!-- <span
       :class="{
                 'module__name__status-indicator': true,
                 'module__name__status-indicator--active': indicatorActive
               }"
-    ></span>
+    ></span> -->
     <span class="module__name__sub-title" :style="{'color': moduleColor}"><slot name="subtitle"></slot></span>
   </div>
 </template>
@@ -33,8 +33,8 @@ export default {
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style lang="scss" scoped>
 .module__name {
-  font-size: 0.9em;
-  padding: 5% 10%;
+  padding: 10px;
+  white-space: nowrap;
   margin: 0;
   display: flex;
   position: relative;
@@ -65,6 +65,7 @@ export default {
     width: 10px;
     border: 1px solid white;
     border-radius: 100%;
+    flex-shrink: 0;
 
     &--active {
       // border: none;

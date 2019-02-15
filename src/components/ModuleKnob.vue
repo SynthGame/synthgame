@@ -471,18 +471,15 @@ export default {
 </script>
 <style scoped lang="scss">
 .knob {
-  max-width: 5.4em;
-  height: 6.9em;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   &__bg {
-    margin-bottom: -150px;
     overflow: visible;
   }
   p {
     margin: 0;
-    font-size: 0.7em;
+    font-size: 12px;
     text-transform: uppercase;
     letter-spacing: 1px;
     z-index: 9;
@@ -490,25 +487,21 @@ export default {
   }
 }
 
-.div-wrapper {
-  max-height: 4em;
-}
-
 .touchpoint {
   // pointer-events: all !important;
   // touch-action: all !important;
 }
 
-@media only screen and (max-width: 1000px) {
-  .knob p {
-    font-size: 1.2em;
-  }
-  .knob {
-    margin: 0 5% !important;
-  }
-  .knob {
-    // pointer-events: none;
-    width: 25%;
-  }
-}
+// @media only screen and (max-width: 1000px) {
+//   .knob p {
+//     font-size: 1.2em;
+//   }
+//   .knob {
+//     margin: 0 5% !important;
+//   }
+//   .knob {
+//     // pointer-events: none;
+//     width: 25%;
+//   }
+// }
 </style>

@@ -1,0 +1,114 @@
+.module {
+  width: auto;
+  background: black;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  &.empty {
+    background: none;
+    &::after {
+      background: none;
+    }
+    &::before {
+      background: none;
+    }
+  }
+  &.sequencer {
+    height: calc(92vh);
+  }
+  &__name {
+    &__sub-title {
+      color: $colour_white !important;
+    }
+  }
+  .octave-wrapper {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    .switch {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      box-sizing: content-box;
+      margin: 0 auto 20px;
+      button {
+        width: 60px; height: 60px; flex-shrink: 0;
+        display: block;
+        svg {
+          padding: 0;
+        }
+      }
+    }
+    button {
+      min-height: 4vh;
+      height: 100%;
+      width: 100%;
+      box-sizing: content-box;
+      padding: 0;
+      margin: auto;
+      background: unset;
+      border: none;
+      cursor: pointer;
+      transition: all 0.2s;
+      &:hover {
+        background: rgba(255, 255, 255, 0.1);
+      }
+    }
+    svg {
+      width: 1em;
+      stroke: white;
+    }
+    & p {
+      margin: 0;
+      font-size: 0.7em;
+      width: 100%;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+  }
+  .button-wrapper {
+    display: flex;
+    padding: 0em;
+    width: 80%;
+    margin: 0;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    min-height: 4em;
+    button {
+      width: 4vh;
+      height: 4vh;
+    }
+    svg {
+      width: 1em;
+    }
+    & p {
+      margin: 0;
+      font-size: 0.7em;
+      width: 100%;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+  }
+  .display {
+    position: relative;
+    z-index: 99;
+    overflow: hidden;
+    margin-bottom: 20px;
+    path {
+      transition: 0.1s all ease-out;
+    }
+  }
+  .knobs {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+  }
+  @media screen and (max-width: 799px) {
+    .display {
+      width: 100vw;
+    }
+  }
+}
