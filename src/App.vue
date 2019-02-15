@@ -16,13 +16,14 @@
         </div>
       </div>
     </transition>
-    <transition name="slideout">
+
+    <!-- <transition name="slideout">
       <success-overlay
         v-if="displaySuccessOverlay"
         @next="startNextLevel"
         @closesuccessoverlay="closeSuccessOverlay"
       />
-    </transition>
+    </transition> -->
 
     <transition name="fade">
       <original-sound-overlay
@@ -125,7 +126,6 @@ export default {
     }),
     ...mapGetters({
       allParametersMatchGoal: "allParametersMatchGoal",
-      nextLevelClickedInNavBar: "nextLevelClickedInNavBar"
     }),
     attempts() {
       return this.$store.state.gameState.attempts;
@@ -290,14 +290,6 @@ export default {
         }
       }
     },
-    nextLevelClickedInNavBar(val) {
-      console.log("nextLevelClickedInNavBar", val);
-      if (val === "true") {
-        console.log("nextLevelClickedInNavBar triggered in app.vue");
-        this.$store.dispatch("notNextLevel");
-        this.startNextLevel();
-      }
-    }
   }
 };
 </script>
