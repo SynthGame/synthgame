@@ -532,7 +532,7 @@ export default {
       this.slide = null;
     },
     setSoundToRandom() {
-
+      this.$store.dispatch("setSynthToDefaultParameters", audio);
     },
     // LEVEL 
     // // // //
@@ -616,9 +616,10 @@ export default {
     },
     setToSelectedPreset() {
       this.$store.commit("setAudioParameterToPreset", {
-        preset: presets[this.pickedPreset].parameterValues
+        preset  : presets[this.pickedPreset].parameterValues
       });
-      //reset oscs for waveforms
+      
+      // reset oscs for waveforms
       audio.oscillator1.state.device.type =
         presets[this.pickedPreset].parameterValues.oscillator1.typeOsc;
       audio.oscillator2.state.device.type =
@@ -631,6 +632,7 @@ export default {
         presets[this.pickedPreset].parameterValues.lfo.type;
       audio.filter.state.device.type =
         presets[this.pickedPreset].parameterValues.filter.type;
+      // this.$store.dispatch('setSynthToGoal', audio);
     },
     startPreset(parameters, bpm) {
       const usedParameters = mapValues(parameters, audioModule =>
