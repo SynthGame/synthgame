@@ -243,7 +243,7 @@ export default {
         });
 
         this.$store.dispatch("levelDone")
-        this.$store.commit("resetAttempts")
+        this.$store.commit("resetAttempts");
       } else {
         if (this.$store.state.gameState.attempts == 10) {
           // need to reset global attemps in gameOver action.....
