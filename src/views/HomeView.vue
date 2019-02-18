@@ -612,7 +612,6 @@ export default {
       // this.$nextTick(() => this.$store.dispatch("setSynthToGoal", audio)); //then let the user hear it
 
       // this.loop.start()
-      // rest will be done by watcher of sequencesPassedInCurrentLevel
     },
     setToSelectedPreset() {
       this.$store.commit("setAudioParameterToPreset", {
@@ -657,7 +656,6 @@ export default {
       this.$store.dispatch("setSynthToGoal", audio); // then let the user hear it
 
       this.loop.start();
-      // rest will be done by watcher of sequencesPassedInCurrentLevel
     },
     cheekySvoosh(){
       this.isThereSvooshComponent = true;

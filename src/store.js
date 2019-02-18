@@ -15,6 +15,7 @@ import Levels from './levels';
 // 
 import PossibleValues from './stores/possibleValues';
 import AudioParameters from './stores/audioParameters';
+import NoKnobsAvalible from './stores/noKnobsAvalible';
 
 Vue.use(Vuex)
 
@@ -24,35 +25,30 @@ export default new Vuex.Store({
     name: 'Anonymous',
     avatarUrl: null,
     audioParameters: AudioParameters(),
-    gameState: {
-      createModeIsActive: false,
-      sweepArmed: true,
-      margin: 10,
-      // GAME SCORING //
+    gameState: {       
+    // GAME SCORING //
+      level: -1,
       attempts: 0,
-      madeAttempt: false,
-      completedLevel: false,
-      levels: Levels,
-      userAttemptPreset: AudioParameters(),
-      // //
       score: 0,
       highScore: 0,
-      isGameOver: false,
-      nextLevelRequested: false,
-      level: -1,
-      sequencesPassedInCurrentLevel: 0,
-      knobsAvailable: {
-        oscillator1: {},
-        oscillator2: {},
-        filter: {},
-        envelope: {},
-        envelope2: {},
-        lfo: {},
-        router: {}
-      },
+
+    // GAME MECHANICS //
+      levels: Levels,
       goal: AudioParameters(),
-      possibleValues: PossibleValues,
+      userAttemptPreset: AudioParameters(),
       defaultParams: AudioParameters(),
+      knobsAvailable: NoKnobsAvalible,
+
+    // TOGGLES //
+      madeAttempt: false,
+      completedLevel: false,
+      createModeIsActive: false,
+      sweepArmed: true,
+      isGameOver: false,
+
+    // CONTSTANTS //
+      margin: 10,
+      possibleValues: PossibleValues,
     }
   },
   mutations: {
@@ -135,20 +131,8 @@ export default new Vuex.Store({
     setCreateMode(state, isActive) {
       state.gameState.createModeIsActive = isActive
     },
-    increaseSequencesPassedInCurrentLevel(state) {
-      state.gameState.sequencesPassedInCurrentLevel++
-    },
-    resetSequencesPassedInCurrentLevel(state) {
-      state.gameState.sequencesPassedInCurrentLevel = 0
-    },
     setTheGameToGameOver(state) {
       state.gameState.isGameOver = true
-    },
-    setRequestNextLevelToTrue(state) {
-      state.gameState.nextLevelRequested = true
-    },
-    setRequestNextLevelToFalse(state) {
-      state.gameState.nextLevelRequested = false
     },
     setTheGameFromGameOver(state) {
       state.gameState.isGameOver = false
@@ -179,9 +163,6 @@ export default new Vuex.Store({
     allParametersMatchGoal: (state, getters) => {
       return flatMap(getters.audioParametersMatchGoalWithMargin, val => values(val))
         .every(val => val)
-    },
-    nextLevelClickedInNavBar: (state) => {
-      return state.gameState.nextLevelRequested ? 'true' : 'false'
     },
     displayedLevel: (state, getters) => {
       return state.gameState.level + 1
@@ -344,7 +325,6 @@ export default new Vuex.Store({
       commit('setKnobsAvailable', knobsAvailable)
     },
     startNewLevel({ state, commit, dispatch }, { knobsAvailable, level }) {
-      commit('resetSequencesPassedInCurrentLevel')
       if (level) commit('setLevelValue', level)
       return dispatch('setLevel', {
         knobsAvailable
