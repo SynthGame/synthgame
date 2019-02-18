@@ -14,6 +14,7 @@ import Levels from './levels';
 
 // 
 import PossibleValues from './stores/possibleValues';
+import AudioParameters from './stores/audioParameters';
 
 Vue.use(Vuex)
 
@@ -22,112 +23,20 @@ export default new Vuex.Store({
     bpm: 110,
     name: 'Anonymous',
     avatarUrl: null,
-    audioParameters: {
-      oscillator1: {
-        frequency: '131',
-        typeOsc: 'sawtooth',
-        detune: 50
-        // phase: 0
-      },
-      oscillator2: {
-        frequency: '131',
-        typeOsc: 'sawtooth',
-        // detune: 50,
-        volume: 50,
-        // phase: 0
-      },
-      filter: {
-        cutOffFreq: 70,
-        type: 'lowpass',
-        setQ: 0
-        // gain: 50
-      },
-      envelope: {
-        attack: 0,
-        decay: 25,
-        sustain: 100,
-        release: 90
-      },
-      envelope2: {
-        attack: 0,
-        decay: 90,
-        sustain: 0,
-        release: 0,
-        assign: 'filtercutoff',
-        amount: 100
-      },
-      lfo: {
-        frequency: 10,
-        type: 'sine',
-        amount: 0
-      },
-      router: {
-        lfo: 'osc1Detune',
-        envelope2: 'filterCutoff'
-      }
-    },
+    audioParameters: AudioParameters(),
     gameState: {
       createModeIsActive: false,
       sweepArmed: true,
-      marginOsc: 0,
-      marginFil: 0,
-      marginEnv: 0,
-      marginLfo: 0,
-      rackSlotArray: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11],
       margin: 10,
       // GAME SCORING //
       attempts: 0,
       madeAttempt: false,
       completedLevel: false,
       levels: Levels,
-      userAttemptPreset: {
-        oscillator1: {
-          frequency: '131',
-          typeOsc: 'sawtooth',
-          detune: 50
-          // phase: 0
-        },
-        oscillator2: {
-          frequency: '131',
-          typeOsc: 'sawtooth',
-          // detune: 50,
-          volume: 50,
-          // phase: 0
-        },
-        filter: {
-          cutOffFreq: 70,
-          type: 'lowpass',
-          setQ: 0
-          // gain: 50
-        },
-        envelope: {
-          attack: 0,
-          decay: 0,
-          sustain: 100,
-          release: 0
-        },
-        envelope2: {
-          attack: 0,
-          decay: 90,
-          sustain: 0,
-          release: 0,
-          assign: 'filterCutoff',
-          amount: 100
-        },
-        lfo: {
-          frequency: 10,
-          type: 'sine',
-          amount: 0
-        },
-        router: {
-          lfo: 'oscsDetune',
-          envelope2: 'filterCutoff'
-        }
-      },
+      userAttemptPreset: AudioParameters(),
       // //
       score: 0,
       highScore: 0,
-      timerIsRunning: false,
       isGameOver: false,
       nextLevelRequested: false,
       level: -1,
@@ -141,92 +50,9 @@ export default new Vuex.Store({
         lfo: {},
         router: {}
       },
-      goal: {
-        oscillator1: {
-          frequency: '131',
-          typeOsc: 'sawtooth',
-          detune: 50
-          // phase: 0
-        },
-        oscillator2: {
-          frequency: '131',
-          typeOsc: 'sawtooth',
-          // detune: 50,
-          volume: 50,
-          // phase: 0
-        },
-        filter: {
-          cutOffFreq: 70,
-          type: 'lowpass',
-          setQ: 0
-          // gain: 50
-        },
-        envelope: {
-          attack: 0,
-          decay: 0,
-          sustain: 100,
-          release: 0
-        },
-        envelope2: {
-          attack: 0,
-          decay: 90,
-          sustain: 0,
-          release: 0,
-          assign: 'filterCutoff',
-          amount: 100
-        },
-        lfo: {
-          frequency: 10,
-          type: 'sine',
-          amount: 0
-        },
-        router: {
-          lfo: 'oscsDetune',
-          envelope2: 'filterCutoff'
-        }
-      },
+      goal: AudioParameters(),
       possibleValues: PossibleValues,
-      defaultParams: {
-        oscillator1: {
-          frequency: '131',
-          typeOsc: 'sawtooth',
-          detune: 50
-        },
-        oscillator2: {
-          frequency: '131',
-          typeOsc: 'sawtooth',
-          // detune: 50,
-          volume: 50,
-        },
-        filter: {
-          cutOffFreq: 40,
-          type: 'lowpass',
-          setQ: 0
-        },
-        envelope: {
-          attack: 0,
-          decay: 25,
-          sustain: 100,
-          release: 90
-        },
-        envelope2: {
-          attack: 0,
-          decay: 90,
-          sustain: 0,
-          release: 0,
-          assign: 'filtercutoff',
-          amount: 100
-        },
-        lfo: {
-          frequency: 10,
-          type: 'sine',
-          amount: 0
-        },
-        router: {
-          lfo: 'oscsDetune',
-          envelope2: 'filterCutoff'
-        }
-      }
+      defaultParams: AudioParameters(),
     }
   },
   mutations: {
@@ -279,14 +105,6 @@ export default new Vuex.Store({
     setMargin(state, { newMargin }) {
       // overwrite parameters from audiostate, this will not fill in nested objects
       state.gameState.margin = newMargin
-    },
-    startTimerIsRunning(state) {
-      // overwrite parameters from audiostate, this will not fill in nested objects
-      state.gameState.timerIsRunning = true
-    },
-    stopTimerIsRunning(state) {
-      // overwrite parameters from audiostate, this will not fill in nested objects
-      state.gameState.timerIsRunning = false
     },
     armSweep(state) {
       // overwrite parameters from audiostate, this will not fill in nested objects
@@ -385,25 +203,6 @@ export default new Vuex.Store({
     madeAttempt({ state, commit }) {
       commit('toggleAttemptMade')
       commit('incrementAttempt')
-    },
-    shuffleRackSlotArray({ state, commit }) {
-      var array = state.gameState.rackSlotArray
-      var currentIndex = array.length, temporaryValue, randomIndex;
-
-      // While there remain elements to shuffle...
-      while (0 !== currentIndex) {
-
-        // Pick a remaining element...
-        randomIndex = Math.floor(Math.random() * currentIndex);
-        currentIndex -= 1;
-
-        // And swap it with the current element.
-        temporaryValue = array[currentIndex];
-        array[currentIndex] = array[randomIndex];
-        array[randomIndex] = temporaryValue;
-      }
-      state.gameState.rackSlotArray = array
-      return array;
     },
     randomizeAudioParameters({ state, commit }, randomizeArray) {
       
@@ -552,15 +351,13 @@ export default new Vuex.Store({
       })
     },
     levelDone({ state, commit }) {
-      commit('stopTimerIsRunning')
+     
       // commit('addValueToScore', timeLeft)
     },
     gameOver({ state, commit }) {
       commit('setTheGameToGameOver')
-      // commit('stopTimerIsRunning')
       // console.log(`you failed at: ${state.gameState.level + 1}`)
       // commit('setLevelValue', state.gameState.level)
-      // commit('startTimerIsRunning')
     },
     nextLevel({ state, commit }) {
       commit('setRequestNextLevelToTrue')
