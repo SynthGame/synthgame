@@ -1,12 +1,16 @@
 import round from 'lodash/round'
 import store from '@/store'
+import audio from '@/audio'
 
 export const vuexSyncGen = (device, parameter, setCallback) => {
   return {
     [parameter]: {
       get: () => store.state.audioParameters[device][parameter],
       set: (value) => {
+        console.log('HELLO!');
+        console.log(store.state.audioParameters[device][parameter]);
         store.commit('setAudioParameter', {
+          audio,
           device,
           parameter,
           value

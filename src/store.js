@@ -68,8 +68,10 @@ export default new Vuex.Store({
 
       state.gameState.knobsAvailable = knobs;
     },
-    setAudioParameter(state, { device, parameter, value }) {
+    setAudioParameter(state, { audio, device, parameter, value }) {
+      console.log(`device ${device}; param: ${parameter}; value: ${value}`)
       state.audioParameters[device][parameter] = value
+      audio[device].state.device[parameter].value = value;
     },
     setUserAttemptParameters(state, { device, parameter, value }) {
       state.gameState.userAttemptPreset[device][parameter] = value
@@ -185,39 +187,35 @@ export default new Vuex.Store({
       commit('toggleAttemptMade')
       commit('incrementAttempt')
     },
-    randomizeAudioParameters({ state, commit }, randomizeArray) {
+    randomizeAudioParameters({ state, commit }, { device, paramater }) {
       
-      const randomizeValues = (obj, selectObj) => mapValues(obj, (val, moduleName) => {
-        return mapValues(val, (val, parameterName) => {
-          // if selectObj is provided and the value is falsey return obj value
-          if (selectObj && !selectObj[moduleName][parameterName]) return obj[moduleName][parameterName]
-          const parameterValDef = state.gameState.possibleValues[moduleName][parameterName]
-          return Array.isArray(parameterValDef)
-            ? parameterValDef[random(0, parameterValDef.length - 1)]
-            : random(0, 95)
-        })
-      })
+      const stringsParams = (state, device, paramater) => {
+        if(device === 'lfo') {
+          return Math.random(0, 100);
+        } else {
+          const possibleValues = state.gameState.possibleValues;
+          let len = possibleValues[device][paramater].length;
+          let rando = Math.round(Math.random() * (len - 1) + 1);
+          console.log(possibleValues[device][paramater][rando]);
+          return possibleValues[device][paramater][rando];
+        }
+      };
 
-      const randomizeWithoutMatches = (obj, selectObj, itrs = 0) => {
-        if (itrs === 20) return obj
-        const randomPreset = randomizeValues(obj, selectObj) // randomly generated preset
-        const accedentlyCorrectValues = mapValues(randomPreset, (val, moduleName) => {
-          return mapValues(val, (val, parameterName) => {
-            if (selectObj[moduleName][parameterName] !== true) return false
-            return isArray(state.gameState.possibleValues[moduleName][parameterName])
-              ? (val === state.gameState.goal[moduleName][parameterName])
-              : inRange(val,
-                (state.gameState.goal[moduleName][parameterName] - state.gameState.margin),
-                (state.gameState.goal[moduleName][parameterName] + state.gameState.margin)
-              )
-          })
-        })
-        if (find(accedentlyCorrectValues, mod => !!find(mod, par => par === true))) return randomizeWithoutMatches(randomPreset, accedentlyCorrectValues, itrs + 1)
-        return randomPreset
+      const randomizeWithoutMatches = (goal, device, paramater) => {
+        const stringers = ['frequency', 'typeOsc', 'type', 'assign', 'lfo', 'envelope2'];
+        // if param is a string type...
+        if(stringers.includes(paramater)) {
+          const newValue = stringsParams(state, device, paramater);
+          return goal[device][paramater] = newValue;
+        } else {
+          const newValue = Math.random() * (100 - 1) + 1;
+          return goal[device][paramater] = newValue;
+        };
+        
       }
 
       return commit('setAudioParameterToPreset', {
-        preset: randomizeWithoutMatches(state.gameState.goal, randomizeArray)
+        preset: randomizeWithoutMatches(state.gameState.goal, device, paramater),
       })
     },
 
@@ -279,10 +277,10 @@ export default new Vuex.Store({
       synth.lfo.state.device.frequency.value = character.lfo.frequency(state.gameState.userAttemptPreset.lfo.frequency)
       synth.lfo.state.device.max = character.lfo.amount(state.gameState.userAttemptPreset.lfo.amount)
       synth.lfo.state.device.type = character.lfo.type(state.gameState.userAttemptPreset.lfo.type)
-      // synth.oscillator1.state.device.frequency.value = character.oscillator1.frequency(state.gameState.userAttemptPreset.oscillator1.frequency)
+      synth.oscillator1.state.device.frequency.value = character.oscillator1.frequency(state.gameState.userAttemptPreset.oscillator1.frequency)
       synth.oscillator1.state.device.type = character.oscillator1.typeOsc(state.gameState.userAttemptPreset.oscillator1.typeOsc)
       synth.oscillator1.state.device.detune.value = character.oscillator1.detune(state.gameState.userAttemptPreset.oscillator1.detune)
-      // synth.oscillator2.state.device.frequency.value = character.oscillator2.frequency(state.gameState.userAttemptPreset.oscillator2.frequency)
+      synth.oscillator2.state.device.frequency.value = character.oscillator2.frequency(state.gameState.userAttemptPreset.oscillator2.frequency)
       synth.oscillator2.state.device.type = character.oscillator2.typeOsc(state.gameState.userAttemptPreset.oscillator2.typeOsc)
       synth.oscillator2.state.device.volume.value = character.oscillator2.volume(state.gameState.userAttemptPreset.oscillator2.volume)
       synth.connectLfo(state.gameState.userAttemptPreset.router.lfo)
@@ -304,10 +302,10 @@ export default new Vuex.Store({
       synth.lfo.state.device.frequency.value = character.lfo.frequency(state.audioParameters.lfo.frequency)
       synth.lfo.state.device.max = character.lfo.amount(state.audioParameters.lfo.amount)
       synth.lfo.state.device.type = character.lfo.type(state.audioParameters.lfo.type)
-      // synth.oscillator1.state.device.frequency.value = character.oscillator1.frequency(state.audioParameters.oscillator1.frequency)
+      synth.oscillator1.state.device.frequency.value = character.oscillator1.frequency(state.audioParameters.oscillator1.frequency)
       synth.oscillator1.state.device.type = character.oscillator1.typeOsc(state.audioParameters.oscillator1.typeOsc)
       synth.oscillator1.state.device.detune.value = character.oscillator1.detune(state.audioParameters.oscillator1.detune)
-      // synth.oscillator2.state.device.frequency.value = character.oscillator2.frequency(state.audioParameters.oscillator2.frequency)
+      synth.oscillator2.state.device.frequency.value = character.oscillator2.frequency(state.audioParameters.oscillator2.frequency)
       synth.oscillator2.state.device.type = character.oscillator2.typeOsc(state.audioParameters.oscillator2.typeOsc)
       synth.oscillator2.state.device.volume.value = character.oscillator2.volume(state.audioParameters.oscillator2.volume)
       synth.connectLfo(state.audioParameters.router.lfo)

@@ -515,6 +515,7 @@ export default {
         }
       );
       this.toneLoop.start();
+
     },
     startNextLevel() {
       const newLevel = this.level + 1;
@@ -532,7 +533,8 @@ export default {
       this.slide = null;
     },
     setSoundToRandom() {
-      this.$store.dispatch("setSynthToDefaultParameters", audio);
+      const { device, paramater } = levels[this.level].levelData;
+      this.$store.dispatch("randomizeAudioParameters", { device, paramater });
     },
     // LEVEL 
     // // // //

@@ -6,3 +6,12 @@ cleanup unused dials, both in HTML template and in fucntions, not every store ac
 fix done dot blinking not correct size
 hide done dots in navbar based on available modules
 solve 'AudioParam.setValueAtTime' bug
+
+
+frequency && oscillator1/2
+
+typeOsc
+type
+assign
+lfo
+envelope2

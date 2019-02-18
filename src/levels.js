@@ -18,6 +18,8 @@ const levels = [
       name: "Waveform",
       parent: "OSC 1",
       number: 1,
+      device: 'oscillator1',
+      paramater: 'frequency',
     }
   },
   // level 2
