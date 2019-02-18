@@ -12,6 +12,9 @@ import character from '@/character'
 import { addPreset } from '@/db'
 import Levels from './levels';
 
+// 
+import PossibleValues from './stores/possibleValues';
+
 Vue.use(Vuex)
 
 export default new Vuex.Store({
@@ -182,30 +185,7 @@ export default new Vuex.Store({
           envelope2: 'filterCutoff'
         }
       },
-      possibleValues: {
-        envelope: {},
-        envelope2: {
-          assign: ['filtercutoff']
-        },
-        filter: {
-          type: ['lowpass', 'highpass', 'bandpass']
-        },
-        lfo: {
-          type: ['sine', 'square', 'sawtooth', 'triangle']
-        },
-        oscillator1: {
-          frequency: ['65', '131', '262', '523'],
-          typeOsc: ['sine', 'square', 'sawtooth', 'triangle']
-        },
-        oscillator2: {
-          frequency: ['65', '131', '262', '523'],
-          typeOsc: ['sine', 'square', 'sawtooth', 'triangle']
-        },
-        router: {
-          lfo: ['oscsDetune', 'osc1Detune', 'filterCutoff'],
-          envelope2: ['oscsDetune', 'osc1Detune', 'filterCutoff'],
-        }
-      },
+      possibleValues: PossibleValues,
       defaultParams: {
         oscillator1: {
           frequency: '131',
