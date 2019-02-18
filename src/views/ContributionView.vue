@@ -1,6 +1,6 @@
 <template>
 <div class="cols">
-  <nav :class="`screen navigation ${showModules ? 'is-active' : ''}`">
+  <nav :class="`screen navigation ${show1stScreen ? 'is-active' : ''}`">
     <div class="navigation--inner">
       <div 
         v-for="(group, index) in nav.groups" 
@@ -74,9 +74,9 @@
   <div class="screen">
     <div v-if="slide !== null" class="screen screen_score screen_start">
       <transition name="fade" mode="in-out" appear>
-        <div v-show="slide === 0" class="hide-desktop screen--header">
+        <div v-show="slide === 1" class="hide-desktop screen--header">
           <div class="screen--header-inner">
-            <button @click="slide = 1" class="btn btn_link btn_primary">
+            <button @click="slide = 0" class="btn btn_link btn_primary">
               <span class="btn--inner">
                 <span class="btn--inner-text">
                   < Back
@@ -128,9 +128,15 @@
     <template v-else>
       <div class="hide-desktop screen--header">
         <div class="screen--header-inner">
-          <button @click="toggleNavigation()" class="btn btn_link btn_primary">
+          <button @click="toggle1stScreen()" class="btn btn_navigation">
             <span class="btn--inner">
-              <span class="btn--inner-text">{{ showModules ? 'Modules >' : '< Modules' }}</span>
+              <span class="btn--inner-text">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 60 71">
+                  <path d="M57 32h-2.581c-1.374-3.881-5.067-6.667-9.419-6.667S36.955 28.119 35.581 32H3a3 3 0 1 0 0 6h32.371c1.168 4.227 5.031 7.334 9.629 7.334s8.461-3.107 9.629-7.334H57a3 3 0 0 0 0-6z"/>
+                  <path d="M57 58H24.419c-1.374-3.881-5.067-6.666-9.419-6.666S6.955 54.119 5.581 58H3a3 3 0 0 0 0 6h2.371c1.168 4.227 5.031 7.334 9.629 7.334s8.461-3.107 9.629-7.334H57a3 3 0 0 0 0-6z"/>
+                  <path d="M3 13h2.371c1.168 4.227 5.031 7.333 9.629 7.333s8.461-3.107 9.629-7.333H57a3 3 0 1 0 0-6H24.419C23.045 3.119 19.352.333 15 .333S6.955 3.119 5.581 7H3a3 3 0 1 0 0 6z"/>
+                </svg>
+              </span>
             </span>
           </button>
           <div class="screen--attempts">
@@ -157,6 +163,20 @@
               ></path>
             </svg>
           </div>
+          <button @click="toggle3dScreen()" class="btn btn_leaderboard">
+            <span class="btn--inner">
+              <span class="btn--inner-text">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                  <path d="M19 17h-7c-1.103 0-2 .897-2 2s.897 2 2 2h7c1.103 0 2-.897 2-2s-.897-2-2-2z"/>
+                  <path d="M19 10h-7c-1.103 0-2 .897-2 2s.897 2 2 2h7c1.103 0 2-.897 2-2s-.897-2-2-2z"/>
+                  <path d="M19 3h-7c-1.103 0-2 .897-2 2s.897 2 2 2h7c1.103 0 2-.897 2-2s-.897-2-2-2z"/>
+                  <circle cx="5" cy="19" r="2.5"/>
+                  <circle cx="5" cy="12" r="2.5"/>
+                  <circle cx="5" cy="5" r="2.5"/>
+                </svg>
+              </span>
+            </span>
+          </button>
         </div>
       </div>
       <div class="screen--inner">
@@ -222,66 +242,49 @@
       @bye="endSvoosh"
     />
   </div>
-  <div class="screen screen_score screen_score_desktop hide-mobile">
-    <div class="screen--header screen--header_transparent">
-      <div class="screen--header-inner">
-        <button class="btn btn_link btn_primary u-ml_a">
-          <span class="btn--inner">
-            <span class="btn--inner-text">or Make a song ></span>
+  <div :class="`screen screen_score screen_3 screen_score_desktop ${show3dScreen ? 'is-active' : '' }`">
+    <div class="screen--inner">
+      <div class="pads">
+        <button
+          v-for="(pad, index) in pads"
+          :key="index"
+          class="pads--item"
+          @click="padClick($event, pad)"
+        >
+          <span class="pads--item-inner">
+            <span class="pads--item-content">{{ pad }}</span>
           </span>
         </button>
       </div>
-    </div>
-    <div class="screen--inner">
-      <div class="screen--score">
-        <div class="screen--score-title">Bart</div>
-        <div class="screen--score-value">0</div>
-      </div>
-      <div class="pyro">
-        <div class="before"></div>
-        <div class="after"></div>
-      </div>
-      <div style="margin-top: 40px" class="screen--attempts">
-        <svg v-for="(i) in totalAttempts/2" :key="i" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48">
-          <defs>
-            <clipPath id="half">
-              <rect x="0" y="0" width="24.5" height="48" />
-            </clipPath>
-          </defs>
-          <path v-if="i <= (totalAttempts - attempts) / 2" class="screen--attempts-fill" d="M23.993 15.872l1.016-.889a7.313 7.313 0 0 1 4.853-1.834c2.032 0 4.035.832 5.489 2.455a7.314 7.314 0 0 1-.339 10.06l-9.828 8.735a1.795 1.795 0 0 1-2.382 0l-9.814-8.735c-2.751-2.695-2.935-7.125-.339-10.06a7.337 7.337 0 0 1 5.489-2.455 7.34 7.34 0 0 1 4.853 1.834l1.002.889" />
-          <path v-if="i - 0.5 === (totalAttempts - attempts) / 2" clip-path="url(#half)" class="screen--attempts-fill" d="M23.993 15.872l1.016-.889a7.313 7.313 0 0 1 4.853-1.834c2.032 0 4.035.832 5.489 2.455a7.314 7.314 0 0 1-.339 10.06l-9.828 8.735a1.795 1.795 0 0 1-2.382 0l-9.814-8.735c-2.751-2.695-2.935-7.125-.339-10.06a7.337 7.337 0 0 1 5.489-2.455 7.34 7.34 0 0 1 4.853 1.834l1.002.889" />
-          <path class="screen--attempts-stroke" d="M23.993 15.872l1.016-.889a7.313 7.313 0 0 1 4.853-1.834c2.032 0 4.035.832 5.489 2.455a7.314 7.314 0 0 1-.339 10.06l-9.828 8.735a1.795 1.795 0 0 1-2.382 0l-9.814-8.735c-2.751-2.695-2.935-7.125-.339-10.06a7.337 7.337 0 0 1 5.489-2.455 7.34 7.34 0 0 1 4.853 1.834l1.002.889" />
-        </svg>
-      </div>
-    </div>
-    <div class="screen--share">
-      <p>Anyone with this link can join and beat your high score.</p>
-      <div class="screen--share-inner">
-        <div class="screen--share-url">
-          <span>www.mindgame.com/56234353/7534657543</span>
+      <div class="screen--share">
+        <p>Anyone with this link can join and create their song on top of this one.</p>
+        <div class="screen--share-inner">
+          <div class="screen--share-url">
+            <span>www.mindgame.com/56234353/7534657543</span>
+          </div>
+          <button class="btn btn_icon btn_primary">
+            <svg viewBox="0 0 23 22" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <rect
+                x="8.904"
+                y="8"
+                width="12.999"
+                height="13"
+                rx="2"
+                stroke="#fff"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              ></rect>
+              <path
+                d="M4.902 14h-1a2 2 0 0 1-2-2V3a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"
+                stroke="#fff"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              ></path>
+            </svg>
+          </button>
         </div>
-        <button class="btn btn_icon btn_primary">
-          <svg viewBox="0 0 23 22" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <rect
-              x="8.904"
-              y="8"
-              width="12.999"
-              height="13"
-              rx="2"
-              stroke="#fff"
-              stroke-width="2"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-            ></rect>
-            <path
-              d="M4.902 14h-1a2 2 0 0 1-2-2V3a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"
-              stroke="#fff"
-              stroke-width="2"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-            ></path>
-          </svg>
-        </button>
       </div>
     </div>
   </div>
@@ -336,12 +339,14 @@ export default {
       lfoColor: MODULE_LFO_COLOR,
       routerColor: MODULE_ROUTER_COLOR,
       sequencerColor: MODULE_SEQUENCER_COLOR,
-      showStartScreen: false,
       isThereSvooshComponent: false,
       svooshIt: false,
       showGame: false,
-      showModules: false,
+      show2ndScreen: false,
+      show3dScreen: false,
+      show1stScreen: false,
       pickedPreset: 0,
+      pads: ['1', '2', 'Q', 'W', 'A', 'S', 'Z', 'X']
     };
   },
   components: {
@@ -357,7 +362,7 @@ export default {
     Svoosh
   },
   mounted() {
-      this.showStartScreen = true;
+      this.show2ndScreen = true;
   },
   created() {
     this.init();
@@ -406,7 +411,7 @@ export default {
     });
   },
   watch: {
-    // showStartScreen(val) {
+    // show2ndScreen(val) {
     //   console.log(`SHowe Start ${val}`)
     //   if(val) {
     //     this.goToLevel(this.level + 1);
@@ -414,8 +419,15 @@ export default {
     // }
   },
   methods: {
-    toggleNavigation() {
-      this.showModules = !this.showModules
+    padClick(event, pad) {
+      // pad click logic goes here:
+      // console.log(pad)
+    },
+    toggle1stScreen() {
+      this.show1stScreen = !this.show1stScreen
+    },
+    toggle3dScreen() {
+      this.show3dScreen = !this.show3dScreen
     },
     makeAttempt() {
       this.$store.dispatch("madeAttempt");
@@ -678,7 +690,7 @@ export default {
       }, 300);
     },
     activeScreen(index, key) {
-      this.showModules = false;
+      this.show1stScreen = false;
       this.nav.active = this.nav.groups[index].items[key];
       let module = this.nav.groups[index],
         moduleName = module.moduleName,
