@@ -170,6 +170,7 @@ export default new Vuex.Store({
       return state.gameState.level + 1
     },
     audioParametersMatchGoalWithMargin: (state) => {
+
       return mapValues(state.audioParameters, (val, moduleName) => {
         return mapValues(val, (val, parameterName) => {
           return isArray(state.gameState.possibleValues[moduleName][parameterName])
@@ -188,6 +189,16 @@ export default new Vuex.Store({
       commit('incrementAttempt')
     },
     randomizeAudioParameters({ state, commit }, { device, paramater }) {
+
+      function reduceKnobsAvalible() {
+        /// reduce the parent to the single child key.
+        let parent = Object.values(state.gameState.knobsAvailable).find(knob => {
+          return Object.entries(knob).length !== 0;
+        });
+        return Object.keys(parent)[0];
+      }
+
+      console.log(reduceKnobsAvalible());
       
       const stringsParams = (state, device, paramater) => {
         if(device === 'lfo') {

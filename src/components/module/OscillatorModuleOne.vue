@@ -93,7 +93,7 @@ export default {
     return {
       name: "oscillator1",
       oscillator1: {},
-      moduleColor: MODULE_OSCILLATORONE_COLOR
+      moduleColor: MODULE_OSCILLATORONE_COLOR,
     };
   },
   components: {
@@ -125,11 +125,11 @@ export default {
       return this.$store.state.gameState.timerIsRunning;
     },
     dialsAreWithinMargin() {
-      if (this.createModeIsActive) return false; // quick hack
-      this.title = "Done!";
-      return Object.values(
-        this.$store.getters.audioParametersMatchGoalWithMargin[this.name]
-      ).every(param => param);
+      // if (this.createModeIsActive) return false; // quick hack
+      // this.title = "Done!";
+      // return Object.values(
+      //   this.$store.getters.audioParametersMatchGoalWithMargin[this.name]
+      // ).every(param => param);
     },
     // freqDial: {
     //   get () {
@@ -141,9 +141,6 @@ export default {
     // },
     ...vuexSyncGen("oscillator1", "frequency", val => {
       // self.oscillator1.frequency.value = character.oscillator1.frequency(val)
-      console.log(`vuexSyncGen ${val}`)
-      console.log(self.oscillator1);
-      return val;
     }),
     ...vuexSyncGen("oscillator1", "typeOsc", val => {
       // if (self.oscillator1.type === character.oscillator1.typeOsc(val)) return;
