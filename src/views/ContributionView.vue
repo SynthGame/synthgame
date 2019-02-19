@@ -1,11 +1,11 @@
 <template>
-  <div class="cols">
-    <nav :class="`screen navigation ${showModules ? 'is-active' : ''}`">
-      <div class="navigation--inner">
-        <div
-          v-for="(group, index) in nav.groups"
-          :key="index"
-          :class="[
+<div class="cols">
+  <nav :class="`screen navigation ${show1stScreen ? 'is-active' : ''}`">
+    <div class="navigation--inner">
+      <div 
+        v-for="(group, index) in nav.groups" 
+        :key="index"
+        :class="[
           `navigation--group_${group.title.toLowerCase().replace(' ', '')}`,
           'navigation--group',
           {
@@ -13,205 +13,155 @@
           }
         ]"
         >
-          <div class="navigation--group-title">
-            <span>{{ group.title }}</span>
-            <svg
-              v-if="group.icon === 'osc'"
-              class="navigation--group-icon"
-              viewBox="0 0 29 29"
-              width="29"
-              height="29"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <g fill="none" fill-rule="evenodd">
-                <path class="navigation--group-fill" d="M0 0h29v29H0z"></path>
-                <path fill="#000" d="M.228 14.5h15.959v6.903L29 15.831V14.5H16.187V6.959z"></path>
-              </g>
-            </svg>
-            <svg
-              v-else-if="group.icon === 'filter'"
-              class="navigation--group-icon"
-              viewBox="0 0 29 29"
-              width="29"
-              height="29"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <g fill="none" fill-rule="evenodd">
-                <path fill="#000" d="M0 0h29v29H0z"></path>
-                <path
-                  class="navigation--group-fill"
-                  d="M0 0h29v25.785C19.04 13.708 9.373 7.775 0 7.985-9.373 8.192-9.373 5.531 0 0z"
-                ></path>
-              </g>
-            </svg>
-            <svg
-              v-else-if="group.icon === 'lfo'"
-              class="navigation--group-icon"
-              viewBox="0 0 29 29"
-              width="29"
-              height="29"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <g fill="none" fill-rule="evenodd">
-                <path class="navigation--group-fill" d="M0 0h29v29H0z"></path>
-                <path d="M14 8.07V0h1v8a7 7 0 1 1-1 .07z" fill="#000"></path>
-              </g>
-            </svg>
-            <svg
-              v-else-if="group.icon === 'envelope'"
-              class="navigation--group-icon"
-              viewBox="0 0 29 29"
-              width="29"
-              height="29"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <g fill="none" fill-rule="evenodd">
-                <path fill="#000" d="M0 0h29v29H0z"></path>
-                <path class="navigation--group-fill" d="M0 0h29v24.211L18.04 10.065H0z"></path>
-              </g>
-            </svg>
-            <svg
-              v-else-if="group.icon === 'envelope2'"
-              class="navigation--group-icon"
-              viewBox="0 0 29 29"
-              width="29"
-              height="29"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <g fill="none" fill-rule="evenodd">
-                <path fill="#000" d="M0 0h29v29H0z"></path>
-                <path class="navigation--group-fill" d="M0 0h29v29H11.42L0 7.774z"></path>
-              </g>
-            </svg>
-            <svg
-              v-else-if="group.icon === 'router'"
-              class="navigation--group-icon"
-              viewBox="0 0 29 29"
-              width="29"
-              height="29"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <g fill="none" fill-rule="evenodd">
-                <path class="navigation--group-fill" d="M0 0h29v29H0z"></path>
-                <circle fill="#000" cx="15" cy="15" r="3"></circle>
-              </g>
-            </svg>
-          </div>
-          <ul class="navigation--list">
-            <li
-              v-for="(item, key) in group.items"
-              :key="key"
-              class="navigation--item"
-              :class="{'is-disabled' : !(index == 0 && key == 0) && lvlScore(item.score) <= 0 }"
-            >
-              <button class="navigation--item-btn" @click="activeScreen(index, key)">
-                <span class="navigation--item-inner">
-                  <span class="navigation--item-text">
-                    <span class="navigation--item-title">
-                      <span>{{ item.knobName }}</span>
-                    </span>
-                    <span>{{ lvlScore(item.score) }}</span>
+        <div class="navigation--group-title">
+          <span>
+            {{ group.title }}
+          </span>
+          <svg v-if="group.icon === 'osc'" class="navigation--group-icon" viewBox="0 0 29 29" width="29" height="29" xmlns="http://www.w3.org/2000/svg">
+            <g fill="none" fill-rule="evenodd">
+              <path class="navigation--group-fill" d="M0 0h29v29H0z"/>
+              <path fill="#000" d="M.228 14.5h15.959v6.903L29 15.831V14.5H16.187V6.959z"/>
+            </g>
+          </svg>
+          <svg v-else-if="group.icon === 'filter'" class="navigation--group-icon" viewBox="0 0 29 29" width="29" height="29" xmlns="http://www.w3.org/2000/svg">
+            <g fill="none" fill-rule="evenodd">
+              <path fill="#000" d="M0 0h29v29H0z"/>
+              <path class="navigation--group-fill" d="M0 0h29v25.785C19.04 13.708 9.373 7.775 0 7.985-9.373 8.192-9.373 5.531 0 0z"/>
+            </g>
+          </svg>
+          <svg v-else-if="group.icon === 'lfo'" class="navigation--group-icon" viewBox="0 0 29 29" width="29" height="29" xmlns="http://www.w3.org/2000/svg">
+            <g fill="none" fill-rule="evenodd">
+              <path class="navigation--group-fill" d="M0 0h29v29H0z"/>
+              <path d="M14 8.07V0h1v8a7 7 0 1 1-1 .07z" fill="#000"/>
+            </g>
+          </svg>
+          <svg v-else-if="group.icon === 'envelope'" class="navigation--group-icon" viewBox="0 0 29 29" width="29" height="29" xmlns="http://www.w3.org/2000/svg">
+            <g fill="none" fill-rule="evenodd">
+              <path fill="#000" d="M0 0h29v29H0z"/>
+              <path class="navigation--group-fill" d="M0 0h29v24.211L18.04 10.065H0z"/>
+            </g>
+          </svg>
+          <svg v-else-if="group.icon === 'envelope2'" class="navigation--group-icon" viewBox="0 0 29 29" width="29" height="29" xmlns="http://www.w3.org/2000/svg">
+            <g fill="none" fill-rule="evenodd">
+              <path fill="#000" d="M0 0h29v29H0z"/>
+              <path class="navigation--group-fill" d="M0 0h29v29H11.42L0 7.774z"/>
+            </g>
+          </svg>
+          <svg v-else-if="group.icon === 'router'" class="navigation--group-icon" viewBox="0 0 29 29" width="29" height="29" xmlns="http://www.w3.org/2000/svg">
+            <g fill="none" fill-rule="evenodd">
+              <path class="navigation--group-fill" d="M0 0h29v29H0z"/>
+              <circle fill="#000" cx="15" cy="15" r="3"/>
+            </g>
+          </svg>
+        </div>
+        <ul class="navigation--list">
+          <li v-for="(item, key) in group.items" :key="key" class="navigation--item" :class="{'is-disabled' : !(index == 0 && key == 0) && lvlScore(item.score) <= 0 }">
+            <button class="navigation--item-btn" @click="activeScreen(index, key)">
+              <span class="navigation--item-inner">
+                <span class="navigation--item-text">
+                  <span class="navigation--item-title">
+                    <span>{{ item.knobName }}</span>
                   </span>
+                  <span>{{ lvlScore(item.score) }}</span>
                 </span>
-              </button>
-            </li>
-          </ul>
-        </div>
-      </div>
-    </nav>
-    <div class="screen">
-      <div v-if="slide !== null" class="screen screen_score screen_start">
-        <transition name="fade" mode="in-out" appear>
-          <div v-show="slide === 0" class="hide-desktop screen--header">
-            <div class="screen--header-inner">
-              <button @click="slide = 1" class="btn btn_link btn_primary">
-                <span class="btn--inner">
-                  <span class="btn--inner-text">< Back</span>
-                </span>
-              </button>
-              <div class="screen--header-title"></div>
-            </div>
-          </div>
-        </transition>
-        <transition name="fade" mode="out-in" appear>
-          <div key="1" v-if="slide === 0" class="screen--inner">
-            <div class="screen--title">Match
-              <br>The
-              <br>Sound
-            </div>
-            <button class="btn btn_link btn_primary hide-desktop">
-              <span class="btn--inner">
-                <span class="btn--inner-text">or Make a song</span>
               </span>
             </button>
-            <div class="screen--score">
-              <div class="screen--score-title">Score</div>
-              <div class="screen--score-value">0</div>
-            </div>
-          </div>
-          <!-- sound preview screen -->
-          <div key="2" v-else-if="slide === 1" class="screen--inner">
-            <div class="screen--preview">
-              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" width="64" height="64">
-                <path
-                  fill="#fff"
-                  d="M14 2c-.781 0-1.313.438-2 1.016L6 8H2c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h4l6 4.984c.688.579 1.219 1.016 2 1.016 1.219 0 2-.984 2-2V4c0-1.016-.781-2-2-2zm-2 21.784L7.445 20H4v-8h3.445L12 8.216v15.568zM20 6c-1.25 0-2 1.047-2 2 0 1.422 2 2.781 2 8s-2 6.578-2 8c0 .953.75 2 2 2 1.016 0 1.625-.547 2.281-2C23.51 21.279 24 18.672 24 16s-.49-5.279-1.719-8C21.625 6.547 21.016 6 20 6zm9.146-2c-.838-1.771-1.63-2-2.333-2-1.188 0-2 1-2 2C24.813 5.672 28 8.531 28 16s-3.188 10.328-3.188 12c0 1 .813 2 2 2 .703 0 1.495-.229 2.333-2C30.063 26.063 32 22.156 32 16S30.063 5.938 29.146 4z"
-                ></path>
-              </svg>
-              <p>Listen to the goal sound and match the pitch of oscillator 1</p>
-            </div>
-          </div>
-        </transition>
-        <div class="screen--footer">
-          <div class="screen--footer-inner">
-            <button
-              @click="slide === 0 ? startNextLevel() : enterLevel()"
-              class="btn btn_stroke btn_primary"
-            >
-              <span class="btn--inner">
-                <span class="btn--inner-text">Continue</span>
-              </span>
-            </button>
-          </div>
-        </div>
+          </li>
+        </ul>
       </div>
-      <template v-else>
-        <div class="hide-desktop screen--header">
+    </div>
+  </nav>
+  <div class="screen">
+    <div v-if="slide !== null" class="screen screen_score screen_start">
+      <transition name="fade" mode="in-out" appear>
+        <div v-show="slide === 1" class="hide-desktop screen--header">
           <div class="screen--header-inner">
-            <button @click="toggleNavigation()" class="btn btn_link btn_primary">
+            <button @click="slide = 0" class="btn btn_link btn_primary">
               <span class="btn--inner">
-                <span class="btn--inner-text">{{ showModules ? 'Modules >' : '< Modules' }}</span>
+                <span class="btn--inner-text">
+                  < Back
+                </span>
               </span>
             </button>
-            <div class="screen--attempts">
-              <svg
-                v-for="(i) in totalAttempts/2"
-                :key="i"
-                xmlns="http://www.w3.org/2000/svg"
-                viewBox="0 0 48 48"
-              >
-                <defs>
-                  <clipPath id="half">
-                    <rect x="0" y="0" width="24.5" height="48"></rect>
-                  </clipPath>
-                </defs>
-                <path
-                  v-if="i <= (totalAttempts - attempts) / 2"
-                  class="screen--attempts-fill"
-                  d="M23.993 15.872l1.016-.889a7.313 7.313 0 0 1 4.853-1.834c2.032 0 4.035.832 5.489 2.455a7.314 7.314 0 0 1-.339 10.06l-9.828 8.735a1.795 1.795 0 0 1-2.382 0l-9.814-8.735c-2.751-2.695-2.935-7.125-.339-10.06a7.337 7.337 0 0 1 5.489-2.455 7.34 7.34 0 0 1 4.853 1.834l1.002.889"
-                ></path>
-                <path
-                  v-if="i - 0.5 === (totalAttempts - attempts) / 2 "
-                  clip-path="url(#half)"
-                  class="screen--attempts-fill"
-                  d="M23.993 15.872l1.016-.889a7.313 7.313 0 0 1 4.853-1.834c2.032 0 4.035.832 5.489 2.455a7.314 7.314 0 0 1-.339 10.06l-9.828 8.735a1.795 1.795 0 0 1-2.382 0l-9.814-8.735c-2.751-2.695-2.935-7.125-.339-10.06a7.337 7.337 0 0 1 5.489-2.455 7.34 7.34 0 0 1 4.853 1.834l1.002.889"
-                ></path>
-                <path
-                  class="screen--attempts-stroke"
-                  d="M23.993 15.872l1.016-.889a7.313 7.313 0 0 1 4.853-1.834c2.032 0 4.035.832 5.489 2.455a7.314 7.314 0 0 1-.339 10.06l-9.828 8.735a1.795 1.795 0 0 1-2.382 0l-9.814-8.735c-2.751-2.695-2.935-7.125-.339-10.06a7.337 7.337 0 0 1 5.489-2.455 7.34 7.34 0 0 1 4.853 1.834l1.002.889"
-                ></path>
-              </svg>
-            </div>
+            <div class="screen--header-title"></div>
+          </div>
+        </div>
+      </transition>
+      <transition name="fade" mode="out-in" appear>
+        <div key="1" v-if="slide === 0" class="screen--inner">
+          <div class="screen--title">Match <br>The <br>Sound</div>
+          <button
+            class="btn btn_link btn_primary hide-desktop">
+            <span class="btn--inner">
+              <span class="btn--inner-text">or Make a song</span>
+            </span>
+          </button>
+          <div class="screen--score">
+            <div class="screen--score-title">Score</div>
+            <div class="screen--score-value">0</div>
+          </div>
+        </div>
+        <!-- sound preview screen -->
+        <div key="2" v-else-if="slide === 1" class="screen--inner">
+          <div class="screen--preview">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" width="64" height="64">
+              <path fill="#fff" d="M14 2c-.781 0-1.313.438-2 1.016L6 8H2c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h4l6 4.984c.688.579 1.219 1.016 2 1.016 1.219 0 2-.984 2-2V4c0-1.016-.781-2-2-2zm-2 21.784L7.445 20H4v-8h3.445L12 8.216v15.568zM20 6c-1.25 0-2 1.047-2 2 0 1.422 2 2.781 2 8s-2 6.578-2 8c0 .953.75 2 2 2 1.016 0 1.625-.547 2.281-2C23.51 21.279 24 18.672 24 16s-.49-5.279-1.719-8C21.625 6.547 21.016 6 20 6zm9.146-2c-.838-1.771-1.63-2-2.333-2-1.188 0-2 1-2 2C24.813 5.672 28 8.531 28 16s-3.188 10.328-3.188 12c0 1 .813 2 2 2 .703 0 1.495-.229 2.333-2C30.063 26.063 32 22.156 32 16S30.063 5.938 29.146 4z"/>
+            </svg>
+            <p>
+              Listen to the goal sound and match the pitch of oscillator 1
+            </p>
+          </div>
+        </div>
+      </transition>
+      <div class="screen--footer">
+        <div class="screen--footer-inner">
+          <button
+            @click="slide === 0 ? startNextLevel() : enterLevel()"
+            class="btn btn_stroke btn_primary">
+            <span class="btn--inner">
+              <span class="btn--inner-text">Continue</span>
+            </span>
+          </button>
+        </div>
+      </div>
+    </div>
+    <template v-else>
+      <div class="hide-desktop screen--header">
+        <div class="screen--header-inner">
+          <button @click="toggle1stScreen()" class="btn btn_navigation">
+            <span class="btn--inner">
+              <span class="btn--inner-text">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 60 71">
+                  <path d="M57 32h-2.581c-1.374-3.881-5.067-6.667-9.419-6.667S36.955 28.119 35.581 32H3a3 3 0 1 0 0 6h32.371c1.168 4.227 5.031 7.334 9.629 7.334s8.461-3.107 9.629-7.334H57a3 3 0 0 0 0-6z"/>
+                  <path d="M57 58H24.419c-1.374-3.881-5.067-6.666-9.419-6.666S6.955 54.119 5.581 58H3a3 3 0 0 0 0 6h2.371c1.168 4.227 5.031 7.334 9.629 7.334s8.461-3.107 9.629-7.334H57a3 3 0 0 0 0-6z"/>
+                  <path d="M3 13h2.371c1.168 4.227 5.031 7.333 9.629 7.333s8.461-3.107 9.629-7.333H57a3 3 0 1 0 0-6H24.419C23.045 3.119 19.352.333 15 .333S6.955 3.119 5.581 7H3a3 3 0 1 0 0 6z"/>
+                </svg>
+              </span>
+            </span>
+          </button>
+          <div class="screen--attempts">
+            <svg v-for="(i) in totalAttempts/2" :key="i" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48">
+              <defs>
+                <clipPath id="half">
+                  <rect x="0" y="0" width="24.5" height="48"></rect>
+                </clipPath>
+              </defs>
+              <path
+                v-if="i <= (totalAttempts - attempts) / 2"
+                class="screen--attempts-fill"
+                d="M23.993 15.872l1.016-.889a7.313 7.313 0 0 1 4.853-1.834c2.032 0 4.035.832 5.489 2.455a7.314 7.314 0 0 1-.339 10.06l-9.828 8.735a1.795 1.795 0 0 1-2.382 0l-9.814-8.735c-2.751-2.695-2.935-7.125-.339-10.06a7.337 7.337 0 0 1 5.489-2.455 7.34 7.34 0 0 1 4.853 1.834l1.002.889"
+              ></path>
+              <path
+                v-if="i - 0.5 === (totalAttempts - attempts) / 2 "
+                clip-path="url(#half)"
+                class="screen--attempts-fill"
+                d="M23.993 15.872l1.016-.889a7.313 7.313 0 0 1 4.853-1.834c2.032 0 4.035.832 5.489 2.455a7.314 7.314 0 0 1-.339 10.06l-9.828 8.735a1.795 1.795 0 0 1-2.382 0l-9.814-8.735c-2.751-2.695-2.935-7.125-.339-10.06a7.337 7.337 0 0 1 5.489-2.455 7.34 7.34 0 0 1 4.853 1.834l1.002.889"
+              ></path>
+              <path
+                class="screen--attempts-stroke"
+                d="M23.993 15.872l1.016-.889a7.313 7.313 0 0 1 4.853-1.834c2.032 0 4.035.832 5.489 2.455a7.314 7.314 0 0 1-.339 10.06l-9.828 8.735a1.795 1.795 0 0 1-2.382 0l-9.814-8.735c-2.751-2.695-2.935-7.125-.339-10.06a7.337 7.337 0 0 1 5.489-2.455 7.34 7.34 0 0 1 4.853 1.834l1.002.889"
+              ></path>
+            </svg>
           </div>
           <button @click="toggle3dScreen()" class="btn btn_leaderboard">
             <span class="btn--inner">
@@ -228,44 +178,47 @@
             </span>
           </button>
         </div>
-        <div class="screen--inner">
-          <oscillator-module-one
-            v-if="moduleIsUseable('oscillator1')"
-            :class="[(activeModule == 0 ? 'active' : '')]"
-          />
-          <oscillator-module-two
-            v-if="moduleIsUseable('oscillator2')"
-            :class="[(activeModule == 1 ? 'active' : '')]"
-          />
-          <filter-module
-            v-if="moduleIsUseable('filter')"
-            :class="[(activeModule == 2 ? 'active' : '')]"
-          />
-          <envelope-module
-            v-if="moduleIsUseable('envelope')"
-            :class="[(activeModule == 3 ? 'active' : '')]"
-          />
-          <lfo-module v-if="moduleIsUseable('lfo')" :class="[(activeModule == 4 ? 'active' : '')]"/>
-          <envelope-module-two
-            v-if="moduleIsUseable('envelope2')"
-            :class="[(activeModule == 5 ? 'active' : '')]"
-          />
-          <sequencer-module
-            v-if="createModeIsActive"
-            :class="[(activeModule == 7 ? 'active' : '')]"
-            class="module sequencer"
-          />
-          <router-module
-            v-if="moduleIsUseable('router')"
-            :class="[(activeModule == 6 ? 'active' : '')]"
-          />
-          <!-- ATTEMPT -->
-          <!-- <div class="attempt-navigation"> -->
+      </div>
+      <div class="screen--inner">
+        <oscillator-module-one
+          v-if="moduleIsUseable('oscillator1')"
+          :class="[(activeModule == 0 ? 'active' : '')]"
+        />
+        <oscillator-module-two
+          v-if="moduleIsUseable('oscillator2')"
+          :class="[(activeModule == 1 ? 'active' : '')]"
+        />
+        <filter-module
+          v-if="moduleIsUseable('filter')"
+          :class="[(activeModule == 2 ? 'active' : '')]"
+        />
+        <envelope-module
+          v-if="moduleIsUseable('envelope')"
+          :class="[(activeModule == 3 ? 'active' : '')]"
+        />
+        <lfo-module
+          v-if="moduleIsUseable('lfo')"
+          :class="[(activeModule == 4 ? 'active' : '')]"
+        />
+        <envelope-module-two
+          v-if="moduleIsUseable('envelope2')"
+          :class="[(activeModule == 5 ? 'active' : '')]"
+        />
+        <sequencer-module
+          v-if="createModeIsActive"
+          :class="[(activeModule == 7 ? 'active' : '')]"
+          class="module sequencer"
+        />
+        <router-module
+          v-if="moduleIsUseable('router')"
+          :class="[(activeModule == 6 ? 'active' : '')]"
+        />
+        <!-- ATTEMPT -->
+        <!-- <div class="attempt-navigation"> -->
           <button
             v-if="!completedLevel"
             @click="makeAttempt"
-            class="btn_full btn btn_stroke btn_primary"
-          >
+            class="btn_full btn btn_stroke btn_primary">
             <span class="btn--inner">
               <span class="btn--inner-text">Submit</span>
             </span>
@@ -274,73 +227,37 @@
           <button
             v-else
             @click="startNextLevel"
-            class="btn_full btn btn_stroke btn_primary btn_next"
-          >
+            class="btn_full btn btn_stroke btn_primary btn_next">
             <span class="btn--inner">
               <span class="btn--inner-text">Next</span>
             </span>
           </button>
-          <!-- </div> -->
-        </div>
-      </template>
-      <svoosh
-        v-if="isThereSvooshComponent"
-        :isFired="svooshIt"
-        @midway="showGame=true"
-        @bye="endSvoosh"
-      />
-    </div>
-    <div class="screen screen_score screen_score_desktop hide-mobile">
-      <div class="screen--header screen--header_transparent">
-        <div class="screen--header-inner">
-          <button class="btn btn_link btn_primary u-ml_a">
-            <span class="btn--inner">
-              <span class="btn--inner-text">or Make a song ></span>
-            </span>
-          </button>
-        </div>
+        <!-- </div> -->
       </div>
-      <div class="screen--inner">
-        <div class="screen--score">
-          <div class="screen--score-title">Bart</div>
-          <div class="screen--score-value">0</div>
-        </div>
-        <div class="pyro">
-          <div class="before"></div>
-          <div class="after"></div>
-        </div>
-        <div style="margin-top: 40px" class="screen--attempts">
-          <svg
-            v-for="(i) in totalAttempts/2"
-            :key="i"
-            xmlns="http://www.w3.org/2000/svg"
-            viewBox="0 0 48 48"
-          >
-            <defs>
-              <clipPath id="half">
-                <rect x="0" y="0" width="24.5" height="48"></rect>
-              </clipPath>
-            </defs>
-            <path
-              v-if="i <= (totalAttempts - attempts) / 2"
-              class="screen--attempts-fill"
-              d="M23.993 15.872l1.016-.889a7.313 7.313 0 0 1 4.853-1.834c2.032 0 4.035.832 5.489 2.455a7.314 7.314 0 0 1-.339 10.06l-9.828 8.735a1.795 1.795 0 0 1-2.382 0l-9.814-8.735c-2.751-2.695-2.935-7.125-.339-10.06a7.337 7.337 0 0 1 5.489-2.455 7.34 7.34 0 0 1 4.853 1.834l1.002.889"
-            ></path>
-            <path
-              v-if="i - 0.5 === (totalAttempts - attempts) / 2"
-              clip-path="url(#half)"
-              class="screen--attempts-fill"
-              d="M23.993 15.872l1.016-.889a7.313 7.313 0 0 1 4.853-1.834c2.032 0 4.035.832 5.489 2.455a7.314 7.314 0 0 1-.339 10.06l-9.828 8.735a1.795 1.795 0 0 1-2.382 0l-9.814-8.735c-2.751-2.695-2.935-7.125-.339-10.06a7.337 7.337 0 0 1 5.489-2.455 7.34 7.34 0 0 1 4.853 1.834l1.002.889"
-            ></path>
-            <path
-              class="screen--attempts-stroke"
-              d="M23.993 15.872l1.016-.889a7.313 7.313 0 0 1 4.853-1.834c2.032 0 4.035.832 5.489 2.455a7.314 7.314 0 0 1-.339 10.06l-9.828 8.735a1.795 1.795 0 0 1-2.382 0l-9.814-8.735c-2.751-2.695-2.935-7.125-.339-10.06a7.337 7.337 0 0 1 5.489-2.455 7.34 7.34 0 0 1 4.853 1.834l1.002.889"
-            ></path>
-          </svg>
-        </div>
+    </template>
+    <svoosh
+      v-if="isThereSvooshComponent"
+      :isFired="svooshIt"
+      @midway="showGame=true"
+      @bye="endSvoosh"
+    />
+  </div>
+  <div :class="`screen screen_score screen_3 screen_score_desktop ${show3dScreen ? 'is-active' : '' }`">
+    <div class="screen--inner">
+      <div class="pads">
+        <button
+          v-for="(pad, index) in pads"
+          :key="index"
+          class="pads--item"
+          @click="padClick($event, pad)"
+        >
+          <span class="pads--item-inner">
+            <span class="pads--item-content">{{ pad }}</span>
+          </span>
+        </button>
       </div>
       <div class="screen--share">
-        <p>Anyone with this link can join and beat your high score.</p>
+        <p>Anyone with this link can join and create their song on top of this one.</p>
         <div class="screen--share-inner">
           <div class="screen--share-url">
             <span>www.mindgame.com/56234353/7534657543</span>
@@ -371,6 +288,7 @@
       </div>
     </div>
   </div>
+</div>
 </template>
 
 <script>
@@ -424,8 +342,11 @@ export default {
       isThereSvooshComponent: false,
       svooshIt: false,
       showGame: false,
-      showModules: false,
-      pickedPreset: 0
+      show2ndScreen: false,
+      show3dScreen: false,
+      show1stScreen: false,
+      pickedPreset: 0,
+      pads: ['1', '2', 'Q', 'W', 'A', 'S', 'Z', 'X']
     };
   },
   components: {
@@ -441,7 +362,7 @@ export default {
     Svoosh
   },
   mounted() {
-    this.showStartScreen = true;
+      this.show2ndScreen = true;
   },
   created() {
     this.init();
@@ -498,8 +419,15 @@ export default {
     // }
   },
   methods: {
-    toggleNavigation() {
-      this.showModules = !this.showModules;
+    padClick(event, pad) {
+      // pad click logic goes here:
+      // console.log(pad)
+    },
+    toggle1stScreen() {
+      this.show1stScreen = !this.show1stScreen
+    },
+    toggle3dScreen() {
+      this.show3dScreen = !this.show3dScreen
     },
     makeAttempt() {
       this.$store.dispatch("madeAttempt");
@@ -616,14 +544,13 @@ export default {
       this.slide = null;
     },
     setSoundToRandom() {
-      const { device, paramater } = levels[this.level].levelData;
-      console.log(`${device}, ${paramater}`)
-      this.$store.dispatch("randomizeAudioParameters", { device, paramater });
+      this.$store.dispatch("setSynthToDefaultParameters", audio);
     },
-    // LEVEL
+    // LEVEL 
     // // // //
     startLevelPreview(level) {
-      this.cheekySvoosh();
+
+      this.cheekySvoosh()
 
       this.$nextTick(() => {
         // disable all overlays when svoosh is done
@@ -638,23 +565,15 @@ export default {
       this.$router.push("?level=" + (level + 1));
       window.parent.postMessage("play-game-activated", "*");
 
+
       // randomly pick preset
       this.pickedPreset = Math.round(Math.random() * (presets.length - 1));
       // console.log('pickedPreset =', this.pickedPreset);
 
-
-      // SET GOAL TO GOAL SOUND
-      this.$store.commit("setGoalToPreset", {
-        preset: Object.assign(presets[this.pickedPreset].parameterValues, {})
-      });
-
-      // SET AUDIO PARAMS TO NEW GOAL SOUND
+      // load the preset on synth
       this.$store.commit("setAudioParameterToPreset", {
         preset: presets[this.pickedPreset].parameterValues
       });
-
-      // SET AUDIO to AUDIO PARAMS
-      this.$store.dispatch("setSynthToAudioParameters", audio);
 
       this.$store.commit("setFeaturedArtist", {
         artistName: presets[this.pickedPreset].name,
@@ -672,6 +591,7 @@ export default {
 
       //and again to correct pitch
       // load the preset on synth
+      this.setToSelectedPreset();
       // console.log('preset audioParameters loaded: ', presets[this.pickedPreset].parameterValues );
 
       // Set back Envs to standard audioParameters
@@ -693,7 +613,38 @@ export default {
         knobsAvailable: availableParameters,
         levelNumber: level || 0
       });
+      this.$store.commit("setGoalToPreset", {
+        preset: Object.assign(presets[this.pickedPreset].parameterValues, {})
+      });
 
+      console.log(availableParameters);
+
+      this.$store.dispatch("randomizeAudioParameters", availableParameters); // and the audio params
+
+      // this.$nextTick(() => this.$store.dispatch("setSynthToGoal", audio)); //then let the user hear it
+
+      // this.loop.start()
+      // rest will be done by watcher of sequencesPassedInCurrentLevel
+    },
+    setToSelectedPreset() {
+      this.$store.commit("setAudioParameterToPreset", {
+        preset  : presets[this.pickedPreset].parameterValues
+      });
+      
+      // reset oscs for waveforms
+      audio.oscillator1.state.device.type =
+        presets[this.pickedPreset].parameterValues.oscillator1.typeOsc;
+      audio.oscillator2.state.device.type =
+        presets[this.pickedPreset].parameterValues.oscillator2.typeOsc;
+      audio.oscillator1.state.device.stop();
+      audio.oscillator1.state.device.start();
+      audio.oscillator2.state.device.stop();
+      audio.oscillator2.state.device.start();
+      audio.lfo.state.device.type =
+        presets[this.pickedPreset].parameterValues.lfo.type;
+      audio.filter.state.device.type =
+        presets[this.pickedPreset].parameterValues.filter.type;
+      // this.$store.dispatch('setSynthToGoal', audio);
     },
     startPreset(parameters, bpm) {
       const usedParameters = mapValues(parameters, audioModule =>
@@ -718,8 +669,9 @@ export default {
       this.$store.dispatch("setSynthToGoal", audio); // then let the user hear it
 
       this.loop.start();
+      // rest will be done by watcher of sequencesPassedInCurrentLevel
     },
-    cheekySvoosh() {
+    cheekySvoosh(){
       this.isThereSvooshComponent = true;
       this.$nextTick(() => (this.svooshIt = true));
       audio.playSweep();
@@ -750,9 +702,10 @@ export default {
         moduleName: moduleName
       });
 
-      const lvl = this.nav.groups[index].items[key].score;
 
-      this.goToLevel(lvl); // CHANGE to lvl
+      const lvl = this.nav.groups[index].items[key].score
+
+      this.goToLevel(lvl) // CHANGE to lvl
 
       this.$store.commit("resetAttempts");
 
@@ -839,7 +792,7 @@ export default {
         this.$store.getters.audioParametersMatchGoalWithMargin["router"]
       ).every(param => param);
     }
-  }
+  },
 };
 </script>
 

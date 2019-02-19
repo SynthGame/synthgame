@@ -105,6 +105,23 @@
     width: 100%;
   }
 
+  &_leaderboard {
+    fill: currentColor;
+    display: block;
+    svg {
+      height: 24px !important;
+      width: auto !important;
+    }
+  }
+  &_navigation {
+    fill: currentColor;
+    display: block;
+    svg {
+      height: 24px !important;
+      width: auto !important;
+    }
+  }
+
   // themes:
   &_primary {
     &.btn_stroke {
