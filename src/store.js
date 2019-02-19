@@ -11,6 +11,7 @@ import find from 'lodash/find'
 import character from '@/character'
 import { addPreset } from '@/db'
 import Levels from './levels';
+import audio from './audio';
 
 // 
 import PossibleValues from './stores/possibleValues';
@@ -68,18 +69,9 @@ export default new Vuex.Store({
 
       state.gameState.knobsAvailable = knobs;
     },
-    setAudioParameter(state, { audio, device, parameter, value }) {
-      console.log(`device ${device}; param: ${parameter}; value: ${value}`)
-      console.log(audio[device].state.device[parameter]);
-      if(audio[device].state.device[parameter].value === undefined) {
-        audio[device].state.device[parameter] = value;
-      } else {
-        audio[device].state.device[parameter].value = value;
-      }
-    },
-    setUserAttemptParameters(state, { device, parameter, value }) {
-      state.gameState.userAttemptPreset[device][parameter] = value
-    },
+    // setUserAttemptParameters(state, { device, parameter, value }) {
+    //   state.gameState.userAttemptPreset[device][parameter] = value
+    // },
     setFeaturedArtist(state, { artistName, avatarUrl }) {
       state.name = artistName
       state.avatarUrl = avatarUrl
@@ -163,6 +155,9 @@ export default new Vuex.Store({
       console.log(payload);
       console.log(`Level ${lvl}`)
       state.gameState.levels[lvl].levelData.score = payload;
+    },
+    setAudioaudioParameter(state, { device, parameter, value }) {
+      state.audioParameters[device][parameter] = value;
     }
   },
   getters: {
@@ -202,9 +197,23 @@ export default new Vuex.Store({
               (state.gameState.goal[device][parameter] - state.gameState.margin),
               (state.gameState.goal[device][parameter] + state.gameState.margin)
             );
-    }
+    },
   },
   actions: {
+    setAudioParameter(state, { device, parameter, value }) {
+      console.log(`device ${device}; param: ${parameter}; value: ${value}`)
+      console.log(audio[device].state.device[parameter]);
+
+      this.commit('setAudioaudioParameter', { device, parameter, value });
+
+      if(parameter !== 'typeOsc') {
+        if(audio[device].state.device[parameter].value === undefined) {
+          audio[device].state.device[parameter] = value;
+        } else {
+          audio[device].state.device[parameter].value = value;
+        }
+      }
+    },
     madeAttempt({ state, commit }) {
       commit('toggleAttemptMade')
       commit('incrementAttempt')

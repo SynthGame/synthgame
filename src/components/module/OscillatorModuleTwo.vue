@@ -155,10 +155,10 @@ export default {
       // self.oscillator2.frequency.value = character.oscillator2.frequency(val)
     }),
     ...vuexSyncGen("oscillator2", "typeOsc", val => {
-      if (self.oscillator2.type === character.oscillator2.typeOsc(val)) return;
-      self.oscillator2.type = character.oscillator2.typeOsc(val);
-      self.oscillator2.stop();
-      self.oscillator2.start();
+      // if (self.oscillator2.type === character.oscillator2.typeOsc(val)) return;
+      // self.oscillator2.type = character.oscillator2.typeOsc(val);
+      // self.oscillator2.stop();
+      // self.oscillator2.start();
     }),
     // ...vuexSyncGen('oscillator2', 'phase', val => {
     //   self.oscillator2.phase = character.oscillator2.phase(val) // phase in degrees
