@@ -59,13 +59,6 @@
         knobColor="#ff8574"
         name="Pitch"
       ></module-knob>
-      <!-- <module-knob
-        v-model="phase"
-        :min="50"
-        :max="10000"
-        knobColor="#ff8574"
-        name="Phase"
-      ></module-knob> -->
       <div class="button-wrapper drop"
         v-if="knobsAvailable.typeOsc || createModeIsActive"
       >

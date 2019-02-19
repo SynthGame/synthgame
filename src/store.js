@@ -292,7 +292,7 @@ export default new Vuex.Store({
       synth.connectLfo(state.gameState.userAttemptPreset.router.lfo)
       synth.connectEnvelope2(state.gameState.userAttemptPreset.envelope2)
     },
-    setSynthToDefaultParameters({ state }, synth) {
+    setSynthToAudioParameters({ state }, synth) {
       synth.envelope.state.device.attack = character.envelope.attack(state.audioParameters.envelope.attack)
       synth.envelope.state.device.decay = character.envelope.decay(state.audioParameters.envelope.decay)
       synth.envelope.state.device.sustain = character.envelope.sustain(state.audioParameters.envelope.sustain)
