@@ -202,14 +202,20 @@ export default new Vuex.Store({
       };
 
       const randomizeWithoutMatches = (goal, device, paramater) => {
+        let randomGameState = {...goal};
         const stringers = ['frequency', 'typeOsc', 'type', 'assign', 'lfo', 'envelope2'];
         // if param is a string type...
         if(stringers.includes(paramater)) {
-          const newValue = stringsParams(state, device, paramater);
-          return goal[device][paramater] = newValue;
+          let newValue = stringsParams(state, device, paramater);
+          return randomGameState[device][paramater] = newValue;
+          console.log(`New Value: ${newValue}`)
+          console.log(`device ${device}, param ${paramater}`)
+          console.log(goal)
         } else {
-          const newValue = Math.random() * (100 - 1) + 1;
-          return goal[device][paramater] = newValue;
+          let newValue = Math.random() * (100 - 1) + 1;
+          console.log(`device ${device}, param ${paramater}`)
+          console.log(randomGameState)
+          return randomGameState[device][paramater] = newValue;
         };
         
       }
