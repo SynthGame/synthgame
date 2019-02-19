@@ -340,9 +340,9 @@ const levels = [
       text: "",
       knobColor: "#e4e259",
       score: 0,
-      name: "Detune",
-      parent: "OSC 1",
-      number: 3,
+      name: "Waveform",
+      parent: "LFO",
+      number: 15,
     }
   },
   //  level 16
@@ -366,9 +366,9 @@ const levels = [
       text: "",
       knobColor: "#e4e259",
       score: 0,
-      name: "Detune",
-      parent: "OSC 1",
-      number: 3,
+      name: "Attack",
+      parent: "Envelope 2",
+      number: 16,
     }
   },
   //  level 17
@@ -392,9 +392,9 @@ const levels = [
       text: "",
       knobColor: "#e4e259",
       score: 0,
-      name: "Detune",
-      parent: "OSC 1",
-      number: 3,
+      name: "Decay",
+      parent: "Envelope 2",
+      number: 17,
     }
   },
   //  level 18
@@ -418,9 +418,9 @@ const levels = [
       text: "",
       knobColor: "#e4e259",
       score: 0,
-      name: "Detune",
-      parent: "OSC 1",
-      number: 3,
+      name: "Sustain",
+      parent: "Envelope 2",
+      number: 18,
     }
   },
   //  level 19
@@ -432,7 +432,6 @@ const levels = [
     filter: {
     },
     envelope: {
-      release: true
     },
     envelope2: {
       release: true
@@ -445,9 +444,9 @@ const levels = [
       text: "",
       knobColor: "#e4e259",
       score: 0,
-      name: "Detune",
-      parent: "OSC 1",
-      number: 3,
+      name: "Sustain",
+      parent: "Envelope 2",
+      number: 19,
     }
   },
   //  level 20
@@ -472,9 +471,9 @@ const levels = [
       text: "",
       knobColor: "#e4e259",
       score: 0,
-      name: "Detune",
-      parent: "OSC 1",
-      number: 3,
+      name: "LFO",
+      parent: "Router",
+      number: 20,
     }
   },
     //  level 21
@@ -499,9 +498,9 @@ const levels = [
         text: "",
         knobColor: "#e4e259",
         score: 0,
-        name: "Detune",
-        parent: "OSC 1",
-        number: 3,
+        name: "Envelope 2",
+        parent: "LFO",
+        number: 21,
       }
     },
   //  level 21
