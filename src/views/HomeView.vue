@@ -96,6 +96,15 @@
                 <circle fill="#000" cx="15" cy="15" r="3"></circle>
               </g>
             </svg>
+            <svg
+              viewBox="0 0 27 13"
+              v-else-if="group.icon === 'sequencer'"
+              class="navigation--group-icon"
+              width="29"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path class="navigation--group-fill" fill="fff" fill-rule="evenodd" d="M0 0h27v13H0V0zm4.5 8a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3z"/>
+            </svg>
           </div>
           <ul class="navigation--list">
             <li
@@ -767,7 +776,8 @@ export default {
     },
     failedLevel() {},
     lvlScore(lvl) {
-      return this.$store.state.gameState.levels[lvl].levelData.score;
+      let level = this.$store.state.gameState.levels[lvl]
+      return level ? level.levelData.score : null
     },
     goToLevel(level) {
       // Add check for lvl avalible....
