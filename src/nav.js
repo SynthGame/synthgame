@@ -1,8 +1,7 @@
-import store from './store';
-
+import store from './store'
 
 export default {
-  title: "Bart's song",
+  title: 'Bart\'s song',
   active: {
     title: 'frequency',
     knobName: 'octave',
@@ -11,8 +10,8 @@ export default {
   },
   groups: [
     {
-      title: "Osc 1",
-      moduleName: "oscillator1",
+      title: 'Osc 1',
+      moduleName: 'oscillator1',
       icon: 'osc',
       items: [
         {
@@ -36,8 +35,8 @@ export default {
       ]
     },
     {
-      moduleName: "oscillator2",
-      title: "Osc 2",
+      moduleName: 'oscillator2',
+      title: 'Osc 2',
       icon: 'osc',
       items: [
         {
@@ -56,13 +55,13 @@ export default {
           title: 'typeOsc',
           knobName: 'shape',
           author: 'Daniel',
-          score: 5,
+          score: 5
         }
       ]
     },
     {
-      moduleName: "filter",
-      title: "Filter",
+      moduleName: 'filter',
+      title: 'Filter',
       icon: 'filter',
       items: [
         {
@@ -80,9 +79,9 @@ export default {
       ]
     },
     {
-      moduleName: "envelope",
-      title: "Envelope",
-      icon: "envelope",
+      moduleName: 'envelope',
+      title: 'Envelope',
+      icon: 'envelope',
       items: [
         {
           title: 'attack',
@@ -111,8 +110,8 @@ export default {
       ]
     },
     {
-      moduleName: "envelope2",
-      title: "Envelope 2",
+      moduleName: 'envelope2',
+      title: 'Envelope 2',
       icon: 'envelope2',
       items: [
         {
@@ -136,8 +135,8 @@ export default {
       ]
     },
     {
-      moduleName: "lfo",
-      title: "LFO",
+      moduleName: 'lfo',
+      title: 'LFO',
       icon: 'lfo',
       items: [
         {
@@ -161,8 +160,8 @@ export default {
       ]
     },
     {
-      moduleName: "router",
-      title: "Router",
+      moduleName: 'router',
+      title: 'Router',
       icon: 'router',
       items: [
         {
@@ -217,6 +216,6 @@ export default {
   },
   levelData: {
     text:
-      "Congratulations! You're an electronic music producer. Make the music for one of the levels, or keep playing the game and break the highscore: level 135."
+      'Congratulations! You\'re an electronic music producer. Make the music for one of the levels, or keep playing the game and break the highscore: level 135.'
   }
 }
