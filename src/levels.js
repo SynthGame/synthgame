@@ -139,7 +139,7 @@ const levels = [
       parent: "OSC 2",
       number: 6,
       device: 'oscillator2',
-      paramater: 'frequency',
+      paramater: 'volume',
     }
   },
   // level 7
@@ -162,6 +162,8 @@ const levels = [
       name: "waveform",
       parent: "Filter",
       number: 7,
+      device: 'filter',
+      paramater: 'type',
     }
   },
   //  level 8
@@ -185,6 +187,8 @@ const levels = [
       name: "Frequency",
       parent: "Filter",
       number: 8,
+      device: 'filter',
+      paramater: 'frequency',
     }
   },
   //  level 9
@@ -209,6 +213,8 @@ const levels = [
       name: "Attack",
       parent: "Envelope",
       number: 9,
+      device: 'envelope',
+      paramater: 'attack',
     }
   },
   //  level 10
@@ -233,6 +239,8 @@ const levels = [
       name: "Decay",
       parent: "Envelope",
       number: 10,
+      device: 'envelope',
+      paramater: 'decay',
     }
   },
   //  level 11
@@ -257,6 +265,8 @@ const levels = [
       name: "Sustain",
       parent: "Envelope",
       number: 11,
+      device: 'envelope',
+      paramater: 'sustain',
     }
   },
   //  level 12
@@ -279,7 +289,9 @@ const levels = [
       score: 0,
       name: "Release",
       parent: "Envelope",
-      number: 12
+      number: 12,
+      device: 'envelope',
+      paramater: 'release',
     }
   },
   // level 13
@@ -304,6 +316,8 @@ const levels = [
       name: "Amount",
       parent: "LFO",
       number: 13,
+      device: 'lfo',
+      paramater: 'amount',
     }
   },
   // level 14
@@ -329,6 +343,8 @@ const levels = [
       name: "Frequency",
       parent: "LFO",
       number: 14,
+      device: 'lfo',
+      paramater: 'frequency',
     }
   },
   // level 15
@@ -355,6 +371,8 @@ const levels = [
       name: "Waveform",
       parent: "LFO",
       number: 15,
+      device: 'lfo',
+      paramater: 'type',
     }
   },
   //  level 16
@@ -381,6 +399,8 @@ const levels = [
       name: "Attack",
       parent: "Envelope 2",
       number: 16,
+      device: 'envelope2',
+      paramater: 'attack',
     }
   },
   //  level 17
@@ -407,6 +427,8 @@ const levels = [
       name: "Decay",
       parent: "Envelope 2",
       number: 17,
+      device: 'envelope2',
+      paramater: 'decay',
     }
   },
   //  level 18
@@ -433,6 +455,8 @@ const levels = [
       name: "Sustain",
       parent: "Envelope 2",
       number: 18,
+      device: 'envelope2',
+      paramater: 'sustain',
     }
   },
   //  level 19
