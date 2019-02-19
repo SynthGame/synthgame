@@ -4,7 +4,7 @@
       <h3 slot="subtitle">Sequencer</h3>
     </module-title>
     <div class="sequencer__controls">
-      <div class="button-wrapper function">
+      <!-- <div class="button-wrapper function">
         <button :style="sequencerEditState === 0 ? 'background: #F40056 !important' : ''" color="#6e01d1" @click="sequencerEditStateChange(0)">Steps</button>
         <button :style="sequencerEditState === 1 ? 'background: #F40056 !important' : ''" color="#6e01d1" @click="sequencerEditStateChange(1)">Pitch</button>
         <button :style="sequencerEditState === 3 ? 'background: #F40056 !important' : ''" color="#6e01d1" @click="sequencerEditStateChange(3)">Glide</button>
@@ -19,26 +19,26 @@
         <button :style="sequencerEditState === 10 ? 'background: #F40056 !important' : ''" class="button-drums" @click="sequencerEditStateChange(10)">Noise</button>
         <button @click="playPauseSynth" class="sequencer-stop-button button-drums"><span>▶</span></button>
         <!-- <p>Drums</p> -->
-      </div>
+      </div> -->
       <div height="200px">
-      <div class="play-random">
-        <!-- <button @click="randomizeSelectedParam" class="sequencer-random-button">
-          random
-        </button> -->
-        <!-- <button @click="playPauseBeat" class="sequencer-random-button">
-          Beat
-        </button> -->
-        <module-knob
-        style="width:4rem"
-          v-model="bpm"
-          :min="60"
-          :max="300"
-          knobColor="#F40056"
-          name="TEMPO"
-          module="sequencer"
-        ></module-knob>
-        <span class="timer">{{bpm}}</span>
-      </div>
+        <div class="play-random">
+          <!-- <button @click="randomizeSelectedParam" class="sequencer-random-button">
+            random
+          </button> -->
+          <!-- <button @click="playPauseBeat" class="sequencer-random-button">
+            Beat
+          </button> -->
+          <module-knob
+          style="width:4rem"
+            v-model="bpm"
+            :min="60"
+            :max="300"
+            knobColor="#F40056"
+            name="TEMPO"
+            module="sequencer"
+          ></module-knob>
+          <span class="timer">{{bpm}}</span>
+        </div>
       </div>
     </div>
     <div class="button-section" v-for="i in [0,1,2,3]" :key="i">
