@@ -54,7 +54,7 @@ const levels = [
     router: {},
     levelData: {
       score: 0,
-      text: "Both detune and octave control the pitch.",
+      text: "",
       knobColor: "#e4e259",
       score: 0,
       name: "Detune",
@@ -123,10 +123,8 @@ const levels = [
     levelData: {
       score: 0,
       number: 0,
-
       text: "Use volume on Osc 2 to alter the mix between the oscillators.",
       knobColor: "#e4e259",
-      score: 0,
       name: "volume",
       parent: "OSC 2",
       number: 6,
@@ -135,14 +133,8 @@ const levels = [
   // level 7
   {
     oscillator1: {
-      detune: true,
-      frequency: true,
-      typeOsc: true
     },
     oscillator2: {
-      typeOsc: true,
-      frequency: true,
-      volume: true
     },
     filter: {
       type: true
@@ -153,25 +145,20 @@ const levels = [
     router: {},
     levelData: {
       score: 0,
-      number: 0,
-
-      text: "You unlocked the filter!"
+      text: "",
+      knobColor: "#e4e259",
+      name: "waveform",
+      parent: "Filter",
+      number: 7,
     }
   },
   //  level 8
   {
     oscillator1: {
-      detune: true,
-      frequency: true,
-      typeOsc: true
     },
     oscillator2: {
-      typeOsc: true,
-      frequency: true,
-      volume: true
     },
     filter: {
-      type: true,
       cutOffFreq: true
     },
     envelope: {},
@@ -180,27 +167,21 @@ const levels = [
     router: {},
     levelData: {
       score: 0,
-      number: 0,
-
-      text:
-        "The cutoff frequency control sets the range of the sound passed through the filter."
+      text: "",
+      knobColor: "#e4e259",
+      score: 0,
+      name: "Frequency",
+      parent: "Filter",
+      number: 8,
     }
   },
   //  level 9
   {
     oscillator1: {
-      detune: true,
-      frequency: true,
-      typeOsc: true
     },
     oscillator2: {
-      typeOsc: true,
-      frequency: true,
-      volume: true
     },
     filter: {
-      type: true,
-      cutOffFreq: true
     },
     envelope: {
       attack: true
@@ -210,29 +191,23 @@ const levels = [
     router: {},
     levelData: {
       score: 0,
-      number: 0,
-
-      text: "You unlocked the Amplifier Envelope!"
+      text: "",
+      knobColor: "#e4e259",
+      score: 0,
+      name: "Attack",
+      parent: "Envelope",
+      number: 9,
     }
   },
   //  level 10
   {
     oscillator1: {
-      detune: true,
-      frequency: true,
-      typeOsc: true
     },
     oscillator2: {
-      typeOsc: true,
-      frequency: true,
-      volume: true
     },
     filter: {
-      type: true,
-      cutOffFreq: true
     },
     envelope: {
-      attack: true,
       decay: true
     },
     envelope2: {},
@@ -240,30 +215,23 @@ const levels = [
     router: {},
     levelData: {
       score: 0,
-      number: 0,
-
-      text: "Every time a note is played, the envelope is triggered."
+      text: "",
+      knobColor: "#e4e259",
+      score: 0,
+      name: "Decay",
+      parent: "Envelope",
+      number: 10,
     }
   },
   //  level 11
   {
     oscillator1: {
-      detune: true,
-      frequency: true,
-      typeOsc: true
     },
     oscillator2: {
-      typeOsc: true,
-      frequency: true,
-      volume: true
     },
     filter: {
-      type: true,
-      cutOffFreq: true
     },
     envelope: {
-      attack: true,
-      decay: true,
       sustain: true
     },
     envelope2: {},
@@ -271,65 +239,46 @@ const levels = [
     router: {},
     levelData: {
       score: 0,
-      number: 0,
-
-      text:
-        "Use attack, decay, sustain and release to decide on the volume of the note over time."
+      text: "",
+      knobColor: "#e4e259",
+      score: 0,
+      name: "Sustain",
+      parent: "Envelope",
+      number: 11,
     }
   },
   //  level 12
   {
     oscillator1: {
-      detune: true,
-      frequency: true,
-      typeOsc: true
     },
     oscillator2: {
-      typeOsc: true,
-      frequency: true,
-      volume: true
     },
     filter: {
-      type: true,
-      cutOffFreq: true
     },
     envelope: {
-      attack: true,
-      decay: true,
-      sustain: true,
       release: true
     },
     envelope2: {},
     lfo: {},
     router: {},
     levelData: {
+      text: "",
+      knobColor: "#e4e259",
       score: 0,
-      number: 0,
-
-      text: "Hint: set attack and decay to low levels for snappy sounds."
+      name: "Release",
+      parent: "Envelope",
+      number: 12
     }
   },
   // level 13
   {
     oscillator1: {
-      detune: true,
-      frequency: true,
-      typeOsc: true
     },
     oscillator2: {
-      typeOsc: true,
-      frequency: true,
-      volume: true
     },
     filter: {
-      type: true,
-      cutOffFreq: true
     },
     envelope: {
-      attack: true,
-      decay: true,
-      sustain: true,
-      release: true
     },
     envelope2: {},
     lfo: {
@@ -338,277 +287,223 @@ const levels = [
     router: {},
     levelData: {
       score: 0,
-      number: 0,
-
-      text: 'You unlocked the LFO!'
+      text: "",
+      knobColor: "#e4e259",
+      name: "Amount",
+      parent: "LFO",
+      number: 13,
     }
   },
   // level 14
   {
     oscillator1: {
-      detune: true,
-      frequency: true,
-      typeOsc: true
     },
     oscillator2: {
-      typeOsc: true,
-      frequency: true,
-      volume: true
     },
     filter: {
-      type: true,
-      cutOffFreq: true
     },
     envelope: {
-      attack: true,
-      decay: true,
-      sustain: true,
-      release: true
     },
     envelope2: {},
     lfo: {
-      amount: true,
       frequency: true
     },
     router: {},
     levelData: {
       score: 0,
-      number: 0,
-
-      text: 'LFO stands for low frequency oscillator. It produces an output signal which can modulate other controls.'
+      text: "",
+      knobColor: "#e4e259",
+      score: 0,
+      name: "Frequency",
+      parent: "LFO",
+      number: 14,
     }
   },
   // level 15
   {
     oscillator1: {
-      detune: true,
-      frequency: true,
-      typeOsc: true
     },
     oscillator2: {
-      typeOsc: true,
-      frequency: true,
-      volume: true
     },
     filter: {
-      type: true,
-      cutOffFreq: true
+
     },
     envelope: {
-      attack: true,
-      decay: true,
-      sustain: true,
-      release: true
     },
     envelope2: {},
     lfo: {
-      amount: true,
-      frequency: true,
       type: true
     },
     router: {},
     levelData: {
       score: 0,
-      number: 0,
-
-      text: "Low frequency oscillators can bring life to otherwise static sounds."
+      text: "",
+      knobColor: "#e4e259",
+      score: 0,
+      name: "Detune",
+      parent: "OSC 1",
+      number: 3,
     }
   },
   //  level 16
   {
     oscillator1: {
-      detune: true,
-      frequency: true,
-      typeOsc: true
     },
     oscillator2: {
-      typeOsc: true,
-      frequency: true,
-      volume: true
     },
     filter: {
-      type: true,
-      cutOffFreq: true
     },
     envelope: {
-      attack: true,
-      decay: true,
-      sustain: true,
-      release: true
     },
     envelope2: {
-      attack: true
+      attack: true,
     },
     lfo: {
-      // amount: true,
-      // frequency: true,
-      // type: true
     },
     router: {},
     levelData: {
       score: 0,
-      number: 0,
-
-      text: "You unlocked the Modulation Envelope!"
+      text: "",
+      knobColor: "#e4e259",
+      score: 0,
+      name: "Detune",
+      parent: "OSC 1",
+      number: 3,
     }
   },
   //  level 17
   {
     oscillator1: {
-      detune: true,
-      frequency: true,
-      typeOsc: true
     },
     oscillator2: {
-      typeOsc: true,
-      frequency: true,
-      volume: true
     },
     filter: {
-      type: true,
-      cutOffFreq: true
     },
     envelope: {
-      attack: true,
-      decay: true,
-      sustain: true,
-      release: true
     },
     envelope2: {
-      attack: true,
       decay: true
     },
     lfo: {
-      // amount: true,
-      // frequency: true,
-      // type: true
     },
     router: {},
     levelData: {
       score: 0,
-      number: 0,
-
-      text: "We use modulation envelope to modulate another synth control."
+      text: "",
+      knobColor: "#e4e259",
+      score: 0,
+      name: "Detune",
+      parent: "OSC 1",
+      number: 3,
     }
   },
   //  level 18
   {
     oscillator1: {
-      detune: true,
-      frequency: true,
-      typeOsc: true
     },
     oscillator2: {
-      typeOsc: true,
-      frequency: true,
-      volume: true
     },
     filter: {
-      type: true,
-      cutOffFreq: true
     },
     envelope: {
-      attack: true,
-      decay: true,
-      sustain: true,
-      release: true
     },
     envelope2: {
-      attack: true,
-      decay: true,
       sustain: true
     },
     lfo: {
-      amount: true,
-      frequency: true,
-      type: true
     },
     router: {},
     levelData: {
       score: 0,
-      number: 0,
-
-      text: 'With both an lfo and an mod envelope the world is your oyster.'
+      text: "",
+      knobColor: "#e4e259",
+      score: 0,
+      name: "Detune",
+      parent: "OSC 1",
+      number: 3,
     }
   },
   //  level 19
   {
     oscillator1: {
-      detune: true,
-      frequency: true,
-      typeOsc: true
     },
     oscillator2: {
-      typeOsc: true,
-      frequency: true,
-      volume: true
     },
     filter: {
-      type: true,
-      cutOffFreq: true
     },
     envelope: {
-      attack: true,
-      decay: true,
-      sustain: true,
       release: true
     },
     envelope2: {
-      attack: true,
       release: true
     },
     lfo: {
-      amount: true,
-      frequency: true,
-      type: true
     },
     router: {},
     levelData: {
       score: 0,
-      number: 0,
-
-      text: "We're impressed."
+      text: "",
+      knobColor: "#e4e259",
+      score: 0,
+      name: "Detune",
+      parent: "OSC 1",
+      number: 3,
     }
   },
   //  level 20
   {
     oscillator1: {
-      detune: true,
-      frequency: true,
-      typeOsc: true
     },
     oscillator2: {
-      typeOsc: true,
-      frequency: true,
-      volume: true
     },
     filter: {
-      type: true,
-      cutOffFreq: true
     },
     envelope: {
-      attack: true,
-      decay: true,
-      sustain: true,
-      release: true
     },
     envelope2: {
-      attack: true,
-      decay: true
     },
     lfo: {
-      // amount: true,
-      // frequency: true,
-      // type: true
     },
     router: {
       lfo: true
     },
     levelData: {
       score: 0,
-      text: "You must be a famous producer already."
+      text: "",
+      knobColor: "#e4e259",
+      score: 0,
+      name: "Detune",
+      parent: "OSC 1",
+      number: 3,
     }
   },
+    //  level 21
+    {
+      oscillator1: {
+      },
+      oscillator2: {
+      },
+      filter: {
+      },
+      envelope: {
+      },
+      envelope2: {
+      },
+      lfo: {
+      },
+      router: {
+        envelope2: true
+      },
+      levelData: {
+        score: 0,
+        text: "",
+        knobColor: "#e4e259",
+        score: 0,
+        name: "Detune",
+        parent: "OSC 1",
+        number: 3,
+      }
+    },
   //  level 21
   // {
   //   oscillator1: {
