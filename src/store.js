@@ -70,8 +70,12 @@ export default new Vuex.Store({
     },
     setAudioParameter(state, { audio, device, parameter, value }) {
       console.log(`device ${device}; param: ${parameter}; value: ${value}`)
-      state.audioParameters[device][parameter] = value
-      audio[device].state.device[parameter].value = value;
+      console.log(audio[device].state.device[parameter]);
+      if(audio[device].state.device[parameter].value === undefined) {
+        audio[device].state.device[parameter] = value;
+      } else {
+        audio[device].state.device[parameter].value = value;
+      }
     },
     setUserAttemptParameters(state, { device, parameter, value }) {
       state.gameState.userAttemptPreset[device][parameter] = value

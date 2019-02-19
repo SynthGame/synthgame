@@ -604,6 +604,7 @@ export default {
     },
     setSoundToRandom() {
       const { device, paramater } = levels[this.level].levelData;
+      console.log(`${device}, ${paramater}`)
       this.$store.dispatch("randomizeAudioParameters", { device, paramater });
     },
     // LEVEL

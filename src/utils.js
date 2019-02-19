@@ -7,8 +7,7 @@ export const vuexSyncGen = (device, parameter, setCallback) => {
     [parameter]: {
       get: () => store.state.audioParameters[device][parameter],
       set: (value) => {
-        console.log('HELLO!');
-        console.log(store.state.audioParameters[device][parameter]);
+        parameter = parameter === 'typeOsc' ? parameter = 'type' : parameter;
         store.commit('setAudioParameter', {
           audio,
           device,

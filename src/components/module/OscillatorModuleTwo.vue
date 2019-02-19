@@ -136,13 +136,13 @@ export default {
     timerIsRunning() {
       return this.$store.state.gameState.timerIsRunning;
     },
-    dialsAreWithinMargin() {
-      if (this.createModeIsActive) return false; // quick hack
-      this.title = "Done!";
-      return Object.values(
-        this.$store.getters.audioParametersMatchGoalWithMargin[this.name]
-      ).every(param => param);
-    },
+    // dialsAreWithinMargin() {
+    //   if (this.createModeIsActive) return false; // quick hack
+    //   this.title = "Done!";
+    //   return Object.values(
+    //     this.$store.getters.audioParametersMatchGoalWithMargin[this.name]
+    //   ).every(param => param);
+    //},
     // freqDial: {
     //   get () {
     //     return this.freqArray.findIndex(el => el == this.frequency)
