@@ -118,11 +118,8 @@ export default {
   },
   computed: {
     ...mapState({
-      sequencesPassedInCurrentLevel: state =>
-        state.gameState.sequencesPassedInCurrentLevel,
       level: state => state.gameState.level,
       timerIsRunning: state => state.gameState.timerIsRunning
-      // nextLevelRequested: state => state.gameState.nextLevelRequested
     }),
     ...mapGetters({
       allParametersMatchGoal: "allParametersMatchGoal",
@@ -139,12 +136,6 @@ export default {
     completedLevel() {
       return this.$store.state.gameState.completedLevel;
     },
-    // nextLevelRequested () {
-    //   if (this.$store.state.gameState.nextLevelRequested) {
-    //     console.log('hiiieeaaa working finally');
-    //   }
-    //   // return this.$store.state.gameState.nextLevelRequested
-    // }
   },
   methods: {
     switchToCreate() {

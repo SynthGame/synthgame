@@ -457,8 +457,6 @@ export default {
 
       // import level config to highest level
       const availableParameters = levels[levels.length - 1];
-
-      // rest will be done by watcher of sequencesPassedInCurrentLevel
     }
   }
 };

@@ -18,6 +18,8 @@ const levels = [
       name: "Waveform",
       parent: "OSC 1",
       number: 1,
+      device: 'oscillator1',
+      paramater: 'frequency',
     }
   },
   // level 2
@@ -39,6 +41,8 @@ const levels = [
       name: "Octave",
       parent: "OSC 1",
       number: 2,
+      device: 'oscillator1',
+      paramater: 'detune',
     }
   },
   // level 3
@@ -60,6 +64,8 @@ const levels = [
       name: "Detune",
       parent: "OSC 1",
       number: 3,
+      device: 'oscillator1',
+      paramater: 'typeOsc',
     }
   },
   // level 4
@@ -82,6 +88,8 @@ const levels = [
       name: "Waveform",
       parent: "OSC 2",
       number: 4,
+      device: 'oscillator2',
+      paramater: 'typeOsc',
     }
   },
   // level 5
@@ -106,6 +114,8 @@ const levels = [
       name: "Octave",
       parent: "OSC 2",
       number: 5,
+      device: 'oscillator2',
+      paramater: 'frequency',
     }
   },
   // level 6
@@ -128,6 +138,8 @@ const levels = [
       name: "volume",
       parent: "OSC 2",
       number: 6,
+      device: 'oscillator2',
+      paramater: 'frequency',
     }
   },
   // level 7

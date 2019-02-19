@@ -11,9 +11,12 @@ import find from 'lodash/find'
 import character from '@/character'
 import { addPreset } from '@/db'
 import Levels from './levels';
+import audio from './audio';
 
 // 
 import PossibleValues from './stores/possibleValues';
+import AudioParameters from './stores/audioParameters';
+import NoKnobsAvalible from './stores/noKnobsAvalible';
 
 Vue.use(Vuex)
 
@@ -22,211 +25,31 @@ export default new Vuex.Store({
     bpm: 110,
     name: 'Anonymous',
     avatarUrl: null,
-    audioParameters: {
-      oscillator1: {
-        frequency: '131',
-        typeOsc: 'sawtooth',
-        detune: 50
-        // phase: 0
-      },
-      oscillator2: {
-        frequency: '131',
-        typeOsc: 'sawtooth',
-        // detune: 50,
-        volume: 50,
-        // phase: 0
-      },
-      filter: {
-        cutOffFreq: 70,
-        type: 'lowpass',
-        setQ: 0
-        // gain: 50
-      },
-      envelope: {
-        attack: 0,
-        decay: 25,
-        sustain: 100,
-        release: 90
-      },
-      envelope2: {
-        attack: 0,
-        decay: 90,
-        sustain: 0,
-        release: 0,
-        assign: 'filtercutoff',
-        amount: 100
-      },
-      lfo: {
-        frequency: 10,
-        type: 'sine',
-        amount: 0
-      },
-      router: {
-        lfo: 'osc1Detune',
-        envelope2: 'filterCutoff'
-      }
-    },
+    audioParameters: AudioParameters(),
     gameState: {
-      createModeIsActive: false,
-      sweepArmed: true,
-      marginOsc: 0,
-      marginFil: 0,
-      marginEnv: 0,
-      marginLfo: 0,
-      rackSlotArray: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11],
-      margin: 10,
       // GAME SCORING //
+      level: -1,
       attempts: 0,
-      madeAttempt: false,
-      completedLevel: false,
-      levels: Levels,
-      userAttemptPreset: {
-        oscillator1: {
-          frequency: '131',
-          typeOsc: 'sawtooth',
-          detune: 50
-          // phase: 0
-        },
-        oscillator2: {
-          frequency: '131',
-          typeOsc: 'sawtooth',
-          // detune: 50,
-          volume: 50,
-          // phase: 0
-        },
-        filter: {
-          cutOffFreq: 70,
-          type: 'lowpass',
-          setQ: 0
-          // gain: 50
-        },
-        envelope: {
-          attack: 0,
-          decay: 0,
-          sustain: 100,
-          release: 0
-        },
-        envelope2: {
-          attack: 0,
-          decay: 90,
-          sustain: 0,
-          release: 0,
-          assign: 'filterCutoff',
-          amount: 100
-        },
-        lfo: {
-          frequency: 10,
-          type: 'sine',
-          amount: 0
-        },
-        router: {
-          lfo: 'oscsDetune',
-          envelope2: 'filterCutoff'
-        }
-      },
-      // //
       score: 0,
       highScore: 0,
-      timerIsRunning: false,
+
+      // GAME MECHANICS //
+      levels: Levels,
+      goal: AudioParameters(),
+      userAttemptPreset: AudioParameters(),
+      defaultParams: AudioParameters(),
+      knobsAvailable: NoKnobsAvalible,
+
+      // TOGGLES //
+      madeAttempt: false,
+      completedLevel: false,
+      createModeIsActive: false,
+      sweepArmed: true,
       isGameOver: false,
-      nextLevelRequested: false,
-      level: -1,
-      sequencesPassedInCurrentLevel: 0,
-      knobsAvailable: {
-        oscillator1: {},
-        oscillator2: {},
-        filter: {},
-        envelope: {},
-        envelope2: {},
-        lfo: {},
-        router: {}
-      },
-      goal: {
-        oscillator1: {
-          frequency: '131',
-          typeOsc: 'sawtooth',
-          detune: 50
-          // phase: 0
-        },
-        oscillator2: {
-          frequency: '131',
-          typeOsc: 'sawtooth',
-          // detune: 50,
-          volume: 50,
-          // phase: 0
-        },
-        filter: {
-          cutOffFreq: 70,
-          type: 'lowpass',
-          setQ: 0
-          // gain: 50
-        },
-        envelope: {
-          attack: 0,
-          decay: 0,
-          sustain: 100,
-          release: 0
-        },
-        envelope2: {
-          attack: 0,
-          decay: 90,
-          sustain: 0,
-          release: 0,
-          assign: 'filterCutoff',
-          amount: 100
-        },
-        lfo: {
-          frequency: 10,
-          type: 'sine',
-          amount: 0
-        },
-        router: {
-          lfo: 'oscsDetune',
-          envelope2: 'filterCutoff'
-        }
-      },
+
+      // CONTSTANTS //
+      margin: 10,
       possibleValues: PossibleValues,
-      defaultParams: {
-        oscillator1: {
-          frequency: '131',
-          typeOsc: 'sawtooth',
-          detune: 50
-        },
-        oscillator2: {
-          frequency: '131',
-          typeOsc: 'sawtooth',
-          // detune: 50,
-          volume: 50,
-        },
-        filter: {
-          cutOffFreq: 40,
-          type: 'lowpass',
-          setQ: 0
-        },
-        envelope: {
-          attack: 0,
-          decay: 25,
-          sustain: 100,
-          release: 90
-        },
-        envelope2: {
-          attack: 0,
-          decay: 90,
-          sustain: 0,
-          release: 0,
-          assign: 'filtercutoff',
-          amount: 100
-        },
-        lfo: {
-          frequency: 10,
-          type: 'sine',
-          amount: 0
-        },
-        router: {
-          lfo: 'oscsDetune',
-          envelope2: 'filterCutoff'
-        }
-      }
     }
   },
   mutations: {
@@ -246,12 +69,9 @@ export default new Vuex.Store({
 
       state.gameState.knobsAvailable = knobs;
     },
-    setAudioParameter(state, { device, parameter, value }) {
-      state.audioParameters[device][parameter] = value
-    },
-    setUserAttemptParameters(state, { device, parameter, value }) {
-      state.gameState.userAttemptPreset[device][parameter] = value
-    },
+    // setUserAttemptParameters(state, { device, parameter, value }) {
+    //   state.gameState.userAttemptPreset[device][parameter] = value
+    // },
     setFeaturedArtist(state, { artistName, avatarUrl }) {
       state.name = artistName
       state.avatarUrl = avatarUrl
@@ -279,14 +99,6 @@ export default new Vuex.Store({
     setMargin(state, { newMargin }) {
       // overwrite parameters from audiostate, this will not fill in nested objects
       state.gameState.margin = newMargin
-    },
-    startTimerIsRunning(state) {
-      // overwrite parameters from audiostate, this will not fill in nested objects
-      state.gameState.timerIsRunning = true
-    },
-    stopTimerIsRunning(state) {
-      // overwrite parameters from audiostate, this will not fill in nested objects
-      state.gameState.timerIsRunning = false
     },
     armSweep(state) {
       // overwrite parameters from audiostate, this will not fill in nested objects
@@ -317,20 +129,8 @@ export default new Vuex.Store({
     setCreateMode(state, isActive) {
       state.gameState.createModeIsActive = isActive
     },
-    increaseSequencesPassedInCurrentLevel(state) {
-      state.gameState.sequencesPassedInCurrentLevel++
-    },
-    resetSequencesPassedInCurrentLevel(state) {
-      state.gameState.sequencesPassedInCurrentLevel = 0
-    },
     setTheGameToGameOver(state) {
       state.gameState.isGameOver = true
-    },
-    setRequestNextLevelToTrue(state) {
-      state.gameState.nextLevelRequested = true
-    },
-    setRequestNextLevelToFalse(state) {
-      state.gameState.nextLevelRequested = false
     },
     setTheGameFromGameOver(state) {
       state.gameState.isGameOver = false
@@ -355,6 +155,9 @@ export default new Vuex.Store({
       console.log(payload);
       console.log(`Level ${lvl}`)
       state.gameState.levels[lvl].levelData.score = payload;
+    },
+    setAudioaudioParameter(state, { device, parameter, value }) {
+      state.audioParameters[device][parameter] = value;
     }
   },
   getters: {
@@ -362,86 +165,99 @@ export default new Vuex.Store({
       return flatMap(getters.audioParametersMatchGoalWithMargin, val => values(val))
         .every(val => val)
     },
-    nextLevelClickedInNavBar: (state) => {
-      return state.gameState.nextLevelRequested ? 'true' : 'false'
-    },
     displayedLevel: (state, getters) => {
       return state.gameState.level + 1
     },
     audioParametersMatchGoalWithMargin: (state) => {
-      return mapValues(state.audioParameters, (val, moduleName) => {
-        return mapValues(val, (val, parameterName) => {
-          return isArray(state.gameState.possibleValues[moduleName][parameterName])
-            ? (val === state.gameState.goal[moduleName][parameterName])
-            : inRange(val,
-              (state.gameState.goal[moduleName][parameterName] - state.gameState.margin),
-              (state.gameState.goal[moduleName][parameterName] + state.gameState.margin)
-            )
-        })
-      })
-    }
+
+      function reduceKnobsAvalible() {
+
+        const knobs = state.gameState.knobsAvailable;
+
+        let devices = Object.keys(knobs);
+
+        let parent = Object.values(knobs).find(knob => {
+          return Object.entries(knob).length !== 0;
+        });
+
+        const parameter = Object.keys(parent)[0]
+        const device = devices.filter(device => Object.keys(knobs[device])[0] === parameter);
+
+
+        return { device, parameter };
+      }
+
+      const { device, parameter } = reduceKnobsAvalible();
+
+      let val = state.audioParameters[device][parameter];
+
+      return isArray(state.gameState.possibleValues[device][parameter])
+        ? (val === state.gameState.goal[device][parameter])
+        : inRange(val,
+          (state.gameState.goal[device][parameter] - state.gameState.margin),
+          (state.gameState.goal[device][parameter] + state.gameState.margin)
+        );
+    },
   },
   actions: {
+    setAudioParameter(state, { device, parameter, value }) {
+      console.log(`device ${device}; param: ${parameter}; value: ${value}`)
+      console.log(audio[device].state.device[parameter]);
+
+      this.commit('setAudioaudioParameter', { device, parameter, value });
+
+      if (!(parameter === 'typeOsc' || parameter === 'volume')) {
+        if (audio[device].state.device[parameter].value === undefined) {
+          audio[device].state.device[parameter] = value;
+        } else {
+          audio[device].state.device[parameter].value = value;
+        }
+      }
+    },
     madeAttempt({ state, commit }) {
       commit('toggleAttemptMade')
       commit('incrementAttempt')
     },
-    shuffleRackSlotArray({ state, commit }) {
-      var array = state.gameState.rackSlotArray
-      var currentIndex = array.length, temporaryValue, randomIndex;
+    randomizeAudioParameters({ state, commit }, { device, paramater }) {
 
-      // While there remain elements to shuffle...
-      while (0 !== currentIndex) {
 
-        // Pick a remaining element...
-        randomIndex = Math.floor(Math.random() * currentIndex);
-        currentIndex -= 1;
+      const stringsParams = (state, device, paramater) => {
+        if (device === 'lfo') {
+          return Math.random(0, 100);
+        } else {
+          const possibleValues = state.gameState.possibleValues;
+          let len = possibleValues[device][paramater].length;
+          let rando = Math.round(Math.random() * (len - 1) + 1);
+          console.log(possibleValues[device][paramater][rando]);
+          return possibleValues[device][paramater][rando];
+        }
+      };
 
-        // And swap it with the current element.
-        temporaryValue = array[currentIndex];
-        array[currentIndex] = array[randomIndex];
-        array[randomIndex] = temporaryValue;
-      }
-      state.gameState.rackSlotArray = array
-      return array;
-    },
-    randomizeAudioParameters({ state, commit }, randomizeArray) {
-      
-      const randomizeValues = (obj, selectObj) => mapValues(obj, (val, moduleName) => {
-        return mapValues(val, (val, parameterName) => {
-          // if selectObj is provided and the value is falsey return obj value
-          if (selectObj && !selectObj[moduleName][parameterName]) return obj[moduleName][parameterName]
-          const parameterValDef = state.gameState.possibleValues[moduleName][parameterName]
-          return Array.isArray(parameterValDef)
-            ? parameterValDef[random(0, parameterValDef.length - 1)]
-            : random(0, 95)
-        })
-      })
+      const randomizeWithoutMatches = (goal, device, paramater) => {
+        let randomGameState = { ...goal };
+        const stringers = ['frequency', 'typeOsc', 'type', 'assign', 'lfo', 'envelope2'];
+        // if param is a string type...
+        if (stringers.includes(paramater)) {
+          let newValue = stringsParams(state, device, paramater);
+          return randomGameState[device][paramater] = newValue;
+          console.log(`New Value: ${newValue}`)
+          console.log(`device ${device}, param ${paramater}`)
+          console.log(goal)
+        } else {
+          let newValue = Math.random() * (100 - 1) + 1;
+          console.log(`device ${device}, param ${paramater}`)
+          console.log(randomGameState)
+          return randomGameState[device][paramater] = newValue;
+        };
 
-      const randomizeWithoutMatches = (obj, selectObj, itrs = 0) => {
-        if (itrs === 20) return obj
-        const randomPreset = randomizeValues(obj, selectObj) // randomly generated preset
-        const accedentlyCorrectValues = mapValues(randomPreset, (val, moduleName) => {
-          return mapValues(val, (val, parameterName) => {
-            if (selectObj[moduleName][parameterName] !== true) return false
-            return isArray(state.gameState.possibleValues[moduleName][parameterName])
-              ? (val === state.gameState.goal[moduleName][parameterName])
-              : inRange(val,
-                (state.gameState.goal[moduleName][parameterName] - state.gameState.margin),
-                (state.gameState.goal[moduleName][parameterName] + state.gameState.margin)
-              )
-          })
-        })
-        if (find(accedentlyCorrectValues, mod => !!find(mod, par => par === true))) return randomizeWithoutMatches(randomPreset, accedentlyCorrectValues, itrs + 1)
-        return randomPreset
       }
 
       return commit('setAudioParameterToPreset', {
-        preset: randomizeWithoutMatches(state.gameState.goal, randomizeArray)
+        preset: randomizeWithoutMatches(state.gameState.goal, device, paramater),
       })
     },
 
-  ///
+    ///
     randomizGoalParameters({ state, commit }) {
       const randomizeValues = obj => mapValues(obj, (val, moduleName) => {
         return mapValues(val, (val, parameterName) => {
@@ -499,16 +315,16 @@ export default new Vuex.Store({
       synth.lfo.state.device.frequency.value = character.lfo.frequency(state.gameState.userAttemptPreset.lfo.frequency)
       synth.lfo.state.device.max = character.lfo.amount(state.gameState.userAttemptPreset.lfo.amount)
       synth.lfo.state.device.type = character.lfo.type(state.gameState.userAttemptPreset.lfo.type)
-      // synth.oscillator1.state.device.frequency.value = character.oscillator1.frequency(state.gameState.userAttemptPreset.oscillator1.frequency)
+      synth.oscillator1.state.device.frequency.value = character.oscillator1.frequency(state.gameState.userAttemptPreset.oscillator1.frequency)
       synth.oscillator1.state.device.type = character.oscillator1.typeOsc(state.gameState.userAttemptPreset.oscillator1.typeOsc)
       synth.oscillator1.state.device.detune.value = character.oscillator1.detune(state.gameState.userAttemptPreset.oscillator1.detune)
-      // synth.oscillator2.state.device.frequency.value = character.oscillator2.frequency(state.gameState.userAttemptPreset.oscillator2.frequency)
+      synth.oscillator2.state.device.frequency.value = character.oscillator2.frequency(state.gameState.userAttemptPreset.oscillator2.frequency)
       synth.oscillator2.state.device.type = character.oscillator2.typeOsc(state.gameState.userAttemptPreset.oscillator2.typeOsc)
       synth.oscillator2.state.device.volume.value = character.oscillator2.volume(state.gameState.userAttemptPreset.oscillator2.volume)
       synth.connectLfo(state.gameState.userAttemptPreset.router.lfo)
       synth.connectEnvelope2(state.gameState.userAttemptPreset.envelope2)
     },
-    setSynthToDefaultParameters({ state }, synth) {
+    setSynthToAudioParameters({ state }, synth) {
       synth.envelope.state.device.attack = character.envelope.attack(state.audioParameters.envelope.attack)
       synth.envelope.state.device.decay = character.envelope.decay(state.audioParameters.envelope.decay)
       synth.envelope.state.device.sustain = character.envelope.sustain(state.audioParameters.envelope.sustain)
@@ -524,10 +340,10 @@ export default new Vuex.Store({
       synth.lfo.state.device.frequency.value = character.lfo.frequency(state.audioParameters.lfo.frequency)
       synth.lfo.state.device.max = character.lfo.amount(state.audioParameters.lfo.amount)
       synth.lfo.state.device.type = character.lfo.type(state.audioParameters.lfo.type)
-      // synth.oscillator1.state.device.frequency.value = character.oscillator1.frequency(state.audioParameters.oscillator1.frequency)
+      synth.oscillator1.state.device.frequency.value = character.oscillator1.frequency(state.audioParameters.oscillator1.frequency)
       synth.oscillator1.state.device.type = character.oscillator1.typeOsc(state.audioParameters.oscillator1.typeOsc)
       synth.oscillator1.state.device.detune.value = character.oscillator1.detune(state.audioParameters.oscillator1.detune)
-      // synth.oscillator2.state.device.frequency.value = character.oscillator2.frequency(state.audioParameters.oscillator2.frequency)
+      synth.oscillator2.state.device.frequency.value = character.oscillator2.frequency(state.audioParameters.oscillator2.frequency)
       synth.oscillator2.state.device.type = character.oscillator2.typeOsc(state.audioParameters.oscillator2.typeOsc)
       synth.oscillator2.state.device.volume.value = character.oscillator2.volume(state.audioParameters.oscillator2.volume)
       synth.connectLfo(state.audioParameters.router.lfo)
@@ -545,22 +361,19 @@ export default new Vuex.Store({
       commit('setKnobsAvailable', knobsAvailable)
     },
     startNewLevel({ state, commit, dispatch }, { knobsAvailable, level }) {
-      commit('resetSequencesPassedInCurrentLevel')
       if (level) commit('setLevelValue', level)
       return dispatch('setLevel', {
         knobsAvailable
       })
     },
     levelDone({ state, commit }) {
-      commit('stopTimerIsRunning')
+
       // commit('addValueToScore', timeLeft)
     },
     gameOver({ state, commit }) {
       commit('setTheGameToGameOver')
-      // commit('stopTimerIsRunning')
       // console.log(`you failed at: ${state.gameState.level + 1}`)
       // commit('setLevelValue', state.gameState.level)
-      // commit('startTimerIsRunning')
     },
     nextLevel({ state, commit }) {
       commit('setRequestNextLevelToTrue')

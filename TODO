@@ -6,3 +6,20 @@ cleanup unused dials, both in HTML template and in fucntions, not every store ac
 fix done dot blinking not correct size
 hide done dots in navbar based on available modules
 solve 'AudioParam.setValueAtTime' bug
+
+
+frequency && oscillator1/2
+
+typeOsc
+type
+assign
+lfo
+envelope2
+
+// a preset is selected and set as "GOAL SOUND"
+// GOAL SOUND is loaded into AUDIO
+// on ENTER LVL:
+     GOAL SOUND is duplicated.
+     The NEW SOUND is given one random value = userAttemptPreset 
+     NEW SOUND is loaded into Audio.
+// userAttemptPreset (NEW SOUND ) is checked against goal (GOAL SOUND)

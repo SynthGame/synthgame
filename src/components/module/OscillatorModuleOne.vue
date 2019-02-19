@@ -59,13 +59,6 @@
         knobColor="#ff8574"
         name="Pitch"
       ></module-knob>
-      <!-- <module-knob
-        v-model="phase"
-        :min="50"
-        :max="10000"
-        knobColor="#ff8574"
-        name="Phase"
-      ></module-knob> -->
       <div class="button-wrapper drop"
         v-if="knobsAvailable.typeOsc || createModeIsActive"
       >
@@ -100,7 +93,8 @@ export default {
     return {
       name: "oscillator1",
       oscillator1: {},
-      moduleColor: MODULE_OSCILLATORONE_COLOR
+      moduleColor: MODULE_OSCILLATORONE_COLOR,
+      freqArray: ['65', '131', '262', '523'],
     };
   },
   components: {
@@ -132,11 +126,11 @@ export default {
       return this.$store.state.gameState.timerIsRunning;
     },
     dialsAreWithinMargin() {
-      if (this.createModeIsActive) return false; // quick hack
-      this.title = "Done!";
-      return Object.values(
-        this.$store.getters.audioParametersMatchGoalWithMargin[this.name]
-      ).every(param => param);
+      // if (this.createModeIsActive) return false; // quick hack
+      // this.title = "Done!";
+      // return Object.values(
+      //   this.$store.getters.audioParametersMatchGoalWithMargin[this.name]
+      // ).every(param => param);
     },
     // freqDial: {
     //   get () {
@@ -147,14 +141,16 @@ export default {
     //   }
     // },
     ...vuexSyncGen("oscillator1", "frequency", val => {
-      // self.oscillator1.frequency.value = character.oscillator1.frequency(val)
+      self.oscillator1.frequency.value = character.oscillator1.frequency(val)
+      // return val;
     }),
     ...vuexSyncGen("oscillator1", "typeOsc", val => {
-      // if (self.oscillator1.type === character.oscillator1.typeOsc(val)) return;
+      // if (self.oscillator1.type === character.oscillator1.typeOsc(val)) return;]
       self.oscillator1.type = character.oscillator1.typeOsc(val);
       // console.log("self.oscillator1.type", self.oscillator1.type);
       self.oscillator1.stop();
       self.oscillator1.start();
+      // return value;
     }),
     // ...vuexSyncGen('oscillator1', 'phase', val => {
     //   self.oscillator1.phase = character.oscillator1.phase(val) // phase in degrees
@@ -163,12 +159,12 @@ export default {
       self.oscillator1.detune.value = character.oscillator1.detune(val);
     }),
     ...mapState({
-      frequencyGoal: state => state.gameState.goal.oscillator1.frequency,
-      typeOscGoal: state => state.gameState.goal.oscillator1.typeOsc,
-      detuneGoal: state => state.gameState.goal.oscillator1.detune,
+      frequencyGoal: state => state.audioParameters.oscillator1.frequency,
+      typeOscGoal: state => state.audioParameters.oscillator1.typeOsc,
+      detuneGoal: state => state.audioParameters.oscillator1.detune,
       // phaseGoal: state => state.gameState.goal.oscillator1.phase,
       typeArray: state => state.gameState.possibleValues.oscillator1.typeOsc,
-      freqArray: state => state.gameState.possibleValues.oscillator1.frequency,
+      // freqArray: state => state.gameState.possibleValues.oscillator1.frequency,
       knobsAvailable: state => state.gameState.knobsAvailable.oscillator1,
       createModeIsActive: state => state.gameState.createModeIsActive
     })
