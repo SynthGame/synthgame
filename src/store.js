@@ -171,16 +171,33 @@ export default new Vuex.Store({
     },
     audioParametersMatchGoalWithMargin: (state) => {
 
-      return mapValues(state.audioParameters, (val, moduleName) => {
-        return mapValues(val, (val, parameterName) => {
-          return isArray(state.gameState.possibleValues[moduleName][parameterName])
-            ? (val === state.gameState.goal[moduleName][parameterName])
+      function reduceKnobsAvalible() {
+
+        const knobs = state.gameState.knobsAvailable;
+
+        let devices = Object.keys(knobs);
+
+        let parent = Object.values(knobs).find(knob => {
+          return Object.entries(knob).length !== 0;
+        });
+
+        const parameter = Object.keys(parent)[0]
+        const device = devices.filter(device => Object.keys(knobs[device])[0] === parameter);
+
+
+        return {device, parameter};
+      }
+
+      const { device, parameter } = reduceKnobsAvalible();
+
+      let val = state.audioParameters[device][parameter];
+
+      return isArray(state.gameState.possibleValues[device][parameter])
+            ? (val === state.gameState.goal[device][parameter])
             : inRange(val,
-              (state.gameState.goal[moduleName][parameterName] - state.gameState.margin),
-              (state.gameState.goal[moduleName][parameterName] + state.gameState.margin)
-            )
-        })
-      })
+              (state.gameState.goal[device][parameter] - state.gameState.margin),
+              (state.gameState.goal[device][parameter] + state.gameState.margin)
+            );
     }
   },
   actions: {
@@ -190,15 +207,6 @@ export default new Vuex.Store({
     },
     randomizeAudioParameters({ state, commit }, { device, paramater }) {
 
-      function reduceKnobsAvalible() {
-        /// reduce the parent to the single child key.
-        let parent = Object.values(state.gameState.knobsAvailable).find(knob => {
-          return Object.entries(knob).length !== 0;
-        });
-        return Object.keys(parent)[0];
-      }
-
-      console.log(reduceKnobsAvalible());
       
       const stringsParams = (state, device, paramater) => {
         if(device === 'lfo') {
