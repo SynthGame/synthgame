@@ -26,28 +26,28 @@ export default new Vuex.Store({
     name: 'Anonymous',
     avatarUrl: null,
     audioParameters: AudioParameters(),
-    gameState: {       
-    // GAME SCORING //
+    gameState: {
+      // GAME SCORING //
       level: -1,
       attempts: 0,
       score: 0,
       highScore: 0,
 
-    // GAME MECHANICS //
+      // GAME MECHANICS //
       levels: Levels,
       goal: AudioParameters(),
       userAttemptPreset: AudioParameters(),
       defaultParams: AudioParameters(),
       knobsAvailable: NoKnobsAvalible,
 
-    // TOGGLES //
+      // TOGGLES //
       madeAttempt: false,
       completedLevel: false,
       createModeIsActive: false,
       sweepArmed: true,
       isGameOver: false,
 
-    // CONTSTANTS //
+      // CONTSTANTS //
       margin: 10,
       possibleValues: PossibleValues,
     }
@@ -184,7 +184,7 @@ export default new Vuex.Store({
         const device = devices.filter(device => Object.keys(knobs[device])[0] === parameter);
 
 
-        return {device, parameter};
+        return { device, parameter };
       }
 
       const { device, parameter } = reduceKnobsAvalible();
@@ -192,11 +192,11 @@ export default new Vuex.Store({
       let val = state.audioParameters[device][parameter];
 
       return isArray(state.gameState.possibleValues[device][parameter])
-            ? (val === state.gameState.goal[device][parameter])
-            : inRange(val,
-              (state.gameState.goal[device][parameter] - state.gameState.margin),
-              (state.gameState.goal[device][parameter] + state.gameState.margin)
-            );
+        ? (val === state.gameState.goal[device][parameter])
+        : inRange(val,
+          (state.gameState.goal[device][parameter] - state.gameState.margin),
+          (state.gameState.goal[device][parameter] + state.gameState.margin)
+        );
     },
   },
   actions: {
@@ -206,8 +206,8 @@ export default new Vuex.Store({
 
       this.commit('setAudioaudioParameter', { device, parameter, value });
 
-      if(parameter !== 'typeOsc') {
-        if(audio[device].state.device[parameter].value === undefined) {
+      if (!(parameter === 'typeOsc' || parameter === 'volume')) {
+        if (audio[device].state.device[parameter].value === undefined) {
           audio[device].state.device[parameter] = value;
         } else {
           audio[device].state.device[parameter].value = value;
@@ -220,9 +220,9 @@ export default new Vuex.Store({
     },
     randomizeAudioParameters({ state, commit }, { device, paramater }) {
 
-      
+
       const stringsParams = (state, device, paramater) => {
-        if(device === 'lfo') {
+        if (device === 'lfo') {
           return Math.random(0, 100);
         } else {
           const possibleValues = state.gameState.possibleValues;
@@ -234,10 +234,10 @@ export default new Vuex.Store({
       };
 
       const randomizeWithoutMatches = (goal, device, paramater) => {
-        let randomGameState = {...goal};
+        let randomGameState = { ...goal };
         const stringers = ['frequency', 'typeOsc', 'type', 'assign', 'lfo', 'envelope2'];
         // if param is a string type...
-        if(stringers.includes(paramater)) {
+        if (stringers.includes(paramater)) {
           let newValue = stringsParams(state, device, paramater);
           return randomGameState[device][paramater] = newValue;
           console.log(`New Value: ${newValue}`)
@@ -249,7 +249,7 @@ export default new Vuex.Store({
           console.log(randomGameState)
           return randomGameState[device][paramater] = newValue;
         };
-        
+
       }
 
       return commit('setAudioParameterToPreset', {
@@ -257,7 +257,7 @@ export default new Vuex.Store({
       })
     },
 
-  ///
+    ///
     randomizGoalParameters({ state, commit }) {
       const randomizeValues = obj => mapValues(obj, (val, moduleName) => {
         return mapValues(val, (val, parameterName) => {
@@ -367,7 +367,7 @@ export default new Vuex.Store({
       })
     },
     levelDone({ state, commit }) {
-     
+
       // commit('addValueToScore', timeLeft)
     },
     gameOver({ state, commit }) {
