@@ -720,7 +720,8 @@ export default {
     },
     failedLevel() {},
     lvlScore(lvl) {
-      return this.$store.state.gameState.levels[lvl].levelData.score;
+      let level = this.$store.state.gameState.levels[lvl]
+      return level ? level.levelData.score : null
     },
     goToLevel(level) {
       // Add check for lvl avalible....
