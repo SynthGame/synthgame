@@ -18,7 +18,7 @@
         <button :style="sequencerEditState === 9 ? 'background: #F40056 !important' : ''" class="button-drums" @click="sequencerEditStateChange(9)">Labmyc</button>
         <button :style="sequencerEditState === 10 ? 'background: #F40056 !important' : ''" class="button-drums" @click="sequencerEditStateChange(10)">Noise</button>
         <button @click="playPauseSynth" class="sequencer-stop-button button-drums"><span>▶</span></button>
-        <!-- <p>Drums</p> -->
+        <p>Drums</p>
       </div> -->
       <div height="200px">
         <div class="play-random">
