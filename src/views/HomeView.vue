@@ -4,6 +4,7 @@
       <div class="navigation--inner">
         <div
           v-for="(group, index) in nav.groups"
+          v-if="group.moduleName != 'sequencer'"
           :key="index"
           :class="[
           `navigation--group_${group.title.toLowerCase().replace(' ', '')}`,
