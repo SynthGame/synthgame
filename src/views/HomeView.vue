@@ -1,6 +1,6 @@
 <template>
   <div class="cols">
-    <nav :class="`screen navigation ${showModules ? 'is-active' : ''}`">
+    <nav :class="`screen navigation ${show1stScreen ? 'is-active' : ''}`">
       <div class="navigation--inner">
         <div
           v-for="(group, index) in nav.groups"
@@ -131,9 +131,9 @@
     <div class="screen">
       <div v-if="slide !== null" class="screen screen_score screen_start">
         <transition name="fade" mode="in-out" appear>
-          <div v-show="slide === 0" class="hide-desktop screen--header">
+          <div v-show="slide === 1" class="hide-desktop screen--header">
             <div class="screen--header-inner">
-              <button @click="slide = 1" class="btn btn_link btn_primary">
+              <button @click="slide = 0" class="btn btn_link btn_primary">
                 <span class="btn--inner">
                   <span class="btn--inner-text">< Back</span>
                 </span>
@@ -187,9 +187,15 @@
       <template v-else>
         <div class="hide-desktop screen--header">
           <div class="screen--header-inner">
-            <button @click="toggleNavigation()" class="btn btn_link btn_primary">
+            <button @click="toggle1stScreen()" class="btn btn_navigation">
               <span class="btn--inner">
-                <span class="btn--inner-text">{{ showModules ? 'Modules >' : '< Modules' }}</span>
+                <span class="btn--inner-text">
+                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 60 71">
+                    <path d="M57 32h-2.581c-1.374-3.881-5.067-6.667-9.419-6.667S36.955 28.119 35.581 32H3a3 3 0 1 0 0 6h32.371c1.168 4.227 5.031 7.334 9.629 7.334s8.461-3.107 9.629-7.334H57a3 3 0 0 0 0-6z"/>
+                    <path d="M57 58H24.419c-1.374-3.881-5.067-6.666-9.419-6.666S6.955 54.119 5.581 58H3a3 3 0 0 0 0 6h2.371c1.168 4.227 5.031 7.334 9.629 7.334s8.461-3.107 9.629-7.334H57a3 3 0 0 0 0-6z"/>
+                    <path d="M3 13h2.371c1.168 4.227 5.031 7.333 9.629 7.333s8.461-3.107 9.629-7.333H57a3 3 0 1 0 0-6H24.419C23.045 3.119 19.352.333 15 .333S6.955 3.119 5.581 7H3a3 3 0 1 0 0 6z"/>
+                  </svg>
+                </span>
               </span>
             </button>
             <div class="screen--attempts">
@@ -222,20 +228,6 @@
               </svg>
             </div>
           </div>
-          <button @click="toggle3dScreen()" class="btn btn_leaderboard">
-            <span class="btn--inner">
-              <span class="btn--inner-text">
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-                  <path d="M19 17h-7c-1.103 0-2 .897-2 2s.897 2 2 2h7c1.103 0 2-.897 2-2s-.897-2-2-2z"/>
-                  <path d="M19 10h-7c-1.103 0-2 .897-2 2s.897 2 2 2h7c1.103 0 2-.897 2-2s-.897-2-2-2z"/>
-                  <path d="M19 3h-7c-1.103 0-2 .897-2 2s.897 2 2 2h7c1.103 0 2-.897 2-2s-.897-2-2-2z"/>
-                  <circle cx="5" cy="19" r="2.5"/>
-                  <circle cx="5" cy="12" r="2.5"/>
-                  <circle cx="5" cy="5" r="2.5"/>
-                </svg>
-              </span>
-            </span>
-          </button>
         </div>
         <div class="screen--inner">
           <oscillator-module-one
@@ -432,8 +424,8 @@ export default {
       sequencerColor: MODULE_SEQUENCER_COLOR,
       isThereSvooshComponent: false,
       svooshIt: false,
+      show1stScreen: false,
       showGame: false,
-      showModules: false,
       pickedPreset: 0
     };
   },
@@ -507,8 +499,8 @@ export default {
     // }
   },
   methods: {
-    toggleNavigation() {
-      this.showModules = !this.showModules;
+    toggle1stScreen() {
+      this.show1stScreen = !this.show1stScreen
     },
     makeAttempt() {
       this.$store.dispatch("madeAttempt");
