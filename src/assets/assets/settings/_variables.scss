@@ -14,6 +14,7 @@ $colour_yellow: #e4e259;
 $colour_blue: #4b1bff;
 $colour_black: #000000;
 $colour_white: #ffffff;
+$colour_pink: #f40056;
 
 $colour_primary: $colour_orange;
 $colour_osc1: $colour_orange;
@@ -22,6 +23,7 @@ $colour_filter: $colour_purple;
 $colour_lfo: $colour_green;
 $colour_envelope: $colour_yellow;
 $colour_envelope2: $colour_blue;
+$colour_sequencer: $colour_pink;
 
 
 $themes: (
@@ -33,6 +35,7 @@ $themes: (
   "envelope": $colour_yellow,
   "envelope2": $colour_blue,
   "router": $colour_white,
+  "sequencer": $colour_sequencer,
 );
 
 /****

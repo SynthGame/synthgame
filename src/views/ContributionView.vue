@@ -7,10 +7,7 @@
         :key="index"
         :class="[
           `navigation--group_${group.title.toLowerCase().replace(' ', '')}`,
-          'navigation--group',
-          {
-            'is-disabled': isGroupActive(group, index)
-          }
+          'navigation--group'
         ]"
         >
         <div class="navigation--group-title">
@@ -53,16 +50,25 @@
               <circle fill="#000" cx="15" cy="15" r="3"/>
             </g>
           </svg>
+          <svg
+              viewBox="0 0 27 13"
+              v-else-if="group.icon === 'sequencer'"
+              class="navigation--group-icon"
+              width="29"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path class="navigation--group-fill" fill="fff" fill-rule="evenodd" d="M0 0h27v13H0V0zm4.5 8a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3z"/>
+            </svg>
         </div>
         <ul class="navigation--list">
-          <li v-for="(item, key) in group.items" :key="key" class="navigation--item" :class="{'is-disabled' : !(index == 0 && key == 0) && lvlScore(item.score) <= 0 }">
+          <li v-for="(item, key) in group.items" :key="key" class="navigation--item">
             <button class="navigation--item-btn" @click="activeScreen(index, key)">
               <span class="navigation--item-inner">
                 <span class="navigation--item-text">
                   <span class="navigation--item-title">
                     <span>{{ item.knobName }}</span>
                   </span>
-                  <span>{{ lvlScore(item.score) }}</span>
+                  <span>{{ item.author }}</span>
                 </span>
               </span>
             </button>
@@ -72,174 +78,70 @@
     </div>
   </nav>
   <div class="screen">
-    <div v-if="slide !== null" class="screen screen_score screen_start">
-      <transition name="fade" mode="in-out" appear>
-        <div v-show="slide === 1" class="hide-desktop screen--header">
+    <transition name="fade" mode="out-in" appear>
+      <div v-if="slide === 0" class="screen screen_score screen_start">
+        <div class="screen--inner">
+          <div class="screen--title">Create <br>Your<br>Song!</div>
+        </div>
+        <div class="screen--footer">
+          <div class="screen--footer-inner">
+            <button
+              @click="startButton()"
+              class="btn btn_stroke btn_primary">
+              <span class="btn--inner">
+                <span class="btn--inner-text">I'm ready!</span>
+              </span>
+            </button>
+          </div>
+        </div>
+      </div>
+      <div v-else class="screen screen_score screen_start">
+        <div class="hide-desktop screen--header">
           <div class="screen--header-inner">
-            <button @click="slide = 0" class="btn btn_link btn_primary">
+            <button @click="toggle1stScreen()" class="btn btn_navigation">
               <span class="btn--inner">
                 <span class="btn--inner-text">
-                  < Back
+                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 60 71">
+                    <path d="M57 32h-2.581c-1.374-3.881-5.067-6.667-9.419-6.667S36.955 28.119 35.581 32H3a3 3 0 1 0 0 6h32.371c1.168 4.227 5.031 7.334 9.629 7.334s8.461-3.107 9.629-7.334H57a3 3 0 0 0 0-6z"/>
+                    <path d="M57 58H24.419c-1.374-3.881-5.067-6.666-9.419-6.666S6.955 54.119 5.581 58H3a3 3 0 0 0 0 6h2.371c1.168 4.227 5.031 7.334 9.629 7.334s8.461-3.107 9.629-7.334H57a3 3 0 0 0 0-6z"/>
+                    <path d="M3 13h2.371c1.168 4.227 5.031 7.333 9.629 7.333s8.461-3.107 9.629-7.333H57a3 3 0 1 0 0-6H24.419C23.045 3.119 19.352.333 15 .333S6.955 3.119 5.581 7H3a3 3 0 1 0 0 6z"/>
+                  </svg>
                 </span>
               </span>
             </button>
-            <div class="screen--header-title"></div>
-          </div>
-        </div>
-      </transition>
-      <transition name="fade" mode="out-in" appear>
-        <div key="1" v-if="slide === 0" class="screen--inner">
-          <div class="screen--title">Match <br>The <br>Sound</div>
-          <button
-            class="btn btn_link btn_primary hide-desktop">
-            <span class="btn--inner">
-              <span class="btn--inner-text">or Make a song</span>
-            </span>
-          </button>
-          <div class="screen--score">
-            <div class="screen--score-title">Score</div>
-            <div class="screen--score-value">0</div>
-          </div>
-        </div>
-        <!-- sound preview screen -->
-        <div key="2" v-else-if="slide === 1" class="screen--inner">
-          <div class="screen--preview">
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" width="64" height="64">
-              <path fill="#fff" d="M14 2c-.781 0-1.313.438-2 1.016L6 8H2c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h4l6 4.984c.688.579 1.219 1.016 2 1.016 1.219 0 2-.984 2-2V4c0-1.016-.781-2-2-2zm-2 21.784L7.445 20H4v-8h3.445L12 8.216v15.568zM20 6c-1.25 0-2 1.047-2 2 0 1.422 2 2.781 2 8s-2 6.578-2 8c0 .953.75 2 2 2 1.016 0 1.625-.547 2.281-2C23.51 21.279 24 18.672 24 16s-.49-5.279-1.719-8C21.625 6.547 21.016 6 20 6zm9.146-2c-.838-1.771-1.63-2-2.333-2-1.188 0-2 1-2 2C24.813 5.672 28 8.531 28 16s-3.188 10.328-3.188 12c0 1 .813 2 2 2 .703 0 1.495-.229 2.333-2C30.063 26.063 32 22.156 32 16S30.063 5.938 29.146 4z"/>
-            </svg>
-            <p>
-              Listen to the goal sound and match the pitch of oscillator 1
-            </p>
-          </div>
-        </div>
-      </transition>
-      <div class="screen--footer">
-        <div class="screen--footer-inner">
-          <button
-            @click="slide === 0 ? startNextLevel() : enterLevel()"
-            class="btn btn_stroke btn_primary">
-            <span class="btn--inner">
-              <span class="btn--inner-text">Continue</span>
-            </span>
-          </button>
-        </div>
-      </div>
-    </div>
-    <template v-else>
-      <div class="hide-desktop screen--header">
-        <div class="screen--header-inner">
-          <button @click="toggle1stScreen()" class="btn btn_navigation">
-            <span class="btn--inner">
-              <span class="btn--inner-text">
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 60 71">
-                  <path d="M57 32h-2.581c-1.374-3.881-5.067-6.667-9.419-6.667S36.955 28.119 35.581 32H3a3 3 0 1 0 0 6h32.371c1.168 4.227 5.031 7.334 9.629 7.334s8.461-3.107 9.629-7.334H57a3 3 0 0 0 0-6z"/>
-                  <path d="M57 58H24.419c-1.374-3.881-5.067-6.666-9.419-6.666S6.955 54.119 5.581 58H3a3 3 0 0 0 0 6h2.371c1.168 4.227 5.031 7.334 9.629 7.334s8.461-3.107 9.629-7.334H57a3 3 0 0 0 0-6z"/>
-                  <path d="M3 13h2.371c1.168 4.227 5.031 7.333 9.629 7.333s8.461-3.107 9.629-7.333H57a3 3 0 1 0 0-6H24.419C23.045 3.119 19.352.333 15 .333S6.955 3.119 5.581 7H3a3 3 0 1 0 0 6z"/>
-                </svg>
+            <button @click="toggle3dScreen()" class="u-ml_a btn btn_leaderboard">
+              <span class="btn--inner">
+                <span class="btn--inner-text">
+                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                    <path d="M19 17h-7c-1.103 0-2 .897-2 2s.897 2 2 2h7c1.103 0 2-.897 2-2s-.897-2-2-2z"/>
+                    <path d="M19 10h-7c-1.103 0-2 .897-2 2s.897 2 2 2h7c1.103 0 2-.897 2-2s-.897-2-2-2z"/>
+                    <path d="M19 3h-7c-1.103 0-2 .897-2 2s.897 2 2 2h7c1.103 0 2-.897 2-2s-.897-2-2-2z"/>
+                    <circle cx="5" cy="19" r="2.5"/>
+                    <circle cx="5" cy="12" r="2.5"/>
+                    <circle cx="5" cy="5" r="2.5"/>
+                  </svg>
+                </span>
               </span>
-            </span>
-          </button>
-          <div class="screen--attempts">
-            <svg v-for="(i) in totalAttempts/2" :key="i" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48">
-              <defs>
-                <clipPath id="half">
-                  <rect x="0" y="0" width="24.5" height="48"></rect>
-                </clipPath>
-              </defs>
-              <path
-                v-if="i <= (totalAttempts - attempts) / 2"
-                class="screen--attempts-fill"
-                d="M23.993 15.872l1.016-.889a7.313 7.313 0 0 1 4.853-1.834c2.032 0 4.035.832 5.489 2.455a7.314 7.314 0 0 1-.339 10.06l-9.828 8.735a1.795 1.795 0 0 1-2.382 0l-9.814-8.735c-2.751-2.695-2.935-7.125-.339-10.06a7.337 7.337 0 0 1 5.489-2.455 7.34 7.34 0 0 1 4.853 1.834l1.002.889"
-              ></path>
-              <path
-                v-if="i - 0.5 === (totalAttempts - attempts) / 2 "
-                clip-path="url(#half)"
-                class="screen--attempts-fill"
-                d="M23.993 15.872l1.016-.889a7.313 7.313 0 0 1 4.853-1.834c2.032 0 4.035.832 5.489 2.455a7.314 7.314 0 0 1-.339 10.06l-9.828 8.735a1.795 1.795 0 0 1-2.382 0l-9.814-8.735c-2.751-2.695-2.935-7.125-.339-10.06a7.337 7.337 0 0 1 5.489-2.455 7.34 7.34 0 0 1 4.853 1.834l1.002.889"
-              ></path>
-              <path
-                class="screen--attempts-stroke"
-                d="M23.993 15.872l1.016-.889a7.313 7.313 0 0 1 4.853-1.834c2.032 0 4.035.832 5.489 2.455a7.314 7.314 0 0 1-.339 10.06l-9.828 8.735a1.795 1.795 0 0 1-2.382 0l-9.814-8.735c-2.751-2.695-2.935-7.125-.339-10.06a7.337 7.337 0 0 1 5.489-2.455 7.34 7.34 0 0 1 4.853 1.834l1.002.889"
-              ></path>
-            </svg>
+            </button>
           </div>
-          <button @click="toggle3dScreen()" class="btn btn_leaderboard">
-            <span class="btn--inner">
-              <span class="btn--inner-text">
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-                  <path d="M19 17h-7c-1.103 0-2 .897-2 2s.897 2 2 2h7c1.103 0 2-.897 2-2s-.897-2-2-2z"/>
-                  <path d="M19 10h-7c-1.103 0-2 .897-2 2s.897 2 2 2h7c1.103 0 2-.897 2-2s-.897-2-2-2z"/>
-                  <path d="M19 3h-7c-1.103 0-2 .897-2 2s.897 2 2 2h7c1.103 0 2-.897 2-2s-.897-2-2-2z"/>
-                  <circle cx="5" cy="19" r="2.5"/>
-                  <circle cx="5" cy="12" r="2.5"/>
-                  <circle cx="5" cy="5" r="2.5"/>
-                </svg>
-              </span>
-            </span>
-          </button>
+        </div>
+        <div class="screen--inner">
+          <oscillator-module-one v-if="moduleIsUseable('oscillator1')" />
+          <oscillator-module-two v-if="moduleIsUseable('oscillator2')" />
+          <filter-module v-if="moduleIsUseable('filter')" />
+          <envelope-module v-if="moduleIsUseable('envelope')" />
+          <lfo-module v-if="moduleIsUseable('lfo')"/>
+          <envelope-module-two v-if="moduleIsUseable('envelope2')" />
+          <sequencer-module v-if="moduleIsUseable('sequencer')" />
+          <router-module v-if="moduleIsUseable('router')" />
         </div>
       </div>
-      <div class="screen--inner">
-        <oscillator-module-one
-          v-if="moduleIsUseable('oscillator1')"
-          :class="[(activeModule == 0 ? 'active' : '')]"
-        />
-        <oscillator-module-two
-          v-if="moduleIsUseable('oscillator2')"
-          :class="[(activeModule == 1 ? 'active' : '')]"
-        />
-        <filter-module
-          v-if="moduleIsUseable('filter')"
-          :class="[(activeModule == 2 ? 'active' : '')]"
-        />
-        <envelope-module
-          v-if="moduleIsUseable('envelope')"
-          :class="[(activeModule == 3 ? 'active' : '')]"
-        />
-        <lfo-module
-          v-if="moduleIsUseable('lfo')"
-          :class="[(activeModule == 4 ? 'active' : '')]"
-        />
-        <envelope-module-two
-          v-if="moduleIsUseable('envelope2')"
-          :class="[(activeModule == 5 ? 'active' : '')]"
-        />
-        <sequencer-module
-          v-if="createModeIsActive"
-          :class="[(activeModule == 7 ? 'active' : '')]"
-          class="module sequencer"
-        />
-        <router-module
-          v-if="moduleIsUseable('router')"
-          :class="[(activeModule == 6 ? 'active' : '')]"
-        />
-        <!-- ATTEMPT -->
-        <!-- <div class="attempt-navigation"> -->
-          <button
-            v-if="!completedLevel"
-            @click="makeAttempt"
-            class="btn_full btn btn_stroke btn_primary">
-            <span class="btn--inner">
-              <span class="btn--inner-text">Submit</span>
-            </span>
-          </button>
-          <!-- DISPLAY PREVIEW -->
-          <button
-            v-else
-            @click="startNextLevel"
-            class="btn_full btn btn_stroke btn_primary btn_next">
-            <span class="btn--inner">
-              <span class="btn--inner-text">Next</span>
-            </span>
-          </button>
-        <!-- </div> -->
-      </div>
-    </template>
+    </transition>
     <svoosh
       v-if="isThereSvooshComponent"
       :isFired="svooshIt"
-      @midway="showGame=true"
-      @bye="endSvoosh"
+      @midway="midwaySvoosh"
+      @bye="hideSvoosh"
     />
   </div>
   <div :class="`screen screen_score screen_3 screen_score_desktop ${show3dScreen ? 'is-active' : '' }`">
@@ -327,8 +229,7 @@ export default {
   name: "home",
   data() {
     return {
-      activeModule: 0,
-      totalAttempts: 10,
+      activeModule: 'oscillator1',
       slide: 0,
       marginArray: [0, 0.2, 0.4, 0.6],
       indicatorActive: true,
@@ -342,9 +243,9 @@ export default {
       isThereSvooshComponent: false,
       svooshIt: false,
       showGame: false,
+      show1stScreen: false,
       show2ndScreen: false,
       show3dScreen: false,
-      show1stScreen: false,
       pickedPreset: 0,
       pads: ['1', '2', 'Q', 'W', 'A', 'S', 'Z', 'X']
     };
@@ -367,56 +268,6 @@ export default {
   created() {
     this.init();
     this.initSynth();
-    if (this.$route.query.preset) {
-      // window.parent.postMessage(this.$route.query.preset, '*'); uncommented because confusing if we're sending old id too
-      // console.log('id',this.$route.query.preset);
-      this.customLevelIsActive = true;
-      this.displayStartOverlay = false;
-      this.showCreatePreview = true;
-      getPresetById(this.$route.query.preset).then(data => {
-        this.$store.commit("setFeaturedArtist", {
-          artistName: data.name,
-          avatarUrl: data.avatarUrl
-        });
-        console.log(data.parameterValues);
-        this.startPreset(data.parameterValues);
-      });
-    } else if (
-      window.location.href.indexOf("tats") != -1 ||
-      window.location.href.indexOf("jobboard") != -1
-    ) {
-      this.customLevelIsActive = true;
-      this.displayStartOverlay = false;
-      this.$store.commit("setCreateMode", true);
-    }
-
-    window.letsPlay = () => this.initM();
-
-    // Pc keyboard listener (might be needed for mobile)
-    document.addEventListener("keypress", event => {
-      if (audio.state.Tone.context.state !== "running") {
-        audio.state.Tone.context.resume();
-      }
-
-      if (event.keyCode === 27 && this.displayOriginalOverlay) {
-        this.killOrignalSoundPrompt();
-      }
-      // const key = event.key
-    });
-
-    // mouseup listener (needed to trace events)
-    document.addEventListener("mouseup", event => {
-      // log to analytics
-      this.$router.push("?level=" + (this.level + 1) + "&" + event.screenX);
-    });
-  },
-  watch: {
-    // show2ndScreen(val) {
-    //   console.log(`SHowe Start ${val}`)
-    //   if(val) {
-    //     this.goToLevel(this.level + 1);
-    //   }
-    // }
   },
   methods: {
     padClick(event, pad) {
@@ -428,20 +279,6 @@ export default {
     },
     toggle3dScreen() {
       this.show3dScreen = !this.show3dScreen
-    },
-    makeAttempt() {
-      this.$store.dispatch("madeAttempt");
-      // this.failedLevel()
-    },
-    startGame() {
-      this.slide = 1;
-      this.goToLevel(0);
-    },
-    isGroupActive(group, index) {
-      let isThereActiveItemInGroup = group.items.some(item => {
-        return this.lvlScore(item.score) > 0;
-      });
-      return index === 0 ? false : !isThereActiveItemInGroup;
     },
     init() {
       // Retrieve highscore from local storage
@@ -528,167 +365,26 @@ export default {
       );
       this.toneLoop.start();
     },
-    startNextLevel() {
-      const newLevel = this.level + 1;
-      this.goToLevel(newLevel);
-      this.$store.commit({
-        type: "setCompletedLevel",
-        value: false
-      });
+    startButton() {
+      this.showSvoosh()
     },
-    // for entering lvl
-    enterLevel(level) {
-      // this.beginSvoosh()
-      // Set to RANDOMIZE PARAM in SOUND ENGINE.
-      this.setSoundToRandom();
-      this.slide = null;
-    },
-    setSoundToRandom() {
-      this.$store.dispatch("setSynthToDefaultParameters", audio);
-    },
-    // LEVEL 
-    // // // //
-    startLevelPreview(level) {
 
-      this.cheekySvoosh()
-
-      this.$nextTick(() => {
-        // disable all overlays when svoosh is done
-        // this.displaySuccessOverlay = false;
-        this.displayFailureOverlay = false;
-        // this.displayStartOverlay = false;
-        this.displayPreviewOverlay = true;
-        this.slide = 1;
-      });
-
-      audio.playSweep();
-      this.$router.push("?level=" + (level + 1));
-      window.parent.postMessage("play-game-activated", "*");
-
-
-      // randomly pick preset
-      this.pickedPreset = Math.round(Math.random() * (presets.length - 1));
-      // console.log('pickedPreset =', this.pickedPreset);
-
-      // load the preset on synth
-      this.$store.commit("setAudioParameterToPreset", {
-        preset: presets[this.pickedPreset].parameterValues
-      });
-
-      this.$store.commit("setFeaturedArtist", {
-        artistName: presets[this.pickedPreset].name,
-        avatarUrl: presets[this.pickedPreset].avatarUrl
-      });
-
-      // set correct routing
-      audio.connectLfo(this.$store.state.audioParameters.router.lfo);
-      audio.connectEnvelope2(
-        this.$store.state.audioParameters.router.envelope2
-      );
-      audio.filter.state.device.frequency.value = character.filter.cutOffFreq(
-        this.$store.state.audioParameters.filter.cutOffFreq
-      );
-
-      //and again to correct pitch
-      // load the preset on synth
-      this.setToSelectedPreset();
-      // console.log('preset audioParameters loaded: ', presets[this.pickedPreset].parameterValues );
-
-      // Set back Envs to standard audioParameters
-
-      // Set LFO amount to 0 TODO only when level is under lfo level check which level that is
-
-      // Set bpm from preset
-      audio.setBpm(presets[this.pickedPreset].bpm * 2);
-      // Set bpm in store
-      this.$store.commit("setPresetBpm", presets[this.pickedPreset].bpm);
-
-      // Set noteArray to sequence preset locally
-      this.noteArray = presets[this.pickedPreset].sequenceArray;
-
-      // import level config
-      const availableParameters = levels[level];
-
-      this.$store.dispatch("startNewLevel", {
-        knobsAvailable: availableParameters,
-        levelNumber: level || 0
-      });
-      this.$store.commit("setGoalToPreset", {
-        preset: Object.assign(presets[this.pickedPreset].parameterValues, {})
-      });
-
-      console.log(availableParameters);
-
-      this.$store.dispatch("randomizeAudioParameters", availableParameters); // and the audio params
-
-      // this.$nextTick(() => this.$store.dispatch("setSynthToGoal", audio)); //then let the user hear it
-
-      // this.loop.start()
-      // rest will be done by watcher of sequencesPassedInCurrentLevel
-    },
-    setToSelectedPreset() {
-      this.$store.commit("setAudioParameterToPreset", {
-        preset  : presets[this.pickedPreset].parameterValues
-      });
-      
-      // reset oscs for waveforms
-      audio.oscillator1.state.device.type =
-        presets[this.pickedPreset].parameterValues.oscillator1.typeOsc;
-      audio.oscillator2.state.device.type =
-        presets[this.pickedPreset].parameterValues.oscillator2.typeOsc;
-      audio.oscillator1.state.device.stop();
-      audio.oscillator1.state.device.start();
-      audio.oscillator2.state.device.stop();
-      audio.oscillator2.state.device.start();
-      audio.lfo.state.device.type =
-        presets[this.pickedPreset].parameterValues.lfo.type;
-      audio.filter.state.device.type =
-        presets[this.pickedPreset].parameterValues.filter.type;
-      // this.$store.dispatch('setSynthToGoal', audio);
-    },
-    startPreset(parameters, bpm) {
-      const usedParameters = mapValues(parameters, audioModule =>
-        mapValues(audioModule, parameter => !!parameter)
-      );
-
-      // disable all overlays
-      // this.displaySuccessOverlay = false;
-      this.displayFailureOverlay = false;
-      this.displayStartOverlay = false;
-      this.displayPreviewOverlay = false;
-      this.showCreatePreview = true;
-
-      this.$store.dispatch("startNewLevel", {
-        knobsAvailable: usedParameters,
-        levelNumber: 0 //
-      });
-      this.$store.commit("setGoalToPreset", {
-        preset: parameters
-      });
-      // this.$store.dispatch('randomizeAudioParameters', usedParameters) // and the audio params
-      this.$store.dispatch("setSynthToGoal", audio); // then let the user hear it
-
-      this.loop.start();
-      // rest will be done by watcher of sequencesPassedInCurrentLevel
-    },
-    cheekySvoosh(){
-      this.isThereSvooshComponent = true;
+    // SWOOSH that shows up on the beginning only
+    showSvoosh() {
+      this.isThereSvooshComponent = true
       this.$nextTick(() => (this.svooshIt = true));
-      audio.playSweep();
     },
-    beginSvoosh() {
-      this.slide = null;
-      this.isThereSvooshComponent = true;
-      this.$nextTick(() => (this.svooshIt = true));
-      audio.playSweep();
-      // start platmode
+    midwaySvoosh() {
+      this.slide = null
+      this.activeScreen(0, 0)
     },
-    endSvoosh() {
+    hideSvoosh() {
       setTimeout(() => {
         this.isThereSvooshComponent = false;
         this.svooshIt = false;
       }, 300);
     },
+
     activeScreen(index, key) {
       this.show1stScreen = false;
       this.nav.active = this.nav.groups[index].items[key];
@@ -701,15 +397,6 @@ export default {
         knobName: knobName,
         moduleName: moduleName
       });
-
-
-      const lvl = this.nav.groups[index].items[key].score
-
-      this.goToLevel(lvl) // CHANGE to lvl
-
-      this.$store.commit("resetAttempts");
-
-      //Trigger preview Screen + new sound.
     },
     moduleIsUseable(moduleName) {
       if (this.createModeIsActive) {
@@ -717,37 +404,14 @@ export default {
       } else {
         return some(this.knobsAvailable[moduleName]); // some are truthy
       }
-    },
-    failedLevel() {},
-    lvlScore(lvl) {
-      let level = this.$store.state.gameState.levels[lvl]
-      return level ? level.levelData.score : null
-    },
-    goToLevel(level) {
-      // Add check for lvl avalible....
-      this.$store.commit("setLevelValue", level);
-      this.startLevelPreview(level); // TODO: should be + 1
-      this.$store.commit({
-        type: "setCompletedLevel",
-        value: false
-      });
     }
   },
   computed: {
     nav() {
       return Nav;
     },
-    attempts() {
-      return this.$store.state.gameState.attempts;
-    },
     level() {
       return this.$store.state.gameState.level;
-    },
-    madeAttempt() {
-      return this.$store.state.gameState.madeAttempt;
-    },
-    completedLevel() {
-      return this.$store.state.gameState.completedLevel;
     },
     createModeIsActive() {
       return this.$store.state.gameState.createModeIsActive;
@@ -755,47 +419,6 @@ export default {
     knobsAvailable() {
       return this.$store.state.gameState.knobsAvailable;
     },
-    knobsAvailable() {
-      return this.$store.state.gameState.knobsAvailable;
-    },
-    oscillator1Complete() {
-      return Object.values(
-        this.$store.getters.audioParametersMatchGoalWithMargin["oscillator1"]
-      ).every(param => param);
-    },
-    oscillator2Complete() {
-      return Object.values(
-        this.$store.getters.audioParametersMatchGoalWithMargin["oscillator2"]
-      ).every(param => param);
-    },
-    filterComplete() {
-      return Object.values(
-        this.$store.getters.audioParametersMatchGoalWithMargin["filter"]
-      ).every(param => param);
-    },
-    envelopeComplete() {
-      return Object.values(
-        this.$store.getters.audioParametersMatchGoalWithMargin["envelope"]
-      ).every(param => param);
-    },
-    envelope2Complete() {
-      return Object.values(
-        this.$store.getters.audioParametersMatchGoalWithMargin["envelope2"]
-      ).every(param => param);
-    },
-    lfoComplete() {
-      return Object.values(
-        this.$store.getters.audioParametersMatchGoalWithMargin["lfo"]
-      ).every(param => param);
-    },
-    routerComplete() {
-      return Object.values(
-        this.$store.getters.audioParametersMatchGoalWithMargin["router"]
-      ).every(param => param);
-    }
   },
 };
 </script>
-
-<style lang="scss">
-</style>
