@@ -9,7 +9,15 @@ export default new Router({
   base: process.env.BASE_URL,
   routes: [
     {
+      path: "*",
+      redirect: '/play/game'
+    },
+    {
       path: "/",
+      redirect: '/play/game'
+    },
+    {
+      path: "/play/:user_id",
       name: "home",
       component: Home
     },

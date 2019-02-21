@@ -1,6 +1,6 @@
 <template>
   <div class="module">
-    <module-title :module-color="moduleColor">
+    <module-title :indicator-active="false" :module-color="moduleColor">
       <h3 slot="subtitle">Mod Env</h3>
     </module-title>
     <module-display
