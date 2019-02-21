@@ -112,7 +112,9 @@
       z-index: 90;
     }
     .screen--attempts {
-      margin: 0 auto;
+      margin-left: auto;
+      width: 100%;	
+      justify-content: flex-end;
     }
     @media screen and (max-width: 799px) {
       background-color: $colour_grey_dark;
@@ -132,7 +134,8 @@
   }
   &--share {
     max-width: 300px;
-    margin: 0 auto;
+    margin-left: auto;
+    margin-right: 40px;
     padding-bottom: 40px;
     &-inner {
       display: flex;
@@ -205,7 +208,7 @@
       align-items: flex-end;
     }
     .screen--share {
-      margin: 40px 0 0;
+      margin: 40px 0 0 auto;
       padding-bottom: 30px;
     }
     .screen--attempts {
