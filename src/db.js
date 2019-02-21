@@ -53,18 +53,24 @@ export const updateRoom = ({ url, name, score }) => {
 
 // RETURN GAME WITH HIGHSCORE DATA
 export const getRoom = (url) => {
-  return gameRoomRefs.doc(url).get()
-    .then((doc) => {
-      if (doc.exists) {
-        console.log("Document data:", doc.data());
-        return doc.data();
-      } else {
-        console.log("No such document!");
-        return { error: 'No Game exists!' }
-      }
-    }).catch(function (error) {
-      console.log("Error getting document:", error);
-    });
+  // return gameRoomRefs.doc(url).get()
+  //   .then((doc) => {
+  //     if (doc.exists) {
+  //       console.log("Document data:", doc.data());
+  //       return doc.data();
+  //     } else {
+  //       console.log("No such document!");
+  //       return { error: 'No Game exists!' }
+  //     }
+  //   }).catch(function (error) {
+  //     console.log("Error getting document:", error);
+  //   });
+  return [
+    {
+      name: "Lawson",
+      score: 21,
+    }
+  ];
 }
 
 // Highscore funtions

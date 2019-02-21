@@ -8,13 +8,16 @@ export default new Router({
   mode: "history",
   base: process.env.BASE_URL,
   routes: [
-    // {
-    //   path: "/",
-    //   name: "home",
-    //   component: Home
-    // },
     {
-      path: "/:user_id",
+      path: "*",
+      redirect: '/play/game'
+    },
+    {
+      path: "/",
+      redirect: '/play/game'
+    },
+    {
+      path: "/play/:user_id",
       name: "home",
       component: Home
     },

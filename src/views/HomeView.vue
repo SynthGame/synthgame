@@ -312,11 +312,11 @@
             </span>
           </div>
           <ul class="leaderboard--list">
-            <li v-for="i in 27" :key="i" :class="`leaderboard--list-item ${i === 24 ? 'is-active' : ''}`">
+            <li v-for="(score, index) in highscores" :key="index" :class="`leaderboard--list-item ${i === 24 ? 'is-active' : ''}`">
               <div class="leaderboard--name">
-                {{ ['Laswon', 'Bart', 'Daniel', 'Lauren', 'Basti', 'Momcilo'][Math.floor(Math.random() * 6)] }}
+                {{ score.name }}
               </div>
-              <div class="leaderboard--value">{{ Math.floor(Math.random() * 10*i) + 20*i }}</div>
+              <div class="leaderboard--value">{{score.score}}</div>
             </li>
           </ul>
         </div>
@@ -458,8 +458,8 @@ export default {
   },
   created() {
     const roomId = this.$route.params.user_id;
-    if (roomId) {
-      this.$store.commit("setRoomId", {roomId});
+    if (roomId && roomId !== 'game') {
+      this.$store.commit("setRoomId", roomId);
     }
     this.init();
     this.initSynth();
@@ -507,6 +507,9 @@ export default {
     });
   },
   watch: {
+    watchRoomId() {
+      this.$store.dispatch("updatedRoom");
+    }
     // show2ndScreen(val) {
     //   console.log(`SHowe Start ${val}`)
     //   if(val) {
@@ -799,8 +802,14 @@ export default {
     }
   },
   computed: {
+    highscores() {
+      return this.$store.state.roomHighScores;
+    },
     shareLink() {
       return this.$store.state.roomId ? `redbull.com/tats/${this.$store.state.roomId}` : false;
+    },
+    watchRoomId() {
+      return this.$store.state.roomId;
     },
     nav() {
       return Nav;
