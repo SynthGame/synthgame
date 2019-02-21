@@ -415,7 +415,6 @@ export default {
       totalAttempts: 10,
       slide: 0,
       marginArray: [0, 0.2, 0.4, 0.6],
-      indicatorActive: true,
       oscillatorColor: MODULE_OSCILLATOR_COLOR,
       oscillatorTwoColor: MODULE_OSCILLATORTWO_COLOR,
       envelopeColor: MODULE_ENVELOPE_COLOR,

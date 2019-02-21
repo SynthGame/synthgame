@@ -1,6 +1,6 @@
 <template>
   <div class="module">
-    <module-title :indicator-active="dialsAreWithinMargin" :module-color="moduleColor">
+    <module-title :module-color="moduleColor">
       <h3 slot="subtitle">Oscillator 2</h3>
     </module-title>
     <module-display
@@ -137,13 +137,6 @@ export default {
     timerIsRunning() {
       return this.$store.state.gameState.timerIsRunning;
     },
-    // dialsAreWithinMargin() {
-    //   if (this.createModeIsActive) return false; // quick hack
-    //   this.title = "Done!";
-    //   return Object.values(
-    //     this.$store.getters.audioParametersMatchGoalWithMargin[this.name]
-    //   ).every(param => param);
-    //},
     // freqDial: {
     //   get () {
     //     return this.freqArray.findIndex(el => el == this.frequency)
