@@ -1,6 +1,6 @@
 <template>
 <div class="cols">
-  <nav :class="`screen navigation ${show1stScreen ? 'is-active' : ''}`">
+  <nav :style="disableCol" :class="`screen navigation ${show1stScreen ? 'is-active' : ''}`">
     <div class="navigation--inner">
       <div 
         v-for="(group, index) in nav.groups" 
@@ -146,7 +146,7 @@
       @bye="hideSvoosh"
     />
   </div>
-  <div :class="`screen screen_score screen_3 screen_score_desktop ${show3dScreen ? 'is-active' : '' }`">
+  <div :style="disableCol" :class="`screen screen_score screen_3 screen_score_desktop ${show3dScreen ? 'is-active' : '' }`">
     <div class="screen--inner">
       <div class="pads">
         <button
@@ -420,6 +420,21 @@ export default {
     knobsAvailable() {
       return this.$store.state.gameState.knobsAvailable;
     },
+    disableCol() {
+      if (this.slide !== 0) {
+        return [{
+          opacity: 1
+        },  {
+          pointerEvents: 'auto'
+        }]
+      } else {
+        return [{
+          opacity: 0.2
+        },  {
+          pointerEvents: 'none'
+        }]
+      }
+    }
   },
 };
 </script>
