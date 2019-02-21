@@ -26,7 +26,8 @@ export default new Vuex.Store({
     name: 'Anonymous',
     avatarUrl: null,
     audioParameters: AudioParameters(),
-    shareableLink: null,
+    roomId: null,
+    roomHighScores: [],
     gameState: {
       // GAME SCORING //
       level: -1,
@@ -57,8 +58,11 @@ export default new Vuex.Store({
   },
   mutations: {
     // Multiplayer
-    setSharableLink(state, { URL }) {
-      state.shareableLink = URL;
+    setRoomId(state, { URL }) {
+      state.roomId = URL;
+    },
+    setRoomHighScores(state, { scores }) {
+      state.roomHighScores = scores;
     },
     // GAME STATE
     setKnobAvalible(state, payload) {
@@ -220,9 +224,11 @@ export default new Vuex.Store({
       const score = store.state.gameState.score;
 
       const URL = createRoom({ name, score });
-      store.commit('setSharableLink', { URL });
+      store.commit('setRoomId', { URL });
     },
-
+    getUpdatedRoom(store) {
+      const scoreData = getRoom(store.state.roomId);
+    },
     setAudioParameter(state, { device, parameter, value }) {
       console.log(`device ${device}; param: ${parameter}; value: ${value}`)
       console.log(audio[device].state.device[parameter]);

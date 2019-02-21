@@ -460,6 +460,10 @@ export default {
     this.showStartScreen = true;
   },
   created() {
+    const roomId = this.$router.params.roomid;
+    if (roomId) {
+      this.$store.commit("setRoomId", {roomId});
+    }
     this.init();
     this.initSynth();
     if (this.$route.query.preset) {

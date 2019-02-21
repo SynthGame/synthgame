@@ -14,6 +14,11 @@ export default new Router({
       component: Home
     },
     {
+      path: "/:roomid",
+      name: "home",
+      component: Home
+    },
+    {
       path: "/tats",
       name: "tats",
       // route level code-splitting
