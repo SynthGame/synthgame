@@ -80,7 +80,7 @@ export default {
     },
     {
       moduleName: 'envelope',
-      title: 'Envelope',
+      title: 'AMP Env',
       icon: 'envelope',
       items: [
         {
@@ -111,7 +111,7 @@ export default {
     },
     {
       moduleName: 'envelope2',
-      title: 'Envelope 2',
+      title: 'MOD ENV',
       icon: 'envelope2',
       items: [
         {
@@ -130,8 +130,8 @@ export default {
           title: 'amount',
           knobName: 'amount',
           author: '',
-          score: 14
-        }
+          score: 13
+        },
       ]
     },
     {
@@ -140,14 +140,14 @@ export default {
       icon: 'lfo',
       items: [
         {
-          title: 'frequency',
-          knobName: 'frequency',
+          title: 'Speed',
+          knobName: 'Speed',
           author: '',
           score: 15
         },
         {
-          title: 'amount',
-          knobName: 'amount',
+          title: 'frequency',
+          knobName: 'frequency',
           author: '',
           score: 16
         },
@@ -156,7 +156,7 @@ export default {
           knobName: 'type',
           author: '',
           score: 17
-        }
+        },
       ]
     },
     {

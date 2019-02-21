@@ -345,7 +345,7 @@
         <p>Anyone with this link can join and beat your high score.</p>
         <div class="screen--share-inner">
           <div class="screen--share-url">
-            <span>www.mindgame.com/56234353/7534657543</span>
+            <!-- <span>www.mindgame.com/56234353/7534657543</span> -->
           </div>
           <button class="btn btn_icon btn_primary">
             <svg viewBox="0 0 23 22" fill="none" xmlns="http://www.w3.org/2000/svg">

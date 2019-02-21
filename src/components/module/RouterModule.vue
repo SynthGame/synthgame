@@ -130,12 +130,12 @@ export default {
     timerIsRunning () {
       return this.$store.state.gameState.timerIsRunning
     },
-    dialsAreWithinMargin () {
-      if (this.createModeIsActive) return false // quick hack
-      this.title = 'Done!'
-      return Object.values(this.$store.getters.audioParametersMatchGoalWithMargin[this.name])
-        .every(param => param)
-    },
+    // dialsAreWithinMargin () {
+    //   if (this.createModeIsActive) return false // quick hack
+    //   this.title = 'Done!'
+    //   return Object.values(this.$store.getters.audioParametersMatchGoalWithMargin[this.name])
+    //     .every(param => param)
+    // },
     // ...vuexSyncGen('oscillator1', 'frequency', val => {
     //   self.oscillator1.frequency.value = character.oscillator1.frequency(val)
     // }),
