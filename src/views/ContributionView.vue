@@ -126,14 +126,16 @@
           </div>
         </div>
         <div class="screen--inner">
-          <oscillator-module-one v-if="moduleIsUseable('oscillator1')" />
-          <oscillator-module-two v-if="moduleIsUseable('oscillator2')" />
-          <filter-module v-if="moduleIsUseable('filter')" />
-          <envelope-module v-if="moduleIsUseable('envelope')" />
-          <lfo-module v-if="moduleIsUseable('lfo')"/>
-          <envelope-module-two v-if="moduleIsUseable('envelope2')" />
-          <sequencer-module v-if="moduleIsUseable('sequencer')" />
-          <router-module v-if="moduleIsUseable('router')" />
+          <transition name="fade" appear mode="out-in" :duration="400">
+            <oscillator-module-one v-if="moduleIsUseable('oscillator1')" />
+            <oscillator-module-two v-else-if="moduleIsUseable('oscillator2')" />
+            <filter-module v-else-if="moduleIsUseable('filter')" />
+            <envelope-module v-else-if="moduleIsUseable('envelope')" />
+            <lfo-module v-else-if="moduleIsUseable('lfo')"/>
+            <envelope-module-two v-else-if="moduleIsUseable('envelope2')" />
+            <sequencer-module v-else-if="moduleIsUseable('sequencer')" />
+            <router-module v-else-if="moduleIsUseable('router')" />
+          </transition>
         </div>
       </div>
     </transition>
