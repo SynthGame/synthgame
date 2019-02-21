@@ -1,6 +1,6 @@
   <template>
     <div class="module">
-      <module-title :indicator-active="dialsAreWithinMargin" :module-color="moduleColor">
+      <module-title :module-color="moduleColor">
         <h3 slot="subtitle">Mod Lfo</h3>
       </module-title>
         <module-display
@@ -94,12 +94,6 @@ export default {
     timerIsRunning () {
       return this.$store.state.gameState.timerIsRunning
     },
-    // dialsAreWithinMargin () {
-    //   if (this.createModeIsActive) return false // quick hack
-    //   this.title = 'Done!'
-    //   return Object.values(this.$store.getters.audioParametersMatchGoalWithMargin[this.name])
-    //     .every(param => param)
-    // },
     ...vuexSyncGen('lfo', 'frequency', val => {
       self.lfo.frequency.value = character.lfo.frequency(val)
       self.realFrq = character.lfo.frequency(val)

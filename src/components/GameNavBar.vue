@@ -154,7 +154,6 @@ export default {
   name: "gameNavBar",
   data: function() {
     return {
-      indicatorActive: true,
       exportPresetName: "",
       exportPresetLink: "",
       oscillatorColor: MODULE_OSCILLATOR_COLOR,

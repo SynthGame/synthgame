@@ -304,25 +304,23 @@
       />
     </div>
     <div class="screen screen_score screen_score_desktop hide-mobile">
-      <div class="screen--header screen--header_transparent">
-        <div class="screen--header-inner">
-          <button class="btn btn_link btn_primary u-ml_a">
-            <span class="btn--inner">
-              <span class="btn--inner-text">or Make a song ></span>
-            </span>
-          </button>
-        </div>
-      </div>
       <div class="screen--inner">
-        <div class="screen--score">
-          <div class="screen--score-title">Bart</div>
-          <div class="screen--score-value">0</div>
+        <div class="leaderboard">
+          <div class="leaderboard--title">
+            <span class="leaderboard--title-inner">
+              <span>Leaderboard</span>
+            </span>
+          </div>
+          <ul class="leaderboard--list">
+            <li v-for="i in 27" :key="i" :class="`leaderboard--list-item ${i === 24 ? 'is-active' : ''}`">
+              <div class="leaderboard--name">
+                {{ ['Laswon', 'Bart', 'Daniel', 'Lauren', 'Basti', 'Momcilo'][Math.floor(Math.random() * 6)] }}
+              </div>
+              <div class="leaderboard--value">{{ Math.floor(Math.random() * 10*i) + 20*i }}</div>
+            </li>
+          </ul>
         </div>
-        <div class="pyro">
-          <div class="before"></div>
-          <div class="after"></div>
-        </div>
-        <div style="margin-top: 40px" class="screen--attempts">
+        <div style="margin-top: 30px" class="u-ml_a screen--attempts">
           <svg
             v-for="(i) in totalAttempts/2"
             :key="i"
@@ -429,7 +427,6 @@ export default {
       totalAttempts: 10,
       slide: 0,
       marginArray: [0, 0.2, 0.4, 0.6],
-      indicatorActive: true,
       oscillatorColor: MODULE_OSCILLATOR_COLOR,
       oscillatorTwoColor: MODULE_OSCILLATORTWO_COLOR,
       envelopeColor: MODULE_ENVELOPE_COLOR,
