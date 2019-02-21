@@ -1,12 +1,6 @@
 <template>
   <div class="module__name">
     <span class="module__name__title"><slot name="title"></slot></span>
-    <!-- <span
-      :class="{
-                'module__name__status-indicator': true,
-                'module__name__status-indicator--active': indicatorActive
-              }"
-    ></span> -->
     <span class="module__name__sub-title" :style="{'color': moduleColor}"><slot name="subtitle"></slot></span>
   </div>
 </template>
@@ -15,10 +9,6 @@
 export default {
   name: "ModuleTitle",
   props: {
-    indicatorActive: {
-      type: Boolean,
-      default: false
-    },
     moduleColor: {
       type: String,
       default: "#FFFFFF"

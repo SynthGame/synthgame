@@ -11,6 +11,7 @@ import ModuleKnob from './components/ModuleKnob.vue'
 import './assets/assets/styles.scss'
 
 Vue.config.productionTip = false
+Vue.config.devtools = true
 
 require('tone')
 

@@ -1,6 +1,6 @@
 <template>
   <div class="module">
-    <module-title :indicator-active="dialsAreWithinMargin" :module-color="moduleColor">
+    <module-title :indicator-active="false" :module-color="moduleColor">
       <h3 slot="subtitle">Mod Env</h3>
     </module-title>
     <module-display
@@ -119,11 +119,6 @@ export default {
   computed: {
     timerIsRunning () {
       return this.$store.state.gameState.timerIsRunning
-    },
-    dialsAreWithinMargin () {
-      if (this.createModeIsActive) return false // quick hack
-      return Object.values(this.$store.getters.audioParametersMatchGoalWithMargin[this.name])
-        .every(param => param)
     },
     ...vuexSyncGen('envelope2', 'attack', val => {
       // somehow these values cause weird problems when they're 0

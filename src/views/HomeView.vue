@@ -104,7 +104,12 @@
               width="29"
               xmlns="http://www.w3.org/2000/svg"
             >
-              <path class="navigation--group-fill" fill="fff" fill-rule="evenodd" d="M0 0h27v13H0V0zm4.5 8a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3z"/>
+              <path
+                class="navigation--group-fill"
+                fill="fff"
+                fill-rule="evenodd"
+                d="M0 0h27v13H0V0zm4.5 8a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3z"
+              ></path>
             </svg>
           </div>
           <ul class="navigation--list">
@@ -192,9 +197,15 @@
               <span class="btn--inner">
                 <span class="btn--inner-text">
                   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 60 71">
-                    <path d="M57 32h-2.581c-1.374-3.881-5.067-6.667-9.419-6.667S36.955 28.119 35.581 32H3a3 3 0 1 0 0 6h32.371c1.168 4.227 5.031 7.334 9.629 7.334s8.461-3.107 9.629-7.334H57a3 3 0 0 0 0-6z"/>
-                    <path d="M57 58H24.419c-1.374-3.881-5.067-6.666-9.419-6.666S6.955 54.119 5.581 58H3a3 3 0 0 0 0 6h2.371c1.168 4.227 5.031 7.334 9.629 7.334s8.461-3.107 9.629-7.334H57a3 3 0 0 0 0-6z"/>
-                    <path d="M3 13h2.371c1.168 4.227 5.031 7.333 9.629 7.333s8.461-3.107 9.629-7.333H57a3 3 0 1 0 0-6H24.419C23.045 3.119 19.352.333 15 .333S6.955 3.119 5.581 7H3a3 3 0 1 0 0 6z"/>
+                    <path
+                      d="M57 32h-2.581c-1.374-3.881-5.067-6.667-9.419-6.667S36.955 28.119 35.581 32H3a3 3 0 1 0 0 6h32.371c1.168 4.227 5.031 7.334 9.629 7.334s8.461-3.107 9.629-7.334H57a3 3 0 0 0 0-6z"
+                    ></path>
+                    <path
+                      d="M57 58H24.419c-1.374-3.881-5.067-6.666-9.419-6.666S6.955 54.119 5.581 58H3a3 3 0 0 0 0 6h2.371c1.168 4.227 5.031 7.334 9.629 7.334s8.461-3.107 9.629-7.334H57a3 3 0 0 0 0-6z"
+                    ></path>
+                    <path
+                      d="M3 13h2.371c1.168 4.227 5.031 7.333 9.629 7.333s8.461-3.107 9.629-7.333H57a3 3 0 1 0 0-6H24.419C23.045 3.119 19.352.333 15 .333S6.955 3.119 5.581 7H3a3 3 0 1 0 0 6z"
+                    ></path>
                   </svg>
                 </span>
               </span>
@@ -293,25 +304,23 @@
       />
     </div>
     <div class="screen screen_score screen_score_desktop hide-mobile">
-      <div class="screen--header screen--header_transparent">
-        <div class="screen--header-inner">
-          <button class="btn btn_link btn_primary u-ml_a">
-            <span class="btn--inner">
-              <span class="btn--inner-text">or Make a song ></span>
-            </span>
-          </button>
-        </div>
-      </div>
       <div class="screen--inner">
-        <div class="screen--score">
-          <div class="screen--score-title">Bart</div>
-          <div class="screen--score-value">0</div>
+        <div class="leaderboard">
+          <div class="leaderboard--title">
+            <span class="leaderboard--title-inner">
+              <span>Leaderboard</span>
+            </span>
+          </div>
+          <ul class="leaderboard--list">
+            <li v-for="(score, index) in highscores" :key="index" :class="`leaderboard--list-item ${i === 24 ? 'is-active' : ''}`">
+              <div class="leaderboard--name">
+                {{ score.name }}
+              </div>
+              <div class="leaderboard--value">{{score.score}}</div>
+            </li>
+          </ul>
         </div>
-        <div class="pyro">
-          <div class="before"></div>
-          <div class="after"></div>
-        </div>
-        <div style="margin-top: 40px" class="screen--attempts">
+        <div style="margin-top: 30px" class="u-ml_a screen--attempts">
           <svg
             v-for="(i) in totalAttempts/2"
             :key="i"
@@ -342,10 +351,13 @@
         </div>
       </div>
       <div class="screen--share">
-        <p>Anyone with this link can join and beat your high score.</p>
-        <div class="screen--share-inner">
+        <p>Share this link to challenge your Friends!</p>
+        <div v-if="!shareLink" class="play-with-friends">
+          <button @click="generateShareLink" class="btn btn_stroke btn_primary">PLAY WITH FRIENDS</button>
+        </div>
+        <div v-if="shareLink" class="screen--share-inner">
           <div class="screen--share-url">
-            <span>www.mindgame.com/56234353/7534657543</span>
+            <span>{{ shareLink }}</span>
           </div>
           <button class="btn btn_icon btn_primary">
             <svg viewBox="0 0 23 22" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -415,7 +427,6 @@ export default {
       totalAttempts: 10,
       slide: 0,
       marginArray: [0, 0.2, 0.4, 0.6],
-      indicatorActive: true,
       oscillatorColor: MODULE_OSCILLATOR_COLOR,
       oscillatorTwoColor: MODULE_OSCILLATORTWO_COLOR,
       envelopeColor: MODULE_ENVELOPE_COLOR,
@@ -446,6 +457,10 @@ export default {
     this.showStartScreen = true;
   },
   created() {
+    const roomId = this.$route.params.user_id;
+    if (roomId && roomId !== 'game') {
+      this.$store.commit("setRoomId", roomId);
+    }
     this.init();
     this.initSynth();
     if (this.$route.query.preset) {
@@ -492,6 +507,9 @@ export default {
     });
   },
   watch: {
+    watchRoomId() {
+      this.$store.dispatch("updatedRoom");
+    }
     // show2ndScreen(val) {
     //   console.log(`SHowe Start ${val}`)
     //   if(val) {
@@ -500,6 +518,9 @@ export default {
     // }
   },
   methods: {
+    generateShareLink() {
+      this.$store.dispatch("createNewRoom");
+    },
     toggle1stScreen() {
       this.show1stScreen = !this.show1stScreen;
     },
@@ -787,6 +808,15 @@ export default {
     }
   },
   computed: {
+    highscores() {
+      return this.$store.state.roomHighScores;
+    },
+    shareLink() {
+      return this.$store.state.roomId ? `redbull.com/tats/${this.$store.state.roomId}` : false;
+    },
+    watchRoomId() {
+      return this.$store.state.roomId;
+    },
     nav() {
       return Nav;
     },
@@ -851,4 +881,9 @@ export default {
 </script>
 
 <style lang="scss">
+
+.play-with-friends {
+  margin-top: 10px;
+}
+
 </style>

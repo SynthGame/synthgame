@@ -1,6 +1,6 @@
 <template>
   <div class="module">
-    <module-title :indicator-active="dialsAreWithinMargin" :module-color="moduleColor">
+    <module-title :module-color="moduleColor">
       <h3 slot="subtitle">Modulation</h3>
     </module-title>
     <module-display
