@@ -104,7 +104,12 @@
               width="29"
               xmlns="http://www.w3.org/2000/svg"
             >
-              <path class="navigation--group-fill" fill="fff" fill-rule="evenodd" d="M0 0h27v13H0V0zm4.5 8a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3z"/>
+              <path
+                class="navigation--group-fill"
+                fill="fff"
+                fill-rule="evenodd"
+                d="M0 0h27v13H0V0zm4.5 8a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3z"
+              ></path>
             </svg>
           </div>
           <ul class="navigation--list">
@@ -192,9 +197,15 @@
               <span class="btn--inner">
                 <span class="btn--inner-text">
                   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 60 71">
-                    <path d="M57 32h-2.581c-1.374-3.881-5.067-6.667-9.419-6.667S36.955 28.119 35.581 32H3a3 3 0 1 0 0 6h32.371c1.168 4.227 5.031 7.334 9.629 7.334s8.461-3.107 9.629-7.334H57a3 3 0 0 0 0-6z"/>
-                    <path d="M57 58H24.419c-1.374-3.881-5.067-6.666-9.419-6.666S6.955 54.119 5.581 58H3a3 3 0 0 0 0 6h2.371c1.168 4.227 5.031 7.334 9.629 7.334s8.461-3.107 9.629-7.334H57a3 3 0 0 0 0-6z"/>
-                    <path d="M3 13h2.371c1.168 4.227 5.031 7.333 9.629 7.333s8.461-3.107 9.629-7.333H57a3 3 0 1 0 0-6H24.419C23.045 3.119 19.352.333 15 .333S6.955 3.119 5.581 7H3a3 3 0 1 0 0 6z"/>
+                    <path
+                      d="M57 32h-2.581c-1.374-3.881-5.067-6.667-9.419-6.667S36.955 28.119 35.581 32H3a3 3 0 1 0 0 6h32.371c1.168 4.227 5.031 7.334 9.629 7.334s8.461-3.107 9.629-7.334H57a3 3 0 0 0 0-6z"
+                    ></path>
+                    <path
+                      d="M57 58H24.419c-1.374-3.881-5.067-6.666-9.419-6.666S6.955 54.119 5.581 58H3a3 3 0 0 0 0 6h2.371c1.168 4.227 5.031 7.334 9.629 7.334s8.461-3.107 9.629-7.334H57a3 3 0 0 0 0-6z"
+                    ></path>
+                    <path
+                      d="M3 13h2.371c1.168 4.227 5.031 7.333 9.629 7.333s8.461-3.107 9.629-7.333H57a3 3 0 1 0 0-6H24.419C23.045 3.119 19.352.333 15 .333S6.955 3.119 5.581 7H3a3 3 0 1 0 0 6z"
+                    ></path>
                   </svg>
                 </span>
               </span>
@@ -342,10 +353,13 @@
         </div>
       </div>
       <div class="screen--share">
-        <p>Anyone with this link can join and beat your high score.</p>
-        <div class="screen--share-inner">
+        <p>Share this link to challenge your Friends!</p>
+        <div v-if="!shareLink" class="play-with-friends">
+          <button @click="generateShareLink" class="btn btn_stroke btn_primary">PLAY WITH FRIENDS</button>
+        </div>
+        <div v-if="shareLink" class="screen--share-inner">
           <div class="screen--share-url">
-            <!-- <span>www.mindgame.com/56234353/7534657543</span> -->
+            <span>{{ shareLink }}</span>
           </div>
           <button class="btn btn_icon btn_primary">
             <svg viewBox="0 0 23 22" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -500,8 +514,11 @@ export default {
     // }
   },
   methods: {
+    generateShareLink() {
+      this.$store.dispatch("createNewRoom");
+    },
     toggle1stScreen() {
-      this.show1stScreen = !this.show1stScreen
+      this.show1stScreen = !this.show1stScreen;
     },
     makeAttempt() {
       this.$store.dispatch("madeAttempt");
@@ -619,7 +636,7 @@ export default {
     },
     setSoundToRandom() {
       const { device, paramater } = levels[this.level].levelData;
-      console.log(`${device}, ${paramater}`)
+      console.log(`${device}, ${paramater}`);
       this.$store.dispatch("randomizeAudioParameters", { device, paramater });
     },
     // LEVEL
@@ -643,7 +660,6 @@ export default {
       // randomly pick preset
       this.pickedPreset = Math.round(Math.random() * (presets.length - 1));
       // console.log('pickedPreset =', this.pickedPreset);
-
 
       // SET GOAL TO GOAL SOUND
       this.$store.commit("setGoalToPreset", {
@@ -695,7 +711,6 @@ export default {
         knobsAvailable: availableParameters,
         levelNumber: level || 0
       });
-
     },
     startPreset(parameters, bpm) {
       const usedParameters = mapValues(parameters, audioModule =>
@@ -769,8 +784,8 @@ export default {
     },
     failedLevel() {},
     lvlScore(lvl) {
-      let level = this.$store.state.gameState.levels[lvl]
-      return level ? level.levelData.score : null
+      let level = this.$store.state.gameState.levels[lvl];
+      return level ? level.levelData.score : null;
     },
     goToLevel(level) {
       // Add check for lvl avalible....
@@ -783,6 +798,9 @@ export default {
     }
   },
   computed: {
+    shareLink() {
+      return this.$store.state.shareableLink;
+    },
     nav() {
       return Nav;
     },
@@ -847,4 +865,9 @@ export default {
 </script>
 
 <style lang="scss">
+
+.play-with-friends {
+  margin-top: 10px;
+}
+
 </style>

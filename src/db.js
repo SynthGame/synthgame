@@ -24,19 +24,21 @@ const presetRef = db.collection('customPresets')
 const gameRoomRefs = db.collection('gameRooms');
 
 // CREATE A ROOM WITH INITAL HIGHSCORE - return URL.
-export const createNewRoom = ({ name, score }) => {
-  const URL = crypto.randomBytes(12).toString('hex');
-  return gameRoomRefs.doc(URL).set({
-    game: [{
-      name,
-      score,
-    }]
-  }).then(() => {
-    return URL;
-  })
-    .catch((error) => {
-      console.error("Error adding document: ", error);
-    });
+export const createRoom = ({ name, score }) => {
+  // const URL = crypto.randomBytes(12).toString('hex');
+  // return gameRoomRefs.doc(URL).set({
+  //   game: [{
+  //     name,
+  //     score,
+  //   }]
+  // }).then(() => {
+  //   console.log(URL);
+  //   return URL;
+  // })
+  //   .catch((error) => {
+  //     console.error("Error adding document: ", error);
+  //   });
+  return 'This is a test "LINK"'
 }
 
 // ADD A PLAYERS SCORE TO AN EXISTING GAME

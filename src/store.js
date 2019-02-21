@@ -9,7 +9,7 @@ import isArray from 'lodash/isArray'
 import add from 'lodash/add'
 import find from 'lodash/find'
 import character from '@/character'
-import { addPreset } from '@/db'
+import { addPreset, createRoom, updateRoom, getRoom } from '@/db'
 import Levels from './levels';
 import audio from './audio';
 
@@ -26,6 +26,7 @@ export default new Vuex.Store({
     name: 'Anonymous',
     avatarUrl: null,
     audioParameters: AudioParameters(),
+    shareableLink: null,
     gameState: {
       // GAME SCORING //
       level: -1,
@@ -55,6 +56,11 @@ export default new Vuex.Store({
     }
   },
   mutations: {
+    // Multiplayer
+    setSharableLink(state, { URL }) {
+      state.shareableLink = URL;
+    },
+    // GAME STATE
     setKnobAvalible(state, payload) {
       const { knobName, moduleName } = payload;
       let knobs = {
@@ -207,6 +213,16 @@ export default new Vuex.Store({
     },
   },
   actions: {
+    // CREATE NEW ROOM
+    createNewRoom(store) {
+
+      const name = store.state.name;
+      const score = store.state.gameState.score;
+
+      const URL = createRoom({ name, score });
+      store.commit('setSharableLink', { URL });
+    },
+
     setAudioParameter(state, { device, parameter, value }) {
       console.log(`device ${device}; param: ${parameter}; value: ${value}`)
       console.log(audio[device].state.device[parameter]);
