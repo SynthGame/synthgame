@@ -457,7 +457,7 @@ export default {
     this.showStartScreen = true;
   },
   created() {
-    const roomId = this.$router.params.roomid;
+    const roomId = this.$route.params.user_id;
     if (roomId) {
       this.$store.commit("setRoomId", {roomId});
     }
@@ -800,7 +800,7 @@ export default {
   },
   computed: {
     shareLink() {
-      return this.$store.state.shareableLink;
+      return this.$store.state.roomId ? `redbull.com/tats/${this.$store.state.roomId}` : false;
     },
     nav() {
       return Nav;

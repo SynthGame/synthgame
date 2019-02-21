@@ -38,7 +38,7 @@ export const createRoom = ({ name, score }) => {
   //   .catch((error) => {
   //     console.error("Error adding document: ", error);
   //   });
-  return 'This is a test "LINK"'
+  return 'a_test_id_link';
 }
 
 // ADD A PLAYERS SCORE TO AN EXISTING GAME
