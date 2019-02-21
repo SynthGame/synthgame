@@ -94,7 +94,7 @@ export default {
       name: "oscillator1",
       oscillator1: {},
       moduleColor: MODULE_OSCILLATORONE_COLOR,
-      freqArray: ['65', '131', '262', '523'],
+      freqArray: ["65", "131", "262", "523"]
     };
   },
   components: {
@@ -141,7 +141,7 @@ export default {
     //   }
     // },
     ...vuexSyncGen("oscillator1", "frequency", val => {
-      self.oscillator1.frequency.value = character.oscillator1.frequency(val)
+      self.oscillator1.frequency.value = character.oscillator1.frequency(val);
       // return val;
     }),
     ...vuexSyncGen("oscillator1", "typeOsc", val => {
@@ -159,9 +159,9 @@ export default {
       self.oscillator1.detune.value = character.oscillator1.detune(val);
     }),
     ...mapState({
-      frequencyGoal: state => state.audioParameters.oscillator1.frequency,
-      typeOscGoal: state => state.audioParameters.oscillator1.typeOsc,
-      detuneGoal: state => state.audioParameters.oscillator1.detune,
+      frequencyGoal: state => state.gameState.goal.oscillator1.frequency,
+      typeOscGoal: state => state.gameState.goal.oscillator1.typeOsc,
+      detuneGoal: state => state.gameState.goal.oscillator1.detune,
       // phaseGoal: state => state.gameState.goal.oscillator1.phase,
       typeArray: state => state.gameState.possibleValues.oscillator1.typeOsc,
       // freqArray: state => state.gameState.possibleValues.oscillator1.frequency,

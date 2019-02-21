@@ -89,27 +89,27 @@
 </template>
 
 <script>
-import { mapState } from 'vuex'
-import { vuexSyncGen, mapValueToRange } from '@/utils'
-import { MODULE_ROUTER_COLOR } from '@/constants'
+import { mapState } from "vuex";
+import { vuexSyncGen, mapValueToRange } from "@/utils";
+import { MODULE_ROUTER_COLOR } from "@/constants";
 
-import audio from '@/audio'
-import character from '@/character'
-import ModuleKnob from '@/components/ModuleKnob.vue'
-import ModuleDisplay from '@/components/ModuleDisplay.vue'
-import ModuleTitle from './ModuleComponents/ModuleTitle.vue'
-import ModuleButton from '@/components/ModuleButton'
+import audio from "@/audio";
+import character from "@/character";
+import ModuleKnob from "@/components/ModuleKnob.vue";
+import ModuleDisplay from "@/components/ModuleDisplay.vue";
+import ModuleTitle from "./ModuleComponents/ModuleTitle.vue";
+import ModuleButton from "@/components/ModuleButton";
 
-var self
+var self;
 
 export default {
-  name: 'RouterModule',
-  data () {
+  name: "RouterModule",
+  data() {
     return {
-      name: 'router',
+      name: "router",
       oscillator1: {},
       moduleColor: MODULE_ROUTER_COLOR
-    }
+    };
   },
   components: {
     ModuleKnob,
@@ -117,44 +117,48 @@ export default {
     ModuleTitle,
     ModuleButton
   },
-  created () {
-    self = this
-    this.realEnvelope2 = audio.envelope2.state.device
-    this.filter = audio.filter.state.device
+  created() {
+    self = this;
+    this.realEnvelope2 = audio.envelope2.state.device;
+    this.filter = audio.filter.state.device;
 
     // this.lfo = audio.lfo.state.device
   },
-  methods: {
-  },
+  methods: {},
   computed: {
-    timerIsRunning () {
-      return this.$store.state.gameState.timerIsRunning
+    timerIsRunning() {
+      return this.$store.state.gameState.timerIsRunning;
     },
-    dialsAreWithinMargin () {
-      if (this.createModeIsActive) return false // quick hack
-      this.title = 'Done!'
-      return Object.values(this.$store.getters.audioParametersMatchGoalWithMargin[this.name])
-        .every(param => param)
+    dialsAreWithinMargin() {
+      if (this.createModeIsActive) return false; // quick hack
+      this.title = "Done!";
+      return Object.values(
+        this.$store.getters.audioParametersMatchGoalWithMargin[this.name]
+      ).every(param => param);
     },
     // ...vuexSyncGen('oscillator1', 'frequency', val => {
     //   self.oscillator1.frequency.value = character.oscillator1.frequency(val)
     // }),
-    ...vuexSyncGen('router', 'lfo', val => {
+    ...vuexSyncGen("router", "lfo", val => {
       audio.connectLfo(val);
-      self.filter.frequency.value = character.filter.cutOffFreq(self.$store.state.audioParameters.filter.cutOffFreq);
-      if (val === 'filterCutoff' && self.envelope2 === 'filterCutoff') {
-        self.envelope2 = 'oscsDetune'
+      self.filter.frequency.value = character.filter.cutOffFreq(
+        self.$store.state.audioParameters.filter.cutOffFreq
+      );
+      if (val === "filterCutoff" && self.envelope2 === "filterCutoff") {
+        self.envelope2 = "oscsDetune";
       }
     }),
-    ...vuexSyncGen('router', 'envelope2', val => {
-      audio.connectEnvelope2(val)
+    ...vuexSyncGen("router", "envelope2", val => {
+      audio.connectEnvelope2(val);
       // if (val ==='filterCutoff') {
       //   self.realEnvelope2.max = character.filter.cutOffFreq(self.$store.state.audioParameters.filter.cutOffFreq)
       // } else {
-        self.filter.frequency.value = character.filter.cutOffFreq(self.$store.state.audioParameters.filter.cutOffFreq);
+      self.filter.frequency.value = character.filter.cutOffFreq(
+        self.$store.state.audioParameters.filter.cutOffFreq
+      );
       // }
-      if (val === 'filterCutoff' && self.lfo === 'filterCutoff') {
-        self.lfo = 'oscsDetune'
+      if (val === "filterCutoff" && self.lfo === "filterCutoff") {
+        self.lfo = "oscsDetune";
       }
     }),
     ...mapState({
@@ -167,12 +171,11 @@ export default {
       cutOffFreq: state => state.gameState.filter.cutOffFreq
     })
   }
-}
+};
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped lang="scss">
-
 .knobs {
   justify-content: center;
   flex-direction: column;
@@ -187,7 +190,7 @@ button.button {
 }
 
 svg.display {
-    fill: #fff;
+  fill: #fff;
 }
 
 ul {

@@ -501,7 +501,7 @@ export default {
   },
   methods: {
     toggle1stScreen() {
-      this.show1stScreen = !this.show1stScreen
+      this.show1stScreen = !this.show1stScreen;
     },
     makeAttempt() {
       this.$store.dispatch("madeAttempt");
@@ -615,17 +615,19 @@ export default {
       // this.beginSvoosh()
       // Set to RANDOMIZE PARAM in SOUND ENGINE.
       this.setSoundToRandom();
+      this.displayPreviewOverlay = false;
       this.slide = null;
     },
     setSoundToRandom() {
       const { device, paramater } = levels[this.level].levelData;
-      console.log(`${device}, ${paramater}`)
+      console.log(`${device}, ${paramater}`);
       this.$store.dispatch("randomizeAudioParameters", { device, paramater });
     },
     // LEVEL
     // // // //
     startLevelPreview(level) {
       this.cheekySvoosh();
+      console.log("startLevelPreview triggered");
 
       this.$nextTick(() => {
         // disable all overlays when svoosh is done
@@ -644,10 +646,12 @@ export default {
       this.pickedPreset = Math.round(Math.random() * (presets.length - 1));
       // console.log('pickedPreset =', this.pickedPreset);
 
-
       // SET GOAL TO GOAL SOUND
       this.$store.commit("setGoalToPreset", {
-        preset: Object.assign(presets[this.pickedPreset].parameterValues, {})
+        // preset: Object.assign(presets[this.pickedPreset].parameterValues, {})
+        preset: JSON.parse(
+          JSON.stringify(presets[this.pickedPreset].parameterValues)
+        )
       });
 
       // SET AUDIO PARAMS TO NEW GOAL SOUND
@@ -695,13 +699,13 @@ export default {
         knobsAvailable: availableParameters,
         levelNumber: level || 0
       });
-
     },
     startPreset(parameters, bpm) {
       const usedParameters = mapValues(parameters, audioModule =>
         mapValues(audioModule, parameter => !!parameter)
       );
 
+      console.log("startPreset triggered");
       // disable all overlays
       // this.displaySuccessOverlay = false;
       this.displayFailureOverlay = false;
@@ -769,8 +773,8 @@ export default {
     },
     failedLevel() {},
     lvlScore(lvl) {
-      let level = this.$store.state.gameState.levels[lvl]
-      return level ? level.levelData.score : null
+      let level = this.$store.state.gameState.levels[lvl];
+      return level ? level.levelData.score : null;
     },
     goToLevel(level) {
       // Add check for lvl avalible....
