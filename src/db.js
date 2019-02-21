@@ -3,14 +3,16 @@ import 'firebase/firestore' // https://cloud.google.com/nodejs/docs/reference/fi
 import * as crypto from 'crypto';
 
 // Initialize Firebase
+// Initialize Firebase
 const config = {
-  apiKey: 'AIzaSyAWPa6eGYyind5Gu74KqGLiRT2NBkS0Pmc',
-  authDomain: 'synthgame-c2436.firebaseapp.com',
-  databaseURL: 'https://synthgame-c2436.firebaseio.com',
-  projectId: 'synthgame-c2436',
-  storageBucket: 'synthgame-c2436.appspot.com',
-  messagingSenderId: '109010755971'
-}
+  apiKey: "AIzaSyB36rJThUmGZks1oZGI8NI7L6olrW5bcP4",
+  authDomain: "synthgame-v2.firebaseapp.com",
+  databaseURL: "https://synthgame-v2.firebaseio.com",
+  projectId: "synthgame-v2",
+  storageBucket: "synthgame-v2.appspot.com",
+  messagingSenderId: "593563070199"
+};
+
 
 firebase.initializeApp(config)
 
@@ -25,20 +27,19 @@ const gameRoomRefs = db.collection('gameRooms');
 
 // CREATE A ROOM WITH INITAL HIGHSCORE - return URL.
 export const createRoom = ({ name, score }) => {
-  // const URL = crypto.randomBytes(12).toString('hex');
-  // return gameRoomRefs.doc(URL).set({
-  //   game: [{
-  //     name,
-  //     score,
-  //   }]
-  // }).then(() => {
-  //   console.log(URL);
-  //   return URL;
-  // })
-  //   .catch((error) => {
-  //     console.error("Error adding document: ", error);
-  //   });
-  return 'a_test_id_link';
+  const URL = crypto.randomBytes(12).toString('hex');
+  gameRoomRefs.doc(URL).set({
+    game: [{
+      name,
+      score,
+    }]
+  }).then(() => {
+    console.log(URL);
+    return URL;
+  })
+    .catch((error) => {
+      console.error("Error adding document: ", error);
+    });
 }
 
 // ADD A PLAYERS SCORE TO AN EXISTING GAME
@@ -53,24 +54,18 @@ export const updateRoom = ({ url, name, score }) => {
 
 // RETURN GAME WITH HIGHSCORE DATA
 export const getRoom = (url) => {
-  // return gameRoomRefs.doc(url).get()
-  //   .then((doc) => {
-  //     if (doc.exists) {
-  //       console.log("Document data:", doc.data());
-  //       return doc.data();
-  //     } else {
-  //       console.log("No such document!");
-  //       return { error: 'No Game exists!' }
-  //     }
-  //   }).catch(function (error) {
-  //     console.log("Error getting document:", error);
-  //   });
-  return [
-    {
-      name: "Lawson",
-      score: 21,
-    }
-  ];
+  return gameRoomRefs.doc(url).get()
+    .then((doc) => {
+      if (doc.exists) {
+        console.log("Document data:", doc.data());
+        return doc.data();
+      } else {
+        console.log("No such document!");
+        return { error: 'No Game exists!' }
+      }
+    }).catch(function (error) {
+      console.log("Error getting document:", error);
+    });
 }
 
 // Highscore funtions

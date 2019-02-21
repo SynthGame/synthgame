@@ -184,9 +184,7 @@ export default new Vuex.Store({
   },
   getters: {
     allParametersMatchGoal: (state, getters) => {
-      return flatMap(getters.audioParametersMatchGoalWithMargin, val =>
-        values(val)
-      ).every(val => val);
+      return getters.audioParametersMatchGoalWithMargin;
     },
     displayedLevel: (state, getters) => {
       return state.gameState.level + 1;
@@ -199,7 +197,7 @@ export default new Vuex.Store({
 
         let parent = Object.values(knobs).find(knob => {
           return Object.entries(knob).length !== 0;
-        });
+        }); 
 
         const parameter = Object.keys(parent)[0];
         const device = devices.filter(
