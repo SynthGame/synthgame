@@ -1,6 +1,6 @@
 <template>
   <div class="module">
-    <module-title :module-color="moduleColor">
+    <module-title :indicator-active="false" :module-color="moduleColor">
       <h3 slot="subtitle">Oscillator 2</h3>
     </module-title>
     <module-display
@@ -59,6 +59,7 @@
         <p>OCTAVE</p>
       </div>
       <module-knob
+        v-if="knobsAvailable.volume || createModeIsActive"
         v-model="volume"
         :min="0"
         :max="100"

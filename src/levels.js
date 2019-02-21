@@ -11,10 +11,10 @@ const levels = [
     lfo: {},
     router: {},
     levelData: {
-      score: 0,
+      score: 9,
       text: "Use the white guidelines to recreate this sound in 60 seconds.",
       knobColor: "#e4e259",
-      score: 0,
+      score: 9,
       name: "Waveform",
       parent: "OSC 1",
       number: 1,
@@ -34,10 +34,10 @@ const levels = [
     lfo: {},
     router: {},
     levelData: {
-      score: 0,
+      score: 9,
       text: "The oscillator is the source of electronic sound. Use the knobs and dials to shape the outputted signal. ",
       knobColor: "#e4e259",
-      score: 0,
+      score: 9,
       name: "Octave",
       parent: "OSC 1",
       number: 2,
@@ -57,10 +57,10 @@ const levels = [
     lfo: {},
     router: {},
     levelData: {
-      score: 0,
+      score: 9,
       text: "",
       knobColor: "#e4e259",
-      score: 0,
+      score: 9,
       name: "Detune",
       parent: "OSC 1",
       number: 3,
@@ -73,7 +73,7 @@ const levels = [
     oscillator1: {
     },
     oscillator2: {
-      typeOsc: true
+      frequency: true,
     },
     filter: {},
     envelope: {},
@@ -81,44 +81,18 @@ const levels = [
     lfo: {},
     router: {},
     levelData: {
-      score: 0,
+      score: 9,
       text: "You unlocked the second oscillator!",
       knobColor: "#e4e259",
-      score: 0,
+      score: 9,
       name: "Waveform",
       parent: "OSC 2",
       number: 4,
       device: 'oscillator2',
-      paramater: 'typeOsc',
-    }
-  },
-  // level 5
-  {
-    oscillator1: {
-    },
-    oscillator2: {
-      frequency: true
-    },
-    filter: {},
-    envelope: {},
-    envelope2: {},
-    lfo: {},
-    router: {},
-    levelData: {
-      score: 0,
-      number: 0,
-      text:
-        "Use detune on Osc 1 to detune the oscillators, resulting in a fatter sound.",
-      knobColor: "#e4e259",
-      score: 0,
-      name: "Octave",
-      parent: "OSC 2",
-      number: 5,
-      device: 'oscillator2',
       paramater: 'frequency',
     }
   },
-  // level 6
+  // level 5
   {
     oscillator1: {
     },
@@ -131,7 +105,33 @@ const levels = [
     lfo: {},
     router: {},
     levelData: {
-      score: 0,
+      score: 9,
+      number: 0,
+      text:
+        "Use detune on Osc 1 to detune the oscillators, resulting in a fatter sound.",
+      knobColor: "#e4e259",
+      score: 9,
+      name: "Octave",
+      parent: "OSC 2",
+      number: 5,
+      device: 'oscillator2',
+      paramater: 'volume',
+    }
+  },
+  // level 6
+  {
+    oscillator1: {
+    },
+    oscillator2: {
+      typeOsc: true
+    },
+    filter: {},
+    envelope: {},
+    envelope2: {},
+    lfo: {},
+    router: {},
+    levelData: {
+      score: 9,
       number: 0,
       text: "Use volume on Osc 2 to alter the mix between the oscillators.",
       knobColor: "#e4e259",
@@ -139,34 +139,10 @@ const levels = [
       parent: "OSC 2",
       number: 6,
       device: 'oscillator2',
-      paramater: 'volume',
+      paramater: 'typeOsc',
     }
   },
   // level 7
-  {
-    oscillator1: {
-    },
-    oscillator2: {
-    },
-    filter: {
-      type: true
-    },
-    envelope: {},
-    envelope2: {},
-    lfo: {},
-    router: {},
-    levelData: {
-      score: 0,
-      text: "",
-      knobColor: "#e4e259",
-      name: "waveform",
-      parent: "Filter",
-      number: 7,
-      device: 'filter',
-      paramater: 'type',
-    }
-  },
-  //  level 8
   {
     oscillator1: {
     },
@@ -180,15 +156,39 @@ const levels = [
     lfo: {},
     router: {},
     levelData: {
-      score: 0,
+      score: 9,
       text: "",
       knobColor: "#e4e259",
-      score: 0,
+      name: "waveform",
+      parent: "Filter",
+      number: 7,
+      device: 'filter',
+      paramater: 'cutOffFreq',
+    }
+  },
+  //  level 8
+  {
+    oscillator1: {
+    },
+    oscillator2: {
+    },
+    filter: {
+      type: true,
+    },
+    envelope: {},
+    envelope2: {},
+    lfo: {},
+    router: {},
+    levelData: {
+      score: 9,
+      text: "",
+      knobColor: "#e4e259",
+      score: 9,
       name: "Frequency",
       parent: "Filter",
       number: 8,
       device: 'filter',
-      paramater: 'frequency',
+      paramater: 'type',
     }
   },
   //  level 9
@@ -206,10 +206,10 @@ const levels = [
     lfo: {},
     router: {},
     levelData: {
-      score: 0,
+      score: 9,
       text: "",
       knobColor: "#e4e259",
-      score: 0,
+      score: 9,
       name: "Attack",
       parent: "Envelope",
       number: 9,
@@ -232,10 +232,10 @@ const levels = [
     lfo: {},
     router: {},
     levelData: {
-      score: 0,
+      score: 9,
       text: "",
       knobColor: "#e4e259",
-      score: 0,
+      score: 9,
       name: "Decay",
       parent: "Envelope",
       number: 10,
@@ -258,10 +258,10 @@ const levels = [
     lfo: {},
     router: {},
     levelData: {
-      score: 0,
+      score: 9,
       text: "",
       knobColor: "#e4e259",
-      score: 0,
+      score: 9,
       name: "Sustain",
       parent: "Envelope",
       number: 11,
@@ -286,7 +286,7 @@ const levels = [
     levelData: {
       text: "",
       knobColor: "#e4e259",
-      score: 0,
+      score: 9,
       name: "Release",
       parent: "Envelope",
       number: 12,
@@ -294,39 +294,96 @@ const levels = [
       paramater: 'release',
     }
   },
-  // level 13
+    //  level 9
+    {
+      oscillator1: {
+      },
+      oscillator2: {
+      },
+      filter: {
+      },
+      envelope: {
+      },
+      envelope2: {
+        attack: true
+      },
+      lfo: {},
+      router: {},
+      levelData: {
+        score: 9,
+        text: "",
+        knobColor: "#e4e259",
+        score: 9,
+        name: "Attack",
+        parent: "Envelope",
+        number: 9,
+        device: 'envelope',
+        paramater: 'attack',
+      }
+    },
+    //  level 10
+    {
+      oscillator1: {
+      },
+      oscillator2: {
+      },
+      filter: {
+      },
+      envelope: {
+      },
+      envelope2: {
+        decay: true
+      },
+      lfo: {},
+      router: {},
+      levelData: {
+        score: 9,
+        text: "",
+        knobColor: "#e4e259",
+        score: 9,
+        name: "Decay",
+        parent: "Envelope",
+        number: 10,
+        device: 'envelope',
+        paramater: 'decay',
+      }
+    },
+    //  level 11
+    {
+      oscillator1: {
+      },
+      oscillator2: {
+      },
+      filter: {
+      },
+      envelope: {
+      },
+      envelope2: {
+        amount: true
+      },
+      lfo: {},
+      router: {},
+      levelData: {
+        score: 9,
+        text: "",
+        knobColor: "#e4e259",
+        score: 9,
+        name: "Sustain",
+        parent: "Envelope",
+        number: 11,
+        device: 'envelope',
+        paramater: 'amount',
+      }
+    },
+    //  level 12
+  // level 15
   {
     oscillator1: {
     },
     oscillator2: {
     },
     filter: {
-    },
-    envelope: {
-    },
-    envelope2: {},
-    lfo: {
-      amount: true
-    },
-    router: {},
-    levelData: {
-      score: 0,
-      text: "",
-      knobColor: "#e4e259",
-      name: "Amount",
-      parent: "LFO",
-      number: 13,
-      device: 'lfo',
-      paramater: 'amount',
-    }
-  },
-  // level 14
-  {
-    oscillator1: {
-    },
-    oscillator2: {
-    },
-    filter: {
+
     },
     envelope: {
     },
@@ -336,18 +393,44 @@ const levels = [
     },
     router: {},
     levelData: {
-      score: 0,
+      score: 9,
       text: "",
       knobColor: "#e4e259",
-      score: 0,
-      name: "Frequency",
+      score: 9,
+      name: "Waveform",
       parent: "LFO",
-      number: 14,
+      number: 15,
       device: 'lfo',
       paramater: 'frequency',
     }
   },
-  // level 15
+  {
+    oscillator1: {
+    },
+    oscillator2: {
+    },
+    filter: {
+
+    },
+    envelope: {
+    },
+    envelope2: {},
+    lfo: {
+      amount: true
+    },
+    router: {},
+    levelData: {
+      score: 9,
+      text: "",
+      knobColor: "#e4e259",
+      score: 9,
+      name: "Waveform",
+      parent: "LFO",
+      number: 15,
+      device: 'lfo',
+      paramater: 'amount',
+    }
+  },
   {
     oscillator1: {
     },
@@ -364,125 +447,15 @@ const levels = [
     },
     router: {},
     levelData: {
-      score: 0,
+      score: 9,
       text: "",
       knobColor: "#e4e259",
-      score: 0,
+      score: 9,
       name: "Waveform",
       parent: "LFO",
       number: 15,
       device: 'lfo',
       paramater: 'type',
-    }
-  },
-  //  level 16
-  {
-    oscillator1: {
-    },
-    oscillator2: {
-    },
-    filter: {
-    },
-    envelope: {
-    },
-    envelope2: {
-      attack: true,
-    },
-    lfo: {
-    },
-    router: {},
-    levelData: {
-      score: 0,
-      text: "",
-      knobColor: "#e4e259",
-      score: 0,
-      name: "Attack",
-      parent: "Envelope 2",
-      number: 16,
-      device: 'envelope2',
-      paramater: 'attack',
-    }
-  },
-  //  level 17
-  {
-    oscillator1: {
-    },
-    oscillator2: {
-    },
-    filter: {
-    },
-    envelope: {
-    },
-    envelope2: {
-      decay: true
-    },
-    lfo: {
-    },
-    router: {},
-    levelData: {
-      score: 0,
-      text: "",
-      knobColor: "#e4e259",
-      score: 0,
-      name: "Decay",
-      parent: "Envelope 2",
-      number: 17,
-      device: 'envelope2',
-      paramater: 'decay',
-    }
-  },
-  //  level 18
-  {
-    oscillator1: {
-    },
-    oscillator2: {
-    },
-    filter: {
-    },
-    envelope: {
-    },
-    envelope2: {
-      sustain: true
-    },
-    lfo: {
-    },
-    router: {},
-    levelData: {
-      score: 0,
-      text: "",
-      knobColor: "#e4e259",
-      score: 0,
-      name: "Sustain",
-      parent: "Envelope 2",
-      number: 18,
-      device: 'envelope2',
-      paramater: 'sustain',
-    }
-  },
-  //  level 19
-  {
-    oscillator1: {
-    },
-    oscillator2: {
-    },
-    filter: {
-    },
-    envelope: {
-    },
-    envelope2: {
-      release: true
-    },
-    lfo: {
-    },
-    router: {},
-    levelData: {
-      score: 0,
-      text: "",
-      knobColor: "#e4e259",
-      score: 0,
-      name: "Sustain",
-      parent: "Envelope 2",
-      number: 19,
     }
   },
   //  level 20
@@ -503,10 +476,10 @@ const levels = [
       lfo: true
     },
     levelData: {
-      score: 0,
+      score: 9,
       text: "",
       knobColor: "#e4e259",
-      score: 0,
+      score: 9,
       name: "LFO",
       parent: "Router",
       number: 20,
@@ -530,10 +503,10 @@ const levels = [
         envelope2: true
       },
       levelData: {
-        score: 0,
+        score: 9,
         text: "",
         knobColor: "#e4e259",
-        score: 0,
+        score: 9,
         name: "Envelope 2",
         parent: "LFO",
         number: 21,
