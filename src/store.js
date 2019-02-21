@@ -40,6 +40,8 @@ export default new Vuex.Store({
       defaultParams: AudioParameters(),
       knobsAvailable: NoKnobsAvalible,
 
+      presetNumber: 0,
+
       // TOGGLES //
       madeAttempt: false,
       completedLevel: false,
@@ -72,6 +74,9 @@ export default new Vuex.Store({
     // setUserAttemptParameters(state, { device, parameter, value }) {
     //   state.gameState.userAttemptPreset[device][parameter] = value
     // },
+    setPresetNumber(state, payload) {
+      state.gameState.presetNumber = payload.value;
+    },
     setFeaturedArtist(state, { artistName, avatarUrl }) {
       state.name = artistName
       state.avatarUrl = avatarUrl
@@ -156,14 +161,13 @@ export default new Vuex.Store({
       console.log(`Level ${lvl}`)
       state.gameState.levels[lvl].levelData.score = payload;
     },
-    setAudioaudioParameter(state, { device, parameter, value }) {
+    setAudioParameter(state, { device, parameter, value }) {
       state.audioParameters[device][parameter] = value;
     }
   },
   getters: {
     allParametersMatchGoal: (state, getters) => {
-      return flatMap(getters.audioParametersMatchGoalWithMargin, val => values(val))
-        .every(val => val)
+      return getters.audioParametersMatchGoalWithMargin;
     },
     displayedLevel: (state, getters) => {
       return state.gameState.level + 1
@@ -191,6 +195,9 @@ export default new Vuex.Store({
 
       let val = state.audioParameters[device][parameter];
 
+      console.log(`value: ${val}`);
+      console.log(`Goal: ${state.gameState.goal[device][parameter]}`);
+
       return isArray(state.gameState.possibleValues[device][parameter])
         ? (val === state.gameState.goal[device][parameter])
         : inRange(val,
@@ -204,7 +211,7 @@ export default new Vuex.Store({
       console.log(`device ${device}; param: ${parameter}; value: ${value}`)
       console.log(audio[device].state.device[parameter]);
 
-      this.commit('setAudioaudioParameter', { device, parameter, value });
+      this.commit('setAudioParameter', { device, parameter, value });
 
       if (!(parameter === 'typeOsc' || parameter === 'volume')) {
         if (audio[device].state.device[parameter].value === undefined) {
@@ -253,27 +260,27 @@ export default new Vuex.Store({
       }
 
       return commit('setAudioParameterToPreset', {
-        preset: randomizeWithoutMatches(state.gameState.goal, device, paramater),
+        preset: randomizeWithoutMatches({...state.gameState.goal}, device, paramater),
       })
     },
 
-    ///
-    randomizGoalParameters({ state, commit }) {
-      const randomizeValues = obj => mapValues(obj, (val, moduleName) => {
-        return mapValues(val, (val, parameterName) => {
-          if (state.gameState.knobsAvailable && state.gameState.knobsAvailable[moduleName] && state.gameState.knobsAvailable[moduleName][parameterName]) {
-            const parameterValDef = state.gameState.possibleValues[moduleName][parameterName]
-            return Array.isArray(parameterValDef)
-              ? parameterValDef[random(0, parameterValDef.length - 1)]
-              : random(0, 95)
-          }
-          return state.gameState.defaultParams[moduleName][parameterName]
-        })
-      })
-      return commit('setGoalToPreset', {
-        preset: randomizeValues(state.audioParameters)
-      })
-    },
+
+    // randomizGoalParameters({ state, commit }) {
+    //   const randomizeValues = obj => mapValues(obj, (val, moduleName) => {
+    //     return mapValues(val, (val, parameterName) => {
+    //       if (state.gameState.knobsAvailable && state.gameState.knobsAvailable[moduleName] && state.gameState.knobsAvailable[moduleName][parameterName]) {
+    //         const parameterValDef = state.gameState.possibleValues[moduleName][parameterName]
+    //         return Array.isArray(parameterValDef)
+    //           ? parameterValDef[random(0, parameterValDef.length - 1)]
+    //           : random(0, 95)
+    //       }
+    //       return state.gameState.defaultParams[moduleName][parameterName]
+    //     })
+    //   })
+    //   return commit('setGoalToPreset', {
+    //     preset: randomizeValues(state.audioParameters)
+    //   })
+    // },
     setSynthToGoal({ state }, synth) {
       synth.envelope.state.device.attack = character.envelope.attack(state.gameState.goal.envelope.attack)
       synth.envelope.state.device.decay = character.envelope.decay(state.gameState.goal.envelope.decay)

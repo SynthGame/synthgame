@@ -59,6 +59,7 @@
         <p>OCTAVE</p>
       </div>
       <module-knob
+        v-if="knobsAvailable.volume || createModeIsActive"
         v-model="volume"
         :min="0"
         :max="100"

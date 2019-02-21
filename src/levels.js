@@ -73,7 +73,7 @@ const levels = [
     oscillator1: {
     },
     oscillator2: {
-      typeOsc: true
+      frequency: true,
     },
     filter: {},
     envelope: {},
@@ -89,7 +89,7 @@ const levels = [
       parent: "OSC 2",
       number: 4,
       device: 'oscillator2',
-      paramater: 'typeOsc',
+      paramater: 'frequency',
     }
   },
   // level 5
