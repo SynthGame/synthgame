@@ -120,7 +120,6 @@
             :button-selected="sequence[j] && sequence[j].snare"
           />
         </transition>
-        <div class="stepnumber">{{j + 1}}</div>
       </span>
     </div>
   </div>
