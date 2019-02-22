@@ -47,94 +47,76 @@
           v-if="knobsAvailable.steps || createModeIsActive"
           @click="toggleNoteOnOff(j)"
           :button-active="j === activeButton"
-          :button-selected="noteArray[j] && noteArray[j].selected"
+          :button-selected="sequence[j] && sequence[j].selected"
         />
         <SequencerSlider
           v-if="knobsAvailable.pitch || createModeIsActive"
-          :value="noteArray[j] && noteArray[j].pitch"
+          :value="sequence[j] && sequence[j].pitch"
           @input="setPitchValue(j, $event)"
           :min="0"
           :max="10"
           :button-active="j === activeButton"
-          :button-selected="noteArray[j] && noteArray[j].selected"
+          :button-selected="sequence[j] && sequence[j].selected"
         />
-        <!-- <SequencerSlider
-          v-else-if="sequencerEditState === 2"
-          :value="noteArray[j] && noteArray[j].volume"
-          @input="setVolumeValue(j, $event)"
-          :min="0"
-          :max="5"
-          :button-active="j === activeButton"
-          :button-selected="noteArray[j] && noteArray[j].selected"
-        /> -->
         <sequencer-button
           v-if="knobsAvailable.accent || createModeIsActive"
           @click="toggleAccentOnOff(j)"
           :button-active="j === activeButton"
-          :button-selected="noteArray[j] && noteArray[j].volume"
+          :button-selected="sequence[j] && sequence[j].volume"
         />
         <sequencer-button
           v-if="knobsAvailable.glide || createModeIsActive"
           @click="toggleGlideOnOff(j)"
           :button-active="j === activeButton"
-          :button-selected="noteArray[j] && noteArray[j].glide"
+          :button-selected="sequence[j] && sequence[j].glide"
         />
-        <!-- <SequencerSlider
-          v-else-if="sequencerEditState === 3"
-          :value="noteArray[j] && noteArray[j].glide"
-          @input="setGlideValue(j, $event)"
-          :min="0"
-          :max="10"
-          :button-active="j === activeButton"
-          :button-selected="noteArray[j] && noteArray[j].selected"
-        /> -->
         <sequencer-button
           v-if="knobsAvailable.kick || createModeIsActive"
           @click="toggleKickOnOff(j)"
           :button-active="j === activeButton"
-          :button-selected="noteArray[j] && noteArray[j].kick"
+          :button-selected="sequence[j] && sequence[j].kick"
         />
         <sequencer-button
           v-if="knobsAvailable.hat || createModeIsActive"
           @click="toggleHatOnOff(j)"
           :button-active="j === activeButton"
-          :button-selected="noteArray[j] && noteArray[j].hat"
+          :button-selected="sequence[j] && sequence[j].hat"
         />
         <sequencer-button
           v-if="knobsAvailable.clap1 || createModeIsActive"
           @click="toggleClapOnOff(j)"
           :button-active="j === activeButton"
-          :button-selected="noteArray[j] && noteArray[j].clap"
+          :button-selected="sequence[j] && sequence[j].clap"
         />
         <sequencer-button
           v-if="knobsAvailable.clap2 || createModeIsActive"
           @click="toggleClap2OnOff(j)"
           :button-active="j === activeButton"
-          :button-selected="noteArray[j] && noteArray[j].clap2"
+          :button-selected="sequence[j] && sequence[j].clap2"
         />
         <sequencer-button
           v-if="knobsAvailable.cymbal || createModeIsActive"
           @click="toggleCymbalOnOff(j)"
           :button-active="j === activeButton"
-          :button-selected="noteArray[j] && noteArray[j].cymbal"
+          :button-selected="sequence[j] && sequence[j].cymbal"
         />
         <sequencer-button
           v-if="knobsAvailable.labmyc || createModeIsActive"
           @click="toggleLabmycOnOff(j)"
           :button-active="j === activeButton"
-          :button-selected="noteArray[j] && noteArray[j].labmyc"
+          :button-selected="sequence[j] && sequence[j].labmyc"
         />
         <sequencer-button
           v-if="knobsAvailable.noise || createModeIsActive"
           @click="toggleNoiseOnOff(j)"
           :button-active="j === activeButton"
-          :button-selected="noteArray[j] && noteArray[j].noise"
+          :button-selected="sequence[j] && sequence[j].noise"
         />
         <sequencer-button
           v-if="knobsAvailable.snare || createModeIsActive"
           @click="toggleSnareOnOff(j)"
           :button-active="j === activeButton"
-          :button-selected="noteArray[j] && noteArray[j].snare"
+          :button-selected="sequence[j] && sequence[j].snare"
         />
         <div class="stepnumber">{{j + 1}}</div>
       </span>
@@ -145,6 +127,7 @@
 <script>
 import { mapState } from "vuex";
 import { vuexSyncGenBpm } from "@/utils";
+import { vuexSyncGenSequence } from "@/utils";
 import audio from "@/audio";
 import ModuleKnob from "@/components/ModuleKnob.vue";
 import ModuleTitle from "./ModuleComponents/ModuleTitle.vue";
@@ -185,22 +168,22 @@ export default {
     };
   },
   mounted() {
-    window.addEventListener("keydown", this.emitOnKey);
+    // window.addEventListener("keydown", this.emitOnKey); // controlling this from contributionview
     // window.addEventListener("message", this.receiveMessage, false);
   },
   beforeDestroy() {
-    window.removeEventListener("keydown", this.emitOnKey);
+    // window.removeEventListener("keydown", this.emitOnKey); // controlling this from contributionview
     // window.removeEventListener('message', this.receiveMessage, false);
   },
   created() {
     // this.initSynth();
-    // this.$store.commit("setActiveSequence", this.noteArray);
+    // this.$store.commit("setActiveSequence", sequence);
     if (this.$route.query.preset) {
       getPresetById(this.$route.query.preset).then(data => {
         console.log("custom preset JSON", data);
         // window.postMessage(this.$route.query.preset, '*')
         // this.customLevelIsActive = true
-        this.noteArray = data.sequenceArray;
+        // sequence = data.sequenceArray; //TEMP switched off to fix undefined sequence bug
         this.$store.commit("setAudioParameterToPreset", {
           preset: data.parameterValues
         });
@@ -281,40 +264,40 @@ export default {
         },
         (time, note) => {
           this.setStep(note);
-          if (this.noteArray[note].selected) {
-            audio.playNote(this.noteArray[note].pitch, {
+          if (this.sequence[note].selected) {
+            audio.playNote(this.sequence[note].pitch, {
               noteLength: "16n",
-              volume: this.noteArray[note].volume,
+              volume: this.sequence[note].volume,
               time: note,
-              glide: this.noteArray[note].glide,
+              glide: this.sequence[note].glide,
               octaveOsc1:
                 self.$store.state.audioParameters.oscillator1.frequency,
               octaveOsc2:
                 self.$store.state.audioParameters.oscillator2.frequency
             });
           }
-          if (this.noteArray[note].kick) {
+          if (this.sequence[note].kick) {
             audio.playKick();
           }
-          if (this.noteArray[note].hat) {
+          if (this.sequence[note].hat) {
             audio.playHat();
           }
-          if (this.noteArray[note].clap) {
+          if (this.sequence[note].clap) {
             audio.playClap();
           }
-          if (this.noteArray[note].clap2) {
+          if (this.sequence[note].clap2) {
             audio.playClap2();
           }
-          if (this.noteArray[note].cymbal) {
+          if (this.sequence[note].cymbal) {
             audio.playCymbal();
           }
-          if (this.noteArray[note].labmyc) {
+          if (this.sequence[note].labmyc) {
             audio.playLabmyc();
           }
-          if (this.noteArray[note].noise) {
+          if (this.sequence[note].noise) {
             audio.playNoise();
           }
-          if (this.noteArray[note].snare) {
+          if (this.sequence[note].snare) {
             audio.playSnare();
           }
         }
@@ -335,112 +318,112 @@ export default {
       this.activeButton++;
     },
     setNoteOnOff(i, val) {
-      this.noteArray = this.noteArray.map(
+      this.sequence = this.sequence.map(
         (el, j) => (i === j ? { ...el, selected: val } : el)
       );
     },
     toggleNoteOnOff(i) {
       // use setNoteOnOff
-      this.noteArray = this.noteArray.map(
+      this.sequence = this.sequence.map(
         (el, j) => (i === j ? { ...el, selected: !el.selected } : el)
       );
     },
     toggleKickOnOff(i) {
       // use setNoteOnOff
-      this.noteArray = this.noteArray.map(
+      this.sequence = this.sequence.map(
         (el, j) => (i === j ? { ...el, kick: !el.kick } : el)
       );
     },
     toggleHatOnOff(i) {
       // use setNoteOnOff
-      this.noteArray = this.noteArray.map(
+      this.sequence = this.sequence.map(
         (el, j) => (i === j ? { ...el, hat: !el.hat } : el)
       );
     },
     toggleClapOnOff(i) {
       // use setNoteOnOff
-      this.noteArray = this.noteArray.map(
+      this.sequence = this.sequence.map(
         (el, j) => (i === j ? { ...el, clap: !el.clap } : el)
       );
     },
     toggleClap2OnOff(i) {
       // use setNoteOnOff
-      this.noteArray = this.noteArray.map(
+      this.sequence = this.sequence.map(
         (el, j) => (i === j ? { ...el, clap2: !el.clap2 } : el)
       );
     },
     toggleCymbalOnOff(i) {
       // use setNoteOnOff
-      this.noteArray = this.noteArray.map(
+      this.sequence = this.sequence.map(
         (el, j) => (i === j ? { ...el, cymbal: !el.cymbal } : el)
       );
     },
     toggleLabmycOnOff(i) {
       // use setNoteOnOff
-      this.noteArray = this.noteArray.map(
+      this.sequence = this.sequence.map(
         (el, j) => (i === j ? { ...el, labmyc: !el.labmyc } : el)
       );
     },
     toggleNoiseOnOff(i) {
       // use setNoteOnOff
-      this.noteArray = this.noteArray.map(
+      this.sequence = this.sequence.map(
         (el, j) => (i === j ? { ...el, noise: !el.noise } : el)
       );
     },
     toggleSnareOnOff(i) {
       // use setNoteOnOff
-      this.noteArray = this.noteArray.map(
+      this.sequence = this.sequence.map(
         (el, j) => (i === j ? { ...el, snare: !el.snare } : el)
       );
     },
     setPitchValue(i, val) {
-      this.noteArray = this.noteArray.map(
+      this.sequence = this.sequence.map(
         (el, j) => (i === j ? { ...el, pitch: Number(val) } : el)
       );
     },
     setGlideValue(i, val) {
-      this.noteArray = this.noteArray.map(
+      this.sequence = this.sequence.map(
         (el, j) => (i === j ? { ...el, glide: Number(val) } : el)
       );
     },
     toggleGlideOnOff(i) {
       // use setNoteOnOff
-      this.noteArray = this.noteArray.map(
+      this.sequence = this.sequence.map(
         (el, j) => (i === j ? { ...el, glide: !el.glide } : el)
       );
     },
     toggleAccentOnOff(i) {
       // use setNoteOnOff
-      this.noteArray = this.noteArray.map(
+      this.sequence = this.sequence.map(
         (el, j) => (i === j ? { ...el, volume: !el.volume } : el)
       );
     },
     setVolumeValue(i, val) {
-      this.noteArray = this.noteArray.map(
+      this.sequence = this.sequence.map(
         (el, j) => (i === j ? { ...el, volume: Number(val) } : el)
       );
-      // this.noteArray = this.noteArray.map((el, j) => i === j ? {...el, volume: 3} : el)
+      // this.sequence = this.sequence.map((el, j) => i === j ? {...el, volume: 3} : el)
     },
     setNoteLengthValue(i, val) {
-      this.noteArray = this.noteArray.map(
+      this.sequence = this.sequence.map(
         (el, j) => (i === j ? { ...el, noteLength: val } : el)
       );
     },
     randomizeSelectedParam(param) {
       const _randomizeNoteSelected = () =>
-        this.noteArray.forEach((el, i) =>
+        this.sequence.forEach((el, i) =>
           this.setNoteOnOff(i, sample([true, false]))
         );
       const _randomizeNotePitch = () =>
-        this.noteArray.forEach((el, i) =>
+        this.sequence.forEach((el, i) =>
           this.setPitchValue(i, random(-12, 12))
         );
       const _randomizeNoteVolume = () =>
-        this.noteArray.forEach((el, i) =>
+        this.sequence.forEach((el, i) =>
           this.setVolumeValue(i, random(-20, 6))
         );
       const _randomizeNoteLength = () =>
-        this.noteArray.forEach((el, i) =>
+        this.sequence.forEach((el, i) =>
           this.setNoteLengthValue(i, random(0, 5))
         );
 
@@ -450,7 +433,7 @@ export default {
         _randomizeNoteVolume(),
         _randomizeNoteLength()
       );
-      // switch(this.sequencerEditState) {
+      // switch(this.this.sequencerEditState) {
       //   case 0:
       //     _randomizeNoteSelected()
       //     break
@@ -481,7 +464,9 @@ export default {
     ...vuexSyncGenBpm("bpm", val => {
       audio.setBpm(val * 2);
     }),
+    ...vuexSyncGenSequence("sequence", val => {}),
     ...mapState({
+      // sequence: state => state.sequence,
       knobsAvailable: state => state.gameState.knobsAvailable.sequencer,
       createModeIsActive: state => state.gameState.createModeIsActive
     })
@@ -490,9 +475,9 @@ export default {
     // bpmKnob (val) {
     //   return audio.setBpm(val*2)
     // },
-    noteArray(val) {
-      this.$store.commit("setActiveSequence", val);
-    }
+    // noteArray(val) {
+    //   this.$store.commit("setActiveSequence", val);
+    // }
   }
 };
 </script>

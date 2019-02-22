@@ -16,6 +16,7 @@ import audio from "./audio";
 //
 import PossibleValues from "./stores/possibleValues";
 import AudioParameters from "./stores/audioParameters";
+import NoSequenceAvailable from "./stores/sequence";
 import NoKnobsAvalible from "./stores/noKnobsAvalible";
 
 Vue.use(Vuex);
@@ -26,6 +27,7 @@ export default new Vuex.Store({
     name: "Anonymous",
     avatarUrl: null,
     audioParameters: AudioParameters(),
+    sequence: NoSequenceAvailable,
     roomId: null,
     roomHighScores: [
       {
@@ -98,6 +100,9 @@ export default new Vuex.Store({
       state.avatarUrl = avatarUrl;
     },
     setBpm(state, { parameter, value }) {
+      state[parameter] = value;
+    },
+    setSequence(state, { parameter, value }) {
       state[parameter] = value;
     },
     setPresetBpm(state, bpm) {
@@ -198,7 +203,7 @@ export default new Vuex.Store({
 
         let parent = Object.values(knobs).find(knob => {
           return Object.entries(knob).length !== 0;
-        }); 
+        });
 
         const parameter = Object.keys(parent)[0];
         const device = devices.filter(

@@ -91,6 +91,7 @@ export default {
 
     log(`Starting oscillator1`);
     oscillator1.start();
+    oscillator2.start();
 
     return output;
   },
