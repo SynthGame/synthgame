@@ -154,11 +154,11 @@
               <br>The
               <br>Sound
             </div>
-            <button class="btn btn_link btn_primary hide-desktop">
+            <router-link to="/contribution" class="btn btn_link btn_primary hide-desktop">
               <span class="btn--inner">
                 <span class="btn--inner-text">or Make a song</span>
               </span>
-            </button>
+            </router-link>
             <div class="screen--score">
               <div class="screen--score-title">Score</div>
               <div class="screen--score-value">0</div>
