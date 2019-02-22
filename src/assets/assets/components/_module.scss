@@ -106,6 +106,10 @@
       }
     }
   }
+  .routerscreenknob {
+    transform-origin: top left;
+    transform: scale(1.21);
+  }
   .knobs {
     display: flex;
     align-items: center;
