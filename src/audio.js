@@ -91,7 +91,6 @@ export default {
 
     log(`Starting oscillator1`);
     oscillator1.start();
-    oscillator2.start();
 
     return output;
   },
@@ -130,6 +129,12 @@ export default {
     log(`Connecting channel: ${channel} to master`);
     // disconnect outputs?
     return channel.toMaster();
+  },
+  startOscTwo() {
+    this.oscillator2.state.device.start();
+  },
+  stopOscTwo() {
+    this.oscillator2.state.device.stop();
   },
   connectLfo(destination) {
     log(`Connecting lfo to ${destination}`);
