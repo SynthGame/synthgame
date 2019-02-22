@@ -20,14 +20,14 @@
         <button @click="playPauseSynth" class="sequencer-stop-button button-drums"><span>▶</span></button>
         <p>Drums</p>
       </div> -->
-      <div height="200px">
+      <!-- <div height="200px">
         <div class="play-random">
           <!-- <button @click="randomizeSelectedParam" class="sequencer-random-button">
             random
           </button> -->
           <!-- <button @click="playPauseBeat" class="sequencer-random-button">
             Beat
-          </button> -->
+          </button> 
           <module-knob
           style="width:4rem"
             v-model="bpm"
@@ -39,7 +39,7 @@
           ></module-knob>
           <span class="timer">{{bpm}}</span>
         </div>
-      </div>
+      </div> -->
     </div>
     <div class="button-section" v-for="i in [0,1,2,3]" :key="i">
       <span class="step-wrapper" v-for="j in getSubRange(i)" :key="j">
@@ -68,13 +68,13 @@
           :button-selected="noteArray[j] && noteArray[j].selected"
         /> -->
         <sequencer-button
-          v-if="sequencerEditState === 2"
+          v-else-if="sequencerEditState === 2"
           @click="toggleAccentOnOff(j)"
           :button-active="j === activeButton"
           :button-selected="noteArray[j] && noteArray[j].volume"
         />
         <sequencer-button
-          v-if="sequencerEditState === 3"
+          v-else-if="sequencerEditState === 3"
           @click="toggleGlideOnOff(j)"
           :button-active="j === activeButton"
           :button-selected="noteArray[j] && noteArray[j].glide"
@@ -89,49 +89,49 @@
           :button-selected="noteArray[j] && noteArray[j].selected"
         /> -->
         <sequencer-button
-          v-if="sequencerEditState === 4"
+          v-else-if="sequencerEditState === 4"
           @click="toggleKickOnOff(j)"
           :button-active="j === activeButton"
           :button-selected="noteArray[j] && noteArray[j].kick"
         />
         <sequencer-button
-          v-if="sequencerEditState === 5"
+          v-else-if="sequencerEditState === 5"
           @click="toggleHatOnOff(j)"
           :button-active="j === activeButton"
           :button-selected="noteArray[j] && noteArray[j].hat"
         />
         <sequencer-button
-          v-if="sequencerEditState === 6"
+          v-else-if="sequencerEditState === 6"
           @click="toggleClapOnOff(j)"
           :button-active="j === activeButton"
           :button-selected="noteArray[j] && noteArray[j].clap"
         />
         <sequencer-button
-          v-if="sequencerEditState === 7"
+          v-else-if="sequencerEditState === 7"
           @click="toggleClap2OnOff(j)"
           :button-active="j === activeButton"
           :button-selected="noteArray[j] && noteArray[j].clap2"
         />
         <sequencer-button
-          v-if="sequencerEditState === 8"
+          v-else-if="sequencerEditState === 8"
           @click="toggleCymbalOnOff(j)"
           :button-active="j === activeButton"
           :button-selected="noteArray[j] && noteArray[j].cymbal"
         />
         <sequencer-button
-          v-if="sequencerEditState === 9"
+          v-else-if="sequencerEditState === 9"
           @click="toggleLabmycOnOff(j)"
           :button-active="j === activeButton"
           :button-selected="noteArray[j] && noteArray[j].labmyc"
         />
         <sequencer-button
-          v-if="sequencerEditState === 10"
+          v-else-if="sequencerEditState === 10"
           @click="toggleNoiseOnOff(j)"
           :button-active="j === activeButton"
           :button-selected="noteArray[j] && noteArray[j].noise"
         />
         <sequencer-button
-          v-if="sequencerEditState === 11"
+          v-else-if="sequencerEditState === 11"
           @click="toggleSnareOnOff(j)"
           :button-active="j === activeButton"
           :button-selected="noteArray[j] && noteArray[j].snare"
@@ -193,8 +193,8 @@ export default {
     // window.removeEventListener('message', this.receiveMessage, false);
   },
   created() {
-    this.initSynth();
-    this.$store.commit("setActiveSequence", this.noteArray);
+    // this.initSynth();
+    // this.$store.commit("setActiveSequence", this.noteArray);
     if (this.$route.query.preset) {
       getPresetById(this.$route.query.preset).then(data => {
         console.log("custom preset JSON", data);
@@ -480,6 +480,10 @@ export default {
   computed: {
     ...vuexSyncGenBpm("bpm", val => {
       audio.setBpm(val * 2);
+    }),
+    ...mapState({
+      knobsAvailable: state => state.gameState.knobsAvailable.sequencer,
+      createModeIsActive: state => state.gameState.createModeIsActive
     })
   },
   watch: {
@@ -492,176 +496,3 @@ export default {
   }
 };
 </script>
-
-<!-- Add "scoped" attribute to limit CSS to this component only -->
-<style lang="scss" scoped>
-$main-seq-color: #f40056;
-
-.sequencer {
-  width: 83.36%;
-  max-width: 83.36%;
-  height: 50%;
-  display: flex;
-  justify-content: space-between;
-  padding: 1% 1.6%;
-
-  & .stepnumber {
-    margin-top: 0.5em;
-  }
-  & button {
-    cursor: pointer;
-    transition: all 0.2s;
-    text-transform: uppercase;
-    min-height: 45px;
-
-    &:active {
-      background: rgba(255, 255, 255, 0.1);
-    }
-  }
-}
-
-.play-random {
-  display: flex;
-  width: fit-content;
-  justify-content: space-around;
-}
-
-.module__name {
-  position: absolute;
-  padding: 0;
-}
-
-button.sequencer-button {
-  min-height: 10em;
-  justify-content: flex-start;
-  display: flex;
-  margin: 0;
-  margin-top: 1em;
-  &:hover {
-    background: rgba(255, 255, 255, 0.1);
-  }
-}
-
-.module__name__title {
-  color: white;
-}
-
-.main {
-  width: 16.67%;
-  height: 480px;
-}
-
-.sequencer-stop-button {
-  height: 45px;
-  width: 45px;
-  display: flex;
-  margin: 10px 5px;
-  padding: 0;
-  border: 1px solid $main-seq-color;
-  background-color: unset;
-  color: #ffffff;
-  align-items: center;
-  align-content: center;
-  span {
-    animation: 0.5s flash infinite alternate;
-  }
-}
-
-.sequencer-random-button {
-  display: inline-flex;
-  margin: 10px 5px;
-  padding: 10px 30px;
-  border: 1px solid $main-seq-color;
-  background-color: unset;
-  color: white;
-}
-
-.button-section {
-  border-top: 1px solid $main-seq-color;
-  display: flex;
-  // align-items: center;
-  width: 23%;
-  margin-right: 1vw;
-  margin-top: 6em;
-  max-height: 10rem;
-  justify-content: space-between;
-}
-
-.button-wrapper {
-  margin-top: -1em;
-  display: flex;
-  width: 25%;
-  &.function {
-    height: fit-content;
-    width: 100%;
-    margin: 0;
-    justify-content: space-between;
-    button {
-      width: 45%;
-      border: 1px solid $main-seq-color;
-      margin: 0.3rem;
-      background-color: black;
-      color: white;
-      border-radius: 1px;
-      min-height: 3.2em;
-      transition: all.2s;
-      &:hover {
-        border-width: 2px;
-      }
-      &.active {
-        background: $main-seq-color !important;
-      }
-      &.button-drums {
-        background: #313131;
-        width: unset;
-        border: unset;
-        min-height: 1px !important;
-        padding: 0 0.4em;
-        min-width: 26px;
-        position: relative;
-        z-index: 999;
-        &:hover {
-          opacity: 0.8;
-        }
-        &.sequencer-stop-button {
-          padding-left: 8px;
-        }
-      }
-    }
-  }
-}
-
-.step-wrapper {
-  width: 100%;
-  margin-left: 1vw;
-  &:first-of-type {
-    margin-left: 0;
-  }
-}
-
-.sequencer__controls {
-  margin-top: 3.4rem;
-  width: 30%;
-  margin-right: 3%;
-}
-
-.timer {
-  display: flex;
-  font-size: 2em;
-  font-family: ledscreen;
-  margin-top: 1.1em;
-}
-
-@keyframes flash {
-  from {
-    opacity: 0;
-  }
-}
-
-@media only screen and (max-width: 1000px) {
-  .sequencer {
-    width: 100% !important;
-    max-width: 100% !important;
-  }
-}
-</style>

@@ -79,7 +79,8 @@ export default new Vuex.Store({
         envelope: {},
         envelope2: {},
         lfo: {},
-        router: {}
+        router: {},
+        sequencer: {}
       };
 
       knobs[moduleName][knobName] = true;
