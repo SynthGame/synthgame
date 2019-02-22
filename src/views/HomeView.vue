@@ -508,7 +508,7 @@ export default {
   },
   watch: {
     watchRoomId() {
-      this.$store.dispatch("updatedRoom");
+      this.$store.dispatch("updateRoom");
     }
     // show2ndScreen(val) {
     //   console.log(`SHowe Start ${val}`)

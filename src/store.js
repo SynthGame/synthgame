@@ -9,7 +9,7 @@ import isArray from "lodash/isArray";
 import add from "lodash/add";
 import find from "lodash/find";
 import character from "@/character";
-import { addPreset, createRoom, updateRoom, getRoom } from "@/db";
+import { addPreset, createRoom, updateMyScore, getRoom } from "@/db";
 import Levels from "./levels";
 import audio from "./audio";
 
@@ -26,7 +26,7 @@ export default new Vuex.Store({
     name: "Anonymous",
     avatarUrl: null,
     audioParameters: AudioParameters(),
-    roomId: '',
+    roomId: null,
     roomHighScores: [
       {
         name: "YOU",
@@ -234,11 +234,17 @@ export default new Vuex.Store({
         store.commit("setRoomId", { URL });
       });
     },
-    updatedRoom(store) {
+    updateRoom(store) {
       console .log(store.state.roomId);
       getRoom(store.state.roomId, (scoreData) => {
         store.commit("setRoomHighScores", scoreData);
       });
+    },
+    updateHighScore(store) {
+      const url = store.state.roomId,
+      name = store.state.name,
+      score = store.state.gameState.highScore;
+      updateMyScore({url, name, score}, () => store.dispatch('updateRoom'));
     },
     setAudioParameter(state, { device, parameter, value }) {
       console.log(`device ${device}; param: ${parameter}; value: ${value}`);

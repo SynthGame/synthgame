@@ -43,13 +43,17 @@ export const createRoom = ({ name, score }, callBack) => {
 }
 
 // ADD A PLAYERS SCORE TO AN EXISTING GAME
-export const updateRoom = ({ url, name, score }) => {
-  return gameRoomRefs.doc(url).update({
+export const updateMyScore = ({ url, name, score }, callback) => {
+  gameRoomRefs.doc(url).update({
     game: firebase.firestore.FieldValue.arrayUnion({
       name,
       score
     })
-  });
+  }).then(() => {
+    callback();
+  }).catch((err) => {
+    console.log(`updateMyScore: ${err}`)
+  })
 }
 
 // RETURN GAME WITH HIGHSCORE DATA
