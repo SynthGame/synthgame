@@ -68,7 +68,8 @@
                   <span class="navigation--item-title">
                     <span>{{ item.knobName }}</span>
                   </span>
-                  <span>{{ item.author }}</span>
+                  <!-- here goes the author name -->
+                  <!-- <span>{{ item.author }}</span> -->
                 </span>
               </span>
             </button>
