@@ -3,6 +3,7 @@
     <div class="display" ref="displayWrapper">
       <svg width="100%" height="100%">
       <!-- <svg> -->
+        {{ this.module }}
         <rect :fill="fill" width="100%" height="100%" />
         <!-- <rect fill="black" width="100%" height="100%" /> -->
 
@@ -13,14 +14,17 @@
               style="fill-rule: nozero"
               />
 
-        <path v-if="this.module === 'oscillator' || this.module === 'filter' || this.module === 'envelope'"
-              stroke="white"
-              v-show="!createModeIsActive"
-              :stroke-width="2"
-              :d="pathGoal"
-              fill="none"
-              style="fill-rule: nozero"
-              />
+        <!-- v-if="['oscillator', 'filter', 'envelope'].includes(this.module)" -->
+        <path
+          v-if="false"
+          class=""
+          stroke="white"
+          v-show="!createModeIsActive"
+          :stroke-width="2"
+          :d="pathGoal"
+          fill="none"
+          style="fill-rule: nozero"
+        />
 
         <!-- lfo: -->
         <!--positioning wrapperfix -->
