@@ -28,28 +28,24 @@ const gameRoomRefs = db.collection('gameRooms');
 // CREATE A ROOM WITH INITAL HIGHSCORE - return URL.
 export const createRoom = ({ name, score }, callBack) => {
   const URL = crypto.randomBytes(12).toString('hex');
-  gameRoomRefs.doc(URL).set({
-    game: [{
-      name,
-      score,
-    }]
-  }).then(() => {
-    console.log(URL);
-    callBack(URL);
-  })
+  gameRoomRefs.doc(URL).set({ [name]: `${score}` })
+    .then(() => {
+      console.log(URL);
+      callBack(URL);
+    })
     .catch((error) => {
       console.error("Error adding document: ", error);
     });
 }
 
 // ADD A PLAYERS SCORE TO AN EXISTING GAME
-export const updateRoom = ({ url, name, score }) => {
-  return gameRoomRefs.doc(url).update({
-    game: firebase.firestore.FieldValue.arrayUnion({
-      name,
-      score
-    })
-  });
+export const updateMyScore = ({ url, name, score }, callback) => {
+  gameRoomRefs.doc(url).update({ [name]: `${score}` })
+  .then(() => {
+    callback()
+  }).catch((err) => {
+    console.log(`updateMyScore: ${err}`)
+  })
 }
 
 // RETURN GAME WITH HIGHSCORE DATA
@@ -58,7 +54,7 @@ export const getRoom = (url, callBack) => {
     .then((doc) => {
       if (doc.exists) {
         console.log("Document data:", doc.data());
-        callBack(doc.data().game);
+        callBack(doc.data());
       } else {
         console.log("No such document!");
         return { error: 'No Game exists!' }

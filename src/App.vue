@@ -269,7 +269,9 @@ export default {
           type: "setCompletedLevel",
           value: true
         });
-
+        if(this.$store.state.roomId !== null) {
+          this.$store.dispatch("updateHighScore");
+        }
         this.$store.dispatch("levelDone")
         this.$store.commit("resetAttempts");
       } else {
