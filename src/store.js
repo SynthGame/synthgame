@@ -9,7 +9,7 @@ import isArray from "lodash/isArray";
 import add from "lodash/add";
 import find from "lodash/find";
 import character from "@/character";
-import { addPreset, createRoom, updateMyScore, getRoom } from "@/db";
+import { addPreset, createRoom, updateMyScore, getRoom, getContributionDB, sharePreset } from "@/db";
 import Levels from "./levels";
 import audio from "./audio";
 
@@ -30,6 +30,7 @@ export default new Vuex.Store({
     audioParameters: AudioParameters(),
     sequence: NoSequenceAvailable,
     roomId: null,
+    contributionId: null,
     roomHighScores: [
       {
         name: "Anonymous",
@@ -65,6 +66,15 @@ export default new Vuex.Store({
     }
   },
   mutations: {
+    // Contribution 
+    setContributionLink(state, { link }) {
+      state.contributionId = link;
+    },
+    setUserContributionData(state, payload) {
+      // console.log(payload);
+      state.sequence = payload.sequence;
+      state.audioParameters = payload.preset;
+    },
     // Multiplayer
     setUsername(state, { userName }) {
       state.name = userName;
@@ -137,7 +147,7 @@ export default new Vuex.Store({
         ...state.gameState.goal,
         ...preset
       };
-      console.log("preset", preset);
+      // console.log("preset", preset);
       // state.gameState.goal = JSON.parse(JSON.stringify(preset));
     },
     setMargin(state, { newMargin }) {
@@ -196,8 +206,8 @@ export default new Vuex.Store({
     },
     setLevelScore(state, payload) {
       const lvl = state.gameState.level;
-      console.log(payload);
-      console.log(`Level ${lvl}`);
+      // console.log(payload);
+      // console.log(`Level ${lvl}`);
       state.gameState.levels[lvl].levelData.score = payload;
     },
     setAudioParameter(state, { device, parameter, value }) {
@@ -233,19 +243,34 @@ export default new Vuex.Store({
 
       let val = state.audioParameters[device][parameter];
 
-      console.log(`value: ${val}`);
-      console.log(`Goal: ${state.gameState.goal[device][parameter]}`);
+      // console.log(`value: ${val}`);
+      // console.log(`Goal: ${state.gameState.goal[device][parameter]}`);
 
       return isArray(state.gameState.possibleValues[device][parameter])
         ? val === state.gameState.goal[device][parameter]
         : inRange(
-            val,
-            state.gameState.goal[device][parameter] - state.gameState.margin,
-            state.gameState.goal[device][parameter] + state.gameState.margin
-          );
+          val,
+          state.gameState.goal[device][parameter] - state.gameState.margin,
+          state.gameState.goal[device][parameter] + state.gameState.margin
+        );
     }
   },
   actions: {
+    // Contribution
+    generateContributionLink(store) {
+      const preset = store.state.audioParameters;
+      const sequence = store.state.sequence;
+
+      sharePreset({ preset, sequence }, ({ link }) => {
+        store.commit("setContributionLink", { link });
+      })
+    },
+    getContribution(store) {
+      let link = store.state.contributionId;
+      getContributionDB(link, (data) => {
+        store.commit("setUserContributionData", data)
+      });
+    },
     // CREATE NEW ROOM
     createNewRoom(store) {
       const name = store.state.name;
@@ -256,7 +281,6 @@ export default new Vuex.Store({
       });
     },
     updateRoom(store) {
-      console.log(`Room ID: ${store.state.roomId}`);
       getRoom(store.state.roomId, (scoreData) => {
         store.commit("setRoomHighScores", scoreData);
       });
@@ -268,8 +292,8 @@ export default new Vuex.Store({
       updateMyScore({ url, name, score }, () => store.dispatch("updateRoom"));
     },
     setAudioParameter(state, { device, parameter, value }) {
-      console.log(`device ${device}; param: ${parameter}; value: ${value}`);
-      console.log(audio[device].state.device[parameter]);
+      // console.log(`device ${device}; param: ${parameter}; value: ${value}`);
+      // console.log(audio[device].state.device[parameter]);
 
       this.commit("setAudioParameter", { device, parameter, value });
 
@@ -321,14 +345,14 @@ export default new Vuex.Store({
         if (stringers.includes(paramater)) {
           let newValue = stringsParams(state, device, paramater, randomGameState);
           return (randomGameState[device][paramater] = newValue);
-          console.log(`New Value: ${newValue}`);
-          console.log(`device ${device}, param ${paramater}`);
-          console.log(goal);
+          // console.log(`New Value: ${newValue}`);
+          // console.log(`device ${device}, param ${paramater}`);
+          // console.log(goal);
         } else {
           let newValue = Math.random() * (100 - 1) + 1;
-          console.log(`device ${device}, param ${paramater}`);
-          console.log(randomGameState);
-          return (randomGameState[device][paramater] = newValue); 
+          // console.log(`device ${device}, param ${paramater}`);
+          // console.log(randomGameState);
+          return (randomGameState[device][paramater] = newValue);
         }
       };
 

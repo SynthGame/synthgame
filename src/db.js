@@ -22,7 +22,7 @@ db.settings({ timestampsInSnapshots: true }) // time snapshot will change in fut
 
 const scoreRef = db.collection('highscores')
 const presetRef = db.collection('customPresets')
-
+const contributionRef = db.collection('userPresets');
 const gameRoomRefs = db.collection('gameRooms');
 
 // CREATE A ROOM WITH INITAL HIGHSCORE - return URL.
@@ -41,11 +41,11 @@ export const createRoom = ({ name, score }, callBack) => {
 // ADD A PLAYERS SCORE TO AN EXISTING GAME
 export const updateMyScore = ({ url, name, score }, callback) => {
   gameRoomRefs.doc(url).update({ [name]: `${score}` })
-  .then(() => {
-    callback()
-  }).catch((err) => {
-    console.log(`updateMyScore: ${err}`)
-  })
+    .then(() => {
+      callback()
+    }).catch((err) => {
+      console.log(`updateMyScore: ${err}`)
+    })
 }
 
 // RETURN GAME WITH HIGHSCORE DATA
@@ -62,6 +62,38 @@ export const getRoom = (url, callBack) => {
     }).catch(function (error) {
       console.log("Error getting document:", error);
     });
+}
+
+
+// CONTRIBUTION
+export const sharePreset = ({ preset, sequence }, callBack) => {
+  const link = crypto.randomBytes(12).toString('hex');
+  contributionRef.doc(link).set({
+    preset,
+    sequence,
+  })
+    .then(() => {
+      callBack({link});
+    })
+    .catch((error) => {
+      console.error("Error adding document: ", error);
+    });
+}
+
+export const getContributionDB = (link, callBack) => {
+  contributionRef.doc(link).get()
+  .then((doc) => {
+    if (doc.exists) {
+      console.log('we;lrkah;sdffa;sdfkj')
+      console.log(doc.data());
+      callBack(doc.data());
+    } else {
+      console.log("No such document!");
+      return { error: 'No Contribution exists!' }
+    }
+  }).catch(function (error) {
+    console.log("Error getting document:", error);
+  });
 }
 
 // Highscore funtions
