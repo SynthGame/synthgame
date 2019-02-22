@@ -27,7 +27,7 @@
           </button> -->
           <!-- <button @click="playPauseBeat" class="sequencer-random-button">
             Beat
-          </button> 
+          </button>
           <module-knob
           style="width:4rem"
             v-model="bpm"
@@ -44,13 +44,13 @@
     <div class="button-section" v-for="i in [0,1,2,3]" :key="i">
       <span class="step-wrapper" v-for="j in getSubRange(i)" :key="j">
         <sequencer-button
-          v-if="sequencerEditState === 0"
+          v-if="knobsAvailable.steps || createModeIsActive"
           @click="toggleNoteOnOff(j)"
           :button-active="j === activeButton"
           :button-selected="noteArray[j] && noteArray[j].selected"
         />
         <SequencerSlider
-          v-else-if="sequencerEditState === 1"
+          v-if="knobsAvailable.pitch || createModeIsActive"
           :value="noteArray[j] && noteArray[j].pitch"
           @input="setPitchValue(j, $event)"
           :min="0"
@@ -68,13 +68,13 @@
           :button-selected="noteArray[j] && noteArray[j].selected"
         /> -->
         <sequencer-button
-          v-else-if="sequencerEditState === 2"
+          v-if="knobsAvailable.accent || createModeIsActive"
           @click="toggleAccentOnOff(j)"
           :button-active="j === activeButton"
           :button-selected="noteArray[j] && noteArray[j].volume"
         />
         <sequencer-button
-          v-else-if="sequencerEditState === 3"
+          v-if="knobsAvailable.glide || createModeIsActive"
           @click="toggleGlideOnOff(j)"
           :button-active="j === activeButton"
           :button-selected="noteArray[j] && noteArray[j].glide"
@@ -89,49 +89,49 @@
           :button-selected="noteArray[j] && noteArray[j].selected"
         /> -->
         <sequencer-button
-          v-else-if="sequencerEditState === 4"
+          v-if="knobsAvailable.kick || createModeIsActive"
           @click="toggleKickOnOff(j)"
           :button-active="j === activeButton"
           :button-selected="noteArray[j] && noteArray[j].kick"
         />
         <sequencer-button
-          v-else-if="sequencerEditState === 5"
+          v-if="knobsAvailable.hat || createModeIsActive"
           @click="toggleHatOnOff(j)"
           :button-active="j === activeButton"
           :button-selected="noteArray[j] && noteArray[j].hat"
         />
         <sequencer-button
-          v-else-if="sequencerEditState === 6"
+          v-if="knobsAvailable.clap1 || createModeIsActive"
           @click="toggleClapOnOff(j)"
           :button-active="j === activeButton"
           :button-selected="noteArray[j] && noteArray[j].clap"
         />
         <sequencer-button
-          v-else-if="sequencerEditState === 7"
+          v-if="knobsAvailable.clap2 || createModeIsActive"
           @click="toggleClap2OnOff(j)"
           :button-active="j === activeButton"
           :button-selected="noteArray[j] && noteArray[j].clap2"
         />
         <sequencer-button
-          v-else-if="sequencerEditState === 8"
+          v-if="knobsAvailable.cymbal || createModeIsActive"
           @click="toggleCymbalOnOff(j)"
           :button-active="j === activeButton"
           :button-selected="noteArray[j] && noteArray[j].cymbal"
         />
         <sequencer-button
-          v-else-if="sequencerEditState === 9"
+          v-if="knobsAvailable.labmyc || createModeIsActive"
           @click="toggleLabmycOnOff(j)"
           :button-active="j === activeButton"
           :button-selected="noteArray[j] && noteArray[j].labmyc"
         />
         <sequencer-button
-          v-else-if="sequencerEditState === 10"
+          v-if="knobsAvailable.noise || createModeIsActive"
           @click="toggleNoiseOnOff(j)"
           :button-active="j === activeButton"
           :button-selected="noteArray[j] && noteArray[j].noise"
         />
         <sequencer-button
-          v-else-if="sequencerEditState === 11"
+          v-if="knobsAvailable.snare || createModeIsActive"
           @click="toggleSnareOnOff(j)"
           :button-active="j === activeButton"
           :button-selected="noteArray[j] && noteArray[j].snare"
