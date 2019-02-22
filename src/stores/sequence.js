@@ -6,7 +6,15 @@ const noSequence =
     selected: false,
     pitch: 0,
     volume: false,
-    glide: false
+    glide: false,
+    kick: false,
+    snare: false,
+    hat: false,
+    clap: false,
+    clap2: false,
+    cymbal: false,
+    labmyc: false,
+    noise: false
   });
 
 // }

@@ -308,60 +308,42 @@ export default {
           // this.setStep(note)
           if (this.sequence[note].selected) {
             // if preview, use octave(frequency) from goal in store
-            if (this.displayPreviewOverlay) {
-              audio.playNote(this.sequence[note].pitch, {
-                noteLength: "8n",
-                volume: this.sequence[note].volume
-                  ? this.sequence[note].volume
-                  : 0,
-                time: note,
-                glide: this.sequence[note].glide
-                  ? this.sequence[note].glide
-                  : 0,
-                octaveOsc1:
-                  self.$store.state.gameState.goal.oscillator1.frequency,
-                octaveOsc2:
-                  self.$store.state.gameState.goal.oscillator2.frequency
-              });
-            } else {
-              audio.playNote(this.sequence[note].pitch, {
-                noteLength: "8n",
-                volume: this.sequence[note].volume
-                  ? this.sequence[note].volume
-                  : 0,
-                time: note,
-                glide: this.sequence[note].glide
-                  ? this.sequence[note].glide
-                  : 0,
-                octaveOsc1:
-                  self.$store.state.audioParameters.oscillator1.frequency,
-                octaveOsc2:
-                  self.$store.state.audioParameters.oscillator2.frequency
-              });
-            }
+
+            audio.playNote(this.sequence[note].pitch, {
+              noteLength: "8n",
+              volume: this.sequence[note].volume
+                ? this.sequence[note].volume
+                : 0,
+              time: note,
+              glide: this.sequence[note].glide ? this.sequence[note].glide : 0,
+              octaveOsc1:
+                self.$store.state.audioParameters.oscillator1.frequency,
+              octaveOsc2:
+                self.$store.state.audioParameters.oscillator2.frequency
+            });
           }
-          if (this.sequence[note].kick && this.displayStartOverlay) {
+          if (this.sequence[note].kick) {
             audio.playKick();
           }
-          if (this.sequence[note].hat && this.displayStartOverlay) {
+          if (this.sequence[note].hat) {
             audio.playHat();
           }
-          if (this.sequence[note].clap && this.displayStartOverlay) {
+          if (this.sequence[note].clap) {
             audio.playClap();
           }
-          if (this.sequence[note].clap2 && this.displayStartOverlay) {
+          if (this.sequence[note].clap2) {
             audio.playClap2();
           }
-          if (this.sequence[note].cymbal && this.displayStartOverlay) {
+          if (this.sequence[note].cymbal) {
             audio.playCymbal();
           }
-          if (this.sequence[note].labmyc && this.displayStartOverlay) {
+          if (this.sequence[note].labmyc) {
             audio.playLabmyc();
           }
-          if (this.sequence[note].noise && this.displayStartOverlay) {
+          if (this.sequence[note].noise) {
             audio.playNoise();
           }
-          if (this.sequence[note].snare && this.displayStartOverlay) {
+          if (this.sequence[note].snare) {
             audio.playSnare();
           }
         }
