@@ -117,9 +117,9 @@
               v-for="(item, key) in group.items"
               :key="key"
               class="navigation--item"
-              :class="{'is-disabled' : !(index == 0 && key == 0) && lvlScore(item.score) <= 0 }"
+              :class="{'is-disabled' : lvlScore(item.score) <= 0 && level !== item.score }"
             >
-              <button class="navigation--item-btn" @click="activeScreen(index, key)">
+              <button class="navigation--item-btn" @click="level !== item.score ? activeScreen(index, key) : null">
                 <span class="navigation--item-inner">
                   <span class="navigation--item-text">
                     <span class="navigation--item-title">
