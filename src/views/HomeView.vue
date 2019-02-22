@@ -117,9 +117,9 @@
               v-for="(item, key) in group.items"
               :key="key"
               class="navigation--item"
-              :class="{'is-disabled' : lvlScore(item.score) <= 0 && level !== item.score }"
+              :class="{'is-disabled' : !(index == 0 && key == 0) && lvlScore(item.score) <= 0 }"
             >
-              <button class="navigation--item-btn" @click="level !== item.score ? activeScreen(index, key) : null">
+              <button class="navigation--item-btn" @click="activeScreen(index, key)">
                 <span class="navigation--item-inner">
                   <span class="navigation--item-text">
                     <span class="navigation--item-title">
@@ -167,9 +167,11 @@
           <!-- sound preview screen -->
           <div key="2" v-else-if="slide === 1" class="screen--inner">
             <div class="screen--preview">
-              <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="feather feather-volume-2" width="64" height="64" viewBox="0 0 24 24">
-                <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/>
-                <path d="M19.07 4.93a10 10 0 0 1 0 14.14M15.54 8.46a5 5 0 0 1 0 7.07"/>
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" width="64" height="64">
+                <path
+                  fill="#fff"
+                  d="M14 2c-.781 0-1.313.438-2 1.016L6 8H2c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h4l6 4.984c.688.579 1.219 1.016 2 1.016 1.219 0 2-.984 2-2V4c0-1.016-.781-2-2-2zm-2 21.784L7.445 20H4v-8h3.445L12 8.216v15.568zM20 6c-1.25 0-2 1.047-2 2 0 1.422 2 2.781 2 8s-2 6.578-2 8c0 .953.75 2 2 2 1.016 0 1.625-.547 2.281-2C23.51 21.279 24 18.672 24 16s-.49-5.279-1.719-8C21.625 6.547 21.016 6 20 6zm9.146-2c-.838-1.771-1.63-2-2.333-2-1.188 0-2 1-2 2C24.813 5.672 28 8.531 28 16s-3.188 10.328-3.188 12c0 1 .813 2 2 2 .703 0 1.495-.229 2.333-2C30.063 26.063 32 22.156 32 16S30.063 5.938 29.146 4z"
+                ></path>
               </svg>
               <p>Listen to the goal sound and match the pitch of oscillator 1</p>
             </div>

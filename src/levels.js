@@ -161,7 +161,7 @@ const levels = [
       knobColor: "#e4e259",
       name: "waveform",
       parent: "Filter",
-      number: 7,
+      number: 4,
       device: 'filter',
       paramater: 'cutOffFreq',
     }
