@@ -273,7 +273,9 @@ export default new Vuex.Store({
 
       this.commit("setAudioParameter", { device, parameter, value });
 
-      if (!(parameter === "typeOsc" || parameter === "volume")) {
+      const baddies = ['cutOffFreq', "typeOsc", "volume"]
+
+      if (!(baddies.includes(parameter))) {
         if (audio[device].state.device[parameter].value === undefined) {
           audio[device].state.device[parameter] = value;
         } else {
