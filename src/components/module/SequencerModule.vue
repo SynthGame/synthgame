@@ -136,7 +136,6 @@
           :button-active="j === activeButton"
           :button-selected="noteArray[j] && noteArray[j].snare"
         />
-        <div class="stepnumber">{{j + 1}}</div>
       </span>
     </div>
   </div>
