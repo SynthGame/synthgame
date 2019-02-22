@@ -20,7 +20,7 @@
     &:not(:last-child) {
       margin-bottom: 20px;
       padding-bottom: 20px;
-      border-bottom: 1px solid $colour_white;
+      border-bottom: 1px solid rgba($colour_white, .2);
     }
   }
   .module__name__sub-title {
