@@ -196,16 +196,10 @@
             <button @click="toggle1stScreen()" class="btn btn_navigation">
               <span class="btn--inner">
                 <span class="btn--inner-text">
-                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 60 71">
-                    <path
-                      d="M57 32h-2.581c-1.374-3.881-5.067-6.667-9.419-6.667S36.955 28.119 35.581 32H3a3 3 0 1 0 0 6h32.371c1.168 4.227 5.031 7.334 9.629 7.334s8.461-3.107 9.629-7.334H57a3 3 0 0 0 0-6z"
-                    ></path>
-                    <path
-                      d="M57 58H24.419c-1.374-3.881-5.067-6.666-9.419-6.666S6.955 54.119 5.581 58H3a3 3 0 0 0 0 6h2.371c1.168 4.227 5.031 7.334 9.629 7.334s8.461-3.107 9.629-7.334H57a3 3 0 0 0 0-6z"
-                    ></path>
-                    <path
-                      d="M3 13h2.371c1.168 4.227 5.031 7.333 9.629 7.333s8.461-3.107 9.629-7.333H57a3 3 0 1 0 0-6H24.419C23.045 3.119 19.352.333 15 .333S6.955 3.119 5.581 7H3a3 3 0 1 0 0 6z"
-                    ></path>
+                  <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="feather feather-menu" viewBox="0 0 24 24">
+                    <line x1="3" x2="21" y1="12" y2="12"/>
+                    <line x1="3" x2="21" y1="6" y2="6"/>
+                    <line x1="3" x2="21" y1="18" y2="18"/>
                   </svg>
                 </span>
               </span>
