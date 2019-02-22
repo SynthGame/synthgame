@@ -11,10 +11,10 @@ const levels = [
     lfo: {},
     router: {},
     levelData: {
-      score: 0,
+      score: 9,
       text: "Use the white guidelines to recreate this sound in 60 seconds.",
       knobColor: "#e4e259",
-      score: 0,
+      score: 9,
       name: "Waveform",
       parent: "OSC 1",
       number: 1,
@@ -34,10 +34,10 @@ const levels = [
     lfo: {},
     router: {},
     levelData: {
-      score: 0,
+      score: 9,
       text: "The oscillator is the source of electronic sound. Use the knobs and dials to shape the outputted signal. ",
       knobColor: "#e4e259",
-      score: 0,
+      score: 9,
       name: "Octave",
       parent: "OSC 1",
       number: 2,
@@ -57,10 +57,10 @@ const levels = [
     lfo: {},
     router: {},
     levelData: {
-      score: 0,
+      score: 9,
       text: "",
       knobColor: "#e4e259",
-      score: 0,
+      score: 9,
       name: "Detune",
       parent: "OSC 1",
       number: 3,
@@ -68,80 +68,80 @@ const levels = [
       paramater: 'typeOsc',
     }
   },
-  // level 4
-  {
-    oscillator1: {
-    },
-    oscillator2: {
-      frequency: true,
-    },
-    filter: {},
-    envelope: {},
-    envelope2: {},
-    lfo: {},
-    router: {},
-    levelData: {
-      score: 0,
-      text: "You unlocked the second oscillator!",
-      knobColor: "#e4e259",
-      score: 0,
-      name: "Waveform",
-      parent: "OSC 2",
-      number: 4,
-      device: 'oscillator2',
-      paramater: 'frequency',
-    }
-  },
-  // level 5
-  {
-    oscillator1: {
-    },
-    oscillator2: {
-      volume: true
-    },
-    filter: {},
-    envelope: {},
-    envelope2: {},
-    lfo: {},
-    router: {},
-    levelData: {
-      score: 0,
-      number: 0,
-      text:
-        "Use detune on Osc 1 to detune the oscillators, resulting in a fatter sound.",
-      knobColor: "#e4e259",
-      score: 0,
-      name: "Octave",
-      parent: "OSC 2",
-      number: 5,
-      device: 'oscillator2',
-      paramater: 'volume',
-    }
-  },
-  // level 6
-  {
-    oscillator1: {
-    },
-    oscillator2: {
-      typeOsc: true
-    },
-    filter: {},
-    envelope: {},
-    envelope2: {},
-    lfo: {},
-    router: {},
-    levelData: {
-      score: 0,
-      number: 0,
-      text: "Use volume on Osc 2 to alter the mix between the oscillators.",
-      knobColor: "#e4e259",
-      name: "volume",
-      parent: "OSC 2",
-      number: 6,
-      device: 'oscillator2',
-      paramater: 'typeOsc',
-    }
-  },
+  // // level 4
+  // {
+  //   oscillator1: {
+  //   },
+  //   oscillator2: {
+  //     frequency: true,
+  //   },
+  //   filter: {},
+  //   envelope: {},
+  //   envelope2: {},
+  //   lfo: {},
+  //   router: {},
+  //   levelData: {
+  //     score: 9,
+  //     text: "You unlocked the second oscillator!",
+  //     knobColor: "#e4e259",
+  //     score: 9,
+  //     name: "Waveform",
+  //     parent: "OSC 2",
+  //     number: 4,
+  //     device: 'oscillator2',
+  //     paramater: 'frequency',
+  //   }
+  // },
+  // // level 5
+  // {
+  //   oscillator1: {
+  //   },
+  //   oscillator2: {
+  //     volume: true
+  //   },
+  //   filter: {},
+  //   envelope: {},
+  //   envelope2: {},
+  //   lfo: {},
+  //   router: {},
+  //   levelData: {
+  //     score: 9,
+  //     number: 0,
+  //     text:
+  //       "Use detune on Osc 1 to detune the oscillators, resulting in a fatter sound.",
+  //     knobColor: "#e4e259",
+  //     score: 9,
+  //     name: "Octave",
+  //     parent: "OSC 2",
+  //     number: 5,
+  //     device: 'oscillator2',
+  //     paramater: 'volume',
+  //   }
+  // },
+  // // level 6
+  // {
+  //   oscillator1: {
+  //   },
+  //   oscillator2: {
+  //     typeOsc: true
+  //   },
+  //   filter: {},
+  //   envelope: {},
+  //   envelope2: {},
+  //   lfo: {},
+  //   router: {},
+  //   levelData: {
+  //     score: 9,
+  //     number: 0,
+  //     text: "Use volume on Osc 2 to alter the mix between the oscillators.",
+  //     knobColor: "#e4e259",
+  //     name: "volume",
+  //     parent: "OSC 2",
+  //     number: 6,
+  //     device: 'oscillator2',
+  //     paramater: 'typeOsc',
+  //   }
+  // },
   // level 7
   {
     oscillator1: {
@@ -156,7 +156,7 @@ const levels = [
     lfo: {},
     router: {},
     levelData: {
-      score: 0,
+      score: 9,
       text: "",
       knobColor: "#e4e259",
       name: "waveform",
@@ -180,10 +180,10 @@ const levels = [
     lfo: {},
     router: {},
     levelData: {
-      score: 0,
+      score: 9,
       text: "",
       knobColor: "#e4e259",
-      score: 0,
+      score: 9,
       name: "Frequency",
       parent: "Filter",
       number: 8,
@@ -206,10 +206,10 @@ const levels = [
     lfo: {},
     router: {},
     levelData: {
-      score: 0,
+      score: 9,
       text: "",
       knobColor: "#e4e259",
-      score: 0,
+      score: 9,
       name: "Attack",
       parent: "Envelope",
       number: 9,
@@ -232,10 +232,10 @@ const levels = [
     lfo: {},
     router: {},
     levelData: {
-      score: 0,
+      score: 9,
       text: "",
       knobColor: "#e4e259",
-      score: 0,
+      score: 9,
       name: "Decay",
       parent: "Envelope",
       number: 10,
@@ -258,10 +258,10 @@ const levels = [
     lfo: {},
     router: {},
     levelData: {
-      score: 0,
+      score: 9,
       text: "",
       knobColor: "#e4e259",
-      score: 0,
+      score: 9,
       name: "Sustain",
       parent: "Envelope",
       number: 11,
@@ -286,7 +286,7 @@ const levels = [
     levelData: {
       text: "",
       knobColor: "#e4e259",
-      score: 0,
+      score: 9,
       name: "Release",
       parent: "Envelope",
       number: 12,
@@ -310,10 +310,10 @@ const levels = [
       lfo: {},
       router: {},
       levelData: {
-        score: 0,
+        score: 9,
         text: "",
         knobColor: "#e4e259",
-        score: 0,
+        score: 9,
         name: "Attack",
         parent: "Envelope",
         number: 9,
@@ -337,10 +337,10 @@ const levels = [
       lfo: {},
       router: {},
       levelData: {
-        score: 0,
+        score: 9,
         text: "",
         knobColor: "#e4e259",
-        score: 0,
+        score: 9,
         name: "Decay",
         parent: "Envelope",
         number: 10,
@@ -364,10 +364,10 @@ const levels = [
       lfo: {},
       router: {},
       levelData: {
-        score: 0,
+        score: 9,
         text: "",
         knobColor: "#e4e259",
-        score: 0,
+        score: 9,
         name: "Sustain",
         parent: "Envelope",
         number: 11,
@@ -393,10 +393,10 @@ const levels = [
     },
     router: {},
     levelData: {
-      score: 0,
+      score: 9,
       text: "",
       knobColor: "#e4e259",
-      score: 0,
+      score: 9,
       name: "Waveform",
       parent: "LFO",
       number: 15,
@@ -420,10 +420,10 @@ const levels = [
     },
     router: {},
     levelData: {
-      score: 0,
+      score: 9,
       text: "",
       knobColor: "#e4e259",
-      score: 0,
+      score: 9,
       name: "Waveform",
       parent: "LFO",
       number: 15,
@@ -447,10 +447,10 @@ const levels = [
     },
     router: {},
     levelData: {
-      score: 0,
+      score: 9,
       text: "",
       knobColor: "#e4e259",
-      score: 0,
+      score: 9,
       name: "Waveform",
       parent: "LFO",
       number: 15,
@@ -476,10 +476,10 @@ const levels = [
       lfo: true
     },
     levelData: {
-      score: 0,
+      score: 9,
       text: "",
       knobColor: "#e4e259",
-      score: 0,
+      score: 9,
       name: "LFO",
       parent: "Router",
       number: 20,
@@ -503,10 +503,10 @@ const levels = [
         envelope2: true
       },
       levelData: {
-        score: 0,
+        score: 9,
         text: "",
         knobColor: "#e4e259",
-        score: 0,
+        score: 9,
         name: "Envelope 2",
         parent: "LFO",
         number: 21,

@@ -415,7 +415,7 @@ import presets from "@/presets";
 import character from "@/character";
 import levels from "@/levels";
 import range from "lodash/range";
-import Nav from "@/nav";
+import Nav from "@/game_nav";
 
 export default {
   name: "home",
