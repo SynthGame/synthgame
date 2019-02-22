@@ -161,7 +161,7 @@
           </span>
         </button>
       </div>
-      <div class="screen--share">
+      <div class="hide-mobile screen--share">
         <p>Anyone with this link can join and create their song on top of this one.</p>
         <div class="screen--share-inner">
           <div class="screen--share-url">
