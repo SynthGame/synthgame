@@ -681,8 +681,7 @@ export default {
       window.parent.postMessage("play-game-activated", "*");
 
       // randomly pick preset
-      // this.pickedPreset = Math.round(Math.random() * (presets.length - 1));
-      this.pickedPreset = 0; // TEMP: have same preset to trace different sounding preview bug
+      this.pickedPreset = Math.round(Math.random() * (presets.length - 1));
 
       // SET GOAL TO GOAL SOUND
       this.$store.commit("setGoalToPreset", {
