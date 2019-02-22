@@ -16,13 +16,11 @@
   @keydown.enter="$emit('click', $event)"
   @mousedown="$emit('click', $event)"
   class="sequencer-button">
-    <div class="sequencer-button__content">
-      <div :class="{
-        'sequencer-button__indicator': true,
-        'sequencer-button__indicator--active': buttonActive,
-        'sequencer-button__indicator--selected': buttonSelected
-      }"></div>
-    </div>
+    <div :class="{
+      'sequencer-button__indicator': true,
+      'sequencer-button__indicator--active': buttonActive,
+      'sequencer-button__indicator--selected': buttonSelected
+    }" />
   </button>
 </template>
 

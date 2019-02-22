@@ -5,16 +5,18 @@
   overflow-x: hidden;
   overflow-y: auto;
   height: 100vh;
+  max-height: 870px;
   padding: 40px 0;
   counter-reset: section;
+  justify-content: center;
   .button-section {
     display: flex;
     justify-content: center;
     max-width: calc(78px * 4);
     width: 100%;
+    height: calc((100% - 120px)/4);
     margin-left: auto;
     margin-right: auto;
-    flex-shrink: 0;
     &:not(:last-child) {
       margin-bottom: 20px;
       padding-bottom: 20px;
@@ -35,7 +37,7 @@
 }
 
 .sequencer-button {
-  height: 8em;
+  height: 100%;
   width: 100%;
   display: flex;
   padding: 0;
@@ -53,14 +55,6 @@
     font-size: 14px;
   }
 
-  &__content {
-    width: 100%;
-    margin-top: -3.6em;
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-start;
-  }
-
   &:active {
     background-color: #292929;
   }
@@ -71,6 +65,9 @@
     margin: 0 auto;
     border: 1px solid white;
     border-radius: 50%;
+    position: absolute;
+    top: 15px; left: 50%; 
+    transform: translateX(-50%);
 
     &--selected {
       background-color: $colour_primary;
@@ -80,6 +77,16 @@
     &--active {
       background-color: white;
       box-shadow: 0px 0px 16px white;
+    }
+  }
+  @media screen and (max-height: 540px) {
+    &:after {
+      display: none;
+    }
+    &__indicator {
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
     }
   }
 }
