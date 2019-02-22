@@ -47,7 +47,7 @@
                 <circle :cx="0" :cy="displayHeight*0.6" :r="displayHeight/4" />
           </g>
 
-          <g v-if="this.module === 'lfo'"
+          <!-- <g v-if="this.module === 'lfo'"
             stroke="white"
             v-show="!createModeIsActive"
             fill="none"
@@ -65,7 +65,7 @@
                   "/>
 
                   <circle :cx="0" :cy="displayHeight*0.6" :r="displayHeight/4"/>
-            </g>
+            </g> -->
         </svg>
         <!-- Router -->
         <g v-if="this.module === 'router'" class="routerscreen" style="transform: scale(0.61) translateY(-3px) translateX(8px); transition: all 0s;">

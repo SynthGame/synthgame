@@ -273,7 +273,9 @@ export default new Vuex.Store({
 
       this.commit("setAudioParameter", { device, parameter, value });
 
-      if (!(parameter === "typeOsc" || parameter === "volume")) {
+      const baddies = ['cutOffFreq', "typeOsc", "volume", "amount"];
+
+      if (!(baddies.includes(parameter))) {
         if (audio[device].state.device[parameter].value === undefined) {
           audio[device].state.device[parameter] = value;
         } else {
@@ -286,15 +288,22 @@ export default new Vuex.Store({
       commit("incrementAttempt");
     },
     randomizeAudioParameters({ state, commit }, { device, paramater }) {
-      const stringsParams = (state, device, paramater) => {
+
+      const stringsParams = (state, device, paramater, goal) => {
         if (device === "lfo") {
           return Math.random(0, 100);
         } else {
           const possibleValues = state.gameState.possibleValues;
           let len = possibleValues[device][paramater].length;
           let rando = Math.round(Math.random() * (len - 1) + 1);
-          console.log(possibleValues[device][paramater][rando]);
-          return possibleValues[device][paramater][rando];
+          // console.log(possibleValues[device][paramater]);
+          // console.log(rando);
+          // console.log(possibleValues[device][paramater][rando]);
+          if (goal[device][paramater] === possibleValues[device][paramater][rando]) {
+            return stringsParams(state, device, paramater, goal);
+          } else {
+            return possibleValues[device][paramater][rando];
+          }
         }
       };
 
@@ -310,7 +319,7 @@ export default new Vuex.Store({
         ];
         // if param is a string type...
         if (stringers.includes(paramater)) {
-          let newValue = stringsParams(state, device, paramater);
+          let newValue = stringsParams(state, device, paramater, randomGameState);
           return (randomGameState[device][paramater] = newValue);
           console.log(`New Value: ${newValue}`);
           console.log(`device ${device}, param ${paramater}`);
@@ -319,7 +328,7 @@ export default new Vuex.Store({
           let newValue = Math.random() * (100 - 1) + 1;
           console.log(`device ${device}, param ${paramater}`);
           console.log(randomGameState);
-          return (randomGameState[device][paramater] = newValue);
+          return (randomGameState[device][paramater] = newValue); 
         }
       };
 

@@ -262,7 +262,7 @@ export default {
     madeAttempt() {
       if (this.allParametersMatchGoal === true) {
         this.showConfetti = true
-        const score = 10 - this.$store.state.gameState.attempts;
+        const score = 11 - this.$store.state.gameState.attempts;
         this.$store.commit("addValueToScore", score);
         this.$store.commit("setLevelScore", score);
         this.$store.commit({

@@ -346,7 +346,7 @@
       </div>
       <div class="screen--share">
         <p>Share this link to challenge your Friends!</p>
-        <div class="username_container">
+        <div v-if="!userName" class="username_container">
           <input class="username_input" v-model="userName" type="text" placeholder="Username"/>
           <button class="btn btn_stroke btn_primary btn-username" @click="setUsername">ENTER</button>
         </div>
@@ -416,7 +416,7 @@ import presets from "@/presets";
 import character from "@/character";
 import levels from "@/levels";
 import range from "lodash/range";
-import Nav from "@/nav";
+import Nav from "@/game_nav";
 
 export default {
   name: "home",
