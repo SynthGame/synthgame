@@ -4,13 +4,15 @@
   list-style: none;
   flex-wrap: wrap;
   padding: 10px;
-  margin: -10px;
   align-items: flex-start;
-  justify-content: space-evenly;
+  align-content: flex-start;
+  max-height: 800px;
+  margin: auto;
   flex: 1;
   &--item {
     align-items: center;
-    width: calc(50% - 20px);
+    width: calc( (((100vh - 58px)/4) - 20px) * 1.42);
+    max-width: calc(50% - 20px);
     flex-shrink: 0;
     border: 2px solid $colour_primary;
     margin: 10px;
@@ -37,6 +39,16 @@
       display: block;
       text-align: left;
       padding: 10px;
+    }
+  }
+  @media screen and (min-width: 800px) {
+    &--item {
+      width: calc( (((100vh - 58px - 156px)/4) - 20px) * 1.42);
+    }
+  }
+  @media screen and (max-width: 799px) {
+    &--item {
+      width: calc( (((100vh - 58px)/4) - 20px) * 1.42);
     }
   }
 }

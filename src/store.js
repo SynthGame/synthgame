@@ -16,6 +16,7 @@ import audio from "./audio";
 //
 import PossibleValues from "./stores/possibleValues";
 import AudioParameters from "./stores/audioParameters";
+import NoSequenceAvailable from "./stores/sequence";
 import NoKnobsAvalible from "./stores/noKnobsAvalible";
 
 Vue.use(Vuex);
@@ -24,8 +25,10 @@ export default new Vuex.Store({
   state: {
     bpm: 110,
     name: "Anonymous",
+    activeButton: 0,
     avatarUrl: null,
     audioParameters: AudioParameters(),
+    sequence: NoSequenceAvailable,
     roomId: null,
     roomHighScores: [
       {
@@ -70,11 +73,10 @@ export default new Vuex.Store({
       state.roomId = roomId;
     },
     setRoomHighScores(state, scores) {
-
-      const results = Object.keys(scores).map((key) => {
+      const results = Object.keys(scores).map(key => {
         return {
-          'score': scores[key],
-          'name': key,
+          score: scores[key],
+          name: key
         };
       });
 
@@ -109,6 +111,14 @@ export default new Vuex.Store({
       state.avatarUrl = avatarUrl;
     },
     setBpm(state, { parameter, value }) {
+      state[parameter] = value;
+    },
+    setStep(state, i) {
+      if (i) return (state.activeButton = i), state.activeButton;
+      if (state.activeButton === 15) state.activeButton = -1;
+      state.activeButton++;
+    },
+    setSequence(state, { parameter, value }) {
       state[parameter] = value;
     },
     setPresetBpm(state, bpm) {
@@ -209,7 +219,7 @@ export default new Vuex.Store({
 
         let parent = Object.values(knobs).find(knob => {
           return Object.entries(knob).length !== 0;
-        }); 
+        });
 
         const parameter = Object.keys(parent)[0];
         const device = devices.filter(
@@ -253,9 +263,9 @@ export default new Vuex.Store({
     },
     updateHighScore(store) {
       const url = store.state.roomId,
-      name = store.state.name,
-      score = store.state.gameState.score;
-      updateMyScore({url, name, score}, () => store.dispatch('updateRoom'));
+        name = store.state.name,
+        score = store.state.gameState.score;
+      updateMyScore({ url, name, score }, () => store.dispatch("updateRoom"));
     },
     setAudioParameter(state, { device, parameter, value }) {
       console.log(`device ${device}; param: ${parameter}; value: ${value}`);
