@@ -144,20 +144,17 @@ export default new Vuex.Store({
     },
     setAudioParameterToPreset(state, { preset }) {
       // overwrite parameters from audiostate, this will not fill in nested objects
-      // state.audioParameters = {
-      //   ...state.audioParameters,
-      //   ...preset
-      // };
-      state.audioParameters = JSON.parse(JSON.stringify(preset)); // deep cloning has to be done like this, otherwise a reference is copied
+      state.audioParameters = {
+        ...state.audioParameters,
+        ...JSON.parse(JSON.stringify(preset)) // deep cloning has to be done like this, otherwise a reference is copied
+      };
     },
     setGoalToPreset(state, { preset }) {
       // overwrite parameters from audiostate, this will not fill in nested objects
-      // state.gameState.goal = {
-      //   ...state.gameState.goal,
-      //   ...preset
-      // };
-      // console.log("preset", preset);
-      state.gameState.goal = JSON.parse(JSON.stringify(preset)); // deep cloning has to be done like this, otherwise a reference is copied
+      state.gameState.goal = {
+        ...state.gameState.goal,
+        ...JSON.parse(JSON.stringify(preset)) // deep cloning has to be done like this, otherwise a reference is copied
+      };
     },
     setMargin(state, { newMargin }) {
       // overwrite parameters from audiostate, this will not fill in nested objects
@@ -357,13 +354,16 @@ export default new Vuex.Store({
             console.log("same same");
             return stringsParams(state, device, paramater, goal);
           } else {
+            console.log("else triggered in stringsParams");
             return possibleValues[device][paramater][rando];
           }
         }
       };
 
       const randomizeWithoutMatches = (goal, device, paramater) => {
+        "randomizeWithoutMatches";
         let randomGameState = { ...goal };
+        console.log("randomGameState", randomGameState);
         const stringers = [
           "frequency",
           "typeOsc",
@@ -374,6 +374,7 @@ export default new Vuex.Store({
         ];
         // if param is a string type...
         if (stringers.includes(paramater)) {
+          console.log("param is a string type...");
           let newValue = stringsParams(
             state,
             device,
@@ -389,15 +390,15 @@ export default new Vuex.Store({
           // console.log(goal);
         } else {
           let newValue = Math.random() * (100 - 1) + 1;
-          // console.log(`device ${device}, param ${paramater}`);
-          // console.log(randomGameState);
-          return (randomGameState[device][paramater] = newValue);
+          console.log("newValue no string type", newValue);
+          randomGameState[device][paramater] = newValue;
+          return randomGameState;
         }
       };
 
       return commit("setAudioParameterToPreset", {
         preset: randomizeWithoutMatches(
-          JSON.parse(JSON.stringify(state.gameState.goal)),
+          JSON.parse(JSON.stringify(state.gameState.goal)), //important, or else goal will change
           device,
           paramater
         )

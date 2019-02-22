@@ -237,24 +237,24 @@
         </div>
         <div class="screen--inner">
           <oscillator-module-one
-            v-if="moduleIsUseable('oscillator1')"
+            v-show="moduleIsUseable('oscillator1')"
             :class="[(activeModule == 0 ? 'active' : '')]"
           />
           <oscillator-module-two
-            v-if="moduleIsUseable('oscillator2')"
+            v-show="moduleIsUseable('oscillator2')"
             :class="[(activeModule == 1 ? 'active' : '')]"
           />
           <filter-module
-            v-if="moduleIsUseable('filter')"
+            v-show="moduleIsUseable('filter')"
             :class="[(activeModule == 2 ? 'active' : '')]"
           />
           <envelope-module
-            v-if="moduleIsUseable('envelope')"
+            v-show="moduleIsUseable('envelope')"
             :class="[(activeModule == 3 ? 'active' : '')]"
           />
           <lfo-module v-show="moduleIsUseable('lfo')" :class="[(activeModule == 4 ? 'active' : '')]"/>
           <envelope-module-two
-            v-if="moduleIsUseable('envelope2')"
+            v-show="moduleIsUseable('envelope2')"
             :class="[(activeModule == 5 ? 'active' : '')]"
           />
           <sequencer-module
@@ -263,7 +263,7 @@
             class="module sequencer"
           />
           <router-module
-            v-if="moduleIsUseable('router')"
+            v-show="moduleIsUseable('router')"
             :class="[(activeModule == 6 ? 'active' : '')]"
           />
           <!-- ATTEMPT -->
