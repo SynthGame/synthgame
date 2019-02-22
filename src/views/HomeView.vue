@@ -252,7 +252,7 @@
             v-if="moduleIsUseable('envelope')"
             :class="[(activeModule == 3 ? 'active' : '')]"
           />
-          <lfo-module v-if="moduleIsUseable('lfo')" :class="[(activeModule == 4 ? 'active' : '')]"/>
+          <lfo-module v-show="moduleIsUseable('lfo')" :class="[(activeModule == 4 ? 'active' : '')]"/>
           <envelope-module-two
             v-if="moduleIsUseable('envelope2')"
             :class="[(activeModule == 5 ? 'active' : '')]"
@@ -424,6 +424,7 @@ export default {
     return {
       i: 0,
       userName: null,
+      displayPreviewOverlay: false,
       activeModule: 0,
       totalAttempts: 10,
       slide: 0,
@@ -503,10 +504,10 @@ export default {
     });
 
     // mouseup listener (needed to trace events)
-    document.addEventListener("mouseup", event => {
-      // log to analytics
-      this.$router.push("?level=" + (this.level + 1) + "&" + event.screenX);
-    });
+    // document.addEventListener("mouseup", event => {
+    //   // log to analytics
+    //   this.$router.push("?level=" + (this.level + 1) + "&" + event.screenX);
+    // });
   },
   watch: {
     watchRoomId() {
@@ -520,6 +521,15 @@ export default {
     // }
   },
   methods: {
+    refreshRouting() {
+      audio.connectLfo(this.$store.state.audioParameters.router.lfo);
+      audio.connectEnvelope2(
+        this.$store.state.audioParameters.router.envelope2
+      );
+      audio.filter.state.device.frequency.value = character.filter.cutOffFreq(
+        this.$store.state.audioParameters.filter.cutOffFreq
+      );
+    },
     setUsername() {
       console.log(this.userName);
       this.$store.commit("setUsername", { userName: this.userName });
@@ -568,7 +578,7 @@ export default {
         (time, note) => {
           if (this.sequence[note].selected) {
             // if preview, use octave(frequency) from goal in store
-            if (this.displayPreviewOverlay) {
+            if (!this.attemptActive) {
               audio.playNote(this.sequence[note].pitch, {
                 noteLength: "8n",
                 volume: this.sequence[note].volume
@@ -600,28 +610,28 @@ export default {
               });
             }
           }
-          if (this.sequence[note].kick && this.displayStartOverlay) {
+          if (this.sequence[note].kick && this.completedLevel) {
             audio.playKick();
           }
-          if (this.sequence[note].hat && this.displayStartOverlay) {
+          if (this.sequence[note].hat && this.completedLevel) {
             audio.playHat();
           }
-          if (this.sequence[note].clap && this.displayStartOverlay) {
+          if (this.sequence[note].clap && this.completedLevel) {
             audio.playClap();
           }
-          if (this.sequence[note].clap2 && this.displayStartOverlay) {
+          if (this.sequence[note].clap2 && this.completedLevel) {
             audio.playClap2();
           }
-          if (this.sequence[note].cymbal && this.displayStartOverlay) {
+          if (this.sequence[note].cymbal && this.completedLevel) {
             audio.playCymbal();
           }
-          if (this.sequence[note].labmyc && this.displayStartOverlay) {
+          if (this.sequence[note].labmyc && this.completedLevel) {
             audio.playLabmyc();
           }
-          if (this.sequence[note].noise && this.displayStartOverlay) {
+          if (this.sequence[note].noise && this.completedLevel) {
             audio.playNoise();
           }
-          if (this.sequence[note].snare && this.displayStartOverlay) {
+          if (this.sequence[note].snare && this.completedLevel) {
             audio.playSnare();
           }
         }
@@ -638,8 +648,10 @@ export default {
     },
     // for entering lvl
     enterLevel(level) {
+      console.log("triggered enterLevel in homeview");
       // this.beginSvoosh()
       // Set to RANDOMIZE PARAM in SOUND ENGINE.
+      this.$store.dispatch("setSynthToAudioParameters", audio);
       this.setSoundToRandom();
       this.displayPreviewOverlay = false;
       this.slide = null;
@@ -669,8 +681,8 @@ export default {
       window.parent.postMessage("play-game-activated", "*");
 
       // randomly pick preset
-      this.pickedPreset = Math.round(Math.random() * (presets.length - 1));
-      // console.log('pickedPreset =', this.pickedPreset);
+      // this.pickedPreset = Math.round(Math.random() * (presets.length - 1));
+      this.pickedPreset = 0; // TEMP: have same preset to trace different sounding preview bug
 
       // SET GOAL TO GOAL SOUND
       this.$store.commit("setGoalToPreset", {
@@ -686,7 +698,7 @@ export default {
       });
 
       // SET AUDIO to AUDIO PARAMS
-      this.$store.dispatch("setSynthToAudioParameters", audio);
+      this.$store.dispatch("setSynthToGoal", audio);
 
       this.$store.commit("setFeaturedArtist", {
         artistName: presets[this.pickedPreset].name,
@@ -694,13 +706,7 @@ export default {
       });
 
       // set correct routing
-      audio.connectLfo(this.$store.state.audioParameters.router.lfo);
-      audio.connectEnvelope2(
-        this.$store.state.audioParameters.router.envelope2
-      );
-      audio.filter.state.device.frequency.value = character.filter.cutOffFreq(
-        this.$store.state.audioParameters.filter.cutOffFreq
-      );
+      this.refreshRouting();
 
       //and again to correct pitch
       // load the preset on synth
@@ -813,6 +819,9 @@ export default {
     }
   },
   computed: {
+    attemptActive() {
+      return this.$store.state.gameState.attemptActive;
+    },
     ...vuexSyncGenSequence("sequence", val => {}),
     highscores() {
       return this.$store.state.roomHighScores;

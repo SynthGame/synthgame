@@ -9,7 +9,14 @@ import isArray from "lodash/isArray";
 import add from "lodash/add";
 import find from "lodash/find";
 import character from "@/character";
-import { addPreset, createRoom, updateMyScore, getRoom, getContributionDB, sharePreset } from "@/db";
+import {
+  addPreset,
+  createRoom,
+  updateMyScore,
+  getRoom,
+  getContributionDB,
+  sharePreset
+} from "@/db";
 import Levels from "./levels";
 import audio from "./audio";
 
@@ -55,6 +62,7 @@ export default new Vuex.Store({
 
       // TOGGLES //
       madeAttempt: false,
+      attemptActive: false,
       completedLevel: false,
       createModeIsActive: false,
       sweepArmed: true,
@@ -66,7 +74,7 @@ export default new Vuex.Store({
     }
   },
   mutations: {
-    // Contribution 
+    // Contribution
     setContributionLink(state, { link }) {
       state.contributionId = link;
     },
@@ -136,19 +144,20 @@ export default new Vuex.Store({
     },
     setAudioParameterToPreset(state, { preset }) {
       // overwrite parameters from audiostate, this will not fill in nested objects
-      state.audioParameters = {
-        ...state.audioParameters,
-        ...preset
-      };
+      // state.audioParameters = {
+      //   ...state.audioParameters,
+      //   ...preset
+      // };
+      state.audioParameters = JSON.parse(JSON.stringify(preset)); // deep cloning has to be done like this, otherwise a reference is copied
     },
     setGoalToPreset(state, { preset }) {
       // overwrite parameters from audiostate, this will not fill in nested objects
-      state.gameState.goal = {
-        ...state.gameState.goal,
-        ...preset
-      };
+      // state.gameState.goal = {
+      //   ...state.gameState.goal,
+      //   ...preset
+      // };
       // console.log("preset", preset);
-      // state.gameState.goal = JSON.parse(JSON.stringify(preset));
+      state.gameState.goal = JSON.parse(JSON.stringify(preset)); // deep cloning has to be done like this, otherwise a reference is copied
     },
     setMargin(state, { newMargin }) {
       // overwrite parameters from audiostate, this will not fill in nested objects
@@ -170,6 +179,12 @@ export default new Vuex.Store({
     },
     setLevelValue(state, level) {
       state.gameState.level = level;
+    },
+    setAttemptActive(state) {
+      state.gameState.attemptActive = true;
+    },
+    setAttemptNotActive(state) {
+      state.gameState.attemptActive = false;
     },
     // updateHighScore(state, val) {
     //   state.gameState.highScore = val;
@@ -243,16 +258,16 @@ export default new Vuex.Store({
 
       let val = state.audioParameters[device][parameter];
 
-      // console.log(`value: ${val}`);
-      // console.log(`Goal: ${state.gameState.goal[device][parameter]}`);
+      console.log(`value: ${val}`);
+      console.log(`Goal: ${state.gameState.goal[device][parameter]}`);
 
       return isArray(state.gameState.possibleValues[device][parameter])
         ? val === state.gameState.goal[device][parameter]
         : inRange(
-          val,
-          state.gameState.goal[device][parameter] - state.gameState.margin,
-          state.gameState.goal[device][parameter] + state.gameState.margin
-        );
+            val,
+            state.gameState.goal[device][parameter] - state.gameState.margin,
+            state.gameState.goal[device][parameter] + state.gameState.margin
+          );
     }
   },
   actions: {
@@ -263,12 +278,12 @@ export default new Vuex.Store({
 
       sharePreset({ preset, sequence }, ({ link }) => {
         store.commit("setContributionLink", { link });
-      })
+      });
     },
     getContribution(store) {
       let link = store.state.contributionId;
-      getContributionDB(link, (data) => {
-        store.commit("setUserContributionData", data)
+      getContributionDB(link, data => {
+        store.commit("setUserContributionData", data);
       });
     },
     // CREATE NEW ROOM
@@ -276,12 +291,12 @@ export default new Vuex.Store({
       const name = store.state.name;
       const score = store.state.gameState.score;
 
-      createRoom({ name, score }, (URL) => {
+      createRoom({ name, score }, URL => {
         store.commit("setRoomId", { roomId: URL });
       });
     },
     updateRoom(store) {
-      getRoom(store.state.roomId, (scoreData) => {
+      getRoom(store.state.roomId, scoreData => {
         store.commit("setRoomHighScores", scoreData);
       });
     },
@@ -297,9 +312,9 @@ export default new Vuex.Store({
 
       this.commit("setAudioParameter", { device, parameter, value });
 
-      const baddies = ['cutOffFreq', "typeOsc", "volume", "amount"];
+      const baddies = ["cutOffFreq", "typeOsc", "volume", "amount"];
 
-      if (!(baddies.includes(parameter))) {
+      if (!baddies.includes(parameter)) {
         if (audio[device].state.device[parameter].value === undefined) {
           audio[device].state.device[parameter] = value;
         } else {
@@ -312,7 +327,7 @@ export default new Vuex.Store({
       commit("incrementAttempt");
     },
     randomizeAudioParameters({ state, commit }, { device, paramater }) {
-
+      console.log("randomizeAudioParameters");
       const stringsParams = (state, device, paramater, goal) => {
         if (device === "lfo") {
           return Math.random(0, 100);
@@ -323,7 +338,23 @@ export default new Vuex.Store({
           // console.log(possibleValues[device][paramater]);
           // console.log(rando);
           // console.log(possibleValues[device][paramater][rando]);
-          if (goal[device][paramater] === possibleValues[device][paramater][rando]) {
+          console.log("goal[device][paramater]", goal[device][paramater]);
+          console.log(
+            "possibleValues[device][paramater][rando]",
+            possibleValues[device][paramater][rando]
+          );
+          console.log(
+            "state.audioParameters.oscillator1.frequency",
+            state.audioParameters.oscillator1.frequency
+          );
+          console.log(
+            "state.gameState.goal.oscillator1.frequency",
+            state.gameState.goal.oscillator1.frequency
+          );
+          if (
+            goal[device][paramater] === possibleValues[device][paramater][rando]
+          ) {
+            console.log("same same");
             return stringsParams(state, device, paramater, goal);
           } else {
             return possibleValues[device][paramater][rando];
@@ -343,8 +374,16 @@ export default new Vuex.Store({
         ];
         // if param is a string type...
         if (stringers.includes(paramater)) {
-          let newValue = stringsParams(state, device, paramater, randomGameState);
-          return (randomGameState[device][paramater] = newValue);
+          let newValue = stringsParams(
+            state,
+            device,
+            paramater,
+            randomGameState
+          );
+          console.log("newValue", newValue);
+          randomGameState[device][paramater] = newValue;
+          return randomGameState;
+
           // console.log(`New Value: ${newValue}`);
           // console.log(`device ${device}, param ${paramater}`);
           // console.log(goal);
@@ -357,7 +396,11 @@ export default new Vuex.Store({
       };
 
       return commit("setAudioParameterToPreset", {
-        preset: randomizeWithoutMatches(state.gameState.goal, device, paramater)
+        preset: randomizeWithoutMatches(
+          JSON.parse(JSON.stringify(state.gameState.goal)),
+          device,
+          paramater
+        )
       });
     },
 
@@ -381,10 +424,14 @@ export default new Vuex.Store({
           });
         });
       return commit("setGoalToPreset", {
-        preset: randomizeValues(state.audioParameters)
+        preset: randomizeValues(
+          JSON.parse(JSON.stringify(state.audioParameters))
+        )
       });
     },
-    setSynthToGoal({ state }, synth) {
+    setSynthToGoal({ state, commit }, synth) {
+      commit("setAttemptNotActive");
+      console.log("setSynthToGoal triggered in store");
       synth.envelope.state.device.attack = character.envelope.attack(
         state.gameState.goal.envelope.attack
       );
@@ -445,9 +492,14 @@ export default new Vuex.Store({
         state.gameState.goal.oscillator2.volume
       );
       synth.connectLfo(state.gameState.goal.router.lfo);
-      synth.connectEnvelope2(state.gameState.goal.envelope2);
+      synth.connectEnvelope2(state.gameState.goal.router.envelope2);
+      audio.filter.state.device.frequency.value = character.filter.cutOffFreq(
+        state.gameState.goal.filter.cutOffFreq
+      );
     },
-    setSynthToUserAttempt({ state }, synth) {
+    setSynthToUserAttempt({ state, commit }, synth) {
+      commit("setAttemptActive");
+      console.log("setSynthToUserAttempt triggered in store");
       synth.envelope.state.device.attack = character.envelope.attack(
         state.gameState.userAttemptPreset.envelope.attack
       );
@@ -512,9 +564,16 @@ export default new Vuex.Store({
         state.gameState.userAttemptPreset.oscillator2.volume
       );
       synth.connectLfo(state.gameState.userAttemptPreset.router.lfo);
-      synth.connectEnvelope2(state.gameState.userAttemptPreset.envelope2);
+      synth.connectEnvelope2(
+        state.gameState.userAttemptPreset.router.envelope2
+      );
+      audio.filter.state.device.frequency.value = character.filter.cutOffFreq(
+        state.gameState.userAttemptPreset.filter.cutOffFreq
+      );
     },
-    setSynthToAudioParameters({ state }, synth) {
+    setSynthToAudioParameters({ state, commit }, synth) {
+      commit("setAttemptActive");
+      console.log("setSynthToAudioParameters triggered in store");
       synth.envelope.state.device.attack = character.envelope.attack(
         state.audioParameters.envelope.attack
       );
@@ -580,6 +639,9 @@ export default new Vuex.Store({
       );
       synth.connectLfo(state.audioParameters.router.lfo);
       synth.connectEnvelope2(state.audioParameters.router.envelope2);
+      audio.filter.state.device.frequency.value = character.filter.cutOffFreq(
+        state.audioParameters.filter.cutOffFreq
+      );
     },
     exportPreset({ state }, data) {
       return addPreset({

@@ -98,11 +98,19 @@ export default {
   },
   mounted() {
     var confettiSettings = {
-      target: 'confetti',
+      target: "confetti",
       size: 8,
       max: 30,
       clock: 50,
-      colors: [[255, 126, 110],[67, 190, 222],[110, 1, 209],[124, 208, 139], [228, 226, 89], [75, 27, 255], [255, 255, 255]]
+      colors: [
+        [255, 126, 110],
+        [67, 190, 222],
+        [110, 1, 209],
+        [124, 208, 139],
+        [228, 226, 89],
+        [75, 27, 255],
+        [255, 255, 255]
+      ]
     };
     var confetti = new ConfettiGenerator(confettiSettings);
     confetti.render();
@@ -114,7 +122,7 @@ export default {
     PreviewScreen,
     Svoosh,
     BeforeCreateOverlay,
-    OriginalSoundOverlay,
+    OriginalSoundOverlay
   },
   computed: {
     ...mapState({
@@ -122,7 +130,7 @@ export default {
       timerIsRunning: state => state.gameState.timerIsRunning
     }),
     ...mapGetters({
-      allParametersMatchGoal: "allParametersMatchGoal",
+      allParametersMatchGoal: "allParametersMatchGoal"
     }),
     attempts() {
       return this.$store.state.gameState.attempts;
@@ -135,7 +143,7 @@ export default {
     },
     completedLevel() {
       return this.$store.state.gameState.completedLevel;
-    },
+    }
   },
   methods: {
     switchToCreate() {
@@ -190,7 +198,7 @@ export default {
       setTimeout(() => {
         this.isThereSvooshComponent = false;
         this.svooshIt = false;
-        this.$store.commit("armSweep")
+        this.$store.commit("armSweep");
       }, 300);
     },
     beginSuccessSvoosh() {
@@ -212,7 +220,7 @@ export default {
     },
     startNextLevel() {
       this.$store.commit("increaseLevelValue", 1);
-      this.startLevel(this.level) // TODO: should be + 1
+      this.startLevel(this.level); // TODO: should be + 1
       this.$store.commit({
         type: "setCompletedLevel",
         value: false
@@ -239,7 +247,7 @@ export default {
       }
     },
     originalSoundPrompt() {
-      let self = this
+      let self = this;
       self.$store.dispatch("setSynthToGoal", audio);
       this.displayOriginalOverlay = true; // create this overlay.
     },
@@ -247,21 +255,21 @@ export default {
       this.displayOriginalOverlay = false;
       clearInterval(this.timerInterval);
       this.originalSoundTimer = 8;
-      this.$store.dispatch("setSynthToUserAttempt", audio);
+      this.$store.dispatch("setSynthToAudioParameters", audio);
     },
     forfeit() {
       this.killOrignalSoundPrompt();
       this.startNextLevel();
     },
     showNextLevel() {
-      document.querySelector('.btn_next').click()
-      this.showConfetti = false
+      document.querySelector(".btn_next").click();
+      this.showConfetti = false;
     }
   },
   watch: {
     madeAttempt() {
       if (this.allParametersMatchGoal === true) {
-        this.showConfetti = true
+        this.showConfetti = true;
         const score = 11 - this.$store.state.gameState.attempts;
         this.$store.commit("addValueToScore", score);
         this.$store.commit("setLevelScore", score);
@@ -269,20 +277,22 @@ export default {
           type: "setCompletedLevel",
           value: true
         });
-        if(this.$store.state.roomId !== null) {
+        if (this.$store.state.roomId !== null) {
           this.$store.dispatch("updateHighScore");
         }
-        this.$store.dispatch("levelDone")
+        this.$store.dispatch("levelDone");
         this.$store.commit("resetAttempts");
       } else {
         if (this.$store.state.gameState.attempts == 10) {
           // need to reset global attemps in gameOver action.....
           this.$store.dispatch("gameOver");
         } else {
+          this.displayOriginalOverlay = true;
+          audio.playGameOver();
           this.originalSoundPrompt();
         }
       }
-    },
+    }
   }
 };
 </script>
@@ -434,18 +444,21 @@ export default {
 //   }
 // }
 
-
-.fade-enter-active, .fade-leave-active {
-  transition: opacity .5s;
+.fade-enter-active,
+.fade-leave-active {
+  transition: opacity 0.5s;
 }
-.fade-enter, .fade-leave-to {
+.fade-enter,
+.fade-leave-to {
   opacity: 0;
 }
 
-.confetti-enter-active, .confetti-leave-active {
-  transition: opacity .1s;
+.confetti-enter-active,
+.confetti-leave-active {
+  transition: opacity 0.1s;
 }
-.confetti-enter, .confetti-leave-to {
+.confetti-enter,
+.confetti-leave-to {
   opacity: 0;
 }
 
