@@ -18,51 +18,53 @@
                 {name: 'amountGoal', min: 1, max: 100, value: this.amountGoal},
                 ]"/>
     <div class="knobs">
-      <module-knob
-        v-model="attack"
-        v-if="knobsAvailable.attack || createModeIsActive"
-        :min="0"
-        :max="100"
-        knobColor="#4b1bff"
-        name="Attack"
-        module="envelope"
-      ></module-knob>
-      <module-knob
-        v-model="decay"
-        v-if="knobsAvailable.decay || createModeIsActive"
-        :min="0"
-        :max="100"
-        knobColor="#4b1bff"
-        name="Decay"
-        module="envelope"
-      ></module-knob>
-      <!-- <module-knob
-        v-model="sustain"
-        v-if="knobsAvailable.sustain || createModeIsActive"
-        :min="0"
-        :max="100"
-        knobColor="#4b1bff"
-        name="Sustain"
-        module="envelope"
-      ></module-knob> -->
-      <!-- <module-knob
-        v-model="release"
-        v-if="knobsAvailable.release || createModeIsActive"
-        :min="0"
-        :max="100"
-        knobColor="#4b1bff"
-        name="Release"
-        module="envelope"
-      ></module-knob> -->
-      <module-knob
-        v-model="amount"
-        v-if="knobsAvailable.amount || createModeIsActive"
-        :min="0"
-        :max="100"
-        knobColor="#4b1bff"
-        name="Amount"
-        module="envelope"
-      ></module-knob>
+      <transition name="fade" appear mode="out-in" :duration="400">
+        <module-knob
+          v-model="attack"
+          v-if="knobsAvailable.attack || createModeIsActive"
+          :min="0"
+          :max="100"
+          knobColor="#4b1bff"
+          name="Attack"
+          module="envelope"
+        />
+        <module-knob
+          v-model="decay"
+          v-else-if="knobsAvailable.decay || createModeIsActive"
+          :min="0"
+          :max="100"
+          knobColor="#4b1bff"
+          name="Decay"
+          module="envelope"
+        />
+        <!-- <module-knob
+          v-model="sustain"
+          v-if="knobsAvailable.sustain || createModeIsActive"
+          :min="0"
+          :max="100"
+          knobColor="#4b1bff"
+          name="Sustain"
+          module="envelope"
+        ></module-knob> -->
+        <!-- <module-knob
+          v-model="release"
+          v-if="knobsAvailable.release || createModeIsActive"
+          :min="0"
+          :max="100"
+          knobColor="#4b1bff"
+          name="Release"
+          module="envelope"
+        ></module-knob> -->
+        <module-knob
+          v-model="amount"
+          v-else-if="knobsAvailable.amount || createModeIsActive"
+          :min="0"
+          :max="100"
+          knobColor="#4b1bff"
+          name="Amount"
+          module="envelope"
+        />
+      </transition>
     </div>
   </div>
 </template>

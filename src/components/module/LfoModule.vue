@@ -16,34 +16,34 @@
                    {name: 'Shape', min:0, max:3, value: this.typeGoal},
                    {name: 'Rlgl', min:0, max:3, value: Math.pow(this.frequencyGoal, (this.frequencyGoal / 100)) - 0.99}
                    ]"/>
-        <div class="knobs">
-          <module-knob
-            v-model="frequency"
-            v-if="knobsAvailable.frequency || createModeIsActive"
-            :min="1"
-            :max="100"
-            knobColor="#5bd484"
-            name="Speed"
-            module="lfo"
-          ></module-knob>
-          <module-knob
-            v-model="amount"
-            v-if="knobsAvailable.amount || createModeIsActive"
-            :min="0"
-            :max="100"
-            knobColor="#5bd484"
-            name="Height"
-            module="lfo"
-          ></module-knob>
-      <div class="button-wrapper"
-         v-if="knobsAvailable.type || createModeIsActive"
-      >
-        <module-button color="#5bd484" shape="sine" :isPressed="type==='sine'" @click.native="type='sine'"/>
-        <module-button color="#5bd484" shape="square" :isPressed="type==='square'" @click.native="type='square'"/>
-        <module-button color="#5bd484" shape="sawtooth" :isPressed="type==='sawtooth'" @click.native="type='sawtooth'"/>
-        <module-button color="#5bd484" shape="triangle" :isPressed="type==='triangle'" @click.native="type='triangle'"/>
-        <p>MOVEMENT</p>
-      </div>
+        <div class="knobs" v-if="knobsAvailable.frequency || knobsAvailable.amount || knobsAvailable.type || createModeIsActive">
+          <transition name="fade" appear mode="out-in" :duration="400">
+            <module-knob
+              v-model="frequency"
+              v-if="knobsAvailable.frequency || createModeIsActive"
+              :min="1"
+              :max="100"
+              knobColor="#5bd484"
+              name="Speed"
+              module="lfo"
+            />
+            <module-knob
+              v-model="amount"
+              v-else-if="knobsAvailable.amount || createModeIsActive"
+              :min="0"
+              :max="100"
+              knobColor="#5bd484"
+              name="Height"
+              module="lfo"
+            />
+            <div class="button-wrapper" v-else-if="knobsAvailable.type || createModeIsActive">
+              <module-button color="#5bd484" shape="sine" :isPressed="type==='sine'" @click.native="type='sine'"/>
+              <module-button color="#5bd484" shape="square" :isPressed="type==='square'" @click.native="type='square'"/>
+              <module-button color="#5bd484" shape="sawtooth" :isPressed="type==='sawtooth'" @click.native="type='sawtooth'"/>
+              <module-button color="#5bd484" shape="triangle" :isPressed="type==='triangle'" @click.native="type='triangle'"/>
+              <p>MOVEMENT</p>
+            </div>
+          </transition>
         </div>
     </div>
 </template>

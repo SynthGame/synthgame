@@ -28,6 +28,7 @@
     flex-direction: column;
     justify-content: space-between;
     .switch {
+      height: 7.4em;
       display: flex;
       flex-direction: column;
       justify-content: space-between;
@@ -72,7 +73,7 @@
     display: flex;
     padding: 0em;
     width: 80%;
-    margin: 0;
+    margin: 0 0 99px;
     flex-wrap: wrap;
     justify-content: space-around;
     min-height: 4em;
@@ -98,6 +99,11 @@
     margin-bottom: 50px;
     path {
       transition: 0.1s all ease-out;
+    }
+    &.display {
+      &:last-child {
+        margin-bottom: 221px;
+      }
     }
   }
   .knobs {

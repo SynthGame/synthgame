@@ -16,33 +16,32 @@
                 {name: 'gainGoal', min: 0, max: 100, value: gain},
                 ]"/>
     <div class="knobs">
-      <module-knob
-        v-model="cutOffFreq"
-        v-if="knobsAvailable.cutOffFreq || createModeIsActive"
-        :min="0"
-        :max="100"
-        knobColor="#6e01d1"
-        name="Frequency"
-        module="filter"
-      ></module-knob>
-      <!-- <module-knob
-        v-model="setQ"
-        v-if="knobsAvailable.setQ || createModeIsActive"
-        :min="0"
-        :max="100"
-        knobColor="#6e01d1"
-        name="Resonance"
-        module="filter"
-      ></module-knob> -->
-      <div
-        v-if="knobsAvailable.type || createModeIsActive"
-        class="button-wrapper"
-      >
-        <module-button color="#6e01d1" shape="lowpass" :isPressed="type==='lowpass'" @click.native="type='lowpass'"/>
-        <module-button color="#6e01d1" shape="highpass" :isPressed="type==='highpass'" @click.native="type='highpass'"/>
-        <module-button color="#6e01d1" shape="bandpass" :isPressed="type==='bandpass'" @click.native="type='bandpass'"/>
-        <p>SHAPE</p>
-      </div>
+      <transition name="fade" appear mode="out-in" :duration="400">
+        <module-knob
+          v-model="cutOffFreq"
+          v-if="knobsAvailable.cutOffFreq || createModeIsActive"
+          :min="0"
+          :max="100"
+          knobColor="#6e01d1"
+          name="Frequency"
+          module="filter"
+        />
+        <!-- <module-knob
+          v-model="setQ"
+          v-if="knobsAvailable.setQ || createModeIsActive"
+          :min="0"
+          :max="100"
+          knobColor="#6e01d1"
+          name="Resonance"
+          module="filter"
+        ></module-knob> -->
+        <div v-else-if="knobsAvailable.type || createModeIsActive" class="button-wrapper">
+          <module-button color="#6e01d1" shape="lowpass" :isPressed="type==='lowpass'" @click.native="type='lowpass'"/>
+          <module-button color="#6e01d1" shape="highpass" :isPressed="type==='highpass'" @click.native="type='highpass'"/>
+          <module-button color="#6e01d1" shape="bandpass" :isPressed="type==='bandpass'" @click.native="type='bandpass'"/>
+          <p>SHAPE</p>
+        </div>
+      </transition>
     </div>
   </div>
 

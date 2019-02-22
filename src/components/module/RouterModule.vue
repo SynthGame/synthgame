@@ -17,73 +17,70 @@
               {name: 'WaveformGoal', min: 0, max:3, value: 0},
             ]"/>
     <div class="knobs">
-      <!-- <module-knob
-        v-model="freqDial"
-        v-if="knobsAvailable.frequency || createModeIsActive"
-        :min="0"
-        :step="1"
-        :max="freqArray.length - 1"
-        knobColor="#ff8574"
-        name="Octave"
-      ></module-knob> -->
-      <!-- <div class="octave-wrapper"
-        v-if="knobsAvailable.frequency || createModeIsActive"
-      >
-        <div class="switch">
-          <button color="#ff8574" @click="incrementOctave">
-            <svg version="1.1"
-              x="0px" y="0px" width="12.3px" height="12.6px" viewBox="0 0 12.3 6.6" style="enable-background:new 0 0 12.3 6.6;"
-              xml:space="preserve">
-              <g>
-                  <polyline class="st0" points="12,6.2 6.3,0.6 0.3,6.2     "/>
-              </g>
-            </svg>
-          </button>
-          <button color="#ff8574" @click="decrementOctave">  <svg version="1.1"
-              x="0px" y="0px" width="12.3px" height="12.6px" viewBox="0 0 12.3 6.6" style="transform: rotate(180deg);enable-background:new 0 0 12.3 6.6;"
-              xml:space="preserve">
-              <g>
-                  <polyline class="st0" points="12,6.2 6.3,0.6 0.3,6.2     "/>
-              </g>
-            </svg>
-          </button>
+      <transition name="fade" appear mode="out-in" :duration="400">
+        <!-- <module-knob
+          v-model="freqDial"
+          v-if="knobsAvailable.frequency || createModeIsActive"
+          :min="0"
+          :step="1"
+          :max="freqArray.length - 1"
+          knobColor="#ff8574"
+          name="Octave"
+        ></module-knob> -->
+        <!-- <div class="octave-wrapper"
+          v-if="knobsAvailable.frequency || createModeIsActive"
+        >
+          <div class="switch">
+            <button color="#ff8574" @click="incrementOctave">
+              <svg version="1.1"
+                x="0px" y="0px" width="12.3px" height="12.6px" viewBox="0 0 12.3 6.6" style="enable-background:new 0 0 12.3 6.6;"
+                xml:space="preserve">
+                <g>
+                    <polyline class="st0" points="12,6.2 6.3,0.6 0.3,6.2     "/>
+                </g>
+              </svg>
+            </button>
+            <button color="#ff8574" @click="decrementOctave">  <svg version="1.1"
+                x="0px" y="0px" width="12.3px" height="12.6px" viewBox="0 0 12.3 6.6" style="transform: rotate(180deg);enable-background:new 0 0 12.3 6.6;"
+                xml:space="preserve">
+                <g>
+                    <polyline class="st0" points="12,6.2 6.3,0.6 0.3,6.2     "/>
+                </g>
+              </svg>
+            </button>
+          </div>
+          <p>OCTAVE</p>
+        </div> -->
+        <!-- <module-knob
+          v-model="detune"
+          v-if="knobsAvailable.detune || createModeIsActive"
+          :min="0"
+          :max="100"
+          knobColor="#ff8574"
+          name="Pitch"
+        ></module-knob> -->
+        <!-- <module-knob
+          v-model="phase"
+          :min="50"
+          :max="10000"
+          knobColor="#ff8574"
+          name="Phase"
+        ></module-knob> -->
+        <div class="button-wrapper" v-if="knobsAvailable.envelope2 || createModeIsActive">
+          <module-button :color="moduleColor" shape="frq" :isPressed="envelope2==='oscsDetune'" @click.native="envelope2='oscsDetune'"/>
+          <module-button :color="moduleColor" shape="osc1 frq" :isPressed="envelope2==='osc1Detune'" @click.native="envelope2='osc1Detune'"/>
+          <module-button :color="moduleColor" shape="fil frq" :isPressed="envelope2==='filterCutoff'" @click.native="envelope2='filterCutoff'"/>
+          <!-- <module-button :color="moduleColor" shape="lfo frq" :isPressed="envelope2==='lfoFrequency'" @click.native="envelope2='lfoFrequency'"/> -->
+            <p>mod Env</p>
         </div>
-        <p>OCTAVE</p>
-      </div> -->
-      <!-- <module-knob
-        v-model="detune"
-        v-if="knobsAvailable.detune || createModeIsActive"
-        :min="0"
-        :max="100"
-        knobColor="#ff8574"
-        name="Pitch"
-      ></module-knob> -->
-      <!-- <module-knob
-        v-model="phase"
-        :min="50"
-        :max="10000"
-        knobColor="#ff8574"
-        name="Phase"
-      ></module-knob> -->
-      <div class="button-wrapper"
-        v-if="knobsAvailable.envelope2 || createModeIsActive"
-      >
-      <module-button :color="moduleColor" shape="frq" :isPressed="envelope2==='oscsDetune'" @click.native="envelope2='oscsDetune'"/>
-      <module-button :color="moduleColor" shape="osc1 frq" :isPressed="envelope2==='osc1Detune'" @click.native="envelope2='osc1Detune'"/>
-      <module-button :color="moduleColor" shape="fil frq" :isPressed="envelope2==='filterCutoff'" @click.native="envelope2='filterCutoff'"/>
-      <!-- <module-button :color="moduleColor" shape="lfo frq" :isPressed="envelope2==='lfoFrequency'" @click.native="envelope2='lfoFrequency'"/> -->
-        <p>mod Env</p>
-      </div>
-      <div class="button-wrapper"
-        v-if="knobsAvailable.lfo || createModeIsActive"
-      >
-        <module-button :color="moduleColor" shape="frq" :isPressed="lfo==='oscsDetune'" @click.native="lfo='oscsDetune'"/>
-        <module-button :color="moduleColor" shape="osc1 frq" :isPressed="lfo==='osc1Detune'" @click.native="lfo='osc1Detune'"/>
-        <module-button :color="moduleColor" shape="fil frq" :isPressed="lfo==='filterCutoff'" @click.native="lfo='filterCutoff'"/>
-        <!-- <module-button color="#ff8574" shape="fil frq" :isPressed="lfo==='env1decay'" @click.native="lfo='env1decay'"/> -->
-        <p>Mod LFO</p>
-      </div>
-
+        <div class="button-wrapper" v-else-if="knobsAvailable.lfo || createModeIsActive">
+          <module-button :color="moduleColor" shape="frq" :isPressed="lfo==='oscsDetune'" @click.native="lfo='oscsDetune'"/>
+          <module-button :color="moduleColor" shape="osc1 frq" :isPressed="lfo==='osc1Detune'" @click.native="lfo='osc1Detune'"/>
+          <module-button :color="moduleColor" shape="fil frq" :isPressed="lfo==='filterCutoff'" @click.native="lfo='filterCutoff'"/>
+          <!-- <module-button color="#ff8574" shape="fil frq" :isPressed="lfo==='env1decay'" @click.native="lfo='env1decay'"/> -->
+          <p>Mod LFO</p>
+        </div>
+      </transition>
     </div>
   </div>
 </template>

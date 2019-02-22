@@ -17,65 +17,62 @@
               {name: 'WaveformGoal', min: 0, max:3, value: typeOscGoal},
             ]"/>
     <div class="knobs">
-      <!-- <module-knob
-        v-model="freqDial"
-        v-if="knobsAvailable.frequency || createModeIsActive"
-        :min="0"
-        :step="1"
-        :max="freqArray.length - 1"
-        knobColor="#43bede"
-        name="Octave"
-      ></module-knob> -->
-      <!-- <module-knob
-        v-model="detune"
-        v-if="knobsAvailable.detune || createModeIsActive"
-        :min="0"
-        :max="100"
-        knobColor="#43bede"
-        name="Detune"
-      ></module-knob> -->
-      <div class="octave-wrapper"
-        v-if="knobsAvailable.frequency || createModeIsActive"
-      >
-        <div class="switch">
-          <button color="#ff8574" @click="incrementOctave">
-            <svg version="1.1"
-              x="0px" y="0px" width="12.3px" height="12.6px" viewBox="0 0 12.3 6.6" style="enable-background:new 0 0 12.3 6.6;"
-              xml:space="preserve">
-              <g>
-                  <polyline class="st0" points="12,6.2 6.3,0.6 0.3,6.2     "/>
-              </g>
-            </svg>
-          </button>
-          <button color="#ff8574" @click="decrementOctave">  <svg version="1.1"
-              x="0px" y="0px" width="12.3px" height="12.6px" viewBox="0 0 12.3 6.6" style="transform: rotate(180deg);enable-background:new 0 0 12.3 6.6;"
-              xml:space="preserve">
-              <g>
-                  <polyline class="st0" points="12,6.2 6.3,0.6 0.3,6.2     "/>
-              </g>
-            </svg>
-          </button>
+      <transition name="fade" appear mode="out-in" :duration="400">
+        <!-- <module-knob
+          v-model="freqDial"
+          v-if="knobsAvailable.frequency || createModeIsActive"
+          :min="0"
+          :step="1"
+          :max="freqArray.length - 1"
+          knobColor="#43bede"
+          name="Octave"
+        ></module-knob> -->
+        <!-- <module-knob
+          v-model="detune"
+          v-if="knobsAvailable.detune || createModeIsActive"
+          :min="0"
+          :max="100"
+          knobColor="#43bede"
+          name="Detune"
+        ></module-knob> -->
+        <div class="octave-wrapper"v-if="knobsAvailable.frequency || createModeIsActive">
+          <div class="switch">
+            <button color="#ff8574" @click="incrementOctave">
+              <svg version="1.1"
+                x="0px" y="0px" width="12.3px" height="12.6px" viewBox="0 0 12.3 6.6" style="enable-background:new 0 0 12.3 6.6;"
+                xml:space="preserve">
+                <g>
+                    <polyline class="st0" points="12,6.2 6.3,0.6 0.3,6.2     "/>
+                </g>
+              </svg>
+            </button>
+            <button color="#ff8574" @click="decrementOctave">  <svg version="1.1"
+                x="0px" y="0px" width="12.3px" height="12.6px" viewBox="0 0 12.3 6.6" style="transform: rotate(180deg);enable-background:new 0 0 12.3 6.6;"
+                xml:space="preserve">
+                <g>
+                    <polyline class="st0" points="12,6.2 6.3,0.6 0.3,6.2     "/>
+                </g>
+              </svg>
+            </button>
+          </div>
+          <p>OCTAVE</p>
         </div>
-        <p>OCTAVE</p>
-      </div>
-      <module-knob
-        v-if="knobsAvailable.volume || createModeIsActive"
-        v-model="volume"
-        :min="0"
-        :max="100"
-        knobColor="#43bede"
-        name="Volume"
-      ></module-knob>
-      <div class="button-wrapper"
-        v-if="knobsAvailable.typeOsc || createModeIsActive"
-      >
-        <module-button color="#43bede" shape="sine" :isPressed="typeOsc==='sine'" @click.native="typeOsc='sine'"/>
-        <module-button color="#43bede" shape="square" :isPressed="typeOsc==='square'" @click.native="typeOsc='square'"/>
-        <module-button color="#43bede" shape="sawtooth" :isPressed="typeOsc==='sawtooth'" @click.native="typeOsc='sawtooth'"/>
-        <module-button color="#43bede" shape="triangle" :isPressed="typeOsc==='triangle'" @click.native="typeOsc='triangle'"/>
-        <p>WAVEFORM</p>
-      </div>
-
+        <module-knob
+          v-else-if="knobsAvailable.volume || createModeIsActive"
+          v-model="volume"
+          :min="0"
+          :max="100"
+          knobColor="#43bede"
+          name="Volume"
+        />
+        <div class="button-wrapper" v-else-if="knobsAvailable.typeOsc || createModeIsActive">
+          <module-button color="#43bede" shape="sine" :isPressed="typeOsc==='sine'" @click.native="typeOsc='sine'"/>
+          <module-button color="#43bede" shape="square" :isPressed="typeOsc==='square'" @click.native="typeOsc='square'"/>
+          <module-button color="#43bede" shape="sawtooth" :isPressed="typeOsc==='sawtooth'" @click.native="typeOsc='sawtooth'"/>
+          <module-button color="#43bede" shape="triangle" :isPressed="typeOsc==='triangle'" @click.native="typeOsc='triangle'"/>
+          <p>WAVEFORM</p>
+        </div>
+      </transition>
     </div>
   </div>
 </template>
