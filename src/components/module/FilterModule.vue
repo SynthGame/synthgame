@@ -16,7 +16,7 @@
                 {name: 'gainGoal', min: 0, max: 100, value: gain},
                 ]"/>
     <div class="knobs">
-      <transition name="fade" appear mode="out-in" :duration="400">
+      <transition name="fade" appear mode="out-in" :duration="300">
         <module-knob
           v-model="cutOffFreq"
           v-if="knobsAvailable.cutOffFreq || createModeIsActive"

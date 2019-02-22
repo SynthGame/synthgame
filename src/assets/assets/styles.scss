@@ -28,7 +28,8 @@
 
 a, button, [tabindex] {
   &:focus {
-    outline: 2px dotted white!important;
+    // outline: 2px dotted white !important;
+    outline: none;
   }
 }
 

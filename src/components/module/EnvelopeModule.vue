@@ -18,7 +18,7 @@
                 {name: 'amountGoal', min: 1, max: 100, value: 100},
                 ]"/>
     <div class="knobs">
-      <transition name="fade" appear mode="out-in" :duration="400">
+      <transition name="fade" appear mode="out-in" :duration="300">
         <module-knob
           v-model="attack"
           v-if="knobsAvailable.attack || createModeIsActive"
