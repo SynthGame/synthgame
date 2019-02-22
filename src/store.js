@@ -29,7 +29,7 @@ export default new Vuex.Store({
     roomId: null,
     roomHighScores: [
       {
-        name: "YOU",
+        name: "Anonymous",
         score: 0
       }
     ],
@@ -63,6 +63,9 @@ export default new Vuex.Store({
   },
   mutations: {
     // Multiplayer
+    setUsername(state, { userName }) {
+      state.name = userName;
+    },
     setRoomId(state, { roomId }) {
       state.roomId = roomId;
     },
@@ -102,7 +105,7 @@ export default new Vuex.Store({
       state.gameState.presetNumber = payload.value;
     },
     setFeaturedArtist(state, { artistName, avatarUrl }) {
-      state.name = artistName;
+      // state.name = artistName;
       state.avatarUrl = avatarUrl;
     },
     setBpm(state, { parameter, value }) {
@@ -239,11 +242,11 @@ export default new Vuex.Store({
       const score = store.state.gameState.score;
 
       createRoom({ name, score }, (URL) => {
-        store.commit("setRoomId", { URL });
+        store.commit("setRoomId", { roomId: URL });
       });
     },
     updateRoom(store) {
-      console .log(store.state.roomId);
+      console.log(`Room ID: ${store.state.roomId}`);
       getRoom(store.state.roomId, (scoreData) => {
         store.commit("setRoomHighScores", scoreData);
       });
