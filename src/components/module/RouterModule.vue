@@ -17,7 +17,7 @@
               {name: 'WaveformGoal', min: 0, max:3, value: 0},
             ]"/>
     <div class="knobs">
-      <transition name="fade" appear mode="out-in" :duration="400">
+      <transition name="fade" appear mode="out-in" :duration="300">
         <!-- <module-knob
           v-model="freqDial"
           v-if="knobsAvailable.frequency || createModeIsActive"

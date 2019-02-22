@@ -1,7 +1,7 @@
 <template>
   <div class="sequencer">
     <module-title :module-color="moduleColor">
-      <h3 slot="subtitle">Sequencer</h3>
+      <h3 slot="subtitle">{{ sequencerName }}</h3>
     </module-title>
     <div class="sequencer__controls">
       <!-- <div class="button-wrapper function">
@@ -43,81 +43,83 @@
     </div>
     <div class="button-section" v-for="i in [0,1,2,3]" :key="i">
       <span class="step-wrapper" v-for="j in getSubRange(i)" :key="j">
-        <sequencer-button
-          v-if="knobsAvailable.steps || createModeIsActive"
-          @click="toggleNoteOnOff(j)"
-          :button-active="j === activeButton"
-          :button-selected="sequence[j] && sequence[j].selected"
-        />
-        <SequencerSlider
-          v-if="knobsAvailable.pitch || createModeIsActive"
-          :value="sequence[j] && sequence[j].pitch"
-          @input="setPitchValue(j, $event)"
-          :min="0"
-          :max="10"
-          :button-active="j === activeButton"
-          :button-selected="sequence[j] && sequence[j].selected"
-        />
-        <sequencer-button
-          v-if="knobsAvailable.accent || createModeIsActive"
-          @click="toggleAccentOnOff(j)"
-          :button-active="j === activeButton"
-          :button-selected="sequence[j] && sequence[j].volume"
-        />
-        <sequencer-button
-          v-if="knobsAvailable.glide || createModeIsActive"
-          @click="toggleGlideOnOff(j)"
-          :button-active="j === activeButton"
-          :button-selected="sequence[j] && sequence[j].glide"
-        />
-        <sequencer-button
-          v-if="knobsAvailable.kick || createModeIsActive"
-          @click="toggleKickOnOff(j)"
-          :button-active="j === activeButton"
-          :button-selected="sequence[j] && sequence[j].kick"
-        />
-        <sequencer-button
-          v-if="knobsAvailable.hat || createModeIsActive"
-          @click="toggleHatOnOff(j)"
-          :button-active="j === activeButton"
-          :button-selected="sequence[j] && sequence[j].hat"
-        />
-        <sequencer-button
-          v-if="knobsAvailable.clap1 || createModeIsActive"
-          @click="toggleClapOnOff(j)"
-          :button-active="j === activeButton"
-          :button-selected="sequence[j] && sequence[j].clap"
-        />
-        <sequencer-button
-          v-if="knobsAvailable.clap2 || createModeIsActive"
-          @click="toggleClap2OnOff(j)"
-          :button-active="j === activeButton"
-          :button-selected="sequence[j] && sequence[j].clap2"
-        />
-        <sequencer-button
-          v-if="knobsAvailable.cymbal || createModeIsActive"
-          @click="toggleCymbalOnOff(j)"
-          :button-active="j === activeButton"
-          :button-selected="sequence[j] && sequence[j].cymbal"
-        />
-        <sequencer-button
-          v-if="knobsAvailable.labmyc || createModeIsActive"
-          @click="toggleLabmycOnOff(j)"
-          :button-active="j === activeButton"
-          :button-selected="sequence[j] && sequence[j].labmyc"
-        />
-        <sequencer-button
-          v-if="knobsAvailable.noise || createModeIsActive"
-          @click="toggleNoiseOnOff(j)"
-          :button-active="j === activeButton"
-          :button-selected="sequence[j] && sequence[j].noise"
-        />
-        <sequencer-button
-          v-if="knobsAvailable.snare || createModeIsActive"
-          @click="toggleSnareOnOff(j)"
-          :button-active="j === activeButton"
-          :button-selected="sequence[j] && sequence[j].snare"
-        />
+      <transition name="fade" appear mode="out-in" :duration="300">
+          <sequencer-button
+            v-if="knobsAvailable.steps || createModeIsActive"
+            @click="toggleNoteOnOff(j)"
+            :button-active="j === activeButton"
+            :button-selected="sequence[j] && sequence[j].selected"
+          />
+          <SequencerSlider
+            v-if="knobsAvailable.pitch || createModeIsActive"
+            :value="sequence[j] && sequence[j].pitch"
+            @input="setPitchValue(j, $event)"
+            :min="0"
+            :max="10"
+            :button-active="j === activeButton"
+            :button-selected="sequence[j] && sequence[j].selected"
+          />
+          <sequencer-button
+            v-if="knobsAvailable.accent || createModeIsActive"
+            @click="toggleAccentOnOff(j)"
+            :button-active="j === activeButton"
+            :button-selected="sequence[j] && sequence[j].volume"
+          />
+          <sequencer-button
+            v-if="knobsAvailable.glide || createModeIsActive"
+            @click="toggleGlideOnOff(j)"
+            :button-active="j === activeButton"
+            :button-selected="sequence[j] && sequence[j].glide"
+          />
+          <sequencer-button
+            v-if="knobsAvailable.kick || createModeIsActive"
+            @click="toggleKickOnOff(j)"
+            :button-active="j === activeButton"
+            :button-selected="sequence[j] && sequence[j].kick"
+          />
+          <sequencer-button
+            v-if="knobsAvailable.hat || createModeIsActive"
+            @click="toggleHatOnOff(j)"
+            :button-active="j === activeButton"
+            :button-selected="sequence[j] && sequence[j].hat"
+          />
+          <sequencer-button
+            v-if="knobsAvailable.clap1 || createModeIsActive"
+            @click="toggleClapOnOff(j)"
+            :button-active="j === activeButton"
+            :button-selected="sequence[j] && sequence[j].clap"
+          />
+          <sequencer-button
+            v-if="knobsAvailable.clap2 || createModeIsActive"
+            @click="toggleClap2OnOff(j)"
+            :button-active="j === activeButton"
+            :button-selected="sequence[j] && sequence[j].clap2"
+          />
+          <sequencer-button
+            v-if="knobsAvailable.cymbal || createModeIsActive"
+            @click="toggleCymbalOnOff(j)"
+            :button-active="j === activeButton"
+            :button-selected="sequence[j] && sequence[j].cymbal"
+          />
+          <sequencer-button
+            v-if="knobsAvailable.labmyc || createModeIsActive"
+            @click="toggleLabmycOnOff(j)"
+            :button-active="j === activeButton"
+            :button-selected="sequence[j] && sequence[j].labmyc"
+          />
+          <sequencer-button
+            v-if="knobsAvailable.noise || createModeIsActive"
+            @click="toggleNoiseOnOff(j)"
+            :button-active="j === activeButton"
+            :button-selected="sequence[j] && sequence[j].noise"
+          />
+          <sequencer-button
+            v-if="knobsAvailable.snare || createModeIsActive"
+            @click="toggleSnareOnOff(j)"
+            :button-active="j === activeButton"
+            :button-selected="sequence[j] && sequence[j].snare"
+          />
+        </transition>
         <div class="stepnumber">{{j + 1}}</div>
       </span>
     </div>
@@ -145,6 +147,12 @@ import character from "@/character";
 
 export default {
   name: "SequencerModule",
+  props: {
+    sequencerName: {
+      type: String,
+      default: ""
+    }
+  },
   components: {
     SequencerButton,
     SequencerSlider,

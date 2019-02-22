@@ -9,7 +9,7 @@ import isArray from "lodash/isArray";
 import add from "lodash/add";
 import find from "lodash/find";
 import character from "@/character";
-import { addPreset, createRoom, updateRoom, getRoom } from "@/db";
+import { addPreset, createRoom, updateMyScore, getRoom } from "@/db";
 import Levels from "./levels";
 import audio from "./audio";
 
@@ -65,11 +65,19 @@ export default new Vuex.Store({
   },
   mutations: {
     // Multiplayer
-    setRoomId(state, { URL }) {
-      state.roomId = URL;
+    setRoomId(state, { roomId }) {
+      state.roomId = roomId;
     },
     setRoomHighScores(state, scores) {
-      state.roomHighScores = scores;
+
+      const results = Object.keys(scores).map((key) => {
+        return {
+          'score': scores[key],
+          'name': key,
+        };
+      });
+
+      state.roomHighScores = results;
     },
     // GAME STATE
     setKnobAvalible(state, payload) {
@@ -137,20 +145,20 @@ export default new Vuex.Store({
       state.gameState.sweepArmed = false;
     },
     addValueToScore(state, val) {
-      state.gameState.score = add(state.gameState.score, val);
+      state.gameState.score = state.gameState.score + val;
     },
     increaseLevelValue(state, val) {
-      state.gameState.level = add(state.gameState.level, val);
+      state.gameState.level = state.gameState.level + val;
     },
     setLevelValue(state, level) {
       state.gameState.level = level;
     },
-    updateHighScore(state, val) {
-      state.gameState.highScore = val;
-      if (localStorage.getItem("highscore") < val) {
-        localStorage.setItem("highscore", val);
-      }
-    },
+    // updateHighScore(state, val) {
+    //   state.gameState.highScore = val;
+    //   if (localStorage.getItem("highscore") < val) {
+    //     localStorage.setItem("highscore", val);
+    //   }
+    // },
     setKnobsAvailable(state, obj) {
       state.gameState.knobsAvailable = obj;
     },
@@ -235,12 +243,21 @@ export default new Vuex.Store({
       const name = store.state.name;
       const score = store.state.gameState.score;
 
-      const URL = createRoom({ name, score });
-      store.commit("setRoomId", { URL });
+      createRoom({ name, score }, (URL) => {
+        store.commit("setRoomId", { URL });
+      });
     },
-    updatedRoom(store) {
-      const scoreData = getRoom(store.state.roomId);
-      store.commit("setRoomHighScores", scoreData);
+    updateRoom(store) {
+      console .log(store.state.roomId);
+      getRoom(store.state.roomId, (scoreData) => {
+        store.commit("setRoomHighScores", scoreData);
+      });
+    },
+    updateHighScore(store) {
+      const url = store.state.roomId,
+      name = store.state.name,
+      score = store.state.gameState.score;
+      updateMyScore({url, name, score}, () => store.dispatch('updateRoom'));
     },
     setAudioParameter(state, { device, parameter, value }) {
       console.log(`device ${device}; param: ${parameter}; value: ${value}`);

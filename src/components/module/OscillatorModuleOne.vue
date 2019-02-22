@@ -27,7 +27,7 @@
         knobColor="#ff8574"
         name="Octave"
       ></module-knob> -->
-      <transition name="fade" appear mode="out-in" :duration="400">
+      <transition name="fade" appear mode="out-in" :duration="300">
         <div class="octave-wrapper" v-if="knobsAvailable.frequency || createModeIsActive" >
           <div class="switch">
             <button class="drop" color="#ff8574" @click="incrementOctave">

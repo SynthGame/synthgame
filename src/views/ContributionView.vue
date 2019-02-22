@@ -68,7 +68,8 @@
                   <span class="navigation--item-title">
                     <span>{{ item.knobName }}</span>
                   </span>
-                  <span>{{ item.author }}</span>
+                  <!-- here goes the author name -->
+                  <!-- <span>{{ item.author }}</span> -->
                 </span>
               </span>
             </button>
@@ -126,14 +127,14 @@
           </div>
         </div>
         <div class="screen--inner">
-          <transition name="fade" appear mode="out-in" :duration="400">
+          <transition name="fade" appear mode="out-in" :duration="300">
             <oscillator-module-one v-if="moduleIsUseable('oscillator1')" />
             <oscillator-module-two v-else-if="moduleIsUseable('oscillator2')" />
             <filter-module v-else-if="moduleIsUseable('filter')" />
             <envelope-module v-else-if="moduleIsUseable('envelope')" />
             <lfo-module v-else-if="moduleIsUseable('lfo')"/>
             <envelope-module-two v-else-if="moduleIsUseable('envelope2')" />
-            <sequencer-module v-else-if="moduleIsUseable('sequencer')" />
+            <sequencer-module v-else-if="moduleIsUseable('sequencer')" :sequencer-name="nav.active.knobName"  />
             <router-module v-else-if="moduleIsUseable('router')" />
           </transition>
         </div>
@@ -160,7 +161,7 @@
           </span>
         </button>
       </div>
-      <div class="screen--share">
+      <div class="hide-mobile screen--share">
         <p>Anyone with this link can join and create their song on top of this one.</p>
         <div class="screen--share-inner">
           <div class="screen--share-url">

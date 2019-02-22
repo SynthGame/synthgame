@@ -17,7 +17,7 @@
                    {name: 'Rlgl', min:0, max:3, value: Math.pow(this.frequencyGoal, (this.frequencyGoal / 100)) - 0.99}
                    ]"/>
         <div class="knobs" v-if="knobsAvailable.frequency || knobsAvailable.amount || knobsAvailable.type || createModeIsActive">
-          <transition name="fade" appear mode="out-in" :duration="400">
+          <transition name="fade" appear mode="out-in" :duration="300">
             <module-knob
               v-model="frequency"
               v-if="knobsAvailable.frequency || createModeIsActive"
