@@ -1,7 +1,7 @@
 <template>
   <div class="knob">
     <div class="div-wrapper">
-      <svg width="100%" style="overflow:visible;height: 8.4em;" viewBox="0 0 550 550" ref="_svg"
+      <svg width="100%" style="overflow:visible;" viewBox="0 0 550 550" ref="_svg"
         @touchmove="handleTouchMove"
         @click="handleClick"
         @mousedown="handleMouseDown"
@@ -474,6 +474,7 @@ export default {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  width: 10em;
   &__bg {
     overflow: visible;
   }
