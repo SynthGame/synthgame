@@ -26,7 +26,7 @@ const presetRef = db.collection('customPresets')
 const gameRoomRefs = db.collection('gameRooms');
 
 // CREATE A ROOM WITH INITAL HIGHSCORE - return URL.
-export const createRoom = ({ name, score }) => {
+export const createRoom = ({ name, score }, callBack) => {
   const URL = crypto.randomBytes(12).toString('hex');
   gameRoomRefs.doc(URL).set({
     game: [{
@@ -35,7 +35,7 @@ export const createRoom = ({ name, score }) => {
     }]
   }).then(() => {
     console.log(URL);
-    return URL;
+    callBack(URL);
   })
     .catch((error) => {
       console.error("Error adding document: ", error);
@@ -53,12 +53,12 @@ export const updateRoom = ({ url, name, score }) => {
 }
 
 // RETURN GAME WITH HIGHSCORE DATA
-export const getRoom = (url) => {
+export const getRoom = (url, callBack) => {
   return gameRoomRefs.doc(url).get()
     .then((doc) => {
       if (doc.exists) {
         console.log("Document data:", doc.data());
-        return doc.data();
+        callBack(doc.data().game);
       } else {
         console.log("No such document!");
         return { error: 'No Game exists!' }

@@ -26,7 +26,7 @@ export default new Vuex.Store({
     name: "Anonymous",
     avatarUrl: null,
     audioParameters: AudioParameters(),
-    roomId: null,
+    roomId: '',
     roomHighScores: [
       {
         name: "YOU",
@@ -230,12 +230,15 @@ export default new Vuex.Store({
       const name = store.state.name;
       const score = store.state.gameState.score;
 
-      const URL = createRoom({ name, score });
-      store.commit("setRoomId", { URL });
+      createRoom({ name, score }, (URL) => {
+        store.commit("setRoomId", { URL });
+      });
     },
     updatedRoom(store) {
-      const scoreData = getRoom(store.state.roomId);
-      store.commit("setRoomHighScores", scoreData);
+      console .log(store.state.roomId);
+      getRoom(store.state.roomId, (scoreData) => {
+        store.commit("setRoomHighScores", scoreData);
+      });
     },
     setAudioParameter(state, { device, parameter, value }) {
       console.log(`device ${device}; param: ${parameter}; value: ${value}`);
