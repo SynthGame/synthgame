@@ -636,6 +636,7 @@ export default {
       // this.beginSvoosh()
       // Set to RANDOMIZE PARAM in SOUND ENGINE.
       this.setSoundToRandom();
+      this.displayPreviewOverlay = false;
       this.slide = null;
     },
     setSoundToRandom() {
@@ -647,6 +648,7 @@ export default {
     // // // //
     startLevelPreview(level) {
       this.cheekySvoosh();
+      console.log("startLevelPreview triggered");
 
       this.$nextTick(() => {
         // disable all overlays when svoosh is done
@@ -667,7 +669,10 @@ export default {
 
       // SET GOAL TO GOAL SOUND
       this.$store.commit("setGoalToPreset", {
-        preset: Object.assign(presets[this.pickedPreset].parameterValues, {})
+        // preset: Object.assign(presets[this.pickedPreset].parameterValues, {})
+        preset: JSON.parse(
+          JSON.stringify(presets[this.pickedPreset].parameterValues)
+        )
       });
 
       // SET AUDIO PARAMS TO NEW GOAL SOUND
@@ -721,6 +726,7 @@ export default {
         mapValues(audioModule, parameter => !!parameter)
       );
 
+      console.log("startPreset triggered");
       // disable all overlays
       // this.displaySuccessOverlay = false;
       this.displayFailureOverlay = false;
