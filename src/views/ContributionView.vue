@@ -269,6 +269,9 @@ export default {
     this.init();
     this.initSynth();
   },
+  beforeDestroy() {
+    audio.stopOscTwo();
+  },
   methods: {
     setStep(i) {
       this.$store.commit("setStep", i);
@@ -281,7 +284,7 @@ export default {
       this.show1stScreen = !this.show1stScreen;
     },
     toggle3dScreen() {
-      this.show3rdScreen = !this.show3rdScreen
+      this.show3rdScreen = !this.show3rdScreen;
     },
     init() {
       // Retrieve highscore from local storage
@@ -348,6 +351,7 @@ export default {
           }
         }
       );
+      audio.startOscTwo();
       this.toneLoop.start();
     },
     startButton() {
@@ -360,11 +364,11 @@ export default {
       this.$nextTick(() => (this.svooshIt = true));
     },
     midwaySvoosh() {
-      this.slide = null
+      this.slide = null;
       // this.activeScreen(0, 0)
-      this.show1stScreen = false
-      this.show2ndScreen = false
-      this.show3rdScreen = true
+      this.show1stScreen = false;
+      this.show2ndScreen = false;
+      this.show3rdScreen = true;
     },
     hideSvoosh() {
       setTimeout(() => {
@@ -374,9 +378,9 @@ export default {
     },
 
     activeScreen(index, key) {
-      this.show1stScreen = false
-      this.show2ndScreen = true
-      this.show3rdScreen = false
+      this.show1stScreen = false;
+      this.show2ndScreen = true;
+      this.show3rdScreen = false;
       this.nav.active = this.nav.groups[index].items[key];
       let module = this.nav.groups[index],
         moduleName = module.moduleName,
