@@ -458,8 +458,9 @@ export default {
   },
   created() {
     const roomId = this.$route.params.user_id;
-    if (roomId && roomId !== 'game') {
-      this.$store.commit("setRoomId", roomId);
+    if (roomId !== null) {
+      console.log(`ROOM ID ${roomId}`);
+      this.$store.commit("setRoomId", { roomId });
     }
     this.init();
     this.initSynth();
@@ -540,7 +541,7 @@ export default {
     },
     init() {
       // Retrieve highscore from local storage
-      this.$store.commit("updateHighScore", localStorage.getItem("highscore"));
+      // this.$store.did("updateHighScore", localStorage.getItem("highscore"));
       // initialize the synth
       audio.init().toMaster();
 

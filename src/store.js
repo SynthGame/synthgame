@@ -63,11 +63,19 @@ export default new Vuex.Store({
   },
   mutations: {
     // Multiplayer
-    setRoomId(state, { URL }) {
-      state.roomId = URL;
+    setRoomId(state, { roomId }) {
+      state.roomId = roomId;
     },
     setRoomHighScores(state, scores) {
-      state.roomHighScores = scores;
+
+      const results = Object.keys(scores).map((key) => {
+        return {
+          'score': scores[key],
+          'name': key,
+        };
+      });
+
+      state.roomHighScores = results;
     },
     // GAME STATE
     setKnobAvalible(state, payload) {
@@ -132,20 +140,20 @@ export default new Vuex.Store({
       state.gameState.sweepArmed = false;
     },
     addValueToScore(state, val) {
-      state.gameState.score = add(state.gameState.score, val);
+      state.gameState.score = state.gameState.score + val;
     },
     increaseLevelValue(state, val) {
-      state.gameState.level = add(state.gameState.level, val);
+      state.gameState.level = state.gameState.level + val;
     },
     setLevelValue(state, level) {
       state.gameState.level = level;
     },
-    updateHighScore(state, val) {
-      state.gameState.highScore = val;
-      if (localStorage.getItem("highscore") < val) {
-        localStorage.setItem("highscore", val);
-      }
-    },
+    // updateHighScore(state, val) {
+    //   state.gameState.highScore = val;
+    //   if (localStorage.getItem("highscore") < val) {
+    //     localStorage.setItem("highscore", val);
+    //   }
+    // },
     setKnobsAvailable(state, obj) {
       state.gameState.knobsAvailable = obj;
     },
@@ -243,7 +251,7 @@ export default new Vuex.Store({
     updateHighScore(store) {
       const url = store.state.roomId,
       name = store.state.name,
-      score = store.state.gameState.highScore;
+      score = store.state.gameState.score;
       updateMyScore({url, name, score}, () => store.dispatch('updateRoom'));
     },
     setAudioParameter(state, { device, parameter, value }) {
