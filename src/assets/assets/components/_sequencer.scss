@@ -41,7 +41,7 @@
   width: 100%;
   display: flex;
   padding: 0;
-  border: 1px solid $colour_primary;
+  border: 1px solid $colour_sequencer;
   border-radius: 2px;
   background-color: unset;
   position: relative;
@@ -70,8 +70,8 @@
     transform: translateX(-50%);
 
     &--selected {
-      background-color: $colour_primary;
-      box-shadow: 0px 0px 16px $colour_primary;
+      background-color: $colour_sequencer;
+      box-shadow: 0px 0px 16px $colour_sequencer;
     }
 
     &--active {
