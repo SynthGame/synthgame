@@ -410,6 +410,7 @@ import LfoModule from "@/components/module/LfoModule.vue";
 import SequencerModule from "@/components/module/SequencerModule.vue";
 import RouterModule from "@/components/module/RouterModule.vue";
 import { SYNTH_BPM } from "@/constants";
+import { vuexSyncGenSequence } from "@/utils";
 import audio from "../audio.js";
 import presets from "@/presets";
 import character from "@/character";
@@ -421,6 +422,7 @@ export default {
   name: "home",
   data() {
     return {
+      i: 0,
       userName: null,
       activeModule: 0,
       totalAttempts: 10,
@@ -457,7 +459,7 @@ export default {
   },
   created() {
     const roomId = this.$route.params.user_id;
-    if (roomId !== 'game') {
+    if (roomId !== "game") {
       console.log(`ROOM ID ${roomId}`);
       this.$store.commit("setRoomId", { roomId });
     }
@@ -519,7 +521,7 @@ export default {
   },
   methods: {
     setUsername() {
-      console.log(this.userName)
+      console.log(this.userName);
       this.$store.commit("setUsername", { userName: this.userName });
     },
     generateShareLink() {
@@ -564,18 +566,17 @@ export default {
           subdivision: "8n"
         },
         (time, note) => {
-          // this.setStep(note)
-          if (this.noteArray[note].selected) {
+          if (this.sequence[note].selected) {
             // if preview, use octave(frequency) from goal in store
             if (this.displayPreviewOverlay) {
-              audio.playNote(this.noteArray[note].pitch, {
+              audio.playNote(this.sequence[note].pitch, {
                 noteLength: "8n",
-                volume: this.noteArray[note].volume
-                  ? this.noteArray[note].volume
+                volume: this.sequence[note].volume
+                  ? this.sequence[note].volume
                   : 0,
                 time: note,
-                glide: this.noteArray[note].glide
-                  ? this.noteArray[note].glide
+                glide: this.sequence[note].glide
+                  ? this.sequence[note].glide
                   : 0,
                 octaveOsc1:
                   self.$store.state.gameState.goal.oscillator1.frequency,
@@ -583,14 +584,14 @@ export default {
                   self.$store.state.gameState.goal.oscillator2.frequency
               });
             } else {
-              audio.playNote(this.noteArray[note].pitch, {
+              audio.playNote(this.sequence[note].pitch, {
                 noteLength: "8n",
-                volume: this.noteArray[note].volume
-                  ? this.noteArray[note].volume
+                volume: this.sequence[note].volume
+                  ? this.sequence[note].volume
                   : 0,
                 time: note,
-                glide: this.noteArray[note].glide
-                  ? this.noteArray[note].glide
+                glide: this.sequence[note].glide
+                  ? this.sequence[note].glide
                   : 0,
                 octaveOsc1:
                   self.$store.state.audioParameters.oscillator1.frequency,
@@ -599,28 +600,28 @@ export default {
               });
             }
           }
-          if (this.noteArray[note].kick && this.displayStartOverlay) {
+          if (this.sequence[note].kick && this.displayStartOverlay) {
             audio.playKick();
           }
-          if (this.noteArray[note].hat && this.displayStartOverlay) {
+          if (this.sequence[note].hat && this.displayStartOverlay) {
             audio.playHat();
           }
-          if (this.noteArray[note].clap && this.displayStartOverlay) {
+          if (this.sequence[note].clap && this.displayStartOverlay) {
             audio.playClap();
           }
-          if (this.noteArray[note].clap2 && this.displayStartOverlay) {
+          if (this.sequence[note].clap2 && this.displayStartOverlay) {
             audio.playClap2();
           }
-          if (this.noteArray[note].cymbal && this.displayStartOverlay) {
+          if (this.sequence[note].cymbal && this.displayStartOverlay) {
             audio.playCymbal();
           }
-          if (this.noteArray[note].labmyc && this.displayStartOverlay) {
+          if (this.sequence[note].labmyc && this.displayStartOverlay) {
             audio.playLabmyc();
           }
-          if (this.noteArray[note].noise && this.displayStartOverlay) {
+          if (this.sequence[note].noise && this.displayStartOverlay) {
             audio.playNoise();
           }
-          if (this.noteArray[note].snare && this.displayStartOverlay) {
+          if (this.sequence[note].snare && this.displayStartOverlay) {
             audio.playSnare();
           }
         }
@@ -715,7 +716,7 @@ export default {
       this.$store.commit("setPresetBpm", presets[this.pickedPreset].bpm);
 
       // Set noteArray to sequence preset locally
-      this.noteArray = presets[this.pickedPreset].sequenceArray;
+      this.sequence = presets[this.pickedPreset].sequenceArray;
 
       // import level config
       const availableParameters = levels[level];
@@ -812,11 +813,14 @@ export default {
     }
   },
   computed: {
+    ...vuexSyncGenSequence("sequence", val => {}),
     highscores() {
       return this.$store.state.roomHighScores;
     },
     shareLink() {
-      return this.$store.state.roomId ? `redbull.com/tats/${this.$store.state.roomId}` : false;
+      return this.$store.state.roomId
+        ? `redbull.com/tats/${this.$store.state.roomId}`
+        : false;
     },
     watchRoomId() {
       return this.$store.state.roomId;
@@ -885,15 +889,14 @@ export default {
 </script>
 
 <style lang="scss">
-
 .play-with-friends {
   margin-top: 10px;
 }
 
 .username_input {
-    border: 1px solid #fff;
-    text-align: center;
-    min-width: 184px;
+  border: 1px solid #fff;
+  text-align: center;
+  min-width: 184px;
 }
 
 .btn-username {
@@ -906,5 +909,4 @@ export default {
   margin-top: 24px;
   margin-left: 15px;
 }
-
 </style>
