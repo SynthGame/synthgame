@@ -355,6 +355,9 @@ export default {
     this.$store.dispatch("getContribution");
     },
   },
+  beforeDestroy() {
+    audio.stopOscTwo();
+  },
   methods: {
     generateShareLink() {
       this.$store.dispatch("generateContributionLink");
@@ -437,6 +440,7 @@ export default {
           }
         }
       );
+      audio.startOscTwo();
       this.toneLoop.start();
     },
     startButton() {

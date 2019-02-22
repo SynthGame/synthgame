@@ -1,7 +1,7 @@
 <template>
 
     <div class="display" ref="displayWrapper">
-      <svg width="100%" height="100%">
+      <svg :class="{'u-mt_40': module === 'router'}" width="100%" height="100%">
       <!-- <svg> -->
         {{ this.module }}
         <rect :fill="fill" width="100%" height="100%" />
@@ -68,14 +68,10 @@
             </g> -->
         </svg>
         <!-- Router -->
-        <g v-if="this.module === 'router'" class="routerscreen" style="transform: scale(0.61) translateY(-3px) translateX(8px); transition: all 0s;">
-
-
-
-<!-- <svg width="248px" height="118px" viewBox="0 0 248 118" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"> -->
-    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-        <g id="SYNTHGAME_MODROUTER-01" transform="translate(-26.000000, -55.000000)">
-            <g id="SCREEN" transform="translate(26.000000, 55.000000)">
+        <g v-if="module === 'router'" class="routerscreen routerscreenknob">
+          <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+            <g id="SYNTHGAME_MODROUTER-01" transform="translate(-26.000000, -55.000000)">
+              <g id="SCREEN" transform="translate(26.000000, 55.000000)">
                 <g id="lines" transform="translate(28.000000, 27.000000)" stroke="#FFFFFF" stroke-width="1">
                   <path v-show="!createModeIsActive" v-if="knobs[3].value === 'oscsDetune'" d="M2.5,0.5 L2.5,63.5" id="Shape"></path>
                   <path v-show="!createModeIsActive" v-if="knobs[2].value === 'oscsDetune'" d="M1.5,1.5 L189.5,62.5" id="Shape"></path>
@@ -83,30 +79,30 @@
                   <path v-show="!createModeIsActive" v-if="knobs[3].value === 'filterCutoff'" d="M191.5,1.5 L0,62.8" id="Shape"></path>
                   <path v-show="!createModeIsActive" v-if="knobs[2].value === 'osc1Detune'" d="M96.5,1.5 L190.332852,62.7219014" id="Shape"></path>
                   <path v-show="!createModeIsActive" v-if="knobs[2].value === 'filterCutoff'" d="M190.332852,1.5 L190.332852,62.5" id="Shape"></path>
-                    <path stroke="#4b1bff" v-if="knobs[1].value === 'oscsDetune'" d="M2.5,0.5 L2.5,63.5" id="Shape"></path>
-                    <path stroke="#5bd484" v-if="knobs[0].value === 'oscsDetune'" d="M1.5,1.5 L189.5,62.5" id="Shape"></path>
-                    <path stroke="#4b1bff" v-if="knobs[1].value === 'osc1Detune'" d="M96.5,1.5 L2.7,61.9" id="Shape"></path>
-                    <path stroke="#4b1bff" v-if="knobs[1].value === 'filterCutoff'" d="M191.5,1.5 L0,62.8" id="Shape"></path>
-                    <path stroke="#5bd484" v-if="knobs[0].value === 'osc1Detune'" d="M96.5,1.5 L190.332852,62.7219014" id="Shape"></path>
-                    <path stroke="#5bd484" v-if="knobs[0].value === 'filterCutoff'" d="M190.332852,1.5 L190.332852,62.5" id="Shape"></path>
+                  <path stroke="#4b1bff" v-if="knobs[1].value === 'oscsDetune'" d="M2.5,0.5 L2.5,63.5" id="Shape"></path>
+                  <path stroke="#5bd484" v-if="knobs[0].value === 'oscsDetune'" d="M1.5,1.5 L189.5,62.5" id="Shape"></path>
+                  <path stroke="#4b1bff" v-if="knobs[1].value === 'osc1Detune'" d="M96.5,1.5 L2.7,61.9" id="Shape"></path>
+                  <path stroke="#4b1bff" v-if="knobs[1].value === 'filterCutoff'" d="M191.5,1.5 L0,62.8" id="Shape"></path>
+                  <path stroke="#5bd484" v-if="knobs[0].value === 'osc1Detune'" d="M96.5,1.5 L190.332852,62.7219014" id="Shape"></path>
+                  <path stroke="#5bd484" v-if="knobs[0].value === 'filterCutoff'" d="M190.332852,1.5 L190.332852,62.5" id="Shape"></path>
                 </g>
                 <rect id="Rectangle-path" fill="#ff8574" fill-rule="nonzero" x="94.6" y="0" width="60" height="29"></rect>
                 <rect id="Rectangle-path" fill="#FF8575" fill-rule="nonzero" x="0.5" y="0" width="60" height="29"></rect>
                 <rect id="Rectangle-path" fill="#6E00D1" fill-rule="nonzero" x="187.5" y="0" width="60" height="29"></rect>
                 <text id="PITCH-OSC-2" fill="#FFFFFF" font-family="Helvetica" font-size="8" font-weight="normal" letter-spacing="0.5">
-                    <tspan x="111.75" y="12">PITCH</tspan>
-                    <tspan x="111.996094" y="22">OSC </tspan>
-                    <tspan x="133.554688" y="22">1</tspan>
+                  <tspan x="111.75" y="12">PITCH</tspan>
+                  <tspan x="111.996094" y="22">OSC </tspan>
+                  <tspan x="133.554688" y="22">1</tspan>
                 </text>
                 <rect id="Rectangle-path" fill="#71D5FF" fill-rule="nonzero" x="30.6" y="0" width="30" height="29"></rect>
                 <text id="FILTER-CUTOFF" fill="#FFFFFF" font-family="Helvetica" font-size="8" font-weight="normal" letter-spacing="0.5">
-                    <tspan x="203.015625" y="12">FILTER</tspan>
-                    <tspan x="200.601562" y="22">CUTOF</tspan>
-                    <tspan x="230.511719" y="22">F</tspan>
+                  <tspan x="203.015625" y="12">FILTER</tspan>
+                  <tspan x="200.601562" y="22">CUTOF</tspan>
+                  <tspan x="230.511719" y="22">F</tspan>
                 </text>
                 <text id="PITCH" fill="#FFFFFF" font-family="Helvetica" font-size="8" font-weight="normal" letter-spacing="0.5">
-                    <tspan x="17.8" y="17">PITC</tspan>
-                    <tspan x="38.0226563" y="17">H</tspan>
+                  <tspan x="17.8" y="17">PITC</tspan>
+                  <tspan x="38.0226563" y="17">H</tspan>
                 </text>
                 <g id="Group" transform="translate(137.000000, 38.000000)"></g>
                 <g id="modlfo-cutoff-filter" transform="translate(28.000000, 27.000000)"></g>
@@ -122,23 +118,23 @@
                 <rect id="Rectangle-path" fill="#5D00FF" fill-rule="nonzero" x="0.6" y="88.9" width="60" height="29"></rect>
                 <rect id="Rectangle-path" fill="#5BD483" fill-rule="nonzero" x="187.6" y="88.9" width="60" height="29"></rect>
                 <g id="Group" transform="translate(0.573500, 90.356000)" fill="#FFFFFF" font-family="Helvetica" font-size="8" font-weight="normal" letter-spacing="0.5">
-                    <text id="MOD-ENV">
-                        <tspan x="19.9179688" y="10">MOD</tspan>
-                        <tspan x="21.2753906" y="20">EN</tspan>
-                        <tspan x="33.3886719" y="20">V</tspan>
-                    </text>
+                  <text id="MOD-ENV">
+                    <tspan x="19.9179688" y="10">MOD</tspan>
+                    <tspan x="21.2753906" y="20">EN</tspan>
+                    <tspan x="33.3886719" y="20">V</tspan>
+                  </text>
                 </g>
                 <g id="Group" transform="translate(187.907000, 90.356000)" fill="#FFFFFF" font-family="Helvetica" font-size="8" font-weight="normal" letter-spacing="0.5">
-                    <text id="MOD-LFO">
-                        <tspan x="19.9179688" y="10">MOD</tspan>
-                        <tspan x="21.7207031" y="20">LF</tspan>
-                        <tspan x="32.0566406" y="20">O</tspan>
-                    </text>
+                  <text id="MOD-LFO">
+                    <tspan x="19.9179688" y="10">MOD</tspan>
+                    <tspan x="21.7207031" y="20">LF</tspan>
+                    <tspan x="32.0566406" y="20">O</tspan>
+                  </text>
                 </g>
+              </g>
             </g>
+          </g>
         </g>
-    </g>
-  </g>
 
           <!-- <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
               <g id="SYNTHGAME_MODROUTER-01" transform="translate(-32.000000, -61.000000)">
@@ -411,7 +407,7 @@
 </template>
 
 <script>
-import store from '../store' // path to your Vuex store
+import store from "../store"; // path to your Vuex store
 
 // TODO:
 // [v]. translate the values so they work properly
@@ -454,7 +450,7 @@ import store from '../store' // path to your Vuex store
 //
 
 export default {
-  name: 'display',
+  name: "display",
   props: {
     module: {
       type: String
@@ -464,552 +460,1007 @@ export default {
     },
     knobs: {
       type: Array,
-      default () { return [] }
+      default() {
+        return [];
+      }
     },
     debug: {
       type: Boolean,
       default: false
     }
   },
-  data () {
+  data() {
     return {
       // default values to not have the calculation derail at created()
       displayHeight: 300,
       displayWidth: 600,
       curveAmnt: 90,
-      strokeWidth: '0.1',
+      strokeWidth: "0.1",
       lfoRotation: 20,
       shouldItGoRight: false,
       shouldGoalGoRight: false,
       intervalId: null,
       goalIntervalId: null
-    }
+    };
   },
-  mounted () {
+  mounted() {
     // console.log('display: mounted!', this.module)
     // update dimentions:
-    this.updateDimensions()
-    window.addEventListener('resize', this.updateDimensions())
+    this.updateDimensions();
+    window.addEventListener("resize", this.updateDimensions());
 
-    if (this.module == 'lfo') {
-      var intervalTest = setInterval(this.updateSeconds, ((1 / this.knobs[3].value) * 1000))
-      this.intervalId = intervalTest
-      this.goalIntervalId = setInterval(this.updateGoalSeconds, (1 / (this.knobs[7].value)) * 1000)
+    if (this.module == "lfo") {
+      var intervalTest = setInterval(
+        this.updateSeconds,
+        (1 / this.knobs[3].value) * 1000
+      );
+      this.intervalId = intervalTest;
+      this.goalIntervalId = setInterval(
+        this.updateGoalSeconds,
+        (1 / this.knobs[7].value) * 1000
+      );
     }
   },
 
-  beforeDestroy () {
-    window.removeEventListener('resize', this.updateDimensions())
+  beforeDestroy() {
+    window.removeEventListener("resize", this.updateDimensions());
   },
   methods: {
-    updateSeconds () {
-      this.shouldItGoRight = !this.shouldItGoRight
+    updateSeconds() {
+      this.shouldItGoRight = !this.shouldItGoRight;
     },
-    updateGoalSeconds () {
-      this.shouldGoalGoRight = !this.shouldGoalGoRight
+    updateGoalSeconds() {
+      this.shouldGoalGoRight = !this.shouldGoalGoRight;
     },
 
-    changeInterval (time) {
-      clearInterval(this.intervalId)
-      this.intervalId = setInterval(this.updateSeconds, time)
+    changeInterval(time) {
+      clearInterval(this.intervalId);
+      this.intervalId = setInterval(this.updateSeconds, time);
     },
-    updateDimensions () {
-      this.displayHeight = this.$refs.displayWrapper.clientHeight
-      this.displayWidth = this.$refs.displayWrapper.clientWidth
+    updateDimensions() {
+      this.displayHeight = this.$refs.displayWrapper.clientHeight;
+      this.displayWidth = this.$refs.displayWrapper.clientWidth;
     }
   },
   computed: {
-    createModeIsActive () {
-      return this.$store.state.gameState.createModeIsActive
+    createModeIsActive() {
+      return this.$store.state.gameState.createModeIsActive;
     },
     // used to refer to LFO rate knob in a watcher (no way to do it directly using because of "[...]")
-    firstCircleLeftMargin () {
-      let margin = ''
-      return margin
+    firstCircleLeftMargin() {
+      let margin = "";
+      return margin;
     },
-    firstCircleLeftMarginGoal () {
-      let margin = ''
-      return margin
+    firstCircleLeftMarginGoal() {
+      let margin = "";
+      return margin;
     },
-    lfoRealFreq () {
-      if (this.module === 'lfo') {
-        return this.knobs[3].value
+    lfoRealFreq() {
+      if (this.module === "lfo") {
+        return this.knobs[3].value;
       }
     },
-    path () {
-      let line
+    path() {
+      let line;
 
-      if (this.module === 'envelope') {
+      if (this.module === "envelope") {
         // helpers:
-        let fourthOfWidth = this.displayWidth / 4
+        let fourthOfWidth = this.displayWidth / 4;
 
-        const attack = this.knobs[0]
-        const decay = this.knobs[1]
-        const sustain = this.knobs[2]
-        const release = this.knobs[3]
-        const amount = this.knobs[8]
+        const attack = this.knobs[0];
+        const decay = this.knobs[1];
+        const sustain = this.knobs[2];
+        const release = this.knobs[3];
+        const amount = this.knobs[8];
 
-        const attackXPosition = (attack.value / attack.max) * fourthOfWidth
-        const attackYPosition = this.displayHeight * 0.75 * (amount.value/100)
-        const decayXPosition = (decay.value / decay.max) * fourthOfWidth
+        const attackXPosition = (attack.value / attack.max) * fourthOfWidth;
+        const attackYPosition =
+          this.displayHeight * 0.75 * (amount.value / 100);
+        const decayXPosition = (decay.value / decay.max) * fourthOfWidth;
 
         // the vertical decay position shall include a fix stopping it
         // from going all the way down (5% height) to perserve release indication:
-        const decayYPosition = (1 - (sustain.value / sustain.max)) * (attackYPosition
+        const decayYPosition =
+          (1 - sustain.value / sustain.max) * attackYPosition -
           //  * (amount.value/100)
-         ) - (1 - ((sustain.value / sustain.max)))
-         * (attackYPosition
-          //  * (amount.value/100)
-        )
-           * 0.05
+          (1 - sustain.value / sustain.max) *
+            attackYPosition *
+            //  * (amount.value/100)
+            0.05;
         // no sustain, as it basically a horizontal line
         // release is known and shall be market with absolute position
 
         // svg path:
-        line = 'M 0, ' + (this.displayHeight + 1) +
-              ' l ' + attackXPosition + ', ' + (-attackYPosition) + ' ' +
-              ' v ' + -1 + //try to make decay point obvious
-              ' h ' + 2 +
-              ' v ' + 1 +
-              ' l ' + decayXPosition + ', ' + decayYPosition + ' ' +
-              ' v ' + -1 + //try to make decay point obvious
-              ' h ' + 2 +
-              ' v ' + 1 +
-              // a horizontal line representing sustain level including a fix regarding adding the release:
-              ' h ' + (this.displayWidth - attackXPosition - decayXPosition - (((release.value / release.max)) * fourthOfWidth)) +
-              ' v ' + -1 + //try to make decay point obvious
-              ' h ' + 2 +
-              ' v ' + 1 +
-              // release end position:
-              ' L ' + this.displayWidth + ', ' + (this.displayHeight + 1) + ' ' +
-              ' Z'
+        line =
+          "M 0, " +
+          (this.displayHeight + 1) +
+          " l " +
+          attackXPosition +
+          ", " +
+          -attackYPosition +
+          " " +
+          " v " +
+          -1 + //try to make decay point obvious
+          " h " +
+          2 +
+          " v " +
+          1 +
+          " l " +
+          decayXPosition +
+          ", " +
+          decayYPosition +
+          " " +
+          " v " +
+          -1 + //try to make decay point obvious
+          " h " +
+          2 +
+          " v " +
+          1 +
+          // a horizontal line representing sustain level including a fix regarding adding the release:
+          " h " +
+          (this.displayWidth -
+            attackXPosition -
+            decayXPosition -
+            (release.value / release.max) * fourthOfWidth) +
+          " v " +
+          -1 + //try to make decay point obvious
+          " h " +
+          2 +
+          " v " +
+          1 +
+          // release end position:
+          " L " +
+          this.displayWidth +
+          ", " +
+          (this.displayHeight + 1) +
+          " " +
+          " Z";
       }
 
-      if (this.module === 'filter') {
+      if (this.module === "filter") {
         // helpers:
-        const type = this.knobs[0]
-        const cutOffFreq = this.knobs[1]
-        const q = this.knobs[2]
-        const gain = this.knobs[3]
+        const type = this.knobs[0];
+        const cutOffFreq = this.knobs[1];
+        const q = this.knobs[2];
+        const gain = this.knobs[3];
 
-        let halfHeight = this.displayHeight / 2
-        let halfWidth = this.displayWidth / 2
-        const gainAddedDistance = ((gain.value / gain.max) * halfHeight) - 5
-        const yOffset = 0
-        const qDistance = (1 - (q.value / q.max)) * (halfWidth)
-        const freqDistance = (cutOffFreq.value / cutOffFreq.max) * (halfWidth)
+        let halfHeight = this.displayHeight / 2;
+        let halfWidth = this.displayWidth / 2;
+        const gainAddedDistance = (gain.value / gain.max) * halfHeight - 5;
+        const yOffset = 0;
+        const qDistance = (1 - q.value / q.max) * halfWidth;
+        const freqDistance = (cutOffFreq.value / cutOffFreq.max) * halfWidth;
 
         // svg path:
-        if (type.value === 'lowpass') {
-          line = 'M 0,' + (this.displayHeight + 1) +
-                ' v ' + (-(halfHeight + gainAddedDistance - yOffset)) +
-                ' h ' + (freqDistance) +
-                ' h ' + ((q.value / q.max) * (halfWidth) / 2) +
-                ' q ' + (qDistance / 2) + ', 0 ' +
-                      +qDistance + ', ' + (halfHeight + gainAddedDistance) +
-
-                ' Z'
-        } else if (type.value === 'highpass') {
-          line = 'M 0,' + (this.displayHeight + 1) +
-                ' h ' + freqDistance +
-                ' h ' + ((q.value / q.max) * (halfWidth) / 2) +
-                ' q ' + (qDistance / 2) + ', ' + (-(halfHeight + gainAddedDistance)) + ' ' +
-                          qDistance + ', ' + (-(halfHeight + gainAddedDistance)) +
-                ' h ' + this.displayWidth +
-                ' v ' + this.displayHeight +
-                ' Z'
-        } else if (type.value === 'bandpass') {
-          line = 'M 0, ' + (this.displayHeight + 1) +
-                ' h ' + (freqDistance + (halfWidth / 2) - qDistance) +
-                ' q ' + (qDistance / 2) + ', ' + (-(halfHeight + gainAddedDistance)) + ' ' +
-                        qDistance + ', ' + (-(halfHeight + gainAddedDistance)) +
-                ' q ' + (qDistance / 2) + ', 0 ' +
-                        qDistance + ', ' + (halfHeight + gainAddedDistance) + ' ' +
-                ' Z '
+        if (type.value === "lowpass") {
+          line =
+            "M 0," +
+            (this.displayHeight + 1) +
+            " v " +
+            -(halfHeight + gainAddedDistance - yOffset) +
+            " h " +
+            freqDistance +
+            " h " +
+            ((q.value / q.max) * halfWidth) / 2 +
+            " q " +
+            qDistance / 2 +
+            ", 0 " +
+            +qDistance +
+            ", " +
+            (halfHeight + gainAddedDistance) +
+            " Z";
+        } else if (type.value === "highpass") {
+          line =
+            "M 0," +
+            (this.displayHeight + 1) +
+            " h " +
+            freqDistance +
+            " h " +
+            ((q.value / q.max) * halfWidth) / 2 +
+            " q " +
+            qDistance / 2 +
+            ", " +
+            -(halfHeight + gainAddedDistance) +
+            " " +
+            qDistance +
+            ", " +
+            -(halfHeight + gainAddedDistance) +
+            " h " +
+            this.displayWidth +
+            " v " +
+            this.displayHeight +
+            " Z";
+        } else if (type.value === "bandpass") {
+          line =
+            "M 0, " +
+            (this.displayHeight + 1) +
+            " h " +
+            (freqDistance + halfWidth / 2 - qDistance) +
+            " q " +
+            qDistance / 2 +
+            ", " +
+            -(halfHeight + gainAddedDistance) +
+            " " +
+            qDistance +
+            ", " +
+            -(halfHeight + gainAddedDistance) +
+            " q " +
+            qDistance / 2 +
+            ", 0 " +
+            qDistance +
+            ", " +
+            (halfHeight + gainAddedDistance) +
+            " " +
+            " Z ";
         }
       }
 
-      if (this.module === 'oscillator') {
+      if (this.module === "oscillator") {
         // helpers:
-        const octave = this.knobs[0]
-        const detune = this.knobs[1]
-        const volume = this.knobs[2]
-        const type = this.knobs[3]
+        const octave = this.knobs[0];
+        const detune = this.knobs[1];
+        const volume = this.knobs[2];
+        const type = this.knobs[3];
 
-        const lineLength = 1.5 * this.displayWidth
-        const yAxisMiddle = this.displayHeight / 2
-        const h = (yAxisMiddle / 2)
-        const hv = (yAxisMiddle / 2) * (volume.value / (volume.max - volume.min))
+        const lineLength = 1.5 * this.displayWidth;
+        const yAxisMiddle = this.displayHeight / 2;
+        const h = yAxisMiddle / 2;
+        const hv =
+          (yAxisMiddle / 2) * (volume.value / (volume.max - volume.min));
 
-        const octaveRatio = (octave.value / (octave.max - octave.min))
+        const octaveRatio = octave.value / (octave.max - octave.min);
         // const detuneRatio = (detune.value - 50) /20
-        const detuneRatio = (detune.value - 50) /10
+        const detuneRatio = (detune.value - 50) / 10;
 
-        const iteration = 475 / Math.round(octave.value / 523 * 40) - (detuneRatio)
+        const iteration =
+          475 / Math.round((octave.value / 523) * 40) - detuneRatio;
 
-        let wave
+        let wave;
         // square:
-        if (type.value === 'square') {
-          wave = ' v ' + hv +
-                 ' h ' + iteration +
-                 ' v ' + (-hv*2) +
-                 ' h ' + iteration +
-                 ' v ' + hv
-        // sine:
-        } else if (type.value === 'sine') {
-          wave = ' q ' + '0, ' + hv + ' ' + iteration / 2 + ', ' + hv +
-                 ' q ' + iteration / 2 + ', 0 ' + iteration / 2 + ', ' + (-hv) +
-                 ' q 0, ' + (-hv) + ' ' + iteration / 2 + ' ' + (-hv) +
-                 ' q ' + iteration / 2 + ', 0 ' + ' ' + iteration / 2 + ' ' + hv
-        // sawtooth:
-        } else if (type.value === 'sawtooth') {
-          wave = ' v ' + hv +
-                 ' l ' + 2 * iteration + ', ' + (-hv*2) +
-                 ' v ' + hv
-        // triangle
-        } else if (type.value === 'triangle') {
-          wave = ' l ' + iteration / 2 + ', ' + hv +
-                 ' l ' + iteration + ', ' + (-hv*2) +
-                 ' l ' + iteration / 2 + ', ' + hv
+        if (type.value === "square") {
+          wave =
+            " v " +
+            hv +
+            " h " +
+            iteration +
+            " v " +
+            -hv * 2 +
+            " h " +
+            iteration +
+            " v " +
+            hv;
+          // sine:
+        } else if (type.value === "sine") {
+          wave =
+            " q " +
+            "0, " +
+            hv +
+            " " +
+            iteration / 2 +
+            ", " +
+            hv +
+            " q " +
+            iteration / 2 +
+            ", 0 " +
+            iteration / 2 +
+            ", " +
+            -hv +
+            " q 0, " +
+            -hv +
+            " " +
+            iteration / 2 +
+            " " +
+            -hv +
+            " q " +
+            iteration / 2 +
+            ", 0 " +
+            " " +
+            iteration / 2 +
+            " " +
+            hv;
+          // sawtooth:
+        } else if (type.value === "sawtooth") {
+          wave =
+            " v " + hv + " l " + 2 * iteration + ", " + -hv * 2 + " v " + hv;
+          // triangle
+        } else if (type.value === "triangle") {
+          wave =
+            " l " +
+            iteration / 2 +
+            ", " +
+            hv +
+            " l " +
+            iteration +
+            ", " +
+            -hv * 2 +
+            " l " +
+            iteration / 2 +
+            ", " +
+            hv;
         }
-        line = 'M ' + iteration * 0 + ', 0 ' +
-              ' m ' + lineLength + ', ' + yAxisMiddle +
-              ' h ' + (-lineLength - iteration) +
-              wave + wave + wave + wave + wave + wave + wave + wave + wave + wave + wave + wave + wave + wave + wave + wave + wave +
-              wave + wave + wave + wave + wave + wave + wave + wave + wave + wave + wave + wave + wave + wave + wave + wave + wave +
-              wave + wave + wave + wave + wave + wave + wave + wave + wave + wave + wave + wave + wave + wave + wave + wave + wave +
-              ' Z '
+        line =
+          "M " +
+          iteration * 0 +
+          ", 0 " +
+          " m " +
+          lineLength +
+          ", " +
+          yAxisMiddle +
+          " h " +
+          (-lineLength - iteration) +
+          wave +
+          wave +
+          wave +
+          wave +
+          wave +
+          wave +
+          wave +
+          wave +
+          wave +
+          wave +
+          wave +
+          wave +
+          wave +
+          wave +
+          wave +
+          wave +
+          wave +
+          wave +
+          wave +
+          wave +
+          wave +
+          wave +
+          wave +
+          wave +
+          wave +
+          wave +
+          wave +
+          wave +
+          wave +
+          wave +
+          wave +
+          wave +
+          wave +
+          wave +
+          wave +
+          wave +
+          wave +
+          wave +
+          wave +
+          wave +
+          wave +
+          wave +
+          wave +
+          wave +
+          wave +
+          wave +
+          wave +
+          wave +
+          wave +
+          wave +
+          wave +
+          " Z ";
       }
 
-      if (this.module === 'lfo') {
+      if (this.module === "lfo") {
         // NON OF THE BELOW PRESENETED APPROACHED WORKED (and should be deleted)
         // used a custom svg in the template
 
         // helpers:
-        const r = this.displayHeight / 4
-        const rate = this.knobs[0]
-        const amount = this.knobs[1]
-        const shape = this.knobs[2]
+        const r = this.displayHeight / 4;
+        const rate = this.knobs[0];
+        const amount = this.knobs[1];
+        const shape = this.knobs[2];
 
         // making a circle with a path..
-        const circle = ' q ' + '0, ' + (-r) + ' ' + r + ', ' + (-r) +
-                       ' q ' + r + ', 0 ' + r + ', ' + r +
-                       ' q ' + '0, ' + r + ' ' + (-r) + ', ' + r +
-                       ' q ' + (-r) + ', 0 ' + (-r) + ', ' + (-r)
+        const circle =
+          " q " +
+          "0, " +
+          -r +
+          " " +
+          r +
+          ", " +
+          -r +
+          " q " +
+          r +
+          ", 0 " +
+          r +
+          ", " +
+          r +
+          " q " +
+          "0, " +
+          r +
+          " " +
+          -r +
+          ", " +
+          r +
+          " q " +
+          -r +
+          ", 0 " +
+          -r +
+          ", " +
+          -r;
 
         // the idea from https://codepen.io/jakob-e/pen/bgBegJ
-        const archCrcl = 'M' + ((this.displayWidth / 2) - r) + ', ' + ((this.displayHeight / 2)) +
-        // 'm '+(-r)+', 0'+
-        'a ' + r + ', ' + r + ' 0 1,0 ' + (2 * r) + ',0' +
-        'a ' + r + ', ' + r + ' 0 1,0 ' + (-2 * r) + ',0'
+        const archCrcl =
+          "M" +
+          (this.displayWidth / 2 - r) +
+          ", " +
+          this.displayHeight / 2 +
+          // 'm '+(-r)+', 0'+
+          "a " +
+          r +
+          ", " +
+          r +
+          " 0 1,0 " +
+          2 * r +
+          ",0" +
+          "a " +
+          r +
+          ", " +
+          r +
+          " 0 1,0 " +
+          -2 * r +
+          ",0";
 
-        line = ''
+        line = "";
       }
-      return line
+      return line;
     },
 
-    lfoVB () {
-      return (0 - this.displayWidth / 2) + ' 0 ' + this.displayWidth + ' ' + this.displayHeight
+    lfoVB() {
+      return (
+        0 -
+        this.displayWidth / 2 +
+        " 0 " +
+        this.displayWidth +
+        " " +
+        this.displayHeight
+      );
     },
-    swingMovement () {
+    swingMovement() {
       // helpers:
-      const rate = this.knobs[0]
-      const amount = this.knobs[1]
-      const shape = this.knobs[2]
+      const rate = this.knobs[0];
+      const amount = this.knobs[1];
+      const shape = this.knobs[2];
 
-      const rateRatio = (rate.value / (rate.max - rate.min))
-      const amountRatio = (amount.value / (amount.max - amount.min))
+      const rateRatio = rate.value / (rate.max - rate.min);
+      const amountRatio = amount.value / (amount.max - amount.min);
 
       // a hot-fix to stop the swing from going trrrrrrrrr ---
       // let realFreq
       // if(this.knobs[3].value === 0) {
       //   realFreq = 0.1
       // } else {
-      let realFreq = this.knobs[3].value
+      let realFreq = this.knobs[3].value;
       // }
 
-      const transitionTime = (1 / (realFreq))
+      const transitionTime = 1 / realFreq;
 
-      let transitionString
+      let transitionString;
       // differenciate shapes using transitions:
-      if (shape.value == 'sine') {
-        transitionString = transitionTime + 's'
-      } else if (shape.value == 'square') {
-        transitionString = ''
-      } else if (shape.value == 'sawtooth') {
+      if (shape.value == "sine") {
+        transitionString = transitionTime + "s";
+      } else if (shape.value == "square") {
+        transitionString = "";
+      } else if (shape.value == "sawtooth") {
         if (!this.shouldItGoRight) {
-          transitionString = transitionTime + 's linear'
+          transitionString = transitionTime + "s linear";
         } else {
-          transitionString = ''
+          transitionString = "";
         }
-      } else if (shape.value == 'triangle') {
-        transitionString = transitionTime + 's linear'
+      } else if (shape.value == "triangle") {
+        transitionString = transitionTime + "s linear";
       }
-      let rotateAmount = 1900 * amountRatio
-      let rotateString
+      let rotateAmount = 1900 * amountRatio;
+      let rotateString;
       if (this.shouldItGoRight) {
         // go right:
-        rotateString = 'rotate(' + rotateAmount + 'deg)'
+        rotateString = "rotate(" + rotateAmount + "deg)";
       } else {
         // go left:
-        rotateString = 'rotate(-' + rotateAmount + 'deg)'
+        rotateString = "rotate(-" + rotateAmount + "deg)";
       }
-      return {transform: rotateString, transition: transitionString}
+      return { transform: rotateString, transition: transitionString };
     },
-    goalSwingMovement () {
+    goalSwingMovement() {
       // helpers:
-      const rate = this.knobs[4]
-      const amount = this.knobs[5]
-      const shape = this.knobs[6]
+      const rate = this.knobs[4];
+      const amount = this.knobs[5];
+      const shape = this.knobs[6];
 
-      const rateRatio = (rate.value / (rate.max - rate.min))
-      const amountRatio = (amount.value / (amount.max - amount.min))
+      const rateRatio = rate.value / (rate.max - rate.min);
+      const amountRatio = amount.value / (amount.max - amount.min);
 
-      const realGoalFreq = this.knobs[7].value
+      const realGoalFreq = this.knobs[7].value;
 
-      const transitionTime = (1 / (realGoalFreq))
+      const transitionTime = 1 / realGoalFreq;
 
-      let transitionString
-      if (shape.value == 'sine') {
-        transitionString = transitionTime + 's'
-      } else if (shape.value == 'square') {
-        transitionString = ''
-      } else if (shape.value == 'sawtooth') {
+      let transitionString;
+      if (shape.value == "sine") {
+        transitionString = transitionTime + "s";
+      } else if (shape.value == "square") {
+        transitionString = "";
+      } else if (shape.value == "sawtooth") {
         if (!this.shouldGoalGoRight) {
-          transitionString = transitionTime + 's linear'
+          transitionString = transitionTime + "s linear";
         } else {
-          transitionString = ''
+          transitionString = "";
         }
-      } else if (shape.value == 'triangle') {
-        transitionString = transitionTime + 's linear'
+      } else if (shape.value == "triangle") {
+        transitionString = transitionTime + "s linear";
       }
-      let rotateAmount = 1900 * amountRatio
-      let rotateString
+      let rotateAmount = 1900 * amountRatio;
+      let rotateString;
       if (this.shouldGoalGoRight) {
         // go right:
-        rotateString = 'rotate(' + rotateAmount + 'deg)'
+        rotateString = "rotate(" + rotateAmount + "deg)";
       } else {
         // go left:
-        rotateString = 'rotate(-' + rotateAmount + 'deg)'
+        rotateString = "rotate(-" + rotateAmount + "deg)";
       }
-      return {transform: rotateString, transition: transitionString }
+      return { transform: rotateString, transition: transitionString };
     },
-    pathGoal () {
-      let line
+    pathGoal() {
+      let line;
 
-      if (this.module === 'lfo') {
+      if (this.module === "lfo") {
         // helpers:
-        const r = this.displayHeight / 4
-        const rate = this.knobs[4]
-        const amount = this.knobs[5]
-        const shape = this.knobs[6]
+        const r = this.displayHeight / 4;
+        const rate = this.knobs[4];
+        const amount = this.knobs[5];
+        const shape = this.knobs[6];
 
         // making a circle with a path..
-        const circle = ' q ' + '0, ' + (-r) + ' ' + r + ', ' + (-r) +
-                       ' q ' + r + ', 0 ' + r + ', ' + r +
-                       ' q ' + '0, ' + r + ' ' + (-r) + ', ' + r +
-                       ' q ' + (-r) + ', 0 ' + (-r) + ', ' + (-r)
+        const circle =
+          " q " +
+          "0, " +
+          -r +
+          " " +
+          r +
+          ", " +
+          -r +
+          " q " +
+          r +
+          ", 0 " +
+          r +
+          ", " +
+          r +
+          " q " +
+          "0, " +
+          r +
+          " " +
+          -r +
+          ", " +
+          r +
+          " q " +
+          -r +
+          ", 0 " +
+          -r +
+          ", " +
+          -r;
 
         // the idea from https://codepen.io/jakob-e/pen/bgBegJ
-        const archCrcl = 'M' + ((this.displayWidth / 2) - r) + ', ' + ((this.displayHeight / 2)) +
-        // 'm '+(-r)+', 0'+
-        'a ' + r + ', ' + r + ' 0 1,0 ' + (2 * r) + ',0' +
-        'a ' + r + ', ' + r + ' 0 1,0 ' + (-2 * r) + ',0'
+        const archCrcl =
+          "M" +
+          (this.displayWidth / 2 - r) +
+          ", " +
+          this.displayHeight / 2 +
+          // 'm '+(-r)+', 0'+
+          "a " +
+          r +
+          ", " +
+          r +
+          " 0 1,0 " +
+          2 * r +
+          ",0" +
+          "a " +
+          r +
+          ", " +
+          r +
+          " 0 1,0 " +
+          -2 * r +
+          ",0";
 
-        line = ''
+        line = "";
       }
 
-      if (this.module === 'envelope') {
+      if (this.module === "envelope") {
         // helpers:
-        let fourthOfWidth = this.displayWidth / 4
+        let fourthOfWidth = this.displayWidth / 4;
 
-        const attack = this.knobs[4]
-        const decay = this.knobs[5]
-        const sustain = this.knobs[6]
-        const release = this.knobs[7]
-        const amount = this.knobs[9]
+        const attack = this.knobs[4];
+        const decay = this.knobs[5];
+        const sustain = this.knobs[6];
+        const release = this.knobs[7];
+        const amount = this.knobs[9];
 
-        const attackXPosition = (attack.value / attack.max) * fourthOfWidth
-        const attackYPosition = this.displayHeight * 0.75 * (amount.value/100)
-        const decayXPosition = (decay.value / decay.max) * fourthOfWidth
+        const attackXPosition = (attack.value / attack.max) * fourthOfWidth;
+        const attackYPosition =
+          this.displayHeight * 0.75 * (amount.value / 100);
+        const decayXPosition = (decay.value / decay.max) * fourthOfWidth;
 
         // the vertical decay position shall include a fix stopping it
         // from going all the way down (5% height) to perserve release indication:
-        const decayYPosition = (1 - (sustain.value / sustain.max)) * (attackYPosition
+        const decayYPosition =
+          (1 - sustain.value / sustain.max) * attackYPosition -
           //  * (amount.value/100)
-         ) - (1 - ((sustain.value / sustain.max)))
-         * (attackYPosition
-          //  * (amount.value/100)
-        )
-           * 0.05
+          (1 - sustain.value / sustain.max) *
+            attackYPosition *
+            //  * (amount.value/100)
+            0.05;
         // no sustain, as it basically a horizontal line
         // release is known and shall be market with absolute position
 
         // svg path:
-        line = 'M 0, ' + (this.displayHeight + 1) +
-              ' l ' + attackXPosition + ', ' + (-attackYPosition) + ' ' +
-              ' h ' + -1 +
-              ' v ' + 1 + //try to make decay point obvious
-              ' v ' + -2 +
-              ' v ' + 1 +
-              ' h ' + 1 +
-              ' v ' + 2 +
-              ' v ' + -4 +
-              ' v ' + 2 +
-              ' h ' + 1 +
-              ' v ' + 3 +
-              ' v ' + -6 +
-              ' v ' + 3 +
-              ' h ' + 1 +
-              ' v ' + 2 +
-              ' v ' + -4 +
-              ' v ' + 2 +
-              ' h ' + 1 +
-              ' v ' + 1 +
-              ' v ' + -2 +
-              ' v ' + 1 +
-
-
-              ' l ' + decayXPosition + ', ' + decayYPosition + ' ' +
-              ' h ' + -1 +
-              ' v ' + 1 + //try to make decay point obvious
-              ' v ' + -2 +
-              ' v ' + 1 +
-              ' h ' + 1 +
-              ' v ' + 2 +
-              ' v ' + -4 +
-              ' v ' + 2 +
-              ' h ' + 1 +
-              ' v ' + 3 +
-              ' v ' + -6 +
-              ' v ' + 3 +
-              ' h ' + 1 +
-              ' v ' + 2 +
-              ' v ' + -4 +
-              ' v ' + 2 +
-              ' h ' + 1 +
-              ' v ' + 1 +
-              ' v ' + -2 +
-              ' v ' + 1 +
-              // a horizontal line representing sustain level including a fix regarding adding the release:
-              ' h ' + (this.displayWidth - attackXPosition - decayXPosition - (((release.value / release.max)) * fourthOfWidth)) +
-              ' h ' + -1 +
-              ' v ' + 1 + //try to make decay point obvious
-              ' v ' + -2 +
-              ' v ' + 1 +
-              ' h ' + 1 +
-              ' v ' + 2 +
-              ' v ' + -4 +
-              ' v ' + 2 +
-              ' h ' + 1 +
-              ' v ' + 3 +
-              ' v ' + -6 +
-              ' v ' + 3 +
-              ' h ' + 1 +
-              ' v ' + 2 +
-              ' v ' + -4 +
-              ' v ' + 2 +
-              ' h ' + 1 +
-              ' v ' + 1 +
-              ' v ' + -2 +
-              ' v ' + 1 +
-              // release end position:
-              ' L ' + this.displayWidth + ', ' + (this.displayHeight + 1) + ' '
-              // +
-              // ' Z'
+        line =
+          "M 0, " +
+          (this.displayHeight + 1) +
+          " l " +
+          attackXPosition +
+          ", " +
+          -attackYPosition +
+          " " +
+          " h " +
+          -1 +
+          " v " +
+          1 + //try to make decay point obvious
+          " v " +
+          -2 +
+          " v " +
+          1 +
+          " h " +
+          1 +
+          " v " +
+          2 +
+          " v " +
+          -4 +
+          " v " +
+          2 +
+          " h " +
+          1 +
+          " v " +
+          3 +
+          " v " +
+          -6 +
+          " v " +
+          3 +
+          " h " +
+          1 +
+          " v " +
+          2 +
+          " v " +
+          -4 +
+          " v " +
+          2 +
+          " h " +
+          1 +
+          " v " +
+          1 +
+          " v " +
+          -2 +
+          " v " +
+          1 +
+          " l " +
+          decayXPosition +
+          ", " +
+          decayYPosition +
+          " " +
+          " h " +
+          -1 +
+          " v " +
+          1 + //try to make decay point obvious
+          " v " +
+          -2 +
+          " v " +
+          1 +
+          " h " +
+          1 +
+          " v " +
+          2 +
+          " v " +
+          -4 +
+          " v " +
+          2 +
+          " h " +
+          1 +
+          " v " +
+          3 +
+          " v " +
+          -6 +
+          " v " +
+          3 +
+          " h " +
+          1 +
+          " v " +
+          2 +
+          " v " +
+          -4 +
+          " v " +
+          2 +
+          " h " +
+          1 +
+          " v " +
+          1 +
+          " v " +
+          -2 +
+          " v " +
+          1 +
+          // a horizontal line representing sustain level including a fix regarding adding the release:
+          " h " +
+          (this.displayWidth -
+            attackXPosition -
+            decayXPosition -
+            (release.value / release.max) * fourthOfWidth) +
+          " h " +
+          -1 +
+          " v " +
+          1 + //try to make decay point obvious
+          " v " +
+          -2 +
+          " v " +
+          1 +
+          " h " +
+          1 +
+          " v " +
+          2 +
+          " v " +
+          -4 +
+          " v " +
+          2 +
+          " h " +
+          1 +
+          " v " +
+          3 +
+          " v " +
+          -6 +
+          " v " +
+          3 +
+          " h " +
+          1 +
+          " v " +
+          2 +
+          " v " +
+          -4 +
+          " v " +
+          2 +
+          " h " +
+          1 +
+          " v " +
+          1 +
+          " v " +
+          -2 +
+          " v " +
+          1 +
+          // release end position:
+          " L " +
+          this.displayWidth +
+          ", " +
+          (this.displayHeight + 1) +
+          " ";
+        // +
+        // ' Z'
       }
 
-      if (this.module === 'filter') {
+      if (this.module === "filter") {
         // helpers:
-        const type = this.knobs[4]
-        const cutOffFreq = this.knobs[5]
-        const q = this.knobs[6]
-        const gain = this.knobs[7]
+        const type = this.knobs[4];
+        const cutOffFreq = this.knobs[5];
+        const q = this.knobs[6];
+        const gain = this.knobs[7];
 
-        let halfHeight = this.displayHeight / 2
-        let halfWidth = this.displayWidth / 2
-        const gainAddedDistance = ((gain.value / gain.max) * halfHeight) - 5
-        const yOffset = 0
-        const qDistance = (1 - (q.value / q.max)) * (halfWidth)
-        const freqDistance = (cutOffFreq.value / cutOffFreq.max) * (halfWidth)
+        let halfHeight = this.displayHeight / 2;
+        let halfWidth = this.displayWidth / 2;
+        const gainAddedDistance = (gain.value / gain.max) * halfHeight - 5;
+        const yOffset = 0;
+        const qDistance = (1 - q.value / q.max) * halfWidth;
+        const freqDistance = (cutOffFreq.value / cutOffFreq.max) * halfWidth;
 
         // svg path:
-        if (type.value === 'lowpass') {
-          line = 'M 0,' + ((this.displayHeight + 1) - (halfHeight + gainAddedDistance - yOffset)) +
-                // ' v ' + (-(halfHeight + gainAddedDistance - yOffset)) +
-                ' h ' + (freqDistance) +
-                ' h ' + ((q.value / q.max) * (halfWidth) / 2) +
-                ' q ' + (qDistance / 2) + ', 0 ' +
-                      +qDistance + ', ' + (halfHeight + gainAddedDistance)
-        } else if (type.value === 'highpass') {
-          line = 'M' + (freqDistance + ((q.value / q.max) * (halfWidth) / 2)) + ', ' + (this.displayHeight + 1) +
-                ' q ' + (qDistance / 2) + ', ' + (-(halfHeight + gainAddedDistance)) + ' ' +
-                          qDistance + ', ' + (-(halfHeight + gainAddedDistance)) +
-                ' h ' + this.displayWidth +
-                ' v ' + this.displayHeight
-        } else if (type.value === 'bandpass') {
-          line = 'M' + (freqDistance + (halfWidth / 2) - qDistance) + ', ' + (this.displayHeight + 1) +
-                ' q ' + (qDistance / 2) + ', ' + (-(halfHeight + gainAddedDistance)) + ' ' +
-                        qDistance + ', ' + (-(halfHeight + gainAddedDistance)) +
-                ' q ' + (qDistance / 2) + ', 0 ' +
-                        qDistance + ', ' + (halfHeight + gainAddedDistance) + ' '
+        if (type.value === "lowpass") {
+          line =
+            "M 0," +
+            (this.displayHeight +
+              1 -
+              (halfHeight + gainAddedDistance - yOffset)) +
+            // ' v ' + (-(halfHeight + gainAddedDistance - yOffset)) +
+            " h " +
+            freqDistance +
+            " h " +
+            ((q.value / q.max) * halfWidth) / 2 +
+            " q " +
+            qDistance / 2 +
+            ", 0 " +
+            +qDistance +
+            ", " +
+            (halfHeight + gainAddedDistance);
+        } else if (type.value === "highpass") {
+          line =
+            "M" +
+            (freqDistance + ((q.value / q.max) * halfWidth) / 2) +
+            ", " +
+            (this.displayHeight + 1) +
+            " q " +
+            qDistance / 2 +
+            ", " +
+            -(halfHeight + gainAddedDistance) +
+            " " +
+            qDistance +
+            ", " +
+            -(halfHeight + gainAddedDistance) +
+            " h " +
+            this.displayWidth +
+            " v " +
+            this.displayHeight;
+        } else if (type.value === "bandpass") {
+          line =
+            "M" +
+            (freqDistance + halfWidth / 2 - qDistance) +
+            ", " +
+            (this.displayHeight + 1) +
+            " q " +
+            qDistance / 2 +
+            ", " +
+            -(halfHeight + gainAddedDistance) +
+            " " +
+            qDistance +
+            ", " +
+            -(halfHeight + gainAddedDistance) +
+            " q " +
+            qDistance / 2 +
+            ", 0 " +
+            qDistance +
+            ", " +
+            (halfHeight + gainAddedDistance) +
+            " ";
         }
       }
 
-      if (this.module === 'oscillator') {
+      if (this.module === "oscillator") {
         // helpers:
-        const octave = this.knobs[4]
-        const detune = this.knobs[5]
-        const volume = this.knobs[6]
-        const type = this.knobs[7]
+        const octave = this.knobs[4];
+        const detune = this.knobs[5];
+        const volume = this.knobs[6];
+        const type = this.knobs[7];
 
-        const lineLength = 1.5 * this.displayWidth
-        const yAxisMiddle = this.displayHeight / 2
-        const h = (yAxisMiddle / 2)
-        const hv = (yAxisMiddle / 2) * (volume.value / (volume.max - volume.min))
+        const lineLength = 1.5 * this.displayWidth;
+        const yAxisMiddle = this.displayHeight / 2;
+        const h = yAxisMiddle / 2;
+        const hv =
+          (yAxisMiddle / 2) * (volume.value / (volume.max - volume.min));
 
-        const octaveRatio = (octave.value / (octave.max - octave.min))
+        const octaveRatio = octave.value / (octave.max - octave.min);
         // const detuneRatio = (detune.value - 50) /20
-        const detuneRatio = (detune.value - 50) /10
+        const detuneRatio = (detune.value - 50) / 10;
 
-        const iteration = 475 / Math.round(octave.value / 523 * 40) - (detuneRatio)
+        const iteration =
+          475 / Math.round((octave.value / 523) * 40) - detuneRatio;
 
-        let wave
+        let wave;
         // square:
-        if (type.value === 'square') {
-          wave = ' v ' + hv +
-                 ' h ' + iteration +
-                 ' v ' + (-hv*2) +
-                 ' h ' + iteration +
-                 ' v ' + hv
-        // sine:
-        } else if (type.value === 'sine') {
-          wave = ' q ' + '0, ' + hv + ' ' + iteration / 2 + ', ' + hv +
-                 ' q ' + iteration / 2 + ', 0 ' + iteration / 2 + ', ' + (-hv) +
-                 ' q 0, ' + (-hv) + ' ' + iteration / 2 + ' ' + (-hv) +
-                 ' q ' + iteration / 2 + ', 0 ' + ' ' + iteration / 2 + ' ' + hv
-        // sawtooth:
-        } else if (type.value === 'sawtooth') {
-          wave = ' v ' + hv +
-                 ' l ' + 2 * iteration + ', ' + (-hv*2) +
-                 ' v ' + hv
-        // triangle
-        } else if (type.value === 'triangle') {
-          wave = ' l ' + iteration / 2 + ', ' + hv +
-                 ' l ' + iteration + ', ' + (-hv*2) +
-                 ' l ' + iteration / 2 + ', ' + hv
+        if (type.value === "square") {
+          wave =
+            " v " +
+            hv +
+            " h " +
+            iteration +
+            " v " +
+            -hv * 2 +
+            " h " +
+            iteration +
+            " v " +
+            hv;
+          // sine:
+        } else if (type.value === "sine") {
+          wave =
+            " q " +
+            "0, " +
+            hv +
+            " " +
+            iteration / 2 +
+            ", " +
+            hv +
+            " q " +
+            iteration / 2 +
+            ", 0 " +
+            iteration / 2 +
+            ", " +
+            -hv +
+            " q 0, " +
+            -hv +
+            " " +
+            iteration / 2 +
+            " " +
+            -hv +
+            " q " +
+            iteration / 2 +
+            ", 0 " +
+            " " +
+            iteration / 2 +
+            " " +
+            hv;
+          // sawtooth:
+        } else if (type.value === "sawtooth") {
+          wave =
+            " v " + hv + " l " + 2 * iteration + ", " + -hv * 2 + " v " + hv;
+          // triangle
+        } else if (type.value === "triangle") {
+          wave =
+            " l " +
+            iteration / 2 +
+            ", " +
+            hv +
+            " l " +
+            iteration +
+            ", " +
+            -hv * 2 +
+            " l " +
+            iteration / 2 +
+            ", " +
+            hv;
         }
         line =
-              ' m -' + iteration + ', ' + yAxisMiddle +
-              wave + wave + wave + wave + wave + wave + wave + wave + wave + wave + wave + wave + wave + wave + wave + wave + wave +
-              wave + wave + wave + wave + wave + wave + wave + wave + wave + wave + wave + wave + wave + wave + wave + wave + wave +
-              wave + wave + wave + wave + wave + wave + wave + wave + wave + wave + wave + wave + wave + wave + wave + wave + wave
+          " m -" +
+          iteration +
+          ", " +
+          yAxisMiddle +
+          wave +
+          wave +
+          wave +
+          wave +
+          wave +
+          wave +
+          wave +
+          wave +
+          wave +
+          wave +
+          wave +
+          wave +
+          wave +
+          wave +
+          wave +
+          wave +
+          wave +
+          wave +
+          wave +
+          wave +
+          wave +
+          wave +
+          wave +
+          wave +
+          wave +
+          wave +
+          wave +
+          wave +
+          wave +
+          wave +
+          wave +
+          wave +
+          wave +
+          wave +
+          wave +
+          wave +
+          wave +
+          wave +
+          wave +
+          wave +
+          wave +
+          wave +
+          wave +
+          wave +
+          wave +
+          wave +
+          wave +
+          wave +
+          wave +
+          wave +
+          wave;
       }
 
-      return line
+      return line;
     },
-    centerLFOSwing () {
-      return 'transform: translateX(' + (this.displayWidth / 2) + 'px)'
+    centerLFOSwing() {
+      return "transform: translateX(" + this.displayWidth / 2 + "px)";
     }
     // moveLFOSwingUp() {
     //   return 'translateY(-' + (this.displayHeight/2) + 'px)'
@@ -1018,34 +1469,33 @@ export default {
   watch: {
     // used to update the interval length on rate knob turn
     lfoRealFreq: {
-      handler (newValue, oldValue) {
-        if (this.module == 'lfo') {
-          let realFreq = this.knobs[3]
-          this.changeInterval((1 / (newValue)) * 1000)
+      handler(newValue, oldValue) {
+        if (this.module == "lfo") {
+          let realFreq = this.knobs[3];
+          this.changeInterval((1 / newValue) * 1000);
         }
       },
       deep: true
     }
-
   }
-}
+};
 </script>
 
 <style scoped lang="scss">
-  path {
-    display: inline-block;
-  }
-  .swingClass {
-    transform-origin: 0% -40%;
-  }
-  .debug-text {
-    font: bold 20px sans-serif;
-    fill: red;
-  }
+path {
+  display: inline-block;
+}
+.swingClass {
+  transform-origin: 0% -40%;
+}
+.debug-text {
+  font: bold 20px sans-serif;
+  fill: red;
+}
 
 @media only screen and (max-width: 1000px) {
   .routerscreen {
-    transform: scale(1.35) translateY(2px) !important
+    transform: scale(1.35) translateY(2px) !important;
   }
 }
 </style>
