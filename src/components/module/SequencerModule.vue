@@ -46,12 +46,14 @@
         <transition name="fade" appear mode="out-in" :duration="400">
           <sequencer-button
             v-if="knobsAvailable.steps || createModeIsActive"
+            :key="'steps'"
             @click="toggleNoteOnOff(j)"
             :button-active="j === activeButton"
             :button-selected="noteArray[j] && noteArray[j].selected"
           />
           <SequencerSlider
-            v-if="knobsAvailable.pitch || createModeIsActive"
+            v-else-if="knobsAvailable.pitch || createModeIsActive"
+            :key="'pitch'"
             :value="noteArray[j] && noteArray[j].pitch"
             @input="setPitchValue(j, $event)"
             :min="0"
@@ -69,13 +71,15 @@
             :button-selected="noteArray[j] && noteArray[j].selected"
           /> -->
           <sequencer-button
-            v-if="knobsAvailable.accent || createModeIsActive"
+            v-else-if="knobsAvailable.accent || createModeIsActive"
+            :key="'accent'"
             @click="toggleAccentOnOff(j)"
             :button-active="j === activeButton"
             :button-selected="noteArray[j] && noteArray[j].volume"
           />
           <sequencer-button
-            v-if="knobsAvailable.glide || createModeIsActive"
+            v-else-if="knobsAvailable.glide || createModeIsActive"
+            :key="'glide'"
             @click="toggleGlideOnOff(j)"
             :button-active="j === activeButton"
             :button-selected="noteArray[j] && noteArray[j].glide"
@@ -90,49 +94,57 @@
             :button-selected="noteArray[j] && noteArray[j].selected"
           /> -->
           <sequencer-button
-            v-if="knobsAvailable.kick || createModeIsActive"
+            v-else-if="knobsAvailable.kick || createModeIsActive"
+            :key="'kick'"
             @click="toggleKickOnOff(j)"
             :button-active="j === activeButton"
             :button-selected="noteArray[j] && noteArray[j].kick"
           />
           <sequencer-button
-            v-if="knobsAvailable.hat || createModeIsActive"
+            v-else-if="knobsAvailable.hat || createModeIsActive"
+            :key="'hat'"
             @click="toggleHatOnOff(j)"
             :button-active="j === activeButton"
             :button-selected="noteArray[j] && noteArray[j].hat"
           />
           <sequencer-button
-            v-if="knobsAvailable.clap1 || createModeIsActive"
+            v-else-if="knobsAvailable.clap1 || createModeIsActive"
+            :key="'clap1'"
             @click="toggleClapOnOff(j)"
             :button-active="j === activeButton"
             :button-selected="noteArray[j] && noteArray[j].clap"
           />
           <sequencer-button
-            v-if="knobsAvailable.clap2 || createModeIsActive"
+            v-else-if="knobsAvailable.clap2 || createModeIsActive"
+            :key="'clap2'"
             @click="toggleClap2OnOff(j)"
             :button-active="j === activeButton"
             :button-selected="noteArray[j] && noteArray[j].clap2"
           />
           <sequencer-button
-            v-if="knobsAvailable.cymbal || createModeIsActive"
+            v-else-if="knobsAvailable.cymbal || createModeIsActive"
+            :key="'cymbal'"
             @click="toggleCymbalOnOff(j)"
             :button-active="j === activeButton"
             :button-selected="noteArray[j] && noteArray[j].cymbal"
           />
           <sequencer-button
-            v-if="knobsAvailable.labmyc || createModeIsActive"
+            v-else-if="knobsAvailable.labmyc || createModeIsActive"
+            :key="'labmyc'"
             @click="toggleLabmycOnOff(j)"
             :button-active="j === activeButton"
             :button-selected="noteArray[j] && noteArray[j].labmyc"
           />
           <sequencer-button
-            v-if="knobsAvailable.noise || createModeIsActive"
+            v-else-if="knobsAvailable.noise || createModeIsActive"
+            :key="'noise'"
             @click="toggleNoiseOnOff(j)"
             :button-active="j === activeButton"
             :button-selected="noteArray[j] && noteArray[j].noise"
           />
           <sequencer-button
-            v-if="knobsAvailable.snare || createModeIsActive"
+            v-else-if="knobsAvailable.snare || createModeIsActive"
+            :key="'snare'"
             @click="toggleSnareOnOff(j)"
             :button-active="j === activeButton"
             :button-selected="noteArray[j] && noteArray[j].snare"
