@@ -144,7 +144,7 @@
       @bye="hideSvoosh"
     />
   </div>
-  <div :style="disableCol" :class="`screen screen_score screen_3 screen_score_desktop ${show3dScreen ? 'is-active' : '' }`">
+  <div :style="disableCol" :class="`screen screen_score screen_3 screen_score_desktop ${show3rdScreen ? 'is-active' : '' }`">
     <div class="screen--inner">
       <div class="pads">
         <button
@@ -244,7 +244,7 @@ export default {
       showGame: false,
       show1stScreen: false,
       show2ndScreen: false,
-      show3dScreen: false,
+      show3rdScreen: true,
       pickedPreset: 0,
       pads: ['1', '2', 'Q', 'W', 'A', 'S', 'Z', 'X']
     };
@@ -277,7 +277,7 @@ export default {
       this.show1stScreen = !this.show1stScreen
     },
     toggle3dScreen() {
-      this.show3dScreen = !this.show3dScreen
+      this.show3rdScreen = !this.show3rdScreen
     },
     init() {
       // Retrieve highscore from local storage
@@ -375,7 +375,10 @@ export default {
     },
     midwaySvoosh() {
       this.slide = null
-      this.activeScreen(0, 0)
+      // this.activeScreen(0, 0)
+      this.show1stScreen = false
+      this.show2ndScreen = false
+      this.show3rdScreen = true
     },
     hideSvoosh() {
       setTimeout(() => {
@@ -385,7 +388,9 @@ export default {
     },
 
     activeScreen(index, key) {
-      this.show1stScreen = false;
+      this.show1stScreen = false
+      this.show2ndScreen = true
+      this.show3rdScreen = false
       this.nav.active = this.nav.groups[index].items[key];
       let module = this.nav.groups[index],
         moduleName = module.moduleName,
