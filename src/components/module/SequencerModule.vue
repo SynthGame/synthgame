@@ -43,7 +43,7 @@
     </div>
     <div class="button-section" v-for="i in [0,1,2,3]" :key="i">
       <span class="step-wrapper" v-for="j in getSubRange(i)" :key="j">
-        <transition name="fade" appear mode="out-in" :duration="400">
+        <transition name="fade" appear mode="out-in" :duration="300">
           <sequencer-button
             v-if="knobsAvailable.steps || createModeIsActive"
             :key="'steps'"

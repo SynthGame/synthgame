@@ -127,7 +127,7 @@
           </div>
         </div>
         <div class="screen--inner">
-          <transition name="fade" appear mode="out-in" :duration="400">
+          <transition name="fade" appear mode="out-in" :duration="300">
             <oscillator-module-one v-if="moduleIsUseable('oscillator1')" />
             <oscillator-module-two v-else-if="moduleIsUseable('oscillator2')" />
             <filter-module v-else-if="moduleIsUseable('filter')" />
