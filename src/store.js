@@ -25,6 +25,7 @@ export default new Vuex.Store({
   state: {
     bpm: 110,
     name: "Anonymous",
+    activeButton: 0,
     avatarUrl: null,
     audioParameters: AudioParameters(),
     sequence: NoSequenceAvailable,
@@ -69,11 +70,10 @@ export default new Vuex.Store({
       state.roomId = roomId;
     },
     setRoomHighScores(state, scores) {
-
-      const results = Object.keys(scores).map((key) => {
+      const results = Object.keys(scores).map(key => {
         return {
-          'score': scores[key],
-          'name': key,
+          score: scores[key],
+          name: key
         };
       });
 
@@ -109,6 +109,11 @@ export default new Vuex.Store({
     },
     setBpm(state, { parameter, value }) {
       state[parameter] = value;
+    },
+    setStep(state, i) {
+      if (i) return (state.activeButton = i), state.activeButton;
+      if (state.activeButton === 15) state.activeButton = -1;
+      state.activeButton++;
     },
     setSequence(state, { parameter, value }) {
       state[parameter] = value;
@@ -243,21 +248,21 @@ export default new Vuex.Store({
       const name = store.state.name;
       const score = store.state.gameState.score;
 
-      createRoom({ name, score }, (URL) => {
+      createRoom({ name, score }, URL => {
         store.commit("setRoomId", { URL });
       });
     },
     updateRoom(store) {
-      console .log(store.state.roomId);
-      getRoom(store.state.roomId, (scoreData) => {
+      console.log(store.state.roomId);
+      getRoom(store.state.roomId, scoreData => {
         store.commit("setRoomHighScores", scoreData);
       });
     },
     updateHighScore(store) {
       const url = store.state.roomId,
-      name = store.state.name,
-      score = store.state.gameState.score;
-      updateMyScore({url, name, score}, () => store.dispatch('updateRoom'));
+        name = store.state.name,
+        score = store.state.gameState.score;
+      updateMyScore({ url, name, score }, () => store.dispatch("updateRoom"));
     },
     setAudioParameter(state, { device, parameter, value }) {
       console.log(`device ${device}; param: ${parameter}; value: ${value}`);

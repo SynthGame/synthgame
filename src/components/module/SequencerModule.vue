@@ -164,7 +164,6 @@ export default {
       toneLoop: null,
       sequencerEditState: 0,
       moduleColor: MODULE_SEQUENCER_COLOR,
-      activeButton: 0,
       noteArray: fill(range(0, 16), {
         selected: false,
         pitch: 0,
@@ -475,7 +474,8 @@ export default {
     ...mapState({
       // sequence: state => state.sequence,
       knobsAvailable: state => state.gameState.knobsAvailable.sequencer,
-      createModeIsActive: state => state.gameState.createModeIsActive
+      createModeIsActive: state => state.gameState.createModeIsActive,
+      activeButton: state => state.activeButton
     })
   },
   watch: {

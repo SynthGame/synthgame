@@ -273,6 +273,9 @@ export default {
     this.initSynth();
   },
   methods: {
+    setStep(i) {
+      this.$store.commit("setStep", i);
+    },
     padClick(event, pad) {
       // pad click logic goes here:
       // console.log(pad)
@@ -305,7 +308,7 @@ export default {
           subdivision: "8n"
         },
         (time, note) => {
-          // this.setStep(note)
+          this.setStep(note);
           if (this.sequence[note].selected) {
             // if preview, use octave(frequency) from goal in store
 
