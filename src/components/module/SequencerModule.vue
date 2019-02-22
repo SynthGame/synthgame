@@ -1,7 +1,7 @@
 <template>
   <div class="sequencer">
     <module-title :module-color="moduleColor">
-      <h3 slot="subtitle">Sequencer</h3>
+      <h3 slot="subtitle">{{ sequencerName }}</h3>
     </module-title>
     <div class="sequencer__controls">
       <!-- <div class="button-wrapper function">
@@ -175,6 +175,12 @@ import character from "@/character";
 
 export default {
   name: "SequencerModule",
+  props: {
+    sequencerName: {
+      type: String,
+      default: ''
+    }
+  },
   components: {
     SequencerButton,
     SequencerSlider,

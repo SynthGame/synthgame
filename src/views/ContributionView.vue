@@ -134,7 +134,7 @@
             <envelope-module v-else-if="moduleIsUseable('envelope')" />
             <lfo-module v-else-if="moduleIsUseable('lfo')"/>
             <envelope-module-two v-else-if="moduleIsUseable('envelope2')" />
-            <sequencer-module v-else-if="moduleIsUseable('sequencer')" />
+            <sequencer-module v-else-if="moduleIsUseable('sequencer')" :sequencer-name="nav.active.knobName"  />
             <router-module v-else-if="moduleIsUseable('router')" />
           </transition>
         </div>
