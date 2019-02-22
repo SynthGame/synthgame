@@ -346,6 +346,10 @@
       </div>
       <div class="screen--share">
         <p>Share this link to challenge your Friends!</p>
+        <div class="username_container">
+          <input class="username_input" v-model="userName" type="text" placeholder="Username"/>
+          <button class="btn btn_stroke btn_primary btn-username" @click="setUsername">ENTER</button>
+        </div>
         <div v-if="!shareLink" class="play-with-friends">
           <button @click="generateShareLink" class="btn btn_stroke btn_primary">PLAY WITH FRIENDS</button>
         </div>
@@ -417,6 +421,7 @@ export default {
   name: "home",
   data() {
     return {
+      userName: null,
       activeModule: 0,
       totalAttempts: 10,
       slide: 0,
@@ -452,7 +457,7 @@ export default {
   },
   created() {
     const roomId = this.$route.params.user_id;
-    if (roomId !== null) {
+    if (roomId !== 'game') {
       console.log(`ROOM ID ${roomId}`);
       this.$store.commit("setRoomId", { roomId });
     }
@@ -513,6 +518,10 @@ export default {
     // }
   },
   methods: {
+    setUsername() {
+      console.log(this.userName)
+      this.$store.commit("setUsername", { userName: this.userName });
+    },
     generateShareLink() {
       this.$store.dispatch("createNewRoom");
     },
@@ -879,6 +888,23 @@ export default {
 
 .play-with-friends {
   margin-top: 10px;
+}
+
+.username_input {
+    border: 1px solid #fff;
+    text-align: center;
+    min-width: 184px;
+}
+
+.btn-username {
+  min-width: 100px;
+}
+
+.username_container {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 24px;
+  margin-left: 15px;
 }
 
 </style>

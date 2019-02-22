@@ -2,8 +2,8 @@
 <div class="cols">
   <nav :style="disableCol" :class="`screen navigation ${show1stScreen ? 'is-active' : ''}`">
     <div class="navigation--inner">
-      <div 
-        v-for="(group, index) in nav.groups" 
+      <div
+        v-for="(group, index) in nav.groups"
         :key="index"
         :class="[
           `navigation--group_${group.title.toLowerCase().replace(' ', '')}`,
@@ -224,12 +224,13 @@ import character from "@/character";
 import levels from "@/levels";
 import range from "lodash/range";
 import Nav from "@/nav";
+import { mapState } from "vuex";
 
 export default {
   name: "home",
   data() {
     return {
-      activeModule: 'oscillator1',
+      activeModule: "oscillator1",
       slide: 0,
       marginArray: [0, 0.2, 0.4, 0.6],
       oscillatorColor: MODULE_OSCILLATOR_COLOR,
@@ -246,7 +247,7 @@ export default {
       show2ndScreen: false,
       show3rdScreen: true,
       pickedPreset: 0,
-      pads: ['1', '2', 'Q', 'W', 'A', 'S', 'Z', 'X']
+      pads: ["1", "2", "Q", "W", "A", "S", "Z", "X"]
     };
   },
   components: {
@@ -262,19 +263,22 @@ export default {
     Svoosh
   },
   mounted() {
-      this.show2ndScreen = true;
+    this.show2ndScreen = true;
   },
   created() {
     this.init();
     this.initSynth();
   },
   methods: {
+    setStep(i) {
+      this.$store.commit("setStep", i);
+    },
     padClick(event, pad) {
       // pad click logic goes here:
       // console.log(pad)
     },
     toggle1stScreen() {
-      this.show1stScreen = !this.show1stScreen
+      this.show1stScreen = !this.show1stScreen;
     },
     toggle3dScreen() {
       this.show3rdScreen = !this.show3rdScreen
@@ -301,63 +305,45 @@ export default {
           subdivision: "8n"
         },
         (time, note) => {
-          // this.setStep(note)
-          if (this.noteArray[note].selected) {
+          this.setStep(note);
+          if (this.sequence[note].selected) {
             // if preview, use octave(frequency) from goal in store
-            if (this.displayPreviewOverlay) {
-              audio.playNote(this.noteArray[note].pitch, {
-                noteLength: "8n",
-                volume: this.noteArray[note].volume
-                  ? this.noteArray[note].volume
-                  : 0,
-                time: note,
-                glide: this.noteArray[note].glide
-                  ? this.noteArray[note].glide
-                  : 0,
-                octaveOsc1:
-                  self.$store.state.gameState.goal.oscillator1.frequency,
-                octaveOsc2:
-                  self.$store.state.gameState.goal.oscillator2.frequency
-              });
-            } else {
-              audio.playNote(this.noteArray[note].pitch, {
-                noteLength: "8n",
-                volume: this.noteArray[note].volume
-                  ? this.noteArray[note].volume
-                  : 0,
-                time: note,
-                glide: this.noteArray[note].glide
-                  ? this.noteArray[note].glide
-                  : 0,
-                octaveOsc1:
-                  self.$store.state.audioParameters.oscillator1.frequency,
-                octaveOsc2:
-                  self.$store.state.audioParameters.oscillator2.frequency
-              });
-            }
+
+            audio.playNote(this.sequence[note].pitch, {
+              noteLength: "8n",
+              volume: this.sequence[note].volume
+                ? this.sequence[note].volume
+                : 0,
+              time: note,
+              glide: this.sequence[note].glide ? this.sequence[note].glide : 0,
+              octaveOsc1:
+                self.$store.state.audioParameters.oscillator1.frequency,
+              octaveOsc2:
+                self.$store.state.audioParameters.oscillator2.frequency
+            });
           }
-          if (this.noteArray[note].kick && this.displayStartOverlay) {
+          if (this.sequence[note].kick) {
             audio.playKick();
           }
-          if (this.noteArray[note].hat && this.displayStartOverlay) {
+          if (this.sequence[note].hat) {
             audio.playHat();
           }
-          if (this.noteArray[note].clap && this.displayStartOverlay) {
+          if (this.sequence[note].clap) {
             audio.playClap();
           }
-          if (this.noteArray[note].clap2 && this.displayStartOverlay) {
+          if (this.sequence[note].clap2) {
             audio.playClap2();
           }
-          if (this.noteArray[note].cymbal && this.displayStartOverlay) {
+          if (this.sequence[note].cymbal) {
             audio.playCymbal();
           }
-          if (this.noteArray[note].labmyc && this.displayStartOverlay) {
+          if (this.sequence[note].labmyc) {
             audio.playLabmyc();
           }
-          if (this.noteArray[note].noise && this.displayStartOverlay) {
+          if (this.sequence[note].noise) {
             audio.playNoise();
           }
-          if (this.noteArray[note].snare && this.displayStartOverlay) {
+          if (this.sequence[note].snare) {
             audio.playSnare();
           }
         }
@@ -365,12 +351,12 @@ export default {
       this.toneLoop.start();
     },
     startButton() {
-      this.showSvoosh()
+      this.showSvoosh();
     },
 
     // SWOOSH that shows up on the beginning only
     showSvoosh() {
-      this.isThereSvooshComponent = true
+      this.isThereSvooshComponent = true;
       this.$nextTick(() => (this.svooshIt = true));
     },
     midwaySvoosh() {
@@ -411,6 +397,9 @@ export default {
     }
   },
   computed: {
+    ...mapState({
+      sequence: state => state.sequence
+    }),
     nav() {
       return Nav;
     },
@@ -425,19 +414,25 @@ export default {
     },
     disableCol() {
       if (this.slide !== 0) {
-        return [{
-          opacity: 1
-        },  {
-          pointerEvents: 'auto'
-        }]
+        return [
+          {
+            opacity: 1
+          },
+          {
+            pointerEvents: "auto"
+          }
+        ];
       } else {
-        return [{
-          opacity: 0.2
-        },  {
-          pointerEvents: 'none'
-        }]
+        return [
+          {
+            opacity: 0.2
+          },
+          {
+            pointerEvents: "none"
+          }
+        ];
       }
     }
-  },
+  }
 };
 </script>
