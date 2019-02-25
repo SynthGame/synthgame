@@ -503,14 +503,14 @@ export default {
     window.letsPlay = () => this.initM();
 
     // Pc keyboard listener (might be needed for mobile)
-    document.addEventListener("keypress", event => {
+    document.addEventListener("touchstart", event => {
       if (audio.state.Tone.context.state !== "running") {
         audio.state.Tone.context.resume();
       }
 
-      if (event.keyCode === 27 && this.displayOriginalOverlay) {
-        this.killOrignalSoundPrompt();
-      }
+      // if (event.keyCode === 27 && this.displayOriginalOverlay) {
+      //   this.killOrignalSoundPrompt();
+      // }
       // const key = event.key
     });
 
@@ -678,7 +678,7 @@ export default {
 
       this.cheekySvoosh();
       console.log("startLevelPreview triggered");
-      
+
       this.$store.commit('resetPreviewTimer');
 
       this.$nextTick(() => {
