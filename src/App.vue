@@ -62,6 +62,7 @@ import range from "lodash/range";
 import fill from "lodash/fill";
 import character from "@/character";
 import "confetti-js";
+import 'prevent-pull-refresh';
 
 export default {
   name: "App",
