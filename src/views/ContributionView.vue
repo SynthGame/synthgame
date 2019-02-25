@@ -218,6 +218,17 @@
       :style="disableCol"
       :class="`screen screen_score screen_3 screen_score_desktop ${show3rdScreen ? 'is-active' : '' }`"
     >
+      <div class="screen--header hide-mobile">
+        <div class="screen--header-inner u-mr_0">
+          <div />
+          <div />
+          <router-link to="/" class="btn btn_link btn_primary">
+            <span class="btn--inner">
+              <span class="btn--inner-text">or Play a game</span>
+            </span>
+          </router-link>
+        </div>
+      </div>
       <div class="screen--inner">
         <div class="pads">
           <button
