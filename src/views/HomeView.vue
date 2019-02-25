@@ -183,8 +183,9 @@
               @click="slide === 0 ? startNextLevel() : enterLevel()"
               class="btn btn_stroke btn_primary"
             >
-              <span class="btn--inner">
-                <span class="btn--inner-text">Continue</span>
+              <span :class="previewClasses">
+                <span v-if="previewTimer > 0" class="btn--inner-text">{{ previewTimer }}</span>
+                <span v-if="previewTimer <= 0" class="btn--inner-text">Continue</span>
               </span>
             </button>
           </div>
@@ -417,6 +418,7 @@ import character from "@/character";
 import levels from "@/levels";
 import range from "lodash/range";
 import Nav from "@/game_nav";
+import { setInterval, clearTimeout } from 'timers';
 
 export default {
   name: "home",
@@ -439,7 +441,8 @@ export default {
       svooshIt: false,
       show1stScreen: false,
       showGame: false,
-      pickedPreset: 0
+      pickedPreset: 0,
+      timer: null,
     };
   },
   components: {
@@ -458,6 +461,9 @@ export default {
     this.showStartScreen = true;
   },
   created() {
+    if(this.timer != null) {
+      clearInterval(this.timer);
+    }
     const roomId = this.$route.params.user_id;
     if (roomId !== "game") {
       console.log(`ROOM ID ${roomId}`);
@@ -652,8 +658,11 @@ export default {
     // LEVEL
     // // // //
     startLevelPreview(level) {
+
       this.cheekySvoosh();
       console.log("startLevelPreview triggered");
+      
+      this.$store.commit('resetPreviewTimer');
 
       this.$nextTick(() => {
         // disable all overlays when svoosh is done
@@ -725,6 +734,13 @@ export default {
         knobsAvailable: availableParameters,
         levelNumber: level || 0
       });
+
+      this.timer = setInterval(() => {
+        this.$store.commit('decrementPreviewTimer');
+        if(this.previewTimer == 0){
+          clearInterval(timer);
+        }
+      }, 1000);
     },
     startPreset(parameters, bpm) {
       const usedParameters = mapValues(parameters, audioModule =>
@@ -813,6 +829,12 @@ export default {
     }
   },
   computed: {
+    previewClasses() {
+      return this.timer > 0 ? 'btn--inner is-disabled' : 'btn--inner';
+    },
+    previewTimer() {
+      return this.$store.state.gameState.previewTimer;
+    },
     ...vuexSyncGenSequence("sequence", val => {}),
     highscores() {
       return this.$store.state.roomHighScores;

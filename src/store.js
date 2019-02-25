@@ -50,6 +50,7 @@ export default new Vuex.Store({
       userAttemptPreset: AudioParameters(),
       defaultParams: AudioParameters(),
       knobsAvailable: NoKnobsAvalible,
+      previewTimer: 0,
 
       presetNumber: 0,
 
@@ -66,6 +67,13 @@ export default new Vuex.Store({
     }
   },
   mutations: {
+    // PREVIEW
+    decrementPreviewTimer(state) {
+      state.gameState.previewTimer = state.gameState.previewTimer - 1;
+    },
+    resetPreviewTimer(state) {
+      state.gameState.previewTimer = 8;
+    },
     // Contribution 
     setContributionLink(state, { link }) {
       state.contributionId = link;
