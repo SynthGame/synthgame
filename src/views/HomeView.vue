@@ -294,6 +294,17 @@
     </div>
     <div class="screen screen_score screen_score_desktop hide-mobile">
       <div class="screen--inner">
+        <div class="screen--header hide-mobile">
+          <div class="screen--header-inner u-mr_0">
+            <div />
+            <div />
+            <router-link to="/contribution" class="btn btn_link btn_primary">
+              <span class="btn--inner">
+                <span class="btn--inner-text">or Make a song</span>
+              </span>
+            </router-link>
+          </div>
+        </div>
         <div class="leaderboard">
           <div class="leaderboard--title">
             <span class="leaderboard--title-inner">
