@@ -83,31 +83,31 @@ export default {
         }
       ]
     },
-    {
-      moduleName: "envelope2",
-      title: "MOD ENV",
-      icon: "envelope2",
-      items: [
-        {
-          title: "attack",
-          knobName: "attack",
-          author: "",
-          score: 9
-        },
-        {
-          title: "decay",
-          knobName: "decay",
-          author: "",
-          score: 10
-        },
-        {
-          title: "amount",
-          knobName: "amount",
-          author: "",
-          score: 11
-        }
-      ]
-    },
+    // {
+    //   moduleName: "envelope2",
+    //   title: "MOD ENV",
+    //   icon: "envelope2",
+    //   items: [
+    //     {
+    //       title: "attack",
+    //       knobName: "attack",
+    //       author: "",
+    //       score: 9
+    //     },
+    //     {
+    //       title: "decay",
+    //       knobName: "decay",
+    //       author: "",
+    //       score: 10
+    //     },
+    //     {
+    //       title: "amount",
+    //       knobName: "amount",
+    //       author: "",
+    //       score: 11
+    //     }
+    //   ]
+    // },
     {
       moduleName: "lfo",
       title: "LFO",
@@ -117,41 +117,41 @@ export default {
           title: "Speed",
           knobName: "Speed",
           author: "",
-          score: 12
+          score: 9
         },
         {
           title: "frequency",
           knobName: "frequency",
           author: "",
-          score: 13
+          score: 10
         },
         {
           title: "type",
           knobName: "type",
           author: "",
-          score: 14
+          score: 11
         }
       ]
     },
-    {
-      moduleName: "router",
-      title: "Router",
-      icon: "router",
-      items: [
-        {
-          title: "lfo",
-          knobName: "lfo",
-          author: "",
-          score: 15
-        },
-        {
-          title: "envelope2",
-          knobName: "envelope2",
-          author: "",
-          score: 16
-        }
-      ]
-    },
+    // {
+    //   moduleName: "router",
+    //   title: "Router",
+    //   icon: "router",
+    //   items: [
+    //     {
+    //       title: "lfo",
+    //       knobName: "lfo",
+    //       author: "",
+    //       score: 15
+    //     },
+    //     {
+    //       title: "envelope2",
+    //       knobName: "envelope2",
+    //       author: "",
+    //       score: 16
+    //     }
+    //   ]
+    // },
     {
       moduleName: "sequencer",
       title: "Sequencer",
@@ -161,73 +161,73 @@ export default {
           title: "steps",
           knobName: "steps",
           author: "",
-          score: 17
+          score: 12
         },
         {
           title: "pitch",
           knobName: "pitch",
           author: "",
-          score: 18
+          score: 13
         },
         {
           title: "glide",
           knobName: "glide",
           author: "",
-          score: 19
+          score: 14
         },
         {
           title: "accent",
           knobName: "accent",
           author: "",
-          score: 20
+          score: 15
         },
         {
           title: "kick",
           knobName: "kick",
           author: "",
-          score: 21
+          score: 16
         },
         {
           title: "hat",
           knobName: "hat",
           author: "",
-          score: 22
+          score: 17
         },
         {
           title: "snare",
           knobName: "snare",
           author: "",
-          score: 23
+          score: 18
         },
         {
           title: "clap1",
           knobName: "clap1",
           author: "",
-          score: 24
+          score: 19
         },
         {
           title: "clap2",
           knobName: "clap2",
           author: "",
-          score: 25
+          score: 20
         },
         {
           title: "cymbal",
           knobName: "cymbal",
           author: "",
-          score: 26
+          score: 21
         },
         {
           title: "labmyc",
           knobName: "labmyc",
           author: "",
-          score: 27
+          score: 22
         },
         {
           title: "noise",
           knobName: "noise",
           author: "",
-          score: 28
+          score: 23
         }
       ]
     }

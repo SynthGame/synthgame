@@ -6,9 +6,7 @@
         <div class="overlay--inner">
           <div class="overlay--title">Yay! You made it!</div>
           <div class="overlay--title">SCORED +{{ levelScore }} POINTS!</div>
-          <button
-            @click="showNextLevel()"
-            class="btn_full btn btn_stroke btn_primary">
+          <button @click="showNextLevel()" class="btn_full btn btn_stroke btn_primary">
             <span class="btn--inner">
               <span class="btn--inner-text">Next</span>
             </span>
@@ -23,8 +21,7 @@
         @next="startNextLevel"
         @closesuccessoverlay="closeSuccessOverlay"
       />
-    </transition> -->
-
+    </transition>-->
     <transition name="fade">
       <original-sound-overlay
         v-if="displayOriginalOverlay"
@@ -35,9 +32,8 @@
       />
     </transition>
 
-
     <failure-overlay v-if="isGameOver" @startagain="startAgain" @startlastlevel="startLastLevel"/>
-    <router-view />
+    <router-view/>
   </div>
 </template>
 
@@ -93,7 +89,7 @@ export default {
         glide: false
       }),
       originalSoundTimer: 8,
-      timerInterval: 0
+      timerInterval: null,
     };
   },
   mounted() {
@@ -133,6 +129,9 @@ export default {
       allParametersMatchGoal: "allParametersMatchGoal",
       levelScore: "returnLevelScore"
     }),
+    preViewtimer() {
+      return this.$store.state.gameState.previewTimer;
+    },
     attempts() {
       return this.$store.state.gameState.attempts;
     },
@@ -240,23 +239,25 @@ export default {
     retreat() {
       // advance to next level failing current level + 0 Points
     },
-    countdown() {
-      this.originalSoundTimer -= 1;
-      console.log(this.originalSoundTimer);
-      if (this.originalSoundTimer === 0) {
-        this.killOrignalSoundPrompt();
-      }
-    },
+    // countdown() {
+    //   this.originalSoundTimer -= 1;
+    //   console.log(this.originalSoundTimer);
+    //   if (this.originalSoundTimer === 0) {
+    //     this.killOrignalSoundPrompt();
+    //   }
+    // },
     originalSoundPrompt() {
       let self = this;
       self.$store.dispatch("setSynthToGoal", audio);
       this.displayOriginalOverlay = true; // create this overlay.
     },
     killOrignalSoundPrompt() {
-      this.displayOriginalOverlay = false;
-      clearInterval(this.timerInterval);
-      this.originalSoundTimer = 8;
-      this.$store.dispatch("setSynthToAudioParameters", audio);
+      if(!(this.preViewtimer > 0)) {
+        this.displayOriginalOverlay = false;
+        clearInterval(this.timerInterval);
+        this.originalSoundTimer = 8;
+        this.$store.dispatch("setSynthToAudioParameters", audio);
+      }
     },
     forfeit() {
       this.killOrignalSoundPrompt();
@@ -291,6 +292,12 @@ export default {
           this.displayOriginalOverlay = true;
           audio.playGameOver();
           this.originalSoundPrompt();
+          this.timerInterval = setInterval(() => {
+            this.$store.commit("decrementPreviewTimer");
+            if (this.previewTimer == 0) {
+              clearInterval(this.timerInterval);
+            }
+          }, 1000);
         }
       }
     }

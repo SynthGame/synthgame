@@ -179,10 +179,7 @@
         </transition>
         <div class="screen--footer">
           <div class="screen--footer-inner">
-            <button
-              @click="slide === 0 ? startNextLevel() : enterLevel()"
-              class="btn btn_stroke btn_primary"
-            >
+            <button @click="startClick()" class="btn btn_stroke btn_primary">
               <span :class="previewClasses">
                 <span v-if="previewTimer > 0" class="btn--inner-text">{{ previewTimer }}</span>
                 <span v-if="previewTimer <= 0" class="btn--inner-text">Continue</span>
@@ -197,10 +194,19 @@
             <button @click="toggle1stScreen()" class="btn btn_navigation">
               <span class="btn--inner">
                 <span class="btn--inner-text">
-                  <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="feather feather-menu" viewBox="0 0 24 24">
-                    <line x1="3" x2="21" y1="12" y2="12"/>
-                    <line x1="3" x2="21" y1="6" y2="6"/>
-                    <line x1="3" x2="21" y1="18" y2="18"/>
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    class="feather feather-menu"
+                    viewBox="0 0 24 24"
+                  >
+                    <line x1="3" x2="21" y1="12" y2="12"></line>
+                    <line x1="3" x2="21" y1="6" y2="6"></line>
+                    <line x1="3" x2="21" y1="18" y2="18"></line>
                   </svg>
                 </span>
               </span>
@@ -253,7 +259,10 @@
             v-show="moduleIsUseable('envelope')"
             :class="[(activeModule == 3 ? 'active' : '')]"
           />
-          <lfo-module v-show="moduleIsUseable('lfo')" :class="[(activeModule == 4 ? 'active' : '')]"/>
+          <lfo-module
+            v-show="moduleIsUseable('lfo')"
+            :class="[(activeModule == 4 ? 'active' : '')]"
+          />
           <envelope-module-two
             v-show="moduleIsUseable('envelope2')"
             :class="[(activeModule == 5 ? 'active' : '')]"
@@ -307,10 +316,12 @@
             </span>
           </div>
           <ul class="leaderboard--list">
-            <li v-for="(score, index) in highscores" :key="index" :class="`leaderboard--list-item ${i === 24 ? 'is-active' : ''}`">
-              <div class="leaderboard--name">
-                {{ score.name }}
-              </div>
+            <li
+              v-for="(score, index) in highscores"
+              :key="index"
+              :class="`leaderboard--list-item ${i === 24 ? 'is-active' : ''}`"
+            >
+              <div class="leaderboard--name">{{ score.name }}</div>
               <div class="leaderboard--value">{{score.score}}</div>
             </li>
           </ul>
@@ -348,7 +359,7 @@
       <div class="screen--share">
         <p>Share this link to challenge your Friends!</p>
         <div v-if="!userName" class="username_container">
-          <input class="username_input" v-model="userName" type="text" placeholder="Username"/>
+          <input class="username_input" v-model="userName" type="text" placeholder="Username">
           <button class="btn btn_stroke btn_primary btn-username" @click="setUsername">ENTER</button>
         </div>
         <div v-if="!shareLink" class="play-with-friends">
@@ -418,7 +429,7 @@ import character from "@/character";
 import levels from "@/levels";
 import range from "lodash/range";
 import Nav from "@/game_nav";
-import { setInterval, clearTimeout } from 'timers';
+import { setInterval, clearTimeout, clearInterval } from 'timers';
 
 export default {
   name: "home",
@@ -527,6 +538,14 @@ export default {
     // }
   },
   methods: {
+    startClick() {
+      if(!(this.preViewtimer > 0)) {
+        this.slide === 0 ? this.startNextLevel() : this.enterLevel()
+      }
+    },
+    pickPreset() {
+      this.presets
+    },
     refreshRouting() {
       audio.connectLfo(this.$store.state.audioParameters.router.lfo);
       audio.connectEnvelope2(
@@ -661,11 +680,19 @@ export default {
       this.setSoundToRandom();
       this.displayPreviewOverlay = false;
       this.slide = null;
+      clearInterval(this.timer);
     },
     setSoundToRandom() {
       const { device, paramater } = levels[this.level].levelData;
       console.log(`${device}, ${paramater}`);
       this.$store.dispatch("randomizeAudioParameters", { device, paramater });
+      if( paramater == 'typeOsc' ) {
+        console.log('on/off synth');
+        audio.oscillator1.state.device.stop();
+        audio.oscillator1.state.device.start();
+        audio.oscillator2.state.device.stop();
+        audio.oscillator2.state.device.start();
+      }
     },
     // LEVEL
     // // // //
@@ -691,6 +718,9 @@ export default {
 
       // randomly pick preset
       this.pickedPreset = Math.round(Math.random() * (presets.length - 1));
+
+      this.newPickedPreset = this.pickPreset(level);
+      console.log(this.newPickedPreset);
 
       // SET GOAL TO GOAL SOUND
       this.$store.commit("setGoalToPreset", {
@@ -743,7 +773,7 @@ export default {
       this.timer = setInterval(() => {
         this.$store.commit('decrementPreviewTimer');
         if(this.previewTimer == 0){
-          clearInterval(timer);
+          clearInterval(this.timer);
         }
       }, 1000);
     },
@@ -834,6 +864,9 @@ export default {
     }
   },
   computed: {
+    preViewtimer() {
+      return this.$store.state.gameState.previewTimer;
+    },
     previewClasses() {
       return this.timer > 0 ? 'btn--inner is-disabled' : 'btn--inner';
     },
