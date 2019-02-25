@@ -57,6 +57,7 @@ export default new Vuex.Store({
       userAttemptPreset: AudioParameters(),
       defaultParams: AudioParameters(),
       knobsAvailable: NoKnobsAvalible,
+      previewTimer: 0,
 
       presetNumber: 0,
 
@@ -74,7 +75,14 @@ export default new Vuex.Store({
     }
   },
   mutations: {
-    // Contribution
+    // PREVIEW
+    decrementPreviewTimer(state) {
+      state.gameState.previewTimer = state.gameState.previewTimer - 1;
+    },
+    resetPreviewTimer(state) {
+      state.gameState.previewTimer = 8;
+    },
+    // Contribution 
     setContributionLink(state, { link }) {
       state.contributionId = link;
     },
@@ -232,6 +240,13 @@ export default new Vuex.Store({
     },
     displayedLevel: (state, getters) => {
       return state.gameState.level + 1;
+    },
+    returnLevelScore: (state) => {
+      if(state.gameState.level == -1) {
+        return 0;
+      } else {
+        return state.gameState.levels[state.gameState.level].levelData.score;
+      }
     },
     audioParametersMatchGoalWithMargin: state => {
       function reduceKnobsAvalible() {

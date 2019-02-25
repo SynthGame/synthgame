@@ -3,12 +3,13 @@
     <div class="overlay--inner">
       <div class="overlay--title">Oooops!</div>
       <div class="overlay--description">You have made {{ attempts }} of 10 attempts.</div>
-      <div class="overlay--description">Listen to the original audio</div>
+      <div class="overlay--description"><b>Listen</b> to the original audio</div>
       <button
         @click="closeoverlay"
         class="btn_full btn btn_stroke btn_primary">
-        <span class="btn--inner">
-          <span class="btn--inner-text">Try again</span>
+        <span :class="previewClasses">
+          <span v-if="timer > 0" class="btn--inner-text">{{ timer }}</span>
+          <span v-if="timer <= 0" class="btn--inner-text">Try again</span>
         </span>
       </button>
     </div>
@@ -30,7 +31,6 @@ export default {
     closeoverlay: Function,
     retreat: Function,
     forfeit: Function,
-    timer: Number,
   },
   data () {
     return {
@@ -48,9 +48,8 @@ export default {
       attempts: this.$store.state.gameState.attempts,
     }
   },
-  created () {
-  },
   mounted () {
+    this.$store.commit('resetPreviewTimer');
     // this.anim[Math.floor(Math.random()*this.anim.length)]
     // console.log(this.anim[drum])
     this.currentAnim = Math.floor(Math.random() * this.anim.length)
@@ -59,9 +58,6 @@ export default {
     this.changeColor()
   },
   beforeDestroy () {
-
-  },
-  methods: {
 
   },
   created () {
@@ -95,6 +91,12 @@ export default {
     }
   },
   computed: {
+    timer() {
+      return this.$store.state.gameState.previewTimer;
+    },
+    previewClasses() {
+      return this.timer > 0 ? 'btn--inner is-disabled' : 'btn--inner';
+    },
     computedRackedStyles () {
       return {'animation-name': 'racket-movement',
         'animation-duration': '1s',
