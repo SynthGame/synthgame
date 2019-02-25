@@ -105,6 +105,21 @@
     width: 100%;
   }
 
+  &.is-disabled {
+    &:focus, &:active, &:hover, & {
+      background: grey !important;
+      color: $colour_white !important;
+      border-color: grey !important;
+      pointer-events: none;
+      user-select: none;
+      .btn--inner {
+        &:before {
+          display: none;
+        }
+      }
+    }
+  }
+
   &_leaderboard {
     fill: currentColor;
     display: block;

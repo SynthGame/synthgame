@@ -175,12 +175,11 @@
         <div class="screen--footer">
           <div class="screen--footer-inner">
             <button
-              @click="slide === 0 ? startNextLevel() : enterLevel()"
-              class="btn btn_stroke btn_primary"
+              @click="(previewTimer <= 0 && (slide === 0 ? startNextLevel() : enterLevel()))"
+              :class="['btn', 'btn_stroke', 'btn_primary', {'is-disabled': previewTimer > 0}]"
             >
-              <span :class="previewClasses">
-                <span v-if="previewTimer > 0" class="btn--inner-text">{{ previewTimer }}</span>
-                <span v-if="previewTimer <= 0" class="btn--inner-text">Continue</span>
+              <span class="btn--inner">
+                <span class="btn--inner-text">{{ previewTimer > 0 ? previewTimer : 'Continue' }}</span>
               </span>
             </button>
           </div>
@@ -735,10 +734,13 @@ export default {
         levelNumber: level || 0
       });
 
-      this.timer = setInterval(() => {
-        this.$store.commit('decrementPreviewTimer');
-        if(this.previewTimer == 0){
-          clearInterval(timer);
+      let self = this
+
+      self.timer = setInterval(() => {
+        self.$store.commit('decrementPreviewTimer');
+        if(self.timer.previewTimer === 0){
+          clearInterval(self.timer);
+          return false
         }
       }, 1000);
     },
@@ -830,7 +832,7 @@ export default {
   },
   computed: {
     previewClasses() {
-      return this.timer > 0 ? 'btn--inner is-disabled' : 'btn--inner';
+      return this.timer > 0 ? 'is-disabled' : '';
     },
     previewTimer() {
       return this.$store.state.gameState.previewTimer;
