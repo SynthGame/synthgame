@@ -134,6 +134,11 @@
               <br>Your
               <br>Song!
             </div>
+            <router-link to="/" class="btn btn_link btn_primary">
+              <span class="btn--inner">
+                <span class="btn--inner-text">or Play a game</span>
+              </span>
+            </router-link>
           </div>
           <div class="screen--footer">
             <div class="screen--footer-inner">
@@ -229,8 +234,8 @@
           </router-link>
         </div>
       </div>
-      <div class="screen--inner">
-        <div class="pads">
+      <div class="screen--inner screen--inner_reduced">
+        <div v-if="false" class="pads">
           <button
             v-for="(pad, index) in pads"
             :key="index"
@@ -242,10 +247,14 @@
             </span>
           </button>
         </div>
-        <div class="hide-mobile screen--share">
-          <p>Anyone with this link can join and create their song on top of this one.</p>
+        <div class="screen--share">
+          <p style="margin-bottom: 20px; text-align: right;">Anyone with this link can join and create their song on top of this one.</p>
           <div v-if="!shareLink" class="play-with-friends">
-            <button @click="generateShareLink" class="btn btn_stroke btn_primary">PLAY WITH FRIENDS</button>
+            <button @click="generateShareLink" class="btn btn_stroke btn_primary">
+              <span class="btn--inner">
+                <span class="btn--inner-text">Play with friends</span>
+              </span>
+            </button>
           </div>
           <div v-if="shareLink" class="screen--share-inner">
             <div class="screen--share-url">
@@ -543,3 +552,13 @@ export default {
   }
 };
 </script>
+<style lang="scss" scoped>
+  .screen--inner_reduced {
+    height: calc(100vh - 58px);
+    @media screen and (max-width: 799px) {
+      .screen--share {
+        margin: 0 auto;
+      }
+    }
+  }
+</style>
