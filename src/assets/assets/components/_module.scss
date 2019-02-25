@@ -35,7 +35,9 @@
       box-sizing: content-box;
       margin: 0 auto 20px;
       button {
-        width: 60px; height: 60px; flex-shrink: 0;
+        width: 60px;
+        height: 60px;
+        flex-shrink: 0;
         display: block;
         svg {
           padding: 0;
@@ -96,7 +98,8 @@
     position: relative;
     z-index: 99;
     overflow: hidden;
-    margin-bottom: 120px;
+    // margin-bottom: 120px; // on iphone se button is pushed out of screen because of this. need fix
+    margin-bottom: 1.5em;
     path {
       transition: 0.1s all ease-out;
     }
