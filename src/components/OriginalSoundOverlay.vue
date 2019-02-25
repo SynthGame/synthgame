@@ -17,12 +17,19 @@
 </template>
 
 <script>
-import { keyframes, easing } from 'popmotion'
-import { MODULE_OSCILLATOR_COLOR, MODULE_ENVELOPE_COLOR, MODULE_FILTER_COLOR, MODULE_LFO_COLOR, MODULE_DELAY_COLOR, MODULE_REVERB_COLOR } from '@/constants'
-import { color } from 'style-value-types'
+import { keyframes, easing } from "popmotion";
+import {
+  MODULE_OSCILLATOR_COLOR,
+  MODULE_ENVELOPE_COLOR,
+  MODULE_FILTER_COLOR,
+  MODULE_LFO_COLOR,
+  MODULE_DELAY_COLOR,
+  MODULE_REVERB_COLOR
+} from "@/constants";
+import { color } from "style-value-types";
 
 export default {
-  name: 'original-sound-overlay',
+  name: "original-sound-overlay",
   props: {
     // level: {
     //   type: Number,
@@ -30,9 +37,9 @@ export default {
     // }
     closeoverlay: Function,
     retreat: Function,
-    forfeit: Function,
+    forfeit: Function
   },
-  data () {
+  data() {
     return {
       currentAnim: null,
       anim: {
@@ -44,50 +51,58 @@ export default {
         drum: {}
       },
       colorArray: [],
-      currentColor: '',
-      attempts: this.$store.state.gameState.attempts,
-    }
+      currentColor: "",
+      attempts: this.$store.state.gameState.attempts
+    };
   },
-  mounted () {
-    this.$store.commit('resetPreviewTimer');
+  mounted() {
+    this.$store.commit("resetPreviewTimer");
     // this.anim[Math.floor(Math.random()*this.anim.length)]
     // console.log(this.anim[drum])
-    this.currentAnim = Math.floor(Math.random() * this.anim.length)
-    window.addEventListener('keydown', this.emitOnKey)
-    this.colorArray.push(MODULE_OSCILLATOR_COLOR, MODULE_ENVELOPE_COLOR, MODULE_FILTER_COLOR, MODULE_LFO_COLOR, MODULE_DELAY_COLOR, MODULE_REVERB_COLOR)
-    this.changeColor()
+    this.currentAnim = Math.floor(Math.random() * this.anim.length);
+    window.addEventListener("keydown", this.emitOnKey);
+    this.colorArray.push(
+      MODULE_OSCILLATOR_COLOR,
+      MODULE_ENVELOPE_COLOR,
+      MODULE_FILTER_COLOR,
+      MODULE_LFO_COLOR,
+      MODULE_DELAY_COLOR,
+      MODULE_REVERB_COLOR
+    );
+    this.changeColor();
   },
-  beforeDestroy () {
-
+  beforeDestroy() {
   },
-  created () {
-    keyframes({
-      values: [ // you can include anything here, jus values or '10px' or colors whatever
-        { ballY: 0, racketRotate: 0, racketYOffset: 0},
-        { ballY: -180, racketRotate: 12, racketYOffset: 20},
-        { ballY: 0, racketRotate: 0, racketYOffset: 0}
-      ],
-      loop: Infinity,
-      duration: 545,
-      easings: [easing.easeOut, easing.easeIn, easing.lineair]
-    }).start({
-      update: v => {
-        this.anim.ping.ballHeight = v.ballY
-        this.anim.ping.racketTurn = v.racketRotate
-        this.anim.ping.racketYOffset = v.racketYOffset
-        if (v.ballY == 0) {
-          this.changeColor()
-        }
-      },
-      complete: () => { console.log('lalala') }
-    })
+  created() {
+    // keyframes({
+    //   values: [ // you can include anything here, jus values or '10px' or colors whatever
+    //     { ballY: 0, racketRotate: 0, racketYOffset: 0},
+    //     { ballY: -180, racketRotate: 12, racketYOffset: 20},
+    //     { ballY: 0, racketRotate: 0, racketYOffset: 0}
+    //   ],
+    //   loop: Infinity,
+    //   duration: 545,
+    //   easings: [easing.easeOut, easing.easeIn, easing.lineair]
+    // }).start({
+    //   update: v => {
+    //     this.anim.ping.ballHeight = v.ballY
+    //     this.anim.ping.racketTurn = v.racketRotate
+    //     this.anim.ping.racketYOffset = v.racketYOffset
+    //     if (v.ballY == 0) {
+    //       this.changeColor()
+    //     }
+    //   },
+    //   complete: () => { console.log('lalala') }
+    // })
   },
   methods: {
-    changeColor () {
+    changeColor() {
       // make sure they do not repeat:
       // let list = this.colorArray.splice(this.colorArray.indexOf(this.currentColor), 1)
       // do so they don't repeat list.splice( list.indexOf('foo'), 1 );
-      this.currentColor = this.colorArray[Math.floor(Math.random() * this.colorArray.length)]
+      this.currentColor = this.colorArray[
+        Math.floor(Math.random() * this.colorArray.length)
+      ];
     }
   },
   computed: {
@@ -95,20 +110,22 @@ export default {
       return this.$store.state.gameState.previewTimer;
     },
     previewClasses() {
-      return this.timer > 0 ? 'btn--inner is-disabled' : 'btn--inner';
+      return this.timer > 0 ? "btn--inner is-disabled" : "btn--inner";
     },
-    computedRackedStyles () {
-      return {'animation-name': 'racket-movement',
-        'animation-duration': '1s',
-        'animation-iteration-count': '10',
-        'animation-direction': 'alternate', /* or: normal */
-        'animation-timing-function': 'ease-out', /* or: ease, ease-in, ease-in-out, linear, cubic-bezier(x1, y1, x2, y2) */
-        'animation-fill-mode': 'forwards', /* or: backwards, both, none */
-        'animation-delay': '2s' /* or: Xms */}
+    computedRackedStyles() {
+      return {
+        "animation-name": "racket-movement",
+        "animation-duration": "1s",
+        "animation-iteration-count": "10",
+        "animation-direction": "alternate" /* or: normal */,
+        "animation-timing-function":
+          "ease-out" /* or: ease, ease-in, ease-in-out, linear, cubic-bezier(x1, y1, x2, y2) */,
+        "animation-fill-mode": "forwards" /* or: backwards, both, none */,
+        "animation-delay": "2s" /* or: Xms */
+      };
     }
-
   }
-}
+};
 </script>
 
 <style scoped lang="scss">
