@@ -167,22 +167,19 @@
           <!-- sound preview screen -->
           <div key="2" v-else-if="slide === 1" class="screen--inner">
             <div class="screen--preview">
-              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" width="64" height="64">
-                <path
-                  fill="#fff"
-                  d="M14 2c-.781 0-1.313.438-2 1.016L6 8H2c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h4l6 4.984c.688.579 1.219 1.016 2 1.016 1.219 0 2-.984 2-2V4c0-1.016-.781-2-2-2zm-2 21.784L7.445 20H4v-8h3.445L12 8.216v15.568zM20 6c-1.25 0-2 1.047-2 2 0 1.422 2 2.781 2 8s-2 6.578-2 8c0 .953.75 2 2 2 1.016 0 1.625-.547 2.281-2C23.51 21.279 24 18.672 24 16s-.49-5.279-1.719-8C21.625 6.547 21.016 6 20 6zm9.146-2c-.838-1.771-1.63-2-2.333-2-1.188 0-2 1-2 2C24.813 5.672 28 8.531 28 16s-3.188 10.328-3.188 12c0 1 .813 2 2 2 .703 0 1.495-.229 2.333-2C30.063 26.063 32 22.156 32 16S30.063 5.938 29.146 4z"
-                ></path>
-              </svg>
-              <p>Listen to the goal sound and match the pitch of oscillator 1</p>
+              <svg xmlns="http://www.w3.org/2000/svg" width="60" height="60" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="0.7" stroke-linecap="round" stroke-linejoin="round"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon><path d="M19.07 4.93a10 10 0 0 1 0 14.14M15.54 8.46a5 5 0 0 1 0 7.07"></path></svg>
+              <p>Listen closely to the goal sound, then hit continue and try to match the sound.</p>
             </div>
           </div>
         </transition>
         <div class="screen--footer">
           <div class="screen--footer-inner">
-            <button @click="startClick()" class="btn btn_stroke btn_primary">
-              <span :class="previewClasses">
-                <span v-if="previewTimer > 0" class="btn--inner-text">{{ previewTimer }}</span>
-                <span v-if="previewTimer <= 0" class="btn--inner-text">Continue</span>
+            <button
+              @click="(previewTimer <= 0 && (slide === 0 ? startNextLevel() : enterLevel()))"
+              :class="['btn', 'btn_stroke', 'btn_primary', {'is-disabled': previewTimer > 0}]"
+            >
+              <span class="btn--inner">
+                <span class="btn--inner-text">{{ previewTimer > 0 ? previewTimer : 'Continue' }}</span>
               </span>
             </button>
           </div>
@@ -309,6 +306,17 @@
     </div>
     <div class="screen screen_score screen_score_desktop hide-mobile">
       <div class="screen--inner">
+        <div class="screen--header hide-mobile">
+          <div class="screen--header-inner u-mr_0">
+            <div />
+            <div />
+            <router-link to="/contribution" class="btn btn_link btn_primary">
+              <span class="btn--inner">
+                <span class="btn--inner-text">or Make a song</span>
+              </span>
+            </router-link>
+          </div>
+        </div>
         <div class="leaderboard">
           <div class="leaderboard--title">
             <span class="leaderboard--title-inner">
@@ -538,11 +546,6 @@ export default {
     // }
   },
   methods: {
-    startClick() {
-      if(!(this.preViewtimer > 0)) {
-        this.slide === 0 ? this.startNextLevel() : this.enterLevel()
-      }
-    },
     pickPreset() {
       this.presets
     },
@@ -770,10 +773,13 @@ export default {
         levelNumber: level || 0
       });
 
-      this.timer = setInterval(() => {
-        this.$store.commit('decrementPreviewTimer');
-        if(this.previewTimer == 0){
-          clearInterval(this.timer);
+      let self = this
+
+      self.timer = setInterval(() => {
+        self.$store.commit('decrementPreviewTimer');
+        if(self.timer.previewTimer === 0){
+          clearInterval(self.timer);
+          return false
         }
       }, 1000);
     },
@@ -868,7 +874,7 @@ export default {
       return this.$store.state.gameState.previewTimer;
     },
     previewClasses() {
-      return this.timer > 0 ? 'btn--inner is-disabled' : 'btn--inner';
+      return this.timer > 0 ? 'is-disabled' : '';
     },
     previewTimer() {
       return this.$store.state.gameState.previewTimer;

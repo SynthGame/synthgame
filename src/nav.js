@@ -10,6 +10,85 @@ export default {
   },
   groups: [
     {
+      moduleName: "sequencer",
+      title: "Sequencer",
+      icon: "sequencer",
+      items: [
+        {
+          title: "steps",
+          knobName: "steps",
+          author: "",
+          score: 20
+        },
+        {
+          title: "pitch",
+          knobName: "pitch",
+          author: "",
+          score: 21
+        },
+        {
+          title: "glide",
+          knobName: "glide",
+          author: "",
+          score: 22
+        },
+        {
+          title: "accent",
+          knobName: "accent",
+          author: "",
+          score: 23
+        },
+        {
+          title: "kick",
+          knobName: "kick",
+          author: "",
+          score: 24
+        },
+        {
+          title: "hat",
+          knobName: "hat",
+          author: "",
+          score: 24
+        },
+        {
+          title: "snare",
+          knobName: "snare",
+          author: "",
+          score: 25
+        },
+        {
+          title: "clap1",
+          knobName: "clap1",
+          author: "",
+          score: 26
+        },
+        {
+          title: "clap2",
+          knobName: "clap2",
+          author: "",
+          score: 27
+        },
+        {
+          title: "cymbal",
+          knobName: "cymbal",
+          author: "",
+          score: 28
+        },
+        {
+          title: "labmyc",
+          knobName: "labmyc",
+          author: "",
+          score: 29
+        },
+        {
+          title: "noise",
+          knobName: "noise",
+          author: "",
+          score: 30
+        }
+      ]
+    },
+    {
       title: "Osc 1",
       moduleName: "oscillator1",
       icon: "osc",
@@ -175,85 +254,6 @@ export default {
           knobName: "envelope2",
           author: "",
           score: 19
-        }
-      ]
-    },
-    {
-      moduleName: "sequencer",
-      title: "Sequencer",
-      icon: "sequencer",
-      items: [
-        {
-          title: "steps",
-          knobName: "steps",
-          author: "",
-          score: 20
-        },
-        {
-          title: "pitch",
-          knobName: "pitch",
-          author: "",
-          score: 21
-        },
-        {
-          title: "glide",
-          knobName: "glide",
-          author: "",
-          score: 22
-        },
-        {
-          title: "accent",
-          knobName: "accent",
-          author: "",
-          score: 23
-        },
-        {
-          title: "kick",
-          knobName: "kick",
-          author: "",
-          score: 24
-        },
-        {
-          title: "hat",
-          knobName: "hat",
-          author: "",
-          score: 24
-        },
-        {
-          title: "snare",
-          knobName: "snare",
-          author: "",
-          score: 25
-        },
-        {
-          title: "clap1",
-          knobName: "clap1",
-          author: "",
-          score: 26
-        },
-        {
-          title: "clap2",
-          knobName: "clap2",
-          author: "",
-          score: 27
-        },
-        {
-          title: "cymbal",
-          knobName: "cymbal",
-          author: "",
-          score: 28
-        },
-        {
-          title: "labmyc",
-          knobName: "labmyc",
-          author: "",
-          score: 29
-        },
-        {
-          title: "noise",
-          knobName: "noise",
-          author: "",
-          score: 30
         }
       ]
     }
