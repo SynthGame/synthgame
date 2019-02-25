@@ -53,7 +53,7 @@ export default {
   data() {
     return {
       slide: 0
-    }
+    };
   },
   mounted() {
     window.addEventListener("keydown", this.emitOnKey);

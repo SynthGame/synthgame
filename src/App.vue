@@ -5,7 +5,7 @@
         <canvas id="confetti"></canvas>
         <div class="overlay--inner">
           <div class="overlay--title">Yay! You made it!</div>
-          <div class="overlay--description">{{ 10 - attempts }} attempts left.</div>
+          <div class="overlay--title">SCORED +{{ levelScore }} POINTS!</div>
           <button
             @click="showNextLevel()"
             class="btn_full btn btn_stroke btn_primary">
@@ -130,7 +130,8 @@ export default {
       timerIsRunning: state => state.gameState.timerIsRunning
     }),
     ...mapGetters({
-      allParametersMatchGoal: "allParametersMatchGoal"
+      allParametersMatchGoal: "allParametersMatchGoal",
+      levelScore: "returnLevelScore"
     }),
     attempts() {
       return this.$store.state.gameState.attempts;
