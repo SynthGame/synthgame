@@ -80,7 +80,6 @@ html, body, #app {
     &_theme_#{$name} {
       .progressbar--line {
         background-color: #{$color};
-        background-image: -webkit-linear-gradient(#{$color}, #{saturate(darken($color, 20), 20)});
       }
     }
   }
@@ -96,15 +95,15 @@ html, body, #app {
       position: absolute;
       top: 0; left: 0; bottom: 0; right: 0;
       background: linear-gradient(
-          -45deg,
-            rgba($colour_white, .2) 25%,
-            transparent 25%,
-            transparent 50%,
-            rgba($colour_white, .2) 50%,
-            rgba($colour_white, .2) 75%,
-            transparent 75%,
-            transparent
-         );
+        -45deg,
+        rgba($colour_white, .2) 25%,
+        transparent 25%,
+        transparent 50%,
+        rgba($colour_white, .2) 50%,
+        rgba($colour_white, .2) 75%,
+        transparent 75%,
+        transparent
+      );
       z-index: 1;
       background-size: 50px 50px;
       animation: move 10s linear infinite;

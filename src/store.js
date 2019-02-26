@@ -235,6 +235,25 @@ export default new Vuex.Store({
     }
   },
   getters: {
+    reduceKnobsAvalible(state) {
+      const knobs = state.gameState.knobsAvailable;
+
+      let devices = Object.keys(knobs);
+
+      let parent = Object.values(knobs).find(knob => {
+        return Object.entries(knob).length !== 0;
+      });
+
+      if(parent) {
+        const parameter = Object.keys(parent)[0];
+        const device = devices.filter(
+          device => Object.keys(knobs[device])[0] === parameter
+        );
+        return { device, parameter };
+      } else {
+        return { device: null, parameter: null };
+      }
+    },
     allParametersMatchGoal: (state, getters) => {
       return getters.audioParametersMatchGoalWithMargin;
     },
