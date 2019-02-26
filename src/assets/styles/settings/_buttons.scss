@@ -120,20 +120,19 @@
     }
   }
 
-  &_leaderboard {
-    fill: currentColor;
-    display: block;
-    svg {
-      height: 24px !important;
-      width: auto !important;
-    }
-  }
+  &_leaderboard,
   &_navigation {
     fill: currentColor;
     display: block;
     svg {
       height: 24px !important;
       width: auto !important;
+      transition: stroke .45s ease;
+    }
+    &.is-active {
+      svg {
+        stroke: $colour_primary;
+      }
     }
   }
 

@@ -153,7 +153,7 @@
         <div v-else class="screen screen_score screen_start">
           <div class="hide-desktop screen--header">
             <div class="screen--header-inner">
-              <button @click="toggle1stScreen()" class="btn btn_navigation">
+              <button @click="toggle1stScreen()" class="btn btn_navigation" :class="{'is-active' : show1stScreen}">
                 <span class="btn--inner">
                   <span class="btn--inner-text">
                     <svg
@@ -173,7 +173,7 @@
                   </span>
                 </span>
               </button>
-              <button @click="toggle3dScreen()" class="u-ml_a btn btn_leaderboard">
+              <button @click="toggle3dScreen()" class="u-ml_a btn btn_leaderboard" :class="{'is-active' : show3rdScreen}">
                 <span class="btn--inner">
                   <span class="btn--inner-text">
                     <svg
