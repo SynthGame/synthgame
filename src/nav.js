@@ -219,8 +219,8 @@ export default {
       icon: "lfo",
       items: [
         {
-          title: "Speed",
-          knobName: "Speed",
+          title: "amount",
+          knobName: "amount",
           author: "",
           score: 15
         },

@@ -6,6 +6,9 @@
   justify-content: center;
   flex-direction: column;
   margin: auto 0;
+  @media only screen and (max-height : 570px) {
+    margin-top: 0;
+  }
   &.empty {
     background: none;
     &::after {

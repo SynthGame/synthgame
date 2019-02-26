@@ -32,6 +32,9 @@ export default {
   align-items: center;
   text-transform: uppercase;
   letter-spacing: 2px;
+  @media only screen and (max-height : 570px) {
+    display: none;
+  }
   &__title {
     h2 {
       margin: 0;
