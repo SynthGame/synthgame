@@ -396,10 +396,20 @@ export default {
       // console.log(pad)
     },
     toggle1stScreen() {
-      this.show1stScreen = !this.show1stScreen;
+      if (this.show1stScreen) {
+        this.show1stScreen = false
+      } else {
+        this.show1stScreen = true
+        this.show3rdScreen = false
+      }
     },
     toggle3dScreen() {
-      this.show3rdScreen = !this.show3rdScreen;
+      if (this.show3rdScreen) {
+        this.show3rdScreen = false
+      } else {
+        this.show3rdScreen = true
+        this.show1stScreen = false
+      }
     },
     init() {
       // Retrieve highscore from local storage
