@@ -136,3 +136,11 @@ html, body, #app {
     background-position: 50px 50px;
   }
 }
+
+.username_input {
+  border: 1px solid $colour_primary;
+  text-align: center;
+  min-width: 184px;
+  text-align: left;
+  padding: 0 15px;
+}

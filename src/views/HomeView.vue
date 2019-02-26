@@ -372,7 +372,13 @@
       <p>Generate link to challenge your friends</p>
       <div v-if="enterName" class="username_container">
         <input class="username_input" v-model="userName" type="text" placeholder="Your name">
-        <button class="btn btn_stroke btn_primary btn-username" @click="setUsername">ENTER</button>
+        <button
+          @click="setUsername"
+          class="btn btn_stroke btn_primary">
+          <span class="btn--inner">
+            <span class="btn--inner-text">Start</span>
+          </span>
+        </button>
       </div>
       <!-- <div v-if="!shareLink" class="play-with-friends">
         <button @click="generateShareLink" class="btn btn_stroke btn_primary">PLAY WITH FRIENDS</button>
@@ -1036,12 +1042,6 @@ export default {
 <style lang='scss'>
 .play-with-friends {
   margin-top: 10px;
-}
-
-.username_input {
-  border: 1px solid #fff;
-  text-align: center;
-  min-width: 184px;
 }
 
 .btn-username {
