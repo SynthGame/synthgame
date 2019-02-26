@@ -8,7 +8,7 @@ import db from './db'
 import './registerServiceWorker'
 import ModuleKnob from './components/ModuleKnob.vue'
 
-import './assets/assets/styles.scss'
+import './assets/styles/styles.scss'
 
 Vue.config.productionTip = false
 Vue.config.devtools = true
