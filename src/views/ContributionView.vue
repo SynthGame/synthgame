@@ -248,7 +248,7 @@
           </button>
         </div>
         <div class="screen--share">
-          <p style="margin-bottom: 20px; text-align: right;">Anyone with this link can join and create their song on top of this one.</p>
+          <p>Anyone with this link can join and create their song on top of this one.</p>
           <div v-if="!shareLink" class="play-with-friends">
             <button @click="generateShareLink" class="btn btn_stroke btn_primary">
               <span class="btn--inner">
@@ -564,6 +564,21 @@ export default {
     @media screen and (max-width: 799px) {
       .screen--share {
         margin: 0 auto;
+        p {
+          margin-bottom: 20px;
+          text-align: center;
+        }
+        .btn {
+          margin-left: 0;
+        }
+      }
+    }
+    @media screen and (min-width: 800px) {
+      .screen--share {
+        p {
+          margin-bottom: 20px;
+          text-align: right;
+        }
       }
     }
   }
