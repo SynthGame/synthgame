@@ -248,7 +248,7 @@
           </button>
         </div>
         <div class="screen--share">
-          <p>Anyone with this link can join and create their song on top of this one.</p>
+          <!-- <p>Anyone with this link can join and create their song on top of this one.</p> -->
           <div v-if="!shareLink" class="play-with-friends">
             <button @click="generateShareLink" class="btn btn_stroke btn_primary">
               <span class="btn--inner">

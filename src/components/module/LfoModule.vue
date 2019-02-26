@@ -33,7 +33,7 @@
               :min="0"
               :max="100"
               knobColor="#5bd484"
-              name="Height"
+              name="Amount"
               module="lfo"
             />
             <div class="button-wrapper" v-else-if="knobsAvailable.type || createModeIsActive">
