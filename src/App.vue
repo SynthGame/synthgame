@@ -24,7 +24,7 @@
           <!-- PLAY AGAIN OR CHALLENGE YOUR FRIENDS -->
           <div class="screen--share--win">
             <p>Share this link to challenge your Friends!</p>
-            <div v-if="!userSet" class="username_container">
+            <div v-if="!userSet" class="username_container_win">
               <input class="username_input" v-model="userName" type="text" placeholder="Username">
               <button class="btn btn_stroke btn_primary btn-username" @click="setUsername">ENTER</button>
             </div>
@@ -404,13 +404,13 @@ export default {
     margin: 0px;
     margin-top: 30px;
     input {
-      	width: 100%;
+      	width: 70%;
 		    height: 60px;
     }
     button {
       margin: 0px;
-	    margin-left: 10px;
-	    width: 120px;
+      margin-left: 4%;
+      width: 25%;
     }
 }
 
