@@ -340,8 +340,8 @@ export default {
       svooshIt: false,
       showGame: false,
       show1stScreen: false,
-      show2ndScreen: false,
-      show3rdScreen: true,
+      show2ndScreen: true,
+      show3rdScreen: false,
       pickedPreset: 0,
       pads: ["1", "2", "Q", "W", "A", "S", "Z", "X"]
     };
@@ -480,10 +480,10 @@ export default {
     },
     midwaySvoosh() {
       this.slide = null;
-      // this.activeScreen(0, 0)
+      this.activeScreen(0, 0)
       this.show1stScreen = false;
-      this.show2ndScreen = false;
-      this.show3rdScreen = true;
+      this.show2ndScreen = true;
+      this.show3rdScreen = false;
     },
     hideSvoosh() {
       setTimeout(() => {
