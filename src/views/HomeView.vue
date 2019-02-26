@@ -1,408 +1,412 @@
 <template>
-  <div class="cols">
-    <nav :class="`screen navigation ${show1stScreen ? 'is-active' : ''}`">
-      <div class="navigation--inner">
-        <div
-          v-for="(group, index) in nav.groups"
-          v-if="group.moduleName != 'sequencer'"
-          :key="index"
-          :class="[
-          `navigation--group_${group.title.toLowerCase().replace(' ', '')}`,
-          'navigation--group',
-          {
-            'is-disabled': isGroupActive(group, index)
-          }
-        ]"
-        >
-          <div class="navigation--group-title">
-            <span>{{ group.title }}</span>
-            <svg
-              v-if="group.icon === 'osc'"
-              class="navigation--group-icon"
-              viewBox="0 0 29 29"
-              width="29"
-              height="29"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <g fill="none" fill-rule="evenodd">
-                <path class="navigation--group-fill" d="M0 0h29v29H0z"></path>
-                <path fill="#000" d="M.228 14.5h15.959v6.903L29 15.831V14.5H16.187V6.959z"></path>
-              </g>
-            </svg>
-            <svg
-              v-else-if="group.icon === 'filter'"
-              class="navigation--group-icon"
-              viewBox="0 0 29 29"
-              width="29"
-              height="29"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <g fill="none" fill-rule="evenodd">
-                <path fill="#000" d="M0 0h29v29H0z"></path>
-                <path
-                  class="navigation--group-fill"
-                  d="M0 0h29v25.785C19.04 13.708 9.373 7.775 0 7.985-9.373 8.192-9.373 5.531 0 0z"
-                ></path>
-              </g>
-            </svg>
-            <svg
-              v-else-if="group.icon === 'lfo'"
-              class="navigation--group-icon"
-              viewBox="0 0 29 29"
-              width="29"
-              height="29"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <g fill="none" fill-rule="evenodd">
-                <path class="navigation--group-fill" d="M0 0h29v29H0z"></path>
-                <path d="M14 8.07V0h1v8a7 7 0 1 1-1 .07z" fill="#000"></path>
-              </g>
-            </svg>
-            <svg
-              v-else-if="group.icon === 'envelope'"
-              class="navigation--group-icon"
-              viewBox="0 0 29 29"
-              width="29"
-              height="29"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <g fill="none" fill-rule="evenodd">
-                <path fill="#000" d="M0 0h29v29H0z"></path>
-                <path class="navigation--group-fill" d="M0 0h29v24.211L18.04 10.065H0z"></path>
-              </g>
-            </svg>
-            <svg
-              v-else-if="group.icon === 'envelope2'"
-              class="navigation--group-icon"
-              viewBox="0 0 29 29"
-              width="29"
-              height="29"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <g fill="none" fill-rule="evenodd">
-                <path fill="#000" d="M0 0h29v29H0z"></path>
-                <path class="navigation--group-fill" d="M0 0h29v29H11.42L0 7.774z"></path>
-              </g>
-            </svg>
-            <svg
-              v-else-if="group.icon === 'router'"
-              class="navigation--group-icon"
-              viewBox="0 0 29 29"
-              width="29"
-              height="29"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <g fill="none" fill-rule="evenodd">
-                <path class="navigation--group-fill" d="M0 0h29v29H0z"></path>
-                <circle fill="#000" cx="15" cy="15" r="3"></circle>
-              </g>
-            </svg>
-            <svg
-              viewBox="0 0 27 13"
-              v-else-if="group.icon === 'sequencer'"
-              class="navigation--group-icon"
-              width="29"
-              xmlns="http://www.w3.org/2000/svg"
-            >
+<div class="cols">
+  <div v-if="slide === null" class="progressbar" :class="progressBar.class">
+    <div class="progressbar--line" :style="[{width: `${progressBar.value * 100}%`}]" />
+    <div class="progressbar--text"> {{ progressBar.passed }} / {{progressBar.total}} completed</div>
+  </div>
+  <nav :class="`screen navigation ${show1stScreen ? 'is-active' : ''}`">
+    <div class="navigation--inner">
+      <div
+        v-for="(group, index) in nav.groups"
+        v-if="group.moduleName != 'sequencer'"
+        :key="index"
+        :class="[
+        `navigation--group_${group.title.toLowerCase().replace(' ', '')}`,
+        'navigation--group',
+        {
+          'is-disabled': isGroupActive(group, index)
+        }
+      ]"
+      >
+        <div class="navigation--group-title">
+          <span>{{ group.title }}</span>
+          <svg
+            v-if="group.icon === 'osc'"
+            class="navigation--group-icon"
+            viewBox="0 0 29 29"
+            width="29"
+            height="29"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <g fill="none" fill-rule="evenodd">
+              <path class="navigation--group-fill" d="M0 0h29v29H0z"></path>
+              <path fill="#000" d="M.228 14.5h15.959v6.903L29 15.831V14.5H16.187V6.959z"></path>
+            </g>
+          </svg>
+          <svg
+            v-else-if="group.icon === 'filter'"
+            class="navigation--group-icon"
+            viewBox="0 0 29 29"
+            width="29"
+            height="29"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <g fill="none" fill-rule="evenodd">
+              <path fill="#000" d="M0 0h29v29H0z"></path>
               <path
                 class="navigation--group-fill"
-                fill="fff"
-                fill-rule="evenodd"
-                d="M0 0h27v13H0V0zm4.5 8a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3z"
+                d="M0 0h29v25.785C19.04 13.708 9.373 7.775 0 7.985-9.373 8.192-9.373 5.531 0 0z"
               ></path>
-            </svg>
-          </div>
-          <ul class="navigation--list">
-            <li
-              v-for="(item, key) in group.items"
-              :key="key"
-              class="navigation--item"
-              :class="{'is-disabled' : !(index == 0 && key == 0) && lvlScore(item.score) <= 0 }"
-            >
-              <button class="navigation--item-btn" @click="activeScreen(index, key)">
-                <span class="navigation--item-inner">
-                  <span class="navigation--item-text">
-                    <span class="navigation--item-title">
-                      <span>{{ item.knobName }}</span>
-                    </span>
-                    <span>{{ lvlScore(item.score) }}</span>
-                  </span>
-                </span>
-              </button>
-            </li>
-          </ul>
-        </div>
-      </div>
-    </nav>
-    <div class="screen">
-      <div v-if="slide !== null" class="screen screen_score screen_start">
-        <transition name="fade" mode="in-out" appear>
-          <div v-show="slide === 1" class="hide-desktop screen--header">
-            <div class="screen--header-inner">
-              <button @click="slide = 0" class="btn btn_link btn_primary">
-                <span class="btn--inner">
-                  <span class="btn--inner-text">< Back</span>
-                </span>
-              </button>
-              <div class="screen--header-title"></div>
-            </div>
-          </div>
-        </transition>
-        <transition name="fade" mode="out-in" appear>
-          <div key="1" v-if="slide === 0" class="screen--inner">
-            <div class="screen--title">Match
-              <br>The
-              <br>Sound
-            </div>
-            <router-link to="/contribution" class="btn btn_link btn_primary hide-desktop">
-              <span class="btn--inner">
-                <span class="btn--inner-text">or Make a song</span>
-              </span>
-            </router-link>
-            <div class="screen--score">
-              <div class="screen--score-title">Score</div>
-              <div class="screen--score-value">0</div>
-            </div>
-          </div>
-          <!-- sound preview screen -->
-          <div key="2" v-else-if="slide === 1" class="screen--inner">
-            <div class="screen--preview">
-              <svg xmlns="http://www.w3.org/2000/svg" width="60" height="60" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="0.7" stroke-linecap="round" stroke-linejoin="round"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon><path d="M19.07 4.93a10 10 0 0 1 0 14.14M15.54 8.46a5 5 0 0 1 0 7.07"></path></svg>
-              <p>Listen closely to the goal sound, then hit continue and try to match the sound.</p>
-            </div>
-          </div>
-        </transition>
-        <div class="screen--footer">
-          <div class="screen--footer-inner">
-            <button
-              @click="(previewTimer <= 0 && (slide === 0 ? startNextLevel() : enterLevel()))"
-              :class="['btn', 'btn_stroke', 'btn_primary', {'is-disabled': previewTimer > 0}]"
-            >
-              <span class="btn--inner">
-                <span class="btn--inner-text">{{ previewTimer > 0 ? previewTimer : 'Continue' }}</span>
-              </span>
-            </button>
-          </div>
-        </div>
-      </div>
-      <template v-else>
-        <div class="hide-desktop screen--header">
-          <div class="screen--header-inner">
-            <button @click="toggle1stScreen()" class="btn btn_navigation">
-              <span class="btn--inner">
-                <span class="btn--inner-text">
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    fill="none"
-                    stroke="currentColor"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    stroke-width="2"
-                    class="feather feather-menu"
-                    viewBox="0 0 24 24"
-                  >
-                    <line x1="3" x2="21" y1="12" y2="12"></line>
-                    <line x1="3" x2="21" y1="6" y2="6"></line>
-                    <line x1="3" x2="21" y1="18" y2="18"></line>
-                  </svg>
-                </span>
-              </span>
-            </button>
-            <div class="screen--attempts">
-              <svg
-                v-for="(i) in totalAttempts/2"
-                :key="i"
-                xmlns="http://www.w3.org/2000/svg"
-                viewBox="0 0 48 48"
-              >
-                <defs>
-                  <clipPath id="half">
-                    <rect x="0" y="0" width="24.5" height="48"></rect>
-                  </clipPath>
-                </defs>
-                <path
-                  v-if="i <= (totalAttempts - attempts) / 2"
-                  class="screen--attempts-fill"
-                  d="M23.993 15.872l1.016-.889a7.313 7.313 0 0 1 4.853-1.834c2.032 0 4.035.832 5.489 2.455a7.314 7.314 0 0 1-.339 10.06l-9.828 8.735a1.795 1.795 0 0 1-2.382 0l-9.814-8.735c-2.751-2.695-2.935-7.125-.339-10.06a7.337 7.337 0 0 1 5.489-2.455 7.34 7.34 0 0 1 4.853 1.834l1.002.889"
-                ></path>
-                <path
-                  v-if="i - 0.5 === (totalAttempts - attempts) / 2 "
-                  clip-path="url(#half)"
-                  class="screen--attempts-fill"
-                  d="M23.993 15.872l1.016-.889a7.313 7.313 0 0 1 4.853-1.834c2.032 0 4.035.832 5.489 2.455a7.314 7.314 0 0 1-.339 10.06l-9.828 8.735a1.795 1.795 0 0 1-2.382 0l-9.814-8.735c-2.751-2.695-2.935-7.125-.339-10.06a7.337 7.337 0 0 1 5.489-2.455 7.34 7.34 0 0 1 4.853 1.834l1.002.889"
-                ></path>
-                <path
-                  class="screen--attempts-stroke"
-                  d="M23.993 15.872l1.016-.889a7.313 7.313 0 0 1 4.853-1.834c2.032 0 4.035.832 5.489 2.455a7.314 7.314 0 0 1-.339 10.06l-9.828 8.735a1.795 1.795 0 0 1-2.382 0l-9.814-8.735c-2.751-2.695-2.935-7.125-.339-10.06a7.337 7.337 0 0 1 5.489-2.455 7.34 7.34 0 0 1 4.853 1.834l1.002.889"
-                ></path>
-              </svg>
-            </div>
-          </div>
-        </div>
-        <div class="screen--inner">
-          <oscillator-module-one
-            v-show="moduleIsUseable('oscillator1')"
-            :class="[(activeModule == 0 ? 'active' : '')]"
-          />
-          <oscillator-module-two
-            v-show="moduleIsUseable('oscillator2')"
-            :class="[(activeModule == 1 ? 'active' : '')]"
-          />
-          <filter-module
-            v-show="moduleIsUseable('filter')"
-            :class="[(activeModule == 2 ? 'active' : '')]"
-          />
-          <envelope-module
-            v-show="moduleIsUseable('envelope')"
-            :class="[(activeModule == 3 ? 'active' : '')]"
-          />
-          <lfo-module
-            v-show="moduleIsUseable('lfo')"
-            :class="[(activeModule == 4 ? 'active' : '')]"
-          />
-          <envelope-module-two
-            v-show="moduleIsUseable('envelope2')"
-            :class="[(activeModule == 5 ? 'active' : '')]"
-          />
-          <sequencer-module
-            v-if="createModeIsActive"
-            :class="[(activeModule == 7 ? 'active' : '')]"
-            class="module sequencer"
-          />
-          <router-module
-            v-show="moduleIsUseable('router')"
-            :class="[(activeModule == 6 ? 'active' : '')]"
-          />
-          <!-- ATTEMPT -->
-          <!-- <div class="attempt-navigation"> -->
-          <button
-            v-if="!completedLevel"
-            @click="makeAttempt"
-            class="btn_full btn btn_stroke btn_primary"
-          >
-            <span class="btn--inner">
-              <span class="btn--inner-text">Submit</span>
-            </span>
-          </button>
-          <!-- DISPLAY PREVIEW -->
-          <button
-            v-else
-            @click="startNextLevel"
-            class="btn_full btn btn_stroke btn_primary btn_next"
-          >
-            <span class="btn--inner">
-              <span class="btn--inner-text">Next</span>
-            </span>
-          </button>
-          <!-- </div> -->
-        </div>
-      </template>
-      <svoosh
-        v-if="isThereSvooshComponent"
-        :isFired="svooshIt"
-        @midway="showGame=true"
-        @bye="endSvoosh"
-      />
-    </div>
-    <div class="screen screen_score screen_score_desktop hide-mobile">
-      <div class="screen--inner">
-        <div class="screen--header hide-mobile">
-          <div class="screen--header-inner u-mr_0">
-            <div />
-            <div />
-            <router-link to="/contribution" class="btn btn_link btn_primary">
-              <span class="btn--inner">
-                <span class="btn--inner-text">or Make a song</span>
-              </span>
-            </router-link>
-          </div>
-        </div>
-        <div class="leaderboard">
-          <div class="leaderboard--title">
-            <span class="leaderboard--title-inner">
-              <span>Leaderboard</span>
-            </span>
-          </div>
-          <ul class="leaderboard--list">
-            <li
-              v-for="(score, index) in highscores"
-              :key="index"
-              :class="`leaderboard--list-item ${i === 24 ? 'is-active' : ''}`"
-            >
-              <div class="leaderboard--name">{{ score.name }}</div>
-              <div class="leaderboard--value">{{score.score}}</div>
-            </li>
-          </ul>
-        </div>
-        <div style="margin-top: 30px" class="u-ml_a screen--attempts">
+            </g>
+          </svg>
           <svg
-            v-for="(i) in totalAttempts/2"
-            :key="i"
+            v-else-if="group.icon === 'lfo'"
+            class="navigation--group-icon"
+            viewBox="0 0 29 29"
+            width="29"
+            height="29"
             xmlns="http://www.w3.org/2000/svg"
-            viewBox="0 0 48 48"
           >
-            <defs>
-              <clipPath id="half">
-                <rect x="0" y="0" width="24.5" height="48"></rect>
-              </clipPath>
-            </defs>
+            <g fill="none" fill-rule="evenodd">
+              <path class="navigation--group-fill" d="M0 0h29v29H0z"></path>
+              <path d="M14 8.07V0h1v8a7 7 0 1 1-1 .07z" fill="#000"></path>
+            </g>
+          </svg>
+          <svg
+            v-else-if="group.icon === 'envelope'"
+            class="navigation--group-icon"
+            viewBox="0 0 29 29"
+            width="29"
+            height="29"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <g fill="none" fill-rule="evenodd">
+              <path fill="#000" d="M0 0h29v29H0z"></path>
+              <path class="navigation--group-fill" d="M0 0h29v24.211L18.04 10.065H0z"></path>
+            </g>
+          </svg>
+          <svg
+            v-else-if="group.icon === 'envelope2'"
+            class="navigation--group-icon"
+            viewBox="0 0 29 29"
+            width="29"
+            height="29"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <g fill="none" fill-rule="evenodd">
+              <path fill="#000" d="M0 0h29v29H0z"></path>
+              <path class="navigation--group-fill" d="M0 0h29v29H11.42L0 7.774z"></path>
+            </g>
+          </svg>
+          <svg
+            v-else-if="group.icon === 'router'"
+            class="navigation--group-icon"
+            viewBox="0 0 29 29"
+            width="29"
+            height="29"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <g fill="none" fill-rule="evenodd">
+              <path class="navigation--group-fill" d="M0 0h29v29H0z"></path>
+              <circle fill="#000" cx="15" cy="15" r="3"></circle>
+            </g>
+          </svg>
+          <svg
+            viewBox="0 0 27 13"
+            v-else-if="group.icon === 'sequencer'"
+            class="navigation--group-icon"
+            width="29"
+            xmlns="http://www.w3.org/2000/svg"
+          >
             <path
-              v-if="i <= (totalAttempts - attempts) / 2"
-              class="screen--attempts-fill"
-              d="M23.993 15.872l1.016-.889a7.313 7.313 0 0 1 4.853-1.834c2.032 0 4.035.832 5.489 2.455a7.314 7.314 0 0 1-.339 10.06l-9.828 8.735a1.795 1.795 0 0 1-2.382 0l-9.814-8.735c-2.751-2.695-2.935-7.125-.339-10.06a7.337 7.337 0 0 1 5.489-2.455 7.34 7.34 0 0 1 4.853 1.834l1.002.889"
-            ></path>
-            <path
-              v-if="i - 0.5 === (totalAttempts - attempts) / 2"
-              clip-path="url(#half)"
-              class="screen--attempts-fill"
-              d="M23.993 15.872l1.016-.889a7.313 7.313 0 0 1 4.853-1.834c2.032 0 4.035.832 5.489 2.455a7.314 7.314 0 0 1-.339 10.06l-9.828 8.735a1.795 1.795 0 0 1-2.382 0l-9.814-8.735c-2.751-2.695-2.935-7.125-.339-10.06a7.337 7.337 0 0 1 5.489-2.455 7.34 7.34 0 0 1 4.853 1.834l1.002.889"
-            ></path>
-            <path
-              class="screen--attempts-stroke"
-              d="M23.993 15.872l1.016-.889a7.313 7.313 0 0 1 4.853-1.834c2.032 0 4.035.832 5.489 2.455a7.314 7.314 0 0 1-.339 10.06l-9.828 8.735a1.795 1.795 0 0 1-2.382 0l-9.814-8.735c-2.751-2.695-2.935-7.125-.339-10.06a7.337 7.337 0 0 1 5.489-2.455 7.34 7.34 0 0 1 4.853 1.834l1.002.889"
+              class="navigation--group-fill"
+              fill="fff"
+              fill-rule="evenodd"
+              d="M0 0h27v13H0V0zm4.5 8a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3z"
             ></path>
           </svg>
         </div>
+        <ul class="navigation--list">
+          <li
+            v-for="(item, key) in group.items"
+            :key="key"
+            class="navigation--item"
+            :class="{'is-disabled' : !(index == 0 && key == 0) && lvlScore(item.score) <= 0 }"
+          >
+            <button class="navigation--item-btn" @click="activeScreen(index, key)">
+              <span class="navigation--item-inner">
+                <span class="navigation--item-text">
+                  <span class="navigation--item-title">
+                    <span>{{ item.knobName }}</span>
+                  </span>
+                  <span>{{ lvlScore(item.score) }}</span>
+                </span>
+              </span>
+            </button>
+          </li>
+        </ul>
       </div>
-      <div class="screen--share">
-        <p>Share this link to challenge your Friends!</p>
-        <div v-if="!userName" class="username_container">
-          <input class="username_input" v-model="userName" type="text" placeholder="Username">
-          <button class="btn btn_stroke btn_primary btn-username" @click="setUsername">ENTER</button>
-        </div>
-        <div v-if="!shareLink" class="play-with-friends">
-          <button @click="generateShareLink" class="btn btn_stroke btn_primary">PLAY WITH FRIENDS</button>
-        </div>
-        <div v-if="shareLink" class="screen--share-inner">
-          <div class="screen--share-url">
-            <span>{{ shareLink }}</span>
+    </div>
+  </nav>
+  <div class="screen">
+    <div v-if="slide !== null" class="screen screen_score screen_start">
+      <transition name="fade" mode="in-out" appear>
+        <div v-show="slide === 1" class="hide-desktop screen--header">
+          <div class="screen--header-inner">
+            <button @click="slide = 0" class="btn btn_link btn_primary">
+              <span class="btn--inner">
+                <span class="btn--inner-text">< Back</span>
+              </span>
+            </button>
+            <div class="screen--header-title"></div>
           </div>
-          <button class="btn btn_icon btn_primary">
-            <svg viewBox="0 0 23 22" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <rect
-                x="8.904"
-                y="8"
-                width="12.999"
-                height="13"
-                rx="2"
-                stroke="#fff"
-                stroke-width="2"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-              ></rect>
-              <path
-                d="M4.902 14h-1a2 2 0 0 1-2-2V3a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"
-                stroke="#fff"
-                stroke-width="2"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-              ></path>
-            </svg>
+        </div>
+      </transition>
+      <transition name="fade" mode="out-in" appear>
+        <div key="1" v-if="slide === 0" class="screen--inner">
+          <div class="screen--title">Match
+            <br>The
+            <br>Sound
+          </div>
+          <router-link to="/contribution" class="btn btn_link btn_primary hide-desktop">
+            <span class="btn--inner">
+              <span class="btn--inner-text">or Make a song</span>
+            </span>
+          </router-link>
+          <div class="screen--score">
+            <div class="screen--score-title">Score</div>
+            <div class="screen--score-value">0</div>
+          </div>
+        </div>
+        <!-- sound preview screen -->
+        <div key="2" v-else-if="slide === 1" class="screen--inner">
+          <div class="screen--preview">
+            <svg xmlns="http://www.w3.org/2000/svg" width="60" height="60" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="0.7" stroke-linecap="round" stroke-linejoin="round"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon><path d="M19.07 4.93a10 10 0 0 1 0 14.14M15.54 8.46a5 5 0 0 1 0 7.07"></path></svg>
+            <p>Listen closely to the goal sound, then hit continue and try to match the sound.</p>
+          </div>
+        </div>
+      </transition>
+      <div class="screen--footer">
+        <div class="screen--footer-inner">
+          <button
+            @click="(previewTimer <= 0 && (slide === 0 ? startNextLevel() : enterLevel()))"
+            :class="['btn', 'btn_stroke', 'btn_primary', {'is-disabled': previewTimer > 0}]"
+          >
+            <span class="btn--inner">
+              <span class="btn--inner-text">{{ previewTimer > 0 ? previewTimer : 'Continue' }}</span>
+            </span>
           </button>
         </div>
       </div>
     </div>
+    <template v-else>
+      <div class="hide-desktop screen--header">
+        <div class="screen--header-inner">
+          <button @click="toggle1stScreen()" class="btn btn_navigation">
+            <span class="btn--inner">
+              <span class="btn--inner-text">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  class="feather feather-menu"
+                  viewBox="0 0 24 24"
+                >
+                  <line x1="3" x2="21" y1="12" y2="12"></line>
+                  <line x1="3" x2="21" y1="6" y2="6"></line>
+                  <line x1="3" x2="21" y1="18" y2="18"></line>
+                </svg>
+              </span>
+            </span>
+          </button>
+          <div class="screen--attempts">
+            <svg
+              v-for="(i) in totalAttempts/2"
+              :key="i"
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 48 48"
+            >
+              <defs>
+                <clipPath id="half">
+                  <rect x="0" y="0" width="24.5" height="48"></rect>
+                </clipPath>
+              </defs>
+              <path
+                v-if="i <= (totalAttempts - attempts) / 2"
+                class="screen--attempts-fill"
+                d="M23.993 15.872l1.016-.889a7.313 7.313 0 0 1 4.853-1.834c2.032 0 4.035.832 5.489 2.455a7.314 7.314 0 0 1-.339 10.06l-9.828 8.735a1.795 1.795 0 0 1-2.382 0l-9.814-8.735c-2.751-2.695-2.935-7.125-.339-10.06a7.337 7.337 0 0 1 5.489-2.455 7.34 7.34 0 0 1 4.853 1.834l1.002.889"
+              ></path>
+              <path
+                v-if="i - 0.5 === (totalAttempts - attempts) / 2 "
+                clip-path="url(#half)"
+                class="screen--attempts-fill"
+                d="M23.993 15.872l1.016-.889a7.313 7.313 0 0 1 4.853-1.834c2.032 0 4.035.832 5.489 2.455a7.314 7.314 0 0 1-.339 10.06l-9.828 8.735a1.795 1.795 0 0 1-2.382 0l-9.814-8.735c-2.751-2.695-2.935-7.125-.339-10.06a7.337 7.337 0 0 1 5.489-2.455 7.34 7.34 0 0 1 4.853 1.834l1.002.889"
+              ></path>
+              <path
+                class="screen--attempts-stroke"
+                d="M23.993 15.872l1.016-.889a7.313 7.313 0 0 1 4.853-1.834c2.032 0 4.035.832 5.489 2.455a7.314 7.314 0 0 1-.339 10.06l-9.828 8.735a1.795 1.795 0 0 1-2.382 0l-9.814-8.735c-2.751-2.695-2.935-7.125-.339-10.06a7.337 7.337 0 0 1 5.489-2.455 7.34 7.34 0 0 1 4.853 1.834l1.002.889"
+              ></path>
+            </svg>
+          </div>
+        </div>
+      </div>
+      <div class="screen--inner">
+        <oscillator-module-one
+          v-show="moduleIsUseable('oscillator1')"
+          :class="[(activeModule == 0 ? 'active' : '')]"
+        />
+        <oscillator-module-two
+          v-show="moduleIsUseable('oscillator2')"
+          :class="[(activeModule == 1 ? 'active' : '')]"
+        />
+        <filter-module
+          v-show="moduleIsUseable('filter')"
+          :class="[(activeModule == 2 ? 'active' : '')]"
+        />
+        <envelope-module
+          v-show="moduleIsUseable('envelope')"
+          :class="[(activeModule == 3 ? 'active' : '')]"
+        />
+        <lfo-module
+          v-show="moduleIsUseable('lfo')"
+          :class="[(activeModule == 4 ? 'active' : '')]"
+        />
+        <envelope-module-two
+          v-show="moduleIsUseable('envelope2')"
+          :class="[(activeModule == 5 ? 'active' : '')]"
+        />
+        <sequencer-module
+          v-if="createModeIsActive"
+          :class="[(activeModule == 7 ? 'active' : '')]"
+          class="module sequencer"
+        />
+        <router-module
+          v-show="moduleIsUseable('router')"
+          :class="[(activeModule == 6 ? 'active' : '')]"
+        />
+        <!-- ATTEMPT -->
+        <!-- <div class="attempt-navigation"> -->
+        <button
+          v-if="!completedLevel"
+          @click="makeAttempt"
+          class="btn_full btn btn_stroke btn_primary"
+        >
+          <span class="btn--inner">
+            <span class="btn--inner-text">Submit</span>
+          </span>
+        </button>
+        <!-- DISPLAY PREVIEW -->
+        <button
+          v-else
+          @click="startNextLevel"
+          class="btn_full btn btn_stroke btn_primary btn_next"
+        >
+          <span class="btn--inner">
+            <span class="btn--inner-text">Next</span>
+          </span>
+        </button>
+        <!-- </div> -->
+      </div>
+    </template>
+    <svoosh
+      v-if="isThereSvooshComponent"
+      :isFired="svooshIt"
+      @midway="showGame=true"
+      @bye="endSvoosh"
+    />
   </div>
+  <div class="screen screen_score screen_score_desktop hide-mobile">
+    <div class="screen--inner">
+      <div class="screen--header hide-mobile">
+        <div class="screen--header-inner u-mr_0">
+          <div />
+          <div />
+          <router-link to="/contribution" class="btn btn_link btn_primary">
+            <span class="btn--inner">
+              <span class="btn--inner-text">or Make a song</span>
+            </span>
+          </router-link>
+        </div>
+      </div>
+      <div class="leaderboard">
+        <div class="leaderboard--title">
+          <span class="leaderboard--title-inner">
+            <span>Leaderboard</span>
+          </span>
+        </div>
+        <ul class="leaderboard--list">
+          <li
+            v-for="(score, index) in highscores"
+            :key="index"
+            :class="`leaderboard--list-item ${i === 24 ? 'is-active' : ''}`"
+          >
+            <div class="leaderboard--name">{{ score.name }}</div>
+            <div class="leaderboard--value">{{score.score}}</div>
+          </li>
+        </ul>
+      </div>
+      <div style="margin-top: 30px" class="u-ml_a screen--attempts">
+        <svg
+          v-for="(i) in totalAttempts/2"
+          :key="i"
+          xmlns="http://www.w3.org/2000/svg"
+          viewBox="0 0 48 48"
+        >
+          <defs>
+            <clipPath id="half">
+              <rect x="0" y="0" width="24.5" height="48"></rect>
+            </clipPath>
+          </defs>
+          <path
+            v-if="i <= (totalAttempts - attempts) / 2"
+            class="screen--attempts-fill"
+            d="M23.993 15.872l1.016-.889a7.313 7.313 0 0 1 4.853-1.834c2.032 0 4.035.832 5.489 2.455a7.314 7.314 0 0 1-.339 10.06l-9.828 8.735a1.795 1.795 0 0 1-2.382 0l-9.814-8.735c-2.751-2.695-2.935-7.125-.339-10.06a7.337 7.337 0 0 1 5.489-2.455 7.34 7.34 0 0 1 4.853 1.834l1.002.889"
+          ></path>
+          <path
+            v-if="i - 0.5 === (totalAttempts - attempts) / 2"
+            clip-path="url(#half)"
+            class="screen--attempts-fill"
+            d="M23.993 15.872l1.016-.889a7.313 7.313 0 0 1 4.853-1.834c2.032 0 4.035.832 5.489 2.455a7.314 7.314 0 0 1-.339 10.06l-9.828 8.735a1.795 1.795 0 0 1-2.382 0l-9.814-8.735c-2.751-2.695-2.935-7.125-.339-10.06a7.337 7.337 0 0 1 5.489-2.455 7.34 7.34 0 0 1 4.853 1.834l1.002.889"
+          ></path>
+          <path
+            class="screen--attempts-stroke"
+            d="M23.993 15.872l1.016-.889a7.313 7.313 0 0 1 4.853-1.834c2.032 0 4.035.832 5.489 2.455a7.314 7.314 0 0 1-.339 10.06l-9.828 8.735a1.795 1.795 0 0 1-2.382 0l-9.814-8.735c-2.751-2.695-2.935-7.125-.339-10.06a7.337 7.337 0 0 1 5.489-2.455 7.34 7.34 0 0 1 4.853 1.834l1.002.889"
+          ></path>
+        </svg>
+      </div>
+    </div>
+    <div class="screen--share">
+      <p>Generate link to challenge your friends</p>
+      <div v-if="enterName" class="username_container">
+        <input class="username_input" v-model="userName" type="text" placeholder="Your name">
+        <button class="btn btn_stroke btn_primary btn-username" @click="setUsername">ENTER</button>
+      </div>
+      <!-- <div v-if="!shareLink" class="play-with-friends">
+        <button @click="generateShareLink" class="btn btn_stroke btn_primary">PLAY WITH FRIENDS</button>
+      </div> -->
+      <div v-if="shareLink" class="screen--share-inner">
+        <div class="screen--share-url">
+          <span>{{ shareLink }}</span>
+        </div>
+        <button class="btn btn_icon btn_primary">
+          <svg viewBox="0 0 23 22" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <rect
+              x="8.904"
+              y="8"
+              width="12.999"
+              height="13"
+              rx="2"
+              stroke="#fff"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            ></rect>
+            <path
+              d="M4.902 14h-1a2 2 0 0 1-2-2V3a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"
+              stroke="#fff"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            ></path>
+          </svg>
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
 </template>
 
 <script>
@@ -445,6 +449,7 @@ export default {
     return {
       i: 0,
       userName: null,
+      enterName: true,
       displayPreviewOverlay: false,
       activeModule: 0,
       totalAttempts: 10,
@@ -559,12 +564,13 @@ export default {
       );
     },
     setUsername() {
-      console.log(this.userName);
       this.$store.commit("setUsername", { userName: this.userName });
-    },
-    generateShareLink() {
       this.$store.dispatch("createNewRoom");
+      this.enterName = false
     },
+    // generateShareLink() {
+    //   this.$store.dispatch("createNewRoom");
+    // },
     toggle1stScreen() {
       this.show1stScreen = !this.show1stScreen;
     },
@@ -870,6 +876,20 @@ export default {
     }
   },
   computed: {
+    progressBar() {
+      let allLevels = this.$store.state.gameState.levels,
+          withScore = allLevels.filter(item => {
+            return item.levelData.score > 0
+          }),
+          className = allLevels[withScore.length - 1].levelData.parent.replace(/ /g, '').toLowerCase()
+
+      return {
+        passed: withScore.length,
+        value: withScore.length / allLevels.length,
+        total: allLevels.length,
+        class: `progressbar_theme_${className}`
+      }
+    },
     preViewtimer() {
       return this.$store.state.gameState.previewTimer;
     },

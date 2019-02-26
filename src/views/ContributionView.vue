@@ -252,7 +252,7 @@
           <div v-if="!shareLink" class="play-with-friends">
             <button @click="generateShareLink" class="btn btn_stroke btn_primary">
               <span class="btn--inner">
-                <span class="btn--inner-text">Play with friends</span>
+                <span class="btn--inner-text">Save song</span>
               </span>
             </button>
           </div>
