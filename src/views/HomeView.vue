@@ -4,7 +4,7 @@
     <div class="progressbar--line" :style="[{width: `${progressBar.value * 100}%`}]" />
     <div class="progressbar--text"> {{ progressBar.passed }} / {{progressBar.total}} completed</div>
   </div>
-  <nav :class="`screen navigation ${show1stScreen ? 'is-active' : ''}`">
+  <nav :style="disableCol" :class="`screen navigation ${show1stScreen ? 'is-active' : ''}`">
     <div class="navigation--inner">
       <div
         v-for="(group, index) in nav.groups"
@@ -308,7 +308,7 @@
       @bye="endSvoosh"
     />
   </div>
-  <div class="screen screen_score screen_score_desktop hide-mobile">
+  <div :style="disableCol" class="screen screen_score screen_score_desktop hide-mobile">
     <div class="screen--inner">
       <div class="screen--header hide-mobile">
         <div class="screen--header-inner u-mr_0">
@@ -923,6 +923,27 @@ export default {
         value: withScore.length / allLevels.length,
         total: allLevels.length,
         class: `progressbar_theme_${className}`
+      }
+    },
+    disableCol() {
+      if (this.slide !== 0) {
+        return [
+          {
+            opacity: 1
+          },
+          {
+            pointerEvents: "auto"
+          }
+        ];
+      } else {
+        return [
+          {
+            opacity: 0.2
+          },
+          {
+            pointerEvents: "none"
+          }
+        ];
       }
     },
     preViewtimer() {
