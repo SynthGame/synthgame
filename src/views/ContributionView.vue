@@ -196,7 +196,7 @@
             </div>
           </div>
           <div class="screen--inner">
-            <transition name="fade" appear mode="out-in" :duration="300">
+            <!-- <transition name="fade" appear mode="out-in" :duration="300"> -->
               <oscillator-module-one v-show="moduleIsUseable('oscillator1')"/>
               <oscillator-module-two v-show="moduleIsUseable('oscillator2')"/>
               <filter-module v-show="moduleIsUseable('filter')"/>
@@ -208,7 +208,7 @@
                 :sequencer-name="nav.active.knobName"
               />
               <router-module v-show="moduleIsUseable('router')"/>
-            </transition>
+            <!-- </transition> -->
           </div>
         </div>
       </transition>
