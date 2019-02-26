@@ -969,8 +969,9 @@ export default {
       return this.$store.state.roomHighScores;
     },
     shareLink() {
+      const base = window.location.hostname;
       return this.$store.state.roomId
-        ? `redbull.com/tats/${this.$store.state.roomId}`
+        ? `${base}/play/${this.$store.state.roomId}`
         : false;
     },
     watchRoomId() {

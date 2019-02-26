@@ -22,13 +22,13 @@
           <div class="overlay--title">YOU'VE COMPLETED THE GAME</div>
           <div class="overlay--title">YOU SCORED {{ totalScore }} POINTS!</div>
           <!-- PLAY AGAIN OR CHALLENGE YOUR FRIENDS -->
-          <div class="screen--share">
+          <div class="screen--share--win">
             <p>Share this link to challenge your Friends!</p>
-            <div v-if="!userName" class="username_container">
+            <div v-if="!userSet" class="username_container">
               <input class="username_input" v-model="userName" type="text" placeholder="Username">
               <button class="btn btn_stroke btn_primary btn-username" @click="setUsername">ENTER</button>
             </div>
-            <div v-if="!shareLink" class="play-with-friends">
+            <div v-if="!shareLink" class="play-with-friends-win">
               <button
                 @click="generateShareLink"
                 class="btn btn_stroke btn_primary"
@@ -122,6 +122,7 @@ export default {
   data() {
     return {
       userName: null,
+      userSet: false,
       kickTime: 0,
       pickedPreset: 0,
       displaySuccessOverlay: false,
@@ -185,8 +186,9 @@ export default {
       return this.$store.state.gameState.score;
     },
     shareLink() {
+      const base = window.location.hostname;
       return this.$store.state.roomId
-        ? `redbull.com/tats/${this.$store.state.roomId}`
+        ? `${base}/play/${this.$store.state.roomId}`
         : false;
     },
     ...mapState({
@@ -214,8 +216,9 @@ export default {
     }
   },
   methods: {
-        setUsername() {
+      setUsername() {
       console.log(this.userName);
+      this.userSet = true;
       this.$store.commit('setUsername', { userName: this.userName });
     },
     generateShareLink() {
@@ -388,6 +391,37 @@ export default {
 </script>
 
 <style lang="scss">
+
+.screen--share-win {
+   max-width: 100%;
+  display: flex;
+  justify-content: space-between;
+  flex-direction: column;
+  margin: auto;
+}
+
+.username_container_win {
+    margin: 0px;
+    margin-top: 30px;
+    input {
+      	width: 100%;
+		    height: 60px;
+    }
+    button {
+      margin: 0px;
+	    margin-left: 10px;
+	    width: 120px;
+    }
+}
+
+.play-with-friends-win {
+    margin-top: 20px;
+    width: 100%;
+    button {
+      width: 100%
+    }
+}
+
 .fade-enter-active,
 .fade-leave-active {
   transition: opacity 0.5s;
