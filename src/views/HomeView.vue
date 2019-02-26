@@ -429,31 +429,31 @@ import {
   MODULE_DELAY_COLOR,
   MODULE_REVERB_COLOR,
   MODULE_LFO_COLOR
-} from "@/constants";
-import some from "lodash/some";
+} from '@/constants';
+import some from 'lodash/some';
 // @ is an alias to /src
-import Svoosh from "@/components/Svoosh";
-import GameNavBar from "@/components/GameNavBar.vue";
-import OscillatorModuleOne from "@/components/module/OscillatorModuleOne.vue";
-import OscillatorModuleTwo from "@/components/module/OscillatorModuleTwo.vue";
-import EnvelopeModule from "@/components/module/EnvelopeModule.vue";
-import EnvelopeModuleTwo from "@/components/module/EnvelopeModuleTwo.vue";
-import FilterModule from "@/components/module/FilterModule.vue";
-import LfoModule from "@/components/module/LfoModule.vue";
-import SequencerModule from "@/components/module/SequencerModule.vue";
-import RouterModule from "@/components/module/RouterModule.vue";
-import { SYNTH_BPM } from "@/constants";
-import { vuexSyncGenSequence } from "@/utils";
-import audio from "../audio.js";
-import presets from "@/presets";
-import character from "@/character";
-import levels from "@/levels";
-import range from "lodash/range";
-import Nav from "@/game_nav";
-import { setInterval, clearTimeout, clearInterval } from "timers";
+import Svoosh from '@/components/Svoosh';
+import GameNavBar from '@/components/GameNavBar.vue';
+import OscillatorModuleOne from '@/components/module/OscillatorModuleOne.vue';
+import OscillatorModuleTwo from '@/components/module/OscillatorModuleTwo.vue';
+import EnvelopeModule from '@/components/module/EnvelopeModule.vue';
+import EnvelopeModuleTwo from '@/components/module/EnvelopeModuleTwo.vue';
+import FilterModule from '@/components/module/FilterModule.vue';
+import LfoModule from '@/components/module/LfoModule.vue';
+import SequencerModule from '@/components/module/SequencerModule.vue';
+import RouterModule from '@/components/module/RouterModule.vue';
+import { SYNTH_BPM } from '@/constants';
+import { vuexSyncGenSequence } from '@/utils';
+import audio from '../audio.js';
+import presets from '@/presets';
+import character from '@/character';
+import levels from '@/levels';
+import range from 'lodash/range';
+import Nav from '@/game_nav';
+import { setInterval, clearTimeout, clearInterval } from 'timers';
 
 export default {
-  name: "home",
+  name: 'home',
   data() {
     return {
       i: 0,
@@ -498,9 +498,9 @@ export default {
       clearInterval(this.timer);
     }
     const roomId = this.$route.params.user_id;
-    if (roomId !== "game") {
+    if (roomId !== 'game') {
       console.log(`ROOM ID ${roomId}`);
-      this.$store.commit("setRoomId", { roomId });
+      this.$store.commit('setRoomId', { roomId });
     }
     this.init();
     this.initSynth();
@@ -511,7 +511,7 @@ export default {
       this.displayStartOverlay = false;
       this.showCreatePreview = true;
       getPresetById(this.$route.query.preset).then(data => {
-        this.$store.commit("setFeaturedArtist", {
+        this.$store.commit('setFeaturedArtist', {
           artistName: data.name,
           avatarUrl: data.avatarUrl
         });
@@ -519,37 +519,37 @@ export default {
         this.startPreset(data.parameterValues);
       });
     } else if (
-      window.location.href.indexOf("tats") != -1 ||
-      window.location.href.indexOf("jobboard") != -1
+      window.location.href.indexOf('tats') != -1 ||
+      window.location.href.indexOf('jobboard') != -1
     ) {
       this.customLevelIsActive = true;
       this.displayStartOverlay = false;
-      this.$store.commit("setCreateMode", true);
+      this.$store.commit('setCreateMode', true);
     }
 
     window.letsPlay = () => this.initM();
 
     // Pc keyboard listener (might be needed for mobile)
-    document.addEventListener("keypress", event => {
-      if (audio.state.Tone.context.state !== "running") {
+    document.addEventListener('touchstart', event => {
+      if (audio.state.Tone.context.state !== 'running') {
         audio.state.Tone.context.resume();
       }
 
-      if (event.keyCode === 27 && this.displayOriginalOverlay) {
-        this.killOrignalSoundPrompt();
-      }
+      // if (event.keyCode === 27 && this.displayOriginalOverlay) {
+      //   this.killOrignalSoundPrompt();
+      // }
       // const key = event.key
     });
 
     // mouseup listener (needed to trace events)
-    // document.addEventListener("mouseup", event => {
+    // document.addEventListener('mouseup', event => {
     //   // log to analytics
-    //   this.$router.push("?level=" + (this.level + 1) + "&" + event.screenX);
+    //   this.$router.push('?level=' + (this.level + 1) + '&' + event.screenX);
     // });
   },
   watch: {
     watchRoomId() {
-      this.$store.dispatch("updateRoom");
+      this.$store.dispatch('updateRoom');
     }
     // show2ndScreen(val) {
     //   console.log(`SHowe Start ${val}`)
@@ -564,22 +564,22 @@ export default {
 
       return presets.filter(preset => {
         const values = preset.parameterValues;
-        switch(device) {
+        switch (device) {
           case 'envelope':
-            if(parameter == 'decay') {
+            if (parameter == 'decay') {
               return values.sustain < 70;
-            };
+            }
             if (parameter == 'release') {
               return values.sustain > 30;
-            };
+            }
             return true;
             break;
           case 'filter':
             const oct = values.oscillator1.frequency;
-            if(parameter == 'lowpass') {
+            if (parameter == 'lowpass') {
               return !(oct == '262' || oct == '523');
             }
-            if(parameter == 'highpass') {
+            if (parameter == 'highpass') {
               return !(oct == '65' || oct == '131');
             }
             return true;
@@ -595,7 +595,6 @@ export default {
             break;
         }
       });
-
     },
     refreshRouting() {
       audio.connectLfo(this.$store.state.audioParameters.router.lfo);
@@ -608,16 +607,16 @@ export default {
     },
     setUsername() {
       console.log(this.userName);
-      this.$store.commit("setUsername", { userName: this.userName });
+      this.$store.commit('setUsername', { userName: this.userName });
     },
     generateShareLink() {
-      this.$store.dispatch("createNewRoom");
+      this.$store.dispatch('createNewRoom');
     },
     toggle1stScreen() {
       this.show1stScreen = !this.show1stScreen;
     },
     makeAttempt() {
-      this.$store.dispatch("madeAttempt");
+      this.$store.dispatch('madeAttempt');
       // this.failedLevel()
     },
     startGame() {
@@ -632,7 +631,7 @@ export default {
     },
     init() {
       // Retrieve highscore from local storage
-      // this.$store.did("updateHighScore", localStorage.getItem("highscore"));
+      // this.$store.did('updateHighScore', localStorage.getItem('highscore'));
       // initialize the synth
       audio.init().toMaster();
 
@@ -649,14 +648,14 @@ export default {
       this.toneLoop = audio.setMainLoop(
         {
           noteArray: range(0, 16),
-          subdivision: "8n"
+          subdivision: '8n'
         },
         (time, note) => {
           if (this.sequence[note].selected) {
             // if preview, use octave(frequency) from goal in store
             if (!this.attemptActive) {
               audio.playNote(this.sequence[note].pitch, {
-                noteLength: "8n",
+                noteLength: '8n',
                 volume: this.sequence[note].volume
                   ? this.sequence[note].volume
                   : 0,
@@ -671,7 +670,7 @@ export default {
               });
             } else {
               audio.playNote(this.sequence[note].pitch, {
-                noteLength: "8n",
+                noteLength: '8n',
                 volume: this.sequence[note].volume
                   ? this.sequence[note].volume
                   : 0,
@@ -718,16 +717,16 @@ export default {
       const newLevel = this.level + 1;
       this.goToLevel(newLevel);
       this.$store.commit({
-        type: "setCompletedLevel",
+        type: 'setCompletedLevel',
         value: false
       });
     },
     // for entering lvl
     enterLevel(level) {
-      console.log("triggered enterLevel in homeview");
+      console.log('triggered enterLevel in homeview');
       // this.beginSvoosh()
       // Set to RANDOMIZE PARAM in SOUND ENGINE.
-      this.$store.dispatch("setSynthToAudioParameters", audio);
+      this.$store.dispatch('setSynthToAudioParameters', audio);
       this.setSoundToRandom();
       this.displayPreviewOverlay = false;
       this.slide = null;
@@ -736,9 +735,9 @@ export default {
     setSoundToRandom() {
       const { device, paramater } = levels[this.level].levelData;
       console.log(`${device}, ${paramater}`);
-      this.$store.dispatch("randomizeAudioParameters", { device, paramater });
-      if (paramater == "typeOsc") {
-        console.log("on/off synth");
+      this.$store.dispatch('randomizeAudioParameters', { device, paramater });
+      if (paramater == 'typeOsc') {
+        console.log('on/off synth');
         audio.oscillator1.state.device.stop();
         audio.oscillator1.state.device.start();
         audio.oscillator2.state.device.stop();
@@ -749,9 +748,9 @@ export default {
     // // // //
     startLevelPreview(level) {
       this.cheekySvoosh();
-      console.log("startLevelPreview triggered");
+      console.log('startLevelPreview triggered');
 
-      this.$store.commit("resetPreviewTimer");
+      this.$store.commit('resetPreviewTimer');
 
       this.$nextTick(() => {
         // disable all overlays when svoosh is done
@@ -763,8 +762,8 @@ export default {
       });
 
       audio.playSweep();
-      this.$router.push("?level=" + (level + 1));
-      window.parent.postMessage("play-game-activated", "*");
+      this.$router.push('?level=' + (level + 1));
+      window.parent.postMessage('play-game-activated', '*');
 
       // randomly pick preset
       this.pickedPreset = Math.round(Math.random() * (presets.length - 1));
@@ -774,7 +773,7 @@ export default {
       console.log(this.newPickedPreset);
 
       // SET GOAL TO GOAL SOUND
-      this.$store.commit("setGoalToPreset", {
+      this.$store.commit('setGoalToPreset', {
         // preset: Object.assign(presets[this.pickedPreset].parameterValues, {})
         preset: JSON.parse(
           JSON.stringify(presets[this.pickedPreset].parameterValues)
@@ -782,14 +781,14 @@ export default {
       });
 
       // SET AUDIO PARAMS TO NEW GOAL SOUND
-      this.$store.commit("setAudioParameterToPreset", {
+      this.$store.commit('setAudioParameterToPreset', {
         preset: presets[this.pickedPreset].parameterValues
       });
 
       // SET AUDIO to AUDIO PARAMS
-      this.$store.dispatch("setSynthToGoal", audio);
+      this.$store.dispatch('setSynthToGoal', audio);
 
-      this.$store.commit("setFeaturedArtist", {
+      this.$store.commit('setFeaturedArtist', {
         artistName: presets[this.pickedPreset].name,
         avatarUrl: presets[this.pickedPreset].avatarUrl
       });
@@ -808,7 +807,7 @@ export default {
       // Set bpm from preset
       audio.setBpm(presets[this.pickedPreset].bpm * 2);
       // Set bpm in store
-      this.$store.commit("setPresetBpm", presets[this.pickedPreset].bpm);
+      this.$store.commit('setPresetBpm', presets[this.pickedPreset].bpm);
 
       // Set noteArray to sequence preset locally
       this.sequence = presets[this.pickedPreset].sequenceArray;
@@ -816,7 +815,7 @@ export default {
       // import level config
       const availableParameters = levels[level];
 
-      this.$store.dispatch("startNewLevel", {
+      this.$store.dispatch('startNewLevel', {
         knobsAvailable: availableParameters,
         levelNumber: level || 0
       });
@@ -824,7 +823,7 @@ export default {
       let self = this;
 
       self.timer = setInterval(() => {
-        self.$store.commit("decrementPreviewTimer");
+        self.$store.commit('decrementPreviewTimer');
         if (self.timer.previewTimer === 0) {
           clearInterval(self.timer);
           return false;
@@ -836,7 +835,7 @@ export default {
         mapValues(audioModule, parameter => !!parameter)
       );
 
-      console.log("startPreset triggered");
+      console.log('startPreset triggered');
       // disable all overlays
       // this.displaySuccessOverlay = false;
       this.displayFailureOverlay = false;
@@ -844,15 +843,15 @@ export default {
       this.displayPreviewOverlay = false;
       this.showCreatePreview = true;
 
-      this.$store.dispatch("startNewLevel", {
+      this.$store.dispatch('startNewLevel', {
         knobsAvailable: usedParameters,
         levelNumber: 0 //
       });
-      this.$store.commit("setGoalToPreset", {
+      this.$store.commit('setGoalToPreset', {
         preset: parameters
       });
       // this.$store.dispatch('randomizeAudioParameters', usedParameters) // and the audio params
-      this.$store.dispatch("setSynthToGoal", audio); // then let the user hear it
+      this.$store.dispatch('setSynthToGoal', audio); // then let the user hear it
 
       this.loop.start();
     },
@@ -882,7 +881,7 @@ export default {
         knobName = module.items[key].title;
 
       this.$store.commit({
-        type: "setKnobAvalible",
+        type: 'setKnobAvalible',
         knobName: knobName,
         moduleName: moduleName
       });
@@ -891,7 +890,7 @@ export default {
 
       this.goToLevel(lvl); // CHANGE to lvl
 
-      this.$store.commit("resetAttempts");
+      this.$store.commit('resetAttempts');
 
       //Trigger preview Screen + new sound.
     },
@@ -909,10 +908,10 @@ export default {
     },
     goToLevel(level) {
       // Add check for lvl avalible....
-      this.$store.commit("setLevelValue", level);
+      this.$store.commit('setLevelValue', level);
       this.startLevelPreview(level); // TODO: should be + 1
       this.$store.commit({
-        type: "setCompletedLevel",
+        type: 'setCompletedLevel',
         value: false
       });
     }
@@ -922,7 +921,7 @@ export default {
       return this.$store.state.gameState.previewTimer;
     },
     previewClasses() {
-      return this.timer > 0 ? "is-disabled" : "";
+      return this.timer > 0 ? 'is-disabled' : '';
     },
     previewTimer() {
       return this.$store.state.gameState.previewTimer;
@@ -930,7 +929,7 @@ export default {
     attemptActive() {
       return this.$store.state.gameState.attemptActive;
     },
-    ...vuexSyncGenSequence("sequence", val => {}),
+    ...vuexSyncGenSequence('sequence', val => {}),
     highscores() {
       return this.$store.state.roomHighScores;
     },
@@ -968,44 +967,44 @@ export default {
     },
     oscillator1Complete() {
       return Object.values(
-        this.$store.getters.audioParametersMatchGoalWithMargin["oscillator1"]
+        this.$store.getters.audioParametersMatchGoalWithMargin['oscillator1']
       ).every(param => param);
     },
     oscillator2Complete() {
       return Object.values(
-        this.$store.getters.audioParametersMatchGoalWithMargin["oscillator2"]
+        this.$store.getters.audioParametersMatchGoalWithMargin['oscillator2']
       ).every(param => param);
     },
     filterComplete() {
       return Object.values(
-        this.$store.getters.audioParametersMatchGoalWithMargin["filter"]
+        this.$store.getters.audioParametersMatchGoalWithMargin['filter']
       ).every(param => param);
     },
     envelopeComplete() {
       return Object.values(
-        this.$store.getters.audioParametersMatchGoalWithMargin["envelope"]
+        this.$store.getters.audioParametersMatchGoalWithMargin['envelope']
       ).every(param => param);
     },
     envelope2Complete() {
       return Object.values(
-        this.$store.getters.audioParametersMatchGoalWithMargin["envelope2"]
+        this.$store.getters.audioParametersMatchGoalWithMargin['envelope2']
       ).every(param => param);
     },
     lfoComplete() {
       return Object.values(
-        this.$store.getters.audioParametersMatchGoalWithMargin["lfo"]
+        this.$store.getters.audioParametersMatchGoalWithMargin['lfo']
       ).every(param => param);
     },
     routerComplete() {
       return Object.values(
-        this.$store.getters.audioParametersMatchGoalWithMargin["router"]
+        this.$store.getters.audioParametersMatchGoalWithMargin['router']
       ).every(param => param);
     }
   }
 };
 </script>
 
-<style lang="scss">
+<style lang='scss'>
 .play-with-friends {
   margin-top: 10px;
 }

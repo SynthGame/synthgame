@@ -370,7 +370,7 @@ export default {
     this.init();
     this.initSynth();
     // Pc keyboard listener (might be needed for mobile)
-    document.addEventListener("keypress", event => {
+    document.addEventListener("touchstart", event => {
       if (audio.state.Tone.context.state !== "running") {
         audio.state.Tone.context.resume();
       }
