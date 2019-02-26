@@ -2,7 +2,7 @@
   <div class="overlay">
     <div class="overlay--inner">
       <div class="overlay--title">Oooops!</div>
-      <div class="overlay--description">You have made {{ attempts }} of 10 attempts.</div>
+      <div class="overlay--description">You have {{ attempts }} of 5 lives left.</div>
       <div class="overlay--description"><b>Listen</b> to the original audio</div>
       <button
         @click="closeoverlay"

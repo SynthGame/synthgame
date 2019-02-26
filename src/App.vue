@@ -15,6 +15,63 @@
       </div>
     </transition>
 
+    <transition name="confetti">
+      <div v-show="gameComplete" class="overlay">
+        <canvas id="confetti"></canvas>
+        <div class="overlay--inner">
+          <div class="overlay--title">YOU'VE COMPLETED THE GAME</div>
+          <div class="overlay--title">YOU SCORED {{ totalScore }} POINTS!</div>
+          <!-- PLAY AGAIN OR CHALLENGE YOUR FRIENDS -->
+          <div class="screen--share">
+            <p>Share this link to challenge your Friends!</p>
+            <div v-if="!userName" class="username_container">
+              <input class="username_input" v-model="userName" type="text" placeholder="Username">
+              <button class="btn btn_stroke btn_primary btn-username" @click="setUsername">ENTER</button>
+            </div>
+            <div v-if="!shareLink" class="play-with-friends">
+              <button
+                @click="generateShareLink"
+                class="btn btn_stroke btn_primary"
+              >PLAY WITH FRIENDS</button>
+            </div>
+            <div v-if="shareLink" class="screen--share-inner">
+              <div class="screen--share-url">
+                <span>{{ shareLink }}</span>
+              </div>
+              <button class="btn btn_icon btn_primary">
+                <svg viewBox="0 0 23 22" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <rect
+                    x="8.904"
+                    y="8"
+                    width="12.999"
+                    height="13"
+                    rx="2"
+                    stroke="#fff"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  ></rect>
+                  <path
+                    d="M4.902 14h-1a2 2 0 0 1-2-2V3a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"
+                    stroke="#fff"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  ></path>
+                </svg>
+              </button>
+            </div>
+          </div>
+
+          <button @click="startAgain()" class="btn_full btn btn_stroke btn_primary">
+            <span class="btn--inner">
+              <span class="btn--inner-text">PLAY AGAIN</span>
+            </span>
+          </button>
+        </div>
+      </div>
+    </transition>
+
     <!-- <transition name="slideout">
       <success-overlay
         v-if="displaySuccessOverlay"
@@ -58,12 +115,13 @@ import range from "lodash/range";
 import fill from "lodash/fill";
 import character from "@/character";
 import "confetti-js";
-import 'prevent-pull-refresh';
+import "prevent-pull-refresh";
 
 export default {
   name: "App",
   data() {
     return {
+      userName: null,
       kickTime: 0,
       pickedPreset: 0,
       displaySuccessOverlay: false,
@@ -72,6 +130,7 @@ export default {
       displayPreviewOverlay: false,
       displayOriginalOverlay: false,
       showConfetti: false,
+      gameComplete: false,
       nextLevel: false,
       // gameSummary: true,
       loop: null,
@@ -90,7 +149,7 @@ export default {
         glide: false
       }),
       originalSoundTimer: 8,
-      timerInterval: null,
+      timerInterval: null
     };
   },
   mounted() {
@@ -122,6 +181,14 @@ export default {
     OriginalSoundOverlay
   },
   computed: {
+    totalScore() {
+      return this.$store.state.gameState.score;
+    },
+    shareLink() {
+      return this.$store.state.roomId
+        ? `redbull.com/tats/${this.$store.state.roomId}`
+        : false;
+    },
     ...mapState({
       level: state => state.gameState.level,
       timerIsRunning: state => state.gameState.timerIsRunning
@@ -147,6 +214,13 @@ export default {
     }
   },
   methods: {
+        setUsername() {
+      console.log(this.userName);
+      this.$store.commit('setUsername', { userName: this.userName });
+    },
+    generateShareLink() {
+      this.$store.dispatch("createNewRoom");
+    },
     switchToCreate() {
       this.showCreatePreview = true;
       this.displayPreviewOverlay = false;
@@ -168,6 +242,7 @@ export default {
     //   this.displaySuccessOverlay = true
     // },
     startAgain() {
+      this.gameComplete = false;
       location.reload();
     },
     startLastLevel() {
@@ -253,7 +328,7 @@ export default {
       this.displayOriginalOverlay = true; // create this overlay.
     },
     killOrignalSoundPrompt() {
-      if(!(this.preViewtimer > 0)) {
+      if (!(this.preViewtimer > 0)) {
         this.displayOriginalOverlay = false;
         clearInterval(this.timerInterval);
         this.originalSoundTimer = 8;
@@ -272,21 +347,27 @@ export default {
   watch: {
     madeAttempt() {
       if (this.allParametersMatchGoal === true) {
-        this.showConfetti = true;
-        const score = 11 - this.$store.state.gameState.attempts;
-        this.$store.commit("addValueToScore", score);
-        this.$store.commit("setLevelScore", score);
-        this.$store.commit({
-          type: "setCompletedLevel",
-          value: true
-        });
-        if (this.$store.state.roomId !== null) {
-          this.$store.dispatch("updateHighScore");
+        if (this.level == levels.length -1) {
+          // win
+          console.log('WIN!')
+          this.gameComplete = true;
+        } else {
+          this.showConfetti = true;
+          const score = 6 - this.$store.state.gameState.attempts;
+          this.$store.commit("addValueToScore", score);
+          this.$store.commit("setLevelScore", score);
+          this.$store.commit({
+            type: "setCompletedLevel",
+            value: true
+          });
+          if (this.$store.state.roomId !== null) {
+            this.$store.dispatch("updateHighScore");
+          }
+          this.$store.dispatch("levelDone");
+          this.$store.commit("resetAttempts");
         }
-        this.$store.dispatch("levelDone");
-        this.$store.commit("resetAttempts");
       } else {
-        if (this.$store.state.gameState.attempts == 10) {
+        if (this.$store.state.gameState.attempts == 5) {
           // need to reset global attemps in gameOver action.....
           this.$store.dispatch("gameOver");
         } else {

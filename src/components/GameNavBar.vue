@@ -74,7 +74,7 @@
     </span>-->
     <div>
       <span v-if="!completedLevel">
-        <button @click="makeAttempt" class="">Attempt {{ attempts }}</button>
+        <button @click="makeAttempt" class="">{{ attempts }} Lives remaining</button>
       </span>
       <span v-if="completedLevel">
       <button class="button-next"
