@@ -167,7 +167,20 @@
           <!-- sound preview screen -->
           <div key="2" v-else-if="slide === 1" class="screen--inner">
             <div class="screen--preview">
-              <svg xmlns="http://www.w3.org/2000/svg" width="60" height="60" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="0.7" stroke-linecap="round" stroke-linejoin="round"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon><path d="M19.07 4.93a10 10 0 0 1 0 14.14M15.54 8.46a5 5 0 0 1 0 7.07"></path></svg>
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="60"
+                height="60"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="white"
+                stroke-width="0.7"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              >
+                <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon>
+                <path d="M19.07 4.93a10 10 0 0 1 0 14.14M15.54 8.46a5 5 0 0 1 0 7.07"></path>
+              </svg>
               <p>Listen closely to the goal sound, then hit continue and try to match the sound.</p>
             </div>
           </div>
@@ -308,8 +321,8 @@
       <div class="screen--inner">
         <div class="screen--header hide-mobile">
           <div class="screen--header-inner u-mr_0">
-            <div />
-            <div />
+            <div/>
+            <div/>
             <router-link to="/contribution" class="btn btn_link btn_primary">
               <span class="btn--inner">
                 <span class="btn--inner-text">or Make a song</span>
@@ -437,7 +450,7 @@ import character from "@/character";
 import levels from "@/levels";
 import range from "lodash/range";
 import Nav from "@/game_nav";
-import { setInterval, clearTimeout, clearInterval } from 'timers';
+import { setInterval, clearTimeout, clearInterval } from "timers";
 
 export default {
   name: "home",
@@ -462,7 +475,7 @@ export default {
       show1stScreen: false,
       showGame: false,
       pickedPreset: 0,
-      timer: null,
+      timer: null
     };
   },
   components: {
@@ -481,7 +494,7 @@ export default {
     this.showStartScreen = true;
   },
   created() {
-    if(this.timer != null) {
+    if (this.timer != null) {
       clearInterval(this.timer);
     }
     const roomId = this.$route.params.user_id;
@@ -547,7 +560,42 @@ export default {
   },
   methods: {
     pickPreset() {
-      this.presets
+      const { device, parameter } = this.$store.getters.reduceKnobsAvalible;
+
+      return presets.filter(preset => {
+        const values = preset.parameterValues;
+        switch(device) {
+          case 'envelope':
+            if(parameter == 'decay') {
+              return values.sustain < 70;
+            };
+            if (parameter == 'release') {
+              return values.sustain > 30;
+            };
+            return true;
+            break;
+          case 'filter':
+            const oct = values.oscillator1.frequency;
+            if(parameter == 'lowpass') {
+              return !(oct == '262' || oct == '523');
+            }
+            if(parameter == 'highpass') {
+              return !(oct == '65' || oct == '131');
+            }
+            return true;
+            break;
+          case 'lfo':
+            return values.lfo.amount > 1;
+            break;
+          case 'oscillator1':
+            return values.lfo.amount <= 3;
+            break;
+          default:
+            return true;
+            break;
+        }
+      });
+
     },
     refreshRouting() {
       audio.connectLfo(this.$store.state.audioParameters.router.lfo);
@@ -689,8 +737,8 @@ export default {
       const { device, paramater } = levels[this.level].levelData;
       console.log(`${device}, ${paramater}`);
       this.$store.dispatch("randomizeAudioParameters", { device, paramater });
-      if( paramater == 'typeOsc' ) {
-        console.log('on/off synth');
+      if (paramater == "typeOsc") {
+        console.log("on/off synth");
         audio.oscillator1.state.device.stop();
         audio.oscillator1.state.device.start();
         audio.oscillator2.state.device.stop();
@@ -700,11 +748,10 @@ export default {
     // LEVEL
     // // // //
     startLevelPreview(level) {
-
       this.cheekySvoosh();
       console.log("startLevelPreview triggered");
-      
-      this.$store.commit('resetPreviewTimer');
+
+      this.$store.commit("resetPreviewTimer");
 
       this.$nextTick(() => {
         // disable all overlays when svoosh is done
@@ -723,6 +770,7 @@ export default {
       this.pickedPreset = Math.round(Math.random() * (presets.length - 1));
 
       this.newPickedPreset = this.pickPreset(level);
+
       console.log(this.newPickedPreset);
 
       // SET GOAL TO GOAL SOUND
@@ -773,13 +821,13 @@ export default {
         levelNumber: level || 0
       });
 
-      let self = this
+      let self = this;
 
       self.timer = setInterval(() => {
-        self.$store.commit('decrementPreviewTimer');
-        if(self.timer.previewTimer === 0){
+        self.$store.commit("decrementPreviewTimer");
+        if (self.timer.previewTimer === 0) {
           clearInterval(self.timer);
-          return false
+          return false;
         }
       }, 1000);
     },
@@ -874,7 +922,7 @@ export default {
       return this.$store.state.gameState.previewTimer;
     },
     previewClasses() {
-      return this.timer > 0 ? 'is-disabled' : '';
+      return this.timer > 0 ? "is-disabled" : "";
     },
     previewTimer() {
       return this.$store.state.gameState.previewTimer;
