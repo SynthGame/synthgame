@@ -347,12 +347,13 @@ export default new Vuex.Store({
 
       if (!baddies.includes(parameter)) {
         if (audio[device].state.device[parameter].value === undefined) {
-          console.log(character[device][parameter](value))
           audio[device].state.device[parameter] = character[device][parameter](value);
         } else {
-          console.log(character[device][parameter](value))
-          audio[device].state.device[parameter].value = value;
+          audio[device].state.device[parameter].value = character[device][parameter](value);
         }
+      } else {
+
+        
       }
     },
     madeAttempt({ state, commit }) {
