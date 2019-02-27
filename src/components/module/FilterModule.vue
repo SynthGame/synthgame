@@ -96,21 +96,21 @@ export default {
       return this.$store.state.gameState.timerIsRunning
     },
     ...vuexSyncGen('filter', 'cutOffFreq', val => {
-      if (self.$store.state.audioParameters.router.envelope2 === 'filterCutoff') {
-        self.filter.frequency.value = character.filter.cutOffFreq(val);
-        audio.envelope2.state.device.max = character.filter.cutOffFreq(val)
-      } else if (self.$store.state.audioParameters.router.lfo === 'filterCutoff') {
-        audio.lfo.state.device.max = character.filter.cutOffFreq(val) * (1 + self.$store.state.audioParameters.lfo.amount/100);
-        audio.lfo.state.device.min = character.filter.cutOffFreq(val) - (character.filter.cutOffFreq(val) * self.$store.state.audioParameters.lfo.amount/100) ;
-      } else {
-        self.filter.frequency.value = character.filter.cutOffFreq(val);
-      }
+      // if (self.$store.state.audioParameters.router.envelope2 === 'filterCutoff') {
+      //   self.filter.frequency.value = character.filter.cutOffFreq(val);
+      //   audio.envelope2.state.device.max = character.filter.cutOffFreq(val)
+      // } else if (self.$store.state.audioParameters.router.lfo === 'filterCutoff') {
+      //   audio.lfo.state.device.max = character.filter.cutOffFreq(val) * (1 + self.$store.state.audioParameters.lfo.amount/100);
+      //   audio.lfo.state.device.min = character.filter.cutOffFreq(val) - (character.filter.cutOffFreq(val) * self.$store.state.audioParameters.lfo.amount/100) ;
+      // } else {
+      //   self.filter.frequency.value = character.filter.cutOffFreq(val);
+      // }
     }),
     ...vuexSyncGen('filter', 'type', val => {
-      self.filter.type = character.filter.type(val)
+      // self.filter.type = character.filter.type(val)
     }),
     ...vuexSyncGen('filter', 'setQ', val => {
-      self.filter.Q.value = character.filter.setQ(val)
+      // self.filter.Q.value = character.filter.setQ(val)
     }),
     // ...vuexSyncGen('filter', 'gain', val => {
     //   self.filter.gain.value = val

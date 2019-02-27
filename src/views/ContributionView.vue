@@ -153,6 +153,7 @@
         <div v-else class="screen screen_score screen_start">
           <div class="hide-desktop screen--header">
             <div class="screen--header-inner">
+
               <button
                 @click="toggle1stScreen()"
                 class="btn btn_navigation"
@@ -543,7 +544,7 @@ export default {
     shareLink() {
       const base = window.location.hostname;
       return this.$store.state.contributionId
-        ? `${base}/play/${this.$store.state.contributionId}`
+        ? `${base}/contribution/${this.$store.state.contributionId}`
         : false;
     },
     nav() {

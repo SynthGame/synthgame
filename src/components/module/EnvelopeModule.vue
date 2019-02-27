@@ -110,16 +110,16 @@ export default {
     ...vuexSyncGen('envelope', 'attack', val => {
       // somehow these values cause weird problems when they're 0
       // this is not a proper fix but if it works it's not stupid
-      self.envelope.attack = character.envelope.attack(val || 1)
+      // self.envelope.attack = character.envelope.attack(val || 1)
     }),
     ...vuexSyncGen('envelope', 'decay', val => {
-      self.envelope.decay = character.envelope.decay(val || 1)
+      // self.envelope.decay = character.envelope.decay(val || 1)
     }),
     ...vuexSyncGen('envelope', 'sustain', val => {
-      self.envelope.sustain = character.envelope.sustain(val || 0)
+      // self.envelope.sustain = character.envelope.sustain(val || 0)
     }),
     ...vuexSyncGen('envelope', 'release', val => {
-      self.envelope.release = character.envelope.release(val || 1)
+      // self.envelope.release = character.envelope.release(val || 1)
     }),
     ...mapState({
       attackGoal: state => state.gameState.goal.envelope.attack,
