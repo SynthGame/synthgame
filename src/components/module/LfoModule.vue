@@ -95,23 +95,23 @@ export default {
       return this.$store.state.gameState.timerIsRunning
     },
     ...vuexSyncGen('lfo', 'frequency', val => {
-      self.lfo.frequency.value = character.lfo.frequency(val)
-      self.realFrq = character.lfo.frequency(val)
+      // self.lfo.frequency.value = character.lfo.frequency(val)
+      // self.realFrq = character.lfo.frequency(val)
     }),
     ...vuexSyncGen('lfo', 'amount', val => {
-      if (self.$store.state.audioParameters.router.lfo === 'filterCutoff') {
-        self.lfo.max = character.filter.cutOffFreq(self.$store.state.audioParameters.filter.cutOffFreq) * (1 + val/100);
-        self.lfo.min = character.filter.cutOffFreq(self.$store.state.audioParameters.filter.cutOffFreq) - (character.filter.cutOffFreq(self.$store.state.audioParameters.filter.cutOffFreq) * (val/100));
-      } else {
-        self.lfo.max = character.lfo.amount(val) //TEMP disabled. mounting min and max manually from connected device
-        self.lfo.min = character.lfo.amount(val) * -1
-      }
+      // if (self.$store.state.audioParameters.router.lfo === 'filterCutoff') {
+      //   self.lfo.max = character.filter.cutOffFreq(self.$store.state.audioParameters.filter.cutOffFreq) * (1 + val/100);
+      //   self.lfo.min = character.filter.cutOffFreq(self.$store.state.audioParameters.filter.cutOffFreq) - (character.filter.cutOffFreq(self.$store.state.audioParameters.filter.cutOffFreq) * (val/100));
+      // } else {
+      //   self.lfo.max = character.lfo.amount(val) //TEMP disabled. mounting min and max manually from connected device
+      //   self.lfo.min = character.lfo.amount(val) * -1
+      // }
     }),
     ...vuexSyncGen('lfo', 'type', val => {
-      if (self.lfo.type === character.lfo.type(val)) return
-      self.lfo.type = character.lfo.type(val)
-      self.lfo.stop()
-      self.lfo.start()
+      // if (self.lfo.type === character.lfo.type(val)) return
+      // self.lfo.type = character.lfo.type(val)
+      // self.lfo.stop()
+      // self.lfo.start()
     }),
     ...mapState({
       typeArray: state => state.gameState.possibleValues.lfo.type,

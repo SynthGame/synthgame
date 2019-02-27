@@ -137,26 +137,26 @@ export default {
     //   self.oscillator1.frequency.value = character.oscillator1.frequency(val)
     // }),
     ...vuexSyncGen("router", "lfo", val => {
-      audio.connectLfo(val);
-      self.filter.frequency.value = character.filter.cutOffFreq(
-        self.$store.state.audioParameters.filter.cutOffFreq
-      );
-      if (val === "filterCutoff" && self.envelope2 === "filterCutoff") {
-        self.envelope2 = "oscsDetune";
-      }
+      // audio.connectLfo(val);
+      // self.filter.frequency.value = character.filter.cutOffFreq(
+      //   self.$store.state.audioParameters.filter.cutOffFreq
+      // );
+      // if (val === "filterCutoff" && self.envelope2 === "filterCutoff") {
+      //   self.envelope2 = "oscsDetune";
+      // }
     }),
     ...vuexSyncGen("router", "envelope2", val => {
-      audio.connectEnvelope2(val);
-      // if (val ==='filterCutoff') {
-      //   self.realEnvelope2.max = character.filter.cutOffFreq(self.$store.state.audioParameters.filter.cutOffFreq)
-      // } else {
-      self.filter.frequency.value = character.filter.cutOffFreq(
-        self.$store.state.audioParameters.filter.cutOffFreq
-      );
+      // audio.connectEnvelope2(val);
+      // // if (val ==='filterCutoff') {
+      // //   self.realEnvelope2.max = character.filter.cutOffFreq(self.$store.state.audioParameters.filter.cutOffFreq)
+      // // } else {
+      // self.filter.frequency.value = character.filter.cutOffFreq(
+      //   self.$store.state.audioParameters.filter.cutOffFreq
+      // );
+      // // }
+      // if (val === "filterCutoff" && self.lfo === "filterCutoff") {
+      //   self.lfo = "oscsDetune";
       // }
-      if (val === "filterCutoff" && self.lfo === "filterCutoff") {
-        self.lfo = "oscsDetune";
-      }
     }),
     ...mapState({
       lfoGoal: state => state.gameState.goal.router.lfo,

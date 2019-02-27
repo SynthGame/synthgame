@@ -244,7 +244,7 @@ export default new Vuex.Store({
         return Object.entries(knob).length !== 0;
       });
 
-      if(parent) {
+      if (parent) {
         const parameter = Object.keys(parent)[0];
         const device = devices.filter(
           device => Object.keys(knobs[device])[0] === parameter
@@ -261,7 +261,7 @@ export default new Vuex.Store({
       return state.gameState.level + 1;
     },
     returnLevelScore: (state) => {
-      if(state.gameState.level == -1) {
+      if (state.gameState.level == -1) {
         return 0;
       } else {
         return state.gameState.levels[state.gameState.level].levelData.score;
@@ -295,10 +295,10 @@ export default new Vuex.Store({
       return isArray(state.gameState.possibleValues[device][parameter])
         ? val === state.gameState.goal[device][parameter]
         : inRange(
-            val,
-            state.gameState.goal[device][parameter] - state.gameState.margin,
-            state.gameState.goal[device][parameter] + state.gameState.margin
-          );
+          val,
+          state.gameState.goal[device][parameter] - state.gameState.margin,
+          state.gameState.goal[device][parameter] + state.gameState.margin
+        );
     }
   },
   actions: {
@@ -337,24 +337,121 @@ export default new Vuex.Store({
         score = store.state.gameState.score;
       updateMyScore({ url, name, score }, () => store.dispatch("updateRoom"));
     },
-    setAudioParameter(state, { device, parameter, value }) {
+    setAudioParameter(store, { device, parameter, value }) {
       // console.log(`device ${device}; param: ${parameter}; value: ${value}`);
       // console.log(audio[device].state.device[parameter]);
 
       this.commit("setAudioParameter", { device, parameter, value });
 
-      const baddies = ["cutOffFreq", "typeOsc", "volume", "amount"];
-
-      if (!baddies.includes(parameter)) {
-        if (audio[device].state.device[parameter].value === undefined) {
-          audio[device].state.device[parameter] = character[device][parameter](value);
-        } else {
-          audio[device].state.device[parameter].value = character[device][parameter](value);
-        }
-      } else {
-
-        
+      switch (device) {
+        case 'envelope':
+        case 'envelop2':
+          const params = ['attack', 'decay', 'release', 'amount']; // val || 1
+          if (params.includes(parameter)) {
+            audio[device].state.device[parameter] = character[device][parameter](value || 1);
+          } else {
+            audio[device].state.device[parameter] = character[device][parameter](value);
+          }
+          break;
+        case 'filter':
+          if (parameter === 'cutOffFreq') {
+            if (store.state.audioParameters.router.envelope2 === 'filterCutoff') {
+              audio.filter.frequency.value = character.filter.cutOffFreq(val);
+              audio.envelope2.state.device.max = character.filter.cutOffFreq(val)
+            } else if (store.state.audioParameters.router.lfo === 'filterCutoff') {
+              audio.lfo.state.device.max = character.filter.cutOffFreq(val) * (1 + store.state.audioParameters.lfo.amount / 100);
+              audio.lfo.state.device.min = character.filter.cutOffFreq(val) - (character.filter.cutOffFreq(val) * store.state.audioParameters.lfo.amount / 100);
+            } else {
+              audio.filter.frequency.value = character.filter.cutOffFreq(val);
+            }
+          } else {
+            if (audio[device].state.device[parameter].value === undefined) {
+              audio[device].state.device[parameter] = character[device][parameter](value);
+            } else {
+              audio[device].state.device[parameter].value = character[device][parameter](value);
+            }
+          }
+          break;
+        case 'oscillator1':
+          if (parameter == "typeOsc") {
+            audio.oscillator1.state.device.type = character.oscillator1.typeOsc(value);
+            audio.oscillator1.state.device.stop();
+            audio.oscillator1.state.device.start();
+          } else {
+            if (audio[device].state.device[parameter].value === undefined) {
+              audio[device].state.device[parameter] = character[device][parameter](value);
+            } else {
+              audio[device].state.device[parameter].value = character[device][parameter](value);
+            }
+          }
+          break;
+        case 'oscillator2':
+          if (parameter == "typeOsc") {
+            audio.oscillator2.state.device.type = character.oscillator2.typeOsc(value);
+            audio.oscillator2.state.device.stop();
+            audio.oscillator2.state.device.start();
+          } else {
+            if (audio[device].state.device[parameter].value === undefined) {
+              audio[device].state.device[parameter] = character[device][parameter](value);
+            } else {
+              audio[device].state.device[parameter].value = character[device][parameter](value);
+            }
+          }
+          break;
+        case 'lfo':
+          if (parameter == 'frequency') {
+            audio.lfo.frequency.value = character.lfo.frequency(val)
+            audio.realFrq = character.lfo.frequency(val)
+          }
+          if (parameter == 'amount') {
+            if (store.state.audioParameters.router.lfo === 'filterCutoff') {
+              audio.lfo.max = character.filter.cutOffFreq(store.state.audioParameters.filter.cutOffFreq) * (1 + val / 100);
+              audio.lfo.min = character.filter.cutOffFreq(store.state.audioParameters.filter.cutOffFreq) - (character.filter.cutOffFreq(store.state.audioParameters.filter.cutOffFreq) * (val / 100));
+            } else {
+              audio.lfo.max = character.lfo.amount(val) //TEMP disabled. mounting min and max manually from connected device
+              audio.lfo.min = character.lfo.amount(val) * -1
+            }
+          }
+          if (parameter == 'type') {
+            if (audio.lfo.type === character.lfo.type(val)) return
+            audio.lfo.type = character.lfo.type(val)
+            audio.lfo.stop()
+            audio.lfo.start()
+          }
+          break;
+        case 'router':
+          if (parameter == 'lfo') {
+            audio.connectLfo(val);
+            audio.filter.frequency.value = character.filter.cutOffFreq(
+              store.state.audioParameters.filter.cutOffFreq
+            );
+            if (val === "filterCutoff" && audio.envelope2 === "filterCutoff") {
+              audio.envelope2 = "oscsDetune";
+            }
+          }
+          if (parameter == 'envelope2') {
+            audio.connectEnvelope2(val);
+            // if (val ==='filterCutoff') {
+            //   audio.realEnvelope2.max = character.filter.cutOffFreq(store.state.audioParameters.filter.cutOffFreq)
+            // } else {
+            audio.filter.frequency.value = character.filter.cutOffFreq(
+              store.state.audioParameters.filter.cutOffFreq
+            );
+            // }
+            if (val === "filterCutoff" && audio.lfo === "filterCutoff") {
+              audio.lfo = "oscsDetune";
+            }
+          }
+          break;
+        default:
+          if (audio[device].state.device[parameter].value === undefined) {
+            audio[device].state.device[parameter] = character[device][parameter](value);
+          } else {
+            audio[device].state.device[parameter].value = character[device][parameter](value);
+          }
+          break;
       }
+
     },
     madeAttempt({ state, commit }) {
       commit("toggleAttemptMade");

@@ -144,22 +144,22 @@ export default {
     //   }
     // },
     ...vuexSyncGen("oscillator2", "frequency", val => {
-      self.oscillator2.frequency.value = character.oscillator2.frequency(val);
+      // self.oscillator2.frequency.value = character.oscillator2.frequency(val);
     }),
     ...vuexSyncGen("oscillator2", "typeOsc", val => {
-      // if (self.oscillator2.type === character.oscillator2.typeOsc(val)) return;
-      self.oscillator2.type = character.oscillator2.typeOsc(val);
-      self.oscillator2.stop();
-      self.oscillator2.start();
+    //   // if (self.oscillator2.type === character.oscillator2.typeOsc(val)) return;
+    //   self.oscillator2.type = character.oscillator2.typeOsc(val);
+    //   self.oscillator2.stop();
+    //   self.oscillator2.start();
     }),
-    // ...vuexSyncGen('oscillator2', 'phase', val => {
-    //   self.oscillator2.phase = character.oscillator2.phase(val) // phase in degrees
-    // }),
-    // ...vuexSyncGen('oscillator2', 'detune', val => {
-    //   self.oscillator2.detune.value = character.oscillator2.detune(val)
-    // }),
+    // // ...vuexSyncGen('oscillator2', 'phase', val => {
+    // //   self.oscillator2.phase = character.oscillator2.phase(val) // phase in degrees
+    // // }),
+    // // ...vuexSyncGen('oscillator2', 'detune', val => {
+    // //   self.oscillator2.detune.value = character.oscillator2.detune(val)
+    // // }),
     ...vuexSyncGen("oscillator2", "volume", val => {
-      self.oscillator2.volume.value = character.oscillator2.volume(val);
+      // self.oscillator2.volume.value = character.oscillator2.volume(val);
     }),
     ...mapState({
       frequencyGoal: state => state.gameState.goal.oscillator2.frequency,

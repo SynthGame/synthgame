@@ -123,21 +123,21 @@ export default {
       return this.$store.state.gameState.timerIsRunning
     },
     ...vuexSyncGen('envelope2', 'attack', val => {
-      // somehow these values cause weird problems when they're 0
-      // this is not a proper fix but if it works it's not stupid
-      self.envelope2.attack = character.envelope2.attack(val || 1)
+      // // somehow these values cause weird problems when they're 0
+      // // this is not a proper fix but if it works it's not stupid
+      // self.envelope2.attack = character.envelope2.attack(val || 1)
     }),
     ...vuexSyncGen('envelope2', 'decay', val => {
-      self.envelope2.decay = character.envelope2.decay(val || 1)
+      // self.envelope2.decay = character.envelope2.decay(val || 1)
     }),
     ...vuexSyncGen('envelope2', 'sustain', val => {
-      self.envelope2.sustain = character.envelope2.sustain(val)
+      // self.envelope2.sustain = character.envelope2.sustain(val)
     }),
     ...vuexSyncGen('envelope2', 'release', val => {
-      self.envelope2.release = character.envelope2.release(val || 1)
+      // self.envelope2.release = character.envelope2.release(val || 1)
     }),
     ...vuexSyncGen('envelope2', 'amount', val => {
-      self.envelope2.max = character.envelope2.amount(val || 1)
+      // self.envelope2.max = character.envelope2.amount(val || 1)
     }),
     // ...vuexSyncGen('envelope2', 'max', val => {
     //   // when filter updates, update env2 to TODO: only when connected to filter

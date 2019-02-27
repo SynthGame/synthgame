@@ -133,22 +133,22 @@ export default {
     //   }
     // },
     ...vuexSyncGen("oscillator1", "frequency", val => {
-      self.oscillator1.frequency.value = character.oscillator1.frequency(val);
-      // return val;
+      // self.oscillator1.frequency.value = character.oscillator1.frequency(val);
+      // // return val;
     }),
     ...vuexSyncGen("oscillator1", "typeOsc", val => {
-      // if (self.oscillator1.type === character.oscillator1.typeOsc(val)) return;]
-      self.oscillator1.type = character.oscillator1.typeOsc(val);
-      // console.log("self.oscillator1.type", self.oscillator1.type);
-      self.oscillator1.stop();
-      self.oscillator1.start();
-      // return value;
+      // // if (self.oscillator1.type === character.oscillator1.typeOsc(val)) return;]
+      // self.oscillator1.type = character.oscillator1.typeOsc(val);
+      // // console.log("self.oscillator1.type", self.oscillator1.type);
+      // self.oscillator1.stop();
+      // self.oscillator1.start();
+      // // return value;
     }),
     // ...vuexSyncGen('oscillator1', 'phase', val => {
     //   self.oscillator1.phase = character.oscillator1.phase(val) // phase in degrees
     // }),
     ...vuexSyncGen("oscillator1", "detune", val => {
-      self.oscillator1.detune.value = character.oscillator1.detune(val);
+      // self.oscillator1.detune.value = character.oscillator1.detune(val);
     }),
     ...mapState({
       frequencyGoal: state => state.gameState.goal.oscillator1.frequency,
