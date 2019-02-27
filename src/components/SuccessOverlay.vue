@@ -40,7 +40,7 @@
         </svg>
 
         <!-- STICK 1  -->
-        <svg width="200px" height="200px" viewBox="0 0 350 350" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+222        <svg width="200px" height="200px" viewBox="0 0 400 400" x="11" y="11">
           <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" stroke-linecap="round" stroke-linejoin="round"  :transform="`rotate(${anim.drum.stick1})`" transform-origin="30 70">
               <svg x="80px" y="90px" id="DRUM-STICK_Mesa-de-trabajo-1-copia-2_Mesa-de-trabajo-1-copia-2" stroke="#FFFFFF" stroke-width="1.5819" fill-rule="no-zero" :fill="currentColor">
                   <path d="M0.6,0.6 L49.8,49.3 L0.6,0.6 Z M68.9,57.9 C68.9,64.2 63.8,69.4 57.4,69.4 C51,69.4 45.9,64.3 45.9,57.9 C45.9,51.5 51,46.4 57.4,46.4 C63.8,46.4 68.9,51.6 68.9,57.9 Z" id="Shape"></path>
@@ -50,7 +50,7 @@
 
         <!-- STICK 2  -->
         <g transform="rotate(00)">
-<svg width="200px" height="300px" viewBox="0 0 350 400" x="96px" y="16px" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+<svg width="200px" height="300px" viewBox="0 0 400 400" x="96" y="6">
 
    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" stroke-linecap="round" stroke-linejoin="round"  :transform="`rotate(${anim.drum.stick2})`" transform-origin="130 0">
        <svg id="DRUM-STICK2_Mesa-de-trabajo-1-copia-2_Mesa-de-trabajo-1-copia-2_Mesa-de-trabajo-1-copia-8" stroke="#FFFFFF" stroke-width="1.5819" fill-rule="no-zero" :fill="currentColor1" x="15px" y="0px">
@@ -61,32 +61,52 @@
         </g>
 
       </svg>
-
-      <div class="score">
-        <span>score</span>
-        <span class="data">{{paddedScoreString}}</span>
+      <div class="scores">
+        <div class="score">
+          <span>score</span>
+          <span class="data">{{paddedScoreString}}</span>
+        </div>
+        <div class="highscore">
+          <span>High score</span>
+          <span class="data">{{paddedHighScoreString}}</span>
+        </div>
       </div>
-      <div class="highscore">
-        <span>High score</span>
-        <span class="data">{{paddedHighScoreString}}</span>
+      <div class="scores">
+        <img width="50" eight="50" class="custom-user-avatar" :src="avatarUrl"/>
+        <span class="data artist">Preset by {{nameArtist}}</span>
       </div>
-
-    <button class="button-next"
-            @click="$emit('next')"
-            ref="button"
-            >NEXT LEVEL</button>
+      <div>
+        <button class="button-next"
+                @click="$emit('closesuccessoverlay')"
+                ref="button"
+                >KEEP TWEAKING</button>
+        <button class="button-next"
+                @click="$emit('next')"
+                ref="button"
+                >NEXT LEVEL</button>
+      </div>
+      <div class="credits">
+        Game created by <a href="https://okbye.io" target="_blank"><span>Ok Bye</span></a>. Read the <a href="https://casestudies.okbye.io/tats/" target="_blank"><span>Case Study</span></a>.
+      </div>
     </div>
   </div>
 </template>
 
 <script>
-import { keyframes, easing } from 'popmotion'
-import { MODULE_OSCILLATOR_COLOR, MODULE_ENVELOPE_COLOR, MODULE_FILTER_COLOR, MODULE_LFO_COLOR, MODULE_DELAY_COLOR, MODULE_REVERB_COLOR } from '@/constants'
-import { color } from 'style-value-types'
-import padStart from 'lodash/padStart'
+import { keyframes, easing } from "popmotion";
+import {
+  MODULE_OSCILLATOR_COLOR,
+  MODULE_ENVELOPE_COLOR,
+  MODULE_FILTER_COLOR,
+  MODULE_LFO_COLOR,
+  MODULE_DELAY_COLOR,
+  MODULE_REVERB_COLOR
+} from "@/constants";
+import { color } from "style-value-types";
+import padStart from "lodash/padStart";
 
 export default {
-  name: 'Overlay',
+  name: "Overlay",
   props: {
     level: {
       type: Number,
@@ -97,7 +117,7 @@ export default {
       default: 545
     }
   },
-  data () {
+  data() {
     return {
       currentAnim: null,
       anim: {
@@ -112,99 +132,114 @@ export default {
         }
       },
       colorArray: [],
-      currentColor: '',
-      currentColor1: '',
+      currentColor: "",
+      currentColor1: "",
       litUpButton: false
-    }
+    };
   },
-  created () {
+  created() {
     // randomize animation:
-    const currentAnimationNumber = Math.floor(Math.random() * Object.keys(this.anim).length)
-    this.currentAnim = 'drum'
+    const currentAnimationNumber = Math.floor(
+      Math.random() * Object.keys(this.anim).length
+    );
+    this.currentAnim = "drum";
 
-    window.addEventListener('keydown', this.emitOnKey)
-    this.colorArray.push(MODULE_OSCILLATOR_COLOR, MODULE_ENVELOPE_COLOR, MODULE_FILTER_COLOR, MODULE_LFO_COLOR, MODULE_DELAY_COLOR, MODULE_REVERB_COLOR)
-    this.currentColor = this.changeColor(this.currentColor)
-    this.currentColor1 = this.changeColor(this.currentColor1)
+    window.addEventListener("keydown", this.emitOnKey);
+    this.colorArray.push(
+      MODULE_OSCILLATOR_COLOR,
+      MODULE_ENVELOPE_COLOR,
+      MODULE_FILTER_COLOR,
+      MODULE_LFO_COLOR,
+      MODULE_DELAY_COLOR,
+      MODULE_REVERB_COLOR
+    );
+    this.currentColor = this.changeColor(this.currentColor);
+    this.currentColor1 = this.changeColor(this.currentColor1);
   },
 
-  mounted () {
-    let conf
-    let callback
+  mounted() {
+    let conf;
+    let callback;
 
-    if (this.currentAnim == 'ping') {
+    if (this.currentAnim == "ping") {
       conf = {
         values: [
-          { ballY: 0, racketRotate: 0, racketYOffset: 0, stick1: 0},
-          { ballY: -200, racketRotate: 12, racketYOffset: 15, stick1: 20},
-          { ballY: 0, racketRotate: 0, racketYOffset: 0, stick1: 0}
+          { ballY: 0, racketRotate: 0, racketYOffset: 0, stick1: 0 },
+          { ballY: -200, racketRotate: 12, racketYOffset: 15, stick1: 20 },
+          { ballY: 0, racketRotate: 0, racketYOffset: 0, stick1: 0 }
         ],
         loop: Infinity,
         duration: this.duration,
         easings: [easing.easeOut, easing.easeIn, easing.lineair]
-      }
+      };
       callback = {
         update: v => {
-          this.anim.ping.ballHeight = v.ballY
-          this.anim.ping.racketTurn = v.racketRotate
-          this.anim.ping.racketYOffset = v.racketYOffset
+          this.anim.ping.ballHeight = v.ballY;
+          this.anim.ping.racketTurn = v.racketRotate;
+          this.anim.ping.racketYOffset = v.racketYOffset;
           // this.anim.drum.stick1 = v.stick1
           if (v.ballY == 0) {
-            this.currentColor = this.changeColor()
+            this.currentColor = this.changeColor();
           }
         },
-        complete: () => { console.log('lalala') }
-      }
-    } else if (this.currentAnim == 'drum') {
+        complete: () => {
+          console.log("lalala");
+        }
+      };
+    } else if (this.currentAnim == "drum") {
       conf = {
         values: [
-          { stick1: 0, stick2: 20, time: 0},
-          { stick1: -20, stick2: 0, time: 1},
-          { stick1: 0, stick2: 20, time: 1}
+          { stick1: 0, stick2: 20, time: 0 },
+          { stick1: -20, stick2: 0, time: 1 },
+          { stick1: 0, stick2: 20, time: 1 }
         ],
         loop: Infinity,
-        duration: this.duration * 2,
+        duration: this.bpm * 9.90909090909, // 1090 = 110
         // easings: easing.cubicBezier(.29,.06,1,-0.24)
         easings: easing.easeIn
-      }
+      };
 
       callback = {
         update: v => {
-          this.anim.drum.stick1 = v.stick1
-          this.anim.drum.stick2 = v.stick2
+          this.anim.drum.stick1 = v.stick1;
+          this.anim.drum.stick2 = v.stick2;
           if (v.stick1 === 0) {
-            this.currentColor = this.changeColor(this.currentColor)
+            this.currentColor = this.changeColor(this.currentColor);
           }
           if (v.stick2 < 0.01) {
-            this.currentColor1 = this.changeColor(this.currentColor1)
+            this.currentColor1 = this.changeColor(this.currentColor1);
             // console.log(v.stick2)
           }
         },
         complete: () => {}
-      }
+      };
     }
-    keyframes(conf).start(callback)
-    this.$refs.button.focus()
+    keyframes(conf).start(callback);
+    this.$refs.button.focus();
   },
-  beforeDestroy () {
-    window.removeEventListener('keydown', this.emitOnKey)
+  beforeDestroy() {
+    window.removeEventListener("keydown", this.emitOnKey);
   },
   methods: {
-    emitOnKey () {
+    emitOnKey() {
       if (event.keyCode === 13) {
-        this.$emit('next')
+        this.$emit("next");
       }
     }
   },
   methods: {
-    changeColor (current) {
-      let randomColor = this.colorArray[Math.floor(Math.random() * this.colorArray.length)]
+    changeColor(current) {
+      let randomColor = this.colorArray[
+        Math.floor(Math.random() * this.colorArray.length)
+      ];
       // does that even work?
       if (randomColor === current) {
-        randomColor = this.colorArray[Math.floor(Math.random() * this.colorArray.length)]
+        randomColor = this.colorArray[
+          Math.floor(Math.random() * this.colorArray.length)
+        ];
         // console.log('repeat!')
       }
-      return randomColor
+      return randomColor;
     }
     // buttonLeave() {
     //   this.litUpButton = false;
@@ -213,41 +248,75 @@ export default {
     // },
   },
   computed: {
-    gameScore () {
-      return this.$store.state.gameState.score
+    bpm() {
+      return this.$store.state.bpm;
     },
-    gameHighScore () {
-      return this.$store.state.gameState.highScore
+    nameArtist() {
+      return this.$store.state.name;
     },
-    paddedScoreString () {
-      return `${padStart(this.gameScore, 5, '0')}`
+    avatarUrl() {
+      return this.$store.state.avatarUrl;
     },
-    paddedHighScoreString () {
-      return `${padStart(this.gameHighScore, 5, '0')}`
+    gameScore() {
+      return this.$store.state.gameState.score;
     },
-    gameLevel () {
-      return this.$store.getters.displayedLevel
+    gameHighScore() {
+      return this.$store.state.gameState.highScore;
     },
-    computedRackedStyles () {
-      return {'animation-name': 'racket-movement',
-        'animation-duration': '1s',
-        'animation-iteration-count': '10',
-        'animation-direction': 'alternate', /* or: normal */
-        'animation-timing-function': 'ease-out', /* or: ease, ease-in, ease-in-out, linear, cubic-bezier(x1, y1, x2, y2) */
-        'animation-fill-mode': 'forwards', /* or: backwards, both, none */
-        'animation-delay': '2s' /* or: Xms */}
+    paddedScoreString() {
+      return `${padStart(this.gameScore, 5, "0")}`;
+    },
+    paddedHighScoreString() {
+      return `${padStart(this.gameHighScore, 5, "0")}`;
+    },
+    gameLevel() {
+      return this.$store.getters.displayedLevel;
+    },
+    computedRackedStyles() {
+      return {
+        "animation-name": "racket-movement",
+        "animation-duration": "1s",
+        "animation-iteration-count": "10",
+        "animation-direction": "alternate" /* or: normal */,
+        "animation-timing-function":
+          "ease-out" /* or: ease, ease-in, ease-in-out, linear, cubic-bezier(x1, y1, x2, y2) */,
+        "animation-fill-mode": "forwards" /* or: backwards, both, none */,
+        "animation-delay": "2s" /* or: Xms */
+      };
     }
-
   }
-}
+};
 </script>
 
 <style scoped lang="scss">
 .drum {
-  margin: -75px 0 -75px 0;
+  height: 60%;
+  margin: -4% 0;
+}
+
+.custom-user-avatar {
+  height: 50px;
+  width: 50px;
+  border-radius: 100%;
+  border: 2px solid white;
 }
 
 .success {
+  .scores {
+    width: 20em;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    .artist {
+      font-size: 1em;
+      font-weight: 200;
+      text-transform: uppercase;
+      margin-left: 1em;
+      a {
+        color: white;
+      }
+    }
+  }
   & .score {
     display: flex;
     font-size: 2em;
@@ -261,7 +330,7 @@ export default {
     width: 8em;
   }
   & span {
-    font-size: .7em;
+    font-size: 0.7em;
   }
   & .data {
     font-weight: 600;
@@ -271,12 +340,31 @@ export default {
 
 .score {
   & h2 {
-  margin: 0.5rem;
-}
+    margin: 0.5rem;
+  }
   & p {
     font-size: 2rem;
     margin: 0.5rem;
   }
 }
 
+.credits {
+  font-size: 1em;
+  font-weight: 200;
+  & a {
+    text-decoration: none;
+    color: white;
+    text-transform: uppercase;
+    // transition: 0.6s all;
+    &:hover {
+      border-bottom: 1px solid white;
+    }
+    & span {
+      color: #ff8574;
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 1em;
+    }
+  }
+}
 </style>

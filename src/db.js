@@ -1,28 +1,104 @@
 import firebase from 'firebase/app'
 import 'firebase/firestore' // https://cloud.google.com/nodejs/docs/reference/firestore/
+import * as crypto from 'crypto';
 
 // Initialize Firebase
+// Initialize Firebase
 const config = {
-  apiKey: 'AIzaSyAWPa6eGYyind5Gu74KqGLiRT2NBkS0Pmc',
-  authDomain: 'synthgame-c2436.firebaseapp.com',
-  databaseURL: 'https://synthgame-c2436.firebaseio.com',
-  projectId: 'synthgame-c2436',
-  storageBucket: 'synthgame-c2436.appspot.com',
-  messagingSenderId: '109010755971'
-}
+  apiKey: "AIzaSyB36rJThUmGZks1oZGI8NI7L6olrW5bcP4",
+  authDomain: "synthgame-v2.firebaseapp.com",
+  databaseURL: "https://synthgame-v2.firebaseio.com",
+  projectId: "synthgame-v2",
+  storageBucket: "synthgame-v2.appspot.com",
+  messagingSenderId: "593563070199"
+};
+
 
 firebase.initializeApp(config)
 
 export const db = firebase.firestore()
 
-db.settings({timestampsInSnapshots: true}) // time snapshot will change in future version
+db.settings({ timestampsInSnapshots: true }) // time snapshot will change in future version
 
 const scoreRef = db.collection('highscores')
 const presetRef = db.collection('customPresets')
+const contributionRef = db.collection('userPresets');
+const gameRoomRefs = db.collection('gameRooms');
+
+// CREATE A ROOM WITH INITAL HIGHSCORE - return URL.
+export const createRoom = ({ name, score }, callBack) => {
+  const URL = crypto.randomBytes(12).toString('hex');
+  gameRoomRefs.doc(URL).set({ [name]: `${score}` })
+    .then(() => {
+      console.log(URL);
+      callBack(URL);
+    })
+    .catch((error) => {
+      console.error("Error adding document: ", error);
+    });
+}
+
+// ADD A PLAYERS SCORE TO AN EXISTING GAME
+export const updateMyScore = ({ url, name, score }, callback) => {
+  gameRoomRefs.doc(url).update({ [name]: `${score}` })
+    .then(() => {
+      callback()
+    }).catch((err) => {
+      console.log(`updateMyScore: ${err}`)
+    })
+}
+
+// RETURN GAME WITH HIGHSCORE DATA
+export const getRoom = (url, callBack) => {
+  return gameRoomRefs.doc(url).get()
+    .then((doc) => {
+      if (doc.exists) {
+        console.log("Document data:", doc.data());
+        callBack(doc.data());
+      } else {
+        console.log("No such document!");
+        return { error: 'No Game exists!' }
+      }
+    }).catch(function (error) {
+      console.log("Error getting document:", error);
+    });
+}
+
+
+// CONTRIBUTION
+export const sharePreset = ({ preset, sequence }, callBack) => {
+  const link = crypto.randomBytes(12).toString('hex');
+  contributionRef.doc(link).set({
+    preset,
+    sequence,
+  })
+    .then(() => {
+      callBack({link});
+    })
+    .catch((error) => {
+      console.error("Error adding document: ", error);
+    });
+}
+
+export const getContributionDB = (link, callBack) => {
+  contributionRef.doc(link).get()
+  .then((doc) => {
+    if (doc.exists) {
+      console.log('we;lrkah;sdffa;sdfkj')
+      console.log(doc.data());
+      callBack(doc.data());
+    } else {
+      console.log("No such document!");
+      return { error: 'No Contribution exists!' }
+    }
+  }).catch(function (error) {
+    console.log("Error getting document:", error);
+  });
+}
 
 // Highscore funtions
 
-export const addHighscore = ({name, score}) => {
+export const addHighscore = ({ name, score }) => {
   return scoreRef.add({
     name,
     score
@@ -59,10 +135,11 @@ export const getHighscoresByName = (name) => {
  *  @param  {Object} obj.sequenceArray - Array with 16 objects that define the steps in the sequence
  *  @return {Promise} Returns the uid of the newly created preset
  */
-export const addPreset = ({name, parameterValues, sequenceArray}) => {
+export const addPreset = ({ name, bpm, parameterValues, sequenceArray }) => {
   return presetRef
     .add({
       name,
+      bpm,
       parameterValues,
       sequenceArray
     })

@@ -1,58 +1,85 @@
 <template>
-  <div class="overlay">
-    <div class="overlay-content-wrapper">
-
-        <h1>Level {{gameLevel}}</h1>
-        <h2 v-html="gameLevelText"></h2>
-        <!-- <h2>Listen closely to the sound, hit randomize, and re-create the sound you're hearing now.</h2> -->
-
-      <!-- <iframe width="560" height="315" src="https://www.youtube.com/embed/O7x-AS6idOQ?rel=0?version=3&autoplay=1&controls=0&&showinfo=0&loop=1&playlist=O7x-AS6idOQ" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe> -->
-      <!-- <video width="480" autoplay loop muted>
-        <source src="../../src/assets/intro.mp4" type="video/mp4">
-      </video> -->
-      <div>
-        <button class="button-next" @click="$emit('startLevel')">Ready</button>
+<div class="screen screen_preview">
+  <transition name="slideout">
+    <div v-if="slide === 0" class="screen--header">
+      <div class="screen--header-inner">
+        <button @click="$emit('back')" class="btn btn_link btn_primary">
+          <span class="btn--inner">
+            <span class="btn--inner-text">Back
+            </span>
+          </span>
+        </button>
+        <div class="screen--header-title"></div>
       </div>
     </div>
+  </transition>
+  <div class="screen--inner">
+    <transition name="slide-up-slide-down">
+      <div v-if="slide === 0" class="screen--preview">
+        Listen to the goal sound and match the pitch of oscillator 1
+      </div>
+    </transition>
+    <transition name="slide-up-slide-down">
+      <div v-if="slide === 1" class="screen--preview">
+        Listen to the goal sound and match the pitch of oscillator 1
+      </div>
+    </transition>
   </div>
+  <div class="screen--footer">
+    <div class="screen--footer-inner">
+      <button
+        @click="slide === 0 ? slide = 1 : $emit('startLevel')"
+        class="btn btn_stroke btn_primary">
+        <span class="btn--inner">
+          <span class="btn--inner-text">Start</span>
+        </span>
+      </button>
+    </div>
+  </div>
+</div>
 </template>
 
 <script>
-import levels from '@/levels'
+import levels from "@/levels";
 
 export default {
-  name: 'startscreen',
+  name: "startscreen",
   props: {
     level: {
       type: Number,
       default: 1
     }
   },
-  mounted () {
-    window.addEventListener('keydown', this.emitOnKey)
+  data() {
+    return {
+      slide: 0
+    };
   },
-  beforeDestroy () {
-    window.removeEventListener('keydown', this.emitOnKey)
+  mounted() {
+    window.addEventListener("keydown", this.emitOnKey);
+  },
+  beforeDestroy() {
+    window.removeEventListener("keydown", this.emitOnKey);
   },
   methods: {
-    emitOnKey () {
+    emitOnKey() {
       if (event.keyCode === 13) {
-        this.$emit('startLevel')
+        this.$emit("startLevel");
       }
     }
   },
   computed: {
-    gameLevel () {
-      return this.$store.getters.displayedLevel
+    gameLevel() {
+      return this.$store.getters.displayedLevel;
     },
-    gameLevelText () {
-      if (this.$store.state.gameState.level >= levels.length) return levels[levels.length - 1].levelData.text || ''
-      return levels[this.$store.state.gameState.level].levelData.text || ''
+    gameLevelText() {
+      if (this.$store.state.gameState.level >= levels.length)
+        return levels[levels.length - 1].levelData.text || "";
+      return levels[this.$store.state.gameState.level].levelData.text || "";
     }
   }
-}
+};
 </script>
 
 <style scoped lang="scss">
-
 </style>

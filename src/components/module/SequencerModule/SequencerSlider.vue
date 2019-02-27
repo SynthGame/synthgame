@@ -1,6 +1,10 @@
 <template>
-  <span class="sequencer-slider">
-    <input v-bind:value="value" v-on:input="$emit('input', $event.target.value)" type="range" :min="min" :max="max" orient="vertical">
+  <span :class="{
+    'sequencer-slider': true,
+    'sequencer-slider--active': buttonActive,
+    'sequencer-slider--selected': buttonSelected
+  }">
+    <input v-bind:value="value" v-on:input="$emit('input', $event.target.value)" type="range" :min="min" :max="max" orient="vertical" >
   </span>
 </template>
 
@@ -37,19 +41,3 @@ export default {
   }
 }
 </script>
-
-<!-- Add "scoped" attribute to limit CSS to this component only -->
-<style lang="scss" scoped>
-$main-synth-color: #F40056;
-
-.sequencer-slider {
-  // transform-origin: 0 0;
-  // transform: rotate(90deg);
-  input {
-    height: 100px;
-    width: 45px;
-    writing-mode: bt-lr; /* IE */
-    -webkit-appearance: slider-vertical; /* WebKit */
-  }
-}
-</style>

@@ -1,76 +1,137 @@
 <template>
   <div id="app">
-    <transition name="slideout">
-      <start-screen
-        v-if="displayStartOverlay"
-        @startPreview="startPlayMode"
-        @create="showCreatePreview=true"
-      />
+    <transition name="confetti">
+      <div v-show="showConfetti" class="overlay">
+        <canvas id="confetti"></canvas>
+        <div class="overlay--inner">
+          <div class="overlay--title">Yay! You made it!</div>
+          <div class="overlay--title">SCORED +{{ levelScore }} POINTS!</div>
+          <button @click="showNextLevel()" class="btn_full btn btn_stroke btn_primary">
+            <span class="btn--inner">
+              <span class="btn--inner-text">Next</span>
+            </span>
+          </button>
+        </div>
+      </div>
     </transition>
-    <before-create-overlay v-if="showCreatePreview" @showCreate="showCreate"/>
-    <transition name="slide-up-slide-down">
-      <preview-screen
-        v-if="displayPreviewOverlay"
-        @startLevel="beginSvoosh"
-      />
+
+    <transition name="confetti">
+      <div v-show="gameComplete" class="overlay">
+        <div class="overlay--inner-win">
+          <div class="overlay--title">YOUR FINAL SCORE IS {{ totalScore }} POINTS!</div>
+          <!-- PLAY AGAIN OR CHALLENGE YOUR FRIENDS -->
+          <div class="screen--share--win">
+            <p>Fill in your name, hit enter and you’ll receive a link to challenge your friends!</p>
+            <div v-if="!userSet" class="username_container_win">
+              <input class="username_input" v-model="userName" type="text" placeholder="Username">
+              <button class="btn btn_stroke btn_primary btn-username" @click="setUsername">ENTER</button>
+            </div>
+            <!-- <div v-if="!shareLink" class="play-with-friends-win">
+              <button
+                @click="generateShareLink"
+                class="btn btn_stroke btn_primary"
+              >PLAY WITH FRIENDS</button>
+            </div> -->
+            <div v-if="shareLink" class="screen--share-inner">
+              <div class="screen--share-url">
+                <span>{{ shareLink }}</span>
+              </div>
+              <button class="btn btn_icon btn_primary">
+                <svg viewBox="0 0 23 22" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <rect
+                    x="8.904"
+                    y="8"
+                    width="12.999"
+                    height="13"
+                    rx="2"
+                    stroke="#fff"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  ></rect>
+                  <path
+                    d="M4.902 14h-1a2 2 0 0 1-2-2V3a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"
+                    stroke="#fff"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  ></path>
+                </svg>
+              </button>
+            </div>
+          </div>
+
+          <button @click="startAgain()" class="btn_full btn btn_stroke btn_primary">
+            <span class="btn--inner">
+              <span class="btn--inner-text">PLAY AGAIN</span>
+            </span>
+          </button>
+        </div>
+      </div>
     </transition>
-    <svoosh
-      v-if="isThereSvooshComponent"
-      :isFired="svooshIt"
-      @bye="endSvoosh"
-      black
-    />
-    <svoosh
-      v-if="isThereSuccessSvooshComponent"
-      :isFired="successSvooshIt"
-      @midway="displaySuccessOverlay=true"
-      @bye="endSuccessSvoosh"
-    />
-    <transition name="slideout">
+
+    <!-- <transition name="slideout">
       <success-overlay
         v-if="displaySuccessOverlay"
         @next="startNextLevel"
+        @closesuccessoverlay="closeSuccessOverlay"
+      />
+    </transition>-->
+    <transition name="fade">
+      <original-sound-overlay
+        v-if="displayOriginalOverlay"
+        :retreat="retreat"
+        :closeoverlay="killOrignalSoundPrompt"
+        :timer="originalSoundTimer"
+        :forfeit="forfeit"
       />
     </transition>
 
-    <failure-overlay
-      v-if="isGameOver"
-      @startagain="startAgain"
-    />
-
-    <!-- <div id="nav">
-      <router-link to="/">Home</router-link> |
-      <router-link to="/about">About</router-link>
-    </div> -->
+    <failure-overlay v-if="isGameOver" @startagain="startAgain" @startlastlevel="startLastLevel"/>
     <router-view/>
   </div>
 </template>
 
 <script>
-import { mapState, mapGetters } from 'vuex'
-import random from 'lodash/random'
-import times from 'lodash/times'
-import mapValues from 'lodash/mapValues'
-import audio from '@/audio'
-import { getPresetById } from '@/db'
-import SuccessOverlay from '@/components/SuccessOverlay'
-import FailureOverlay from '@/components/FailureOverlay'
-import BeforeCreateOverlay from '@/components/BeforeCreateOverlay'
-import StartScreen from '@/components/StartScreen'
-import PreviewScreen from '@/components/PreviewScreen'
-import Svoosh from '@/components/Svoosh'
-import { SYNTH_BPM } from '@/constants'
-import levels from '@/levels'
+import { mapState, mapGetters } from "vuex";
+import random from "lodash/random";
+import times from "lodash/times";
+import mapValues from "lodash/mapValues";
+import audio from "@/audio";
+import { getPresetById } from "@/db";
+import SuccessOverlay from "@/components/SuccessOverlay";
+import FailureOverlay from "@/components/FailureOverlay";
+import BeforeCreateOverlay from "@/components/BeforeCreateOverlay";
+import OriginalSoundOverlay from "@/components/OriginalSoundOverlay";
+import StartScreen from "@/components/StartScreen";
+import PreviewScreen from "@/components/PreviewScreen";
+import Svoosh from "@/components/Svoosh";
+import { SYNTH_BPM } from "@/constants";
+import levels from "@/levels";
+import presets from "@/presets";
+import range from "lodash/range";
+import fill from "lodash/fill";
+import character from "@/character";
+import "confetti-js";
+import "prevent-pull-refresh";
 
 export default {
-  name: 'App',
-  data () {
+  name: "App",
+  data() {
     return {
+      userName: '',
+      userSet: false,
       kickTime: 0,
+      pickedPreset: 0,
       displaySuccessOverlay: false,
       displayFailureOverlay: false,
-      displayStartOverlay: true,
+      displayStartOverlay: true, // change
       displayPreviewOverlay: false,
+      displayOriginalOverlay: false,
+      showConfetti: false,
+      gameComplete: false,
+      nextLevel: false,
+      // gameSummary: true,
       loop: null,
       isThereSvooshComponent: false,
       svooshIt: false,
@@ -78,8 +139,36 @@ export default {
       successSvooshIt: false,
       customLevelIsActive: false,
       customLevelSequence: [],
-      showCreatePreview: false
-    }
+      showCreatePreview: false,
+      customLevelCreator: "Anonymous",
+      noteArray: fill(range(0, 16), {
+        selected: false,
+        pitch: 0,
+        volume: false,
+        glide: false
+      }),
+      originalSoundTimer: 8,
+      timerInterval: null
+    };
+  },
+  mounted() {
+    var confettiSettings = {
+      target: "confetti",
+      size: 8,
+      max: 30,
+      clock: 50,
+      colors: [
+        [255, 126, 110],
+        [67, 190, 222],
+        [110, 1, 209],
+        [124, 208, 139],
+        [228, 226, 89],
+        [75, 27, 255],
+        [255, 255, 255]
+      ]
+    };
+    var confetti = new ConfettiGenerator(confettiSettings);
+    confetti.render();
   },
   components: {
     SuccessOverlay,
@@ -87,485 +176,268 @@ export default {
     StartScreen,
     PreviewScreen,
     Svoosh,
-    BeforeCreateOverlay
-  },
-  created () {
-    this.init()
-    if (this.$route.query.preset) {
-      getPresetById(this.$route.query.preset)
-        .then(data => {
-          this.customLevelIsActive = true
-          this.customLevelSequence = data.sequenceArray
-          this.startPreset(data.parameterValues)
-        })
-    }
-
-    window.letsPlay = () => this.initM()
-
-    // Pc keyboard listener (might be needed for mobile)
-    document.addEventListener('keypress', (event) => {
-      if (audio.state.Tone.context.state !== 'running') {
-        audio.state.Tone.context.resume()
-      }
-      // const key = event.key
-    })
+    BeforeCreateOverlay,
+    OriginalSoundOverlay
   },
   computed: {
+    totalScore() {
+      console.log(`HighScore ${this.$store.state.gameState.highScore}`)
+      return this.$store.state.gameState.score;
+    },
+    shareLink() {
+      const base = window.location.hostname;
+      return this.$store.state.roomId
+        ? `${base}/play/${this.$store.state.roomId}`
+        : false;
+    },
     ...mapState({
-      sequencesPassedInCurrentLevel: state => state.gameState.sequencesPassedInCurrentLevel,
       level: state => state.gameState.level,
       timerIsRunning: state => state.gameState.timerIsRunning
     }),
     ...mapGetters({
-      allParametersMatchGoal: 'allParametersMatchGoal'
+      allParametersMatchGoal: "allParametersMatchGoal",
+      levelScore: "returnLevelScore"
     }),
-    isGameOver () {
-      return this.$store.state.gameState.isGameOver
+    preViewtimer() {
+      return this.$store.state.gameState.previewTimer;
+    },
+    attempts() {
+      return this.$store.state.gameState.attempts;
+    },
+    isGameOver() {
+      return this.$store.state.gameState.isGameOver;
+    },
+    madeAttempt() {
+      return this.$store.state.gameState.madeAttempt;
+    },
+    completedLevel() {
+      return this.$store.state.gameState.completedLevel;
     }
   },
   methods: {
-    init () {
-      // Retrieve highscore from local storage
-      this.$store.commit('updateHighScore', localStorage.getItem('highscore'))
-      // initialize the synth
-      audio.init().toMaster()
-      // create loop wich sequences 4 notes
-      const randomLoop = times(16).map(i => random(-12, 12))
-      this.loop = audio.setMainLoop({
-        noteArray: times(16),
-        subdivision: '8n'
-      }, (time, i) => { // i here is just a note from the note array define above
-        if (this.$store.state.gameState.timerIsRunning === false && !this.displaySuccessOverlay && !this.displayPreviewOverlay) {
-          if (this.$store.state.gameState.sweepArmed) {
-            audio.playSweep() // plan this ahead?
-            this.$store.commit('disarmSweep')
-          }
-        }
-        if ((this.displayPreviewOverlay && this.kickTime === 0 && !this.displayStartOverlay) || (this.displaySuccessOverlay && this.kickTime === 0 && !this.displayStartOverlay)) {
-          audio.playKick()
-          this.$store.commit('armSweep')
-          this.kickTime++
-        } else if (this.kickTime < 15) {
-          this.kickTime++
-        } else {
-          this.kickTime = 0
-        };
-        if (!this.customLevelIsActive) {
-          audio.playNote(randomLoop[i], {})
-        } else {
-          if (this.customLevelSequence[i].selected) {
-            audio.playNote(this.customLevelSequence[i].pitch, {
-              noteLength: ['16t', '8n', '4n', '2n', '1n'][this.customLevelSequence[i].noteLength],
-              volume: this.customLevelSequence[i].volume
-            })
-          }
-        }
-
-        // if (i === 15) this.$store.commit('increaseSequencesPassedInCurrentLevel')
-      })
-      // set BPM
-      audio.setBpm(SYNTH_BPM)
-      // start tone general
-      audio.start()
-      // start loop
-      //
+      setUsername() {
+      console.log(this.userName);
+      this.userSet = true;
+      this.$store.commit('setUsername', { userName: this.userName });
+      this.generateShareLink();
     },
-    initM () {
-      navigator.requestMIDIAccess()
-        .then(access => {
-          if (access.inputs.size > 0) {
-            const input = access.inputs.values().next().value // get the first input
-            console.log(input.name)
-            input.onmidimessage = e => {
-              if (e.data.length !== 3) return
-              const pS = e.data[1]
-              const value = e.data[2]
-              const device = Object.keys(this.$store.state.audioParameters)[('' + pS)[0] - 1]
-              const parameter = Object.keys(this.$store.state.audioParameters[device])[('' + pS)[1]]
-              this.$store.commit('setAudioParameter', { device,
-                parameter,
-                value: this.$store.state.gameState.possibleValues[device][parameter]
-                  ? this.$store.state.gameState.possibleValues[device][parameter][e.data[2]]
-                  : e.data[2]
-              })
-            }
-          }
-        }, error => console.log)
+    generateShareLink() {
+      this.$store.dispatch("createNewRoom");
     },
-    displaySuccesMessage () {
-      this.displaySuccessOverlay = true
+    switchToCreate() {
+      this.showCreatePreview = true;
+      this.displayPreviewOverlay = false;
+    },
+    closeSuccessOverlay() {
+      this.displaySuccessOverlay = false;
+    },
+    back() {
+      this.showCreatePreview = false;
+      if (this.level < 6) {
+        this.displaySuccessOverlay = true;
+      }
+    },
+    displaySuccesMessage() {
+      // this.displaySuccessOverlay = true;
+      this.displayStartOverlay = true;
     },
     // displayFailureMessage () {
     //   this.displaySuccessOverlay = true
     // },
-    startAgain () {
-      location.reload()
+    startAgain() {
+      this.gameComplete = false;
+      location.reload();
     },
-    startPlayMode () {
-      this.displayStartOverlay = false // hide start overlay
-      this.startLevel(0)
+    startLastLevel() {
+      this.startLevel(this.$store.state.gameState.level);
+      this.displayFailureOverlay = false;
+      audio.startMainLoop();
+      this.$store.commit("setTheGameFromGameOver");
+      this.$store.commit("stopTimerIsRunning");
+      // this.$nextTick(() => this.$store.commit('startTimerIsRunning'))
     },
-    startCreateMode () {
-      this.displayStartOverlay = false
-      this.displayFailureOverlay = false
-      this.$store.commit('setCreateMode', true)
+    startPlayMode() {
+      this.displayStartOverlay = false; // hide start overlay
+      this.startLevel(0);
     },
-    startLevel (level) {
-      // disable all overlays
-      this.displaySuccessOverlay = false
-      this.displayFailureOverlay = false
-      this.displayStartOverlay = false
-      this.displayPreviewOverlay = true
-      // import level config
-      const availableParameters = levels[level] || levels[levels.length - 1]
-
-      this.$store.dispatch('startNewLevel', {
-        knobsAvailable: availableParameters,
-        levelNumber: level || 0
-      })
-      this.$store.dispatch('randomizGoalParameters') // first randomize the goal
-      this.$store.dispatch('randomizeAudioParameters', availableParameters) // and the audio params
-      this.$store.dispatch('setSynthToGoal', audio) // then let the user hear it
-
-      this.loop.start()
-      // rest will be done by watcher of sequencesPassedInCurrentLevel
+    startCreateMode() {
+      this.displayStartOverlay = false;
+      this.displayFailureOverlay = false;
+      this.$store.commit("setCreateMode", true);
     },
-    startPreset (parameters) {
-      const usedParameters = mapValues(parameters,
-        audioModule => mapValues(audioModule,
-          parameter => !!parameter))
-
-      // disable all overlays
-      this.displaySuccessOverlay = false
-      this.displayFailureOverlay = false
-      this.displayStartOverlay = false
-      this.displayPreviewOverlay = true
-
-      this.$store.dispatch('startNewLevel', {
-        knobsAvailable: usedParameters,
-        levelNumber: 0
-      })
-      this.$store.commit('setGoalToPreset', {
-        preset: parameters
-      })
-      this.$store.dispatch('randomizeAudioParameters', usedParameters) // and the audio params
-      this.$store.dispatch('setSynthToGoal', audio) // then let the user hear it
-
-      this.loop.start()
-      // rest will be done by watcher of sequencesPassedInCurrentLevel
+    beginSvoosh() {
+      this.displayStartOverlay = false;
+      this.isThereSvooshComponent = true;
+      this.$nextTick(() => (this.svooshIt = true));
+      this.displayPreviewOverlay = false;
+      audio.playSweep();
+      this.endPreview();
     },
-    beginSvoosh () {
-      this.isThereSvooshComponent = true
-      this.$nextTick(() => this.svooshIt = true)
-      this.displayPreviewOverlay = false
-    },
-    endSvoosh () {
+    endSvoosh() {
       setTimeout(() => {
-        this.isThereSvooshComponent = false
-        this.svooshIt = false
-        this.$store.commit('armSweep')
-      }, 500)
-      this.endPreview()
+        this.isThereSvooshComponent = false;
+        this.svooshIt = false;
+        this.$store.commit("armSweep");
+      }, 300);
     },
-    beginSuccessSvoosh () {
-      this.isThereSuccessSvooshComponent = true
-      this.$nextTick(() => this.successSvooshIt = true)
+    beginSuccessSvoosh() {
+      this.isThereSuccessSvooshComponent = true;
+      this.$nextTick(() => (this.successSvooshIt = true));
     },
-    endSuccessSvoosh () {
+    endSuccessSvoosh() {
       setTimeout(() => {
-        this.isThereSuccessSvooshComponent = false
-        this.successSvooshIt = false
-      }, 500)
+        this.isThereSuccessSvooshComponent = false;
+        this.successSvooshIt = false;
+        // Update note array with pickedpreset sequence
+        this.noteArray = presets[this.pickedPreset].sequenceArray;
+      }, 300);
     },
-    endPreview () {
-      this.$store.commit('startTimerIsRunning')
-      this.$store.dispatch('setSynthToDefaultParameters', audio)
+    endPreview() {
+      this.$store.commit("startTimerIsRunning");
+      this.$store.dispatch("setSynthToDefaultParameters", audio);
+      audio.playKick();
     },
-    startNextLevel (level) {
-      this.$store.commit('increaseLevelValue', 1)
-      this.startLevel(this.level) // TODO: should be + 1
+    startNextLevel() {
+      this.$store.commit("increaseLevelValue", 1);
+      this.startLevel(this.level); // TODO: should be + 1
+      this.$store.commit({
+        type: "setCompletedLevel",
+        value: false
+      });
     },
-    gameLevel () {
-      return this.$store.state.gameState.level
+    gameLevel() {
+      return this.$store.state.gameState.level;
     },
-    showCreate () {
-      this.showCreatePreview = false
-      this.startCreateMode()
+    showCreate() {
+      this.showCreatePreview = false;
+      audio.playKick();
+      this.startCreateMode();
+      window.parent.postMessage("make-music-activated", "*");
+    },
+    // NEW METHODS
+    retreat() {
+      // advance to next level failing current level + 0 Points
+    },
+    // countdown() {
+    //   this.originalSoundTimer -= 1;
+    //   console.log(this.originalSoundTimer);
+    //   if (this.originalSoundTimer === 0) {
+    //     this.killOrignalSoundPrompt();
+    //   }
+    // },
+    originalSoundPrompt() {
+      let self = this;
+      self.$store.dispatch("setSynthToGoal", audio);
+      this.displayOriginalOverlay = true; // create this overlay.
+    },
+    killOrignalSoundPrompt() {
+      if (!(this.preViewtimer > 0)) {
+        this.displayOriginalOverlay = false;
+        clearInterval(this.timerInterval);
+        this.originalSoundTimer = 5;
+        this.$store.dispatch("setSynthToAudioParameters", audio);
+      }
+    },
+    forfeit() {
+      this.killOrignalSoundPrompt();
+      this.startNextLevel();
+    },
+    showNextLevel() {
+      document.querySelector(".btn_next").click();
+      this.showConfetti = false;
     }
   },
   watch: {
-    allParametersMatchGoal (val) {
-      if (val === true && this.timerIsRunning) {
-        this.beginSuccessSvoosh()
-        this.$store.dispatch('levelDone') // would be nice to pass timeleft here but it is being passed by timer on gamestop
+    madeAttempt() {
+      if (this.allParametersMatchGoal === true) {
+        if (this.level == levels.length -1) {
+          // win
+          console.log('WIN!')
+          this.gameComplete = true;
+        } else {
+          this.showConfetti = true;
+          const score = 6 - this.$store.state.gameState.attempts;
+          this.$store.commit("addValueToScore", score);
+          this.$store.commit("setLevelScore", score);
+          this.$store.commit({
+            type: "setCompletedLevel",
+            value: true
+          });
+          if (this.$store.state.roomId !== null) {
+            this.$store.dispatch("updateHighScore");
+          }
+          this.$store.dispatch("levelDone");
+          this.$store.commit("resetAttempts");
+        }
+      } else {
+        if (this.$store.state.gameState.attempts == 5) {
+          // need to reset global attemps in gameOver action.....
+          this.$store.dispatch("gameOver");
+        } else {
+          this.displayOriginalOverlay = true;
+          audio.playGameOver();
+          this.originalSoundPrompt();
+          this.timerInterval = setInterval(() => {
+            this.$store.commit("decrementPreviewTimer");
+            if (this.previewTimer == 0) {
+              clearInterval(this.timerInterval);
+            }
+          }, 1000);
+        }
       }
     }
   }
-}
+};
 </script>
 
 <style lang="scss">
-@import url('https://fonts.googleapis.com/css?family=Montserrat:300,600,900');
 
-@font-face {
-    font-family: ledscreen;
-    src: url(./assets/ledscreen.ttf);
-}
-
-.tabs {
-  display: none;
-  justify-content: flex-start;
-  position: absolute;
-  bottom: 0;
-  width: 100vw;
-  height: 10vh;
-  align-items: center;
-  text-transform: uppercase;
-  &__tab {
-    height: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 20%;
-    border: .5px solid white;
-    cursor: pointer;
-    &:hover {
-      background: white;
-      color: black;
-    }
-  }
-}
-
-.level {
-  display: block;
-  position: relative;
-  background: #101010;
-  background-image: url(./assets/bg.svg);
-  background-size: stretch;
-  width:100vw;
-  height: 92vh;
-}
-
-.empty {
-  display: inline-block;
-  height: calc(0.6*92vh);
-  width: 16.67em;
-  &:nth-of-type(1) {
-    height: calc(0.2*92vh);
-  }
-  &:nth-of-type(2) {
-    height: calc(0.4*92vh);
-  }
-}
-
-.module {
-  background: black;
-  width: 16.67em;
-  height: 50%;
-  margin: 0;
-  display: block;
-  float: left;
-  position: relative;
-  border: 1px solid #b7b7b7;
-  &.empty {
-    background: none;
-    &::after {
-      background: none;
-    }
-    &::before {
-      background: none;
-    }
-  }
-  &.sequencer {
-    height: calc(92vh);
-  }
-  .button-wrapper {
-      display: flex;
-      padding: 0em;
-      width: 85%;
-      margin: 0 0 1em 0;
-      flex-wrap: wrap;
-      justify-content: center;
-      button {
-        width:2.5em;
-        height: 2.5em;
-      }
-      svg{
-        width: 1em;
-      }
-    & p {
-       margin: .5em 0 0 0;
-       font-size: .7em;
-       width: 100%;
-       text-transform: uppercase;
-       letter-spacing: 1px;
-    }
-  }
-  &:before {
-    content:'';
-    display: block;
-    position: absolute;
-    background: #b7b7b7;
-    width: .4em;
-    height: .4em;
-    border-radius: 100%;
-    top: .45em;
-    left: .55em;
-  }
-  &:after {
-    content:'';
-    display: block;
-    position: absolute;
-    background: #b7b7b7;
-    width: .4em;
-    height: .4em;
-    border-radius: 100%;
-    top: .45em;
-    right: .55em;
-  }
-  & .display {
-    position: relative;
-    z-index: 99;
-    margin: 2% 2%;
-    height: 6em;
-    width: 80%;
-    margin-left: 10%;
-    & path {
-      transition: .1s all ease-out;
-    }
-  }
-  & .knobs {
-    width: 100%;
-    min-height: 15em;
-    margin: auto;
-    display: flex;
-    align-items: center;
-    flex-wrap: wrap;
-    justify-content: center;
-    align-items: center;
-    &:before {
-      content:'';
-      display: block;
-      position: absolute;
-      background: #b7b7b7;
-      width: .4em;
-      height: .4em;
-      border-radius: 100%;
-      bottom: .55em;
-      left: .55em;
-    }
-    &:after {
-      content:'';
-      display: block;
-      position: absolute;
-      background: #b7b7b7;
-      width: .4em;
-      height: .4em;
-      border-radius: 100%;
-      bottom: .55em;
-      right: .55em;
-    }
-  }
-}
-
-body {
-  background: black;
-  margin: 0;
-  user-select: none;
-}
-
-#app {
-  font-family: 'Montserrat', sans-serif;
-  font-weight: 300;
-  font-size: 1vw;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: white;
-}
-
-.overlay {
-  position: fixed;
+.screen--share-win {
+   max-width: 100%;
   display: flex;
-  align-items: center;
-  justify-content: center;
-  z-index: 9998;
-  top: 0;
-  left: 0;
-  width: 100vw;
-  height: 100vh;
-  background-color: rgba(0, 0, 0, .90);
-  transition: opacity .3s ease;
-  fill: none;
-  stroke: red;
-  stroke-width: 3;
-  // position: relative;
-  z-index: 20000;
-  & h1 {
-    text-transform: uppercase;
-  }
-  & h2 {
-    font-weight: 300;
-    font-size: 3em;
-    max-width: 12em;
-    margin: 0;
-    & span {
-      font-size: .6em;
-      margin-top: 1.5em;
-      line-height: 1.5em;
-      max-width: 20em;
-      display: inline-block;
-    }
-  }
-}
-
-.overlay-content-wrapper {
-  padding: 1rem;
-  height: 80%;
-  display: flex;
-  flex-direction: column;
   justify-content: space-between;
-  align-items: center;
+  flex-direction: column;
+  margin: auto;
 }
 
-.button-next {
-    text-transform: uppercase;
-    letter-spacing: 1px;
-    font-size: 1em;
-    color: inherit;
-    padding: 0;
-    font: inherit;
-    cursor: pointer;
-    outline: inherit;
-    padding: .8rem 1.4rem;
-    border: none;
-    margin: 5px;
-    background: none;
-    border: 1px solid #ff8574;
-    transition: all .2s;
-    &:hover {
-      background: #ff8574;
+.username_container_win {
+    margin: 0px;
+    margin-top: 30px;
+    input {
+      	width: 70%;
+		    height: 60px;
+    }
+    button {
+      margin: 0px;
+      margin-left: 4%;
+      width: 25%;
     }
 }
 
-* {
-  box-sizing: border-box;
-}
-
-@keyframes blink {
-    from {opacity: 0}
-    to {opacity: 1}
-}
-
-#nav {
-  padding: 30px;
-  a {
-    font-weight: bold;
-    color: #2c3e50;
-    &.router-link-exact-active {
-      color: #42b983;
+.play-with-friends-win {
+    margin-top: 20px;
+    width: 100%;
+    button {
+      width: 100%
     }
-  }
+}
+
+.fade-enter-active,
+.fade-leave-active {
+  transition: opacity 0.5s;
+}
+.fade-enter,
+.fade-leave-to {
+  opacity: 0;
+}
+
+.confetti-enter-active,
+.confetti-leave-active {
+  transition: opacity 0.1s;
+}
+.confetti-enter,
+.confetti-leave-to {
+  opacity: 0;
 }
 
 /* OVERLAYS TRANSITIONING
@@ -573,88 +445,18 @@ body {
 * the way the start screen goes away:
 */
 .slideout-leave-active {
-  animation: slideout 1s
+  animation: slideout 1s;
 }
-
-/* ...and the preview screen enters: */
-.slide-up-slide-down-enter-active {
-  animation: slidein 1s
-}
-
-/* and the way it disappears after a black svoosh */
-.slide-up-slide-down-leave-active {
-  animation: slidedown 900ms ease-in 0.3s
-}
-
-/* these animations, defined in keyframes: */
 @keyframes slideout {
   0% {
-  transform: translateY(0);
+    transform: translateY(0);
   }
   100% {
-  transform: translateY(-100%)
+    transform: translateY(-100%);
   }
 }
 
-@keyframes slidein {
-  0% {
-  transform: translateY(100%);
-  }
-  100% {
-  transform: translateY(0)
-  }
-}
-
-@keyframes slidedown {
-  0% {
-  transform: translateY(0);
-  }
-  100% {
-  transform: translateY(100%)
-  }
-}
-
-@media only screen and (max-width: 1000px) {
-  #app {
-    font-size: .8em;
-  }
-  .level {
-    height: 82vh !important;
-  }
-  .tabs {
-    display: flex;
-    &__tab {
-      flex-direction: column;
-      height:100%;
-      padding: 2vh 0;
-      justify-content: space-around;
-    }
-  }
-  .module {
-    width: 100vw;
-    height: 90vh;
-    position: absolute;
-    opacity: 0;
-  }
-  .module .knobs {
-    padding-top: 5vh;
-    min-height: 55vh;
-}
-.module .button-wrapper button {
-    width: 4.5em;
-    height: 4.5em;
-}
-.module .button-wrapper p {
-    font-size: 1.2em;
-}
-  .module.active {
-    left: 0;
-    opacity: 1;
-    z-index: 1;
-    height: 82vh;
-  }
-  .module .display {
-    height: 20vh;
-  }
+.overlay--inner-win {
+  z-index: 20;
 }
 </style>

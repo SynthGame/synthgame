@@ -1,9 +1,7 @@
 <template>
   <div class="module">
-    <module-title :indicator-active="dialsAreWithinMargin" :module-color="moduleColor">
-      <h2 slot="title">Tats</h2>
-      <h3 v-if="dialsAreWithinMargin" slot="subtitle">Done!</h3>
-      <h3 v-else slot="subtitle">Filter</h3>
+    <module-title :module-color="moduleColor">
+      <h3 slot="subtitle">Filter</h3>
     </module-title>
     <module-display
       fill="#6e01d1"
@@ -18,33 +16,32 @@
                 {name: 'gainGoal', min: 0, max: 100, value: gain},
                 ]"/>
     <div class="knobs">
-      <module-knob
-        v-model="cutOffFreq"
-        v-if="knobsAvailable.cutOffFreq || createModeIsActive"
-        :min="0"
-        :max="100"
-        knobColor="#6e01d1"
-        name="Frequency"
-        module="filter"
-      ></module-knob>
-      <module-knob
-        v-model="setQ"
-        v-if="knobsAvailable.setQ || createModeIsActive"
-        :min="0"
-        :max="100"
-        knobColor="#6e01d1"
-        name="Resonance"
-        module="filter"
-      ></module-knob>
-      <div
-        v-if="knobsAvailable.type || createModeIsActive"
-        class="button-wrapper"
-      >
-        <module-button color="#6e01d1" shape="lowpass" :isPressed="type==='lowpass'" @click.native="type='lowpass'"/>
-        <module-button color="#6e01d1" shape="highpass" :isPressed="type==='highpass'" @click.native="type='highpass'"/>
-        <module-button color="#6e01d1" shape="bandpass" :isPressed="type==='bandpass'" @click.native="type='bandpass'"/>
-        <p>SHAPE</p>
-      </div>
+      <transition name="fade" appear mode="out-in" :duration="300">
+        <module-knob
+          v-model="cutOffFreq"
+          v-if="knobsAvailable.cutOffFreq || createModeIsActive"
+          :min="0"
+          :max="100"
+          knobColor="#6e01d1"
+          name="Frequency"
+          module="filter"
+        />
+        <!-- <module-knob
+          v-model="setQ"
+          v-if="knobsAvailable.setQ || createModeIsActive"
+          :min="0"
+          :max="100"
+          knobColor="#6e01d1"
+          name="Resonance"
+          module="filter"
+        ></module-knob> -->
+        <div v-else-if="knobsAvailable.type || createModeIsActive" class="button-wrapper">
+          <module-button color="#6e01d1" shape="lowpass" :isPressed="type==='lowpass'" @click.native="type='lowpass'"/>
+          <module-button color="#6e01d1" shape="highpass" :isPressed="type==='highpass'" @click.native="type='highpass'"/>
+          <module-button color="#6e01d1" shape="bandpass" :isPressed="type==='bandpass'" @click.native="type='bandpass'"/>
+          <p>SHAPE</p>
+        </div>
+      </transition>
     </div>
   </div>
 
@@ -87,29 +84,33 @@ export default {
   created () {
     self = this
     this.filter = audio.filter.state.device
+    this.envelope2 = audio.envelope2.state.device
   },
   methods: {
-
+    envTwoAssigned () {
+      return this.$store.state.envelope2.assign
+    },
   },
   computed: {
     timerIsRunning () {
       return this.$store.state.gameState.timerIsRunning
     },
-    dialsAreWithinMargin () {
-      if (this.createModeIsActive) return false // quick hack
-      this.title = 'Done!'
-      return Object.values(this.$store.getters.audioParametersMatchGoalWithMargin[this.name])
-        .every(param => param)
-    },
     ...vuexSyncGen('filter', 'cutOffFreq', val => {
-      // self.filter.frequency.value = val
-      self.filter.frequency.value = character.filter.cutOffFreq(val)
+      // if (self.$store.state.audioParameters.router.envelope2 === 'filterCutoff') {
+      //   self.filter.frequency.value = character.filter.cutOffFreq(val);
+      //   audio.envelope2.state.device.max = character.filter.cutOffFreq(val)
+      // } else if (self.$store.state.audioParameters.router.lfo === 'filterCutoff') {
+      //   audio.lfo.state.device.max = character.filter.cutOffFreq(val) * (1 + self.$store.state.audioParameters.lfo.amount/100);
+      //   audio.lfo.state.device.min = character.filter.cutOffFreq(val) - (character.filter.cutOffFreq(val) * self.$store.state.audioParameters.lfo.amount/100) ;
+      // } else {
+      //   self.filter.frequency.value = character.filter.cutOffFreq(val);
+      // }
     }),
     ...vuexSyncGen('filter', 'type', val => {
-      self.filter.type = character.filter.type(val)
+      // self.filter.type = character.filter.type(val)
     }),
     ...vuexSyncGen('filter', 'setQ', val => {
-      self.filter.Q.value = character.filter.setQ(val)
+      // self.filter.Q.value = character.filter.setQ(val)
     }),
     // ...vuexSyncGen('filter', 'gain', val => {
     //   self.filter.gain.value = val

@@ -1,9 +1,7 @@
   <template>
     <div class="module">
-      <module-title :indicator-active="dialsAreWithinMargin" :module-color="moduleColor">
-        <h2 slot="title">Tats</h2>
-        <h3 v-if="dialsAreWithinMargin" slot="subtitle">Done!</h3>
-        <h3 v-else slot="subtitle">Lfo</h3>
+      <module-title :module-color="moduleColor">
+        <h3 slot="subtitle">Mod Lfo</h3>
       </module-title>
         <module-display
           class="display"
@@ -18,34 +16,34 @@
                    {name: 'Shape', min:0, max:3, value: this.typeGoal},
                    {name: 'Rlgl', min:0, max:3, value: Math.pow(this.frequencyGoal, (this.frequencyGoal / 100)) - 0.99}
                    ]"/>
-        <div class="knobs">
-          <module-knob
-            v-model="frequency"
-            v-if="knobsAvailable.frequency || createModeIsActive"
-            :min="1"
-            :max="100"
-            knobColor="#5bd484"
-            name="Rate"
-            module="lfo"
-          ></module-knob>
-          <module-knob
-            v-model="amount"
-            v-if="knobsAvailable.amount || createModeIsActive"
-            :min="0"
-            :max="100"
-            knobColor="#5bd484"
-            name="Amount"
-            module="lfo"
-          ></module-knob>
-      <div class="button-wrapper"
-         v-if="knobsAvailable.type || createModeIsActive"
-      >
-        <module-button color="#5bd484" shape="sine" :isPressed="type==='sine'" @click.native="type='sine'"/>
-        <module-button color="#5bd484" shape="square" :isPressed="type==='square'" @click.native="type='square'"/>
-        <module-button color="#5bd484" shape="sawtooth" :isPressed="type==='sawtooth'" @click.native="type='sawtooth'"/>
-        <module-button color="#5bd484" shape="triangle" :isPressed="type==='triangle'" @click.native="type='triangle'"/>
-        <p>WAVEFORM</p>
-      </div>
+        <div class="knobs" v-if="knobsAvailable.frequency || knobsAvailable.amount || knobsAvailable.type || createModeIsActive">
+          <transition name="fade" appear mode="out-in" :duration="300">
+            <module-knob
+              v-model="frequency"
+              v-if="knobsAvailable.frequency || createModeIsActive"
+              :min="1"
+              :max="100"
+              knobColor="#5bd484"
+              name="Speed"
+              module="lfo"
+            />
+            <module-knob
+              v-model="amount"
+              v-else-if="knobsAvailable.amount || createModeIsActive"
+              :min="0"
+              :max="100"
+              knobColor="#5bd484"
+              name="Amount"
+              module="lfo"
+            />
+            <div class="button-wrapper" v-else-if="knobsAvailable.type || createModeIsActive">
+              <module-button color="#5bd484" shape="sine" :isPressed="type==='sine'" @click.native="type='sine'"/>
+              <module-button color="#5bd484" shape="square" :isPressed="type==='square'" @click.native="type='square'"/>
+              <module-button color="#5bd484" shape="sawtooth" :isPressed="type==='sawtooth'" @click.native="type='sawtooth'"/>
+              <module-button color="#5bd484" shape="triangle" :isPressed="type==='triangle'" @click.native="type='triangle'"/>
+              <p>MOVEMENT</p>
+            </div>
+          </transition>
         </div>
     </div>
 </template>
@@ -96,24 +94,24 @@ export default {
     timerIsRunning () {
       return this.$store.state.gameState.timerIsRunning
     },
-    dialsAreWithinMargin () {
-      if (this.createModeIsActive) return false // quick hack
-      this.title = 'Done!'
-      return Object.values(this.$store.getters.audioParametersMatchGoalWithMargin[this.name])
-        .every(param => param)
-    },
     ...vuexSyncGen('lfo', 'frequency', val => {
-      self.lfo.frequency.value = character.lfo.frequency(val)
-      self.realFrq = character.lfo.frequency(val)
+      // self.lfo.frequency.value = character.lfo.frequency(val)
+      // self.realFrq = character.lfo.frequency(val)
     }),
     ...vuexSyncGen('lfo', 'amount', val => {
-      self.lfo.max = character.lfo.amount(val)
+      // if (self.$store.state.audioParameters.router.lfo === 'filterCutoff') {
+      //   self.lfo.max = character.filter.cutOffFreq(self.$store.state.audioParameters.filter.cutOffFreq) * (1 + val/100);
+      //   self.lfo.min = character.filter.cutOffFreq(self.$store.state.audioParameters.filter.cutOffFreq) - (character.filter.cutOffFreq(self.$store.state.audioParameters.filter.cutOffFreq) * (val/100));
+      // } else {
+      //   self.lfo.max = character.lfo.amount(val) //TEMP disabled. mounting min and max manually from connected device
+      //   self.lfo.min = character.lfo.amount(val) * -1
+      // }
     }),
     ...vuexSyncGen('lfo', 'type', val => {
-      if (self.lfo.type === character.lfo.type(val)) return
-      self.lfo.type = character.lfo.type(val)
-      self.lfo.stop()
-      self.lfo.start()
+      // if (self.lfo.type === character.lfo.type(val)) return
+      // self.lfo.type = character.lfo.type(val)
+      // self.lfo.stop()
+      // self.lfo.start()
     }),
     ...mapState({
       typeArray: state => state.gameState.possibleValues.lfo.type,

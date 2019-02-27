@@ -52,24 +52,38 @@
         <span>High score</span>
         <span class="data">{{paddedHighScoreString}}</span>
       </div>
-
-    <button class="button-next"
-            ref="button"
-            @click="startAgain"
-            >TRY AGAIN</button>
+      <!-- <div class="makemusic">
+        <span>Make the music for this game and win a trip to Mess foundation!</span>
+      </div> -->
+      <div class="">
+        <button class="button-next"
+                @click="startLastLevel"
+                >TRY LAST LEVEL AGAIN</button>
+        <button class="button-next"
+                ref="button"
+                @click="startAgain"
+                >BACK TO MENU</button>
+      </div>
     </div>
   </div>
 </template>
 
 <script>
-import { keyframes, easing } from 'popmotion'
-import { MODULE_OSCILLATOR_COLOR, MODULE_ENVELOPE_COLOR, MODULE_FILTER_COLOR, MODULE_LFO_COLOR, MODULE_DELAY_COLOR, MODULE_REVERB_COLOR } from '@/constants'
-import { color } from 'style-value-types'
-import padStart from 'lodash/padStart'
-import audio from '@/audio'
+import { keyframes, easing } from "popmotion";
+import {
+  MODULE_OSCILLATOR_COLOR,
+  MODULE_ENVELOPE_COLOR,
+  MODULE_FILTER_COLOR,
+  MODULE_LFO_COLOR,
+  MODULE_DELAY_COLOR,
+  MODULE_REVERB_COLOR
+} from "@/constants";
+import { color } from "style-value-types";
+import padStart from "lodash/padStart";
+import audio from "@/audio";
 
 export default {
-  name: 'Overlay',
+  name: "Overlay",
   props: {
     level: {
       type: Number,
@@ -80,7 +94,7 @@ export default {
       default: 545
     }
   },
-  data () {
+  data() {
     return {
       currentAnim: null,
       anim: {
@@ -95,58 +109,66 @@ export default {
           stick2: 20,
           stick2AdditionalTwirl: 0,
           changedTransitionOrigin: -100
-
         }
       },
       colorArray: [],
-      currentColor: '',
-      currentColor1: '',
-      buttonColor: '',
+      currentColor: "",
+      currentColor1: "",
+      buttonColor: "",
       litUpButton: false
-    }
+    };
   },
-  created () {
+  created() {
     // stop beat
-    audio.stopKick()
+    audio.stopKick();
     // stop loop
-    audio.stopMainLoop()
+    audio.stopMainLoop();
     // Play gameover
-    audio.playGameOver()
+    audio.playGameOver();
     // randomize animation:
-    const currentAnimationNumber = Math.floor(Math.random() * Object.keys(this.anim).length)
-    this.currentAnim = Object.keys(this.anim)[currentAnimationNumber]
+    const currentAnimationNumber = Math.floor(
+      Math.random() * Object.keys(this.anim).length
+    );
+    this.currentAnim = Object.keys(this.anim)[currentAnimationNumber];
 
-    window.addEventListener('keydown', this.emitOnKey)
-    this.colorArray.push(MODULE_OSCILLATOR_COLOR, MODULE_ENVELOPE_COLOR, MODULE_FILTER_COLOR, MODULE_LFO_COLOR, MODULE_DELAY_COLOR, MODULE_REVERB_COLOR)
-    this.buttonColor = this.changeColor(this.buttonColor)
-    this.currentColor = this.changeColor(this.currentColor)
-    this.currentColor1 = this.changeColor(this.currentColor1)
+    window.addEventListener("keydown", this.emitOnKey);
+    this.colorArray.push(
+      MODULE_OSCILLATOR_COLOR,
+      MODULE_ENVELOPE_COLOR,
+      MODULE_FILTER_COLOR,
+      MODULE_LFO_COLOR,
+      MODULE_DELAY_COLOR,
+      MODULE_REVERB_COLOR
+    );
+    this.buttonColor = this.changeColor(this.buttonColor);
+    this.currentColor = this.changeColor(this.currentColor);
+    this.currentColor1 = this.changeColor(this.currentColor1);
   },
 
-  mounted () {
+  mounted() {
     let conf = {
       values: [
-        {
-          stick1: -20,
-          stick1Offset: 0,
-          stick2: 20,
-          stick2AdditionalTwirl: 0,
-          changedTransitionOrigin: 0
-        },
-        {
-          stick1: 0,
-          stick1Offset: 0,
-          stick2: 0,
-          stick2AdditionalTwirl: 0,
-          changedTransitionOrigin: 0
-        },
-        {
-          stick1: -25,
-          stick1Offset: 0,
-          stick2: 0,
-          stick2AdditionalTwirl: 0,
-          changedTransitionOrigin: 0
-        },
+        // {
+        //   stick1: -20,
+        //   stick1Offset: 0,
+        //   stick2: 20,
+        //   stick2AdditionalTwirl: 0,
+        //   changedTransitionOrigin: 0
+        // },
+        // {
+        //   stick1: 0,
+        //   stick1Offset: 0,
+        //   stick2: 0,
+        //   stick2AdditionalTwirl: 0,
+        //   changedTransitionOrigin: 0
+        // },
+        // {
+        //   stick1: -25,
+        //   stick1Offset: 0,
+        //   stick2: 0,
+        //   stick2AdditionalTwirl: 0,
+        //   changedTransitionOrigin: 0
+        // },
         {
           stick1: 0,
           stick1Offset: 0,
@@ -165,77 +187,84 @@ export default {
       loop: 0,
       duration: this.duration * 2,
       easings: easing.cubicBezier(0.29, 0.06, 1, -0.24)
-    }
+    };
 
     let callback = {
       update: v => {
-        this.anim.drum.stick1 = v.stick1
-        this.anim.drum.stick1Offset = v.stick1Offset
-        this.anim.drum.stick2 = v.stick2
-        this.anim.drum.stick2AdditionalTwirl = v.stick2AdditionalTwirl
-        this.anim.drum.changedTransitionOrigin = v.changedTransitionOrigin
+        this.anim.drum.stick1 = v.stick1;
+        this.anim.drum.stick1Offset = v.stick1Offset;
+        this.anim.drum.stick2 = v.stick2;
+        this.anim.drum.stick2AdditionalTwirl = v.stick2AdditionalTwirl;
+        this.anim.drum.changedTransitionOrigin = v.changedTransitionOrigin;
         if (v.stick1 === 0) {
-          this.currentColor = this.changeColor(this.currentColor)
+          this.currentColor = this.changeColor(this.currentColor);
           // console.log(`this.currentColor changed!`)
         }
         if (v.stick2 < 0.1) {
-          this.currentColor1 = this.changeColor(this.currentColor1)
+          this.currentColor1 = this.changeColor(this.currentColor1);
           // console.log(`this.currentColor1 changed!`)
         }
       },
       complete: () => {}
-    }
+    };
 
-    keyframes(conf).start(callback)
-    this.$refs.button.focus()
+    keyframes(conf).start(callback);
+    this.$refs.button.focus();
   },
-  beforeDestroy () {
-    window.removeEventListener('keydown', this.emitOnKey)
+  beforeDestroy() {
+    window.removeEventListener("keydown", this.emitOnKey);
   },
   methods: {
-    emitOnKey () {
+    emitOnKey() {
       if (event.keyCode === 13) {
-        this.$emit('startagain')
+        this.$emit("startagain");
       }
     },
-    changeColor (current) {
-      let randomColor = this.colorArray[Math.floor(Math.random() * this.colorArray.length)]
+    changeColor(current) {
+      let randomColor = this.colorArray[
+        Math.floor(Math.random() * this.colorArray.length)
+      ];
       // does that even work?
       if (randomColor === current) {
-        randomColor = this.colorArray[Math.floor(Math.random() * this.colorArray.length)]
+        randomColor = this.colorArray[
+          Math.floor(Math.random() * this.colorArray.length)
+        ];
         // console.log('repeat!')
       }
-      return randomColor
+      return randomColor;
     },
-    startAgain () {
-      this.$emit('startagain')
+    startAgain() {
+      this.$emit("startagain");
+    },
+    startLastLevel() {
+      this.$emit("startlastlevel");
+      console.log("startlastlevel in failure method triggered");
     }
   },
   computed: {
-    gameScore () {
-      return this.$store.state.gameState.score
+    gameScore() {
+      return this.$store.state.gameState.score;
     },
-    gameHighScore () {
-      return this.$store.state.gameState.highScore
+    gameHighScore() {
+      return this.$store.state.gameState.highScore;
     },
-    gameLevel () {
-      return this.$store.state.gameState.level
+    gameLevel() {
+      return this.$store.state.gameState.level;
     },
-    paddedScoreString () {
-      return `${padStart(this.gameScore, 5, '0')}`
+    paddedScoreString() {
+      return `${padStart(this.gameScore, 5, "0")}`;
     },
-    paddedHighScoreString () {
-      return `${padStart(this.gameHighScore, 5, '0')}`
+    paddedHighScoreString() {
+      return `${padStart(this.gameHighScore, 5, "0")}`;
     }
-
   }
-}
+};
 </script>
 
 <style scoped lang="scss">
 .game-over-text {
-  font-size:5rem;
-  margin-bottom:0;
+  font-size: 5rem;
+  margin-bottom: 0;
 }
 .svg {
   margin: -75px 0 0 0;
@@ -243,7 +272,7 @@ export default {
 
 .gameover {
   & h1 {
-    margin: 0
+    margin: 0;
   }
   & .score {
     display: flex;
@@ -257,8 +286,14 @@ export default {
     flex-direction: column;
     width: 8em;
   }
+  .makemusic {
+    display: flex;
+    font-size: 2em;
+    flex-direction: column;
+    width: 11em;
+  }
   & span {
-    font-size: .7em;
+    font-size: 0.7em;
   }
   & .data {
     font-weight: 600;
@@ -268,12 +303,11 @@ export default {
 
 .score {
   & h2 {
-  margin: 0.5rem;
-}
+    margin: 0.5rem;
+  }
   & p {
     font-size: 2rem;
     margin: 0.5rem;
   }
 }
-
 </style>

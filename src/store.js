@@ -1,361 +1,816 @@
-import Vue from 'vue'
-import Vuex from 'vuex'
-import mapValues from 'lodash/mapValues'
-import random from 'lodash/random'
-import values from 'lodash/values'
-import flatMap from 'lodash/flatMap'
-import inRange from 'lodash/inRange'
-import isArray from 'lodash/isArray'
-import add from 'lodash/add'
-import find from 'lodash/find'
-import character from '@/character'
-import { addPreset } from '@/db'
+import Vue from "vue";
+import Vuex from "vuex";
+import mapValues from "lodash/mapValues";
+import random from "lodash/random";
+import values from "lodash/values";
+import flatMap from "lodash/flatMap";
+import inRange from "lodash/inRange";
+import isArray from "lodash/isArray";
+import add from "lodash/add";
+import find from "lodash/find";
+import character from "@/character";
+import {
+  addPreset,
+  createRoom,
+  updateMyScore,
+  getRoom,
+  getContributionDB,
+  sharePreset
+} from "@/db";
+import Levels from "./levels";
+import audio from "./audio";
 
-Vue.use(Vuex)
+//
+import PossibleValues from "./stores/possibleValues";
+import AudioParameters from "./stores/audioParameters";
+import NoSequenceAvailable from "./stores/sequence";
+import NoKnobsAvalible from "./stores/noKnobsAvalible";
+
+Vue.use(Vuex);
 
 export default new Vuex.Store({
   state: {
-    audioParameters: {
-      oscillator1: {
-        frequency: 131,
-        typeOsc: 'sawtooth',
-        detune: 60
-        // phase: 0
-      },
-      oscillator2: {
-        frequency: 131,
-        typeOsc: 'sawtooth',
-        detune: 60
-        // phase: 0
-      },
-      filter: {
-        cutOffFreq: 70,
-        type: 'lowpass',
-        setQ: 0
-        // gain: 50
-      },
-      envelope: {
-        attack: 50,
-        decay: 25,
-        sustain: 10,
-        release: 90
-      },
-      lfo: {
-        frequency: 10,
-        type: 'sine',
-        amount: 0
+    bpm: 110,
+    name: "Anonymous",
+    activeButton: 0,
+    avatarUrl: null,
+    audioParameters: AudioParameters(),
+    sequence: NoSequenceAvailable,
+    roomId: null,
+    contributionId: null,
+    roomHighScores: [
+      {
+        name: "Anonymous",
+        score: 0
       }
-    },
+    ],
     gameState: {
+      // GAME SCORING //
+      level: -1,
+      attempts: 0,
+      score: 0,
+      highScore: 0,
+
+      // GAME MECHANICS //
+      levels: Levels,
+      goal: AudioParameters(),
+      userAttemptPreset: AudioParameters(),
+      defaultParams: AudioParameters(),
+      knobsAvailable: NoKnobsAvalible,
+      previewTimer: 0,
+
+      presetNumber: 0,
+
+      // TOGGLES //
+      madeAttempt: false,
+      attemptActive: false,
+      completedLevel: false,
       createModeIsActive: false,
       sweepArmed: true,
-      marginOsc: 0,
-      marginFil: 0,
-      marginEnv: 0,
-      marginLfo: 0,
-      margin: 10,
-      timerIsRunning: false,
       isGameOver: false,
-      level: 0,
-      sequencesPassedInCurrentLevel: 0,
-      knobsAvailable: {
+
+      // CONTSTANTS //
+      margin: 10,
+      possibleValues: PossibleValues
+    }
+  },
+  mutations: {
+    // PREVIEW
+    decrementPreviewTimer(state) {
+      state.gameState.previewTimer = state.gameState.previewTimer - 1;
+    },
+    resetPreviewTimer(state) {
+      state.gameState.previewTimer = 5;
+    },
+    // Contribution 
+    setContributionLink(state, { link }) {
+      state.contributionId = link;
+    },
+    setUserContributionData(state, payload) {
+      // console.log(payload);
+      state.sequence = payload.sequence;
+      state.audioParameters = payload.preset;
+    },
+    // Multiplayer
+    setUsername(state, { userName }) {
+      state.name = userName;
+    },
+    setRoomId(state, { roomId }) {
+      state.roomId = roomId;
+    },
+    setRoomHighScores(state, scores) {
+      const results = Object.keys(scores).map(key => {
+        return {
+          score: scores[key],
+          name: key
+        };
+      });
+
+      state.roomHighScores = results;
+    },
+    // GAME STATE
+    setKnobAvalible(state, payload) {
+      const { knobName, moduleName } = payload;
+      let knobs = {
         oscillator1: {},
         oscillator2: {},
         filter: {},
         envelope: {},
-        lfo: {}
-      },
-      score: 0,
-      highScore: 0,
-      goal: {
-        oscillator1: {
-          frequency: 131,
-          typeOsc: 'sawtooth',
-          detune: 60
-          // phase: 0
-        },
-        oscillator2: {
-          frequency: 131,
-          typeOsc: 'sawtooth',
-          detune: 60
-          // phase: 0
-        },
-        filter: {
-          cutOffFreq: 70,
-          type: 'lowpass',
-          setQ: 0
-          // gain: 50
-        },
-        envelope: {
-          attack: 0,
-          decay: 0,
-          sustain: 90,
-          release: 0
-        },
-        lfo: {
-          frequency: 10,
-          type: 'sine',
-          amount: 0
-        }
-      },
-      possibleValues: {
-        envelope: {},
-        filter: {
-          type: ['lowpass', 'highpass', 'bandpass']
-        },
-        lfo: {
-          type: ['sine', 'square', 'sawtooth', 'triangle']
-        },
-        oscillator1: {
-          frequency: ['65', '131', '262', '523'],
-          typeOsc: ['sine', 'square', 'sawtooth', 'triangle']
-        },
-        oscillator2: {
-          frequency: ['65', '131', '262', '523'],
-          typeOsc: ['sine', 'square', 'sawtooth', 'triangle']
-        }
-      },
-      defaultParams: {
-        oscillator1: {
-          frequency: 131,
-          typeOsc: 'sawtooth',
-          detune: 60
-        },
-        oscillator2: {
-          frequency: 131,
-          typeOsc: 'sawtooth',
-          detune: 60
-        },
-        filter: {
-          cutOffFreq: 70,
-          type: 'lowpass',
-          setQ: 0
-        },
-        envelope: {
-          attack: 50,
-          decay: 25,
-          sustain: 10,
-          release: 90
-        },
-        lfo: {
-          frequency: 10,
-          type: 'sine',
-          amount: 0
-        }
-      }
-    }
-  },
-  mutations: {
-    setAudioParameter (state, {device, parameter, value}) {
-      state.audioParameters[device][parameter] = value
+        envelope2: {},
+        lfo: {},
+        router: {},
+        sequencer: {}
+      };
+
+      knobs[moduleName][knobName] = true;
+
+      state.gameState.knobsAvailable = knobs;
     },
-    setAudioParameterToPreset (state, {preset}) {
+    // setUserAttemptParameters(state, { device, parameter, value }) {
+    //   state.gameState.userAttemptPreset[device][parameter] = value
+    // },
+    setPresetNumber(state, payload) {
+      state.gameState.presetNumber = payload.value;
+    },
+    setFeaturedArtist(state, { artistName, avatarUrl }) {
+      // state.name = artistName;
+      state.avatarUrl = avatarUrl;
+    },
+    setBpm(state, { parameter, value }) {
+      state[parameter] = value;
+    },
+    setStep(state, i) {
+      if (i) return (state.activeButton = i), state.activeButton;
+      if (state.activeButton === 15) state.activeButton = -1;
+      state.activeButton++;
+    },
+    setSequence(state, { parameter, value }) {
+      state[parameter] = value;
+    },
+    setPresetBpm(state, bpm) {
+      state.bpm = bpm;
+    },
+    setAudioParameterToPreset(state, { preset }) {
       // overwrite parameters from audiostate, this will not fill in nested objects
       state.audioParameters = {
         ...state.audioParameters,
-        ...preset
-      }
+        ...JSON.parse(JSON.stringify(preset)) // deep cloning has to be done like this, otherwise a reference is copied
+      };
     },
-    setGoalToPreset (state, {preset}) {
+    setGoalToPreset(state, { preset }) {
       // overwrite parameters from audiostate, this will not fill in nested objects
       state.gameState.goal = {
         ...state.gameState.goal,
-        ...preset
-      }
+        ...JSON.parse(JSON.stringify(preset)) // deep cloning has to be done like this, otherwise a reference is copied
+      };
     },
-    setMargin (state, {newMargin}) {
+    setMargin(state, { newMargin }) {
       // overwrite parameters from audiostate, this will not fill in nested objects
-      state.gameState.margin = newMargin
+      state.gameState.margin = newMargin;
     },
-    startTimerIsRunning (state) {
+    armSweep(state) {
       // overwrite parameters from audiostate, this will not fill in nested objects
-      state.gameState.timerIsRunning = true
+      state.gameState.sweepArmed = true;
     },
-    stopTimerIsRunning (state) {
+    disarmSweep(state) {
       // overwrite parameters from audiostate, this will not fill in nested objects
-      state.gameState.timerIsRunning = false
+      state.gameState.sweepArmed = false;
     },
-    armSweep (state) {
-      // overwrite parameters from audiostate, this will not fill in nested objects
-      state.gameState.sweepArmed = true
+    addValueToScore(state, val) {
+      state.gameState.score = state.gameState.score + val;
     },
-    disarmSweep (state) {
-      // overwrite parameters from audiostate, this will not fill in nested objects
-      state.gameState.sweepArmed = false
+    increaseLevelValue(state, val) {
+      state.gameState.level = state.gameState.level + val;
     },
-    addValueToScore (state, val) {
-      state.gameState.score = add(state.gameState.score, val)
+    setLevelValue(state, level) {
+      state.gameState.level = level;
     },
-    increaseLevelValue (state, val) {
-      state.gameState.level = add(state.gameState.level, val)
+    setAttemptActive(state) {
+      state.gameState.attemptActive = true;
     },
-    setLevelValue (state, level) {
-      state.gameState.level = level
+    setAttemptNotActive(state) {
+      state.gameState.attemptActive = false;
     },
-    updateHighScore (state, val) {
-      state.gameState.highScore = val
-      if (localStorage.getItem('highscore') < val) {
-        localStorage.setItem('highscore', val)
-      }
+    // updateHighScore(state, val) {
+    //   state.gameState.highScore = val;
+    //   if (localStorage.getItem("highscore") < val) {
+    //     localStorage.setItem("highscore", val);
+    //   }
+    // },
+    setKnobsAvailable(state, obj) {
+      state.gameState.knobsAvailable = obj;
     },
-    setKnobsAvailable (state, obj) {
-      state.gameState.knobsAvailable = obj
+    setCreateMode(state, isActive) {
+      state.gameState.createModeIsActive = isActive;
     },
-    setCreateMode (state, isActive) {
-      state.gameState.createModeIsActive = isActive
+    setTheGameToGameOver(state) {
+      state.gameState.isGameOver = true;
     },
-    increaseSequencesPassedInCurrentLevel (state) {
-      state.gameState.sequencesPassedInCurrentLevel++
+    setTheGameFromGameOver(state) {
+      state.gameState.isGameOver = false;
     },
-    resetSequencesPassedInCurrentLevel (state) {
-      state.gameState.sequencesPassedInCurrentLevel = 0
+    setActiveSequence(state, sequence) {
+      state.activeSequence = sequence;
     },
-    setTheGameToGameOver (state) {
-      state.gameState.isGameOver = true
+    toggleAttemptMade(state) {
+      state.gameState.madeAttempt = !state.gameState.madeAttempt;
     },
-    setTheGameFromGameOver (state) {
-      state.gameState.isGameOver = false
+    incrementAttempt(state) {
+      state.gameState.attempts += 1;
     },
-    setActiveSequence (state, sequence) {
-      state.activeSequence = sequence
+    resetAttempts(state) {
+      state.gameState.attempts = 0;
+    },
+    setCompletedLevel(state, payload) {
+      state.gameState.completedLevel = payload.value;
+    },
+    setLevelScore(state, payload) {
+      const lvl = state.gameState.level;
+      // console.log(payload);
+      // console.log(`Level ${lvl}`);
+      state.gameState.levels[lvl].levelData.score = payload;
+    },
+    setAudioParameter(state, { device, parameter, value }) {
+      state.audioParameters[device][parameter] = value;
     }
   },
   getters: {
+    reduceKnobsAvalible(state) {
+      const knobs = state.gameState.knobsAvailable;
+
+      let devices = Object.keys(knobs);
+
+      let parent = Object.values(knobs).find(knob => {
+        return Object.entries(knob).length !== 0;
+      });
+
+      if (parent) {
+        const parameter = Object.keys(parent)[0];
+        const device = devices.filter(
+          device => Object.keys(knobs[device])[0] === parameter
+        );
+        return { device, parameter };
+      } else {
+        return { device: null, parameter: null };
+      }
+    },
     allParametersMatchGoal: (state, getters) => {
-      return flatMap(getters.audioParametersMatchGoalWithMargin, val => values(val))
-        .every(val => val)
+      return getters.audioParametersMatchGoalWithMargin;
     },
     displayedLevel: (state, getters) => {
-      return state.gameState.level + 1
+      return state.gameState.level + 1;
     },
-    audioParametersMatchGoalWithMargin: (state) => {
-      return mapValues(state.audioParameters, (val, moduleName) => {
-        return mapValues(val, (val, parameterName) => {
-          return isArray(state.gameState.possibleValues[moduleName][parameterName])
-            ? (val === state.gameState.goal[moduleName][parameterName])
-            : inRange(val,
-              (state.gameState.goal[moduleName][parameterName] - state.gameState.margin),
-              (state.gameState.goal[moduleName][parameterName] + state.gameState.margin)
-            )
-        })
-      })
+    returnLevelScore: (state) => {
+      if (state.gameState.level == -1) {
+        return 0;
+      } else {
+        return state.gameState.levels[state.gameState.level].levelData.score;
+      }
+    },
+    audioParametersMatchGoalWithMargin: state => {
+      function reduceKnobsAvalible() {
+        const knobs = state.gameState.knobsAvailable;
+
+        let devices = Object.keys(knobs);
+
+        let parent = Object.values(knobs).find(knob => {
+          return Object.entries(knob).length !== 0;
+        });
+
+        const parameter = Object.keys(parent)[0];
+        const device = devices.filter(
+          device => Object.keys(knobs[device])[0] === parameter
+        );
+
+        return { device, parameter };
+      }
+
+      const { device, parameter } = reduceKnobsAvalible();
+
+      let val = state.audioParameters[device][parameter];
+
+      console.log(`value: ${val}`);
+      console.log(`Goal: ${state.gameState.goal[device][parameter]}`);
+
+      return isArray(state.gameState.possibleValues[device][parameter])
+        ? val === state.gameState.goal[device][parameter]
+        : inRange(
+          val,
+          state.gameState.goal[device][parameter] - state.gameState.margin,
+          state.gameState.goal[device][parameter] + state.gameState.margin
+        );
     }
   },
   actions: {
-    randomizeAudioParameters ({state, commit}, randomizeArray) {
-      const randomizeValues = (obj, selectObj) => mapValues(obj, (val, moduleName) => {
-        return mapValues(val, (val, parameterName) => {
-          // if selectObj is provided and the value is falsey return store value
-          if (selectObj && !selectObj[moduleName][parameterName]) return state.gameState.goal[moduleName][parameterName]
-          const parameterValDef = state.gameState.possibleValues[moduleName][parameterName]
-          return Array.isArray(parameterValDef)
-            ? parameterValDef[random(0, parameterValDef.length - 1)]
-            : random(0, 100)
-        })
-      })
+    // Contribution
+    generateContributionLink(store) {
+      const preset = store.state.audioParameters;
+      const sequence = store.state.sequence;
 
-      const randomizeWithoutMatches = (obj, selectObj, itrs = 0) => {
-        if (itrs === 20) return obj
-        const randomPreset = randomizeValues(obj, selectObj) // randomly generated preset
-        const accedentlyCorrectValues = mapValues(randomPreset, (modulePreset, moduleName) => {
-          return mapValues(modulePreset, (val, parameterName) => {
-            const a = val
-            const b = state.gameState.goal[moduleName][parameterName]
-            return selectObj[moduleName][parameterName]
-              ? a === b || inRange(a, b + state.gameState.margin, b - state.gameState.margin)
-              : false
-          })
-        })
-        if (find(accedentlyCorrectValues, mod => !!find(mod, par => par === true))) return randomizeWithoutMatches(randomPreset, accedentlyCorrectValues, itrs + 1)
-        return randomPreset
+      sharePreset({ preset, sequence }, ({ link }) => {
+        store.commit("setContributionLink", { link });
+      });
+    },
+    getContribution(store) {
+      let link = store.state.contributionId;
+      getContributionDB(link, data => {
+        store.commit("setUserContributionData", data);
+      });
+    },
+    // CREATE NEW ROOM
+    createNewRoom(store) {
+      const name = store.state.name;
+      const score = store.state.gameState.score;
+
+      createRoom({ name, score }, URL => {
+        store.commit("setRoomId", { roomId: URL });
+      });
+    },
+    updateRoom(store) {
+      getRoom(store.state.roomId, scoreData => {
+        store.commit("setRoomHighScores", scoreData);
+      });
+    },
+    updateHighScore(store) {
+      const url = store.state.roomId,
+        name = store.state.name,
+        score = store.state.gameState.score;
+      updateMyScore({ url, name, score }, () => store.dispatch("updateRoom"));
+    },
+    setAudioParameter(store, { device, parameter, value }) {
+      // console.log(`device ${device}; param: ${parameter}; value: ${value}`);
+      // console.log(audio[device].state.device[parameter]);
+
+      this.commit("setAudioParameter", { device, parameter, value });
+
+      switch (device) {
+        case 'envelope':
+        case 'envelop2':
+          const params = ['attack', 'decay', 'release', 'amount']; // val || 1
+          if (params.includes(parameter)) {
+            audio[device].state.device[parameter] = character[device][parameter](value || 1);
+          } else {
+            audio[device].state.device[parameter] = character[device][parameter](value);
+          }
+          break;
+        case 'filter':
+          if (parameter === 'cutOffFreq') {
+            if (store.state.audioParameters.router.envelope2 === 'filterCutoff') {
+              audio.filter.frequency.value = character.filter.cutOffFreq(val);
+              audio.envelope2.state.device.max = character.filter.cutOffFreq(val)
+            } else if (store.state.audioParameters.router.lfo === 'filterCutoff') {
+              audio.lfo.state.device.max = character.filter.cutOffFreq(val) * (1 + store.state.audioParameters.lfo.amount / 100);
+              audio.lfo.state.device.min = character.filter.cutOffFreq(val) - (character.filter.cutOffFreq(val) * store.state.audioParameters.lfo.amount / 100);
+            } else {
+              audio.filter.frequency.value = character.filter.cutOffFreq(val);
+            }
+          } else {
+            if (audio[device].state.device[parameter].value === undefined) {
+              audio[device].state.device[parameter] = character[device][parameter](value);
+            } else {
+              audio[device].state.device[parameter].value = character[device][parameter](value);
+            }
+          }
+          break;
+        case 'oscillator1':
+          if (parameter == "typeOsc") {
+            audio.oscillator1.state.device.type = character.oscillator1.typeOsc(value);
+            audio.oscillator1.state.device.stop();
+            audio.oscillator1.state.device.start();
+          } else {
+            if (audio[device].state.device[parameter].value === undefined) {
+              audio[device].state.device[parameter] = character[device][parameter](value);
+            } else {
+              audio[device].state.device[parameter].value = character[device][parameter](value);
+            }
+          }
+          break;
+        case 'oscillator2':
+          if (parameter == "typeOsc") {
+            audio.oscillator2.state.device.type = character.oscillator2.typeOsc(value);
+            audio.oscillator2.state.device.stop();
+            audio.oscillator2.state.device.start();
+          } else {
+            if (audio[device].state.device[parameter].value === undefined) {
+              audio[device].state.device[parameter] = character[device][parameter](value);
+            } else {
+              audio[device].state.device[parameter].value = character[device][parameter](value);
+            }
+          }
+          break;
+        case 'lfo':
+          if (parameter == 'frequency') {
+            audio.lfo.frequency.value = character.lfo.frequency(val)
+            audio.realFrq = character.lfo.frequency(val)
+          }
+          if (parameter == 'amount') {
+            if (store.state.audioParameters.router.lfo === 'filterCutoff') {
+              audio.lfo.max = character.filter.cutOffFreq(store.state.audioParameters.filter.cutOffFreq) * (1 + val / 100);
+              audio.lfo.min = character.filter.cutOffFreq(store.state.audioParameters.filter.cutOffFreq) - (character.filter.cutOffFreq(store.state.audioParameters.filter.cutOffFreq) * (val / 100));
+            } else {
+              audio.lfo.max = character.lfo.amount(val) //TEMP disabled. mounting min and max manually from connected device
+              audio.lfo.min = character.lfo.amount(val) * -1
+            }
+          }
+          if (parameter == 'type') {
+            if (audio.lfo.type === character.lfo.type(val)) return
+            audio.lfo.type = character.lfo.type(val)
+            audio.lfo.stop()
+            audio.lfo.start()
+          }
+          break;
+        case 'router':
+          if (parameter == 'lfo') {
+            audio.connectLfo(val);
+            audio.filter.frequency.value = character.filter.cutOffFreq(
+              store.state.audioParameters.filter.cutOffFreq
+            );
+            if (val === "filterCutoff" && audio.envelope2 === "filterCutoff") {
+              audio.envelope2 = "oscsDetune";
+            }
+          }
+          if (parameter == 'envelope2') {
+            audio.connectEnvelope2(val);
+            // if (val ==='filterCutoff') {
+            //   audio.realEnvelope2.max = character.filter.cutOffFreq(store.state.audioParameters.filter.cutOffFreq)
+            // } else {
+            audio.filter.frequency.value = character.filter.cutOffFreq(
+              store.state.audioParameters.filter.cutOffFreq
+            );
+            // }
+            if (val === "filterCutoff" && audio.lfo === "filterCutoff") {
+              audio.lfo = "oscsDetune";
+            }
+          }
+          break;
+        default:
+          if (audio[device].state.device[parameter].value === undefined) {
+            audio[device].state.device[parameter] = character[device][parameter](value);
+          } else {
+            audio[device].state.device[parameter].value = character[device][parameter](value);
+          }
+          break;
       }
 
-      return commit('setAudioParameterToPreset', {
-        preset: randomizeWithoutMatches(state.audioParameters, randomizeArray)
-      })
     },
-    randomizGoalParameters ({state, commit}) {
-      const randomizeValues = obj => mapValues(obj, (val, moduleName) => {
-        return mapValues(val, (val, parameterName) => {
-          if (state.gameState.knobsAvailable && state.gameState.knobsAvailable[moduleName] && state.gameState.knobsAvailable[moduleName][parameterName]) {
-            const parameterValDef = state.gameState.possibleValues[moduleName][parameterName]
-            return Array.isArray(parameterValDef)
-              ? parameterValDef[random(0, parameterValDef.length - 1)]
-              : random(0, 100)
+    madeAttempt({ state, commit }) {
+      commit("toggleAttemptMade");
+      commit("incrementAttempt");
+    },
+    randomizeAudioParameters({ state, commit }, { device, paramater }) {
+      console.log("randomizeAudioParameters");
+      const stringsParams = (state, device, paramater, goal) => {
+        if (device === "lfo") {
+          return Math.random(0, 100);
+        } else {
+          const possibleValues = state.gameState.possibleValues;
+          let len = possibleValues[device][paramater].length;
+          let rando = Math.round(Math.random() * (len - 1) + 1);
+          // console.log(possibleValues[device][paramater]);
+          // console.log(rando);
+          // console.log(possibleValues[device][paramater][rando]);
+          console.log("goal[device][paramater]", goal[device][paramater]);
+          console.log(
+            "possibleValues[device][paramater][rando]",
+            possibleValues[device][paramater][rando]
+          );
+          console.log(
+            "state.audioParameters.oscillator1.frequency",
+            state.audioParameters.oscillator1.frequency
+          );
+          console.log(
+            "state.gameState.goal.oscillator1.frequency",
+            state.gameState.goal.oscillator1.frequency
+          );
+          if (
+            goal[device][paramater] === possibleValues[device][paramater][rando]
+          ) {
+            console.log("same same");
+            return stringsParams(state, device, paramater, goal);
+          } else {
+            console.log("else triggered in stringsParams");
+            return possibleValues[device][paramater][rando];
           }
-          return state.gameState.goal[moduleName][parameterName]
-        })
-      })
-      return commit('setGoalToPreset', {
-        preset: randomizeValues(state.audioParameters)
-      })
+        }
+      };
+
+      const randomizeWithoutMatches = (goal, device, paramater) => {
+        "randomizeWithoutMatches";
+        let randomGameState = { ...goal };
+        console.log("randomGameState", randomGameState);
+        const stringers = [
+          "frequency",
+          "typeOsc",
+          "type",
+          "assign",
+          "lfo",
+          "envelope2"
+        ];
+        // if param is a string type...
+        if (stringers.includes(paramater)) {
+          console.log("param is a string type...");
+          let newValue = stringsParams(
+            state,
+            device,
+            paramater,
+            randomGameState
+          );
+          console.log("newValue", newValue);
+          randomGameState[device][paramater] = newValue;
+          return randomGameState;
+
+          // console.log(`New Value: ${newValue}`);
+          // console.log(`device ${device}, param ${paramater}`);
+          // console.log(goal);
+        } else {
+          let newValue = Math.random() * (100 - 1) + 1;
+          console.log("newValue no string type", newValue);
+          randomGameState[device][paramater] = newValue;
+          return randomGameState;
+        }
+      };
+
+      return commit("setAudioParameterToPreset", {
+        preset: randomizeWithoutMatches(
+          JSON.parse(JSON.stringify(state.gameState.goal)), //important, or else goal will change
+          device,
+          paramater
+        )
+      });
     },
-    setSynthToGoal ({state}, synth) {
-      synth.envelope.state.device.attack = character.envelope.attack(state.gameState.goal.envelope.attack)
-      synth.envelope.state.device.decay = character.envelope.decay(state.gameState.goal.envelope.decay)
-      synth.envelope.state.device.sustain = character.envelope.sustain(state.gameState.goal.envelope.sustain)
-      synth.envelope.state.device.release = character.envelope.release(state.gameState.goal.envelope.release)
-      synth.filter.state.device.frequency.value = character.filter.cutOffFreq(state.gameState.goal.filter.cutOffFreq)
-      synth.filter.state.device.type = character.filter.type(state.gameState.goal.filter.type)
-      synth.filter.state.device.Q.value = character.filter.setQ(state.gameState.goal.filter.setQ)
-      synth.lfo.state.device.frequency.value = character.lfo.frequency(state.gameState.goal.lfo.frequency)
-      synth.lfo.state.device.max = character.lfo.amount(state.gameState.goal.lfo.amount)
-      synth.lfo.state.device.type = character.lfo.type(state.gameState.goal.lfo.type)
-      synth.oscillator1.state.device.frequency.value = character.oscillator1.frequency(state.gameState.goal.oscillator1.frequency)
-      synth.oscillator1.state.device.type = character.oscillator1.typeOsc(state.gameState.goal.oscillator1.typeOsc)
-      synth.oscillator1.state.device.detune.value = character.oscillator1.detune(state.gameState.goal.oscillator1.detune)
-      synth.oscillator2.state.device.frequency.value = character.oscillator2.frequency(state.gameState.goal.oscillator2.frequency)
-      synth.oscillator2.state.device.type = character.oscillator2.typeOsc(state.gameState.goal.oscillator2.typeOsc)
-      synth.oscillator2.state.device.detune.value = character.oscillator2.detune(state.gameState.goal.oscillator2.detune)
+
+    ///
+    randomizGoalParameters({ state, commit }) {
+      const randomizeValues = obj =>
+        mapValues(obj, (val, moduleName) => {
+          return mapValues(val, (val, parameterName) => {
+            if (
+              state.gameState.knobsAvailable &&
+              state.gameState.knobsAvailable[moduleName] &&
+              state.gameState.knobsAvailable[moduleName][parameterName]
+            ) {
+              const parameterValDef =
+                state.gameState.possibleValues[moduleName][parameterName];
+              return Array.isArray(parameterValDef)
+                ? parameterValDef[random(0, parameterValDef.length - 1)]
+                : random(0, 95);
+            }
+            return state.gameState.defaultParams[moduleName][parameterName];
+          });
+        });
+      return commit("setGoalToPreset", {
+        preset: randomizeValues(
+          JSON.parse(JSON.stringify(state.audioParameters))
+        )
+      });
     },
-    setSynthToDefaultParameters ({state}, synth) {
-      synth.envelope.state.device.attack = character.envelope.attack(state.gameState.defaultParams.envelope.attack)
-      synth.envelope.state.device.decay = character.envelope.decay(state.gameState.defaultParams.envelope.decay)
-      synth.envelope.state.device.sustain = character.envelope.sustain(state.gameState.defaultParams.envelope.sustain)
-      synth.envelope.state.device.release = character.envelope.release(state.gameState.defaultParams.envelope.release)
-      synth.filter.state.device.frequency.value = character.filter.cutOffFreq(state.gameState.defaultParams.filter.cutOffFreq)
-      synth.filter.state.device.type = character.filter.type(state.gameState.defaultParams.filter.type)
-      synth.filter.state.device.Q.value = character.filter.setQ(state.gameState.defaultParams.filter.setQ)
-      synth.lfo.state.device.frequency.value = character.lfo.frequency(state.gameState.defaultParams.lfo.frequency)
-      synth.lfo.state.device.max = character.lfo.amount(state.gameState.defaultParams.lfo.amount)
-      synth.lfo.state.device.type = character.lfo.type(state.gameState.defaultParams.lfo.type)
-      synth.oscillator1.state.device.frequency.value = character.oscillator1.frequency(state.gameState.defaultParams.oscillator1.frequency)
-      synth.oscillator1.state.device.type = character.oscillator1.typeOsc(state.gameState.defaultParams.oscillator1.typeOsc)
-      synth.oscillator1.state.device.detune.value = character.oscillator1.detune(state.gameState.defaultParams.oscillator1.detune)
-      synth.oscillator2.state.device.frequency.value = character.oscillator2.frequency(state.gameState.defaultParams.oscillator2.frequency)
-      synth.oscillator2.state.device.type = character.oscillator2.typeOsc(state.gameState.defaultParams.oscillator2.typeOsc)
-      synth.oscillator2.state.device.detune.value = character.oscillator2.detune(state.gameState.defaultParams.oscillator2.detune)
+    setSynthToGoal({ state, commit }, synth) {
+      commit("setAttemptNotActive");
+      console.log("setSynthToGoal triggered in store");
+      synth.envelope.state.device.attack = character.envelope.attack(
+        state.gameState.goal.envelope.attack
+      );
+      synth.envelope.state.device.decay = character.envelope.decay(
+        state.gameState.goal.envelope.decay
+      );
+      synth.envelope.state.device.sustain = character.envelope.sustain(
+        state.gameState.goal.envelope.sustain
+      );
+      synth.envelope.state.device.release = character.envelope.release(
+        state.gameState.goal.envelope.release
+      );
+      synth.envelope2.state.device.attack = character.envelope2.attack(
+        state.gameState.goal.envelope2.attack
+      );
+      synth.envelope2.state.device.decay = character.envelope2.decay(
+        state.gameState.goal.envelope2.decay
+      );
+      synth.envelope2.state.device.sustain = character.envelope2.sustain(
+        state.gameState.goal.envelope2.sustain
+      );
+      synth.envelope2.state.device.release = character.envelope2.release(
+        state.gameState.goal.envelope2.release
+      );
+      synth.envelope2.state.device.max = character.envelope2.amount(
+        state.gameState.goal.envelope2.amount
+      );
+      synth.filter.state.device.frequency.value = character.filter.cutOffFreq(
+        state.gameState.goal.filter.cutOffFreq
+      );
+      synth.filter.state.device.type = character.filter.type(
+        state.gameState.goal.filter.type
+      );
+      synth.filter.state.device.Q.value = character.filter.setQ(
+        state.gameState.goal.filter.setQ
+      );
+      synth.lfo.state.device.frequency.value = character.lfo.frequency(
+        state.gameState.goal.lfo.frequency
+      );
+      synth.lfo.state.device.max = character.lfo.amount(
+        state.gameState.goal.lfo.amount
+      );
+      synth.lfo.state.device.type = character.lfo.type(
+        state.gameState.goal.lfo.type
+      );
+      // synth.oscillator1.state.device.frequency.value = character.oscillator1.frequency(state.gameState.goal.oscillator1.frequency)
+      synth.oscillator1.state.device.type = character.oscillator1.typeOsc(
+        state.gameState.goal.oscillator1.typeOsc
+      );
+      synth.oscillator1.state.device.detune.value = character.oscillator1.detune(
+        state.gameState.goal.oscillator1.detune
+      );
+      // synth.oscillator2.state.device.frequency.value = character.oscillator2.frequency(state.gameState.goal.oscillator2.frequency)
+      synth.oscillator2.state.device.type = character.oscillator2.typeOsc(
+        state.gameState.goal.oscillator2.typeOsc
+      );
+      synth.oscillator2.state.device.volume.value = character.oscillator2.volume(
+        state.gameState.goal.oscillator2.volume
+      );
+      synth.connectLfo(state.gameState.goal.router.lfo);
+      synth.connectEnvelope2(state.gameState.goal.router.envelope2);
+      audio.filter.state.device.frequency.value = character.filter.cutOffFreq(
+        state.gameState.goal.filter.cutOffFreq
+      );
     },
-    exportPreset ({state}) {
+    setSynthToUserAttempt({ state, commit }, synth) {
+      commit("setAttemptActive");
+      console.log("setSynthToUserAttempt triggered in store");
+      synth.envelope.state.device.attack = character.envelope.attack(
+        state.gameState.userAttemptPreset.envelope.attack
+      );
+      synth.envelope.state.device.decay = character.envelope.decay(
+        state.gameState.userAttemptPreset.envelope.decay
+      );
+      synth.envelope.state.device.sustain = character.envelope.sustain(
+        state.gameState.userAttemptPreset.envelope.sustain
+      );
+      synth.envelope.state.device.release = character.envelope.release(
+        state.gameState.userAttemptPreset.envelope.release
+      );
+      synth.envelope2.state.device.attack = character.envelope2.attack(
+        state.gameState.userAttemptPreset.envelope2.attack
+      );
+      synth.envelope2.state.device.decay = character.envelope2.decay(
+        state.gameState.userAttemptPreset.envelope2.decay
+      );
+      synth.envelope2.state.device.sustain = character.envelope2.sustain(
+        state.gameState.userAttemptPreset.envelope2.sustain
+      );
+      synth.envelope2.state.device.release = character.envelope2.release(
+        state.gameState.userAttemptPreset.envelope2.release
+      );
+      synth.envelope2.state.device.max = character.envelope2.amount(
+        state.gameState.userAttemptPreset.envelope2.amount
+      );
+      synth.filter.state.device.frequency.value = character.filter.cutOffFreq(
+        state.gameState.userAttemptPreset.filter.cutOffFreq
+      );
+      synth.filter.state.device.type = character.filter.type(
+        state.gameState.userAttemptPreset.filter.type
+      );
+      synth.filter.state.device.Q.value = character.filter.setQ(
+        state.gameState.userAttemptPreset.filter.setQ
+      );
+      synth.lfo.state.device.frequency.value = character.lfo.frequency(
+        state.gameState.userAttemptPreset.lfo.frequency
+      );
+      synth.lfo.state.device.max = character.lfo.amount(
+        state.gameState.userAttemptPreset.lfo.amount
+      );
+      synth.lfo.state.device.type = character.lfo.type(
+        state.gameState.userAttemptPreset.lfo.type
+      );
+      synth.oscillator1.state.device.frequency.value = character.oscillator1.frequency(
+        state.gameState.userAttemptPreset.oscillator1.frequency
+      );
+      synth.oscillator1.state.device.type = character.oscillator1.typeOsc(
+        state.gameState.userAttemptPreset.oscillator1.typeOsc
+      );
+      synth.oscillator1.state.device.detune.value = character.oscillator1.detune(
+        state.gameState.userAttemptPreset.oscillator1.detune
+      );
+      synth.oscillator2.state.device.frequency.value = character.oscillator2.frequency(
+        state.gameState.userAttemptPreset.oscillator2.frequency
+      );
+      synth.oscillator2.state.device.type = character.oscillator2.typeOsc(
+        state.gameState.userAttemptPreset.oscillator2.typeOsc
+      );
+      synth.oscillator2.state.device.volume.value = character.oscillator2.volume(
+        state.gameState.userAttemptPreset.oscillator2.volume
+      );
+      synth.connectLfo(state.gameState.userAttemptPreset.router.lfo);
+      synth.connectEnvelope2(
+        state.gameState.userAttemptPreset.router.envelope2
+      );
+      audio.filter.state.device.frequency.value = character.filter.cutOffFreq(
+        state.gameState.userAttemptPreset.filter.cutOffFreq
+      );
+    },
+    setSynthToAudioParameters({ state, commit }, synth) {
+      commit("setAttemptActive");
+      console.log("setSynthToAudioParameters triggered in store");
+      synth.envelope.state.device.attack = character.envelope.attack(
+        state.audioParameters.envelope.attack
+      );
+      synth.envelope.state.device.decay = character.envelope.decay(
+        state.audioParameters.envelope.decay
+      );
+      synth.envelope.state.device.sustain = character.envelope.sustain(
+        state.audioParameters.envelope.sustain
+      );
+      synth.envelope.state.device.release = character.envelope.release(
+        state.audioParameters.envelope.release
+      );
+      synth.envelope2.state.device.attack = character.envelope2.attack(
+        state.audioParameters.envelope2.attack
+      );
+      synth.envelope2.state.device.decay = character.envelope2.decay(
+        state.audioParameters.envelope2.decay
+      );
+      synth.envelope2.state.device.sustain = character.envelope2.sustain(
+        state.audioParameters.envelope2.sustain
+      );
+      synth.envelope2.state.device.release = character.envelope2.release(
+        state.audioParameters.envelope2.release
+      );
+      synth.envelope2.state.device.max = character.envelope2.amount(
+        state.audioParameters.envelope2.amount
+      );
+      synth.filter.state.device.frequency.value = character.filter.cutOffFreq(
+        state.audioParameters.filter.cutOffFreq
+      );
+      synth.filter.state.device.type = character.filter.type(
+        state.audioParameters.filter.type
+      );
+      synth.filter.state.device.Q.value = character.filter.setQ(
+        state.audioParameters.filter.setQ
+      );
+      synth.lfo.state.device.frequency.value = character.lfo.frequency(
+        state.audioParameters.lfo.frequency
+      );
+      synth.lfo.state.device.max = character.lfo.amount(
+        state.audioParameters.lfo.amount
+      );
+      synth.lfo.state.device.type = character.lfo.type(
+        state.audioParameters.lfo.type
+      );
+      synth.oscillator1.state.device.frequency.value = character.oscillator1.frequency(
+        state.audioParameters.oscillator1.frequency
+      );
+      synth.oscillator1.state.device.type = character.oscillator1.typeOsc(
+        state.audioParameters.oscillator1.typeOsc
+      );
+      synth.oscillator1.state.device.detune.value = character.oscillator1.detune(
+        state.audioParameters.oscillator1.detune
+      );
+      synth.oscillator2.state.device.frequency.value = character.oscillator2.frequency(
+        state.audioParameters.oscillator2.frequency
+      );
+      synth.oscillator2.state.device.type = character.oscillator2.typeOsc(
+        state.audioParameters.oscillator2.typeOsc
+      );
+      synth.oscillator2.state.device.volume.value = character.oscillator2.volume(
+        state.audioParameters.oscillator2.volume
+      );
+      synth.connectLfo(state.audioParameters.router.lfo);
+      synth.connectEnvelope2(state.audioParameters.router.envelope2);
+      audio.filter.state.device.frequency.value = character.filter.cutOffFreq(
+        state.audioParameters.filter.cutOffFreq
+      );
+    },
+    exportPreset({ state }, data) {
       return addPreset({
-        name: 'test',
+        name: data.name,
+        bpm: state.bpm,
         parameterValues: state.audioParameters,
         sequenceArray: state.activeSequence
-      })
+      });
     },
-    setLevel ({state, commit}, {knobsAvailable}) {
-      commit('setKnobsAvailable', knobsAvailable)
+    setLevel({ state, commit }, { knobsAvailable }) {
+      commit("setKnobsAvailable", knobsAvailable);
     },
-    startNewLevel ({state, commit, dispatch}, {knobsAvailable, level}) {
-      commit('resetSequencesPassedInCurrentLevel')
-      if (level) commit('setLevelValue', level)
-      return dispatch('setLevel', {
+    startNewLevel({ state, commit, dispatch }, { knobsAvailable, level }) {
+      if (level) commit("setLevelValue", level);
+      return dispatch("setLevel", {
         knobsAvailable
-      })
+      });
     },
-    levelDone ({state, commit}) {
-      commit('stopTimerIsRunning')
+    levelDone({ state, commit }) {
       // commit('addValueToScore', timeLeft)
     },
-    gameOver ({state, commit}) {
-      commit('setTheGameToGameOver')
-      // commit('stopTimerIsRunning')
+    gameOver({ state, commit }) {
+      commit("setTheGameToGameOver");
       // console.log(`you failed at: ${state.gameState.level + 1}`)
       // commit('setLevelValue', state.gameState.level)
-      // commit('startTimerIsRunning')
     },
-    startAgain ({state, commit}) {
-      commit('setTheGameFromGameOver')
+    nextLevel({ state, commit }) {
+      commit("setRequestNextLevelToTrue");
+    },
+    notNextLevel({ state, commit }) {
+      commit("setRequestNextLevelToFalse");
+    },
+    startAgain({ state, commit }) {
+      commit("setTheGameFromGameOver");
     }
   }
-})
+});

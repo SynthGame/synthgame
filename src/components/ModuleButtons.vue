@@ -16,6 +16,12 @@
     <module-button color="#6e01d1" label="highpass" :value="selectedValue" name="shape" @change="changeFilterShape"/>
     <module-button color="#6e01d1" label="bandpass" :value="selectedValue" name="shape" @change="changeFilterShape"/>
 </div>
+<div v-else-if="module === 'router'" class="button-set">
+    <module-button color="#fff" label="lowpass" :value="selectedValue" name="shape" @change="changeRoutingLfo"/>
+    <module-button color="#fff" label="lowpass" :value="selectedValue" name="shape" @change="changeRoutingLfo"/>
+    <module-button color="#fff" label="lowpass" :value="selectedValue" name="shape" @change="changeRoutingLfo"/>
+    <module-button color="#fff" label="lowpass" :value="selectedValue" name="shape" @change="changeRoutingLfo"/>
+</div>
 </template>
 
 <script>
@@ -62,6 +68,10 @@ export default {
     changeLFOShape (newShape) {
       this.selectedValue = newShape
       this.$emit('lfoShape', newShape)
+    },
+    changeRoutingLfo (newConnection) {
+      this.selectedValue = newConnection
+      this.$emit('connection', newConnection)
     }
   }
 }

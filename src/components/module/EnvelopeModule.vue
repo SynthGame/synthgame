@@ -1,9 +1,7 @@
 <template>
   <div class="module">
-    <module-title :indicator-active="dialsAreWithinMargin" :module-color="moduleColor">
-      <h2 slot="title">Tats</h2>
-      <h3 v-if="dialsAreWithinMargin" slot="subtitle">Done!</h3>
-      <h3 v-else slot="subtitle">Envelope</h3>
+    <module-title :indicator-active="false" :module-color="moduleColor">
+      <h3slot="subtitle">Amp Env</h3>
     </module-title>
     <module-display
       fill="#e4e259"
@@ -15,45 +13,49 @@
                 {name: 'attackGoal', min: 1, max: 100, value: this.attackGoal},
                 {name: 'decayGoal', min: 1, max: 100, value: this.decayGoal},
                 {name: 'sustainGoal', min: 1, max: 100, value: this.sustainGoal},
-                {name: 'releasevGoal', min: 1, max: 100, value: this.releaseGoal}
+                {name: 'releasevGoal', min: 1, max: 100, value: this.releaseGoal},
+                {name: 'amount', min: 1, max: 100, value: 100},
+                {name: 'amountGoal', min: 1, max: 100, value: 100},
                 ]"/>
     <div class="knobs">
-      <module-knob
-        v-model="attack"
-        v-if="knobsAvailable.attack || createModeIsActive"
-        :min="0"
-        :max="100"
-        knobColor="#e4e259"
-        name="Attack"
-        module="envelope"
-      ></module-knob>
-      <module-knob
-        v-model="decay"
-        v-if="knobsAvailable.decay || createModeIsActive"
-        :min="0"
-        :max="100"
-        knobColor="#e4e259"
-        name="Decay"
-        module="envelope"
-      ></module-knob>
-      <module-knob
-        v-model="sustain"
-        v-if="knobsAvailable.sustain || createModeIsActive"
-        :min="0"
-        :max="100"
-        knobColor="#e4e259"
-        name="Sustain"
-        module="envelope"
-      ></module-knob>
-      <module-knob
-        v-model="release"
-        v-if="knobsAvailable.release || createModeIsActive"
-        :min="0"
-        :max="100"
-        knobColor="#e4e259"
-        name="Release"
-        module="envelope"
-      ></module-knob>
+      <transition name="fade" appear mode="out-in" :duration="300">
+        <module-knob
+          v-model="attack"
+          v-if="knobsAvailable.attack || createModeIsActive"
+          :min="0"
+          :max="100"
+          knobColor="#e4e259"
+          name="Attack"
+          module="envelope"
+        />
+        <module-knob
+          v-model="decay"
+          v-else-if="knobsAvailable.decay || createModeIsActive"
+          :min="0"
+          :max="100"
+          knobColor="#e4e259"
+          name="Decay"
+          module="envelope"
+        />
+        <module-knob
+          v-model="sustain"
+          v-else-if="knobsAvailable.sustain || createModeIsActive"
+          :min="0"
+          :max="100"
+          knobColor="#e4e259"
+          name="Sustain"
+          module="envelope"
+        />
+        <module-knob
+          v-model="release"
+          v-else-if="knobsAvailable.release || createModeIsActive"
+          :min="0"
+          :max="100"
+          knobColor="#e4e259"
+          name="Release"
+          module="envelope"
+        />
+      </transition>
     </div>
   </div>
 </template>
@@ -105,24 +107,19 @@ export default {
     timerIsRunning () {
       return this.$store.state.gameState.timerIsRunning
     },
-    dialsAreWithinMargin () {
-      if (this.createModeIsActive) return false // quick hack
-      return Object.values(this.$store.getters.audioParametersMatchGoalWithMargin[this.name])
-        .every(param => param)
-    },
     ...vuexSyncGen('envelope', 'attack', val => {
       // somehow these values cause weird problems when they're 0
       // this is not a proper fix but if it works it's not stupid
-      self.envelope.attack = character.envelope.attack(val || 1)
+      // self.envelope.attack = character.envelope.attack(val || 1)
     }),
     ...vuexSyncGen('envelope', 'decay', val => {
-      self.envelope.decay = character.envelope.decay(val || 1)
+      // self.envelope.decay = character.envelope.decay(val || 1)
     }),
     ...vuexSyncGen('envelope', 'sustain', val => {
-      self.envelope.sustain = character.envelope.sustain(val || 1)
+      // self.envelope.sustain = character.envelope.sustain(val || 0)
     }),
     ...vuexSyncGen('envelope', 'release', val => {
-      self.envelope.release = character.envelope.release(val || 1)
+      // self.envelope.release = character.envelope.release(val || 1)
     }),
     ...mapState({
       attackGoal: state => state.gameState.goal.envelope.attack,
