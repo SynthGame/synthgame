@@ -80,7 +80,7 @@ export default new Vuex.Store({
       state.gameState.previewTimer = state.gameState.previewTimer - 1;
     },
     resetPreviewTimer(state) {
-      state.gameState.previewTimer = 8;
+      state.gameState.previewTimer = 5;
     },
     // Contribution 
     setContributionLink(state, { link }) {
@@ -347,8 +347,10 @@ export default new Vuex.Store({
 
       if (!baddies.includes(parameter)) {
         if (audio[device].state.device[parameter].value === undefined) {
-          audio[device].state.device[parameter] = value;
+          console.log(character[device][parameter](value))
+          audio[device].state.device[parameter] = character[device][parameter](value);
         } else {
+          console.log(character[device][parameter](value))
           audio[device].state.device[parameter].value = value;
         }
       }

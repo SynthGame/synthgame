@@ -17,8 +17,7 @@
 
     <transition name="confetti">
       <div v-show="gameComplete" class="overlay">
-        <canvas id="confetti"></canvas>
-        <div class="overlay--inner">
+        <div class="overlay--inner-win">
           <div class="overlay--title">YOU'VE COMPLETED THE GAME</div>
           <div class="overlay--title">YOU SCORED {{ totalScore }} POINTS!</div>
           <!-- PLAY AGAIN OR CHALLENGE YOUR FRIENDS -->
@@ -121,7 +120,7 @@ export default {
   name: "App",
   data() {
     return {
-      userName: null,
+      userName: '',
       userSet: false,
       kickTime: 0,
       pickedPreset: 0,
@@ -183,7 +182,8 @@ export default {
   },
   computed: {
     totalScore() {
-      return this.$store.state.gameState.score;
+      console.log(`HighScore ${this.$store.state.gameState.highScore}`)
+      return this.$store.state.gameState.highScore;  
     },
     shareLink() {
       const base = window.location.hostname;
@@ -334,7 +334,7 @@ export default {
       if (!(this.preViewtimer > 0)) {
         this.displayOriginalOverlay = false;
         clearInterval(this.timerInterval);
-        this.originalSoundTimer = 8;
+        this.originalSoundTimer = 5;
         this.$store.dispatch("setSynthToAudioParameters", audio);
       }
     },
@@ -454,5 +454,9 @@ export default {
   100% {
     transform: translateY(-100%);
   }
+}
+
+.overlay--inner-win {
+  z-index: 20;
 }
 </style>

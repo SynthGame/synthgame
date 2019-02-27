@@ -153,7 +153,11 @@
         <div v-else class="screen screen_score screen_start">
           <div class="hide-desktop screen--header">
             <div class="screen--header-inner">
-              <button @click="toggle1stScreen()" class="btn btn_navigation" :class="{'is-active' : show1stScreen}">
+              <button
+                @click="toggle1stScreen()"
+                class="btn btn_navigation"
+                :class="{'is-active' : show1stScreen}"
+              >
                 <span class="btn--inner">
                   <span class="btn--inner-text">
                     <svg
@@ -173,7 +177,11 @@
                   </span>
                 </span>
               </button>
-              <button @click="toggle3dScreen()" class="u-ml_a btn btn_leaderboard" :class="{'is-active' : show3rdScreen}">
+              <button
+                @click="toggle3dScreen()"
+                class="u-ml_a btn btn_leaderboard"
+                :class="{'is-active' : show3rdScreen}"
+              >
                 <span class="btn--inner">
                   <span class="btn--inner-text">
                     <svg
@@ -197,17 +205,17 @@
           </div>
           <div class="screen--inner">
             <!-- <transition name="fade" appear mode="out-in" :duration="300"> -->
-              <oscillator-module-one v-show="moduleIsUseable('oscillator1')"/>
-              <oscillator-module-two v-show="moduleIsUseable('oscillator2')"/>
-              <filter-module v-show="moduleIsUseable('filter')"/>
-              <envelope-module v-show="moduleIsUseable('envelope')"/>
-              <lfo-module v-show="moduleIsUseable('lfo')"/>
-              <envelope-module-two v-show="moduleIsUseable('envelope2')"/>
-              <sequencer-module
-                v-show="moduleIsUseable('sequencer')"
-                :sequencer-name="nav.active.knobName"
-              />
-              <router-module v-show="moduleIsUseable('router')"/>
+            <oscillator-module-one v-show="moduleIsUseable('oscillator1')"/>
+            <oscillator-module-two v-show="moduleIsUseable('oscillator2')"/>
+            <filter-module v-show="moduleIsUseable('filter')"/>
+            <envelope-module v-show="moduleIsUseable('envelope')"/>
+            <lfo-module v-show="moduleIsUseable('lfo')"/>
+            <envelope-module-two v-show="moduleIsUseable('envelope2')"/>
+            <sequencer-module
+              v-show="moduleIsUseable('sequencer')"
+              :sequencer-name="nav.active.knobName"
+            />
+            <router-module v-show="moduleIsUseable('router')"/>
             <!-- </transition> -->
           </div>
         </div>
@@ -225,8 +233,8 @@
     >
       <div class="screen--header hide-mobile">
         <div class="screen--header-inner u-mr_0">
-          <div />
-          <div />
+          <div/>
+          <div/>
           <router-link to="/" class="btn btn_link btn_primary">
             <span class="btn--inner">
               <span class="btn--inner-text">or Play a game</span>
@@ -377,9 +385,9 @@ export default {
     });
   },
   watch: {
-  shareLink() {
-    this.$store.dispatch("getContribution");
-    },
+    shareLink() {
+      this.$store.dispatch("getContribution");
+    }
   },
   beforeDestroy() {
     audio.stopOscTwo();
@@ -397,18 +405,18 @@ export default {
     },
     toggle1stScreen() {
       if (this.show1stScreen) {
-        this.show1stScreen = false
+        this.show1stScreen = false;
       } else {
-        this.show1stScreen = true
-        this.show3rdScreen = false
+        this.show1stScreen = true;
+        this.show3rdScreen = false;
       }
     },
     toggle3dScreen() {
       if (this.show3rdScreen) {
-        this.show3rdScreen = false
+        this.show3rdScreen = false;
       } else {
-        this.show3rdScreen = true
-        this.show1stScreen = false
+        this.show3rdScreen = true;
+        this.show1stScreen = false;
       }
     },
     init() {
@@ -490,7 +498,7 @@ export default {
     },
     midwaySvoosh() {
       this.slide = null;
-      this.activeScreen(0, 0)
+      this.activeScreen(0, 0);
       this.show1stScreen = false;
       this.show2ndScreen = true;
       this.show3rdScreen = false;
@@ -529,8 +537,12 @@ export default {
     ...mapState({
       sequence: state => state.sequence
     }),
+
     shareLink() {
-      return this.$store.state.contributionId;
+      const base = window.location.hostname;
+      return this.$store.state.contributionId
+        ? `${base}/play/${this.$store.state.contributionId}`
+        : false;
     },
     nav() {
       return Nav;
@@ -569,27 +581,27 @@ export default {
 };
 </script>
 <style lang="scss" scoped>
-  .screen--inner_reduced {
-    height: calc(100vh - 58px);
-    @media screen and (max-width: 799px) {
-      .screen--share {
-        margin: 0 auto;
-        p {
-          margin-bottom: 20px;
-          text-align: center;
-        }
-        .btn {
-          margin-left: 0;
-        }
+.screen--inner_reduced {
+  height: calc(100vh - 58px);
+  @media screen and (max-width: 799px) {
+    .screen--share {
+      margin: 0 auto;
+      p {
+        margin-bottom: 20px;
+        text-align: center;
       }
-    }
-    @media screen and (min-width: 800px) {
-      .screen--share {
-        p {
-          margin-bottom: 20px;
-          text-align: right;
-        }
+      .btn {
+        margin-left: 0;
       }
     }
   }
+  @media screen and (min-width: 800px) {
+    .screen--share {
+      p {
+        margin-bottom: 20px;
+        text-align: right;
+      }
+    }
+  }
+}
 </style>
