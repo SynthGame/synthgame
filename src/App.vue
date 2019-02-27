@@ -18,21 +18,20 @@
     <transition name="confetti">
       <div v-show="gameComplete" class="overlay">
         <div class="overlay--inner-win">
-          <div class="overlay--title">YOU'VE COMPLETED THE GAME</div>
-          <div class="overlay--title">YOU SCORED {{ totalScore }} POINTS!</div>
+          <div class="overlay--title">YOUR FINAL SCORE IS {{ totalScore }} POINTS!</div>
           <!-- PLAY AGAIN OR CHALLENGE YOUR FRIENDS -->
           <div class="screen--share--win">
-            <p>Share this link to challenge your Friends!</p>
+            <p>Fill in your name, hit enter and you’ll receive a link to challenge your friends!</p>
             <div v-if="!userSet" class="username_container_win">
               <input class="username_input" v-model="userName" type="text" placeholder="Username">
               <button class="btn btn_stroke btn_primary btn-username" @click="setUsername">ENTER</button>
             </div>
-            <div v-if="!shareLink" class="play-with-friends-win">
+            <!-- <div v-if="!shareLink" class="play-with-friends-win">
               <button
                 @click="generateShareLink"
                 class="btn btn_stroke btn_primary"
               >PLAY WITH FRIENDS</button>
-            </div>
+            </div> -->
             <div v-if="shareLink" class="screen--share-inner">
               <div class="screen--share-url">
                 <span>{{ shareLink }}</span>
@@ -183,7 +182,7 @@ export default {
   computed: {
     totalScore() {
       console.log(`HighScore ${this.$store.state.gameState.highScore}`)
-      return this.$store.state.gameState.highScore;  
+      return this.$store.state.gameState.score;
     },
     shareLink() {
       const base = window.location.hostname;
@@ -220,6 +219,7 @@ export default {
       console.log(this.userName);
       this.userSet = true;
       this.$store.commit('setUsername', { userName: this.userName });
+      this.generateShareLink();
     },
     generateShareLink() {
       this.$store.dispatch("createNewRoom");
